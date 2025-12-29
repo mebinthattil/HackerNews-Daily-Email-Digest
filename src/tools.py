@@ -1,4 +1,5 @@
 import os
+import pathlib
 from typing import Tuple
 from dotenv import load_dotenv
 import re
@@ -73,6 +74,28 @@ def _members_base_url(list_name: str, domain_name: str) -> str:
 def _member_url(list_name: str, domain_name: str, email: str) -> str:
     return f"{_members_base_url(list_name, domain_name)}/{email}"
 
+
+def _prepare_mailgun(email: str):
+    """Validate email, import requests and load mailgun config.
+
+    Returns (sanitized_email, requests_module, api_key, list_name, domain_name).
+    Raises InvalidEmailError, DependencyError, ConfigError.
+    """
+    valid, sanitized_email = validate_email(email)
+    if not valid:
+        raise InvalidEmailError(sanitized_email)
+
+    requests_mod, err = _get_requests_module()
+    if requests_mod is None:
+        raise DependencyError(err)
+
+    api_key, list_name, domain_name, cfg_err = _get_mailgun_config()
+    if cfg_err:
+        raise ConfigError(cfg_err)
+
+    return sanitized_email, requests_mod, api_key, list_name, domain_name
+
+
 def add_subscriber(email: str) -> Tuple[bool, str]:
     """Return (True, message) on success (or already subscribed), or (False, error_message).
 
@@ -80,28 +103,21 @@ def add_subscriber(email: str) -> Tuple[bool, str]:
     Handles exceptions by converting them to error messages so callers need only inspect the boolean.
     """
     try:
-        already_subscribed = existing_subscriber(email)
+        sanitized_email, requests, api_key, list_name, domain_name = _prepare_mailgun(email)
+    except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
+        return False, str(exc)
+
+    try:
+        already_subscribed = existing_subscriber(sanitized_email)
     except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
         return False, str(exc)
 
     if already_subscribed:
         return True, "You are already subscribed to the mailing list."
 
-    requests, err = _get_requests_module()
-    if requests is None:
-        return False, err
-
-    api_key, list_name, domain_name, cfg_err = _get_mailgun_config()
-    if cfg_err:
-        return False, cfg_err
-
     url = _members_base_url(list_name, domain_name)
 
-    data = {
-        "address": email,
-        "subscribed": True,
-        "upsert": "yes",
-    }
+    data = {"address": sanitized_email, "subscribed": True, "upsert": "yes"}
 
     try:
         resp = requests.post(url, auth=("api", api_key), data=data, timeout=10)
@@ -111,8 +127,15 @@ def add_subscriber(email: str) -> Tuple[bool, str]:
         return (False, msg)
 
     if resp.status_code == 200:
-        msg = f"Added {email} to mailing list"
+        msg = f"Added {sanitized_email} to mailing list"
         logger.info(msg)
+        #send greeting email
+        try:
+            sent, send_msg = send_greeting_mail(sanitized_email)
+            if sent:
+                msg += "; greeting email sent, check your inbox."
+        except Exception as exc:
+            logger.info("Greeting email failed: %s", str(exc))
         return (True, msg)
     elif resp.status_code == 429:
         msg = "Too many requests"
@@ -139,20 +162,8 @@ def existing_subscriber(email: str) -> bool:
       ConfigError: when mailgun env configs are missing.
       MailgunError: for network/API errors.
     """
-    valid, email = validate_email(email)
-    if not valid:
-        logger.info("existing_subscriber: invalid email -> %s", email)
-        raise InvalidEmailError(email)
-
-    requests, err = _get_requests_module()
-    if requests is None:
-        raise DependencyError(err)
-
-    api_key, list_name, domain_name, cfg_err = _get_mailgun_config()
-    if cfg_err:
-        raise ConfigError(cfg_err)
-
-    url = _member_url(list_name, domain_name, email)
+    sanitized_email, requests, api_key, list_name, domain_name = _prepare_mailgun(email)
+    url = _member_url(list_name, domain_name, sanitized_email)
 
     try:
         resp = requests.get(url, auth=("api", api_key), timeout=8)
@@ -161,7 +172,7 @@ def existing_subscriber(email: str) -> bool:
         raise MailgunError(f"Request error: {exc}")
 
     if resp.status_code == 200:
-        logger.info("Subscriber exists: %s", email)
+        logger.info("Subscriber exists: %s", sanitized_email)
         return True
     elif resp.status_code == 404:
         return False
@@ -176,3 +187,68 @@ def existing_subscriber(email: str) -> bool:
 
     logger.info("existing_subscriber Mailgun error (%s): %s", resp.status_code, detail)
     raise MailgunError(f"Mailgun error ({resp.status_code}): {detail}")
+
+
+def send_greeting_mail(email: str) -> Tuple[bool, str]:
+    """Send a small confirmation email to `email` via Mailgun.
+
+    Returns (True, message) on success or (False, error_message) on failure.
+    """
+    try:
+        sanitized_email, requests, api_key, list_name, domain_name = _prepare_mailgun(email)
+    except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
+        return False, str(exc)
+
+    from_addr = f"{list_name}@{domain_name}".strip()
+    url = f"https://api.mailgun.net/v3/{domain_name}/messages"
+    
+    template_dir = pathlib.Path(__file__).parents[1] / "templates"
+    css_path = template_dir / "greetingMail.css"
+    html_path = template_dir / "greetingMail.html"
+    
+    if not css_path.exists() or not html_path.exists():
+        msg = f"greeting templates missing: {html_path} or {css_path}"
+        logger.info(msg)
+        raise ConfigError(msg)
+    try:
+        css = css_path.read_text()
+        html_template = html_path.read_text()
+        html = html_template.replace("{{ css }}", css)
+    except Exception as exc:
+        logger.info("Error loading greeting templates: %s", exc)
+        raise ConfigError(f"Error loading greeting templates: {exc}")
+
+    text = (
+        "HackerNews Digest - Subscription confirmed\n\n"
+        "Thanks for subscribing to the HackerNews Digest. "
+        "To ensure delivery, add this sender to your contacts list."
+    )
+
+    data = {
+        "from": from_addr,
+        "to": sanitized_email,
+        "subject": "HackerNews Digest: Subscription confirmed",
+        "text": text,
+        "html": html,
+    }
+
+    try:
+        resp = requests.post(url, auth=("api", api_key), data=data, timeout=10)
+    except requests.RequestException as exc:
+        msg = f"Request error when sending email: {exc}"
+        logger.info(msg)
+        return False, msg
+
+    if resp.status_code == 200:
+        msg = f"Greeting email sent to {sanitized_email}"
+        logger.info(msg)
+        return True, msg
+
+    try:
+        detail = resp.json()
+    except Exception:
+        detail = getattr(resp, 'text', str(resp))
+
+    msg = f"Mailgun send error ({resp.status_code}): {detail}"
+    logger.info(msg)
+    return False, msg
