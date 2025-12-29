@@ -1,7 +1,7 @@
 # Top Hackernews articles summarized and sent straight to your inbox
 
 ## TODO
--[] Send out greeting mail
+-[x] Send out greeting mail
 -[] CSS for mails
 -[] scrape HN: post + comments
 -[] summarize using LLM

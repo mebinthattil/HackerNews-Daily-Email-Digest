@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>{{ css }}</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">{{ date }}</p>
+    </div>
+
+    <div class="content-body">
+      {% for article in articles %}
+      <div class="article">
+        <h2 class="article-title">
+          <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+        </h2>
+        <span class="article-meta">
+          {{ article.points }} points • by {{ article.by }} • {{ article.comments_count }} comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            {{ article.summary | safe }}
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              {{ article.comments_summary | safe }}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      <p>
+        <a href="{{ unsubscribe_url }}">Unsubscribe</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
