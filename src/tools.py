@@ -74,11 +74,18 @@ def _member_url(list_name: str, domain_name: str, email: str) -> str:
     return f"{_members_base_url(list_name, domain_name)}/{email}"
 
 def add_subscriber(email: str) -> Tuple[bool, str]:
-    """return (True, success_message) or (False, error_message)."""
-    emailOK, email = validate_email(email)
-    if not emailOK:
-        err_msg = email # because validate_email returns (False, err_msg)
-        return (False, err_msg)
+    """Return (True, message) on success (or already subscribed), or (False, error_message).
+
+    Performs pre-check for existing subscriber
+    Handles exceptions by converting them to error messages so callers need only inspect the boolean.
+    """
+    try:
+        already_subscribed = existing_subscriber(email)
+    except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
+        return False, str(exc)
+
+    if already_subscribed:
+        return True, "You are already subscribed to the mailing list."
 
     requests, err = _get_requests_module()
     if requests is None:
