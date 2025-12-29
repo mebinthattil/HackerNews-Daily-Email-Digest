@@ -11,14 +11,13 @@ def index():
 
 @app.route("/subscribe", methods=["POST"])
 def subscribe():
-    email = request.form.get("email")
-    subscriber_added, err_msg = tools.add_subscriber(email)
+    email = request.form.get("email", "")
 
+    subscriber_added, result_msg = tools.add_subscriber(email)
     if subscriber_added:
-        return render_template("confirm.html")
-    else:
-        return render_template("error.html", error=err_msg), 400
+        return render_template("confirm.html", message=result_msg)
 
+    return render_template("error.html", error=result_msg), 400
 
 
 if __name__ == "__main__":
