@@ -7,8 +7,7 @@
 - [x] summarize using LLM
 - [x] make GH actions do the compute
 - [x] make GH actions send out emails
-- [ ] improve landing page
-- [ ] Create archive page for past digests
+- [x] improve landing page
 - [ ] Deploy!
 
 ## Dev Resources
