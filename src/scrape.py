@@ -54,10 +54,21 @@ def scrape_site(url: str) -> Optional[str]:
             logger.error(f"Invalid URL: {url}")
             return None
         
+        # Check if URL points to a PDF
+        if parsed.path.lower().endswith('.pdf'):
+            logger.info(f"Skipping PDF file: {url}")
+            return None
+        
         # Make request with timeout
         logger.info(f"Scraping URL: {url}")
         response = requests.get(url, headers=headers, timeout=15, allow_redirects=True)
         response.raise_for_status()
+        
+        # Check Content-Type header for PDF
+        content_type = response.headers.get('Content-Type', '').lower()
+        if 'application/pdf' in content_type or 'pdf' in content_type:
+            logger.info(f"Skipping PDF content type: {url}")
+            return None
         
         # Check for common paywall indicators in status code or redirects
         if response.status_code == 402:  # Payment Required
