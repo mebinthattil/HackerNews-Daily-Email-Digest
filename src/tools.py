@@ -108,11 +108,11 @@ def add_subscriber(email: str) -> Tuple[bool, str]:
         return False, str(exc)
 
     try:
-        already_subscribed = existing_subscriber(sanitized_email)
+        exists, is_subscribed = existing_subscriber(sanitized_email)
     except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
         return False, str(exc)
 
-    if already_subscribed:
+    if exists and is_subscribed:
         return True, "You are already subscribed to the mailing list."
 
     url = _members_base_url(list_name, domain_name)
@@ -153,8 +153,13 @@ def add_subscriber(email: str) -> Tuple[bool, str]:
         return (False, msg)
 
 
-def existing_subscriber(email: str) -> bool:
-    """Return True if subscriber exists, False if not.
+def existing_subscriber(email: str) -> Tuple[bool, bool]:
+    """Return (exists, is_subscribed) tuple.
+
+    Returns:
+      (True, True): subscriber exists and is subscribed.
+      (True, False): subscriber exists but is unsubscribed.
+      (False, False): subscriber does not exist.
 
     Raises:
       InvalidEmailError: when email is invalid.
@@ -172,10 +177,17 @@ def existing_subscriber(email: str) -> bool:
         raise MailgunError(f"Request error: {exc}")
 
     if resp.status_code == 200:
-        logger.info("Subscriber exists: %s", sanitized_email)
-        return True
+        try:
+            member_data = resp.json().get("member", {})
+            is_subscribed = member_data.get("subscribed", False)
+            logger.info("Subscriber exists: %s, subscribed: %s", sanitized_email, is_subscribed)
+            return True, is_subscribed
+        except Exception as exc:
+            logger.info("Error parsing member data: %s", exc)
+            # If we can't parse, assume subscribed for backward compatibility
+            return True, True
     elif resp.status_code == 404:
-        return False
+        return False, False
     elif resp.status_code == 429:
         logger.info("Trying to check if existing_subscriber, errored out with: Too many requests")
         raise MailgunError("Too many requests")
