@@ -1,0 +1,44 @@
+name: Daily HackerNews Digest
+
+on:
+  schedule:
+    # 6:00 AM IST = 00:30 UTC (IST is UTC+5:30)
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+    inputs:
+      story_count:
+        description: 'Number of top stories to include'
+        required: false
+        default: '10'
+        type: string
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Send digest
+        env:
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_LIST_NAME: ${{ secrets.MAILGUN_LIST_NAME }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          GROQ_API: ${{ secrets.GROQ_API }}
+        run: |
+          cd src
+          uv run python -c "import mail_digest; mail_digest.main(story_count=${{ github.event.inputs.story_count || 10 }})"
