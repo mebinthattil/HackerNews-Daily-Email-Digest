@@ -1,11 +1,9 @@
 from groq import Groq
 import dotenv, os
-import logging
 import time
+from logger import setup_logger
 
-logger = logging.getLogger(__name__)
-if not logging.getLogger().hasHandlers():
-    logging.basicConfig(level=logging.INFO)
+logger = setup_logger(__name__)
 
 dotenv.load_dotenv()
 

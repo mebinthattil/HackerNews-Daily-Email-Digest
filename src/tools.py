@@ -3,13 +3,11 @@ import pathlib
 from typing import Tuple, Optional
 from dotenv import load_dotenv
 import re
-import logging
+from logger import setup_logger
 
 load_dotenv()
 
-logger = logging.getLogger(__name__)
-if not logging.getLogger().hasHandlers():
-    logging.basicConfig(level=logging.INFO)
+logger = setup_logger(__name__)
 
 
 class MailgunError(Exception):

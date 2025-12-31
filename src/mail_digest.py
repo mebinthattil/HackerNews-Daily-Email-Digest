@@ -1,6 +1,5 @@
 import sys
 import os
-import logging
 import requests
 from datetime import datetime
 
@@ -11,10 +10,9 @@ from flask import render_template
 from main import app
 import digest_generator
 from tools import _get_mailgun_config
+from logger import setup_logger, log_section
 
-logger = logging.getLogger(__name__)
-if not logging.getLogger().hasHandlers():
-    logging.basicConfig(level=logging.INFO)
+logger = setup_logger(__name__)
 
 
 def send_digest_to_list(html_content: str) -> bool:
@@ -52,6 +50,7 @@ def send_digest_to_list(html_content: str) -> bool:
 
 def main(story_count: int = 10):
     """Generate and send digest."""
+    log_section("Starting Digest Generation", logger)
     logger.info(f"Generating digest for top {story_count} stories...")
     
     digest_data = digest_generator.generate_digest(count=story_count)
@@ -60,7 +59,8 @@ def main(story_count: int = 10):
         logger.error("No digest data generated.")
         return
     
-    logger.info(f"Sending digest for {len(digest_data)} stories...")
+    log_section("Rendering Email Template", logger)
+    logger.info(f"Rendering template for {len(digest_data)} stories...")
     
     with app.app_context():
         html_content = render_template(
@@ -70,6 +70,7 @@ def main(story_count: int = 10):
             unsubscribe_url="%mailing_list_unsubscribe_url%"
         )
     
+    log_section("Sending Email", logger)
     if send_digest_to_list(html_content):
         logger.info("Digest sent successfully!")
     else:

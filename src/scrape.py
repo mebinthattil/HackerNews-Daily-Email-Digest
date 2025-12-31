@@ -2,12 +2,10 @@
 # TODO: Write better code for this
 from typing import Optional
 import re
-import logging
 from urllib.parse import urlparse, urljoin
+from logger import setup_logger
 
-logger = logging.getLogger(__name__)
-if not logging.getLogger().hasHandlers():
-    logging.basicConfig(level=logging.INFO)
+logger = setup_logger(__name__)
 
 def scrape_site(url: str) -> Optional[str]:
     """
