@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>HackerNews Digest</title>
-  <style>{{ css }}</style>
+  <style>
+    {% include 'digest.css' %}
+  </style>
 </head>
 <body>
   <div class="container">
@@ -20,23 +22,25 @@
           <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
         </h2>
         <span class="article-meta">
-          {{ article.points }} points • by {{ article.by }} • {{ article.comments_count }} comments
+          {{ article.points }} points • by {{ article.author }} • {{ article.comments_count }} comments
         </span>
 
         <div class="section">
           <div class="section-label">Summary</div>
           <div class="summary-content">
-            {{ article.summary | safe }}
+            {{ article.post_summary | safe }}
           </div>
+          <a href="{{ article.url }}" target="_blank" class="read-link">Read full article →</a>
         </div>
 
         <div class="section">
           <div class="section-label">Community Discussion</div>
           <div class="comments-box">
             <div class="comments-content">
-              {{ article.comments_summary | safe }}
+              {{ article.comment_summary | safe }}
             </div>
           </div>
+          <a href="{{ article.comments_url }}" target="_blank" class="read-link">Read all comments →</a>
         </div>
       </div>
       {% endfor %}
