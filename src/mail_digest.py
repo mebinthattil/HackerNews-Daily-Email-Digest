@@ -82,7 +82,15 @@ def main(story_count: int = 10):
     logger.info(f"Rendering template for {len(digest_data)} stories...")
     
     with app.app_context():
-        html_content = render_template(
+        # Arhive pages don't need unsubscribe link 
+        archive_html = render_template(
+            "digest.html",
+            articles=list(digest_data.values()),
+            date=datetime.now().strftime("%B %d, %Y"),
+            unsubscribe_url=None
+        )
+        
+        email_html = render_template(
             "digest.html",
             articles=list(digest_data.values()),
             date=datetime.now().strftime("%B %d, %Y"),
@@ -90,13 +98,13 @@ def main(story_count: int = 10):
         )
     
     log_section("Saving to Archive", logger)
-    if save_to_archive(html_content):
+    if save_to_archive(archive_html):
         logger.info("Digest archived successfully!")
     else:
         logger.warning("Failed to archive digest, continuing with email send...")
     
     log_section("Sending Email", logger)
-    if send_digest_to_list(html_content):
+    if send_digest_to_list(email_html):
         logger.info("Digest sent successfully!")
     else:
         logger.error("Failed to send digest.")
