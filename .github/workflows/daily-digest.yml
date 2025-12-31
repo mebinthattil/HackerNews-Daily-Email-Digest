@@ -41,4 +41,12 @@ jobs:
           GROQ_API: ${{ secrets.GROQ_API }}
         run: |
           cd src
-          uv run python -c "import mail_digest; mail_digest.main(story_count=${{ github.event.inputs.story_count || 10 }})"
+          uv run python -c "import mail_digest; mail_digest.main(story_count=${{ github.event.inputs.story_count || 10 }})" 2>&1 | tee ../digest.log
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: digest-logs-${{ github.run_id }}
+          path: digest.log
+          retention-days: 30
