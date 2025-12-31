@@ -3,7 +3,10 @@ import pathlib
 from typing import Tuple, Optional
 from dotenv import load_dotenv
 import re
-from logger import setup_logger
+try:
+    from logger import setup_logger
+except ImportError:
+    from src.logger import setup_logger
 
 load_dotenv()
 
