@@ -14,6 +14,25 @@ from logger import setup_logger, log_section
 
 logger = setup_logger(__name__)
 
+# Path to archives directory (relative to project root)
+ARCHIVES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'static', 'archives'))
+
+
+def save_to_archive(html_content: str) -> bool:
+    """save digest HTML to archives directory in DD-MM-YYYY.html format."""
+    filename = datetime.now().strftime("%d-%m-%Y") + ".html"
+    filepath = os.path.join(ARCHIVES_DIR, filename)
+    
+    try:
+        os.makedirs(ARCHIVES_DIR, exist_ok=True)
+        with open(filepath, 'w') as f:
+            f.write(html_content)
+        logger.info(f"Archived digest to: {filepath}")
+        return True
+    except IOError as e:
+        logger.error(f"Failed to archive digest: {e}")
+        return False
+
 
 def send_digest_to_list(html_content: str) -> bool:
     """Send digest email to the mailing list."""
@@ -69,6 +88,12 @@ def main(story_count: int = 10):
             date=datetime.now().strftime("%B %d, %Y"),
             unsubscribe_url="%mailing_list_unsubscribe_url%"
         )
+    
+    log_section("Saving to Archive", logger)
+    if save_to_archive(html_content):
+        logger.info("Digest archived successfully!")
+    else:
+        logger.warning("Failed to archive digest, continuing with email send...")
     
     log_section("Sending Email", logger)
     if send_digest_to_list(html_content):

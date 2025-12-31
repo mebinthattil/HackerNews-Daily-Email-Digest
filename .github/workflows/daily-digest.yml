@@ -50,3 +50,16 @@ jobs:
           name: digest-logs-${{ github.run_id }}
           path: digest.log
           retention-days: 30
+
+      - name: Commit archive to repository
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add static/archives/*.html
+          if git diff --staged --quiet; then
+            echo "No new archive files to commit"
+          else
+            git commit -m "chore: archive digest for $(date +'%d-%m-%Y')"
+            git push
+          fi
+

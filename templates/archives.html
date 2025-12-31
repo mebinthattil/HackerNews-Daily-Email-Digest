@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Archive - HackerNews Digest</title>
+    <meta name="description" content="Browse past HackerNews Digest editions.">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <main class="container archive-container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <h1>Digest Archive</h1>
+        <p class="tagline">Browse previous editions of HackerNews Digest.</p>
+
+        {% if archives %}
+        <ul class="archive-list">
+            {% for archive in archives %}
+            <li class="archive-item">
+                <a href="{{ archive.url }}" class="archive-link">
+                    <span class="archive-date">{{ archive.display_date }}</span>
+                    <span class="archive-arrow">→</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="archive-empty">No archived digests yet. Check back after the next digest is generated!</p>
+        {% endif %}
+
+        <div class="opensource">
+            <p class="opensource-desc">
+                <a href="/" class="home-link">Subscribe to get daily digests →</a>
+            </p>
+        </div>
+    </main>
+</body>
+
+</html>
