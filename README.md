@@ -8,7 +8,8 @@
 - [x] make GH actions do the compute
 - [x] make GH actions send out emails
 - [ ] improve landing page
-- [ ] set approval process to be added to mailing list
+- [ ] Create archive page for past digests
+- [ ] Deploy!
 
 ## Dev Resources
 - [HN API](https://github.com/HackerNews/API)
