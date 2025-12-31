@@ -9,6 +9,8 @@ load_dotenv()
 
 logger = setup_logger(__name__)
 
+MAX_SUBSCRIBERS = 50
+
 
 class MailgunError(Exception):
     """Base exception for Mailgun-related errors."""
@@ -94,12 +96,35 @@ def _prepare_mailgun(email: str):
     return sanitized_email, requests_mod, api_key, list_name, domain_name
 
 
+def get_subscriber_count() -> int:
+    """Get current subscriber count from Mailgun."""
+    try:
+        requests, err_requests = _get_requests_module()
+        api_key, list_name, domain_name, err = _get_mailgun_config()
+        if err or err_requests:
+            return 0
+        url = f"https://api.mailgun.net/v3/lists/{list_name}@{domain_name}"
+        resp = requests.get(url, auth=("api", api_key), timeout=10)
+        if resp.status_code == 200:
+            return resp.json().get("list", {}).get("members_count", 0)
+    except Exception:
+        pass
+    return 0
+
+
 def add_subscriber(email: str) -> Tuple[bool, str]:
     """Return (True, message) on success (or already subscribed), or (False, error_message).
 
     Performs pre-check for existing subscriber
     Handles exceptions by converting them to error messages so callers need only inspect the boolean.
     """
+    if get_subscriber_count() >= MAX_SUBSCRIBERS:
+        return False, ('''
+            We've reached the maximum number of subscribers. 
+            This service runs for free and can only accommodate a limited number of users. 
+            For queries, please reach out to newsletter-queries@mebin.in
+        ''')
+    
     try:
         sanitized_email, requests, api_key, list_name, domain_name = _prepare_mailgun(email)
     except (InvalidEmailError, DependencyError, ConfigError, MailgunError) as exc:
