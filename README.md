@@ -3,7 +3,7 @@
 ## TODO
 -[x] Send out greeting mail
 -[] CSS for mails
--[] scrape HN: post + comments
+-[x] scrape HN: post + comments
 -[] summarize using LLM
 -[] make GH actions do the compute
 -[] make GH actions send out emails

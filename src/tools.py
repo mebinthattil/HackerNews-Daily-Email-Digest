@@ -1,6 +1,6 @@
 import os
 import pathlib
-from typing import Tuple
+from typing import Tuple, Optional
 from dotenv import load_dotenv
 import re
 import logging
