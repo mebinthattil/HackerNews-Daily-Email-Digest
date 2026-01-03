@@ -1,0 +1,521 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://indieweb.org/POSSE#" target="_blank">Publish on your own site, syndicate elsewhere</a>
+        </h2>
+        <span class="article-meta">
+          371 points • by 47thpresident • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            POSSE (Publish (on your) Own Site, Syndicate Elsewhere) is a content‑distribution model where the author posts to their own domain first, then copies or links to third‑party silos (e.g., Twitter, Facebook, Mastodon). It reduces reliance on external services, preserves canonical URLs, ensures ownership, improves searchability, and allows reverse‑syndication (backfeed) of responses. Syndicated copies typically include a permashortlink back to the original, aiding discovery, spam mitigation, and SEO ranking.
+
+Implementation for developers involves automatic posting of the original and then posting a copy with the original link to each chosen silo; the UI can be invisible or provide a preview. Two workflow patterns exist: (1) client → site → silo (server handles syndication) and (2) client → site and client → silo (manual selection). Popular destinations include Twitter, Facebook, Medium, WordPress.com, and ActivityPub services.
+
+Libraries and tools supporting POSSE: PHP php‑helpers (POSSE namespace), Python SiloRider, Feed2Toot, Docker images, and various Micropub/Microsub integrations. Numerous IndieWeb sites (e.g., tantek.com, waterpigs.co.uk, aaronparecki.com) demonstrate POSSE with plugins, custom CMSes, or command‑line tools. Related models are COPE (Create Once, Publish Everywhere), POSE (Publish Once, Syndicate Everywhere), and PESOS/P ESETAS, which invert the ownership order.
+          </div>
+          <a href="https://indieweb.org/POSSE#" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments broadly endorse using a personal website as the primary publishing platform and syndicating via RSS, newsletters, and social networks. Contributors cite substantial traffic from RSS feeds and search, appreciate control over content, and value the resilience against platform shutdowns. Challenges mentioned include automation limits, differing community norms across networks, and reduced reach when posting links on walled‑garden services. While many find the approach rewarding and sustainable, several note the extra effort required to tailor posts and maintain multiple distribution channels. Overall, the sentiment favors POSSE despite its practical complexities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46468600" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://xeiaso.net/notes/2026/year-linux-desktop/" target="_blank">2026 will be my year of the Linux desktop</a>
+        </h2>
+        <span class="article-meta">
+          239 points • by todsacerdoti • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page, titled “Making sure you’re not a bot!,” presents a security loading screen that reads “Please wait a moment while we ensure the security of your connection.” It includes headings for visual content, listing “Image 1” and “Image 2,” but no actual images or descriptive text accompany these placeholders. No additional information or functionality is provided.
+          </div>
+          <a href="https://xeiaso.net/notes/2026/year-linux-desktop/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects widespread frustration with recent Windows releases, citing intrusive advertising, sluggish interfaces, opaque updates, and limited control over system resources. In contrast, many participants describe Linux as faster, more stable, and customizable, appreciating its lower memory usage, transparent logging, and robust gaming support through Proton, while also noting advantages for development workflows. Concerns about Linux remain, including battery life, hardware compatibility, anti‑cheat restrictions, fragmentation, and the learning curve for non‑technical users, suggesting it is still maturing for broader adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46471199" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.madebywindmill.com/tempi/blog/hbfs-bpm/" target="_blank">Daft Punk Easter Egg in the BPM Tempo of Harder, Better, Faster, Stronger?</a>
+        </h2>
+        <span class="article-meta">
+          255 points • by simonw • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Daft Punk’s “Harder, Better, Faster, Stronger” is commonly listed at 123 BPM, but precise measurement shows it is 123.45 BPM. Using a manual beat‑count method (identifying the first and last clear waveform peaks, measuring the interval between them, and applying bpm = 60 × (beats − 1) ÷ duration) yields 123.4499 BPM on a Discovery CD rip (216.276 s for 445 intervals) and 123.4534 BPM on the official YouTube audio (216.282 s). The author’s tempo‑detection software, based on FFT and autocorrelation, reports values between 123 and 124, confirming the non‑integral tempo. Hardware used on the Discovery album—E‑mu SP‑1200, Akai MPC‑3000, and Emagic Logic—supports fractional BPMs to one decimal place (SP‑1200, MPC‑3000) and to four decimal places (Logic), making a 123.45 BPM setting feasible. The close match suggests the tempo may have been an intentional Easter egg, though definitive confirmation from the producers is unavailable.
+          </div>
+          <a href="https://www.madebywindmill.com/tempi/blog/hbfs-bpm/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the track’s unusually precise 123.45 BPM, with participants debating whether it is an intentional Daft Punk easter‑egg or a byproduct of analog sampling, rounding, or digital processing quirks. Technical analyses cite timing calculations, software detection limits, and possible varispeed or mastering adjustments, while others view the precision as deliberate thematic symbolism tied to the song’s robotic narrative. Overall, commenters express admiration for the band’s ingenuity, yet many remain unconvinced that the exact tempo was purposefully engineered.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46469577" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nullprogram.com/blog/2015/03/19/" target="_blank">A Basic Just-In-Time Compiler (2015)</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by ibobev • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article describes a minimal x86‑64 Just‑In‑Time (JIT) compiler written to solve a /r/dailyprogrammer challenge that iterates a recurrence relation u(n+1)=f(u(n)). Instead of interpreting each operation, the program emits native machine code for the sequence of arithmetic instructions and executes it directly.  
+
+Key points:  
+
+- Executable memory is allocated with mmap (POSIX) or VirtualAlloc (Windows) as writable pages, then protected with mprotect or VirtualProtect to set PROT_READ|PROT_EXEC after code generation (W^X policy).  
+- An `asmbuf` struct holds a page‑sized buffer; helper functions insert raw instruction bytes (`asmbuf_ins`) and immediate operands (`asmbuf_immediate`).  
+- The generated function follows the System V AMD64 ABI: the input integer arrives in RDI (or RCX on Windows) and the result is returned in RAX. Simple move‑and‑return code (`mov rax,rdi; ret`) is assembled by extracting bytes from NASM output.  
+- For each operator (+, –, *, /) the compiler emits the corresponding instruction bytes (e.g., `add rax,rdi`, `sub rax,rdi`, `imul rax,rdi`, `xor rdx,rdx; idiv rdi`).  
+- After emitting all instructions, the buffer is finalized, cast to a function pointer, and called repeatedly to compute the recurrence.  
+
+The author notes the implementation’s limits (no branching, stack use, or complex expressions) and expresses interest in extending it to more sophisticated JIT tasks.
+          </div>
+          <a href="https://nullprogram.com/blog/2015/03/19/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46471712" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lotteryeverysecond.lffl.me/" target="_blank">Show HN: Website that plays the lottery every second</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by Loeffelmann • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://lotteryeverysecond.lffl.me/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the extremely low probability of winning lottery draws, treating the purchase as a source of hope and anticipation rather than a rational investment. Many acknowledge that the odds are tiny and view the waiting period as the primary psychological reward, while some express curiosity about tracking net returns and expected value over many plays. A minority voice recommends avoiding tickets altogether, citing personal rules against gambling. Interest is also shown in simulating outcomes and presenting odds transparently. Overall, the sentiment is analytical, recognizing both the allure and the financial improbability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46471171" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/j-brooke/FracturedJson/wiki" target="_blank">FracturedJson</a>
+        </h2>
+        <span class="article-meta">
+          511 points • by PretzelFisch • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The scraped page is the home of the “FracturedJson” GitHub wiki (repository j‑brooke/FracturedJson). When accessed, the site returns the message “You can’t perform that action at this time,” indicating a permission or rate‑limit block that prevents viewing or editing content. The only visible element beyond the error is a placeholder for an image, described only by its alt text: “Layout Types.” No further text, navigation links, or technical documentation is present in the excerpt. Consequently, the page provides no substantive information about the FracturedJson project, its features, or usage; it only signals restricted access and references a missing visual asset labeled “Layout Types.”
+          </div>
+          <a href="https://github.com/j-brooke/FracturedJson/wiki" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express overall enthusiasm for human‑readable JSON tools, highlighting the value of existing C#, TypeScript, and Rust implementations and noting the potential of a language‑agnostic conformance suite. Contributors appreciate the formatting flexibility, comment support, and usefulness in debugging or log inspection, while also acknowledging adoption hurdles such as limited package availability and reliance on .NET runtimes. Comparisons to alternatives like YAML, TOML, Protobuf, and XML surface, with mixed views on readability trade‑offs and suggestions for broader integration into editors, pipelines, and other languages.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46464235" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.clicksphone.com/en/communicator" target="_blank">Clicks Communicator</a>
+        </h2>
+        <span class="article-meta">
+          259 points • by microflash • 68 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Clicks Communicator is an unlocked multi‑band mobile device supporting global 5G, 4G LTE, 3G, and 2G networks. 5G NR coverage includes n1, n2, n3, n5, n7, n8, n12, n13, n14, n20, n25, n26, n28, n38, n40, n41, n48, n66, n71, n77, n78 and n78 5G NR (4×4 MIMO) on a subset. LTE (4G) FDD bands: B1, B2, B3, B4, B5, B7, B8, B12, B13, B14, B17, B18, B19, B20, B25, B26, B28, B66, B71; TDD bands: B34, B38, B39, B40, B41, B42, B48. 3G WCDMA bands: B1, B2, B4, B5, B6, B8, B9, B19. 2G GSM bands: B2, B3, B5, B8. The device is sold unlocked and intended for worldwide connectivity.
+          </div>
+          <a href="https://www.clicksphone.com/en/communicator" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to the device. Many appreciate the tactile QWERTY keyboard, compact size and focus on reducing distractions, seeing it as a niche productivity tool. However, users frequently cite practical drawbacks such as slower, error‑prone typing, loss of virtual‑keyboard features, limited app compatibility with the unusual aspect ratio, and concerns about short Android update windows. Skepticism also targets the marketing approach, perceived hype, pricing, and lack of openness to alternative operating systems, while a subset remains hopeful and supportive of its potential.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46467057" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unixv4.dev/" target="_blank">Unix v4 (1973) – Live Terminal</a>
+        </h2>
+        <span class="article-meta">
+          127 points • by pjmlp • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Unix Version 4, released in November 1973, was the first Unix system written in C, enabling portability across hardware platforms. The only known copy was recovered in 2025 from a magnetic tape found at the University of Utah after 52 years and now runs on an emulated PDP‑11/45—the same minicomputer used at Bell Labs. The site provides access to this historic system, with source references to squoze.net and the tape‑recovery story. Users are warned of several quirks: backspace is non‑functional, the “#” key deletes characters, “@” terminates a line, the command chdir must be used instead of cd, and there are no manual pages (introduced in later versions). Sessions are temporary, timing out after ten minutes of inactivity, and all state is cleared on page reload, preserving authentic 1973 behavior.
+          </div>
+          <a href="https://unixv4.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show enthusiasm for expanding the project with a browser‑based VT420 terminal emulator and curiosity about fully implementing the system in JavaScript, while appreciating the inclusion of the classic ed editor. At the same time, users express frustration with frequent rate‑limit errors and question the openness of the code, seeking verification that the service is fully open source and that its licensing complies with copyright requirements. Overall, there is a mix of technical interest, positive reception of the demo, and concerns about accessibility and legal compliance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46468283" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Who is hiring? (January 2026)</a>
+        </h2>
+        <span class="article-meta">
+          255 points • by whoishiring • 130 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The listings highlight a strong demand for full‑stack and backend engineers with expertise in React, TypeScript, Python/Django, Go, and Rust, often combined with AI, machine‑learning, or high‑performance computing skills. Many roles emphasize remote or hybrid work, offering flexibility across U.S. and international locations, while a few require onsite presence for collaboration‑intensive projects. Companies span diverse sectors—including logistics, fintech, robotics, biotech, and creative AI—and frequently mention equity, competitive salaries, and growth‑oriented environments. Overall, the postings convey a focus on technical depth, autonomy, and rapid product development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46466074" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theregister.com/2025/12/31/ipv6_at_30/" target="_blank">IPv6 just turned 30 and still hasn&#39;t taken over the world</a>
+        </h2>
+        <span class="article-meta">
+          267 points • by Brajeshwar • 70 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            IPv6, defined in RFC 1883 (1995), expanded address space from 32‑bit (≈4.3 billion) to 128‑bit (≈3.4 × 10³⁸) addresses, aiming to prevent IPv4 exhaustion. Adoption remains under 50 % globally according to Google, APNIC, and Cloudflare data. Key factors limiting deployment:
+
+* IPv6 is not backward‑compatible with IPv4, requiring dual‑stack or migration, raising cost and complexity.
+* It introduced few functional enhancements beyond address size; many security, QoS, and plug‑and‑play features were later added to IPv4.
+* Network Address Translation (NAT) extended IPv4 usability, allowing many devices to share a single public address and delaying the need for IPv6.
+* Vendor support, migration ROI, and legacy infrastructure lacking dual‑stack capability hindered uptake.
+
+Despite limited rollout, IPv6 supports growth in mobile, broadband, cloud, IoT, and advanced routing (e.g., Segment Routing). Some operators adopt IPv6 when IPv4 address costs rise. Emerging technologies such as QUIC and name‑based DNS/ security models reduce reliance on permanent IP addresses, further altering IPv6’s perceived necessity. Organizations like Huawei and Starlink have secured massive IPv6 blocks, contributing to gradual increases in adoption rates.
+          </div>
+          <a href="https://www.theregister.com/2025/12/31/ipv6_at_30/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment reflects mixed experience with IPv6: adoption has steadily risen to roughly half of global traffic, driven by mobile networks and some enterprise or IoT deployments, yet many users and small operators still rely on IPv4 due to dual‑stack complexity, inconsistent ISP support, and perceived lack of tangible benefits. Common frustrations include difficult configuration, address length, and privacy concerns, while critics label the protocol a failure or unnecessary because it is not backward‑compatible. Conversely, proponents argue that IPv6 resolves address‑space limits and is essential for future growth, emphasizing the need for clearer incentives and broader education.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46465327" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
