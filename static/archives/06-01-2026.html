@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 06, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://loworbitsecurity.com/radar/radar16/" target="_blank">There were BGP anomalies during the Venezuela blackout</a>
+        </h2>
+        <span class="article-meta">
+          488 points • by illithid0 • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            During the Venezuela blackout, BGP data showed a route‑leak affecting the state‑owned telecom AS8048 (CANTV). Cloudflare Radar recorded eight prefixes being advertised through CANTV with transit ASes Sparkle (Italy) and GlobeNet (Colombia) appearing in the AS‑PATH—paths they do not normally traverse. A spike in BGP announcements and a drop in announced address space preceded the outage. Sparkle is listed as “unsafe” on isbgpsafeyet.com for lacking RPKI filtering, raising the risk of malicious propagation. Public RIS captures (retrieved via ris.ripe.net and parsed with bgpdump) confirm announcements for 200.74.226.0/24‑200.74.238.0/23, showing repeated AS‑PATH sequences such as 263237 52320 8048 … 1299 269832 21980. The data reveal multiple duplicate entries of AS8048 within the path, indicating a potential hijack or misconfiguration that could have contributed to the observed internet disruptions in Venezuela.
+          </div>
+          <a href="https://loworbitsecurity.com/radar/radar16/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments treat the BGP prepending incident chiefly as a technical anomaly, emphasizing that such long AS‑paths are usually the result of routine traffic engineering or misconfiguration rather than deliberate hijacking, and noting the lack of clear evidence for malicious intent. Several contributors explore speculative scenarios involving intelligence collection, espionage, or geopolitical motives, but most caution against drawing firm conclusions. The discussion also veers into broader concerns about cyber‑warfare, network reliability, and political implications, reflecting a mixture of analytical observation and cautious speculation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46504963" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.donutlab.com/ces-battery-announcement/" target="_blank">Donut Lab’s all-solid-state battery delivers 400 Wh/kg of energy density</a>
+        </h2>
+        <span class="article-meta">
+          140 points • by aeonfox • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Donut Lab announced at CES 2026 the launch of its first commercially‑ready all‑solid‑state battery, termed the Donut Battery, now in production vehicles. The battery offers 400 Wh/kg energy density, full‑charge capability in five minutes, and a design life of up to 100,000 cycles with minimal capacity fade. Safety is achieved through the absence of liquid electrolytes, thermal‑runaway risk, and dendrite formation, enabling operation from –30 °C to over 100 °C with >99 % capacity retention. Constructed from abundant, low‑cost materials, the battery is positioned as cheaper than conventional lithium‑ion cells. Initial deployment is on Verge Motorcycles’ TS Pro and Ultra models, delivering up to 60 km of range per minute of charging and a 600 km single‑charge range for the long‑range variant, with deliveries slated for Q1 2026. Additional collaborations include WATTEV’s modular EV platform, Cova Power’s smart trailers, and ESOX Group’s defense applications, highlighting the battery’s adaptability across automotive, aerospace, and energy‑storage sectors.
+          </div>
+          <a href="https://www.donutlab.com/ces-battery-announcement/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display cautious skepticism toward the announced solid‑state battery, questioning verification at CES, the absence of independent testing, patents, manufacturing capacity, and clear chemistry details. Concerns about scalability, cost, durability, safety and partnership credibility are common, while the disparity in claimed charge rates fuels doubt. Simultaneously, several remarks note the impressive energy‑density and rapid‑charging figures, acknowledging that if substantiated the technology could significantly affect EV adoption and industry dynamics. Overall the discussion balances doubt about hype with tentative optimism about potential impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46505975" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stoppels.ch/2022/11/27/io-is-no-longer-the-bottleneck.html" target="_blank">I/O is no longer the bottleneck? (2022)</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by benhoyt • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post evaluates whether I/O has become the bottleneck for typical interview‑style text‑processing tasks. Measured sequential reads on the author's system reach 1.6 GB/s from a cold cache and 12.8 GB/s warm. An optimized C word‑frequency program (Ben Hoyt’s code) processes the 425 MiB “bible‑100.txt” at only 278 MiB/s (1.525 s). Moving the uppercase‑to‑lowercase conversion out of the main loop and letting clang vectorise raises throughput to ≈330 MiB/s, still far below raw read speed. The standard `wc -w` utility, which handles many delimiters, runs at ≈245 MiB/s (1.758 s). A hand‑written AVX2 implementation that scans 128‑byte blocks, broadcasts whitespace masks, and uses `PMOVMSKB` and bit‑trick loops achieves 1.45 GB/s on a warm cache (0.227 s) and ≈1.1 GB/s on a cold cache (0.395 s). Even with aggressive vectorisation, CPU‑bound parsing and hash‑map updates limit throughput to roughly 10‑15 % of raw sequential I/O, confirming that modern disk speeds are no longer the primary constraint.
+          </div>
+          <a href="https://stoppels.ch/2022/11/27/io-is-no-longer-the-bottleneck.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights that modern CPU performance is increasingly constrained by per‑core memory bandwidth, typically around 6 GB/s on x86 and up to 20 GB/s on Apple silicon, while advertised totals reflect all cores combined. It notes that even optimal parsers cannot surpass this limit for conventional formats like JSON and Protobuf, which require full parsing. Zero‑copy serialization is presented as a way to avoid the bottleneck, with the Lite³ format claimed to achieve dramatically higher throughput, and references are provided for further reading on related techniques.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46506994" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.koreaherald.com/article/10648326" target="_blank">Six-decade math puzzle solved by Korean mathematician</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by mikhael • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Korean mathematician Baek Jin‑eon, a research fellow at the Korea Institute for Advanced Study, solved the long‑standing “moving sofa” problem, which asks for the maximal area of a rigid shape that can traverse a unit‑width right‑angled corner. First posed by Leo Moser in 1966, the problem saw incremental improvements: John Hammersley’s 2.2074 m² shape (1968) and Joseph Gerver’s 2.2195 m² curved figure (1992) were the best known candidates, but no proof established an upper bound. After seven years of work, Baek released a 119‑page arXiv preprint (late 2024) demonstrating that Gerver’s shape is optimal, using logical reasoning rather than extensive computer‑assisted estimates. The paper, under review by *Annals of Mathematics*, has earned Baek international recognition, including placement among Scientific American’s top‑10 mathematical breakthroughs of 2025. Baek completed his Ph.D. at the University of Michigan, previously worked at the National Institute for Mathematical Sciences, and solved the problem at age 29 while a postdoctoral researcher at Yonsei University.
+          </div>
+          <a href="https://www.koreaherald.com/article/10648326" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the recent solution to the long‑standing moving‑sofa problem, noting surprise that such a seemingly simple question remained unsolved for decades. Readers highlight the elegance of the result, reference explanatory resources, and discuss the broader significance for mathematical research. There is curiosity about extending the problem to three dimensions and speculation that artificial‑intelligence tools might have accelerated progress. Overall, the tone is enthusiastic and inquisitive, emphasizing both admiration for the achievement and interest in related challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46491129" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://andrew.grahamyooll.com/blog/Try-to-Take-My-Position/" target="_blank">Try to take my position: The best promotion advice I ever got</a>
+        </h2>
+        <span class="article-meta">
+          268 points • by yuppiepuppie • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article conveys a promotion strategy centered on “taking the position” before receiving the title. The author’s CTO advised acting as if already in the senior role, i.e., assuming higher‑level responsibilities and solving team‑wide problems. A concrete example shows a junior engineer drafting a complete RFC to reduce service incidents—identifying the issue, proposing a solution, and estimating effort—demonstrating ownership beyond their immediate tasks. The author emphasizes that promotions require sustained performance: managers typically observe candidates for 3–6 months and favor consistent senior‑level judgment over isolated successes. This pattern‑matching seeks reliability when the employee is unsupervised or during routine work. Consequently, the recommended mindset is responsibility‑first: proactively address the challenges a manager would consider, continuously for several months, and let the title follow proven behavior.
+          </div>
+          <a href="https://andrew.grahamyooll.com/blog/Try-to-Take-My-Position/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments acknowledge that aligning with a manager’s goals and taking on higher‑level responsibilities can help signal readiness for promotion, but they stress that this strategy depends heavily on organizational culture, growth prospects, and explicit agreements with the manager. Many note the risk of exploitation when extra work is unrewarded, advise seeking clear expectations or switching firms when internal advancement stalls, and highlight that promotions are often influenced by politics, bias, and senior‑level decision‑making rather than pure performance. Overall, the advice is seen as situational and contingent on company dynamics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46466027" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://strange.website/" target="_blank">Strange.website</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by abelanger • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The passage depicts a website as a manipulative, oppressive entity that twists facts into fiction, forces attention, and employs “dark UX” tactics such as deceptive offers, infinite scroll, deepfakes, and emotionally‑draining forms.  
+- It personifies the site in multiple states: a haunted castle demanding worship, a decaying structure emitting 410 errors, a lover seeking attachment, and a self‑destructive system yearning for a creator.  
+- A detailed inventory of developer tools is listed—code editor, terminal, CLIs, debuggers, unit/E2E/integration testing frameworks, CI/CD pipelines, cloud hosting, containers, orchestration, DBMS, API gateways, authentication, caching, monitoring, UI libraries, design tools, SEO dashboards, and more—framed as preparation for confronting the site.  
+- Core themes include the erosion of original web values, the psychological toll of relentless engagement, the website’s gradual decay (broken links, 404s, obsolete code), and the paradox of users forming emotional bonds with a fundamentally hostile digital environment.
+          </div>
+          <a href="https://strange.website/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses a nostalgic dissatisfaction with the current state of the internet, contrasting it with earlier, more idiosyncratic and handcrafted sites. It critiques contemporary design trends as overly generic, while praising unconventional, opinionated webpages that recall the aesthetic of earlier web culture. References to related projects and literary influences underscore a desire for creativity and personal expression online, and the tone mixes lament for perceived loss with enthusiasm for niche, experimental web creations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46506596" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://elbowgreasegames.substack.com/p/when-good-actors-can-trust-each-other" target="_blank">How Y Combinator made it smart to trust founders</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by spacemarine1 • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://elbowgreasegames.substack.com/p/when-good-actors-can-trust-each-other" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion contrasts Y Combinator’s high‑trust, founder‑centric model with concerns that its scale creates a self‑reinforcing bias toward applying to YC first, while potentially diluting founder autonomy in stable markets. Commenters note YC’s positive impact on founder‑investor relations but criticize recent trends that appear to disadvantage early employees through weaker equity offers, suggesting a need for clearer criteria to protect hires. Skepticism is expressed about YC’s shift toward AI‑focused investments and whether its trust‑building ecosystem can endure under these changes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46501677" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.djmurphy.net/blog/clo-gaelach/" target="_blank">Adding insular script like it&#39;s 1626</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by sollewitt • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The medieval Irish “Cló Gaelach” script evolved from Latin to encode Irish phonology, using a dot over consonants to indicate séimhiú (softening). Production was hampered by limited insular typefaces and cumbersome typewriter entry (letter + backspace + dot), making printing slow and costly. Modern Irish orthography replaced the dot with a following “h”, which preserves the text but reduces phonetic transparency.
+
+To revive the visual style while keeping text data intact, the author created an OpenType font (Úr cló GC) with discretionary ligatures that replace consonant‑+‑h sequences with dotted equivalents and substitute the ampersand with the Tironian “et”. The ligatures are optional, activated via `font-variant-ligatures: discretionary-ligatures;`, so copy‑paste and screen‑reader output remain in standard Latin characters.
+
+For web presentation, a custom Astro component wraps Irish text in a `<ruby>` element, providing a visible Gaelic script (via the ligature‑enabled font) and an optional English translation displayed as ruby annotation. The component also includes hidden `<span>` elements with `lang="ga"` and `lang="en"` for screen‑reader accessibility, preserving language metadata while delivering the historic visual aesthetic.
+          </div>
+          <a href="https://www.djmurphy.net/blog/clo-gaelach/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks convey a positive reception of the ruby HTML element, describing it as an effective expanded use case, and express agreement with the observation that older internet blogs are experiencing a resurgence, a trend the commenter finds enjoyable. The tone is enthusiastic, highlighting personal enjoyment and alignment with the broader shift toward nostalgic online content.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46488883" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/1803.03635" target="_blank">The Lottery Ticket Hypothesis: finding sparse trainable NNs with 90% less params</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by felineflock • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper investigates why heavily pruned neural networks, which can retain >90 % of original performance with far fewer parameters, are hard to train from scratch. Using a standard magnitude‑based pruning method, the authors discover subnetworks whose initial random weights enable effective training when isolated. This leads to the “lottery ticket hypothesis”: dense, randomly initialized feed‑forward networks contain sparse subnetworks (“winning tickets”) that, with their original initializations, achieve test accuracy comparable to the full network within a similar training budget. An algorithm is proposed to locate such tickets by iteratively training, pruning, and resetting weights to their initial values. Experiments on fully‑connected and convolutional architectures for MNIST and CIFAR‑10 consistently find winning tickets comprising 10‑20 % of the original parameters. These tickets train faster and often surpass the unpruned network’s accuracy, highlighting the critical role of fortunate initial weight configurations in sparse, trainable networks.
+          </div>
+          <a href="https://arxiv.org/abs/1803.03635" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment treats the lottery‑ticket hypothesis as an informal observation rather than a proven principle, arguing that over‑parameterized networks possess a vast space of interchangeable configurations that can approximate a target function. It frames neural‑network behavior in terms of gauge invariance and suggests that many “good enough” arrangements exist, limiting the hypothesis’s practical advantage, especially for final performance gains. The author proposes that optimizer strategies, specific initializations, and potential hardware adaptations could exploit this redundancy, and mentions the possibility of pruning and distilling oversized models after locating effective configurations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46470513" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://perishablepress.com/google-broke-my-heart/" target="_blank">Google broke my heart</a>
+        </h2>
+        <span class="article-meta">
+          288 points • by ingve • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Jeff Starr, a long‑time author and WordPress developer, describes how Google’s DMCA removal process changed by 2026. Previously, his DMCA notices led to swift de‑indexing of pirated copies of his books. When he submitted a new request, Google replied that it could not verify his authority to act, warning of potential liability for false claims. After he identified himself, Google again questioned his copyright ownership and asked for additional proof without specifying requirements. Starr provided extensive evidence—website ownership via Search Console, social‑media profiles, and author credentials—but Google still declined to act, directing him to resolve the issue with the infringing site’s owner and use the Refresh Outdated Content tool after any legal removal. The post highlights the shift from automatic takedowns to a more restrictive, verification‑heavy process that leaves authors to pursue legal avenues before Google will update search results.
+          </div>
+          <a href="https://perishablepress.com/google-broke-my-heart/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong dissatisfaction with Google’s handling of DMCA takedowns, citing false or illegitimate strikes, automated responses, and a perceived lack of human support. Contributors criticize the system’s vulnerability to abuse, call for verification safeguards, and suggest reforms such as processing fees or legal escalation. While some acknowledge the DMCA’s universal availability, many view Google’s practices as driven by profit and corporate inertia, recommending legal action, better documentation of ownership, or alternative distribution models to mitigate the problem.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46505518" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
