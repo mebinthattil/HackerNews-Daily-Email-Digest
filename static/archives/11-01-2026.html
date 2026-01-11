@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 11, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mitchellh.com/writing/ghostty-memory-leak-fix" target="_blank">Finding and fixing Ghostty&#39;s largest memory leak</a>
+        </h2>
+        <span class="article-meta">
+          271 points • by thorel • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Ghostty’s memory leak stemmed from its PageList implementation, which stores terminal content in a doubly‑linked list of memory pages. Pages are allocated either from a fixed‑size pool (standard pages) or via direct mmap for larger, non‑standard pages needed by content with many emojis, styles, or hyperlinks. During scrollback pruning, Ghostty reuses the oldest page as the newest to avoid allocations. The bug occurred when a non‑standard page was repurposed: the metadata was reset to the standard size, but the underlying mmap allocation remained unchanged. When the page was later freed, Ghostty treated it as a pooled page and omitted the required munmap, leaking the large allocation. The issue became apparent with Claude Code’s output, which frequently creates non‑standard pages. The fix prevents reuse of non‑standard pages—such pages are now destroyed with munmap and replaced by a fresh standard page from the pool. Additional changes added Mach‑tagged allocators on macOS for easier debugging. The patch is in nightly builds and slated for the 1.3 release; extensive leak‑detection tooling (Zig allocators, Valgrind, Instruments) now includes a regression test for this case.
+          </div>
+          <a href="https://mitchellh.com/writing/ghostty-memory-leak-fix" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the detailed bug‑fix write‑up and the progress made on Ghostty’s memory‑leak issue, highlighting the value of transparent post‑mortems and visualizations. Readers note the bug’s broader relevance, cite personal encounters with similar crashes, and suggest alternative implementations such as circular buffers or tagging allocations. There is some disappointment that the fix is slated for a later feature release rather than an immediate patch, and a few users criticize perceived over‑engineering compared with other terminals that avoid custom allocators. Overall, the discussion is supportive yet calls for faster resolution and simpler designs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46568794" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Show HN: Librario, a book metadata API that aggregates G Books, ISBNDB, and more</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by jamesponddotco • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback is generally supportive, praising the presentation, detail, and sourcing while expressing interest in using the API for related projects. Common concerns include limited multilingual support, difficulty obtaining non‑English titles, lack of forthcoming‑title listings, and reliance on Amazon data that requires extensive scraping. There is also a request for better provenance tracking to avoid overwriting manually corrected information, and curiosity about integration with resources like BookBrainz. Overall, the comments combine approval with suggestions for broader language coverage, upcoming‑title features, and stronger data provenance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46571149" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://trails.pieterma.es/" target="_blank">Show HN: I used Claude Code to discover connections between 100 books</a>
+        </h2>
+        <span class="article-meta">
+          219 points • by pmaze • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The “Trails” page presents a catalog of book titles identified as thematic links across multiple publications, generated automatically by Claude Code. The content consists of a sequence of images, each labeled with an alt‑text title, covering a broad spectrum of subjects such as neuroscience (“The Elephant in the Brain”), technology and innovation (“The Innovators”, “Zero to One”, “The Hardware Hacker”), economics and history (“Why Nations Fail”, “The Ascent of Money”, “Guns, Germs, and Steel”), psychology and philosophy (“Intuition Pumps”, “Philosophy in the Flesh”), and biographies of notable figures (“Steve Jobs”, “Elon Musk”, “Alan Turing”). The list includes titles on systems thinking, engineering, entrepreneurship, scientific discovery, and cultural analysis, totaling 89 distinct works that span technical, social, and historical domains.
+          </div>
+          <a href="https://trails.pieterma.es/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments display mixed reactions: many admire the interface design and find the project technically impressive, while several criticize the generated connections as often irrelevant or superficial and question the depth of insight provided. Participants discuss the challenges of relying on LLMs for meaningful literary analysis, note hallucination issues, and suggest refining prompts or adding iterative passes. Several users share related technical experiments and propose broader applications such as distant reading or recommendation systems, but overall consensus acknowledges both the novelty and the current limitations of the approach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46567400" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/OlaProeis/Ferrite" target="_blank">Show HN: Ferrite – Markdown editor in Rust with native Mermaid diagram rendering</a>
+        </h2>
+        <span class="article-meta">
+          14 points • by OlaProis • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Ferrite is a lightweight, high‑performance text editor targeting Markdown, JSON, YAML, and TOML files. Implemented in Rust using the egui framework, it delivers a native, responsive UI with multiple viewing options: a raw code pane, a rendered preview, a split view combining both, and a distraction‑free Zen mode. The project is released under the MIT license. The repository’s front‑end displays typical GitHub UI elements, but access to certain actions is currently restricted (“You can’t perform that action at this time”). Image assets reference the MIT license badge, the Rust language logo, and screenshots of the editor’s raw, rendered, split, and Zen modes, illustrating its core functionality and interface design.
+          </div>
+          <a href="https://github.com/OlaProeis/Ferrite" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment notes that existing Markdown editors like Typora already provide similar functionality, but lack built‑in support for JSON and YAML, highlighting a perceived gap as LLMs generate increasingly complex, parseable text with embedded diagrams. It questions whether mermaid rendering is implemented natively in Rust or relies on a JavaScript interpreter, and mentions difficulties encountered when rendering Markdown documents containing numerous mermaid diagrams, expressing a desire for a more reliable and robust rendering solution.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46571980" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.openchaos.dev/" target="_blank">Open Chaos: A self-evolving open-source project</a>
+        </h2>
+        <span class="article-meta">
+          316 points • by stefanvdw1 • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenChaos.dev is presented as a minimal web page consisting of a title line (“Title: OpenChaos.dev”) followed by a header (“OPENCHAOS.DEV”) and a short sequence of command‑line‑style tokens (“--d --h --m --s”). The page concludes with the phrase “until next merge.” No additional descriptive text, functional details, or contextual information is provided beyond these elements. The content therefore conveys only the project name, a set of four prefixed identifiers, and a temporal note indicating that the current state persists “until next merge.” No further technical specifications, explanations, or usage instructions are included.
+          </div>
+          <a href="https://www.openchaos.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed curiosity and uncertainty about the GitConsensus experiment, with many likening it to “Twitch plays Github” and questioning its purpose and end product. Some express enthusiasm for the collaborative, chaotic approach and see potential for innovative outcomes, while others note practical concerns such as slow update frequency, security warnings, and the need for basic quality controls or structure. Suggestions include automating issue generation and establishing guardrails, reflecting a desire to balance openness with maintainable standards. Overall sentiment ranges from intrigued optimism to cautious skepticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46566812" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nightingaledvs.com/dark-sky-weather-data-viz/" target="_blank">Eulogy for Dark Sky, a data visualization masterpiece (2023)</a>
+        </h2>
+        <span class="article-meta">
+          378 points • by skadamat • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple discontinued the Dark Sky weather app on iOS on Jan 1 2023 after acquiring the company in 2020 and integrating its forecast technology into Apple Weather with iOS 16. The article highlights Dark Sky’s information‑design strengths: context‑sensitive graphics, hyper‑local forecasts, and a default 12‑hour view that starts at “now.” Screenshots illustrate how the app emphasizes relevant data—storm timing, rain probability, temperature distribution—and offers a “Time Machine” view for past weather. Weekly forecasts provide hyper‑local temperature ranges, rain likelihood, and micro‑trends. Design details include preserving temperature magnitudes in visual “pills,” substituting precise precipitation values with categorical labels (light/medium/heavy), and using arrows for wind direction. User feedback notes that Apple Weather presents information less efficiently, lacking features such as Dark Sky’s precipitation graph. The author, Srini Kadamati, now builds data‑management tools for biomedical research and has taught data visualization at Dataquest.io and Preset.io.
+          </div>
+          <a href="https://nightingaledvs.com/dark-sky-weather-data-viz/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong nostalgia for Dark Sky’s precise hyper‑local forecasts and minimalist UI, contrasting it with Apple’s weather app, which many view as less accurate, feature‑reduced, and aesthetically driven after the acquisition. Users note missing features such as historical data and cite a perception that the original app offered a unique “spark of joy.” Numerous alternatives—including open‑source clones, Breezy Weather, Weathergraph, WeatherStrip, Windy, and government graphs—are recommended for similar functionality, while some critique broader design choices and corporate handling of the service.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46565132" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dri.es/ai-is-a-business-model-stress-test" target="_blank">AI is a business model stress test</a>
+        </h2>
+        <span class="article-meta">
+          176 points • by amarsahinovic • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            AI’s ability to generate fully specified artifacts—documentation, UI components, CSS libraries—has eroded the traffic‑driven revenue model of Tailwind Labs. After a 40 % drop in doc visits, 75 % of its engineering staff were laid off, illustrating a stress test rather than a universal failure of open‑source businesses. The company’s $299 Tailwind Plus component bundle relied on discovery via documentation; AI now supplies equivalent code directly, extracting value without compensating the source. The analysis argues that value is moving from specifiable deliverables to repeatable operational services such as deployment, testing, rollbacks, observability, and security—areas AI cannot “prompt.” Examples include Vercel’s free Next.js framework paired with paid hosting, and Acquia’s services around Drupal (hosting, CI/CD, DAM). The author calls for policy discussion on AI training on open‑source content and notes that while Tailwind CSS will persist, its business model must pivot toward operational offerings to remain viable.
+          </div>
+          <a href="https://dri.es/ai-is-a-business-model-stress-test" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that AI‑driven code generation is eroding the revenue model of products like Tailwind by making their functionality quickly reproducible, effectively “stress‑testing” those businesses. The discussion broadens to a critique of software monetization generally, noting that value is shifting toward ongoing operations, support, and integration rather than static libraries, and that open‑source projects face similar pressure to find sustainable funding. Opinions differ on whether this constitutes a disruptive break or a natural evolution, with some proposing attribution or advertising mechanisms as possible compensation, while others see the shift as an inevitable market adjustment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46567392" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/apify/mcp-cli" target="_blank">Show HN: mcpc – Universal command-line client for Model Context Protocol (MCP)</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by jancurn • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository apify/mcp-cli provides a universal command‑line client for the MCP platform. It supports persistent sessions, allowing stateful interactions across multiple commands. Communication can occur via standard I/O streams or HTTP endpoints, and authentication is handled through OAuth 2.1. Output is formatted as JSON, facilitating integration with scripts and enabling a “code mode” for programmatic use. An optional proxy feature routes traffic through AI sandbox environments. The tool is intended for developers needing a flexible, scriptable interface to MCP services, offering both interactive and automated operation modes. No additional content beyond the title and a notice of restricted access is present.
+          </div>
+          <a href="https://github.com/apify/mcp-cli" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback expresses a positive assessment of the tool, highlighting satisfaction with its capabilities and enthusiasm for the addition of another builder within the MCP ecosystem. The tone conveys approval and optimism about the tool’s contribution to the community, indicating overall approval without raising concerns or criticisms.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46513163" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fly.io/blog/code-and-let-live/" target="_blank">Code and Let Live</a>
+        </h2>
+        <span class="article-meta">
+          230 points • by usrme • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Fly.io’s “Sprites” are lightweight, disposable cloud computers that boot in 1‑2 seconds, provide a persistent root filesystem (default 100 GB), and support instant checkpoint/restore (≈1 s) for full‑system state. Unlike traditional read‑only, short‑lived sandboxes, Sprites stay alive and idle without billing, can be created in large numbers without Docker containers, and are automatically attached to Fly’s Anycast network, exposing HTTPS URLs. They enable developers (and AI agents such as Claude) to work on code with durable storage, avoiding repeated environment reconstruction (e.g., reinstalling packages or rebuilding node_modules). Sprites expose a root shell, allow arbitrary package installs, and can be restored to previous checkpoints after destructive actions. The post argues that stateless containers hinder productive agents, proposing that persistent, full‑system VMs better serve both professional developers and AI‑driven tooling, especially for workloads exceeding typical sandbox time limits. Sprites combine EC2‑like durability with near‑instant provisioning, positioning them as a new “disposable computer” paradigm beyond conventional sandboxes.
+          </div>
+          <a href="https://fly.io/blog/code-and-let-live/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for sprites.dev, praising its fast startup, checkpointing, and sandboxed execution model as a useful tool for running agents and untrusted code. Users appreciate Fly’s infrastructure and see potential for custom base images, cloning, and integration with API‑key management, while also requesting clearer documentation, authentication methods, cost visibility, and scaling limits. Several participants compare the service to VPS, EC2, and local VM solutions, noting both the convenience of a managed platform and the desire for more control and local alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46557825" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://paris1970.jeantho.eu/index.html" target="_blank">1970 Paris, cut into a grid and photographed</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by panic • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Ville de Paris and FNAC ran a 1970 amateur photography contest to create a comprehensive visual record of Paris, dividing the city into 1,755 squares measuring 250 m per side. Of the 15,000 entrants, 2,800 submitted complete portfolios; the resulting images were transferred to the Bibliothèque historique de la Ville de Paris, digitized, and organized into a searchable collection. The current website displays low‑resolution thumbnails for each square and links to high‑resolution versions hosted by the library. The digitized archive contains 30,225 photographs contributed by 6,918 participants; some original submissions remain undigitized. Users can navigate the grid by selecting a page, which is also divided into 250 m squares, to view photographs of any chosen area.
+          </div>
+          <a href="https://paris1970.jeantho.eu/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary expresses enthusiasm for the extensive collection of amateur photographs, noting the striking emptiness of the streets and the nostalgic value of viewing a Paris that predates personal memories. It raises technical curiosity about using geolocation to recreate historic cityscapes, referencing comparable historic maps and similar datasets from other cities. Frustration is voiced toward intrusive translation prompts on mobile browsers, criticizing the lack of a non‑obtrusive option. Overall, the tone combines appreciation for the visual archive with interest in its potential applications and annoyance at UI interruptions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46481060" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
