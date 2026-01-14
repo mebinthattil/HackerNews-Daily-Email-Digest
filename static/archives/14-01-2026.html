@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://questdb.com/blog/jvm-current-thread-user-time/" target="_blank">A 40-line fix eliminated a 400x performance gap</a>
+        </h2>
+        <span class="article-meta">
+          140 points • by bluestreak • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The OpenJDK commit 858d2e434dd replaces the original `ThreadMXBean.getCurrentThreadUserTime()` implementation, which read `/proc/self/task/<tid>/stat`, parsed a complex string with `sscanf`, and converted clock ticks to nanoseconds, with a direct `clock_gettime()` call. The old method required multiple syscalls (open, read, close), VFS processing, kernel‑side string formatting, and user‑space parsing, causing a 30‑400× slowdown versus the simpler `getCurrentThreadCpuTime()` that already used `clock_gettime(CLOCK_THREAD_CPUTIME_ID)`.  
+
+The new code obtains a thread‑specific `clockid_t` via `pthread_getcpuclockid()`, flips the low bits to request VIRT (user‑time‑only) clocks, and calls the existing `os::Linux::thread_cpu_time()` wrapper. Benchmarks on a Ryzen 9950X show average latency dropping from ~11 µs to 0.28 µs (≈40×) and further micro‑benchmarking reduces it to ~70 ns, a 13 % gain by constructing the clockid manually (PID = 0) to use the kernel fast‑path that skips the radix‑tree lookup.  
+
+The change, a 40‑line edit, landed Dec 3 2025 and will be part of JDK 26 (Mar 2026), delivering a substantial performance improvement for `ThreadMXBean.getCurrentThreadUserTime()`.
+          </div>
+          <a href="https://questdb.com/blog/jvm-current-thread-user-time/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on performance‑measurement techniques, highlighting a proposed use of software perf events to obtain thread CPU time with minimal overhead and noting limited documentation and uncertain support for user‑time selection. Readers repeatedly praise flamegraphs for revealing hidden inefficiencies and commend the author’s thorough investigation and clear presentation. There is disappointment expressed over long delays in fixing related kernel bugs, while appreciation is voiced for the QuestDB team, the blog’s quality, and the overall write‑up.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46609630" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.greptile.com/blog/github-ids" target="_blank">Every GitHub object has two IDs</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by dakshgupta • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub objects have two identifier schemes. The older format encodes a string of the form “<type‑enum>:<type‑name><database‑ID>” and is base‑64‑encoded (e.g., `MDEwOlJlcG9zaXRvcnkyMzI1Mjk4` → `010:Repository2325298`). Newer objects use a global node ID prefixed by an object type (e.g., `PRRC_kwDOL4aMSs6Tkzl8`). The suffix is a base‑64‑encoded MessagePack array: `[version, repository‑DB‑ID, object‑DB‑ID]`. Decoding yields the repository ID and the object’s database ID; the object ID is always the last array element. Because the MessagePack payload is 96 bits, the lower 32 bits correspond to the database ID, allowing extraction via a simple bitmask (`decoded & 0xffffffff`). Legacy IDs persist for older repositories and certain object types (e.g., Users), while newer repositories receive the MessagePack‑based IDs. The first array element appears to be a version marker. Converting a node ID to its database ID can be done with:
+
+```python
+import base64, msgpack
+def node_id_to_db_id(node_id):
+    _, enc = node_id.split('_')
+    return msgpack.unpackb(base64.b64decode(enc))[-1]
+```
+          </div>
+          <a href="https://www.greptile.com/blog/github-ids" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on GitHub’s migration guide advising IDs be treated as opaque, yet participants note observable structure in the IDs, describing a type prefix, colon, and numeric component. Commenters express frustration that such patterns undermine the notion of true opacity and argue that robust APIs would need encryption to prevent reliance on hidden formats. Technical explanations counter claims about conditional logic, attributing the encoding to GraphQL’s base64 handling rather than time‑based checks, and note that the ID format changed only after the migration.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46602591" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.vllm.ai/2025/12/17/large-scale-serving.html" target="_blank">vLLM large scale serving: DeepSeek 2.2k tok/s/h200 with wide-ep</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by robertnishihara • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            vLLM 0.11.0 completes migration to the V1 engine, enabling higher‑throughput inference for large MoE models such as DeepSeek‑V3. Community benchmarks on a CoreWeave H200 cluster (Infiniband ConnectX‑7) report sustained 2.2 k tokens / s per GPU—up from ~1.5 k tokens / s—thanks to kernel upgrades (SiLU‑mul‑quant fusion, Cutlass QKV kernels, TP‑attention fixes) and Dual‑Batch Overlap (DBO) for decode.
+
+Key techniques:
+- **Wide‑EP**: combines expert parallelism with data parallelism, sharing a single expert set across ranks and avoiding tensor‑parallel duplication of latent‑attention projections, improving KV‑cache utilization.
+- **Dual‑Batch Overlap (DBO)**: overlaps micro‑batch compute with all‑reduce communication, reducing idle GPU time.
+- **Expert Parallel Load Balancing (EPLB)**: hierarchical/global policies rebalance token routing dynamically to prevent rank idling.
+- **Disaggregated serving**: separates prefill and decode phases, mitigating delay from compute‑bound prefill requests in EP groups.
+
+Supported deployment stacks include llm‑d (Kubernetes), Dynamo (high‑throughput/low‑latency), and Ray Serve LLM (modular Ray‑based serving). Ongoing roadmap items cover elastic EP, long‑context serving, KV‑cache CPU transfer, full determinism, and large‑MoE kernel fusions.
+          </div>
+          <a href="https://blog.vllm.ai/2025/12/17/large-scale-serving.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46602737" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.owlposting.com/p/the-truth-behind-the-2026-jp-morgan" target="_blank">The truth behind the 2026 J.P. Morgan Healthcare Conference</a>
+        </h2>
+        <span class="article-meta">
+          56 points • by abhishaike • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author, co‑hosting a San Francisco event on 16 Jan 2026, reflects on the J.P. Morgan Healthcare Conference (JPM HC) held 12‑16 Jan 2026 at the Westin St. Francis. They note that, despite extensive online presence—official website, press articles, AI‑generated LinkedIn posts—no one they know has physically attended the conference, and media coverage lacks personal anecdotes, focusing on generic phrases (“pipeline updates,” “cautiously optimistic”). Drawing a parallel to the 1835 Great Moon Hoax, the author suggests the conference’s reality is indistinguishable from a well‑executed hoax. They invoke Thomas Schelling’s “focal point” concept, proposing JPM HC functions as an industry‑wide coordination device rather than a conventional meeting. Extending this, the author speculates that the Westin hotel sits above a massive subterranean organism that requires drug infusion, positioning the biotech sector as a caretaker for this entity and explaining California’s economic centrality. The piece frames the conference as a ritualistic, almost religious gathering, while acknowledging the speculative nature of these theories.
+          </div>
+          <a href="https://www.owlposting.com/p/the-truth-behind-the-2026-jp-morgan" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments portray the healthcare conference as largely superficial, with forgettable talks and dealmakers perceived as lacking depth, while also recognizing its role as a networking hub where investors, executives, regulators and journalists convene to discuss mergers, IPOs and funding. Opinions about other events vary, noting low paper standards and a relaxed atmosphere at a biocomputing symposium. Overall, the sentiment blends criticism of content quality with acknowledgment of the practical value of industry gatherings for relationship‑building and deal negotiation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46605332" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">The $LANG Programming Language</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by dang • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express concern that Show HN posts receive minimal exposure, with the “Show” link and especially the “Show New” section attracting only a tiny fraction of visitors, forcing authors to rely on external promotion to generate up‑votes. There is frustration over the difficulty of gaining visibility within Hacker News, coupled with self‑critical jokes about potentially impacting site performance. Some remarks note technical details of the posted project, while others seek clarification about how static pages appear in the site’s lists. Overall, the tone mixes criticism of the visibility system with light‑hearted commentary.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46610557" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://caidan.dev/portfolio/ascii_clouds/" target="_blank">ASCII Clouds</a>
+        </h2>
+        <span class="article-meta">
+          5 points • by majkinetor • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is titled “ASCII Clouds” and provides a short list of available visual presets for the application. Two preset names are shown: **DefaultTerminalRetro** and **CRTCosmicFogRed**. No additional description, usage instructions, or technical details are included beyond these identifiers. The content consists solely of the title and the two preset options, indicating a selection interface for different ASCII‑based cloud rendering styles. No further information about functionality, configuration parameters, or implementation is present.
+          </div>
+          <a href="https://caidan.dev/portfolio/ascii_clouds/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks convey a generally upbeat reaction, expressing appreciation and interest in the visual element presented. The tone is positive, with a sense of curiosity prompting questions about interpretation of the imagery. There is no evident disagreement or criticism, and the focus remains on enjoying the content and seeking further description of what is observed. The overall sentiment is supportive and inquisitive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46611507" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eieio.games/blog/two-heads-arent-better-than-one/" target="_blank">Are two heads better than one?</a>
+        </h2>
+        <span class="article-meta">
+          123 points • by evakhoury • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The puzzle considers a fair coin flipped, observed by Alice who lies 20 % of the time. Trusting Alice alone yields an 80 % correct guess. Adding Bob, who also lies independently 20 % of the time, does not improve accuracy: the optimal strategy—guess the most likely outcome for each reported pattern—still gives 80 % success. A detailed probability table shows four cases (both truthful, both lying, one truthful/one lying) each contributing 64 %, 4 %, and two 16 % scenarios where a random guess yields 50 % correctness, summing to 80 %. Simulations of one‑million trials confirm the result. Introducing a third independent liar (Charlie) raises accuracy to 90 % because a majority vote breaks ties; a fourth (David) restores an even number of voters and the gain disappears. This mirrors Condorcet’s Jury Theorem: with independent voters each correct with probability > ½, the majority decision’s correctness approaches 100 % as the odd voter count grows, while even counts add no information without a tie‑breaker.
+          </div>
+          <a href="https://eieio.games/blog/two-heads-arent-better-than-one/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that when two sources have equal but opposite reliability the combined likelihood is symmetric, yielding no information gain in tie cases. It notes that trusting an additional low‑accuracy observer does not improve overall correctness unless their agreement provides a clear signal, and that strategies beyond unconditional trust offer no advantage. Extensions to multiple observers, relational coherence, and analogies to error‑correction or betting are explored, highlighting the limits of information gain from correlated or noisy inputs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46603111" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://everything2.com/node/e2node/Why%20IRC%20is%20better%20than%20Real%20Life" target="_blank">Why IRC is better than Real Life</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by jskherman • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cannot provide a summary because the supplied input contains only a title and no substantive content to summarize.
+          </div>
+          <a href="https://everything2.com/node/e2node/Why%20IRC%20is%20better%20than%20Real%20Life" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment critiques an attempt to exploit a netsplit for channel control, noting that such a takeover and the application of +m moderation on a large channel are ineffective in practice. It also points out a formatting omission, specifically the absence of “(2000)” in the title, suggesting attention to detail. Overall, the tone reflects skepticism toward the described method and highlights a perceived oversight in the presentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46611119" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ycombinator.com/companies/sei/jobs/Rn0KPXR-devops-platform-ai-infrastructure-engineer" target="_blank">Sei (YC W22) Is Hiring a DevOps Engineer (India/In-Office/Chennai/Gurgaon)</a>
+        </h2>
+        <span class="article-meta">
+          1 points • by ramkumarvenkat • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Sei is an AI platform for financial services backed by Y Combinator and other investors. The company seeks a senior DevOps/Platform/AI Infrastructure Engineer to help scale its product for enterprise customers. The stack includes a TypeScript backend, React frontend, Python AI agents, and AWS‑based infrastructure managed with Terraform and Kubernetes. Key responsibilities are auto‑scaling services, cost optimization, operating open‑source monitoring and security tools, and managing WebRTC servers, PSTN gateways, and STT/TTS/LLM deployments. Candidates must have strong AWS, Kubernetes, and Terraform experience, exposure to AI/ML and large language models, and a track record of building systems from zero to production. The role emphasizes continuous 360° feedback, product ownership, rapid execution, and a humane, collaborative culture. Work is location‑based in Gurgaon or Chennai (minimum four days per week) with an intense, high‑accountability environment. Compensation includes a competitive salary, equity, and flexibility in cash‑equity split.
+          </div>
+          <a href="https://www.ycombinator.com/companies/sei/jobs/Rn0KPXR-devops-platform-ai-infrastructure-engineer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46610967" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.construction-physics.com/p/japans-skyscraper-factories" target="_blank">Japan&#39;s Skyscraper Factories (2021)</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by Pikamander2 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Japan’s large construction firms invested heavily from the late 1970s in robotics to address high labor costs and stagnant productivity. Initial single‑task robots (e.g., SSR‑1 fire‑proofing sprayer, 1983) evolved into integrated “building factories” that moved the factory onto the jobsite. Core technologies included rail‑mounted gantries, vertical lifts, climbing platforms, and just‑in‑time delivery of prefabricated steel, concrete floor slabs, and façade panels; single‑task robots performed welding, cutting, and finishing. Notable systems were Shimizu’s SMART, Akatuki‑21 (with ground and sky factories), Obayashi’s ABCS/Big Canopy, T‑Up, AMURAD, and others. Reported outcomes (1990s‑early 2000s) showed 20‑70 % labor reductions per task, 15‑30 % construction‑time savings on high‑rise projects, up to 70 % waste reduction, and improved site weather protection. Drawbacks were long (≈1‑3 months) and costly factory set‑up, limited applicability to tall buildings, extensive design coordination, and long pay‑back periods (e.g., AMURAD ≈ 8 buildings, ~20 years). By the 2010s the systems were no longer in commercial use, though Shimizu continues R&D on newer site‑wide robotic platforms.
+          </div>
+          <a href="https://www.construction-physics.com/p/japans-skyscraper-factories" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on speculation that progress in construction automation could reduce the fanciful nature of massive megastructure concepts such as the X‑Seed, suggesting that once automated building processes are solved, assembling such colossal projects might become a matter of material collection and initiating the system. The tone is curious and tentative, linking future technological capabilities to the plausibility of previously far‑out ideas.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46534632" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
