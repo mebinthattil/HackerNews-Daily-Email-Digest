@@ -1,0 +1,505 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 19, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://radiancefields.com/a-ap-rocky-releases-helicopter-music-video-featuring-gaussian-splatting" target="_blank">Gaussian Splatting – A$AP Rocky &#34;Helicopter&#34; music video</a>
+        </h2>
+        <span class="article-meta">
+          468 points • by ChrisArchitect • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A$AP Rocky’s “Helicopter” music video was created using full‑body volumetric capture and dynamic Gaussian splatting. Director Dan Strait selected the technique to give unrestricted post‑production freedom that conventional filming could not provide. Evercoast recorded all performers, including Rocky, with a 56‑camera RGB‑D array in Los Angeles (August), capturing over 10 TB of raw data and producing roughly 30 minutes of splatted footage (≈1 TB of PLY sequences). The raw captures were processed in Houdini using CG Nomads GSOPs and rendered with OTOY’s OctaneRender, which allowed relighting and shadowing of the splats. Blender was used for layout and preview, while WildCapture’s tools supplied primitive pose estimations for motion transfer and simulation of rigid/soft bodies. The workflow enabled live on‑set previews, rapid creative decisions, and extensive recomposition of physically performed stunts (wire rigs, props) without additional filming. The final aesthetic appears synthetic, but all motion is captured from real performances rather than AI‑generated content.
+          </div>
+          <a href="https://radiancefields.com/a-ap-rocky-releases-helicopter-music-video-featuring-gaussian-splatting" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong interest in the music video’s use of Gaussian splatting, highlighting its technical novelty and artistic impact while noting the complexity of the underlying workflow. Readers seek clearer explanations of the method, compare it to traditional VFX and AI‑generated visuals, and discuss its potential for faster, more flexible compositing. Opinions diverge on visual quality, with some finding the texture off or causing motion sickness, and others praising the surreal aesthetic; cost and practicality are also debated. Overall sentiment is curious and cautiously optimistic.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46670024" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/antirez/flux2.c" target="_blank">Flux 2 Klein pure C inference</a>
+        </h2>
+        <span class="article-meta">
+          231 points • by antirez • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is titled “GitHub – antirez/flux2.c: Flux 2 image generation model pure C inference,” indicating a repository that hosts a C implementation for running inference with the Flux 2 image‑generation model. The site currently displays a notice stating “You can’t perform that action at this time,” suggesting that a requested operation (e.g., viewing or downloading content) is blocked or unavailable. Three visual elements are listed with alternative text only: the first image is described as “Woman with sunglasses,” the second as “@antirez,” and the third as “@claude.” No additional code, documentation, or technical details are provided in the captured text.
+          </div>
+          <a href="https://github.com/antirez/flux2.c" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express enthusiasm for using LLM‑assisted workflows to port and implement models, noting speed gains, reduced manual effort, and successful reuse of existing codebases. Contributors highlight the value of thorough documentation such as implementation, prompt, and skill files, and suggest best practices for weight handling, testing, and metadata preservation. Questions arise about code quality, production readiness, licensing choices, and performance compared to Python or GPU‑accelerated stacks, while some raise concerns about download reliability and the broader implications of embedding generative AI in diverse applications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46670279" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://overreacted.io/a-social-filesystem/" target="_blank">A Social Filesystem</a>
+        </h2>
+        <span class="article-meta">
+          296 points • by icy • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post argues that social platforms should treat user‑generated data as files in an app‑agnostic “everything folder,” mirroring the traditional filesystem model where files belong to users, not apps. By defining social actions (posts, follows, likes) as JSON records stored in uniquely named collections—e.g., com.twitter.post—apps become reactive views over these files, while the files remain the source of truth. Formats (lexicons) describe each record’s schema; validation occurs on read, allowing multiple apps with differing schemas to coexist. Record identifiers combine timestamps with randomness to avoid collisions, and domain‑based namespaces prevent naming conflicts. Persistent, host‑independent links require a user identifier (e.g., @dril) resolved via a registry, enabling content to move between hosts without breaking references. The AT protocol implements this model at scale in projects like Bluesky, providing a distributed social filesystem that separates data ownership from application logic.
+          </div>
+          <a href="https://overreacted.io/a-social-filesystem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments converge on the idea that durable, file‑based data and open standards could reduce platform lock‑in and give users more control, yet opinions diverge on feasibility. Several contributors highlight existing decentralized approaches (e.g., Perkeep, SOLID, Nostr, Mastodon) as promising alternatives, while others criticize the AT Protocol and similar proposals as overly complex, hard to adopt, or potentially creating immutable surveillance records. Concerns about privacy, key loss, and the difficulty of moving large user bases to private storage appear alongside optimism about local‑first software and community‑driven standards. Overall sentiment is mixed, balancing hopeful endorsement of data portability with practical skepticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46665839" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://git.qt.io/cradam/fil-qt" target="_blank">Fil-Qt: A Qt Base build with Fil-C experience</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by pjmlp • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No content was provided to summarize.
+          </div>
+          <a href="https://git.qt.io/cradam/fil-qt" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight both appreciation and skepticism toward the Fil‑C integration with Qt. Users note the minimal code changes required as evidence of strong compatibility and express interest in leveraging the tool to identify unresolved Qt bugs. At the same time, there is doubt about whether the project fulfills Fil‑C’s intended role as a seamless, safe C replacement, questioning the implications of the current implementation. Overall, the discussion reflects enthusiasm for the technical capabilities while raising concerns about alignment with Fil‑C’s original purpose.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46646080" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gitlab.winehq.org/wine/wine/-/releases/wine-11.0" target="_blank">Wine 11.0</a>
+        </h2>
+        <span class="article-meta">
+          247 points • by zdw • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is a GitLab repository listing for Wine version 11.0, indicating that the source code and related project materials for this release are hosted on the GitLab platform under the “wine / wine” project namespace.
+          </div>
+          <a href="https://gitlab.winehq.org/wine/wine/-/releases/wine-11.0" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for recent Wine developments, highlighting features such as WoW64 support, ntsync, and the ability to run 64‑bit Windows programs without extra dependencies. Users discuss practical uses, including bundling Wine in AppImages or macOS app bundles, and request concrete lists of newly supported applications and games. There is interest in whether current Microsoft Office can run under Wine. While the overall tone is positive, a few remarks critique the project's PR handling and perceived bureaucratic overhead.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46611816" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.joinformal.com/blog/using-proxies-to-hide-secrets-from-claude-code/" target="_blank">Using proxies to hide secrets from Claude Code</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by drewgregory • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article treats sandboxing of agentic coding tools (e.g., Claude Code) as a networking isolation problem. It outlines three security questions: untrusted input exposure, external communication, and secret exposure. Claude Code inherits environment variables, API keys, and directory files, so sandboxing must restrict network access and secret propagation. A provided devcontainer firewall uses `iptables` to allow only specific IPs, but IP‑level allowlists are coarse; domain fronting and prompt‑injection can still exfiltrate data. The recommended mitigation is to route Claude Code traffic through HTTP proxies (e.g., mitmproxy) that can replace dummy API keys with real ones after leaving the sandbox, thereby keeping secrets out of the sandbox’s environment. Mitmproxy add‑ons can rewrite hostnames, headers, or inject credentials. Formal’s Connectors and Resources enable fine‑grained, least‑privilege policies by decoupling human and machine identities, ensuring Claude Code never directly sees admin Anthropic keys. Combined proxy and policy controls limit external communication and credential exposure while preserving necessary functionality.
+          </div>
+          <a href="https://www.joinformal.com/blog/using-proxies-to-hide-secrets-from-claude-code/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The post outlines a Linux runc container configuration that isolates the host via bind‑mounted folders, uses a transparent proxy for networking, and forwards Wayland sockets for GUI apps. Secrets are managed with sops‑encrypted environment files, which are convenient but can leave decrypted temporary files if an editor crashes, raising a minor security risk. The author highlights a proxy pattern that treats LLM context windows as untrusted, allowing credential injection without exposing secrets, and notes that Claude Code aggressively reads .env files, suggesting a built‑in sandbox secret store could mitigate such exposure.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46605155" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kudmitry.com/articles/dead-internet-theory/" target="_blank">Dead Internet Theory</a>
+        </h2>
+        <span class="article-meta">
+          92 points • by skwee357 • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author reflects on encounters on Hacker News where an open‑source project's code and its author’s comments appear AI‑generated—evidenced by unusual em‑dash usage, formulaic phrases (“you are absolutely right”), and templated offers. This prompted suspicion that the author, despite denying AI assistance, might be a bot. Extending this observation, the piece cites the “Dead Internet Theory,” which argues that since ~2016 most online interactions and content are produced by automated agents to drive sales or manipulate SEO. The writer contrasts this with early‑2000s experiences on IRC and phpBB forums, where human discourse was commonplace and learning was peer‑driven. Additional examples include AI‑altered corporate photos on LinkedIn and fabricated multimedia on platforms such as Facebook, X, and TikTok. The overall concern is that widespread, inexpensive AI tools enable mass generation of code, comments, and media, eroding authentic human contribution and threatening the internet’s role as a collaborative knowledge hub.
+          </div>
+          <a href="https://kudmitry.com/articles/dead-internet-theory/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread unease about the growing prevalence of AI‑generated and bot‑driven content, viewing it as a source of division, misinformation, and erosion of genuine discourse across platforms such as YouTube, Reddit, and Hacker News. Many anticipate a “dead‑internet” or “dark‑forest” scenario in which human interaction becomes isolated pockets amid overwhelming automated noise, while some suggest technical countermeasures and community curation as possible mitigations. There is also debate over terminology for social media and occasional lighter remarks about typographic conventions, but overall the tone is cautious and skeptical of AI’s impact on online ecosystems.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46671731" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.texasobserver.org/texas-police-invest-tangles-sheriff-surveillance/" target="_blank">Police Invested Millions in Shadowy Phone-Tracking Software Won&#39;t Say How Used</a>
+        </h2>
+        <span class="article-meta">
+          239 points • by nobody9999 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.texasobserver.org/texas-police-invest-tangles-sheriff-surveillance/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of police reliance on secretive phone‑tracking software, viewing it as a breach of civil liberties and a tool for pre‑emptive policing. Skepticism runs about the legality and effectiveness of the system, with many blaming broader surveillance culture, data brokers, and elite exploitation rather than solely the police. There is distrust of law‑enforcement motives, concern over unchecked data collection, and frustration with media framing, while some suggest the issue may be overstated or misrepresented.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46672150" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.alilleybrinker.com/mini/gas-town-decoded/" target="_blank">Gas Town Decoded</a>
+        </h2>
+        <span class="article-meta">
+          56 points • by alilleybrinker • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post reviews Steve Yegge’s “Welcome to Gas Town,” a newly released AI‑agent orchestration framework described in a chaotic style and illustrated with AI‑generated images of a fictional industrial city. The announcement generated rapid reaction due to the system’s claimed scale, high cost, and extensive proprietary terminology. To make the concept accessible, Andrew Lilley Brinker provides a concise decoder that translates Yegge’s internal jargon into more conventional terms, noting that the original definitions are recursive and that the architecture includes layered supervisory agents (e.g., a Maintenance Manager Checker Agent). While acknowledging the tool’s complexity and potential redundancy, the decoder aims to clarify the core idea that agent orchestration—coordinating multiple AI agents to perform tasks—will become an important capability despite the system’s perceived wastefulness and expense.
+          </div>
+          <a href="https://www.alilleybrinker.com/mini/gas-town-decoded/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed but cautious view of the “gas town” concept. Many acknowledge its novelty and potential for coordinated, low‑concurrency agent work, yet repeatedly highlight concerns about vague terminology, unclear practical value, high token or monetary cost, and insufficient concrete demonstrations. Skepticism appears about whether the project is serious or satirical, while suggestions include tighter naming conventions, better guardrails, and clearer documentation. Overall, interest exists, but expectations are tempered by doubts over feasibility, execution, and the creator’s credibility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46624883" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://asteriskmag.com/issues/07/sins-of-the-children" target="_blank">Sins of the Children</a>
+        </h2>
+        <span class="article-meta">
+          117 points • by maxall4 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Human expedition on Chelicer 14d established farms to harvest a native “Farmer” species (spider‑like chelicerates) that cultivated a nutrient‑rich tuber used for superconductors.  
+- An unknown apex predator, a large armored chelicerate (“death‑flea”), appeared, leaping up to half a kilometre and killing crew members, including Merrit, before being temporarily disabled by targeting a joint.  
+- The team recorded the creature’s anatomy, noting a rigid exoskeleton, articulated legs, and scissor‑blade mouthparts. Repeated attacks damaged infrastructure, including the planet‑to‑orbit elevator cable, forcing evacuation.  
+- Concern leadership authorized a large‑scale culling using hunter drones, prioritizing the Farmers and resource extraction over ecosystem preservation.  
+- Over subsequent years, extensive exploitation and predator removal triggered a cascade of species transformations and extinctions, ultimately collapsing the planet’s biota.  
+- The final crew, including biologists Greffin and FenJuan, left the planet as a failed commercial venture, noting the Concerns’ focus on profit and expansion despite the ecological collapse.
+          </div>
+          <a href="https://asteriskmag.com/issues/07/sins-of-the-children" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion expresses strong appreciation for Adrian Tchaikovsky’s world‑building and alien‑ecosystem concepts, highlighting the “Children of Time/Time” series, Shroud, and related short fiction as especially rewarding. Commenters note a fatigue with the recurring “humans as ecological villains” trope in Western sci‑fi and seek narratives where humanity is not cast as the bad actor, citing examples from Chinese and other non‑Anglophone works. Themes of cooperative versus competitive evolution and totalitarian philosophies appear, and additional recommendations such as Blindsight are mentioned. Overall sentiment is enthusiastic and inquisitive, favoring fresh ecological perspectives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46669663" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
