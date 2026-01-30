@@ -1,0 +1,511 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">January 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://grid.space/stem/" target="_blank">Grid: Forever free, local-first, browser-based 3D printing/CNC/laser slicer</a>
+        </h2>
+        <span class="article-meta">
+          160 points • by cyrusradfar • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Grid.Space offers browser‑based, free STEM tools for digital fabrication with no installation, licensing, or account requirements. All work remains locally on the user’s device, avoiding data collection and complying with COPPA and FERPA. The platform runs on any modern browser across Windows, macOS, Linux, Chromebooks, and tablets, and functions offline after the initial load.
+
+Target environments include K‑12 classrooms, makerspaces, university labs, libraries, homeschool settings, and after‑school programs. Students can practice industry‑standard workflows for 3D printing (FDM/SLA), CNC machining, laser cutting, and 3D modeling, covering tasks such as slicing, toolpath generation, material settings, mesh editing, and design‑for‑manufacturing. Additional focus areas are design thinking, iterative prototyping, and troubleshooting.
+
+Curriculum alignment spans technology & engineering (CAD/CAM, additive/subtractive manufacturing), science (material properties, prototyping, data visualization), and art & design (digital fabrication, form‑function balance). Educators start by bookmarking grid.space, accessing documentation, tutorials, and community forums; students load models via grid.space/kiri or grid.space/mesh and save outputs locally. Contact: admin@grid.space.
+          </div>
+          <a href="https://grid.space/stem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The response is broadly favorable, highlighting the tool’s free, locally‑run, cross‑platform nature and its utility for makerspaces that need a single application for 3D printing, laser cutting, and CNC. It praises the open‑source model as a counterpoint to subscription‑based services and notes the advantage of offline operation once loaded. Concerns are raised about occasional slicing issues, limited top‑surface generation, and the desire for a fully offline printer workflow, while acknowledging the need for reliable long‑term support compared with proprietary alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46817813" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://redgamingtech.com/playstation-2-recompilation-project-is-absolutely-incredible/" target="_blank">PlayStation 2 Recompilation Project Is Absolutely Incredible</a>
+        </h2>
+        <span class="article-meta">
+          308 points • by croes • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article describes PS2Recomp, a static recompiler and runtime tool that translates PlayStation 2 games—originally built for the Emotion Engine (a MIPS R5900 CPU with two Vector Units, ~300 MHz, 32 MB RAM, and a 147 MHz Graphics Synthesizer with 4 MB eDRAM)—into native executables for Windows or Linux. Unlike emulators such as PCSX2, which run the original binary in a virtualized environment, recompilation produces platform‑specific code, potentially offering higher frame rates, lower hardware requirements, and easier integration of HD texture packs without breaking physics or collision detection. The author cites successful N64 recompilation projects (e.g., Mario 64 RTX, Zelda enhancements) as precedents. Anticipated outcomes include native PC versions of titles like Metal Gear Solid 2, Gran Turismo, God of War, and Tekken 4, with support for modern controllers and additional features. The project is still under development, but its progress is presented as a significant step toward game preservation.
+          </div>
+          <a href="https://redgamingtech.com/playstation-2-recompilation-project-is-absolutely-incredible/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The response expresses strong enthusiasm for preserving and experiencing classic PlayStation 2 titles, viewing emulation and recompilation as significant advances for game preservation while acknowledging that native ports could offer a complementary, though potentially less faithful, option. It highlights technical challenges such as PS2 floating‑point behavior and self‑modifying code, and notes legal concerns about intellectual‑property enforcement. The tone is generally positive about modern hardware’s capability to run legacy games, yet critical of the article’s technical depth, formatting errors, and limited coverage of only a few titles.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46814743" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/project-genie/" target="_blank">Project Genie: Experimenting with infinite, interactive worlds</a>
+        </h2>
+        <span class="article-meta">
+          471 points • by meetpateltech • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Project Genie, an experimental research prototype powered by Genie 3, Nano Banana Pro, and Gemini, is now available to Google AI Ultra subscribers (age 18+, U.S.) for creating, exploring, and remixing interactive worlds. Genie 3 is a general‑purpose world model that simulates environment dynamics in real time, generating forward paths, physics, and interactions as users move. Its “breakthrough consistency” enables simulation of diverse real‑world scenarios—including robotics, animation, fiction, location exploration, and historical settings—beyond static 3D snapshots. The prototype web app provides three core capabilities (not detailed in the excerpt) for immersive world creation, building on prior testing across multiple industries. This rollout expands access from trusted testers to a broader user base, supporting Google DeepMind’s AGI research by addressing the need for models that can navigate the full diversity of real‑world environments.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/project-genie/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight strong enthusiasm for Genie’s ability to generate coherent, photorealistic interactive worlds and its potential for AI imagination, robotics, and immersive media. Many note the novelty of maintaining visual consistency when looking around, seeing it as a step toward training agents or novel game creation. Skepticism appears regarding scalability, realism, energy consumption, and practical applications, with some questioning its relevance to AGI or preferring text‑based tools. Overall sentiment mixes optimism about future possibilities with caution about current technical limits and unclear commercial value.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46812933" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://marginlab.ai/trackers/claude-code/" target="_blank">Claude Code daily benchmarks for degradation tracking</a>
+        </h2>
+        <span class="article-meta">
+          573 points • by qwesr123 • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Code Opus 4.5 Performance Tracker by Marginlab displays benchmark results with a 95 % confidence interval for each data point. Users can toggle a checkbox to show or hide these intervals; wider intervals indicate greater uncertainty, typically due to a smaller sample size. The interface includes visual elements, such as an image labeled “marginlab,” to complement the data presentation. The tracker emphasizes statistical confidence, allowing viewers to assess the reliability of performance metrics across the reported samples.
+          </div>
+          <a href="https://marginlab.ai/trackers/claude-code/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reveal widespread concern about perceived performance variability and possible degradation of Claude Code, with users noting recent drops in coding accuracy and occasional erroneous outputs. Many criticize the current statistical approach, calling for larger sample sizes, multiple daily runs, proper confidence‑interval calculations, and baseline controls to distinguish true regression from noise. Others attribute fluctuations to server load, updates, or random sampling rather than deliberate down‑ranking. Across the discussion there is a strong demand for greater transparency, rigorous benchmarking, and clearer methodology to assess model quality reliably.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46810282" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.drugtargetreview.com/news/192714/drug-trio-found-to-block-tumour-resistance-in-pancreatic-cancer/" target="_blank">Drug trio found to block tumour resistance in pancreatic cancer in mouse models</a>
+        </h2>
+        <span class="article-meta">
+          238 points • by axiomdata316 • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The study reports a pre‑clinical triple‑targeted therapy for pancreatic ductal adenocarcinoma (PDAC) that simultaneously inhibits three KRAS‑related signalling nodes—RAF1 (downstream), EGFR family receptors (upstream) and STAT3 (parallel). The regimen combines RMC‑6236 (daraxonrasib, a KRAS inhibitor), Afatinib (EGFR family inhibitor) and SD36 (selective STAT3 degrader). In orthotopic mouse models of KRAS/TP53‑driven PDAC, the combination induced complete tumour regression and prevented recurrence for >200 days, with no detectable resistance and good tolerability. Similar durable regressions were observed in genetically engineered mouse tumours and in patient‑derived xenografts (PDX). The authors suggest that coordinated blockade of RAF1, EGFR and STAT3 can overcome the common therapeutic resistance of PDAC, supporting the design of future clinical trials of multi‑targeted approaches.
+          </div>
+          <a href="https://www.drugtargetreview.com/news/192714/drug-trio-found-to-block-tumour-resistance-in-pancreatic-cancer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys a mixture of frustration and cautious optimism about pancreatic‑cancer research. Commenters repeatedly note the difficulty of early detection, the low conversion rate from pre‑clinical (often mouse) studies to approved therapies, and the tendency of headlines to oversell experimental results. At the same time, several participants acknowledge genuine progress in clinical trials, personalized vaccine work, and recent promising pre‑clinical data, while stressing the long timelines, high failure rates, and regulatory hurdles that keep such advances from reaching patients. Overall sentiment is skeptical of hype but hopeful about incremental scientific gains.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46812159" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals" target="_blank">AGENTS.md outperforms skills in our agent evals</a>
+        </h2>
+        <span class="article-meta">
+          189 points • by maximedupre • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The evaluation compared two methods for providing Next.js 16 documentation to AI coding agents: (1) a reusable “skill” that bundles prompts, tools, and docs, and (2) an AGENTS.md file containing a compressed index of version‑matched docs.  
+
+* Baseline (no docs) pass rate: 53 %.  
+* Skill without explicit prompting: 0 pp improvement; the skill was invoked in only 44 % of cases and sometimes reduced test scores.  
+* Skill with explicit “invoke the skill” instructions: pass rate rose to 79 % ( +26 pp), but results were highly sensitive to wording and ordering of exploration vs. invocation.  
+* AGENTS.md with an 8 KB compressed docs index and a “prefer retrieval‑led reasoning” note achieved a 100 % pass rate (+47 pp), with perfect scores on build, lint, and test metrics.  
+
+The authors attribute AGENTS.md’s superiority to the absence of a decision point, constant availability, and elimination of sequencing ambiguities. Compression reduces context size while preserving effectiveness. Recommendations: embed a compressed docs index in AGENTS.md, design docs for file‑level retrieval, and validate with evals targeting APIs absent from model training data.
+          </div>
+          <a href="https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely acknowledge that compressing relevant documentation into a concise AGENTS.md or similar index can improve an agent’s immediate performance, especially under tight context budgets, while also recognizing that explicit skill definitions offer extensibility and clearer capability boundaries. Several users note the evaluation’s limited methodology, such as single‑model testing, lack of token‑level metrics, and insufficient error reporting. There is consensus that better skill design, progressive disclosure, and model training on skill usage are needed, and that future model releases may address current shortcomings.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46809708" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://predr.ag/blog/wifi-only-works-when-its-raining/" target="_blank">The WiFi only works when it&#39;s raining (2024)</a>
+        </h2>
+        <span class="article-meta">
+          99 points • by epicalex • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A line‑of‑sight Wi‑Fi bridge was installed between a home apartment and a nearby office, using high‑gain directional antennas and 802.11g equipment. For about a decade the link provided stable, high‑speed internet. Over time a neighbor’s tree grew tall enough that its upper branches partially obstructed the Fresnel zone between the antennas. When rain fell, water weight bent the branches away, temporarily clearing the line‑of‑sight and restoring the link; after the rain stopped the branches returned, causing 90 %+ packet loss and loss of connectivity. Debugging confirmed the local router was fine and that the loss occurred only on the bridge’s remote side. The solution was to replace the aging 802.11g devices with newer 802.11n hardware that supports beamforming and is more tolerant of partial obstructions. After installing the new antennas, the bridge maintained a reliable connection regardless of weather, eliminating the rain‑dependent behavior.
+          </div>
+          <a href="https://predr.ag/blog/wifi-only-works-when-its-raining/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The collection emphasizes that many technical problems stem from unexpected physical or environmental factors rather than software bugs, with anecdotes ranging from Wi‑Fi links degraded by foliage to monitors crashing near antennae and rain improving long‑range links. Contributors repeatedly note that simple, concrete adjustments—such as repositioning equipment, pruning trees, adding cooling fans, or using isolating cables—often resolve these issues. The overall tone is pragmatic and mildly amused, acknowledging that unconventional causes are common and that straightforward fixes are frequently sufficient.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46816357" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/flameshot-org/flameshot" target="_blank">Flameshot</a>
+        </h2>
+        <span class="article-meta">
+          132 points • by OsrsNeedsf2P • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Flameshot is a GitHub‑hosted screenshot utility described as “powerful yet simple to use.” The repository page displays visual badges indicating build status for GNU/Linux, Windows, and macOS, as well as nightly and latest stable releases. Additional metrics show total downloads, licensing information, translation coverage, documentation links, and distribution options via Snap Store and Flathub. Packaging status badges are also present. Contributor acknowledgments list several usernames (e.g., @lupoDharkael, @borgmanJeremy, @weblate, @panpuchkov, @veracioux, @hosiet, @mmahmoudian, @holazt, @adem4ik, @ElTh0r0, @AlfredoRamos, @AlexP11223, @nullobsi, @albanobattistella). No further textual description of features or usage is included in the scraped content.
+          </div>
+          <a href="https://github.com/flameshot-org/flameshot" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight strong overall approval of Flameshot as a reliable, feature‑rich screenshot tool, with many users preferring it over alternatives and relying on it for work. Common criticisms focus on incomplete HDR capture on modern displays, limited or beta Wayland support, and issues with fractional scaling or occasional platform bugs. Users also mention other utilities such as ShareX, Spectacle, and ksnip, noting their strengths but generally maintaining that Flameshot remains the favored choice despite its shortcomings.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46815297" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://campedersen.com/tessellation" target="_blank">Cutting Up Curved Things</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by ecto • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GPU rendering is limited to triangles, so any curved surface must be tessellated into a triangle mesh. The mesh is stored as two arrays: a flat list of vertex coordinates (x, y, z) and an index list grouping vertices into triples. Flat polygonal faces are triangulated by fan‑triangulation (n‑2 triangles for an n‑gon). Cylindrical faces are sampled on a UV grid: the u‑parameter spans 0…2π around the axis, v is derived from projecting boundary vertices onto the cylinder axis to obtain the height range; each grid cell yields two triangles. Spherical faces use latitude/longitude sampling, with special handling at the poles where rows collapse to a single vertex and triangles form a fan. For faces with holes, a bridge is created between the outer boundary and an inner loop to form a single polygon, then ear‑clipping is applied: repeatedly remove ears—convex triples containing no other vertices—until only one triangle remains. The final output is a `TriangleMesh{ vertices: Vec<f32>, indices: Vec<u32> }`, compatible with GPUs, STL files, and physics engines.
+          </div>
+          <a href="https://campedersen.com/tessellation" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment emphasizes that modern GPUs support rendering methods beyond triangle rasterization, such as analytical ray tracing, signed distance fields, and direct NURBS ray tracing, allowing smooth surfaces without tessellation. It corrects the misconception that all on‑screen smooth objects rely on tiny flat triangles, noting triangles remain practical but are not universally required. Historical challenges of triangulating curved geometry are mentioned, alongside improvements in angle‑optimizing algorithms. The tone concludes with appreciation for the referenced website and its explanation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46817764" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.politico.com/news/2026/01/27/cisa-madhu-gottumukkala-chatgpt-00749361" target="_blank">CISA’s acting head uploaded sensitive files into public version of ChatGPT</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by rurp • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.politico.com/news/2026/01/27/cisa-madhu-gottumukkala-chatgpt-00749361" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong criticism of the DHS/CISA leader’s decision to use a public generative‑AI model for handling non‑public documents, viewing it as a clear security lapse and evidence of broader managerial incompetence. Contributors highlight the need for dedicated, secure government‑only AI deployments, stricter blocking of commercial models in regulated sectors, and tighter compliance enforcement. Several remarks note that similar misconduct would trigger severe disciplinary action in private firms, while others question the leader’s qualifications and the overall effectiveness of current governmental cybersecurity oversight.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46786672" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
