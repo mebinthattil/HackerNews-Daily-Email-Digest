@@ -1,0 +1,513 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://alignment.anthropic.com/2026/hot-mess-of-ai/" target="_blank">How does misalignment scale with model intelligence and task complexity?</a>
+        </h2>
+        <span class="article-meta">
+          97 points • by salkahfi • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper investigates whether failures of advanced reasoning models stem from systematic misalignment (bias) or incoherent, unpredictable behavior (variance). Using a bias‑variance decomposition, incoherence is defined as variance‑share of total error. Experiments on frontier models (Claude Sonnet 4, o3‑mini, o4‑mini, Qwen 3) across GPQA, MMLU, SWE‑Bench, and safety evaluations reveal four main patterns: (1) longer reasoning or more agent actions increase incoherence; (2) scaling improves coherence on easy tasks but not on hard tasks, where larger models can become more incoherent; (3) spontaneous “overthinking” raises incoherence far more than manually extended reasoning budgets; and (4) ensembling multiple samples reduces variance, though practical for irreversible actions. Synthetic optimizer experiments—training transformers to emulate steepest‑descent steps—show incoherence rising with trajectory length and scale reducing bias faster than variance, widening the gap between knowing the objective and reliably pursuing it. The authors conclude that future AI risks may resemble industrial accidents driven by erratic behavior rather than deliberate pursuit of misaligned goals, implying a shift in alignment research toward mitigating bias and handling unpredictable variance.
+          </div>
+          <a href="https://alignment.anthropic.com/2026/hot-mess-of-ai/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display a mixed but generally thoughtful response. Several remarks highlight the piece’s brevity, actionable guidance, and relevance for research on task decomposition, model coherence, and the utility of lower‑cost models for execution. Others critique the focus on “cheap shots,” question whether findings apply to newer state‑of‑the‑art models, and express skepticism about AI alignment, specification effort, and the framing of AI errors as non‑evil accidents or liability shifting. Overall, the discussion balances appreciation for practical insights with doubts about generalizability and broader implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46864498" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-the-codex-app/" target="_blank">The Codex App</a>
+        </h2>
+        <span class="article-meta">
+          550 points • by meetpateltech • 89 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/introducing-the-codex-app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed response to the new Codex desktop app. Users appreciate its ability to generate code and streamline workflows, especially when combined with parallel agents, but many criticize its limited platform support, clunky UI, and performance issues such as slow loading and unreliable updates. Comparisons with Claude, Gemini and other tools highlight concerns about code quality, outdated data, and token limits, while repeated calls for native‑OS integration, Linux compatibility, remote execution, and more polished experience indicate widespread demand for broader functionality and reliability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46859054" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://forums.ankiweb.net/t/ankis-growing-up/68610" target="_blank">Anki ownership transferred to AnkiHub</a>
+        </h2>
+        <span class="article-meta">
+          258 points • by trms • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The AnkiHub team announces a transition to a larger leadership role in partnership with Damien, aiming to strengthen Anki’s development while preserving its community‑driven ethos. Core principles include respect for user agency, avoidance of manipulative design, and maintaining open‑source code without external investors. Key objectives are UI/UX improvements, reducing reliance on single contributors (the “bus factor”), expanding support beyond medical students, and enhancing the add‑on ecosystem for non‑technical users. Governance will become more transparent, with community input, defined decision‑making processes, and a possible formal advisory structure, though no rushed model is planned. Sustainability relies on a self‑funded business model that keeps pricing unchanged and prioritizes accessibility. FAQs confirm that Anki will stay open source, mobile apps and AnkiDroid will continue, subscriptions remain unchanged, and volunteer contributors remain essential. The transition seeks to increase engineering, design, and support capacity, improve onboarding and stability, and build trust through consistent, open communication.
+          </div>
+          <a href="https://forums.ankiweb.net/t/ankis-growing-up/68610" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for Anki’s long‑standing impact on learning, thanking its original developer while acknowledging the software’s stability and usefulness. At the same time, many users convey confusion about the roles of Anki, AnkiWeb, and the newly involved AnkiHub, voicing concerns over governance, potential commercial direction, and the risk of reduced openness or “enshittification.” Nonetheless, there is optimism that the core code will remain open source, that the community can sustain or fork the project if needed, and that alternatives exist for those uneasy about the transition.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46861313" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.githubstatus.com?todayis=2026-02-02" target="_blank">GitHub experience various partial-outages/degradations</a>
+        </h2>
+        <span class="article-meta">
+          159 points • by bhouston • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub reported a service incident affecting GitHub Actions hosted runners. From 19:03 UTC on Feb 2, degraded performance and high wait times were observed, with jobs queuing and failing across all labels; self‑hosted runners remained unaffected. The issue also impacted dependent features such as Copilot Coding Agent, Dependabot, and Pages, which showed degraded performance. An upstream provider was engaged; mitigation steps were applied by 22:53 UTC, leading to gradual recovery. By 00:56 UTC on Feb 3, Actions and related services were operating normally, and telemetry indicated full recovery for most customers. The incident was declared resolved at 00:56 UTC on Feb 3, with a root‑cause analysis to follow.
+          </div>
+          <a href="https://www.githubstatus.com?todayis=2026-02-02" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express frustration over a widespread Azure outage that disrupted VM‑scale operations and consequently halted GitHub Actions, causing jobs to fail and consume minutes. Users identify a recent storage‑account ACL change as the root cause and note the broader impact on services such as Azure Arc, Batch, DevOps, and Load Testing. There is disappointment with the reliability of the platform, criticism of Azure’s configuration handling, and concern about GitHub’s dependence on Azure, alongside requests for compensation for lost action minutes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46861842" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.spacex.com/updates#xai-joins-spacex" target="_blank">xAI joins SpaceX</a>
+        </h2>
+        <span class="article-meta">
+          501 points • by g-mork • 161 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.spacex.com/updates#xai-joins-spacex" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments overwhelmingly doubt the practicality of orbital AI data centers, citing extreme thermal management, radiation hardening, launch costs and mass constraints that make the concept appear technically infeasible and economically unsound. Many view the move as a financial maneuver to extract value from Musk’s companies, expressing disappointment and concern for SpaceX’s reputation. A minority note possible strategic or long‑term benefits for space‑based compute, but overall the discussion is dominated by skepticism, criticism of Musk’s motives, and worries about legal and environmental ramifications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46862170" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tamikothiel.com/cm/cm-tshirt.html" target="_blank">The Connection Machine CM-1 &#34;Feynman&#34; T-shirt</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by tosh • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Tamiko Thiel created the CM‑1 “Feynman” T‑shirt logo in 1983, preceding the actual Connection Machine design; the machine was later built to match the logo, making it the only supercomputer inspired by apparel. The graphic depicts a 12‑dimensional “cube of cubes” representing the hardware network that interconnects all processor chips within a maximum of 12 steps—a topology suggested by Nobel physicist Richard Feynman. Red “pom‑poms” illustrate software data structures, which are not constrained by the hardware topology. The classic color scheme uses a black shirt, yellow‑gold for the hardware cube, and red for the pom‑poms, echoing the machine’s chassis and blinking status lights. The shirt gained public attention when Apple featured a photo of Feynman wearing it in the “Think Different” campaign. The design is sold in men’s, women’s, and kids’ versions, with ordering options for the USA and Europe via Spreadshirt.
+          </div>
+          <a href="https://tamikothiel.com/cm/cm-tshirt.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express enthusiasm for the article on Feynman’s involvement with the Connection Machine, noting its appeal to computing‑history fans. Readers highlight the distinctive LED panels, recalling their appearance in popular media and praising restoration efforts. Practical remarks mention ordering experiences, including concerns about shrinkage in dryers and size mismatches. Some users note regional availability limits, such as lack of access in Japan. Overall tone is appreciative and nostalgic, with minor logistical frustrations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46822177" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.millert.dev/" target="_blank">Todd C. Miller – Sudo maintainer for over 30 years</a>
+        </h2>
+        <span class="article-meta">
+          316 points • by wodniok • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Todd C. Miller has maintained the sudo project for over 30 years and is seeking sponsorship for its ongoing development. He also contributes to OpenBSD, though less actively now, and has made significant contributions to ISC cron and other software projects.
+          </div>
+          <a href="https://www.millert.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express strong appreciation for Todd Miller’s decades‑long stewardship of sudo, recognizing its critical role in modern infrastructure and lamenting the limited financial support he receives. Many callers call for corporate or foundation sponsorship, citing the mismatch between widespread reliance and minimal compensation, while also debating broader open‑source funding models and the inadequacy of informal donations. Some jokes and tangential references appear, but the dominant tone is concern that essential utilities remain underfunded and a hope for more sustainable backing.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46858577" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://borretti.me/fiction/julia" target="_blank">Julia</a>
+        </h2>
+        <span class="article-meta">
+          54 points • by ashergill • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Julia is a massive glass‑and‑wire construct, 600 m in major diameter, 40 m in minor diameter, weighing ~9 × 10⁵ t and having completed ~240 million rotations. It serves as a long‑duration habitat and observation platform orbiting the binary brown dwarf Luhman 16 (≈70 AU from the system barycenter, 90° off the ecliptic). The vessel hosts two surviving crew members—Dr. Brouwer and Dr. Cartan—who alternate shifts in a cryogenic dewar, monitor instrumentation, and maintain an antenna that receives microwave signals and occasional communications from distant probes. Over a 109‑year period, multiple expedition ships (Baghdad, Afrasiab) have been launched to reach Julia; both suffered mutinies and losses, with Afrasiab eventually returning a signed key from its private‑key system. Scientists aboard debate Julia’s nature: Dr. Cartan proposes a divine, hourglass‑like origin; Dr. Brouwer models it as a high‑dimensional object whose three‑dimensional projections change with perspective. The vessel’s control software generates text via a formal string‑rewriting system, referencing Turing’s theory of language as a transitive closure of rewrite rules. Recent observations report Julia’s surface as a molten‑gold cavity with liquid‑metal pillars, turbulent amber‑colored storms, and self‑similar spiral structures. The narrative records the final fatal incident in which Dr. Cartan is ejected during an attempted docking with Afrasiab, leading to structural failure and the disintegration of Julia’s components.
+          </div>
+          <a href="https://borretti.me/fiction/julia" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express strong appreciation for the piece’s lyrical and imaginative quality, noting its evocative tone, poetic feel, and resonances with works such as Gene Wolfe’s fiction and the game Caves of Qud. Readers highlight its atmospheric, melancholy charm and consider it well‑crafted, though a few suggest it could benefit from clearer character motivation or a stronger narrative twist. Overall, the reception is favorable, emphasizing the work’s artistic style and immersive effect.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46863357" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.frommers.com/tips/airfare/the-tsa-new-45-fee-to-fly-without-id-is-illegal-says-regulatory-expert/" target="_blank">The TSA&#39;s New $45 Fee to Fly Without ID Is Illegal</a>
+        </h2>
+        <span class="article-meta">
+          234 points • by donohoe • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.frommers.com/tips/airfare/the-tsa-new-45-fee-to-fly-without-id-is-illegal-says-regulatory-expert/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely criticize the $45 fee for travelers without a Real ID, characterizing it as a profit‑driven measure that unfairly burdens low‑income passengers and questions its security justification. Many argue the requirement lacks a clear legal mandate, point to existing alternatives to Real ID, and allege constitutional overreach by the TSA. A minority note that most travelers already possess acceptable ID and view the fee as a reasonable deterrent, while others reference personal experiences of flying without ID, suggesting the rule is inconsistently applied.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46863162" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://128.237.157.9/pub/" target="_blank">Carnegie Mellon Unversity Computer Club FTP Server</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by 1vuio0pswjnm7 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Carnegie Mellon University Computer Club hosts a public mirror service at /pub, updating every six hours. Available mirrors include:
+
+- **HVSC** – High Voltage SID Collection  
+- **gnu** – ftp.gnu.org  
+- **knoppix** and **knoppix‑dvd** – Knoppix CD/DVD images  
+- **aminet** – Aminet repository  
+- **scene.org** – scene.org content (note: a 2015‑11‑17 removal of parties/2012/demodays12/realtime_demo_size_limited/horology_www.exe following an antivirus flag)  
+- **archive.debian.org** – Debian archive  
+- **zeroshell** – Zeroshell package  
+- **ubuntu** and **ubuntu‑iso** – Ubuntu releases and ISO images  
+
+Additional mirrors may be added based on relevance and storage capacity; requests are sent to gripe@club.cc.cmu.edu. Monetary or hardware contributions are accepted.  
+
+A legal notice states that any cryptographic software provided is subject to U.S. export regulations under License Exception “TSU” (15 C.F.R. § 740.13(e)).
+          </div>
+          <a href="http://128.237.157.9/pub/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express curiosity about the relevance of the linked Ubuntu repository in the current year, asking why it might be noteworthy now. The tone includes a brief, informal affirmation, indicating a light‑hearted or appreciative reaction to the content. Overall, the discussion centers on questioning the significance of the archive while maintaining a casual, positive attitude toward the shared resource.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46806346" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
