@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 06, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank">Claude Opus 4.6</a>
+        </h2>
+        <span class="article-meta">
+          1628 points • by HellsMaddy • 89 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Opus 4.6 is Anthropic’s latest Opus‑class model, offering a beta 1 million‑token context window, 128 k output tokens, and adaptive thinking that lets the model decide when deeper reasoning is needed. Developers can select four effort levels (low, medium, high default, max) and use context compaction to summarize older conversation portions, avoiding window limits. Pricing remains $5/$25 per M tokens (premium rates for >200 k tokens).
+
+Benchmark performance:
+- Highest scores on Terminal‑Bench 2.0 (agentic coding) and Humanity’s Last Exam (multidisciplinary reasoning).
+- GDPval‑AA: +144 Elo over OpenAI’s GPT‑5.2 and +190 Elo over Opus 4.5.
+- BrowseComp and MRCR v2 (1 M‑token needle‑in‑haystack): 76 % vs. Sonnet 4.5’s 18.5 %.
+- BigLaw Bench: 90.2 % (40 % perfect scores).
+- Cybersecurity: best in 38/40 blind rankings with up to 9 subagents and 100+ tool calls.
+
+Safety evaluations show misaligned behavior rates equal to or lower than prior models, with the lowest over‑refusal rate and new cybersecurity probes to detect misuse. Product updates include Claude Code agent‑team preview, enhanced Excel capabilities, and PowerPoint research preview. The model is available via claude.ai, API, and major cloud platforms.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion around Claude Opus 4.6 is split between enthusiasm for its 1 M‑token context window and impressive niche results, and frustration over higher token costs, strict usage limits, and occasional performance regressions compared with earlier versions and competing models. Users note useful new features such as agent‑team support and context‑compaction, but criticize the removal of prefill, limited availability on subscription tiers, and perceived marketing‑product mismatches. Economic debates highlight uncertainty about inference profitability versus overall model funding, while ethical concerns surface about feature appropriation and the broader impact of large‑scale LLM deployment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46902223" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-gpt-5-3-codex/" target="_blank">GPT-5.3-Codex</a>
+        </h2>
+        <span class="article-meta">
+          1082 points • by meetpateltech • 74 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/introducing-gpt-5-3-codex/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a split between enthusiasm for the new capabilities of GPT‑5.3‑Codex and Anthropic Opus 4.6 and skepticism about their release strategy, pricing, and availability. Users note a philosophical divide: Codex is viewed as a tight, interactive collaborator, while Opus is seen as a more autonomous planner. Benchmark numbers are cited, but many call for clearer, comparable evaluations. Concerns surface about speed, usage limits, security of AI‑generated code, and the impact on software engineers, while others appreciate the productivity gains and anticipate further model evolution.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46902638" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres" target="_blank">It&#39;s 2026, Just Use Postgres</a>
+        </h2>
+        <span class="article-meta">
+          444 points • by turtles3 • 76 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            PostgreSQL can serve as a single‑system platform for workloads traditionally handled by specialized databases. Extensions provide native functionality equivalent to external tools: pg_textsearch implements BM25 full‑text search; pgvector + pgvectorscale (DiskANN) deliver vector similarity with latency 28× lower and 75 % cheaper than Pinecone; TimescaleDB supplies time‑series partitioning, compression and SQL queries comparable to InfluxDB; JSONB offers document storage and indexing on par with MongoDB; unlogged tables act as in‑memory caches similar to Redis; pgmq provides lightweight message queues replacing Kafka; PostGIS delivers mature GIS capabilities; pg_cron handles scheduled jobs. Consolidating these features in PostgreSQL reduces operational overhead—one backup, monitoring stack, security model, and connection string—while avoiding data‑drift sync jobs and multi‑service coordination, especially important for AI agents that frequently fork test environments. Benchmarks cite 28× lower latency for vector search, comparable or superior performance for time‑series and full‑text search, and cost reductions. The article argues that for ~99 % of companies, PostgreSQL with its ecosystem meets performance, reliability, and scalability needs, reserving separate specialized systems for only the largest, most exotic workloads.
+          </div>
+          <a href="https://www.tigerdata.com/blog/its-2026-just-use-postgres" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong admiration for PostgreSQL’s capabilities, noting its performance, flexibility and extensive ecosystem, but many caution against treating it as a universal solution. Contributors highlight the importance of evaluating use‑cases, pointing to specialized databases such as Redis, ClickHouse, Elasticsearch, SQLite, MySQL and columnar engines for caching, search, time‑series, vector, or simple embedded needs. Operational concerns appear frequently, including tuning complexity, clustering, HA, and resource contention when multiple workloads share a single instance. A recurring theme criticizes overly generic “just use Postgres” advice and the prevalence of AI‑generated posts.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46905555" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mitchellh.com/writing/my-ai-adoption-journey" target="_blank">My AI Adoption Journey</a>
+        </h2>
+        <span class="article-meta">
+          376 points • by anurag • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author outlines a six‑stage progression for integrating AI agents into software development. Stage 1 advises abandoning pure chat‑based coding (e.g., ChatGPT) due to inefficiency and instead using an “agent” capable of reading files, executing programs, and making HTTP requests. Stage 2 involves reproducing one’s own manual work with an agent, breaking tasks into clear subtasks, separating planning from execution, and providing verification mechanisms so the agent can self‑correct. Stage 3 adds “end‑of‑day” agents that run for 30 minutes after work, handling deep research, parallel idea exploration, and issue/PR triage via scripted GitHub CLI commands. Stage 4 delegates high‑confidence, repeatable tasks to agents while the developer focuses on high‑value work, emphasizing control over notifications to avoid costly context switches. Stage 5 introduces “harness engineering”: maintaining files like AGENTS.md and custom scripts to prevent recurring agent mistakes. Stage 6 aims to keep an agent continuously running, leveraging slower, higher‑quality models for background tasks without unnecessary execution. The author reports modest efficiency gains and a shift toward using AI as a supportive, rather than primary, tool.
+          </div>
+          <a href="https://mitchellh.com/writing/my-ai-adoption-journey" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes a pragmatic, balanced view of AI‑assisted coding, praising recent tool stability while warning against hype, over‑broad prompts, and unnoticed drift. Commenters commonly stress breaking work into small, reviewable diffs, using agents for specific tasks, and maintaining human oversight. Skepticism persists regarding cost, skill erosion, and privacy, yet many report tangible productivity gains when the workflow is carefully structured. Overall sentiment is cautiously optimistic, valuing practical guidance and realistic expectations over sensational claims.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46903558" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/engineering/building-c-compiler" target="_blank">We tasked Opus 4.6 using agent teams to build a C Compiler</a>
+        </h2>
+        <span class="article-meta">
+          396 points • by modeless • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article describes an experiment in which 16 parallel Claude instances were used to autonomously develop a Rust‑implemented C compiler capable of building Linux 6.9 for x86, ARM, and RISC‑V. A harness placed each Claude in an infinite loop that fetched a task lock file, performed work, merged via git, and released the lock, allowing agents to specialize (e.g., code generation, documentation, performance). High‑quality tests and a continuous‑integration pipeline were essential to keep agents on track; test output was minimized to avoid context‑window overload, and deterministic subsampling mitigated time blindness. Parallelism succeeded on independent test failures but required a GCC “oracle” when compiling the monolithic Linux kernel, enabling agents to isolate and fix distinct bugs. After ~2,000 Claude sessions (≈2 billion input tokens, $20 k cost), the resulting 100 k‑line compiler passes 99 % of major test suites, builds several open‑source projects, and runs Doom, though it lacks a 16‑bit x86 backend, an internal assembler/linker, and produces less efficient code than GCC. The work demonstrates both the potential and current limits of fully autonomous LLM‑driven software development.
+          </div>
+          <a href="https://www.anthropic.com/engineering/building-c-compiler" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge the technical feat of producing a functional C compiler that can build the Linux kernel, noting the impressive automation, extensive testing, and the insight it offers into AI‑driven development. At the same time, many highlight significant shortcomings: limited code efficiency, missing components such as a 16‑bit backend, reliance on existing compilers for verification, high monetary and compute costs, and questions about true clean‑room originality and long‑term maintainability. Overall, the community sees the project as an intriguing proof‑of‑concept but remains skeptical about its practical value, scalability, and impact on real‑world software engineering.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46903616" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://neosmart.net/blog/recreating-epstein-pdfs-from-raw-encoded-attachments/" target="_blank">Recreating Epstein PDFs from raw encoded attachments</a>
+        </h2>
+        <span class="article-meta">
+          229 points • by ComputerGuru • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author critiques the Department of Justice’s recent Epstein document dump, noting extensive redactions, corrupted quoted‑printable encoding, and poorly handled binary attachments. An email (EFTA00400459) contains a 76‑page base64‑encoded PDF (“DBC12 One Page Invite with Reply.pdf”) that is visible only as scanned, OCR‑processed text. The OCR output is riddled with extra characters, missing symbols, and frequent confusion between “1” and “l” due to the use of Courier New at low resolution, making reliable reconstruction difficult. The author experiments with several pipelines: manual copy‑paste, Adobe Acrobat Pro OCR, ImageMagick conversion, poppler’s pdftoppm, Tesseract OCR with a whitelist of base64 characters, and Amazon Textract (including up‑scaling images). Textract yields the best but still imperfect results, with occasional line‑length errors. Attempts to decode the base64 and decompress the PDF with `base64 -i` and `qpdf` fail because of corrupted data and incomplete flate streams. The piece concludes by inviting others to rebuild the original PDF from the embedded base64 and to locate additional reconstructable attachments in the dump.
+          </div>
+          <a href="https://neosmart.net/blog/recreating-epstein-pdfs-from-raw-encoded-attachments/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on technical attempts to recover redacted PDF content, outlining script usage, OCR training, decoding strategies, and tool performance comparisons. Contributors express frustration with the DOJ’s handling of redactions, criticizing both delays and errors, and advocate for a safer, open‑source document format for government releases. There is enthusiasm for the challenge itself, noting the “nerd‑snipe” nature, while also recognizing practical obstacles such as processing speed and the complexity of PDF structures. Overall, the tone is analytical and critical, with a focus on improving methodology.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46890335" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.animatedknots.com/" target="_blank">Animated Knots</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by ostacke • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Animated Knots by Grog provides step‑by‑step animated tutorials for a wide range of knots used in activities such as climbing, boating, fishing, scouting, search‑and‑rescue, arboriculture, horse handling, household tasks, and decorative applications. The site organizes knots into categories—basic knots, bends, end‑loops, hitches, decorative rope mats, mid‑loops, quick‑release knots, slide‑and‑grip knots, rope splicing, and stopper knots—and includes specific examples like overhand, figure‑8, half hitch, square knot, slip knot, sheet bend, and various tie knots (four‑in‑hand, Pratt, half Windsor, Windsor, bow tie). A disclaimer emphasizes that rope work can be hazardous, noting variables such as material choice, rope condition, and user execution, and disclaims liability for any incidents. The site’s visual content consists mainly of animated images illustrating each knot and technique.
+          </div>
+          <a href="https://www.animatedknots.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong appreciation for the site’s focused, non‑commercial approach and its carefully edited photo sequences, which many find clearer and more practical than animated alternatives for learning to tie knots. Reviewers highlight its usefulness for hobbyists, scouts and educational contexts, noting the thoughtful presentation and convenient features like image flipping. Criticisms are limited to the misleading “animated” title, occasional disappointment with the slideshow format, and a wish for additional minor knots and broader coverage. Overall sentiment is decidedly positive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46855697" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mrbruh.com/amd/" target="_blank">The RCE that AMD won&#39;t fix</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by MrBruh • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author discovered a Remote Code Execution (RCE) issue in AMD’s AutoUpdate utility. The software’s `app.config` stores the update endpoint using a development URL but serves the actual executable download links over HTTP rather than HTTPS. Because the client fetches these binaries without any signature or certificate verification, a network attacker (e.g., via MITM or ISP-level access) can replace the downloaded files with malicious payloads, which the updater executes immediately. The vulnerability was identified on 27 January 2026, reported to AMD on 5 February 2026, and closed the same day as “out of scope”/won’t fix. The author published a blog post on 6 February 2026 documenting the findings. No remediation or patch from AMD is indicated.
+          </div>
+          <a href="https://mrbruh.com/amd/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong concern about the AMD AutoUpdate mechanism, emphasizing that its use of plain‑HTTP URLs creates a clear opportunity for man‑in‑the‑middle attacks and that widespread deployment could make many systems vulnerable if DNS or network settings are compromised. Participants contrast this with Linux distributions, which they view as more securely handling drivers without such update software. While some acknowledge that exploitation requires additional network compromise, the overall tone is critical of AMD’s security practices and the decision to deem the issue out‑of‑scope.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46906947" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.newworker.org/ncptrory/1984.htm" target="_blank">Review of 1984 by Isaac Asimov (1980)</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by doruk101 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Isaac Asimov’s review of George Orwell’s *1984* frames the novel as a polemic against Stalinist totalitarianism rather than a genuine science‑fiction forecast. He outlines Orwell’s (Eric Blair’s) background—British upper‑class upbringing, left‑wing activism, experience in the Spanish Civil War, and anti‑Stalinist literary campaign culminating in *Animal Farm* and *1984* (1949). Asimov critiques the novel’s literary style as didactic and repetitive, noting its early popularity among conservatives as anti‑Soviet propaganda and later among liberals fearful of “Big Brother” government surveillance. He argues the book’s technological predictions (two‑way telescreens, pervasive child informants) are implausible and reflects Orwell’s technophobia. Asimov also examines the political structure of Oceania, Eurasia, and Eastasia, seeing a prescient but oversimplified tripartite world mirroring the Cold War superpowers. He concludes that *1984* serves more to settle Orwell’s personal feud with Stalinism than to anticipate future realities, and that reliance on its dystopian vision risks misdirected policy responses.
+          </div>
+          <a href="https://www.newworker.org/ncptrory/1984.htm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely view Asimov’s 1980 review of 1984 as dated and overly focused on Cold‑War and demographic concerns, noting missed insights about surveillance, informant networks, and the novel’s broader applicability beyond Stalinism. Critics point out factual errors, such as misunderstandings of technology and historical details, and argue that Asimov’s gender and war predictions have not held up. At the same time, many acknowledge Orwell’s enduring relevance to contemporary monitoring and political dynamics, while expressing disappointment that Asimov dismissed the novel’s speculative value.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46905761" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.atomic14.com/2026/02/01/pong-cam" target="_blank">Pong Cam – My ESP32S3 Thinks It&#39;s a WebCam</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by iamflimflam1 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The ESP32‑S3’s native USB controller can be used with Espressif’s usb_device_uvc component (built on TinyUSB) to enumerate as a standard UVC webcam and stream MJPEG video. The project demonstrates three firmware stages that generate all frames in software:  
+
+* **Demo 1 – Static test card:** A JPEG of a BBC test pattern is embedded in the firmware and returned for every host frame request, confirming USB enumeration, UVC negotiation, and MJPEG streaming.  
+
+* **Demo 2 – Animated GIF:** An animated GIF (320 × 240) is stored in flash, decoded with Larry Bank’s Animated GIF library (~33 ms per frame), then re‑encoded to JPEG using esp_new_jpeg component (~23 ms per frame, ~45 fps).  
+
+* **Demo 3 – Pong game:** Real‑time Pong graphics are rendered each host request, JPEG‑encoded (~21 ms) and sent, achieving ~30 fps. The loop must fit within the 33 ms budget for 30 fps, handling game logic, rendering, encoding, and USB transfer.  
+
+The codebase (CMake‑based ESP‑IDF) embeds binary assets via EMBED_FILES and supplies callbacks (start, fb_get, fb_return, stop) to the UVC driver. Future work will replace synthetic frames with an actual camera sensor.
+          </div>
+          <a href="https://www.atomic14.com/2026/02/01/pong-cam" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46845135" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
