@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://noheger.at/blog/2026/02/12/resizing-windows-on-macos-tahoe-the-saga-continues/" target="_blank">Resizing windows on macOS Tahoe – the saga continues</a>
+        </h2>
+        <span class="article-meta">
+          210 points • by erickhill • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post documents testing of macOS 26.3’s window‑resizing behavior using a custom app that scans the bottom‑right corner for mouse‑event zones. In the Release Candidate, Apple changed the resize regions to follow the window’s corner radius instead of remaining square. However, the vertical/horizontal resize band (yellow) narrowed: the inner portion reduced from 3 px to 2 px, and the overall band thickness dropped from 7 px to 6 px—a 14 % reduction that increases missed resize attempts. In the final macOS 26.3 release, this adjustment was removed, restoring the original square regions. Correspondingly, the release notes were updated, reclassifying the issue from “Resolved” to a “Known Issue.” The findings are illustrated with three comparative images.
+          </div>
+          <a href="https://noheger.at/blog/2026/02/12/resizing-windows-on-macos-tahoe-the-saga-continues/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express broad dissatisfaction with macOS window‑management, particularly the difficulty of resizing and moving windows due to thin borders, rounded corners, and inconsistent hit‑testing, which many view as a regression or design flaw. Users compare the experience unfavorably to Linux and Windows, cite workarounds such as third‑party tools, and request features like predefined zones and edge‑linked resizing. Technical critiques of the recent pixel‑size change appear, while some note similar bugs on multi‑monitor setups and lament perceived misallocation of engineering resources at Apple.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46997008" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://skipthe.tips/" target="_blank">Skip the Tips: A game to select &#34;No Tip&#34; but dark patterns try to stop you</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by randycupertino • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No content was provided to summarize.
+          </div>
+          <a href="https://skipthe.tips/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on how dark‑pattern designs exploit context such as time pressure, social pressure, and cognitive load, citing examples like automatic store‑credit purchases and pre‑selected tip amounts. Several contributors acknowledge the technical skill behind the implementation while simultaneously condemning the manipulative intent and describing personal strategies to avoid being tricked. Humor and light‑hearted remarks appear alongside criticism, and a minority express frustration or dislike for the experience. Overall, the discussion balances appreciation for the clever execution with disapproval of its ethical implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46997519" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-gpt-5-3-codex-spark/" target="_blank">GPT‑5.3‑Codex‑Spark</a>
+        </h2>
+        <span class="article-meta">
+          582 points • by meetpateltech • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/introducing-gpt-5-3-codex-spark/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight strong enthusiasm for the new wafer‑scale chip and the faster, lower‑latency GPT‑5.3‑Codex‑Spark model, noting its usefulness for real‑time coding agents and iterative workflows. Users also compare its performance to larger models, appreciating speed gains while criticizing reduced context size, occasional accuracy drops, and limited capability for complex tasks. Concerns recur about pricing opacity, model availability on cloud platforms, and whether the hardware can support larger or proprietary architectures. Overall, the discussion balances excitement over speed improvements with skepticism about trade‑offs in capability and cost.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46992553" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/" target="_blank">Gemini 3 Deep Think</a>
+        </h2>
+        <span class="article-meta">
+          698 points • by tosh • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gemini 3 Deep Think, a specialized reasoning mode for scientific, research, and engineering problems, has received a major upgrade. Developed in collaboration with scientists, the model is intended for tasks where data are incomplete, problems lack clear guardrails, and multiple solutions may exist. It combines deep scientific knowledge with practical engineering utility to move beyond abstract theory toward real‑world applications. The updated Deep Think is now accessible to Google AI Ultra subscribers through the Gemini app and, for the first time, via the Gemini API for select researchers, engineers, and enterprises, with early‑access requests being accepted. Early testers report usage across various scientific and engineering challenges, though specific examples are not provided. Supporting visuals include a logo, evaluation charts, and an evaluation table.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight strong enthusiasm for Gemini 3’s rapid performance gains, cost‑effectiveness and usefulness in tasks such as translation, historical document processing, biology queries and simple CAD generation, with many noting it surpasses recent competitor models. At the same time, users express frustration over limited access, high subscription fees, platform lock‑in, and the model’s weaker agentic and instruction‑following abilities compared with alternatives like Claude. Skepticism appears about Google’s business sustainability and the durability of benchmark claims, while some argue the pace of releases creates uncertainty for future job security.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46991240" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/aws/aws-sdk-go-v2/commit/3dca5e45d5ad05460b93410087833cbaa624754e" target="_blank">AWS Adds support for nested virtualization</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by sitole • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Release 2026‑02‑12 of the aws/aws‑sdk‑go‑v2 repository (commit 3dca5e4) announces a new hardware offering: R8i instances that use custom Intel Xeon 6 processors. These instances are exclusive to AWS and are specified to sustain an all‑core turbo frequency of 3.9 GHz. The release notes repeat this feature description, indicating its primary focus on the processor’s performance characteristics and AWS‑only availability. No additional technical details, code changes, or usage instructions are provided in the excerpt. An accompanying image is listed with the alt text “author,” but no further visual information is described.
+          </div>
+          <a href="https://github.com/aws/aws-sdk-go-v2/commit/3dca5e45d5ad05460b93410087833cbaa624754e" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall enthusiasm for AWS’s addition of nested virtualization, noting its significance for running micro‑VMs such as Firecracker without costly bare‑metal instances and aligning AWS with capabilities already available on GCP and other providers. Participants also discuss technical complexity, questioning kernel stability, performance overhead, and the impact on I/O‑bound workloads, while acknowledging that enabling the feature disables Virtual Secure Mode. There is interest in broader adoption across cloud services and curiosity about future extensions to security technologies like SEV‑SNP and TDX.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46997133" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/" target="_blank">An AI agent published a hit piece on me</a>
+        </h2>
+        <span class="article-meta">
+          1521 points • by scottshambaugh • 153 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on caution about autonomous AI agents in open‑source workflows, highlighting risks of misaligned behavior, reputational attacks, and supply‑chain threats. Many call for human‑in‑the‑loop safeguards, clearer legal attribution, and stricter licensing guidance, while some view the incident as a possible hoax or trolling episode rather than a systemic problem. The community appreciates the measured response of the maintainer but remains divided on the severity of the threat, emphasizing the need for robust oversight, accountability for human operators, and clearer policies before accepting AI‑generated contributions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46990729" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theverge.com/news/878447/ring-flock-partnership-canceled" target="_blank">Ring cancels its partnership with Flock Safety after surveillance backlash</a>
+        </h2>
+        <span class="article-meta">
+          233 points • by c420 • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Ring announced it is canceling the planned integration with surveillance‑technology firm Flock Safety after intense public backlash. In a blog statement the company said the integration would require more time and resources than expected, and that it never launched, so no Ring videos were sent to Flock. The decision follows criticism that the partnership could aid ICE and other federal agencies, amid broader concerns over Ring’s collaborations with law‑enforcement tools such as the “Community Requests” program, which replaced the controversial “Requests for Assistance” system. Community Requests still permits agencies that use third‑party evidence‑management platforms (now Axon and the cancelled Flock) to request user video during active investigations. Ring also faced scrutiny for its new AI‑driven “Search Party” and “Familiar Faces” facial‑recognition features, prompting a Senate letter urging Amazon to drop facial‑recognition. The Axon partnership remains unchanged, and Ring says no other integrations are being explored.
+          </div>
+          <a href="https://www.theverge.com/news/878447/ring-flock-partnership-canceled" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of the company’s surveillance partnership, viewing the cancellation as a reaction to public backlash rather than a genuine ethical shift and fearing a possible quiet reinstatement later. Many highlight concerns about data privacy, corporate influence, and law‑enforcement collaboration, while advocating for locally hosted, encrypted alternatives such as HomeKit or self‑run NVR solutions. Overall sentiment is distrustful of the brand’s motives, skeptical of the cancellation’s permanence, and supportive of privacy‑focused camera options.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46996999" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sampatt.com/blog/2025-12-13-my-grandma-was-a-fed-lessons-from-digitizing-hundreds-of-hours-of-childhood/" target="_blank">My Grandma Was a Fed – Lessons from Digitizing Hours of Childhood</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by SamPatt • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided input contains only the article title “My Grandma Was a Fed – Lessons from Digitizing Hundreds of Hours of Childhood” by Sam Patterson; no additional content is present to summarize.
+          </div>
+          <a href="https://sampatt.com/blog/2025-12-13-my-grandma-was-a-fed-lessons-from-digitizing-hundreds-of-hours-of-childhood/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely praise how AI assistance accelerated a personal video‑digitization project, highlighting its usefulness for technical guidance, code generation, plugin creation, and transcription. Several contributors note practical challenges such as time investment, encoding decisions, and long‑term storage considerations, while others suggest alternative tools or storage media. A minority express discomfort with the enthusiastic tone and perceived marketing style of the original post. Overall, the discussion reflects appreciation for AI’s role, tempered by realistic observations about effort, cost, and implementation details.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46934513" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pol.is/home2" target="_blank">Polis: Open-source platform for large-scale civic deliberation</a>
+        </h2>
+        <span class="article-meta">
+          190 points • by mefengl • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://pol.is/home2" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express cautious optimism about consensus‑building platforms, noting their technical promise for structured debate while highlighting practical concerns. Repeated worries focus on spam, bot manipulation, and the difficulty of verifying identities without compromising privacy or increasing friction. Skepticism appears about scalability to larger societies, potential bias from operators, and misuse of opinion graphs for political influence. Some cite successful small‑scale experiments, yet many stress that cultural education and robust safeguards are essential for any meaningful impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46992815" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://blog.can.ac/2026/02/12/the-harness-problem/" target="_blank">Improving 15 LLMs at Coding in One Afternoon. Only the Harness Changed</a>
+        </h2>
+        <span class="article-meta">
+          577 points • by kachapopopow • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article argues that coding‑assistant performance depends more on the harness—the interface that presents files, applies edits, and manages state—than on the underlying LLM. Existing agents use three main edit formats: OpenAI‑style `apply_patch` diffs, simple `str_replace` substitutions, and a dedicated cursor model (e.g., Aider). These formats often fail because they require exact token‑level reproduction of source text, leading to high patch‑failure rates (e.g., 50 % for Grok‑4, 46 % for GLM‑4.7).  
+
+The author introduces “hashline”, a line‑level tagging scheme where each line receives a short content hash (e.g., `2:f1`). Edits reference these tags instead of raw text, allowing the harness to verify line identity before applying changes and eliminating dependence on whitespace or exact matches.
+
+A benchmark generated 180 mutated React files per run, described in plain English, and evaluated 16 models with three edit tools. Results show hashline consistently outperforms patch and often beats replace; weaker models gain the most (e.g., Grok‑Code‑Fast 1 improves from 6.7 % to 68.3 %). Token usage drops up to 61 % due to fewer retries.  
+
+The author notes vendor restrictions (Anthropic blocking OpenCode, Google disabling a Gemini account) hinder community‑driven harness improvements, emphasizing that open‑source harness engineering offers the highest‑leverage path to more reliable coding tools. All code and benchmark data are released under the “oh‑my‑pi” project.
+          </div>
+          <a href="http://blog.can.ac/2026/02/12/the-harness-problem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that tooling and harness design are as crucial as model quality, with many participants citing concrete gains from better edit formats, structured diffs, and AST‑based tools. While some view reported improvements as modest or overstated, a majority agrees that engineering refinements can outweigh raw model advances and that open‑source, customizable harnesses are needed. Concerns are raised about token waste, platform bans, and benchmark inflation, yet overall sentiment is that focused harness work offers significant, under‑exploited efficiency and reliability benefits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=46988596" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
