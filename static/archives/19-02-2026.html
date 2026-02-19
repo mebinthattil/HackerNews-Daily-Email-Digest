@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 19, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pudding.cool/2026/02/womens-sizing/" target="_blank">Sizing chaos</a>
+        </h2>
+        <span class="article-meta">
+          321 points • by zdw • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The analysis uses National Center for Health Statistics (NCHS) anthropometric data (2021‑2023) to define median waist circumference for U.S. women. Girls < 20 are grouped in two‑year age bins (≈141 participants per bin); women ≥ 20 are in nine‑year bins (≈465 participants per bin) and a combined 20‑plus group (3,121 participants). Pregnant respondents are excluded. Percentile values (5th‑95th) for each age range are applied to estimate waist measurements across the population. Historical comparison uses 1988‑1994 HHS data (7,410 women ≥ 20) converted from centimeters to inches. Apparel size‑chart data, captured manually in July 2025, covers regular/standard and plus sizes from a cross‑section of U.S. mass‑market, fast‑fashion, premium, and luxury brands; petite, tall, or curve lines are omitted. For each size range, bust, waist, and hip dimensions are recorded (single values or ranges) along with numeric and alpha size labels. Charts follow ASTM International standards D 5585‑95 (sizes 2‑20) and the updated D 5585‑21 (sizes 00‑20).
+          </div>
+          <a href="https://pudding.cool/2026/02/womens-sizing/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on frustration with inconsistent, non‑standardized clothing sizes, especially for women, noting that vanity sizing and brand‑specific measurements create frequent fit failures. Many cite the broader obesity trend and body‑shape diversity as drivers of the problem, while others argue personal health choices and market demand dictate current practices. Suggestions include data‑driven sizing systems, expanded size ranges, and greater use of tailoring or custom manufacturing, yet skepticism persists that market forces and brand strategies will motivate substantial change. Parallel issues in men’s apparel and ancillary design flaws, such as inadequate pockets, are also mentioned.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47066552" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://old.reddit.com/r/MacOS/comments/1r8900z/macos_which_officially_supports_27_year_old/" target="_blank">27-year-old Apple iBooks can connect to Wi-Fi and download official updates</a>
+        </h2>
+        <span class="article-meta">
+          179 points • by surprisetalk • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://old.reddit.com/r/MacOS/comments/1r8900z/macos_which_officially_supports_27_year_old/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey nostalgic appreciation for the classic Aqua interface and Apple hardware design, while repeatedly noting the practical difficulties of updating legacy Macs—particularly Wi‑Fi incompatibility, expired certificates, and App Store restrictions. Users describe workarounds such as using modern Macs to create bootable installers, retrofitting storage, or repurposing old machines for specific tasks. Opinions on planned obsolescence are split: some view Apple’s continued security patches as supportive, yet many criticize forced software upgrades that render older devices unusable. Overall sentiment blends fondness for older systems with frustration over their limited modern connectivity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47066241" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jasonfantl.com/posts/Universal-Unique-IDs/" target="_blank">Cosmologically Unique IDs</a>
+        </h2>
+        <span class="article-meta">
+          294 points • by jfantl • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article investigates how to assign IDs that remain unique at cosmic scale. Two main approaches are examined:
+
+**Random IDs** – selecting a number from a large space. Using the birthday paradox, 122‑bit UUIDs give an expected collision after ≈2⁶¹ IDs; to avoid any collision until the universe’s heat death (≈10¹²⁰ operations) requires ≈10²⁴⁰ possible values, i.e., 798 bits. Smaller “reasonable” limits (atoms, 1‑g nanobots) need 532 and 372 bits respectively. True randomness (quantum or CSPRNG) is essential to keep collision probability negligible.
+
+**Deterministic schemes** – central counters, hierarchical “Dewey” (A.B…Z), binary tree, and token‑based methods. All guarantee uniqueness but grow ID length according to the assignment tree. Simulations show best‑case logarithmic growth, but worst‑case (a chain) forces linear growth; a proof shows any scheme must require ≈n bits after n nodes, i.e., linear in the worst case.
+
+Modeling human expansion (random, preferential, fitness‑based growth) on planetary and galactic scales yields ID lengths of hundreds of thousands to billions of bits for deterministic schemes, far exceeding the 798‑bit random limit. Consequently, the author concludes that large‑space random IDs (≈800 bits) provide the most practical universally unique identifier.
+          </div>
+          <a href="https://jasonfantl.com/posts/Universal-Unique-IDs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments critique the article’s collision analysis for ignoring locality, arguing that realistic collision risk is far lower and that 800‑bit identifiers are excessive. Many favor hybrid schemes that embed timestamps or hierarchical information—ULIDs, Snowflake IDs, and versioned UUIDs—citing improved sortability, provenance, and human readability. Practical concerns about over‑engineered uniqueness, the trade‑off with legibility, and the usefulness of deterministic or region‑based addressing dominate, while a minority inject philosophical musings on infinite universes and the limits of identification.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47064490" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thunderseethe.dev/posts/how-to-choose-between-hm-and-bidir/" target="_blank">How to Choose Between Hindley-Milner and Bidirectional Typing</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by thunderseethe • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post argues that choosing between Hindley‑Milner (HM) and bidirectional typing is a false dichotomy; the core decision should be whether the language needs generics. Generics require unification, which is central to HM and can be incorporated into a bidirectional system. Bidirectional typing, by adding a `check` function to an `infer` routine, can support unification and thus all HM features, while also allowing annotations to guide inference and reduce reliance on type variables. Implementing bidirectional typing is shown with simple Rust‑like pseudocode: `infer` returns a type, and `check` either compares for equality or invokes `unify`. The author notes that unification adds complexity but is essential for general‑purpose languages that want type inference without explicit annotations. For learning projects, DSLs, or languages where generics are unnecessary, a pure bidirectional approach with annotations may suffice. In all cases, bidirectional typing can accommodate generics if needed.
+          </div>
+          <a href="https://thunderseethe.dev/posts/how-to-choose-between-hm-and-bidir/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment recommends replacing a Hindley‑Milner style type system with a compositional type system, arguing that the latter provides significantly clearer explanations of type derivations and error messages. It points to an external presentation that details the compositional approach, suggesting that its structure improves understandability of typing behavior compared with traditional HM inference.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47025885" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nicolasdickenmann.com/blog/the-great-fp64-divide.html" target="_blank">15 years of FP64 segmentation, and why the Blackwell Ultra breaks the pattern</a>
+        </h2>
+        <span class="article-meta">
+          21 points • by fp64enjoyer • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Nvidia’s consumer GPUs have seen the FP64‑to‑FP32 performance ratio widen from 1:2 (hardware) to 1:8 (driver‑capped) on Fermi (2010) and subsequently to 1:64 on Ampere (2020), while FP32 throughput grew ~78× (1.35 TFLOPS → 104.8 TFLOPS). Enterprise GPUs retained a 1:2–1:3 ratio, creating a clear market segmentation: consumer cards prioritize gaming and media workloads that need only FP32, whereas HPC, CFD, climate, finance, and chemistry rely on FP64 precision. Nvidia reinforced this split with a 2017 EULA ban on datacenter use of GeForce cards.
+
+To obtain double‑precision on consumer hardware, developers employ software emulation: Dekker’s split‑float method, Thall’s algorithms (≈48‑bit mantissa), and the Ozaki scheme, which partitions FP64 operands into multiple low‑precision fragments (e.g., FP8) and uses tensor‑core MMA, preserving full 64‑bit results. Nvidia added Ozaki support to cuBLAS (Oct 2025).
+
+The Blackwell Ultra B300 enterprise GPU reverses the historical trend, reducing dedicated FP64 units (1:64 FP64:FP32) and boosting low‑precision tensor cores (NVFP4). Peak FP64 falls from 37 TFLOPS (B200) to 1.2 TFLOPS, indicating a shift toward emulation‑augmented HPC rather than physical FP64 throughput.
+          </div>
+          <a href="https://nicolasdickenmann.com/blog/the-great-fp64-divide.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes NVIDIA’s evolution from graphics‑focused hardware to broader high‑performance computing roles, noting that programmable shaders unintentionally launched GPGPU and CUDA, while later cryptocurrency demand raised GPU prices without leveraging floating‑point capabilities. It points out that FP64 performance is restricted on consumer cards due to U.S. export regulations tied to nuclear research, making compliance viable only for enterprise GPUs. Overall, the view is that NVIDIA has been fortunate yet effective in adapting to emerging workloads, despite occasional strategic misalignments.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47068890" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tailscale.com/blog/peer-relays-ga" target="_blank">Tailscale Peer Relays is now generally available</a>
+        </h2>
+        <span class="article-meta">
+          342 points • by sz4kerto • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Tailscale Peer Relays are now generally available, offering customer‑deployed, high‑throughput relaying on any Tailscale node. Recent updates improve throughput by optimizing interface selection, reducing lock contention, and distributing traffic across multiple UDP sockets, resulting in performance close to a full mesh even when direct peer‑to‑peer paths are blocked. A new `--relay-server-static-endpoints` flag lets relays advertise fixed IP:port pairs, enabling deployment behind load balancers or strict firewalls (e.g., in public‑cloud subnets) where automatic endpoint discovery fails. Peer Relays integrate with Tailscale’s observability stack: `tailscale ping` can report relay usage and latency; metrics `tailscaled_peer_relay_forwarded_packets_total` and `tailscaled_peer_relay_forwarded_bytes_total` are exposed for Prometheus/Grafana monitoring. They can replace subnet routers, support full‑mesh private subnets, and maintain Tailscale’s end‑to‑end encryption and least‑privilege access. Enabling a relay requires a CLI command and ACL grants, and the feature is available on all Tailscale plans, including the free tier.
+          </div>
+          <a href="https://tailscale.com/blog/peer-relays-ga" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a generally favorable view of Tailscale’s ease of use, performance gains, and the new peer‑relay architecture, especially for NAT‑traversal and low‑latency scenarios. Users also highlight practical applications such as gaming, remote development, and cloud‑run workloads. At the same time, concerns recur about the proprietary client components, dependence on a commercial service, potential future pricing changes, and limited documentation of low‑level behavior. Requests for open‑source alternatives and clearer technical details reflect a desire for transparency while acknowledging the convenience the platform currently provides.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47063005" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chromereleases.googleblog.com/2026/02/stable-channel-update-for-desktop_13.html" target="_blank">Zero-day CSS: CVE-2026-2441 exists in the wild</a>
+        </h2>
+        <span class="article-meta">
+          266 points • by idoxer • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is a Chrome Releases announcement titled “Stable Channel Update for Desktop.” The content consists mainly of structural markup: a top‑level title, horizontal separators, and a section labeled “Images and Visual Content.” Within that section are two image placeholders whose alt‑text labels read “Share on Twitter” and “Share on Facebook,” indicating the presence of social‑media sharing icons. No additional textual description, changelog, or technical details about the update are provided. The layout suggests the page is intended to inform users of a desktop‑focused stable‑channel release while offering quick sharing options to Twitter and Facebook.
+          </div>
+          <a href="https://chromereleases.googleblog.com/2026/02/stable-channel-update-for-desktop_13.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment is mixed, recognizing the vulnerability as serious because it enables arbitrary code execution, data leakage, and session hijacking, while also noting it currently affects only Chromium‑based browsers. Commenters express concern over insufficient dedicated security staffing and call for stronger auditing and possible rewrites in safer languages. There is curiosity about the researcher’s bounty, the proof‑of‑concept details, and detection tools used. Some speculate about the role of large language models in discovery, while others view the impact as limited.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47062748" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://letsencrypt.org/2026/02/18/dns-persist-01.html" target="_blank">DNS-Persist-01: A New Model for DNS-Based Challenge Validation</a>
+        </h2>
+        <span class="article-meta">
+          214 points • by todsacerdoti • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Let’s Encrypt is adding a new ACME challenge type, DNS‑PERSIST‑01, defined in an IETF draft. Unlike DNS‑01, which requires a fresh TXT token at _acme‑challenge.<domain> for each issuance, DNS‑PERSIST‑01 uses a permanent TXT record at _validation‑persist.<domain> that binds the domain to a specific ACME account and CA (e.g., “letsencrypt.org;accounturi=…”). Once published, the record can be reused for all subsequent certificate requests and renewals, eliminating per‑issuance DNS updates and reducing exposure of DNS write credentials.  
+
+Security shifts from protecting DNS API keys to protecting the ACME account key, as the persistent record remains valid indefinitely unless an optional persistUntil timestamp is set. Scope controls allow limiting authorization to the exact FQDN, enabling wildcard issuance via policy=wildcard, or authorizing multiple CAs by adding separate TXT records.  
+
+The mechanism passed the CA/Browser Forum ballot SC‑088v3 in Oct 2025 and was adopted by the IETF ACME working group. Pebble (a Boulder test server) already supports the draft; a Go client is under development. Staging rollout is planned for late Q1 2026, with production rollout expected in Q2 2026.
+          </div>
+          <a href="https://letsencrypt.org/2026/02/18/dns-persist-01.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments are overwhelmingly positive, describing the new DNS‑persist approach as a major usability boost that streamlines certificate automation, especially for internal or non‑public services and eliminates many manual steps. Reviewers appreciate the reduced operational overhead and anticipate broader adoption. However, several participants raise security‑privacy worries about publishing plain‑text account identifiers in DNS, potential abuse if those IDs are compromised, and the lack of built‑in DNSSEC or stronger cryptographic binding. Concerns also include account‑ownership validation, revocation handling, and the desire for tighter scope controls. Overall sentiment is supportive but cautious.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47064047" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.gamingonlinux.com/2026/02/minecraft-java-is-switching-from-opengl-to-vulkan-for-the-vibrant-visuals-update/" target="_blank">Minecraft Java is switching from OpenGL to Vulkan</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by tuananh • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Minecraft Java’s “Vibrant Visuals” update will replace OpenGL with Vulkan as the primary rendering API. Mojang announced the change on 18 February, citing modern GPU features, improved visual fidelity, and better performance. The switch targets broad PC compatibility—including macOS and Linux—using a translation layer (Metal) on macOS because Apple does not support Vulkan natively.  
+
+Key implications:  
+
+- Mod developers must transition away from OpenGL; Mojang advises reusing internal rendering APIs and offers support for complex cases.  
+- A dual‑API testing phase will run in summer snapshots, allowing users to toggle between OpenGL and Vulkan while stability and performance are evaluated.  
+- OpenGL will be phased out once Vulkan meets Mojang’s criteria.  
+- Older hardware lacking Vulkan support may be excluded, though Vulkan has existed on many legacy GPUs.  
+
+The article also notes the original Minecraft Java release date (8 Nov 2011) and confirms native Linux support.
+          </div>
+          <a href="https://www.gamingonlinux.com/2026/02/minecraft-java-is-switching-from-opengl-to-vulkan-for-the-vibrant-visuals-update/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks express cautious optimism about Microsoft’s approach to Minecraft’s graphics stack, noting that Java‑only desktop support avoids mobile Vulkan driver issues and that a stable cross‑platform RHI could lower CPU overhead on the main thread. There is criticism of current Vulkan driver performance and shader compilation lag, alongside surprise that Microsoft provides a Java implementation. Overall, the comments hope for better CPU utilization and smoother shader handling while remaining skeptical of present limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47068948" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://code.claude.com/docs/en/legal-and-compliance" target="_blank">Anthropic officially bans using subscription auth for third party use</a>
+        </h2>
+        <span class="article-meta">
+          14 points • by theahura • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The document titled “Legal and compliance – Claude Code Docs” consolidates the legal agreements, compliance certifications, and security information associated with Claude Code. It is organized to present the contractual terms governing use of the service, the certifications demonstrating adherence to industry‑standard compliance frameworks, and details regarding the platform’s security architecture and data protection measures. The visual component consists of three images identified only by their alternative‑text descriptors: a “light logo,” a “dark logo,” and an image labeled “US.” No additional textual content, policy excerpts, or certification specifics are provided within the excerpt. The page therefore serves as a high‑level index pointing to the existence of formal legal and compliance documentation and includes minimal branding imagery.
+          </div>
+          <a href="https://code.claude.com/docs/en/legal-and-compliance" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a need for explicit guidance from AI service providers about whether third‑party commercial apps may use users’ OAuth tokens to access services like ChatGPT or Claude. Contributors note that while direct API use is clear, the permissibility of token‑based authentication remains ambiguous, citing terms that forbid using OAuth tokens outside the provider’s own products. This uncertainty creates frustration, as developers lack a clear contact point or official statement, and they seek clarification on whether such usage violates the providers’ consumer agreements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47069299" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
