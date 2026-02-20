@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 20, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gist.github.com/interpiduser5/547d8a7baec436f24b7cce89dd4ae1ea" target="_blank">MuMu Player (NetEase) silently runs 17 reconnaissance commands every 30 minutes</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by interpidused • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            MuMu Player Pro (v1.8.5, bundle com.netease.mumu.nemux‑global) on macOS runs a silent data‑collection routine every 30 minutes while the emulator is active. It creates a timestamped folder in ~/Library/Application Support/com.netease.mumu.nemux‑global/logs/ and stores the output of commands that enumerate network devices ( arp ‑a), interface configuration (ifconfig), DNS and proxy settings (scutil --dns, --proxy), hosts file (cat /etc/hosts), network connections (netstat), all processes with full arguments (ps aux), installed applications (ls ‑laeTO ‑@ /Applications/, mdls /Applications/*.app), kernel parameters (sysctl ‑a), launch agents/daemons, mounted volumes, and two curl requests to MuMu’s APIs. Each run logs success/failure per file and produces ~400 KB of data; about 23 runs are retained before rotation. The collected data—process list, software inventory, network topology, DNS configuration, kernel settings, and the Mac’s serial number—are packaged into SensorsData analytics files (identities, super_properties, message queue) and transmitted to MuMu’s servers. The privacy policy does not disclose these commands, the recurring schedule, or the hardware identifier, representing a transparency shortfall.
+          </div>
+          <a href="https://gist.github.com/interpiduser5/547d8a7baec436f24b7cce89dd4ae1ea" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong distrust of Chinese technology firms, emphasizing concerns that their products—particularly video games—collect extensive user data and could compromise privacy. The author argues that such practices threaten personal security and cultural influence, suggesting that Western authorities have been insufficiently proactive, favoring economic ties over protective measures. The overall tone is critical, highlighting apprehension about data harvesting, advocating for stricter regulation, and questioning the adequacy of current Western policy responses.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47082496" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/" target="_blank">Gemini 3.1 Pro</a>
+        </h2>
+        <span class="article-meta">
+          572 points • by MallocVoidstar • 119 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gemini 3.1 Pro is released in preview following the November launch of Gemini 3 Pro, incorporating user‑feedback‑driven enhancements and aiming to support more ambitious agentic workflows. The preview rollout begins today for Google AI Pro and Ultra plan subscribers, offering higher usage limits in the Gemini app and exclusive access on NotebookLM for the same tiers. Developers and enterprise customers can also test 3.1 Pro via the Gemini API in AI Studio, Antigravity, Vertex AI, Gemini Enterprise, the Gemini CLI, and Android Studio. The preview serves to validate these updates before a general availability release. Visual assets include a model illustration and a benchmark comparison chart, but no specific performance metrics are provided in the text.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed view of Gemini 3 / 3.1: many appreciate its strong code‑generation, lower cost and recent benchmark gains, especially in visual tasks, yet repeatedly note reliability problems such as looping, poor tool‑calling, inconsistent output limits, and opaque “thinking” streams that hinder practical use. Users contrast it with Claude Opus, which is praised for steadier agentic behavior and clearer interactions. Concerns also surface about rapid model deprecation, limited regional availability, and UI/CLI friction, leading to cautious optimism tempered by frustration.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47074735" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theshamblog.com/an-ai-agent-wrote-a-hit-piece-on-me-part-4/" target="_blank">An AI Agent Published a Hit Piece on Me – The Operator Came Forward</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by scottshambaugh • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://theshamblog.com/an-ai-agent-wrote-a-hit-piece-on-me-part-4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47083145" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tmustier/pi-for-excel" target="_blank">Pi for Excel: AI sidebar add-in for Excel, powered by Pi</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by rahimnathwani • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub repository “tmustier/pi-for-excel” hosts an experimental Excel sidebar add‑in that functions as an agent interface. The add‑in is described as “multi‑model” and relies on the Pi language model for its core functionality. The project page displays a standard GitHub error message (“You can’t perform that action at this time”), indicating that a requested operation—likely a repository action such as cloning, forking, or accessing a protected resource—is currently blocked. Visual placeholders include three images with alt text references to the repository owner (@tmustier), an automated dependency bot (@dependabot[bot]), and an AI model identifier (@claude). No further technical documentation, installation instructions, or code snippets are present in the scraped content. The repository appears to be in early or restricted development, with limited public information available.
+          </div>
+          <a href="https://github.com/tmustier/pi-for-excel" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47082854" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sour.coffee/2026/02/20/an-arm-homelab-server-or-a-minisforum-ms-r1-review/" target="_blank">An ARM Homelab Server, or a Minisforum MS-R1 Review</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by neelc • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Minisforum MS‑R1 is a bare‑bones ARM mini‑PC positioned as a low‑cost homelab server (MSRP $599, purchased for $559). After installing a 1 TB SSD, the author attempted Rocky Linux but the onboard Realtek RTL8127 NIC was not detected, requiring manual driver insertion and causing maintenance concerns. Fedora provided native driver support and was adopted for the system. Key hardware observations:
+
+- Quiet operation and adequate performance for ARM workloads, though far below high‑end x86 CPUs (≈285 kIPS vs a 9950X).
+- Two M.2 slots, one occupied by Wi‑Fi; the second accepts only U.2, limiting SSD expansion and RAID options.
+- Marvell AQC107 NICs are invisible to UEFI, rendering them unusable.
+- “Power‑on after outage” feature fails to restart the unit.
+
+The device runs headless, hosts a FreeBSD 15.0 VM as a secondary Samba domain controller, and functions well as an ARM hypervisor despite the NIC and expandability limitations. The reviewer finds it a practical, affordable addition to an existing x86‑heavy homelab, while noting the ARM ecosystem remains smaller than x86.
+          </div>
+          <a href="https://sour.coffee/2026/02/20/an-arm-homelab-server-or-a-minisforum-ms-r1-review/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong interest in ARM‑based homelab servers, with several users expressing enthusiasm after trying a Minisforum unit and noting its preinstalled Debian and price volatility. Many seek clarification on the unusual CPU core arrangement and its high idle power draw, questioning why it exceeds typical Intel or AMD levels and why the power supply appears oversized. Additional inquiries address the suitability of macOS versus Linux for server workloads, the perception of Fedora as less appropriate for servers, and the potential role of newer power‑efficiency technologies.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47082548" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://micasa.dev" target="_blank">Show HN: Micasa – track your house from the terminal</a>
+        </h2>
+        <span class="article-meta">
+          470 points • by cpcloud • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            micasa is a terminal‑based home‑management tool that stores maintenance records, projects, incidents, appliances, vendors, quotes, and related documents in a single SQLite file. It provides auto‑computed maintenance schedules, full service histories, warranty tracking, and incident logging with severity and location tags, linking items to vendors and files (manuals, invoices, photos). The interface is keyboard‑driven with Vim‑style modal keys, supporting column sorting, fuzzy navigation, and drill‑down into related records; keybindings are documented in a reference sheet. Installation requires Go 1.25+ (`go install github.com/cpcloud/micasa/cmd/micasa@latest`) or a precompiled binary for Linux, macOS, or Windows (amd64/arm64). Quick start commands include `micasa --demo` for sample data, `micasa` for a new database, and `micasa --print-path` to locate the file. The project aims to replace scattered receipts, binders, and notes with a single, portable database, inspired by the VisiData modal UI paradigm.
+          </div>
+          <a href="https://micasa.dev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong enthusiasm for the project’s TUI design, its simplicity, and the clever use of SQLite, with many users praising its aesthetics and practicality for personal home‑maintenance tracking. Repeated suggestions include adding a web or mobile interface, cloud sync, reminder or email automation, and easier data export, to make the tool accessible to non‑technical household members. Concerns appear around backup safety, reliance on a terminal‑only workflow, and the choice of a relational database versus plain text or spreadsheet alternatives. Overall sentiment is positive, tempered by requests for broader usability features.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47075124" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.zgp.org/micropayments-as-a-reality-check-for-news-sites/" target="_blank">Micropayments as a reality check for news sites</a>
+        </h2>
+        <span class="article-meta">
+          123 points • by speckx • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article argues that fragmented, low‑revenue readership created by modern search, aggregators, and social sharing can be monetized through micropayments without harming subscription models. Micropayments would act as a revenue multiplier for advertising and provide publishers with verifiable, human‑audience data to counter bot‑inflated metrics, strengthening ad pricing. The author cites mobile‑game in‑app‑purchase models—real‑money conversion to virtual coins then to assets—as a cognitive technique that reduces perceived transaction cost and could be adapted for “pay‑by‑article” systems. Suggested implementations include issuing publisher‑specific coins as subscriber bonuses that can be transferred to non‑subscribers, seeding free coins to develop user habit, and allowing advertisers to distribute coins to customers. The piece warns that big‑tech attribution proposals risk centralizing data control, making independent audience metrics crucial. It also notes that reducing UI friction (e.g., consolidating consent dialogs, sign‑ins) would improve user experience and revenue potential.
+          </div>
+          <a href="https://blog.zgp.org/micropayments-as-a-reality-check-for-news-sites/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed enthusiasm for collective unlocking of articles but a prevailing skepticism that micropayments can sustain journalism. Many cite past failures, high friction, charge‑back costs and a “race to the bottom” that would undervalue quality reporting, favoring subscription bundles, patronage, grants or ad‑supported models instead. Some propose friction‑less wallet or blockchain solutions, yet most argue that social‑psychological barriers, technical overhead and the need for stable revenue make per‑article payments impractical, while subscription‑style or community‑funded approaches receive broader support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47078167" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.governance.fyi/p/america-vs-singapore-you-cant-save" target="_blank">America vs. Singapore: You can&#39;t save your way out of economic shocks</a>
+        </h2>
+        <span class="article-meta">
+          234 points • by guardianbob • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper compares saving‑regret among adults 60‑74 in the United States and Singapore. Across 12 psychometric measures of procrastination, the correlation with regretting insufficient savings is essentially null; where significant, the sign often reverses the behavioral‑economics expectation. By contrast, exposure to negative financial shocks (unemployment, health expenses, earnings shortfalls, divorce, forced early retirement) strongly predicts regret. 69 % of U.S. respondents reported at least one shock versus 46 % in Singapore; among those, 61 % (U.S.) and 42 % (Singapore) expressed regret. Regret rises with shock count in the U.S. (up to 76 % for ≥5 shocks) but remains around 50 % in Singapore regardless of shock frequency. Institutional differences explain much of the gap: Singapore’s compulsory Central Provident Fund allocates earnings to housing, retirement, and health accounts, providing buffers before shocks occur; U.S. unemployment insurance coverage is low and health insurance is employment‑based, amplifying shock impact. Probability‑numeracy, not standard financial literacy, correlates with lower regret (‑14 pp U.S., ‑19 pp Singapore). The authors argue that strengthening social‑insurance and risk‑pooling mechanisms would reduce saving regret more effectively than nudges targeting procrastination.
+          </div>
+          <a href="https://www.governance.fyi/p/america-vs-singapore-you-cant-save" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments present a mixed view of Singapore’s economic system, noting that the compulsory savings scheme functions more as a government‑run bond purchase than a traditional pension, with strict withdrawal limits and high contribution rates that limit disposable income. Critics highlight reliance on immigrant labor, the government’s emphasis on maximizing employment, and potential regressive effects on lower‑income residents, while others praise the country’s safety, efficient administration, and strong social cohesion. Comparisons to the United States stress differing immigration shares, housing policies, and the balance between forced savings and individual financial autonomy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47074389" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/world/us-plans-online-portal-bypass-content-bans-europe-elsewhere-2026-02-18/" target="_blank">US plans online portal to bypass content bans in Europe and elsewhere</a>
+        </h2>
+        <span class="article-meta">
+          197 points • by c420 • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.reuters.com/world/us-plans-online-portal-bypass-content-bans-europe-elsewhere-2026-02-18/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread skepticism toward the U.S.‑backed “freedom.gov” portal, questioning its technical feasibility, effectiveness, and potential to become a government‑controlled VPN that could be blocked by target regimes. Critics highlight the irony of a government that funds anti‑censorship initiatives while imposing its own content restrictions, and argue that existing tools such as Tor would deliver greater value. Concerns also surface about privacy, surveillance, misuse for propaganda, and the allocation of taxpayer funds toward a likely limited, politically symbolic solution.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47067270" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Veirt/weathr" target="_blank">A terminal weather app with ASCII animations driven by real-time weather data</a>
+        </h2>
+        <span class="article-meta">
+          172 points • by forinti • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository Veirt/weathr on GitHub is a terminal‑based weather application that renders weather data using ASCII‑style animation. The page currently shows a “You can’t perform that action at this time” notice, indicating restricted access. Visual elements referenced include badges for the crate on crates.io, download statistics, and licensing information, as well as example animations such as “Thunderstorm Night” and “Snow”. Additional images consist of avatar icons for contributors or collaborators identified by handles @Veirt, @Levizor, @natedenh, @claude, @greyltc, @marcohoovy, and @OrbitalPeriod. No further descriptive text, code snippets, or functional details are present in the scraped content.
+          </div>
+          <a href="https://github.com/Veirt/weathr" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express largely positive reactions to the terminal‑based projects, praising the visual details such as animated lightning and snow effects and noting the appeal of a clean, grid‑driven layout. Users discuss workflow choices, favoring Zellij for remote session continuity while still appreciating Ghostty’s features. There is interest in learning terminal animation techniques and curiosity about Rust’s growing role in similar tools. Overall sentiment is enthusiastic, with agreement on the projects’ aesthetic and functional strengths and modest technical curiosity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47076659" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
