@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 21, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://f-droid.org/2026/02/20/twif.html" target="_blank">Keep Android Open</a>
+        </h2>
+        <span class="article-meta">
+          1129 points • by LorenDB • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            F‑Droid’s weekly report (20 Feb 2026) notes ongoing concerns over Google’s announced Android lock‑down, which the team says remains scheduled despite public relief. To raise awareness, F‑Droid and partners have added warning banners to their clients, urging users to contact local authorities. Development on F‑Droid Basic continues; version 2.0‑alpha3 introduces translated strings, CSV export of installed apps, install‑history tracking, mirror chooser, screenshot prevention, tool‑tips, a three‑dot overflow menu, persistent sort order, Material Design 3 styling, and a bug fix for missing icons. Existing Basic users (1.23.x) must enable “Allow beta updates” manually. The report lists major app updates: Buses 1.10, Conversations & Quicksy 2.19.10+free, Dolphin Emulator 2512, Image Toolbox 3.6.1, Luanti 5.15.1, several Nextcloud components (e.g., Nextcloud 33.0.0, Talk 23.0.0), ProtonVPN 5.15.70.0 (now WireGuard‑only), Offi 14.0 (requires Android 8+), QUIK SMS 4.3.4, SimpleEmail 1.5.4. Five apps were removed (e.g., Chord Shift, OpenAthena™) and one added (NeoDB You). About 287 apps received updates. The notice invites RSS subscription, forum participation, and donations via the provided pages.
+          </div>
+          <a href="https://f-droid.org/2026/02/20/twif.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion is largely critical of Google’s move to restrict sideloading and enforce developer verification, viewing it as a threat to Android’s openness and to independent AOSP‑based distributions. Commenters emphasize the importance of community‑driven alternatives, regulatory engagement, and potential forks, while expressing frustration over the missing “advanced flow” and the impact on side‑loaded apps and custom ROMs. Some note the difficulty of app distribution compared with iOS, suggest migration to Linux‑based phones or other ecosystems, and warn that increased lock‑down could diminish user control and device longevity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47091419" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://words.filippo.io/dependabot/" target="_blank">Turn Dependabot Off</a>
+        </h2>
+        <span class="article-meta">
+          292 points • by todsacerdoti • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Dependabot generates large numbers of low‑value alerts, especially for Go security issues, creating noise and alert fatigue. A recent vulnerability in filippo.io/edwards25519 (​CVE‑2026‑26958) caused thousands of Dependabot PRs despite the affected symbol Point.MultiScalarMult being unused in most projects, even in repositories that import only unrelated sub‑packages. The Go Vulnerability Database provides precise module, package, and symbol metadata (OSV format) that enables accurate filtering. Using govulncheck or similar static‑analysis scanners, developers can:
+
+- Run govulncheck in a scheduled GitHub Action to report only reachable vulnerable symbols.  
+- Combine this with a daily CI job that tests against the latest dependency versions via go get -u -t ./… instead of automatic Dependabot updates.
+
+Example Action YAML runs govulncheck daily and only notifies when a real vulnerability is present. This approach reduces false positives, prevents unnecessary PRs, and allows focused remediation while keeping dependencies up‑to‑date through controlled CI testing.
+          </div>
+          <a href="https://words.filippo.io/dependabot/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed views on Dependabot: many find it useful for automated updates but criticize its security‑focused alerts as noisy, especially when vulnerabilities are irrelevant to their code paths or client‑side only. Users favor tools that analyze actual call graphs, such as govulncheck for Go, and seek similar reachability‑based scanners for other ecosystems. Alternatives like Renovate, pip‑audit, and custom GitHub Actions are mentioned for greater flexibility and reduced false positives. Overall sentiment favors more precise static analysis, configurable update schedules, and reduced alert fatigue while acknowledging Dependabot’s cross‑language convenience.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47094192" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://worldwideweb.cern.ch" target="_blank">CERN rebuilt the original browser from 1989 (2019)</a>
+        </h2>
+        <span class="article-meta">
+          94 points • by tylerdane • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In December 1990 CERN’s NeXT workstation ran the original WorldWideWeb application, the first web browser and editor. To mark its 30‑year anniversary, a team of developers and designers reconceptualized the historic browser within a modern environment in February 2019, enabling users to experience the early interface. The project, funded by the US Mission in Geneva via the CERN & Society Foundation, provides a functional replica with step‑by‑step instructions for launching the browser, opening URLs, and creating links. The accompanying documentation is organized into sections covering: a concise history of the 1989 prototype; a timeline of influences before and after the seminal memo; detailed usage guidance and UI patterns; the NeXT typography employed; excerpts of the original source code; the production workflow for the rebuild; related historical and technical resources; and a colophon listing contributors. Visuals include two images labeled “WorldWideWeb” and “CERN.”
+          </div>
+          <a href="https://worldwideweb.cern.ch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects a nostalgic recollection of early Web development, describing how the initial experience resembled gopher and WAIS and noting that graphical browsers like Erwise emerged from a university project but lacked funding, leading to its abandonment. It highlights the availability of original source code, expresses a wish for a modern port using GNUstep and Emscripten, and corrects a common misconception that Lynx was the first browser. Overall, the tone is informative and mildly critical of missed preservation opportunities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47095429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dixken.de/blog/i-found-a-vulnerability-they-found-a-lawyer" target="_blank">I found a Vulnerability. They found a Lawyer</a>
+        </h2>
+        <span class="article-meta">
+          372 points • by toomuchtodo • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A platform engineer and diving instructor discovered a critical flaw in a major diving insurer’s member portal while on a dive trip. The system assigned sequential numeric user IDs and a static default password that users were never forced to change, enabling anyone to log in by guessing an ID and using the common password. This allowed unrestricted access to full personal profiles, including names, addresses, phone numbers and dates of birth of under‑age students, violating GDPR’s integrity, confidentiality, and breach‑notification requirements. The researcher verified the issue with minimal access, created a Selenium script to enumerate accounts, and reported it to the organization and Malta’s CSIRT, observing the required 30‑day embargo. The insurer responded with legal threats, demanded a confidentiality declaration, and blamed users for not changing passwords, despite the systemic weakness. The vulnerability was later mitigated (password resets, 2FA rollout), but the researcher has not received confirmation of user notifications. The blog uses the case to illustrate proper coordinated vulnerability disclosure, GDPR obligations, and the negative impact of legal intimidation on security research.
+          </div>
+          <a href="https://dixken.de/blog/i-found-a-vulnerability-they-found-a-lawyer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey widespread frustration with companies that respond to vulnerability reports with legal threats, NDAs, or silence rather than remediation, and they criticize the resulting chilling effect on security research. Contributors repeatedly call for stronger legal protections for white‑hat and grey‑hat researchers, mandatory cyber‑security audits, and clear, independent reporting channels or intermediaries to prevent intimidation. There is consensus that current bug‑bounty practices are often inadequate, that insurance considerations can drive defensive behavior, and that legislation is needed to balance corporate risk‑aversion with public‑interest cybersecurity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47092578" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pilk.website/3/facebook-is-absolutely-cooked" target="_blank">Facebook is cooked</a>
+        </h2>
+        <span class="article-meta">
+          779 points • by npilk • 155 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author revisited Facebook after an eight‑year absence and observed that the News Feed was dominated by AI‑generated or AI‑enhanced content rather than posts from friends or local groups. The top items included a recent XKCD comic followed by multiple “thirst‑trap” images of young women, many appearing synthetic, with generic captions. Additional posts featured AI‑created videos (e.g., a police officer replacing a boy’s bike) and low‑quality memes about relationships. Meta’s interface suggested AI‑driven questions about the visuals, such as “Why is she wearing pink heels?” The author noted the difficulty distinguishing genuine from AI content, speculated that the algorithm amplifies such posts when personal connections are sparse, and expressed concern over the prevalence of potentially under‑aged representations. The experience led to the conclusion that Facebook’s feed now prioritizes AI‑produced, engagement‑bait material over genuine user‑generated content.
+          </div>
+          <a href="https://pilk.website/3/facebook-is-absolutely-cooked" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a broad consensus that Facebook’s feed has deteriorated for many users, especially those who return after long inactivity, showing predominately low‑engagement, clickbait‑styled or AI‑generated content often tailored to perceived demographics such as gender. Critics note intrusive ads, “thirst‑trap” material, and algorithmic echo chambers, while also highlighting issues with bots, political propaganda, and poor UI design. Conversely, several users still find value in specific features like Marketplace, hobby groups, and regional community pages, describing them as useful for local coordination despite the overall perceived decline in meaningful social interaction.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47091748" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.june.kim/cord" target="_blank">Cord: Coordinating Trees of AI Agents</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by gfortaine • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cord is a runtime that lets LLM agents dynamically construct and execute a coordination tree rather than following a developer‑defined static workflow. Agents start with a single goal, then use five primitives—**spawn** (create a child with a clean context), **fork** (create a child inheriting all completed sibling results), **ask** (prompt a human), **complete**, and **read_tree**—to generate sub‑tasks, express dependencies (via blocked_by), and parallelize work. The distinction between spawn and fork controls what context the child receives, enabling independent research tasks (spawn) and synthesis steps that need all prior knowledge (fork).  
+
+Implemented with Claude Code CLI processes, an MCP tool server, and a shared SQLite database, Cord enforces dependency resolution, authority scoping, and result injection. In fifteen tests Claude correctly decomposed projects, chose appropriate primitives, and escalated via ask when authority was lacking, confirming the model’s understanding of the protocol.  
+
+The protocol is backend‑agnostic; it could run on PostgreSQL, multiple LLM providers, or incorporate human workers. Cord is released as a proof‑of‑concept repository and requires a Claude Code CLI subscription.
+          </div>
+          <a href="https://www.june.kim/cord" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion questions whether using a “spawn” API can ever be advantageous compared to a “fork,” emphasizing concerns about unnecessary context removal. It suggests that while some scenarios may require context elimination, the preferred approach would involve efficient sub‑agent compaction rather than a complete “clean‑slate” reset, which is viewed as generally suboptimal. The overall sentiment leans toward favoring strategies that preserve existing context whenever possible.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47096466" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ggml-org/llama.cpp/discussions/19759" target="_blank">Ggml.ai joins Hugging Face to ensure the long-term progress of Local AI</a>
+        </h2>
+        <span class="article-meta">
+          675 points • by lairv • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The GitHub discussion titled “ggml.ai joins Hugging Face to ensure the long‑term progress of Local AI” announces a partnership between the ggml.ai project and Hugging Face aimed at supporting continued development of local AI models. The post indicates that the user cannot perform the requested action, suggesting restricted access or a permissions issue. The discussion includes a series of images whose alt text lists usernames of contributors and community members (e.g., @ggerganov, @rabbidave, @giladgd, @ericcurtin, etc.), likely representing participants or supporters of the initiative. No additional technical details, code, or substantive content are provided in the scraped text.
+          </div>
+          <a href="https://github.com/ggml-org/llama.cpp/discussions/19759" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments overwhelmingly praise Hugging Face’s support for open‑source, on‑premise AI and view the backing of llama.cpp/ggml as a crucial, welcomed reinforcement for the local‑model ecosystem. Optimism about broader accessibility and the developers’ contributions is strong, though many voice cautious questions about the long‑term viability of Hugging Face’s business model, potential lock‑in, and the impact of further consolidation. A minority criticize the quality and stability of Hugging Face’s Python libraries, while others speculate on future acquisitions and the challenges facing local AI as model sizes grow.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47088037" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://leaflet.pub/p/did:plc:3vdrgzr2zybocs45yfhcr6ur/3mfd2oxx5v22b" target="_blank">What Is OAuth?</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by cratermoon • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OAuth was created to provide a standard, secure way for third‑party applications to act on a user’s behalf without sharing passwords. The core mechanism consists of two parts: (1) with the user’s consent, the authorization server issues a multi‑use token (the “secret”) to the delegate (client); (2) the client presents that token to resource servers to make authorized requests. This simple model replaces numerous ad‑hoc, insecure delegation schemes used by early Web 2.0 services (e.g., Flickr, AWS, Delicious). OpenID Connect (OIDC) builds on OAuth to enable “magic‑link” style sign‑in, showing how OAuth underpins modern authentication flows. Historical drivers included Twitter’s need in 2006 to support OpenID sign‑in for desktop and mobile clients without passwords, prompting the design of a reusable delegation protocol. The OAuth specifications have grown into a framework rather than a rigid standard, allowing implementations to adopt needed features while preserving security and interoperability. Understanding the underlying goal—delegated access with user consent—clarifies why the protocol appears complex.
+          </div>
+          <a href="https://leaflet.pub/p/did:plc:3vdrgzr2zybocs45yfhcr6ur/3mfd2oxx5v22b" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey overall appreciation for the article, noting that it addresses a common but poorly understood feature and provides useful clarification. Readers contribute practical advice, such as how to scroll correctly, and acknowledge the piece’s value for newer audiences unfamiliar with earlier web‑2.0 practices. Some critique the title as misleading, suggesting it implies a generic OAuth explanation rather than the specific design rationale and use‑case examples the post actually covers. Despite this, the consensus remains positive, highlighting the article’s informative nature.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47096520" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arstechnica.com/tech-policy/2026/02/wikipedia-bans-archive-today-after-site-executed-ddos-and-altered-web-captures/" target="_blank">Wikipedia deprecates Archive.today, starts removing archive links</a>
+        </h2>
+        <span class="article-meta">
+          314 points • by nobody9999 • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Wikipedia’s English edition has blacklisted Archive.today after the archiving service was used to launch a distributed denial‑of‑service (DDoS) attack against a blogger. Investigation revealed that Archive.today altered archived snapshots to insert the targeted blogger’s name, apparently motivated by a grievance over the blogger’s exposure of the site maintainer’s aliases. Consensus among editors called for immediate deprecation of the domain, addition to the spam blacklist, and removal of all its links. Approximately 695 000 Archive.today links appear on about 400 000 Wikipedia pages; most can be replaced because the original sources remain accessible. Editors are instructed to delete such links when the source is still online, substitute them with alternatives (e.g., Internet Archive, Ghostarchive, Megalodon), or modify citations to eliminate the need for archiving. The guidance applies to all Archive.today subdomains (archive.today, .is, .ph, .fo, .li, .md, .vn). The FBI has sought the operator’s identity via a subpoena to registrar Tucows.
+          </div>
+          <a href="https://arstechnica.com/tech-policy/2026/02/wikipedia-bans-archive-today-after-site-executed-ddos-and-altered-web-captures/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey a largely critical view of Archive.today, focusing on allegations of coordinated DDoS attacks, retroactive content alteration, opaque administration, and potential doxxing, which raise doubts about the service’s trustworthiness and authenticity. Users also discuss technical curiosity about how the site bypasses paywalls and request detailed explanations. Simultaneously, several remarks acknowledge its practical value, especially for hard‑to‑archive material, and suggest self‑hosted or alternative services such as ArchiveBox, Perma.cc, or a Wikimedia‑run solution. Overall, sentiment skews skeptical, calling for transparency, better alternatives, and policy reconsiderations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47092006" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openscan.eu/pages/scan-gallery" target="_blank">OpenScan</a>
+        </h2>
+        <span class="article-meta">
+          101 points • by joebig • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenScan provides affordable, open‑source 3D scanners built around a community‑driven platform. The system integrates photogrammetry techniques with modular hardware components, allowing users to assemble and customize scanners to suit specific needs. Targeted at a spectrum from hobbyists to professional users, the project supplies the tools and documentation required to capture high‑quality 3D models. By publishing designs and software openly, OpenScan enables worldwide participation, encouraging contributions, improvements, and shared best practices. The accessible nature of the scanners supports applications in digital preservation, cultural heritage documentation, product design, and other creative or technical fields. Overall, OpenScan’s aim is to democratize 3D scanning technology, reducing cost barriers while fostering an ecosystem that advances digital creation and archival processes.
+          </div>
+          <a href="https://openscan.eu/pages/scan-gallery" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the potential of high‑resolution DSLR macro photography, such as a Canon R5 ii with a 100 mm f/1.4 macro lens, to produce detailed 3D models, acknowledging depth‑of‑field challenges. There is interest in exploring affordable 3D‑scanning solutions for small objects like Japanese souvenir handicrafts, with specific attention to the OpenScan system’s €203 price point and whether comparable alternatives exist in that budget range.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47093724" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
