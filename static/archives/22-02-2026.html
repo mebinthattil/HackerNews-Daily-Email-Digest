@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://boristane.com/blog/how-i-use-claude-code/" target="_blank">How I use Claude Code: Separation of planning and execution</a>
+        </h2>
+        <span class="article-meta">
+          166 points • by vinhnx • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author’s workflow for Claude Code consists of four disciplined phases:
+
+- **Research** – Prompt Claude to read relevant code deeply and generate a detailed `research.md` report saved as a persistent markdown file. The report is reviewed manually to verify understanding before any planning.
+
+- **Planning** – Using the verified research, request a comprehensive `plan.md` that includes explanations, code snippets, file paths, and trade‑offs. The plan is edited locally with inline notes that correct assumptions, add constraints, or provide domain knowledge.
+
+- **Annotation Cycle** – Send the annotated plan back to Claude repeatedly (1–6 times) with a “don’t implement yet” guard until the document satisfies the developer. Then request a granular todo list within the plan.
+
+- **Implementation** – Issue a single “implement it all” prompt that directs Claude to execute every task, mark completed items in the plan, avoid unnecessary comments, enforce strict typing, and continuously run type‑checks. The developer provides terse corrections during execution and retains final control over scope and architectural decisions.
+
+The process relies on persistent markdown artifacts to maintain context, isolates planning from coding, and keeps the developer in the decision‑making loop.
+          </div>
+          <a href="https://boristane.com/blog/how-i-use-claude-code/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that explicit, multi‑stage planning and annotation significantly improve LLM‑driven code generation, with many users citing success using detailed prompts, spec files, ticket‑style documents, and tools such as Superpowers, Speckit, OpenSpec, and custom PCL lists. Benefits are linked to newer models like Claude Opus that handle larger token budgets, while token limits, costs, and workflow overhead are repeatedly noted as constraints. Skepticism remains about the extra effort compared to manual coding, but overall the community favors structured, lean‑context workflows despite the need to balance productivity and expense.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47106686" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Leading-AI-IO/palantir-ontology-strategy" target="_blank">Palantir&#39;s secret weapon isn&#39;t AI – it&#39;s Ontology. An open-source deep dive</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by leading-AI • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository Leading‑AI‑IO/palantir-ontology-strategy hosts an open‑source book that explains the core “ontology” concept of Palantir Foundry, detailing both the strategic rationale and concrete implementation practices. The project is presented as a comprehensive guide to the data‑platform’s foundational model, targeting developers and architects who need to understand how Palantir structures, manages, and operationalizes metadata and relationships within its ecosystem. All content is released under a Creative Commons Attribution 4.0 (CC BY 4.0) license, permitting reuse with attribution. The description includes Japanese text, indicating bilingual or Japan‑focused material. The page currently shows a “You can’t perform that action at this time” notice, suggesting limited access or a temporary restriction on repository actions.
+          </div>
+          <a href="https://github.com/Leading-AI-IO/palantir-ontology-strategy" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a generally skeptical view of the project, characterizing its approach as overly simplistic and merely repackaging familiar database concepts such as views, materialized views, UDFs, and stored procedures under corporate terminology. The notion of modeling data with “nouns” and “verbs” is described as naïve compared to more established symbolic frameworks like OWL. Additionally, there is reference to a significant stock decline since the announcement, suggesting disappointment with the initiative’s perceived substance and impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47107512" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/xaskasdf/ntransformer" target="_blank">Show HN: Llama 3.1 70B on a single RTX 3090 via NVMe-to-GPU bypassing the CPU</a>
+        </h2>
+        <span class="article-meta">
+          122 points • by xaskasdf • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository xaskasdf/ntransformer hosts a high‑efficiency inference engine for large language models (LLMs), implemented in C++ with CUDA acceleration. Its primary claim is the capability to execute the Llama 70‑billion‑parameter model on a single Nvidia RTX 3090 GPU, indicating optimized memory handling and performance for very large transformer networks. The page includes placeholder messages indicating that certain actions are unavailable and displays two image placeholders with alt texts referencing the usernames @xaskasdf and @claude. No additional documentation, code examples, benchmarks, or usage instructions are provided in the extracted content.
+          </div>
+          <a href="https://github.com/xaskasdf/ntransformer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments explore using GPU‑direct pathways to move data from storage to GPU memory, including speculative ideas like treating M.2 as DRAM and leveraging NVMe for on‑the‑fly model paging. Participants note that low token throughput limits interactivity, favoring smaller, well‑quantized models for better latency‑quality balance, and anticipate model‑level compression becoming a primary research focus to broaden AI accessibility. There is interest in multi‑tier memory hierarchies, new bandwidth‑oriented silicon, and APIs such as DirectX or PCI‑P2P that could streamline these approaches.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47104667" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.sambent.com/a-botnet-accidentally-destroyed-i2p-the-full-story/" target="_blank">A Botnet Accidentally Destroyed I2P</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by Cider9986 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            On 3 Feb 2026 the I2P anonymity network suffered a massive Sybil attack: ≈700 000 hostile nodes were introduced, overwhelming its normal 15‑20 k active participants (≈39 : 1 ratio). Similar attacks occurred each February in 2023 and 2024 via malicious floodfill routers, but those remained unattributed. Investigation linked the 2026 surge to the Kimwolf IoT botnet, which had infected millions of devices (streaming boxes, consumer routers) after a record‑setting 31.4 Tbps DDoS in Dec 2025. Botnet operators disclosed on Discord that the disruption was accidental; they were repurposing I2P as a backup command‑and‑control layer after researchers dismantled >550 of their primary C2 servers. I2P’s developers released version 2.11.0 six days later, adding hybrid ML‑KEM + X25519 post‑quantum encryption (enabled by default), SAMv3 API upgrades, and additional Sybil‑mitigation and infrastructure improvements.
+          </div>
+          <a href="https://www.sambent.com/a-botnet-accidentally-destroyed-i2p-the-full-story/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects uncertainty and a demand for clearer context surrounding the I2P botnet incident, with participants questioning the completeness of the headline coverage and seeking more in‑depth reporting. Common concerns include the reported pattern of state‑sponsored attacks, the mechanisms enabling large botnets to communicate through platforms like Discord, and why such servers remain permissible, indicating overall confusion and a desire for additional technical and policy explanations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47106985" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/doi/10.1126/science.adq7188" target="_blank">Evidence of the bouba-kiki effect in naïve baby chicks</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by suddenlybananas • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.science.org/doi/10.1126/science.adq7188" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express cautious skepticism toward the findings, questioning whether the observed sound‑shape associations are merely reducible to basic acoustic properties such as fricatives and stops. Several remarks draw parallels to training cues in dog behavior and propose that the brain’s cross‑modal encoding could extend to musical or non‑speech sounds. There is curiosity about methodological details like sample size, alongside light‑hearted jokes about universal translators and exaggerated praise. Overall, the tone is inquisitive and critical, seeking clarification and broader context rather than accepting the results outright.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47105198" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.harudagondi.space/blog/parse-dont-validate-and-type-driven-design-in-rust/" target="_blank">Parse, Don&#39;t Validate and Type-Driven Design in Rust</a>
+        </h2>
+        <span class="article-meta">
+          135 points • by todsacerdoti • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post explains the “parse‑don’t‑validate” pattern in Rust, advocating that invariants be encoded at the type level rather than checked at runtime. Using division as a running example, it shows how a plain `fn divide(a: i32, b: i32) -> i32` can panic on zero, while a fallible version returning `Option<f32>` merely signals failure. The author then introduces newtype wrappers—e.g., `NonZeroF32` and `NonEmptyVec<T>`—whose private fields force construction through fallible constructors (`NonZeroF32::new`, `NonEmptyVec::try_from`). Once created, these types guarantee the invariant (non‑zero, non‑empty) and can be used directly in functions, eliminating repeated runtime checks and allowing the compiler to enforce correctness. The article contrasts weakening return types (Option/Result) with strengthening parameter types, demonstrating reduced boilerplate, better refactor safety, and potential performance gains. It also outlines how these wrappers integrate with common Rust APIs (e.g., `Result`, `Box<dyn Error>`).
+          </div>
+          <a href="https://www.harudagondi.space/blog/parse-dont-validate-and-type-driven-design-in-rust/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion acknowledges the value of “parse, don’t validate” when invariants can be encoded directly in types, citing examples such as non‑empty vectors and dependent typing, but criticizes the article’s division‑by‑zero case as poorly chosen and impractical for many languages. Many points argue that validation remains necessary for complex constraints and that excessive newtype abstractions can add unnecessary complexity, especially in Rust. Overall, the sentiment is mixed: the principle is useful when feasible, yet over‑reliance on type‑level guarantees is seen as cumbersome.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47103931" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.deadlanguagesociety.com/p/how-far-back-in-time-understand-english" target="_blank">How far back in time can you understand English?</a>
+        </h2>
+        <span class="article-meta">
+          387 points • by spzb • 70 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The piece presents a fictional travel blog that retroactively adopts English styles from successive centuries, compressing roughly a thousand years of the language into a single narrative. Early sections use modern, chatty prose; later passages shift to Georgian, Elizabethan, medieval, and Old English registers, featuring period‑specific spelling, typography (long s, thorn þ, yogh ȝ, wynn ƿ), and grammar (inflections, freer word order, pronoun shifts such as thou/thee). The author, Colin Gorrie (PhD linguist), explains that written English stabilized after the mid‑1700s, with standardized spelling and minimal grammatical change, while earlier stages show variable spelling, vowel‑letter interchange (u/v), and loss of Latin‑derived vocabulary. He outlines how Old English’s inflectional system gave way to Middle English’s reduced endings and stricter syntax, and how typographic conventions like the long s vanished by the early 19th century. The narrative culminates in a medieval‑style tale of a mysterious “Master” and a heroine Ælfgifu, illustrating the increasing incomprehensibility of pre‑1300 English. The text also promotes Gorrie’s “Dead Language Society” newsletter, offering historical reading guides and book clubs.
+          </div>
+          <a href="https://www.deadlanguagesociety.com/p/how-far-back-in-time-understand-english" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong interest in tracing English back through its written forms, praising resources such as the History of English Podcast, audio renditions, and instructional books while noting that comprehension generally declines sharply around the 1300‑1400 period due to orthographic shifts, unfamiliar characters, and vocabulary change. Readers report varying personal thresholds—some managing to 1300 with effort, others stopping at 1200—and compare the experience to other languages and historical texts. There is consensus that language evolves rapidly, prompting curiosity about future intelligibility and the impact of modern communication habits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47061614" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tnm/zclaw" target="_blank">zclaw: personal AI assistant in under 888 KB, running on an ESP32</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by tosh • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub repository **tnm/zclaw** offers a personal AI assistant designed to run on ESP32 hardware. The full package is 888 KiB, with the core application code compressed to roughly 25 KB. Functionality includes direct control of GPIO pins, scheduling via cron, and memory management features, enabling integration of AI capabilities into embedded projects. The repository page indicates that the action to view additional content is currently unavailable. An accompanying image depicts a lobster soldering a Seeed Studio XIAO ESP32‑C3, illustrating the hardware context. The project emphasizes minimal code size while providing extensive ESP32 interfacing options.
+          </div>
+          <a href="https://github.com/tnm/zclaw" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed reaction, combining skepticism about the novelty of LLM‑driven agents with interest in practical, low‑resource implementations. Several contributors highlight concerns over safety, code simplicity, and the hype surrounding “OpenClaw,” while others explore using ESP32 hardware, local models, and minimal assistants for IoT or creative projects. There is curiosity about real‑world use cases and workflow integration, alongside criticism that similar agent concepts already existed, and a desire for clearer, more secure, locally hosted solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47100232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://phys.org/news/2026-02-scientists-tectonic-moon.html" target="_blank">Scientists discover recent tectonic activity on the moon</a>
+        </h2>
+        <span class="article-meta">
+          14 points • by bookmtn • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://phys.org/news/2026-02-scientists-tectonic-moon.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47051709" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.openslop.ai/blog/why-every-ai-video-tool-feels-broken" target="_blank">Why every AI video tool feels broke</a>
+        </h2>
+        <span class="article-meta">
+          5 points • by umairnadeem123 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            AI video platforms such as OpenArt, Higgsfield, AutoShorts, StoryShort, Vimerse, Vadoo, Hypernatural, and Freepik promise quick, high‑quality output but consistently deliver generic, template‑driven videos. Their primary issues are: (1) uniform treatment of diverse content types, limiting pacing, visuals, and audio; (2) abstraction of image‑generation parameters (seeds, aspect ratios, style references, model choice), resulting in an oversaturated, easily recognizable AI aesthetic; (3) inability to edit individual scenes without regenerating the entire video; and (4) cost inefficiency, with all‑in‑one services charging $5–$20 per video versus direct API pipelines costing under $2. Creators therefore construct ad‑hoc pipelines—Python scripts, Make.com/n8n flows, Zapier‑linked Google Sheets—to retain control over model selection, animation style, and budgeting. The market split leaves a “missing middle”: expensive, low‑quality all‑in‑one tools on the left and raw API access requiring programming expertise on the right. OpenSlop aims to fill this gap with an open‑source, free pipeline that provides granular model control, scene‑level editing, and transparent costing, targeting creators who lack deep coding skills.
+          </div>
+          <a href="https://www.openslop.ai/blog/why-every-ai-video-tool-feels-broken" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments note that many practitioners of generative AI rely on the ComfyUI platform, crediting it with significantly higher productivity while emphasizing that comparable skill levels are still required. At the same time, the post is criticized for appearing to serve as self‑promotion, with the author’s affiliation to the service highlighted as a conflict of interest. Additional observations point out an apparent irony in the naming of a video generator as “openslop,” suggesting the branding may be unintentionally contradictory.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47107367" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
