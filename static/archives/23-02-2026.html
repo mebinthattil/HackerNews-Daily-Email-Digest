@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 23, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hawksley.org/2026/02/17/timeframe.html" target="_blank">I built Timeframe, our family e-paper dashboard</a>
+        </h2>
+        <span class="article-meta">
+          710 points • by saeedesmaili • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Timeframe is a family e‑paper dashboard that consolidates calendar, weather, and smart‑home data. Initial attempts used a “Magic Mirror” LCD and jail‑broken Kindles, rendering PNGs via a Ruby on Rails app that fetched Google Calendar and Dark Sky data and sent images to devices. Reliability issues led to Visionect e‑paper panels (6”, 10”, 13”) driven by a local Docker instance on a Raspberry Pi; images were generated with IMGKit and updated every five minutes. A 2021 pivot adopted a 25.3″ Boox Mira Pro, enabling real‑time HDMI output and richer information (clock, Sonos track, precipitation). This shift exposed backend limits, prompting a rewrite that removed the Rails database/Redis, replaced image generation with URL rendering, and migrated data sources to Home Assistant (HA). HA now supplies calendar, weather, and sensor states, allowing template sensors to drive display content without code deployments. Current setup shows only active alerts (e.g., open doors, laundry done), treating a blank screen as a “healthy” house. Ongoing work focuses on hardening the system for deployment, fully integrating HA, and reducing hardware cost/complexity for broader adoption.
+          </div>
+          <a href="https://hawksley.org/2026/02/17/timeframe.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show enthusiasm for e‑ink information panels because they are low‑power, non‑glare and can serve as family dashboards, helping organize chores and calendars without adding screen glare. At the same time, many note that the price of large commercial displays (around $2 k) is prohibitive, prompting suggestions for cheaper alternatives such as Inkplate, Waveshare panels, repurposed e‑readers, or DIY Raspberry Pi builds. Practical concerns include manual data entry, maintenance of services, ghosting issues, and whether the display adds value beyond existing phones or paper methods.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47113728" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lyra.kids/" target="_blank">Show HN: Lyra Kids – I built an AI bedtime storyteller for my daughters</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by Kael1 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Lyra.kids is presented with the tagline “Where stars tell stories.” The page includes a FAQ section (contents not provided) and an images area featuring a logo image described only by alt text “Logo” and title “Logo.”
+          </div>
+          <a href="https://lyra.kids/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express cautious skepticism toward AI‑generated children’s content, citing privacy concerns and discomfort with realistic images, preferring more stylized, cartoon‑like visuals. Many stress the importance of human‑read storytelling and reading aloud, warning that low‑quality AI output could hinder literacy and imagination. Some acknowledge the novelty and potential of AI‑assisted tools but note technical glitches and question market viability, seeking advice on differentiating from free prompt‑based alternatives. Overall sentiment leans toward wariness balanced with limited optimism for thoughtful implementation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47117429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://warnfirehose.com" target="_blank">Show HN: WARN Firehose – Every US layoff notice in one searchable database</a>
+        </h2>
+        <span class="article-meta">
+          85 points • by sendkamal • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            WARN Firehose aggregates every U.S. WARN Act mass‑layoff notice into a unified, searchable database. It continuously scrapes data from all 50 states—handling PDFs, Excel files, and HTML tables—and normalizes over 109 000 notices affecting more than 12.9 million workers, with records dating back to 1998. The platform offers:  
+
+- Daily‑updated data via automated pipelines.  
+- A full REST API with filtering, pagination, sorting, and OpenAPI documentation.  
+- Bulk export options in CSV, JSON, JSON‑LD (schema.org), Parquet, and NDJSON for machine consumption and AI integration.  
+- Interactive visualizations (trend charts, state heatmaps, company rankings, YoY comparisons).  
+
+Target users include journalists, investors, recruiters, economists, workforce boards, and real‑estate analysts, who can monitor layoffs, assess economic signals, locate displaced talent, and model labor‑market trends. Access begins by obtaining an API key, after which users can query the dataset or download bulk files for analysis in R, Python, or ML pipelines.
+          </div>
+          <a href="https://warnfirehose.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed sentiment, combining appreciation for the site’s concept with substantial criticism of data reliability and user experience. Reviewers note inconsistencies between reported employee counts and visualizations, missing or erroneous entries, and broken links that undermine confidence in data integrity. Concerns focus on uneven WARN filing compliance, gaps that limit quantitative strategies, and unclear notice dates, while some users request better filtering, clearer processing explanations, and more comprehensive coverage. Overall, interest in the dataset’s potential is tempered by perceived quality and usability shortcomings.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47116026" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://joinloops.org/" target="_blank">Loops is a federated, open-source TikTok</a>
+        </h2>
+        <span class="article-meta">
+          280 points • by Gooblebrai • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Loops is an open‑source short‑video platform designed as an ethical alternative to commercial services. It emphasizes user‑centric privacy, avoiding invasive tracking, data mining, and advertising‑driven metrics. Governance is community‑based, with radical transparency in development and feature decisions. Core functionalities include vertical video recording, For You and Following feeds, threaded comments, engagement buttons with counts, and hashtag‑based search. The app integrates with the fediverse, allowing accounts to connect to Mastodon and Pixelfed. Visual elements referenced (logo, app preview, camera interface, notifications) illustrate the user interface but contain no additional technical details. The overall focus is on providing creators, visual artists, and general users a platform where content sharing is governed by privacy and community principles rather than commercial exploitation.
+          </div>
+          <a href="https://joinloops.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed but generally skeptical view of federated short‑form video platforms. Many point to the underlying algorithmic addiction and branding issues of existing services, questioning whether decentralisation can meaningfully change content quality, moderation, or revenue models. Practical concerns dominate, including clunky user interfaces, lack of essential features, difficulty attracting mainstream audiences, and uncertain financial sustainability. A minority express cautious optimism about open‑source alternatives and the removal of corporate branding, yet overall consensus doubts the viability and societal benefit of another TikTok‑like fediverse service.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47113618" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cia-factbook-archive.fly.dev/" target="_blank">Show HN: CIA World Factbook Archive (1990–2025), searchable and exportable</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by MilkMp • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The CIA World Factbook Archive offers a comprehensive analytics platform featuring: a Regional Dashboard with COCOM region maps and capital markers; a Timeline Map showing animated choropleths across 36 years; Communications Analysis for internet, mobile, and broadband penetration; Map Compare for side‑by‑side year comparisons; COCOM Region Detail with country‑level KPIs; Intelligence Dossier providing 203 country assessments; Global Rankings sortable by any indicator; Global Trends displaying worldwide indicator trajectories; Compare Countries for direct indicator juxtaposition; Field Explorer for browsing all data fields and coverage stats; Change Detection highlighting year‑over‑year field changes; Dissolved States cataloguing historical entities; Trade Networks visualizing global trade relationships; Organization Networks mapping international organization memberships; Query Builder for custom analytical queries; and Text Diff for side‑by‑side year comparisons with highlighted changes. The interface includes visual tools such as library, country profile, full‑text search, field time series, quiz, export, and various region‑specific maps.
+          </div>
+          <a href="https://cia-factbook-archive.fly.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall appreciation for the archived fact‑book service, noting its usefulness, thoroughness, and the value of the timeline feature while praising the effort behind it. Several users request enhancements such as bulk downloading, additional features, and clearer copyright information. Multiple bug reports are mentioned, including incorrect links and chart‑normalization errors, and some users report slow loading times across devices and locations. A few remarks reflect nostalgia for the original site and concern about preserving web resources.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47114530" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://discuss.ai.google.dev/t/account-restricted-without-warning-google-ai-ultra-oauth-via-openclaw/122778" target="_blank">Google restricting Google AI Pro/Ultra subscribers for using OpenClaw</a>
+        </h2>
+        <span class="article-meta">
+          353 points • by srigi • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - A user’s Google AI Ultra (Antigravity) account was suspended for three days without prior warning after connecting Gemini models via the OpenClaw OAuth integration.  
+- The user, paying $249 / month, was unable to log in, received a 403 “service disabled” error, and reported the issue to multiple support channels (Google One, Google Cloud, Antigravity feedback).  
+- Internal investigation confirmed the suspension resulted from using credentials in the third‑party tool “OpenClaw,” which violates Google’s Terms of Service by employing Antigravity servers for a non‑Antigravity product. Google’s policy applies a zero‑tolerance stance, and the suspension is not reversible.  
+- Affected users report similar bans, lack of response from support, and continued billing despite inaccessible services. Some describe the support process as a “catch‑22,” involving redirects between Google One, Cloud, and Android developer teams.  
+- Workarounds discussed include creating new accounts, migrating data, and considering alternative AI platforms (Claude, Codex). No official resolution or timeline has been provided.
+          </div>
+          <a href="https://discuss.ai.google.dev/t/account-restricted-without-warning-google-ai-ultra-oauth-via-openclaw/122778" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on frustration with Google’s immediate, non‑appealable bans on paid accounts that used third‑party tools to access subsidized tokens, describing the enforcement as draconian and support as ineffective. While many acknowledge the economic need to separate consumer‑grade subscriptions from programmatic API usage, they criticize the lack of warnings, transparent policies, and graduated responses. Comparisons to Anthropic’s more communicative approach are common, and users suggest using proper API tiers, alternative providers, or open‑source solutions to avoid similar issues. Overall sentiment is disappointment mixed with a call for clearer guidance and fairer handling.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47115805" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://susam.net/attention-media-vs-social-networks.html" target="_blank">Attention Media ≠ Social Networks</a>
+        </h2>
+        <span class="article-meta">
+          562 points • by susam • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Early web‑based social networks (circa 2000–2012) functioned as genuine platforms: users followed known contacts, received meaningful notifications, and saw updates primarily from those contacts.  
+- Between 2012‑2016, major design changes altered this model: infinite scrolling removed the page’s end, and notification systems began surfacing low‑relevance content, serving platform engagement rather than user interests.  
+- Over time, timelines increasingly displayed content from random strangers, turning the services into “attention media” that prioritize user attention capture and monetization over social interaction.  
+- The author discontinued use of mainstream platforms due to these shifts.  
+- Mastodon, a federated micro‑blogging network, is presented as a contrast: it supports a limited, user‑curated follow list, delivers updates only from chosen accounts, and lacks manipulative notifications, resulting in a calmer, more predictable feed that resembles the original intent of social networking.
+          </div>
+          <a href="https://susam.net/attention-media-vs-social-networks.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on a view that modern platforms have shifted from genuine social networking toward algorithm‑driven “attention media,” mixing friends’ posts with content from strangers, ads, and recommendation loops that many find intrusive, addictive, and privacy‑risking. Users express nostalgia for early, friend‑centric feeds and desire chronological or manually curated timelines, ad‑free experiences, and greater control over data. Alternatives such as Mastodon, Bluesky, Discord, or private shared albums are praised for offering more user‑controlled environments, though some note their limited activity or potential for similar commercialization over time.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47110515" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.lesswrong.com/posts/8m6AM5qtPMjgTkEeD/my-journey-to-the-microwave-alternate-timeline" target="_blank">My journey to the microwave alternate timeline</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by jstanley • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post explores an alternate technological timeline in which microwave ovens replace conventional stovetops, using Marie T. Smith’s 1985 cookbook *Microwave Cooking for One* as a primary source. It outlines the historical context: microwaves were novel in the mid‑1980s, prompting speculation about food‑industry adaptation and a vision of single‑person cooking. Smith’s “microwave maximalist” approach claims any edible item can be prepared in a microwave, including achieving Maillard browning with specialized cookware such as Corning’s pyroceram “browning skillet,” whose tin‑oxide base absorbs microwaves and heats above boiling point. The author experimentally tests recipes—steak, onions, sunny‑side‑up and poached eggs—reporting mixed success, noting precise timing, wattage, and vessel geometry are critical; some attempts (e.g., poached egg) caused explosions. The narrative attributes the mainstream relegation of microwaves to reheating to cultural distrust, low‑status perception, and lack of visual cooking cues, despite their potential for faster, energy‑efficient, single‑serve meals. Scaling microwave cooking to multiple portions is described as computationally intractable (NP‑hard).
+          </div>
+          <a href="https://www.lesswrong.com/posts/8m6AM5qtPMjgTkEeD/my-journey-to-the-microwave-alternate-timeline" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47067031" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/quailyquaily/aqua" target="_blank">Aqua: A CLI message tool for AI agents</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by lyricat • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository “aqua” (user qualylyquaily) is presented as a command‑line interface (CLI) messaging tool for AI agents. No additional information about its code, features, or documentation is available; attempts to view the page returned the error message “You can’t perform that action at this time.”
+          </div>
+          <a href="https://github.com/quailyquaily/aqua" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects interest in exploring a RabbitMQ‑style architecture for coordinating agents, proposing that each agent could have its own subscription topic while also subscribing to additional topics relevant to its function. It conveys curiosity about how such a system would be structured and operate, noting potential benefits such as decoupled communication and dynamic topic management.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47117169" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.feld.me/posts/2026/02/using-new-bridges-freebsd-15/" target="_blank">Using the new bridges of FreeBSD 15</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by vermaden • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            FreeBSD 15 introduces a new bridge driver that natively supports VLAN tagging and deprecates layer‑3 addresses on bridge members (controlled by net.link.bridge.member_ifaddrs, to be removed in 16.0). The key changes are:
+
+- A single bridge can now handle multiple tagged/untagged VLANs per interface via the vlanfilter flag, eliminating the need for separate per‑VLAN bridges.
+- Configuration is reduced to one ifconfig statement, e.g. `ifconfig bridge0 "vlanfilter addm ix1 tagged 2,3,128"`.
+- Adding members without vlanfilter allows only untagged VLANs; attempting to add tagged VLANs yields “VLAN filtering not enabled”.
+
+For VNET jails, the older jib script is superseded by stable epair(4) interfaces, which now generate persistent MACs via net.link.epair.ether_gen_addr. A custom script creates an epair, disables IPv6 link‑local, and attaches the “e0a” end to the bridge with the appropriate untagged VLAN.
+
+Bhyve VMs lack native support for the new bridge+VLAN model; the author uses manually created tap interfaces added to the bridge via rc.local and a manual switch definition. Stable MACs must be set when the tap device is created. This approach works but is acknowledged as a temporary workaround.
+          </div>
+          <a href="https://blog.feld.me/posts/2026/02/using-new-bridges-freebsd-15/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects heightened interest in recent FreeBSD developments, with participants noting an influx of related posts and expressing curiosity about any new releases or features. There is widespread confusion over the complex abstractions of jail, iojail, Sylve, Bastille, and bhyve, prompting calls for clearer, mutually consistent documentation. Technical questions arise regarding performance‑related flags such as TSO and LRO, while overall sentiment remains supportive, welcoming progress on the BSD front despite current difficulty in understanding the systems.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47115575" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
