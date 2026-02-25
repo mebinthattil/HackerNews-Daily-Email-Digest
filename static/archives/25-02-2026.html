@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.calebleak.com/posts/dog-game/" target="_blank">I&#39;m helping my dog vibe code games</a>
+        </h2>
+        <span class="article-meta">
+          680 points • by cleak • 97 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author built a system that lets his 9‑lb cavapoo, Momo, generate playable Godot 4.6 games by typing on a Bluetooth keyboard. Keystrokes are sent from the keyboard to a Raspberry Pi 5, broadcast via UDP, and captured by a Rust application (“DogKeyboard”) that filters special keys and forwards the text to Claude Code. When a sufficient input length is reached, DogKeyboard triggers an Aqara C1 smart pet feeder (via Zigbee) to dispense a treat, while a chime signals Claude’s readiness.  
+
+A custom prompt tells Claude to treat any random input as cryptic design instructions, and a checklist of minimum game features (audio, controls, player character, enemy) improves output. Automated feedback includes: screenshot capture, scripted input playback for QA, scene and shader linters, and an input‑action mapper that edits Godot’s .tscn and project files.  
+
+The hardware stack uses a Logitech Pebble Keys 2 keyboard, Raspberry Pi for networking and Zigbee control, and the DogKeyboard app for orchestration. Over weeks, Momo produced several complete games (e.g., “Swamp Snacker,” “Octogroove,” “Quasar Saz”) with 1–2 hour development cycles. The author concludes that robust prompts, guardrails, and automated verification are the primary drivers of AI‑assisted development quality, not the semantic value of the raw input.
+          </div>
+          <a href="https://www.calebleak.com/posts/dog-game/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend humor and satire with genuine interest in the experiment, celebrating the novelty of “dog‑vibe‑coding” while noting that the underlying success stems from the AI’s feedback loop and Godot’s text‑based scene format rather than the animal input. Many find the approach entertaining and see it as a playful illustration of current AI‑assisted development limits, though some express concern that such gimmicks could trivialize human coding roles or mask resource costs. Overall, the discussion is light‑hearted, appreciative of the technical insight, yet cautious about broader implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47139675" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/moonshine-ai/moonshine" target="_blank">Show HN: Moonshine Open-Weights STT models – higher accuracy than WhisperLargev3</a>
+        </h2>
+        <span class="article-meta">
+          144 points • by petewarden • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Moonshine‑AI’s GitHub repository, titled “moonshine‑ai/moonshine: Fast and accurate automatic speech recognition (ASR) for edge devices,” is referenced but the page returns the message “You can’t perform that action at this time,” preventing direct access to its contents. The scraped material lists a series of visual assets identified only by their alt text: a Moonshine Voice logo, a language chart, an architecture diagram labeled “Moonshine Voice Architecture,” and a collection of contributor or author identifiers (e.g., @evmaki, @keveman, @petewarden, @andimarafioti, @guynich, @xenova, @njeffrie, @esadek, @eustlb, @Tialo). No further technical description, code snippets, or documentation is present in the captured text.
+          </div>
+          <a href="https://github.com/moonshine-ai/moonshine" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show cautious optimism about the model’s speed and local‑deployment potential, especially on devices like M1 Macs and 8 GB systems. Reviewers frequently request more detailed streaming metrics—latency, partial‑token stability, and performance on noisy far‑field audio—and compare accuracy and VRAM use against Whisper, Parakeet, and VibeVoice. Several points of criticism recur: limited language coverage, lack of translation and multi‑language handling, sparse licensing information, and installation complexities on platforms such as Raspberry Pi. Interest in browser/JS or WebAssembly support is also noted. Overall sentiment is positive about feasibility but seeks clearer benchmarks and broader feature support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47143755" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://matklad.github.io/2026/02/14/justifying-text-wrap-pretty.html" target="_blank">Justifying Text-Wrap: Pretty</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by surprisetalk • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The report discusses Safari’s recent implementation of `text-wrap: pretty`, which selects line breaks to produce roughly equal‑length lines, and its interaction with `text-align: justify`. Unlike the greedy algorithm historically used in browsers, the “pretty” algorithm employs a dynamic‑programming scoring function (similar to Knuth‑Plass) that targets a width slightly narrower than the paragraph’s maximum to allow both undershoot and overshoot for better balance. When combined with full justification, this systematic undershoot leads to uniformly enlarged inter‑word spaces, making paragraphs look distorted. The author notes that the issue arises only when both properties are applied together; each works acceptably in isolation. They request that WebKit adjust the implementation to prevent excessive whitespace when `text-wrap: pretty` is used alongside `text-align: justify`, preserving the intended aesthetic of justified text.
+          </div>
+          <a href="https://matklad.github.io/2026/02/14/justifying-text-wrap-pretty.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed reactions to the new text‑wrap feature. Several contributors acknowledge the visual improvement of “pretty” justification but point out drawbacks such as overly narrow columns, excessive hyphenation, and reduced readability in certain layouts. There is disagreement over which browsers introduced the feature first, with Chrome cited as earlier than Safari. Many emphasize that hyphenation remains valuable for legibility and that jagged right edges can be preferable in some contexts, while still recognizing the need for robust, bug‑free justification when required.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47077215" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.apple.com/newsroom/2026/02/apple-accelerates-us-manufacturing-with-mac-mini-production/" target="_blank">Mac mini will be made at a new facility in Houston</a>
+        </h2>
+        <span class="article-meta">
+          377 points • by haunter • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple announced that its Houston site will begin domestic production of the Mac mini later this year, expanding a facility that already ships advanced AI servers ahead of schedule. A 20,000‑sq‑ft Advanced Manufacturing Center will open in Houston to train students, supplier employees, and U.S. manufacturers in the same processes used for Apple products. The expansion is part of Apple’s $600 billion U.S. investment, creating thousands of jobs and doubling the Houston campus footprint. Recent milestones include: sourcing over 20 billion U.S.-made chips from 24 factories in 12 states; GlobalWafers’ $4 billion wafer plant in Sherman, Texas, supplying Apple‑directed silicon; Amkor’s $7 billion advanced‑packaging facility in Peoria, Arizona, with Apple as its largest customer; Corning’s Kentucky plant now fully dedicated to iPhone and Apple Watch cover glass; projected purchase of >100 million advanced chips from TSMC’s Arizona fab in 2026; and the Detroit Apple Manufacturing Academy supporting 130+ SMEs with AI, automation, and smart‑manufacturing training.
+          </div>
+          <a href="https://www.apple.com/newsroom/2026/02/apple-accelerates-us-manufacturing-with-mac-mini-production/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions to Apple’s new US assembly facility. Many note the limited scale and question whether it represents a genuine shift away from Chinese supply chains, citing cost, logistics, and past attempts that fell short. Others view it as a positive step for domestic manufacturing and national security, while some are skeptical of political motives, tariff avoidance, or superficial “Made in America” labeling. Questions also arise about flood‑risk location, the nature of the AI servers, and the long‑term impact on production percentages.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47143152" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pi.dev" target="_blank">Pi – a minimal terminal coding harness</a>
+        </h2>
+        <span class="article-meta">
+          187 points • by kristianpaul • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            pi.dev is a minimal, terminal‑based coding harness that can be customized through TypeScript extensions, skills, prompt templates, and themes, distributed as npm or git packages. It supports over 15 AI providers (Anthropic, OpenAI, Google, Azure, Bedrock, Mistral, Groq, Cerebras, xAI, Hugging Face, Kimi, MiniMax, OpenRouter, Ollama, etc.) with API‑key or OAuth authentication, and allows model switching mid‑session via `/model`, Ctrl+L, or Ctrl+P. Sessions are stored as a single tree‑structured file, navigable with `/tree`, exportable to HTML (`/export`) or GitHub Gist (`/share`). Context engineering is handled via customizable system prompts (`SYSTEM.md`), auto‑summarization (compaction), and dynamic extensions that can inject messages, implement RAG, or maintain long‑term memory. Messaging supports steering (`Enter`) and follow‑up (`Alt+Enter`) while the agent runs. Four interaction modes are provided: interactive TUI, print/JSON, RPC (JSON over stdin/stdout), and SDK embedding. Core functionality is intentionally minimal; features such as sub‑agents, plan mode, permission dialogs, to‑dos, or background bash are expected to be added via extensions or third‑party packages.
+          </div>
+          <a href="https://pi.dev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show strong overall enthusiasm for Pi, highlighting its speed, extensibility, modular architecture and suitability as a daily driver, especially when integrated with tools like Emacs or custom GUIs. Users appreciate the transparency and ability to tailor commands, extensions and plans, and many cite successful community forks and lightweight deployments. Critiques focus on missing features such as sub‑agents or plan mode, concerns about cost, sandboxing and security, and mixed impressions of alternative harnesses. The consensus leans toward Pi being a favored, flexible option while noting areas for improvement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47143754" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://laughingmeme.org/2026/02/09/code-has-always-been-the-easy-part.html" target="_blank">Code has always been the easy part</a>
+        </h2>
+        <span class="article-meta">
+          19 points • by Ozzie_osman • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author reflects on Etsy’s early rewrite effort, noting that a pivot to a standardized PHP stack enabled the team to deliver customer‑facing features after two years of stalled development. He argues that the industry has long over‑valued code quality as the primary artifact, while the real value lies in the overall system and the human‑technology interaction that delivers products. This mismatch contributed to ineffective technical hiring practices, such as reliance on white‑board algorithms. The post emphasizes that code has historically been the “easy” part of software creation, a fact now amplified by recent AI coding models (e.g., Claude Code) that drive code‑production costs toward near zero. While acknowledging that technological shifts—web, CI/CD, mobile, ML—have repeatedly forced new team workflows, the author stresses the need to redesign social contracts and incorporate humans rather than exclude them. He expresses cautious skepticism toward AI hype and notes the cultural shift for engineers who derived agency from coding.
+          </div>
+          <a href="https://laughingmeme.org/2026/02/09/code-has-always-been-the-easy-part.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed view of AI’s impact on software development. Many assert that coding is not inherently easy and that high compensation reflects its complexity, while others claim AI has dramatically shortened development cycles, making mistakes more tolerable and prompting a reevaluation of traditional product, sales, and marketing assumptions. A recurring theme is concern that portraying coding as “easy” serves wage‑suppression narratives. Several contributors note that AI reduces both coding and thinking time, though perspectives differ on how this reshapes the profession.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47099476" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.mariannefeng.com/portfolio/kindle/" target="_blank">Hacking an old Kindle to display bus arrival times</a>
+        </h2>
+        <span class="article-meta">
+          186 points • by mengchengfeng • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.mariannefeng.com/portfolio/kindle/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong enthusiasm for repurposing Kindles as low‑power e‑ink dashboards, highlighting Wi‑Fi as the primary energy drain and noting that periodic full‑screen refreshes increase consumption. Contributors share various hacks—cron‑driven scripts, Lua rewrites, Raspberry Pi syncs, and browser‑based RSS readers—to reduce draw and extend battery life to several days, while also acknowledging older devices’ poor charge retention. The community values the simplicity, affordability, and always‑on nature of e‑ink screens for static data displays, contrasting them with LCD alternatives and emphasizing practical implementation details.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47141797" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/yjeanrenaud/yj_nearbyglasses" target="_blank">Nearby Glasses</a>
+        </h2>
+        <span class="article-meta">
+          257 points • by zingerlio • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository yjeanrenaud/yj_nearbyglasses is presented as an Android project designed to detect smart glasses in the user’s vicinity and issue a warning. The GitHub page itself returns a “You can’t perform that action at this time” error, so no source code, readme, or issue tracker is visible in the excerpt. Three images accompany the listing: a primary screenshot of the app’s main interface (“Screenshot Nearby Glasses”), a Google Play badge indicating availability for download (“Get It On Google Play”), and a screenshot of the app’s settings screen (“Screenshot Nearby Glasses: Settings”). No additional technical details, implementation notes, or usage instructions are provided in the captured content.
+          </div>
+          <a href="https://github.com/yjeanrenaud/yj_nearbyglasses" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express a mixed view of smart‑glass detection tools. Users note technical problems, limited device support and a high false‑positive rate, while some appreciate the concept for personal safety and low‑vision assistance. Many raise privacy and legal concerns, warning that widespread adoption could turn bystanders into subjects of surveillance. Criticism also targets the reliability and repairability of current smart‑glass hardware, especially Meta models, and a demand for broader platform support and stronger privacy safeguards. Overall sentiment balances cautious interest with significant apprehension.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47140042" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.thebignewsletter.com/p/amazon-busted-for-widespread-price" target="_blank">Amazon Busted for Widespread Scheme to Inflate Prices Across the Economy</a>
+        </h2>
+        <span class="article-meta">
+          150 points • by toomuchtodo • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.thebignewsletter.com/p/amazon-busted-for-widespread-price" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong criticism of Amazon’s alleged price‑fixing and vendor‑price‑matching policies, viewing them as anti‑competitive and harmful to sellers and consumers. Many note that legal action is delayed and costly, limiting its effectiveness, while some point out that manufacturers often circumvent restrictions, questioning the actual impact on prices. There is a broader call for comprehensive regulation rather than targeting a single company, coupled with frustration over perceived corporate greed and personal experiences prompting shoppers to shift to alternative retailers.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47145907" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://wordglyph.xyz/one-piece-at-a-time" target="_blank">I pitched a roller coaster to Disneyland at age 10 in 1978</a>
+        </h2>
+        <span class="article-meta">
+          403 points • by wordglyph • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In 1978, 10‑year‑old Kevin Glikmann rode Space Mountain at Disneyland and conceived a looping roller coaster, later sketching a four‑loop design he called the “Quadrupuler.” Using balsa wood, Styrofoam board, and heat‑bent plastic strips, he built a scale model with four loops and documented it with Polaroid photos. He mailed the photos and a brief letter to WED Enterprises (Walter Elias Disney’s Imagineering division). In April 1979 Tom Fitzgerald, a new Imagineer, replied, acknowledging the model and noting Disney’s upcoming Frontierland coaster, Big Thunder Mountain Railroad, while thanking Kevin for his interest. The correspondence reinforced Kevin’s confidence; he later modified a Rubik’s Cube with a bandsaw, submitted the prototype to Ideal Toy Company (which declined unsolicited ideas), and pursued additional patented board‑game inventions. He now works as an actor, citing the early Disney validation as a source of resilience and continued inventive activity.
+          </div>
+          <a href="https://wordglyph.xyz/one-piece-at-a-time" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey nostalgic enthusiasm for the tradition of children sending ideas to companies and receiving personal replies, which many recall as motivating and memorable. Several anecdotes highlight positive, encouraging responses from corporations, while others note generic or absent replies, underscoring a mixed experience. Contributors agree that such direct mail fostered creativity, confidence, and a sense of validation, and they question whether similar opportunities persist in the digital age. Parental support and the novelty of handwritten pitches are repeatedly praised as key factors in these experiences.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47136604" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
