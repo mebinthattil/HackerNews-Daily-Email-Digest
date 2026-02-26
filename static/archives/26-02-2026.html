@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 26, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://spectrum.ieee.org/jimi-hendrix-systems-engineer" target="_blank">Jimi Hendrix was a systems engineer</a>
+        </h2>
+        <span class="article-meta">
+          335 points • by tintinnabula • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Jimi Hendrix’s 3 Feb 1967 “Purple Haze” session used a custom Octavia pedal (Roger Mayer) alongside a Fuzz Face, wah‑wah, Marshall 100‑W amp and studio acoustics. The author reproduced the full analog signal chain in ngspice, modeling guitar pickups (6 kΩ, 2.5 H) and cable capacitance, and simulated both germanium and silicon Fuzz Face variants. Key findings: • Fuzz Face is a low‑impedance (≈20 kΩ) two‑transistor feedback amp that turns sinusoidal input into near‑square‑wave fuzz; reducing guitar volume restores a sinusoid (“cleanup effect”). • Octavia’s rectifier flips waveform troughs, effectively doubling frequency content and adding a bright octave‑up harmonic. • Wah‑wah functions as a sweepable band‑pass filter (≈300 Hz → 2 kHz), producing vowel‑like articulations. • Uni‑Vibe cascades four phase‑shift sections modulated by photoresistors, adding low‑frequency motion. • Driving the Marshall near saturation and exploiting room‑coupled acoustic feedback extends sustain and creates controllable oscillation modes. All circuit schematics, ngspice files, and Python scripts are publicly available on GitHub (nahorov/Hendrix-Systems-Lab). The work reframes Hendrix’s tone as an engineered, reproducible system.
+          </div>
+          <a href="https://spectrum.ieee.org/jimi-hendrix-systems-engineer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show generally positive appreciation for the article’s exploration of Hendrix’s use of feedback and the interplay between engineering and musical expression, with several readers highlighting historical examples, modern effects, and the instrument’s expressive potential. At the same time, a notable minority point out factual inconsistencies, such as mismatched diagrams, mislabeled images, and unclear explanations of technical symbols, and some extend the discussion to broader topics like curriculum relevance and other artists’ experimental gear. Overall, the feedback balances admiration for the content with calls for greater technical precision.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47157224" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.disruptionbanking.com/2026/02/24/jane-street-hit-with-terra-40b-insider-trading-suit/" target="_blank">Jane Street Hit with Terra $40B Insider Trading Suit</a>
+        </h2>
+        <span class="article-meta">
+          111 points • by shin_lao • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A lawsuit filed on February 23 in the U.S. District Court for the Southern District of New York (Case 1:26‑cv‑1504) accuses Jane Street Group LLC of insider trading and market manipulation related to the May 2022 TerraUSD (UST) collapse that erased about $40 billion in value. The complaint, brought by Todd R. Snyder, the court‑appointed administrator of Terraform Labs, alleges that after Terraform withdrew $150 million of UST from the Curve 3‑pool without public notice, a wallet linked to Jane Street withdrew an additional $85 million within ten minutes—a move described as Jane Street’s largest single swap and a catalyst for the loss of confidence in UST. The suit claims Jane Street obtained material non‑public information via a back‑channel created by former Terraform intern Bryce Pratt, who allegedly communicated with Terraform’s business‑development lead. Co‑founder Robert Granieri and employee Michael Huang are also named. Jane Street denies the allegations, attributing losses to fraud by Terraform’s management (Do Kwon). The case follows a related suit against Jump Trading alleging similar conduct. If the claims proceed, Jane Street may be compelled to produce internal communications and trading data concerning the TerraUSD market.
+          </div>
+          <a href="https://www.disruptionbanking.com/2026/02/24/jane-street-hit-with-terra-40b-insider-trading-suit/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on the Terra/Luna collapse, questioning whether the rapid post‑swap trades constitute insider trading and finding the allegation of price inflation by Jump unconvincing. Several remarks highlight how the episode underscores the need for regulation, noting that crypto exposes fraud that might remain hidden in traditional finance and pointing out that many prominent crypto scammers have trad‑fi backgrounds. There is confusion about insider‑trading definitions in crypto, criticism of speculative narratives, and a call for clearer, human‑written analysis.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47160613" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://info.cern.ch" target="_blank">First Website (1992)</a>
+        </h2>
+        <span class="article-meta">
+          123 points • by shrikaranhanda • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page titled “http://info.cern.ch” identifies itself as the home of the first website, offering a brief navigation prompt “From here you can:” without further content.
+          </div>
+          <a href="https://info.cern.ch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects nostalgic enthusiasm for the early web, highlighting the simplicity, ad‑free environment and collaborative spirit of the original CERN site and line‑mode browser. Contributors express curiosity about retrieving the original server source code and how navigation worked without modern UI elements, noting the ability to type commands like “Back.” There is also interest in the historical progression from those primitive tools to contemporary frameworks, with occasional references to related archives, news items, and the broader evolution of web technology.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47159302" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonbergerart.com" target="_blank">Artist who &#34;paints&#34; portraits on glass by hitting it with a hammer</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by cs702 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Contemporary glass artist Simon Berger creates sculptural works by striking glass panes with a hammer, using the resulting cracks to explore material depth, transparency, and contrast. The glass serves both as structural support and as a visual “handwriting,” with rapid, brief blows producing stronger tonal variations. Berger’s process treats the hammer as an effect‑amplifying tool rather than a destructive instrument.
+
+Originally a carpenter, he began with spray‑painted portraits, then expanded to wood and mechanical assemblages, including work on used car bodies. The concept of using automotive windshields as a medium emerged from this experience. Berger cites a fascination with human faces, noting that safety glass transforms abstract fogging into recognizable figurative forms that engage viewers. His practice merges a background in carpentry and mechanics with a distinctive glass‑cracking technique to generate abstract‑figurative visual effects.
+          </div>
+          <a href="https://simonbergerart.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a generally skeptical view of the piece, questioning its artistic merit and relevance while noting the novelty of the technique. Several remarks compare it to low‑brow or tourist‑oriented art and suggest it adds little meaning beyond its visual trickery. A few brief responses express mild fascination or gratitude for the share, but overall the consensus leans toward seeing the work as interesting yet lacking substantive artistic value and possibly misplaced on the forum.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47112299" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arstechnica.com/gadgets/2026/02/ram-now-represents-35-percent-of-bill-of-materials-for-hp-pcs/" target="_blank">RAM now represents 35 percent of bill of materials for HP PCs</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by jnord • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - HP’s CFO reported that RAM’s share of a PC’s bill of materials has risen from roughly 15‑18 % in fiscal Q4 2025 to about 35 % for the remainder of the fiscal year, reflecting a severe memory shortage.  
+- Memory costs have increased approximately 100 % sequentially, with further price escalation expected throughout fiscal 2026 and likely into fiscal 2027.  
+- The Personal Systems market is projected to contract by double‑digit percentages this calendar year as higher component prices suppress consumer demand.  
+- HP anticipates the most pronounced financial impact from the RAM shortage in the second half of its fiscal year, citing rising DRAM and NAND prices as primary drivers of input‑cost volatility.  
+- To offset higher RAM expenses, HP has raised PC prices while noting that roughly one‑third of its Personal Systems margin derives from non‑RAM categories such as IT services and peripherals.
+          </div>
+          <a href="https://arstechnica.com/gadgets/2026/02/ram-now-represents-35-percent-of-bill-of-materials-for-hp-pcs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed tone, combining personal optimism about a recent hardware upgrade with broader unease about ongoing supply‑chain disruptions. While the upgrade is viewed as a worthwhile investment expected to extend device lifespan, there is skepticism that improvements in production capacity will quickly alleviate issues such as missing shipping trucks and broader logistical challenges, suggesting limited confidence in near‑term relief.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47161160" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html" target="_blank">Making MCP cheaper via CLI</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by thellimist • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - MCP agents preload the full JSON‑Schema for every available tool (e.g., 84 tools across 6 servers), incurring a large token cost at session start (≈600 tokens for tool discovery plus additional tokens for each call).  
+- A CLI‑based approach (generated with CLIHub) lists only tool names and locations; detailed schemas are fetched lazily when the agent invokes a command, reducing discovery tokens to a few tokens per tool.  
+- Benchmarks show the CLI method uses about 94 % fewer tokens overall compared with MCP’s eager loading.  
+- Anthropic’s “Tool Search” loads a searchable index and fetches full schemas on demand, cutting token usage by ~85 % but still incurs the full schema cost per tool and is limited to Anthropic models.  
+- CLIHub provides an open‑source converter that creates CLIs from MCP definitions in a single command, preserving OAuth and API compatibility while achieving the token savings across any LLM.
+          </div>
+          <a href="https://kanyilmaz.me/2026/02/23/cli-vs-mcp.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the token and context overhead of loading many MCP tool definitions versus the practicality of lightweight CLI wrappers. Commenters generally view CLI tools as easier to install, more audit‑friendly, and better at composability, while acknowledging that MCP can mitigate bloat through lazy‑loading and skill‑style discovery. Several participants note that the core issue is selective activation of relevant tools rather than the protocol itself, and that longer context windows or improved attention mechanisms could reduce the trade‑off. Overall, the consensus favors CLI‑based approaches for current efficiency but sees potential for refined MCP designs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47157398" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blogs.windows.com/windows-insider/2026/01/21/notepad-and-paint-updates-begin-rolling-out-to-windows-insiders/" target="_blank">Windows 11 Notepad to support Markdown</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by andreynering • 78 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Notepad (v 11.2512.10.0) receives several enhancements for Windows 11 Insiders in the Canary and Dev channels. Markdown support is expanded to include strikethrough and nested‑list syntax, accessible via the formatting toolbar, shortcuts, or direct markup. A new welcome dialog introduces core features and can be reopened via a megaphone icon. AI‑assisted “Write,” “Rewrite,” and “Summarize” functions now stream results, showing partial output sooner; these features require a Microsoft‑account sign‑in. Feedback should be filed in Feedback Hub under Apps → Notepad.  
+
+Paint (v 11.2512.191.0) adds two features. “Coloring book,” an AI‑driven tool in the Copilot menu, generates custom coloring‑page images from text prompts; it is limited to Copilot+ devices and also requires a Microsoft‑account sign‑in. A fill‑tolerance slider for the Fill tool lets users adjust precision, enabling cleaner fills or artistic effects. Feedback for Paint is to be submitted via Feedback Hub under Apps → Paint.  
+          </div>
+          <a href="https://blogs.windows.com/windows-insider/2026/01/21/notepad-and-paint-updates-begin-rolling-out-to-windows-insiders/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a largely critical response to the new Notepad features, with many users emphasizing that the program’s core value is its simplicity and plain‑text handling, and warning that markdown, AI integration, and account requirements threaten that purpose. Several participants note recent security concerns and prefer to keep Notepad unchanged or use existing alternatives such as Notepad++ or edit.exe, while a minority acknowledge potential usefulness of markdown support if it does not compromise basic functionality. Overall, the sentiment leans toward preserving Notepad’s minimalism and avoiding feature creep.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47154399" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Zyora-Dev/zse" target="_blank">Show HN: ZSE – Open-source LLM inference engine with 3.9s cold starts</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by zyoralabs • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Zyora-Dev’s GitHub repository “zse” provides the Zyora Server Inference Engine for large language models (LLM). The project is packaged on PyPI, indicating it can be installed via the Python package index. Compatibility requires Python 3.11 or newer. Licensing information is displayed, though the specific license type is not detailed in the extracted text. Deployment options are highlighted with badges for Railway and Render, suggesting that the engine can be hosted on either platform. An interface message reads “You can’t perform that action at this time,” implying a temporary restriction on certain repository actions. The available visual cues consist of alt‑text labels for the PyPI badge, Python version requirement, license indicator, and the two deployment platforms.
+          </div>
+          <a href="https://github.com/Zyora-Dev/zse" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks convey enthusiasm for a project that runs multiple models on a limited GPU setup, viewing loading and off‑loading as the primary strategy. There is intent to deploy the approach and a specific query about whether advertised cold‑start timings assume an idle GPU with no other models loaded, seeking clarification on performance expectations under those conditions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47160526" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://worksinprogress.co/issue/the-united-states-needs-fewer-bus-stops/" target="_blank">Bus stop balancing is fast, cheap, and effective</a>
+        </h2>
+        <span class="article-meta">
+          305 points • by surprisetalk • 85 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            American bus routes typically place stops every 200–250 m (≈5–8 stops per mile), far closer than the 300–450 m spacing common in Europe. Frequent stopping adds dwell, deceleration and acceleration time, slowing buses to about 8 mph in cities such as New York and San Francisco, raising labor costs (≈70 % of operating budgets) and limiting investment in stop amenities. “Stop balancing” – increasing stop spacing to roughly 400–600 m (≈1,300 ft) – can be implemented cheaply by removing signs and revising schedules. Pilot projects show measurable gains: San Francisco saw 4.4‑14 % higher speeds; Vancouver saved ≈$500 k annually and cut travel time by ~5 min; Portland achieved a 6 % speed rise with a 90‑ft spacing increase; Los Angeles’ limited‑stop service boosted speeds 29 % and ridership 33 %; Washington DC recorded 22‑26 % speed gains. Modeling indicates coverage loss is modest (1‑13 %). Faster, more reliable service reduces required vehicles and labor, frees resources for better shelters, and can increase overall network accessibility without extensive new infrastructure.
+          </div>
+          <a href="https://worksinprogress.co/issue/the-united-states-needs-fewer-bus-stops/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments view the article’s focus on stop density as overly narrow, arguing that low ridership stems chiefly from chronic under‑funding, unreliable service, poor street design, and lack of dedicated bus lanes rather than merely the number of stops. While a few acknowledge that consolidating stops can modestly speed buses in high‑frequency corridors, most stress that political resistance, accessibility concerns, and the need for more vehicles, better signal priority, and broader infrastructure upgrades are essential for meaningful improvements. Overall sentiment is skeptical of stop‑balancing as a stand‑alone solution.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47153798" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://respectify.org/" target="_blank">Show HN: Respectify – A comment moderator that teaches people to argue better</a>
+        </h2>
+        <span class="article-meta">
+          110 points • by vintagedave • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Respectify analysis of a snippet titled “Respectify – Improve Online Discourse” reports no logical fallacies but flags two issues: the phrase “dumb animals” is labeled objectionable for disrespecting bears and lacking supporting evidence, and the sentence “every bear is like this. Polar bears and grizzlies, they all think the same thing.” is identified as a negative‑tone overgeneralization that attributes human thoughts to animals. The content is marked as low effort and receives an overall quality score of 1. A brief note indicates that the full API response contains additional information beyond this summary.
+          </div>
+          <a href="https://respectify.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display mixed feelings toward the tool. Many users find it overly restrictive, flagging nuanced or contrarian political remarks, producing vague revisions, and seeming to enforce a particular viewpoint, which they describe as patronizing, unpredictable, and potentially censorious. Critics argue it fails to address bad‑faith actors effectively and risks creating echo chambers, while some appreciate the intention of fostering respectful dialogue and suggest improvements such as customizability, better handling of formal debates, and integration with existing platforms. Overall, frustration with current performance coexists with cautious optimism about the concept’s potential if refined.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47151842" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
