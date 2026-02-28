@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">February 28, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://notdivided.org" target="_blank">We Will Not Be Divided</a>
+        </h2>
+        <span class="article-meta">
+          496 points • by BloondAndDoom • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The letter “We Will Not Be Divided” seeks a broad coalition to address concerns about the potential misuse of AI against Americans. Organizers state they are independent citizens, not tied to any political party, advocacy group, AI company, or paid entity. Current and former Google and OpenAI employees are invited to sign; each signature is verified before inclusion. Verification options include Google Form or email confirmation (requiring a @google.com or @openai.com address) and an “alternative verification” reviewed manually. Anonymous signers have their personal data (name, email) deleted after 24 hours, leaving only an anonymous public listing; a single organizer can view the data during that window. The site runs on Fly.io, uses an encrypted SQLite database, sends verification emails via Resend, and is built on an open‑source Flask application with DNS/SSL managed by Cloudflare. No analytics or tracking scripts are employed. Organizers acknowledge occasional verification errors and commit to logging and correcting them.
+          </div>
+          <a href="https://notdivided.org" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments display strong skepticism toward government‑driven AI mandates, emphasizing the risks of imposing policy on companies and individuals and warning that such pressure could stifle innovation, enable surveillance, or lead to military misuse. Contributors criticize the lack of transparency in verification processes, call for broader employee participation, and voice concern that only a few firms would control powerful AI if open‑source efforts are not pursued. While some defend Anthropic’s stance against the Pentagon’s demands, overall sentiment leans toward distrust of top‑down control and a desire for greater accountability and openness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47188473" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/statement-comments-secretary-war" target="_blank">Statement on the comments from Secretary of War Pete Hegseth</a>
+        </h2>
+        <span class="article-meta">
+          318 points • by surprisetalk • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Secretary of War Pete Hegseth announced that the Department of War intends to label Anthropic, an American AI firm, as a supply‑chain risk after negotiations stalled over two requested exceptions: (1) use of Anthropic’s Claude model for mass domestic surveillance of Americans, and (2) deployment in fully autonomous weapons. Anthropic states it supports all lawful national‑security AI applications, notes that neither exception has been used in any government mission, and argues that current frontier models are not reliable for autonomous weapons and that mass surveillance would breach fundamental rights. The company claims such a designation is unprecedented for a U.S. company, would lack legal basis, and plans to contest it in court. Under 10 U.S.C. § 3252, a supply‑chain‑risk label would only affect Claude’s use on Department‑of‑War contracts, leaving API access for individual or commercial customers unchanged. Anthropic’s sales and support teams are available for inquiries and the firm thanks its users and supporters.
+          </div>
+          <a href="https://www.anthropic.com/news/statement-comments-secretary-war" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments collectively applaud Anthropic’s refusal to compromise on AI‑ethics principles, contrasting it with perceived acquiescence by larger firms. The community criticizes the Department of Defense’s “supply‑chain‑risk” threat as heavy‑handed and warns it could pressure contractors to abandon the company. Supporters express willingness to continue patronage and call for similar leadership elsewhere, while a few raise concerns about government surveillance, autonomous weapons and the broader impact on military contracts. Overall sentiment is strongly favorable toward Anthropic’s stance and wary of governmental overreach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47188697" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/anadim/AdderBoard" target="_blank">Smallest transformer that can add two 10-digit numbers</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by ks2048 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page references a GitHub repository named **anadim/AdderBoard**, described as the “Smallest transformer that can add two 10‑digit numbers.” Access to the repository’s content is blocked, as indicated by the message “You can’t perform that action at this time.” The only visual elements listed are three images with alt‑text labels: “AdderBoard,” “@anadim,” and “@claude.” No further technical details, code, model architecture, training data, performance metrics, or usage instructions are provided in the scraped text. Consequently, the available information is limited to the repository’s title, the access restriction notice, and the three image descriptors. No additional substantive content can be summarized.
+          </div>
+          <a href="https://github.com/anadim/AdderBoard" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion expresses skepticism toward the claim of achieving high accuracy with an extremely small parameter count, questioning the legitimacy of the approach and noting the absence of a formal publication. Participants show curiosity about embedding fixed‑weight networks within larger models but also convey disappointment that the idea appears under‑documented and potentially unreliable. Overall sentiment is doubtful, with a focus on the need for rigorous evidence and a preference to prioritize more substantiated research.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47170030" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://techcrunch.com/2026/02/27/openai-raises-110b-in-one-of-the-largest-private-funding-rounds-in-history/" target="_blank">OpenAI raises $110B on $730B pre-money valuation</a>
+        </h2>
+        <span class="article-meta">
+          395 points • by zlatkov • 67 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI announced a $110 billion private funding round, the largest in history, comprising a $50 billion investment from Amazon and $30 billion each from Nvidia and SoftBank, based on a $730 billion pre‑money valuation. The round remains open for additional investors. Key components include extensive infrastructure partnerships: Amazon will host OpenAI models on its Bedrock platform, expand AWS compute services by $100 billion, and allocate at least 2 GW of Trainium chips for training, while Nvidia will provide 3 GW of dedicated inference capacity and 2 GW of training on Vera Rubin systems. Amazon’s contribution may include a conditional $35 billion tied to achieving AGI or an IPO. The previous round in March 2025 raised $40 billion at a $300 billion valuation. Executives highlighted the shift from research to large‑scale daily use, emphasizing the need for rapid infrastructure scaling to meet global demand.
+          </div>
+          <a href="https://techcrunch.com/2026/02/27/openai-raises-110b-in-one-of-the-largest-private-funding-rounds-in-history/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments portray widespread skepticism toward OpenAI’s $110 billion funding round and its $730 billion pre‑money valuation. Observers note the financing is largely circular, tying investor commitments to future cloud, GPU, or IPO milestones, and question whether the valuation reflects genuine revenue potential. Concerns about an IPO rejection, a possible bailout, and the sustainability of the business model dominate, while a minority point to the brand’s market strength. Ethical, geopolitical, and market‑bubble implications are also mentioned, but overall confidence appears low.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47181211" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/doi/10.1126/science.adt2760" target="_blank">Qt45: A small polymerase ribozyme that can synthesize itself</a>
+        </h2>
+        <span class="article-meta">
+          48 points • by ppnpm • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.science.org/doi/10.1126/science.adt2760" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment emphasizes that the length of self‑replicating RNA capable of arising by chance is within realistic bounds, noting a calculated probability of roughly 1 in 2^90 (about 1.2 × 10^27, equivalent to 20 000 moles) and asserting that this magnitude is not prohibitive. It references a 2009 study on self‑sustained RNA enzyme replication to support the claim, presenting the argument in a neutral, analytical tone without expressing overt skepticism or endorsement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47187649" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.pcgamer.com/software/operating-systems/a-new-california-law-says-all-operating-systems-including-linux-need-to-have-some-form-of-age-verification-at-account-setup/" target="_blank">A new California law says all operating systems need to have age verification</a>
+        </h2>
+        <span class="article-meta">
+          406 points • by WalterSobchak • 88 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            California’s Assembly Bill 1043, signed by Governor Gavin Newsom and effective 1 January 2027, mandates that any operating‑system provider collect an age indicator during account creation and expose a real‑time API signal that categorises users into four brackets: under 13, 13‑15, 16‑17, and 18 or older. The OS must present an accessible interface for entering birth‑date or age and provide developers who request the signal with a digital indication of the user’s bracket. Windows already complies via Microsoft‑account DOB entry; Linux distributions face criticism from community members who argue the requirement is unenforceable in California and may lead to “not for California” disclaimers. The bill reflects a broader governmental trend toward statutory age‑verification mechanisms, echoed by the UK’s Online Safety Act and controversial face‑scan systems on platforms such as Discord, raising privacy concerns despite limited technical enforcement.
+          </div>
+          <a href="https://www.pcgamer.com/software/operating-systems/a-new-california-law-says-all-operating-systems-including-linux-need-to-have-some-form-of-age-verification-at-account-setup/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments converge on strong criticism of the California age‑verification mandate for operating systems, describing it as impractical, over‑broad and poorly informed about technology. Commenters question how it could be enforced on embedded, headless or open‑source devices, highlight privacy and free‑speech concerns, and point out potential contradictions with existing OS account models. Several note that the law appears to target app stores rather than operating systems, and many express skepticism that compliance would be feasible without imposing excessive burdens on developers and users.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47181208" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/wkoszek/emuko" target="_blank">Emuko: Fast RISC-V emulator written in Rust, boots Linux</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by felipap • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub repository **wkoszek/emuko** provides a fast RISC‑V emulator implemented in Rust, capable of booting Linux. The page includes a notice (“You can’t perform that action at this time”) and an image placeholder with alt text “@wkoszek”.
+          </div>
+          <a href="https://github.com/wkoszek/emuko" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong enthusiasm for RISC‑V adoption in ESP devices, highlighting the value of open architectures for hobbyist development. There is keen interest in using an emulator like Emuko to streamline testing by avoiding repeated ROM flashing, and a desire for concrete usage reports. Contributors suggest practical enhancements such as an HTTP‑to‑GDB bridge, UART integration modeled after existing STM32 QEMU support, and leveraging GDB for autosnapshot capabilities, indicating a collaborative focus on expanding emulator functionality.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47187121" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cnn.com/2026/02/25/politics/chatgpt-china-intimidation-operation" target="_blank">A Chinese official’s use of ChatGPT revealed an intimidation operation</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by cwwc • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI’s investigation uncovered a Chinese law‑enforcement official using ChatGPT as a private log of a transnational repression campaign targeting Chinese dissidents abroad. The user detailed tactics that included impersonating U.S. immigration officers to warn a U.S.-based dissident, forging U.S. county‑court documents to force removal of a social‑media account, creating a fake obituary with gravestone photos, and drafting a plan to smear Japanese Prime Minister Sanae Takaichi by exploiting anti‑U.S. tariff sentiment. OpenAI matched these entries to real‑world activity, confirming that false death rumors spread in 2023 and coordinated hashtag attacks appeared later. The operation reportedly involved hundreds of Chinese operators and thousands of fake online personas across multiple platforms. OpenAI banned the account after detection. The case illustrates how authoritarian regimes leverage AI tools for information warfare, occurring amid heightened U.S.–China AI competition, including a Pentagon dispute with Anthropic over model safeguards.
+          </div>
+          <a href="https://www.cnn.com/2026/02/25/politics/chatgpt-china-intimidation-operation" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong concern that OpenAI’s moderation and human‑review processes expose user conversations to government surveillance and corporate misuse, especially regarding Chinese authorities. Critics question the privacy of chats, the triggers for manual review, and the decision to ban a user rather than share intelligence, viewing the disclosures as evidence of systemic overreach. There is skepticism that the technology is being leveraged as an intelligence‑gathering tool, prompting calls for alternative, self‑hosted models and broader scrutiny of OpenAI’s role in state‑level monitoring.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47181944" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cbsnews.com/news/nasa-artemis-moon-program-overhaul/" target="_blank">NASA announces overhaul of Artemis program amid safety concerns, delays</a>
+        </h2>
+        <span class="article-meta">
+          216 points • by voxadam • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            NASA Administrator Jared Isaacman announced a restructuring of Artemis after an Aerospace Safety Advisory Panel flagged excessive risk in the original schedule. A new 2027 flight will place astronauts in low‑Earth orbit to dock with one or both commercially built lunar landers (SpaceX, Blue Origin) and conduct integrated tests of navigation, communications, propulsion, life‑support, rendezvous procedures, and spacesuits. The revised Artemis III becomes this orbital test, not a lunar landing. Artemis IV and V, slated for 2028, will use the validated lander(s) for the first crewed moon landings, with the possibility of one or two missions per year thereafter. NASA will retain the current Block 1 SLS rocket and adopt a “standardized” upper stage, halting work on the more powerful Exploration Upper Stage to reduce configuration changes. The plan emphasizes step‑by‑step capability growth, increased launch cadence, workforce rebuilding, and risk reduction through Earth‑orbit validation before lunar surface operations.
+          </div>
+          <a href="https://www.cbsnews.com/news/nasa-artemis-moon-program-overhaul/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed but generally cautious view of NASA’s Artemis revisions. Many recognize the logic of increasing launch cadence and see the new architecture as a step toward greater reliability and better testing opportunities, while also expressing respect for the program’s engineering heritage. Frequent comparisons to SpaceX’s rapid‑iterate model highlight debate over cost and schedule efficiency, with some urging a more iterative approach and others warning against bypassing established certification processes. Concerns persist about safety, budget overruns, and the feasibility of meeting the 2028 lunar‑landing target.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47182483" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/a-better-web-streams-api/" target="_blank">A better streams API is possible for JavaScript</a>
+        </h2>
+        <span class="article-meta">
+          378 points • by nnx • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The WHATWG Streams Standard, created between 2014‑2016, introduced a reader‑writer, lock‑based API that predates async iteration. Consequently, common operations require boilerplate (getReader, read loops, releaseLock) and expose lock‑management bugs when locks aren’t released. Although async iteration can be retrofitted, it cannot expose features like BYOB reads, which need a separate BYOBReader, buffer detachment handling, and are rarely used despite their intended zero‑copy benefits.  
+
+Backpressure signaling via desiredSize and highWaterMark is advisory; implementations may ignore it, and tee() creates unbounded internal buffers because the spec imposes no limits. TransformStream’s push‑oriented design further decouples backpressure between writable and readable sides, causing unchecked buffering and extra promise chains. The specification’s heavy reliance on promises generates per‑read objects and async coordination overhead, leading to significant GC pressure in high‑frequency scenarios such as server‑side rendering.  
+
+These design choices force runtimes (Node.js, Deno, Bun, Cloudflare Workers) to implement non‑standard, complex optimizations to achieve acceptable performance, resulting in portability and maintenance challenges across environments.
+          </div>
+          <a href="https://blog.cloudflare.com/a-better-web-streams-api/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that existing Web Streams APIs impose unnecessary promise overhead, complex back‑pressure handling, and resource‑management difficulties, especially for high‑throughput or mixed sync/async workloads. Many developers favor async iterables or custom “stream iterator” designs that allow synchronous consumption when possible, reduce promise creation, and simplify composition with `for‑await‑of`. Real‑world experiences cite significant performance gains from such alternatives and from pull‑based or thunk‑based approaches. Nonetheless, some acknowledge Node’s legacy streams and propose hybrid or observable‑style solutions to retain familiar ergonomics while addressing the identified inefficiencies.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47180569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
