@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 01, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://karpathy.github.io/2026/02/12/microgpt/" target="_blank">Microgpt</a>
+        </h2>
+        <span class="article-meta">
+          156 points • by tambourine_man • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            microgpt is a self‑contained 200‑line Python script that implements a GPT‑2‑style language model without external libraries. It uses a simple character‑level dataset of ~32 000 names (one name per line) and a tokenizer that maps each unique character (a‑z) plus a BOS token to integer IDs, yielding a 27‑token vocabulary. Autograd is built from scratch via a `Value` class that stores a scalar, its gradient, child nodes, and local derivatives; the `backward()` method performs a reverse‑topological traversal to apply the chain rule. Model parameters (~4 200) are initialized as Gaussian‑distributed `Value` objects and organized in a `state_dict` containing token/position embeddings, attention matrices, and MLP weights. The architecture follows GPT‑2 with simplifications: RMSNorm instead of LayerNorm, no biases, ReLU activation, and a single layer with 4 attention heads (embedding size 16, head dimension 4, block size 16). Functions `linear`, `softmax`, and `rmsnorm` provide core operations; the `gpt` function processes one token, updates KV caches, computes multi‑head attention, an MLP residual block, and outputs logits for next‑token prediction. Training loops use Adam optimization and generate name samples after training.
+          </div>
+          <a href="http://karpathy.github.io/2026/02/12/microgpt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express appreciation for the minimal C implementation of a GPT model, emphasizing its usefulness in revealing system‑level tradeoffs such as KV‑cache performance and exposing hidden complexity within high‑level ML frameworks. They view the stripped‑down code as valuable for education and benchmarking, show interest in running training and inference on consumer‑grade hardware, and inquire about licensing and primary use cases. The overall tone is constructive and inquisitive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47202708" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/OpenAI/status/2027846016423321831" target="_blank">We do not think Anthropic should be designated as a supply chain risk</a>
+        </h2>
+        <span class="article-meta">
+          317 points • by golfer • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page displays an error notice stating that something went wrong and prompts the user to try again. An accompanying image includes an alt text warning symbol (⚠️).
+          </div>
+          <a href="https://twitter.com/OpenAI/status/2027846016423321831" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread criticism of the companies’ government contracts, accusing OpenAI of compromising ethics while receiving lucrative deals and portraying Anthropic as unfairly penalized for stricter enforcement. Concerns dominate around the potential use of AI for autonomous weapons, lack of meaningful oversight, and the risk of surveillance or civil‑rights abuses. Many users report personal disengagement, such as canceling subscriptions, and call for clearer explanations of the controversy, while emphasizing distrust of the involved firms’ motives and transparency.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47200420" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dl.acm.org/doi/fullHtml/10.1145/238386.238611" target="_blank">The Windows 95 user interface: A case study in usability engineering (1996)</a>
+        </h2>
+        <span class="article-meta">
+          158 points • by ksec • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://dl.acm.org/doi/fullHtml/10.1145/238386.238611" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion expresses strong nostalgia for the user interfaces of Windows 95–2000 and early macOS, describing them as tasteful, crisp, and highly usable. Later design shifts—such as Windows XP’s “Luna” theme, the Office ribbon, and modern flat‑design trends with rounded corners—are criticized as regressions that diminish usability. The comments also highlight effective historical design practices, praise Microsoft’s 1990s marketing campaign, and lament the current emphasis on visual style over functional simplicity, calling for a return to earlier UI principles.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47200904" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://help.obsidian.md/sync/headless" target="_blank">Obsidian Sync now has a headless client</a>
+        </h2>
+        <span class="article-meta">
+          411 points • by adilmoujahid • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No content was provided for summarization.
+          </div>
+          <a href="https://help.obsidian.md/sync/headless" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the new Obsidian CLI and head‑less capabilities, highlighting its usefulness for AI workflows, server‑side automation, and seamless Git‑based versioning. Users appreciate avoiding extra plugins and see the feature as a major convenience, especially for mobile and remote editing. Recurrent concerns include limited version‑history in paid Sync plans, occasional sync glitches, and the desire for robust, free alternatives to Obsidian Sync. Overall sentiment is positive, with many planning to integrate the CLI into existing git or self‑hosted sync setups.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47197267" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ben-mini.com/2026/the-happiest-ive-ever-been" target="_blank">The happiest I&#39;ve ever been</a>
+        </h2>
+        <span class="article-meta">
+          352 points • by bewal416 • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In January 2020 the author, a recent college graduate, took a volunteer head‑coach position for a middle‑school basketball team in Indiana. Over a season of weekly games and bi‑weekly practices with six players, the author and co‑coach Clayton established drills, team rules, and a supportive culture that quickly turned a losing start into an unbeaten run. The experience boosted the players’ confidence and the author’s self‑esteem, improving interpersonal skills, leadership confidence, and overall happiness. Key factors cited for this fulfillment were a love of mentoring children, the physical, in‑person nature of coaching, the autonomy of directing practices and games, and a genuine passion for basketball. Reflecting on broader career concerns, the author relates this personal joy to a sense of emptiness in tech work, questioning the value of “scalable” product roles amid AI advances. The piece concludes with advice to identify and pursue activities that generate happiness.
+          </div>
+          <a href="https://ben-mini.com/2026/the-happiest-ive-ever-been" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments coalesce around the idea that personal fulfillment increasingly stems from direct, outward‑focused contributions—coaching, mentoring, and tangible help—rather than solitary coding or abstract achievement. Many note that the rapid evolution of tools and AI has shifted value from sheer output to the impact of one’s presence, while also expressing both excitement for technology’s potential and unease about its societal effects. Concerns appear about remote work, cost of living, and the need for sustainable income, but overall the discussion favors purpose‑driven work and human connection as primary sources of happiness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47161759" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/jonwiggins/xmloxide" target="_blank">Show HN: Xmloxide – an agent made rust replacement for libxml2</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by jawiggins • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository “xmloxide” provides a pure Rust reimplementation of the libxml2 library. It is packaged as a crate on crates.io, with continuous‑integration (CI) status displayed, and documentation hosted on docs.rs. The project is released under the MIT license and specifies a minimum supported Rust version (MSRV). The primary maintainer is identified as @jonwiggins, with a related presence @claude. No additional functional description or usage details are included in the scraped excerpt.
+          </div>
+          <a href="https://github.com/jonwiggins/xmloxide" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express frustration that widely used libraries such as libxml receive little maintenance despite heavy production reliance, while simultaneously showing enthusiasm for AI‑driven coding tools that can iterate quickly with test suites and AI evaluations. Contributors appreciate the rapid progress and seek more detail on workflows, advocate for clear risk disclosures on AI‑generated packages, and suggest experimenting with alternative runtimes. Technical curiosity includes questions about unsafe code usage, code size comparisons, and whether security flaws have been resolved. Overall, the tone combines criticism of neglect with optimism for AI‑assisted development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47201816" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.inconspicuous.info/p/h-bomb-a-frank-lloyd-wright-typographic" target="_blank">H-Bomb: A Frank Lloyd Wright Typographic Mystery</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by mrngm • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Unity Temple in Oak Park, Illinois, features bronze signage reading “For the Worship of God and the Service of Man.” The phrase contains three “H”s on each of two identical entrances (east and west). Historical research shows the letters have passed through four distinct eras: (1) original installation (1908‑1973), (2) post‑gunite removal and re‑installation (1973‑2010), (3) replacement letters after a 2010 theft (2012‑2014), and (4) restored lettering after a 2014‑17 $25 M renovation. Early photos (1930s‑40s) show correctly oriented “H”s; a 1956 image of the west entrance shows all three “H”s upside‑down, suggesting the error may have existed before the 1973 work. By the late 1970s the west sign’s “H”s were upright but an “S” in “WORSHIP” remained inverted. The 2012 replacement corrected both inverted letters on the east side; the west side remained correct until the 2014‑17 restoration, which introduced the current upside‑down “H” on the top line. The investigation does not confirm whether Frank Lloyd Wright ever oversaw an inverted “H”.
+          </div>
+          <a href="https://www.inconspicuous.info/p/h-bomb-a-frank-lloyd-wright-typographic" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a strongly negative reaction to the referenced article, warning readers that the visual content is disturbing and difficult to ignore once seen. Critics also note a distracting typographic inconsistency, specifically irregular spacing between words on a particular line, and speculate that the unconventional lettering was deliberately hand‑drawn rather than a typographic error, emphasizing a belief that the design choice was intentional despite its lack of aesthetic subtlety.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47163779" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://robservatory.com/block-the-upgrade-to-tahoe-alerts-and-system-settings-indicator/" target="_blank">Block the “Upgrade to Tahoe” Alerts</a>
+        </h2>
+        <span class="article-meta">
+          154 points • by todsacerdoti • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://robservatory.com/block-the-upgrade-to-tahoe-alerts-and-system-settings-indicator/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a broadly negative view of the latest macOS release, describing it as a downgrade that introduces slower, jittery animations, Finder lag, intrusive UI changes, and flaky cross‑device features. Users express frustration with forced updates and regard the “stop‑Tahoe‑update” tools, notification suppression, and downgrade workarounds as essential. While a minority note no noticeable impact on certain hardware or prefer alternative OSes, the dominant sentiment is disappointment with the UI, stability, and perceived loss of user control.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47198977" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/google-gemini/gemini-cli/discussions/20632" target="_blank">Addressing Antigravity Bans and Reinstating Access</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by RyanShook • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The GitHub discussion titled “Addressing Antigravity Bans & Reinstating Access” (repository google‑gemini/gemini‑cli, issue #20632) cannot be viewed; the page returns the error “You can’t perform that action at this time.” The content that is visible consists solely of a list of image placeholders, each with an alt‑text label showing a user handle (e.g., @jackwotherspoon, @segin, @anxkhn, etc.). No discussion text, technical details, or additional context are present in the provided excerpt.
+          </div>
+          <a href="https://github.com/google-gemini/gemini-cli/discussions/20632" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments coalesce around strong criticism of Google’s handling of Gemini‑CLI and related AI services, highlighting opaque policy changes, abrupt account bans, and inadequate appeal processes that jeopardize primary email accounts and broader access. Users describe the risk as disproportionate, view the restrictions as anticompetitive, and lament the inability to use purchased tokens flexibly. While a few note functional alternatives and occasional positive experiences, the dominant view stresses distrust of Google’s enforcement practices, calls for clearer communication, and recommends decoupling critical workflows from its ecosystem.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47195371" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ad-si/Woxi" target="_blank">Woxi: Wolfram Mathematica Reimplementation in Rust</a>
+        </h2>
+        <span class="article-meta">
+          256 points • by adamnemecek • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository ad‑si/Woxi on GitHub implements a re‑creation of the Wolfram Language/Mathematica environment using the Rust programming language, referred to as “Wolfram oxidized.” The page displays a wordmark for Woxi, a collage of applications that integrate the library, and a screenshot of a Jupyter Notebook session demonstrating its usage. User handles @claude, @ad‑si, @rgbkrk, and @adamnemecek are shown, likely indicating contributors or community members. No additional technical documentation, code examples, or usage instructions are present in the scraped content.
+          </div>
+          <a href="https://github.com/ad-si/Woxi" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights mixed reactions to the project’s design and progress. Critics point to an architectural issue where core mathematical features are hard‑coded in Rust instead of the language itself, fearing long‑term maintainability problems. The lead developer emphasizes steady advancement toward a release covering most Mathematica 1.0 functionality and notes existing Jupyter‑Lite and studio front‑ends. Participants express enthusiasm for a polished CLI kernel and the open‑source, AGPL model, while also raising concerns about licensing, proprietary algorithms, and potential code reuse. Overall sentiment combines cautious optimism with technical skepticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47155526" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
