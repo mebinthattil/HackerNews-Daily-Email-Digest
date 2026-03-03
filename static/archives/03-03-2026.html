@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.svd.se/a/K8nrV4/metas-ai-smart-glasses-and-data-privacy-concerns-workers-say-we-see-everything" target="_blank">The workers behind Meta’s smart glasses can see everything</a>
+        </h2>
+        <span class="article-meta">
+          657 points • by sandbach • 59 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Meta’s AI‑enabled smart glasses, marketed as an all‑in‑one personal assistant, collect continuous video, audio, and sensor data that is sent to Meta’s servers for real‑time processing and model training. Annotation work for this data is outsourced to the subcontractor Sama in Nairobi, where low‑paid workers label images and transcriptions, often encountering highly private content such as bathroom footage, sexual activity, and visible bank cards. Workers report mandatory confidentiality agreements and lack of ability to refuse such material. Retail staff in Sweden claim users can opt out of data sharing, but technical tests show the glasses require cloud connectivity to Meta’s infrastructure (Sweden, Denmark, Ireland) for AI functions, making local processing impossible. Meta’s privacy policy permits automatic storage and possible human review of interactions, with no clear limits on retention or access. GDPR experts note insufficient transparency, lack of explicit consent for recording, and questionable adequacy of data transfers to third‑country processors like Kenya. Meta has provided only generic legal references, leaving the extent of user control and protection ambiguous.
+          </div>
+          <a href="https://www.svd.se/a/K8nrV4/metas-ai-smart-glasses-and-data-privacy-concerns-workers-say-we-see-everything" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show widespread unease about Meta’s smart glasses, centering on privacy risks from constant video capture, human review of footage, and unclear data‑training practices. Users demand clearer transparency, stronger consent mechanisms, and legal safeguards, especially regarding inadvertent recording and facial‑recognition features. While a few acknowledge convenience for audio or hands‑free tasks, most view the product as invasive, potentially illegal under consent laws, and call for regulation or avoidance. Overall sentiment is largely critical and cautious toward adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47225130" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openclaw.allegro.earth/" target="_blank">OpenClaw Exposure Watchboard</a>
+        </h2>
+        <span class="article-meta">
+          26 points • by fanweixiao • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openclaw.allegro.earth/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express caution about publicly exposing vulnerable AI agents, emphasizing responsible disclosure and preferring private notification to avoid broader exploitation. While several remarks note that authentication tokens mitigate immediate risk, many consider the exposure insecure and stress the need for better configuration to prevent token interception. A recurring theme is the development of more secure, sandboxed alternatives with fine‑grained permissions. Overall, sentiment leans toward concern over current vulnerabilities, acknowledgement of limited exploitability, and advocacy for stronger security practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47227329" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ntik.me/posts/voice-agent" target="_blank">Show HN: I built a sub-500ms latency voice agent from scratch</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by nicktikhonov • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author built a voice‑agent orchestration layer from scratch, achieving sub‑500 ms end‑to‑end latency and outperforming off‑the‑shelf platforms such as Vapi. Key components and findings:
+
+- **Turn‑taking loop**: a two‑state machine (user speaking / listening) driven by voice‑activity detection (VAD) and Deepgram’s Flux streaming API, which provides real‑time transcription and turn‑boundary events.  
+- **Pipeline architecture**: on turn end, the transcript is sent to an LLM; the first token is streamed to ElevenLabs TTS via a warm WebSocket pool; audio frames are immediately forwarded to Twilio. Barge‑in handling cancels LLM, TTS and flushes outbound audio as soon as the user resumes speaking.  
+- **Latency optimization**: geographic colocation of orchestration (Railway EU) with Twilio, Deepgram, and ElevenLabs cut server‑side latency to ~690 ms (≈790 ms total). Switching from OpenAI gpt‑4o‑mini to Groq’s llama‑3.3‑70b reduced time‑to‑first‑token to ~80 ms, yielding ~400 ms overall latency.  
+- **Technical takeaways**: prioritize turn detection, minimize TTFT, stream LLM→TTS, cancel in‑flight calls promptly, and place services regionally. The full source code is available on GitHub.
+          </div>
+          <a href="https://www.ntik.me/posts/voice-agent" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the challenge of reducing latency and improving turn‑taking detection in voice agents. Contributors describe various architectures—Raspberry Pi stacks, cloud services, local LLMs, and endpoint‑detection models—and note that semantic end‑of‑turn prediction remains a bottleneck. There is enthusiasm for open‑source, offline pipelines and for leveraging filler sounds to mask delays, while also expressing frustration that consumer devices lack comparable capabilities. Consensus holds that latency is primarily an orchestration issue that can be mitigated through tighter co‑location, streaming optimisations, and better VAD or endpoint‑detection technologies.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47224295" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.rac.ca/rac-responds-to-the-closure-of-the-weatherradio-service-in-canada/" target="_blank">Closure of the Weatheradio Service in Canada</a>
+        </h2>
+        <span class="article-meta">
+          86 points • by da768 • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Radio Amateurs of Canada issued a response to the announced shutdown of Canada’s weather‑radio service. The announcement is presented with three visual elements: a “join‑rac” graphic, the organization’s bilingual logo, and the November 2019 RAC bulletin logo. No further textual details are provided in the excerpt.
+          </div>
+          <a href="https://www.rac.ca/rac-responds-to-the-closure-of-the-weatherradio-service-in-canada/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong concern that discontinuing traditional NOAA‑style weather radio undermines a resilient, power‑independent safety service, emphasizing its life‑saving role in severe‑weather zones and for remote users. Many criticize reliance on smartphones or internet‑based alerts as fragile replacements and call for preserving or funding the existing network, while a few suggest newer approaches such as satellite broadcasts or donor‑supported operations. A minority view the technology as outdated given modern connectivity, but overall the consensus favors maintaining the established radio system for its reliability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47225505" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://andrewvanner.github.io/som/SoM_CC_Process_Day.pdf" target="_blank">Seed of Might Color Correction Process (2023) [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          74 points • by haunter • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://andrewvanner.github.io/som/SoM_CC_Process_Day.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect strong appreciation for fan‑driven restoration and color‑correction projects that aim to match original broadcast hues, citing personal nostalgia and admiration for the technical effort involved. There is recurring criticism of official releases for poor transfers, high‑bitrate encodes, and perceived neglect of fan feedback, contrasted with praise for community‑initiated upscales of series like Dragon Ball and Avatar. The discussion also highlights occasional tension between studios and fans over source material authenticity, while emphasizing the enduring cultural impact of the series across generations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47225318" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.hopefulmons.com/p/what-are-your-guilty-displeasures" target="_blank">What are your guilty displeasures?</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by aregue • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - A “guilty displeasure” is the inverse of a guilty pleasure: something you genuinely dislike but feel you should like because of your self‑image, social norms, or professional identity.  
+- The author cites personal examples—opera, classic films, poetry, mathematics, and coding—activities traditionally associated with “high culture” or technical competence that they find boring or tedious, yet feel pressured to enjoy.  
+- These dislikes arise from social environments (family, peers, academic or work cultures) and the desire to conform to expectations of one’s class, career, or intellectual community.  
+- The tension can intensify when close relationships or career investments amplify the perceived obligation to appreciate the activity, sometimes persisting until retirement or a change in self‑perception.  
+- The author observes that as people mature, both guilty pleasures and displeasures often diminish, and recommends focusing on positive interests rather than cultivating negative ones, using self‑awareness of such dislikes to make informed choices.
+          </div>
+          <a href="https://www.hopefulmons.com/p/what-are-your-guilty-displeasures" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a reflective, mixed‑feelings stance toward personal interests and identity. There is enthusiasm for using AI to enhance coding productivity despite concerns about job impact, while cultural tastes—anime, music, opera, nerd hobbies, and outdoor activities—are described as sources of both enjoyment and embarrassment, often accepted without guilt. A recurring theme is the gradual shedding of social pressure and “snob” expectations as one ages, leading to a more relaxed acceptance of what is liked or disliked.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47204784" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://physics.aps.org/articles/v19/24" target="_blank">How to Build Your Own Quantum Computer</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by tzury • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://physics.aps.org/articles/v19/24" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments emphasize that practical quantum computers are presently limited to industrial and academic settings, with most existing devices offering low‑fidelity performance far from the idealized “marvel” notion. They note the high material and operational costs, implying that only well‑funded groups can develop meaningful systems, while small teams lack realistic prospects. Skepticism is expressed about real‑world utility, with calls for concrete examples of computations that surpass classical capabilities rather than generic promises of quantum supremacy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47225726" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cbc.ca/news/canada/british-columbia/b-c-adopting-year-round-daylight-time-9.7111657" target="_blank">British Columbia to end time changes, adopt year-round daylight time</a>
+        </h2>
+        <span class="article-meta">
+          485 points • by ireflect • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            British Columbia will permanently observe daylight‑saving time, making the “spring forward” on 8 March 2026 the last clock change. The province will remain on Pacific Time year‑round, except for East Kootenay, which stays on Mountain Time with Alberta; the Peace Region and Creston have never shifted clocks. Legislation enabling the change was passed in 2019, but a timeline was set only now; the province waited for neighboring U.S. states (Washington, Oregon, California) before proceeding, though none have yet adopted permanent daylight time. A 2019 public‑engagement survey showed 93 % support for year‑round daylight time, mainly for health and wellness reasons, while 54 % wanted alignment with other jurisdictions. Critics—including the Greater Vancouver Board of Trade, Vancouver Airport Authority, and the Canadian Federation of Independent Business—warn of business disruption and confusion at the border, suggesting the move may distract from the province’s $13 billion deficit. UBC professor Werner Antweiler noted the health benefits of eliminating spring‑time clock changes and framed BC as a “first mover.”
+          </div>
+          <a href="https://www.cbc.ca/news/canada/british-columbia/b-c-adopting-year-round-daylight-time-9.7111657" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on British Columbia’s shift to year‑round daylight‑saving time, with participants divided between favoring permanent standard time for health and safety reasons and endorsing permanent daylight time for longer evening daylight and economic alignment with the U.S. West Coast. Many express relief at eliminating biannual clock changes, citing disruption and circadian impacts, while others worry about darker mornings and road safety. Regional complications, such as neighboring provinces on different zones, and broader ideas about uniform UTC or local autonomy also appear, reflecting a broadly mixed but thoughtful response.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47223620" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/" target="_blank">New iPad Air, powered by M4</a>
+        </h2>
+        <span class="article-meta">
+          336 points • by Garbage • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple announced the new iPad Air (2026) powered by the M4 chip, available in 11‑inch and 13‑inch models at $599/$799 (Wi‑Fi) and $749/$949 (Wi‑Fi + Cellular), with education pricing of $549/$749. Key specifications: 8‑core CPU, 9‑core GPU, 16‑core Neural Engine, 12 GB unified memory (50 % increase), 120 GB/s memory bandwidth, and up to 2.3 × faster performance than the M1‑based iPad Air (up to 30 % faster than M3). The GPU supports second‑generation mesh shading and ray tracing, delivering >4 × faster 3D rendering. Connectivity includes Apple‑designed N1 (Wi‑Fi 7, Bluetooth 6, Thread) and C1X cellular modem (up to 50 % faster data, 30 % lower energy use). iPadOS 26 introduces a new windowing system, menu bar, enhanced Files app, and Preview app with Apple Pencil support. Compatible accessories: Apple Pencil Pro (USB‑C), Apple Pencil (USB‑C), and Magic Keyboard with trackpad and function row. The device contains 30 % recycled content, uses 100 % recycled aluminum and cobalt, and is manufactured with 40 % renewable electricity. Pre‑orders start March 4, shipping March 11.
+          </div>
+          <a href="https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed feelings toward the new iPad models. Reviewers appreciate the device’s durability, long battery life and smooth performance, but many question the need for high‑end processors in a tablet whose OS limits multitasking and professional software. Frequent complaints involve the lack of user profiles, inability to run macOS or Linux, limited RAM compared to similarly priced laptops, and the high price of Pro variants. Overall, users see the iPad as a solid media and casual‑use device, yet uncertain about its value for power‑users or as a laptop replacement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47218175" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://health.ucdavis.edu/news/headlines/first-ever-in-utero-stem-cell-therapy-for-fetal-spina-bifida-repair-is-safe-study-finds/2026/02" target="_blank">First in-utero stem cell therapy for fetal spina bifida repair is safe: study</a>
+        </h2>
+        <span class="article-meta">
+          255 points • by gmays • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The CuRe Trial (Phase 1, single‑arm, first‑in‑human) evaluated safety of adding a human placenta‑derived stem‑cell patch to standard in‑utero repair of myelomeningocele. Six fetuses underwent open fetal surgery at UC Davis Health; a stem‑cell‑laden patch was placed over the exposed spinal cord before uterine closure. Primary safety outcomes showed no stem‑cell‑related adverse events, no infections, cerebrospinal‑fluid leaks, abnormal tissue growth, or tumors. All surgeries were technically successful, wounds healed, and postoperative MRI demonstrated reversal of hindbrain herniation in every infant; none required hydrocephalus shunting before discharge. The FDA and an independent monitoring board authorized progression to Phase 1/2a, now enrolling up to 35 participants with follow‑up to age 6 to assess long‑term safety and early functional benefits (mobility, bladder, bowel). The trial is funded by the California Institute for Regenerative Medicine and Shriners Children’s. Spina bifida affects ~1,500–2,000 U.S. births annually; this approach aims to enhance regenerative outcomes beyond conventional fetal surgery.
+          </div>
+          <a href="https://health.ucdavis.edu/news/headlines/first-ever-in-utero-stem-cell-therapy-for-fetal-spina-bifida-repair-is-safe-study-finds/2026/02" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong optimism about fetal stem‑cell therapy for spina bifida, highlighting personal stories of resilience and the potential to improve physical function and quality of life. Many acknowledge recent surgical advances and view them as promising steps toward broader cures. Concerns are raised about insurance barriers, unequal access, and regulatory delays that could limit delivery of new treatments. Questions persist regarding the therapy’s impact on cognitive development, but overall sentiment favors continued research and faster implementation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47218743" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
