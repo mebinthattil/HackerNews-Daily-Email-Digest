@@ -1,0 +1,508 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 08, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://devblog.ecuadors.net/cloud-vm-benchmarks-2026-performance-price-1i1m.html" target="_blank">Cloud VM benchmarks 2026: performance/price for 44 VM types over 7 providers</a>
+        </h2>
+        <span class="article-meta">
+          82 points • by dkechag • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Tested 44 VM families from seven major cloud providers (AWS, GCP, Azure, OCI, Linode/Akamai, DigitalOcean, Hetzner) in 2‑vCPU configurations, covering multiple regions to capture performance variance.  
+- New CPUs introduced: AMD EPYC Turin, Intel Granite Rapids, Google Axion (ARM), Azure Cobalt 100, Ampere One M.  
+- Benchmark suite (Docker image) comprised DKbench (primary), Geekbench 5, Phoronix tests (7‑zip, nginx, OpenSSL), and FFmpeg x264 transcoding, run on Debian 13 (Ubuntu 24.04 for a few cases).  
+- Single‑thread results: EPYC Turin delivers the highest per‑thread throughput; Granite Rapids offers higher and more stable performance than prior Intel generations; Axion matches EPYC Genoa on ARM; Cobalt 100 sits between Graviton‑3 and Graviton‑4.  
+- Multi‑thread scaling follows SMT rules (2 vCPU = 1 full core for Intel/AMD).  
+- Pricing uses on‑demand rates in the cheapest US/EU regions; reserved 1‑/3‑year rates shown without prepayment; OCI provides uniform pricing with 50 % spot discount; GCP sustained‑use discounts omitted for fairness.  
+- Recommendation: avoid older CPU generations (Skylake, Broadwell, Rome) due to lower efficiency and higher cost per performance.
+          </div>
+          <a href="https://devblog.ecuadors.net/cloud-vm-benchmarks-2026-performance-price-1i1m.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments contrast cloud services with self‑hosted bare‑metal, noting that owning hardware often delivers lower cost per performance, especially for CI and batch workloads, while also requiring additional effort for maintenance, upgrades and fault handling. AMD EPYC (Turin/Genoa) CPUs receive consistent praise for strong single‑core and multi‑core benchmarks, and Hetzner is highlighted as offering good price‑performance despite recent price hikes. Cloud advantages are acknowledged for production environments, scalability and reduced operational burden, with some concern about vendor lock‑in, particularly with Oracle. Hybrid deployments are suggested as a practical compromise.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47293119" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/0x0mer/CasNum" target="_blank">CasNum</a>
+        </h2>
+        <span class="article-meta">
+          205 points • by aebtebeten • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CasNum is a Python library that performs arbitrary‑precision arithmetic using only compass‑and‑straightedge constructions. The core engine (in cas/) provides the five classical constructions—line through two points, circle through a point with a given centre, intersections of lines, line‑circle, and circle‑circle—and treats them as the instruction set for higher‑level operations. Numbers are encoded as points (x, 0) in the plane; addition uses midpoints, while multiplication and division rely on triangle similarity. Logical gates (AND, OR, XOR) are also built geometrically, though less cleanly. The library integrates with the PyBoy Game Boy emulator by replacing its ALU with CasNum operations (modifying opcodes_gen.py). Example programs include a basic calculator, an RSA implementation, and a Game Boy run of the free 2048 ROM (with optional Pokémon ROM support). Computations are cached via functools.lru_cache, leading to high memory use and slow initial performance (≈15 min boot, then ~0.5–1 FPS). Dependencies include sympy, pyglet (viewer), pytest‑lazy‑fixtures, and pycryptodome. The code is MIT‑licensed.
+          </div>
+          <a href="https://github.com/0x0mer/CasNum" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey broadly positive reception, highlighting the project’s humor, originality, and usefulness while expressing enthusiasm for the underlying ideas. Readers note appreciation for the documentation and demonstrations, and several inquire about technical extensions such as incorporating full game state, polynomial‑ring support, or comparisons to similar repositories. A few users report difficulties applying the tool to specific problems, like solving a quintic, and request clarification on implementation details. Overall, the tone is supportive, with constructive curiosity and modest suggestions for further development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47291292" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cacm.acm.org/research/a-decade-of-docker-containers/" target="_blank">A decade of Docker containers</a>
+        </h2>
+        <span class="article-meta">
+          243 points • by zacwest • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://cacm.acm.org/research/a-decade-of-docker-containers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight Docker’s enduring popularity due to its low entry barrier and flexible Dockerfile syntax, which many view as practical despite its “ugly” flexibility. Reproducible builds, image‑size bloat, and networking limitations—especially on macOS—are frequent pain points, prompting calls for better tooling or alternatives such as Nix, Podman, or unikernels. Historical context and nostalgia appear, but critics also label Docker as a hacky, debt‑generating solution, while supporters stress its simplicity and usefulness as an on‑ramp for container adoption. Overall sentiment is mixed, balancing appreciation for convenience with frustration over design flaws.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47289311" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arcanenibble.github.io/dumping-lego-nxt-firmware-off-of-an-existing-brick.html" target="_blank">Dumping Lego NXT firmware off of an existing brick (2025)</a>
+        </h2>
+        <span class="article-meta">
+          158 points • by theblazehen • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author needed to back up the original LEGO NXT firmware (v1.01) and evaluated several approaches. Using the standard SAM‑BA bootloader’s PEEK/POKE commands was ruled out because entering bootloader mode overwrites the firmware. JTAG would allow full memory access but requires hardware modification and outdated tooling, so it was considered a last resort. Writing a user program is limited by the NXT bytecode VM, which restricts memory access to a fixed data segment and lacks arbitrary reads.
+
+The breakthrough came from examining the NXT communication protocol and the “IO‑Maps” documented in the NXC programmer’s guide. The VM IO‑Map contains a writable function pointer pRCHandler, the handler for direct USB commands. Because the IO‑Map can be read and written via the “Read IO Map” USB command, the author used PyUSB to send the appropriate 10‑byte request (module ID 0x00010001, offset 0x10, length 4) and retrieved the pointer value 0x00100D3D, located in the chip’s internal flash. Modifying this pointer enables arbitrary code execution, providing a software‑only method to read or dump the firmware without entering bootloader mode or using JTAG.
+          </div>
+          <a href="https://arcanenibble.github.io/dumping-lego-nxt-firmware-off-of-an-existing-brick.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the article’s clear, question‑driven style and its ability to make technical details accessible, especially for readers without an embedded‑systems background. Nostalgic readers recall personal experiences with LEGO Mindstorms NXT and feel motivated to revisit their old kits after learning new insights about the hardware. Additional interest surfaces in specific technical queries about the code‑snippet font and colorscheme and curiosity about whether the smart bricks have been reverse‑engineered. Overall tone is positive and inquisitive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47271988" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pulsefeedback.io/" target="_blank">Show HN: A weird thing that detects your pulse from the browser video</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by kilroy123 • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            PulseFeedback is a browser‑based service that captures a user’s pulse via the device’s camera. The application processes the video feed locally to extract heart‑rate data, then discards the visual image, ensuring that no facial or identifying information is transmitted. Only the derived heart‑rate metric is shared with the server or other participants, preserving user anonymity. The interface is designed to respond in real time to the detected pulse, providing immediate feedback while maintaining privacy. No additional personal data or video streams are stored or displayed, limiting exposure to the single biometric value of heart rate.
+          </div>
+          <a href="https://pulsefeedback.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights significant privacy concerns, fearing that the technology could enable covert profiling by employers, landlords, law‑enforcement and other entities, and calls for clear privacy disclosures before webcam activation. Users report unreliable physiological measurements, noting discrepancies between detected pulse and personal data, and frequent browser crashes on desktop systems. Technical compatibility is praised on Android, with some appreciating the feature’s simplicity. Overall sentiment is cautious, balancing interest in potential benefits against doubts about accuracy, safety and data handling.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47247762" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.honest-broker.com/p/the-day-ny-publishing-lost-its-soul" target="_blank">The stagnancy of publishing and the disappearance of the midlist</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by wallflower • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article argues that New York publishing has become stagnant, driven by corporate consolidation and profit‑driven metrics. Major houses now require first print runs of 40‑60 000 copies, marginalizing midlist titles that historically sold 10 000 copies and sustained diverse literary output. This shift, traced to the 1990s and intensified after Random House’s sale to Bertelsmann, forced editors to prioritize low‑risk, high‑volume products—celebrity memoirs, formulaic novels, and influencer self‑helps—while discarding risk‑taking authors. Resulting uniform cover designs and repetitive story formulas signal a broader cultural decline, echoed in film and music. The author attributes the problem to the “Big Five” controlling about 80 % of trade publishing, which limits resources for independent presses, bookstores, reviews, and academic adoption of books. He calls for renewed support of indie publishers, libraries, book clubs, and individual readers as the remaining avenues to sustain a robust, varied literary ecosystem.
+          </div>
+          <a href="https://www.honest-broker.com/p/the-day-ny-publishing-lost-its-soul" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express widespread frustration with publishing consolidation and the erosion of traditional gatekeepers, which many see as limiting opportunities for midlist authors and forcing reliance on self‑publishing or day‑job income. Critics highlight rating manipulation, AI‑generated content, and homogenized cover design as signs of a volume‑driven market that prioritizes quantity over quality. While some acknowledge that the explosion of available titles provides readers with unprecedented variety, opinions diverge on whether this abundance offsets the perceived decline in editorial curation and industry diversity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47291525" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.merkley.senate.gov/merkley-klobuchar-launch-new-effort-to-ban-federal-elected-officials-profiting-from-prediction-markets/" target="_blank">Effort to prevent government officials from engaging in prediction markets</a>
+        </h2>
+        <span class="article-meta">
+          261 points • by stopbulying • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Senators Jeff Merkley (D‑OR) and Amy Klobuchar (D‑MN) introduced the “End Prediction Market Corruption Act,” legislation that would prohibit the President, Vice President, members of Congress, senior executive‑branch officials and other federal elected officials from buying or selling event contracts in prediction markets. The bill aims to prevent insider‑information trading and strengthen the Commodity Futures Trading Commission’s authority to pursue violations. It is co‑sponsored by Senators Chris Van Hollen, Adam Schiff, and Kirsten Gillibrand, and endorsed by advocacy groups including Public Citizen, Citizens for Responsibility and Ethics in Washington (CREW), and the Project On Government Oversight (POGO). The sponsors argue that the rapid growth of retail prediction markets increases the risk of officials exploiting non‑public information for personal profit, undermining public trust.
+          </div>
+          <a href="https://www.merkley.senate.gov/merkley-klobuchar-launch-new-effort-to-ban-federal-elected-officials-profiting-from-prediction-markets/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary views prediction markets as inherently prone to abuse, emphasizing that insider information and influence can extend beyond elected officials to appointed and bureaucratic actors, making bans on officials ineffective. It highlights risks of manipulating outcomes, especially in elections and war scenarios, and doubts enforcement of existing anti‑insider‑trading rules. While acknowledging their informational value, the overall stance is critical, suggesting broader prohibitions or stronger regulation are necessary because targeted legislation is unlikely to curb corruption or manipulation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47291406" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/karpathy/autoresearch" target="_blank">Autoresearch: Agents researching on single-GPU nanochat training automatically</a>
+        </h2>
+        <span class="article-meta">
+          55 points • by simonpure • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository karpathy/autoresearch demonstrates autonomous AI‑driven experimentation on a single‑GPU nanochat training setup. It provides three core files: prepare.py (fixed constants, data download, BPE tokenizer, dataloader, and evaluation utilities, not to be edited), train.py (the full GPT model, Muon + AdamW optimizer, and training loop, which the AI agent may modify—architecture, hyperparameters, batch size, etc.), and program.md (which contains baseline instructions for the agent and is edited by the human. Training runs for a strict 5‑minute wall‑clock budget per experiment, using val_bpb (validation bits per byte) as the performance metric; lower values are better and are independent of vocabulary size. The setup requires a single NVIDIA GPU (tested on H100), Python 3.10+, and the uv project manager. Installation steps are: install uv, sync dependencies, run prepare.py once, then execute train.py to verify operation before entering autonomous research mode. Platform support is limited to single‑GPU CUDA; extensions for CPU, MPS, or other devices are not provided but can be referenced from the parent nanochat repository. The code is MIT‑licensed and intended as a minimal, self‑contained demo of autonomous research loops.
+          </div>
+          <a href="https://github.com/karpathy/autoresearch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on using autoresearch to locate optimal models within time and hardware limits, with participants expressing curiosity about performance on high‑end GPUs and concern that the best short‑run models may be too small for emergent capabilities. Several comments compare the approach to conventional hyper‑parameter optimization, questioning whether LLM‑driven changes are systematic or random and how they stack up against methods like Bayesian optimization. Interest in broader automation, Jupyter integration, and scaling is evident, while some view current gains as modest and note similarity to existing suggestions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47291123" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://buttondown.com/suchbadtechads/archive/maxell-life-size-robots/" target="_blank">In 1985 Maxell built a bunch of life-size robots for its bad floppy ad</a>
+        </h2>
+        <span class="article-meta">
+          64 points • by rfarley04 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In 1985 Maxell produced full‑size robot props for a series of print ads that featured the company’s 5¼‑inch floppy disks as restaurant‑style dishes. The robots—one gold, several silver—were articulated, with movable fingers and lighting effects, and appeared in ads for PC Mag, Personal Computer, Byte, and other publications through 1986‑87. The props were later incorporated into the Computer Museum’s “Smart Machines” exhibit (opened 18 June 1987), where they were positioned in a theater, illuminated by a video program, and performed limited motions. Internal museum documents reveal that the Maxell units consumed significant technical support time and that a four‑minute performance cycle often caused viewers to leave before the animation completed. Photographs from the exhibit and subsequent ads show the robots delivering “business advice,” lecturing on floppy‑disk evolution, and participating in a Frankenstein‑themed scene. The campaign concluded with a final “Gold Robot” ad in 1988, after which Maxell’s robots remained part of the museum’s collection, now held by the Computer History Museum.
+          </div>
+          <a href="https://buttondown.com/suchbadtechads/archive/maxell-life-size-robots/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a skeptical view of the Maxwell robot video, suggesting it uses actors in costume rather than functional robotics, and contrast it with Honda’s Asimo, which is regarded as a genuine robot. Personal recollections highlight Maxell’s reputation for high‑quality cassettes and compare the ad’s visual elements to an earlier Samsung commercial featuring a similar robot. Legal context is mentioned regarding Vanna White’s publicity‑rights case, and a factual correction points out a prop inconsistency between the advertised “3½ microdisk” and the visible 5¼‑inch floppy disks.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47247644" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mariozechner.at/posts/2024-07-20-macos-code-injection-fun/" target="_blank">macOS code injection for fun and no profit (2024)</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by jstrieb • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article details a minimal macOS code‑injection project built with CMake that uses Mach APIs to modify a running process. It starts with a simple test program that writes its PID, the address of `foo()` and the address of a global `data` variable to `data.txt`. The injector reads this file, calls `task_for_pid` to obtain a task port (requiring the `com.apple.security.cs.debugger` entitlement), and stores the process information in a `RemoteProcess` struct. The guide shows how to suspend and resume the target using `task_suspend`/`task_resume`, then read and write memory safely with `vm_read_overwrite` and `vm_write`. An example modifies the `data` variable from 123 to 456. For full function replacement, the injector defines a new function `bar()` returning 857 and a marker `barEnd()` to determine its size; the machine code between these symbols is copied into the target’s `foo()` address. Build instructions include code‑signing with entitlements, and the source is hosted on GitHub.
+          </div>
+          <a href="https://mariozechner.at/posts/2024-07-20-macos-code-injection-fun/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects nostalgic recollection of early‑2000s cheat‑engine hacking as an informal introduction to memory management, pointers, and assembly, while noting that the excitement of runtime manipulation persists despite changing operating systems. It contrasts that experience with contemporary development practices, expressing frustration with the iteration overhead of compiled languages for games and simple GUIs and favoring higher‑level frameworks such as Electron or React Native. The author seeks insight from native developers about effective live‑update techniques.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47250500" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
