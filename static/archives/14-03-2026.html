@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/blog/1m-context-ga" target="_blank">1M context is now generally available for Opus 4.6 and Sonnet 4.6</a>
+        </h2>
+        <span class="article-meta">
+          333 points • by meetpateltech • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Opus 4.6 and Sonnet 4.6 now provide a full 1 million‑token context window at standard pricing on the Claude Platform. Pricing remains $5/$25 per million tokens for Opus 4.6 and $3/$15 for Sonnet 4.6, with no premium for longer contexts; a 900 K‑token request costs the same per token as a 9 K request. Key updates:
+
+- Uniform rate limits and throughput across the entire window.
+- Support for up to 600 images or PDF pages per request (up from 100), available on Claude Platform, Azure Foundry, and Google Vertex AI.
+- No beta header needed; requests >200 K tokens are processed automatically.
+- 1 M‑token context included for Claude Code users on Max, Team, and Enterprise plans, reducing the need for compaction or summarization.
+
+Opus 4.6 achieves 78.3 % on MRCR v2, the highest among frontier models at this context length, enabling full‑codebases, extensive documents, or long‑running agent traces to be processed without lossy summarization.
+          </div>
+          <a href="https://claude.com/blog/1m-context-ga" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong enthusiasm for the new 1 million‑token window, especially among Claude Code users who see it enabling longer coding sessions and reducing the need for frequent context compaction. At the same time, users question how much of that window remains usable, noting occasional performance slowdowns and concerns that coherence may degrade near the limit. Pricing draws mixed reactions: the 5× plan offers no discount and several users report rapid token consumption and high costs, prompting worries about expense and response latency. Overall, excitement about capability gains is tempered by practical concerns over quality, speed, and cost.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47367129" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://benzimmermann.dev/blog/algolia-docsearch-admin-keys" target="_blank">I Found 39 Algolia Admin Keys Exposed Across Open Source Documentation Sites</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by kernelrocks • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A security audit uncovered 39 Algolia DocSearch admin API keys exposed on open‑source documentation sites. Algolia’s DocSearch service supplies a search‑only key for frontend embedding, yet many projects mistakenly publish full‑admin keys, granting permissions to add, delete, edit, browse, and even wipe entire indexes. The researcher scraped ~15 000 documentation sites using the public docsearch‑configs repository as a seed, applied regex extraction, conducted GitHub code searches, and ran TruffleHog on 500+ repos, identifying 35 keys via frontend scraping and 4 via git history; all were active. Affected projects include high‑profile open‑source tools such as Home Assistant, KEDA, and vcluster, some with indexes exceeding 100 000 records. Exploitation could poison search results, redirect users to malicious sites, or delete indexes entirely. The root cause is misconfiguration: sites using their own crawlers often embed write/admin keys instead of the intended search‑only keys. Remediation requires verifying and replacing frontend keys with restricted, search‑only credentials.
+          </div>
+          <a href="https://benzimmermann.dev/blog/algolia-docsearch-admin-keys" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express criticism of Algolia’s lack of response to security disclosures and concern that its documentation encourages risky practices by exposing admin‑scoped keys without safeguards. The documentation’s visual graphs are described as unnecessary and potentially distracting. Several remarks highlight the prevalence of public API key misuse, warn that secret‑scanning services can quickly invalidate exposed keys, and note that malicious actors are already developing tools to exploit such vulnerabilities. Overall, the sentiment is wary and critical of the security posture and presentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47371064" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cge84xqjg5lo" target="_blank">Games with loot boxes to get minimum 16 age rating across Europe</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by gostsamo • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            PEGI (Pan‑European Game Information) announced that games featuring loot boxes will receive a mandatory 16+ age rating in the United Kingdom. The decision aligns the rating system’s existing categories—3, 7, 12, 16, and 18—with a focus on age‑appropriateness rather than gameplay difficulty. By assigning 16+ to loot‑box content, PEGI aims to mitigate exposure of potentially gambling‑like mechanics to younger players. The policy applies to all titles distributed in the UK that incorporate random‑reward systems, regardless of genre or platform. This move follows broader regulatory scrutiny of loot boxes as a form of micro‑transaction that can encourage risk‑taking behavior. No other technical details or implementation timelines were provided.
+          </div>
+          <a href="https://www.bbc.com/news/articles/cge84xqjg5lo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express confusion about why digital loot boxes in video games are subject to regulation while physical collectibles such as Pokémon cards are not, highlighting a perceived inconsistency in policy. They identify loot boxes as a form of gambling and question the practice of allowing minors, particularly those aged sixteen and older, to engage in such activities. The overall sentiment calls for broader restrictions on gambling for children, suggesting that current age‑based limits are inadequate and that a more comprehensive ban might be a better initial approach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47371692" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.canirun.ai/" target="_blank">Can I run AI locally?</a>
+        </h2>
+        <span class="article-meta">
+          988 points • by ricardbejarano • 109 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CanIRun.ai is a tool for checking whether a given machine can run specific AI models. The current query returned no matching models, prompting the user to modify search terms or filter settings.
+          </div>
+          <a href="https://www.canirun.ai/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed view of the model‑hardware compatibility tool. Users appreciate the ability to see which models might run locally and praise certain small quantized models, yet many criticize inaccurate RAM and GPU specifications, missing hardware entries, confusing model names, and unreliable token‑per‑second estimates. Repeated requests call for clearer quantization details, better performance benchmarks, filtering by use case, and UI improvements. Several participants note the difficulty of selecting optimal models and question the economic viability of local inference compared with cloud services.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47363754" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://channelsurfer.tv" target="_blank">Show HN: Channel Surfer – Watch YouTube like it’s cable TV</a>
+        </h2>
+        <span class="article-meta">
+          428 points • by kilroy123 • 69 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Channel Surfer – Watch YouTube Like It's Cable TV is a tool that re‑imagines YouTube browsing by presenting videos in a linear, channel‑style interface, mimicking the experience of traditional cable television.
+          </div>
+          <a href="https://channelsurfer.tv" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The response to the channel‑surfing YouTube interface is overwhelmingly positive. Users appreciate its nostalgic cable‑TV aesthetic, the reduction of algorithm‑driven overload, and the ease of random discovery across categorized channels. Many mention the appeal of shared, synchronized viewing, potential for curated playlists, and suitability for background or family use. Minor complaints focus on occasional UI quirks, difficulty importing subscriptions, limited remote or mobile support, and a wish for added features such as live chat or deeper curation. Overall, the consensus is that the concept is enjoyable and useful.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47336100" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.amygoodchild.com/blog/cursive-handwriting-in-javascript" target="_blank">Coding My Handwriting</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by bwoah • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post compares the file size of two font‑generation classes. The block‑print class is 9.7 KB, while the cursive handwriting class, after minification, is 26.1 KB. The larger size stems from multiple SVG paths per character and an algorithm that adjusts point coordinates to align neighboring letters. The author notes that points are defined relative to a default font size of 20, producing decimal values (e.g., x = 14.5). By increasing the default size to 200, coordinates could be expressed as whole numbers (e.g., 145), eliminating decimal points and reducing character count. This scaling change is planned for a future update, along with other potential optimizations. An image labeled “Amy Goodchild” accompanies the text.
+          </div>
+          <a href="https://www.amygoodchild.com/blog/cursive-handwriting-in-javascript" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the clean, adaptable handwriting demonstrated, noting its impressiveness even for those with dysgraphia and highlighting how alignment influences readability. Readers show enthusiasm for further exploration, particularly wanting to see the font applied in code contexts and to experiment with it using neural‑network techniques as a learning exercise. Overall, the feedback is positive and curious, focusing on potential practical extensions rather than criticizing the current presentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47310815" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/TomBadash/MouseControl" target="_blank">Mouser: An open source alternative to Logi-Plus mouse software</a>
+        </h2>
+        <span class="article-meta">
+          219 points • by avionics-guy • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Mouser is an open‑source, local alternative to Logitech Options+ for the Logitech MX Master 3S mouse. It runs on Windows 10/11 and macOS 12+, requires no Logitech software, and stores all configuration in a local JSON file. Key capabilities include:
+
+- Remapping all six programmable buttons with 22 built‑in actions (navigation, editing, media, etc.).
+- Per‑application profiles that auto‑switch when the foreground app changes (detected via periodic GetForegroundWindow polling).
+- DPI control (200–8000) and independent vertical/horizontal scroll inversion, synchronized via HID++.
+- Full HID++ 2.0 gesture‑button support over Bluetooth and a three‑tier fallback (raw input, middle‑click redirection).
+- Low‑level Windows mouse hook (SetWindowsHookExW, WH_MOUSE_LL) and macOS CGEventTap for event interception; key simulation uses SendInput (Windows) or Quartz events (macOS).
+- Qt Quick UI with interactive mouse diagram, system‑tray control, and real‑time connection status.
+- Portable build via PyInstaller; source installation uses Python 3.10+, PySide6, hidapi, pystray, Pillow.
+
+The repository includes core modules (engine, mouse_hook, hid_gesture, key_simulator, config, app_detector) and UI QML files. Contributions focus on extending support to other HID++ devices, improving scroll inversion, and porting to Linux.
+          </div>
+          <a href="https://github.com/TomBadash/MouseControl" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong dissatisfaction with Logitech’s Options+ software, criticizing its bloat, telemetry, frequent updates, and poor macOS permissions, while noting occasional functional adequacy but high resource use. Users highlight a demand for open‑source or third‑party replacements, citing tools such as MacMouseFix, BetterTouchTool, Piper, LinearMouse, and similar utilities that offer remapping, smooth scrolling, and device‑switching features. Several remarks note missing capabilities compared with Options+, especially macro and chord support, and concern about long‑term maintenance of community‑driven alternatives. Overall sentiment favors alternatives and calls for more reliable, lightweight solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47368033" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tomshardware.com/tech-industry/qatar-helium-shutdown-puts-chip-supply-chain-on-a-two-week-clock" target="_blank">Qatar helium shutdown puts chip supply chain on a two-week clock</a>
+        </h2>
+        <span class="article-meta">
+          459 points • by johnbarron • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.tomshardware.com/tech-industry/qatar-helium-shutdown-puts-chip-supply-chain-on-a-two-week-clock" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments coalesce around anxiety over the U.S. divestment of its strategic helium reserve, fearing supply constraints for semiconductor, medical‑imaging and diving applications and anticipating price spikes. Contributors also express skepticism toward official inflation figures, citing sharply higher local cost increases for fuel, coffee and hardware. Geopolitical tensions in the Persian Gulf are linked to broader supply‑chain volatility, with criticism of policy decisions and concerns that disruptions could ripple into technology sectors and exacerbate economic instability. Overall sentiment is markedly apprehensive and critical.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47363584" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Hammerspoon/hammerspoon" target="_blank">Hammerspoon</a>
+        </h2>
+        <span class="article-meta">
+          228 points • by tosh • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Hammerspoon is a macOS automation framework that connects the operating system to a Lua scripting engine. Its functionality derives from a suite of extensions that expose specific system APIs, allowing users to write Lua scripts to control various aspects of macOS. Installation can be performed by dragging the downloaded Hammerspoon.app into /Applications or via Homebrew (`brew install hammerspoon --cask`). After installation, users create ~/.hammerspoon/init.lua to load custom scripts. The project originated as a fork of Mjolnir, which emphasized minimalism and external extension management; Hammerspoon seeks a more integrated experience. Development goals include expanding coverage of system APIs across extensions, improving integration between extensions, and delivering a smoother overall user experience. Continuous integration and code coverage metrics are displayed on the project page.
+          </div>
+          <a href="https://github.com/Hammerspoon/hammerspoon" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a strongly positive consensus: users rely on Hammerspoon as an essential, versatile automation layer for macOS, praising its Lua‑based scripting, extensive hotkey and window‑management capabilities, and the rich ecosystem of spoons. Many share detailed personal workflows and express enthusiasm for community contributions and tutorials. Minor concerns appear around the planned shift to JavaScript and occasional limitations such as space switching without disabling SIP, but overall the tool is viewed as superior or complementary to alternatives like Yabai, Keyboard Maestro, or AppleScript.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47367932" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cra.mr/optimizing-content-for-agents/" target="_blank">Optimizing Content for Agents</a>
+        </h2>
+        <span class="article-meta">
+          4 points • by vinhnx • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Optimizing content for AI agents involves tailoring responses to the constraints of frontier models, which often limit context size and favor concise, structured data. Key practices include:
+
+- Providing a content‑negotiation hook (e.g., `Accept: text/markdown`) so agents receive raw markdown instead of HTML, reducing tokenization overhead and improving parsing accuracy.  
+- Stripping browser‑only elements such as navigation scripts and JavaScript, and emphasizing link hierarchy to aid navigation.  
+- Supplying programmatic entry points (MCP servers, CLI, API) when a human‑oriented page would otherwise require authentication, enabling agents to access structured data without HTML parsing.  
+- Designing “skill” files in markdown that define prompts for code‑review agents (as used in Sentry’s Warden), following the `agentskills.io` specification.
+
+Sentry’s implementation demonstrates these principles: their docs are served as true markdown, their site returns JSON with MCP endpoints for agents, and Warden delivers markdown‑based skill definitions for automated code analysis. Continuous monitoring of agent behavior is advised to adapt optimizations over time.
+          </div>
+          <a href="https://cra.mr/optimizing-content-for-agents/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Since no comments were supplied, there is no source material from which to extract sentiment, themes, or collective opinions. Without aggregated input, no consensus, patterns, or dominant viewpoints can be identified, and any attempt to infer perspectives would be unfounded. Consequently, a summary of opinions cannot be generated in the absence of actual comments.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47372672" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
