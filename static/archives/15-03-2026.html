@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://agelesslinux.org/" target="_blank">Ageless Linux – Software for humans of indeterminate age</a>
+        </h2>
+        <span class="article-meta">
+          402 points • by nateb2022 • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Ageless Linux is a minimal Linux “distribution” consisting of a bash script that edits /etc/os‑release to rename the system and installs a stub age‑verification API. It positions itself as an “operating system provider” under California’s AB 1043, which mandates age collection for child users and imposes civil penalties per “affected child.” The project argues that the law’s definitions are so broad that a simple script can trigger regulatory obligations, exposing volunteer Linux distributions to selective enforcement. Ageless Linux pledges to publish removal scripts or forks that strip age‑verification components (e.g., D‑Bus interfaces, AccountsService prompts) from other distributions if they implement such features. It offers two modes: a standard stub at /etc/ageless/age‑verification-api.sh that exits with an error, and a “flagrant” mode with no API. The maintainers claim the effort is not a legal defense but a test case to force clarification on whether a script qualifies as an operating‑system provider, whether devices like Raspberry Pi count as “general‑purpose computing devices,” and how “affected child” fines can be applied.
+          </div>
+          <a href="https://agelesslinux.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments broadly criticize the California age‑verification mandate as unnecessary, intrusive and poorly suited to open‑source operating systems, arguing that parental controls or existing OS mechanisms should suffice. Many view the law as a product of lobbying and government overreach that threatens privacy and civil liberties, while some acknowledge the technical feasibility of a simple age flag but question its effectiveness and enforcement. A recurring theme is the tension between regulatory intent to protect minors and the tech community’s resistance to mandated compliance, with occasional calls for alternative, privacy‑preserving solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47381791" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cg4g7kn99q3o" target="_blank">Treasure hunter freed from jail after refusing to turn over shipwreck gold</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by tartoran • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A treasure hunter was released from jail after refusing to surrender gold recovered from a mid‑19th‑century shipwreck. The wreck, carrying a reserve of gold intended for eastern‑coast banks, sank to a depth of about 7,000 feet, killing all 425 passengers and crew aboard. The loss of the treasure contributed to the financial panic of 1857. The hunter’s imprisonment and subsequent freedom are tied to his refusal to turn over the recovered gold. The accompanying image captions (gold bars, a woman, a building sign, satellite view of Kharg Island, a 2026 explosion in Fujairah, and US Marines training) are unrelated visual content.
+          </div>
+          <a href="https://www.bbc.com/news/articles/cg4g7kn99q3o" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express curiosity and mild amusement about the case, noting the suspects’ decision to remain in Florida rather than flee with the recovered coins. Readers highlight the legal system’s ability to eventually free the individuals despite lengthy imprisonment, and several raise questions about any legal duty to surrender discovered treasure. Overall, the discussion centers on the intrigue of the legal outcome, the practicalities of asset recovery, and the anticipation that the situation will resolve over time.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47383804" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://s4dbrd.github.io/posts/how-kernel-anti-cheats-work/" target="_blank">How Kernel Anti-Cheats Work: A Deep Dive into Modern Game Protection</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by davikr • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Kernel anti‑cheat solutions run at ring 0 to overcome the inherent limitations of user‑mode protection, which can be bypassed by kernel‑level cheats or hypervisors. Modern implementations adopt a three‑component model: (1) a kernel driver that registers callbacks (ObRegisterCallbacks, PsSetCreateProcessNotifyRoutineEx, PsSetCreateThreadNotifyRoutine, PsSetLoadImageNotifyRoutine) to monitor process/thread creation, handle access, and image loading; (2) a SYSTEM‑privileged user‑mode service communicating with the driver via IOCTLs and handling networking, telemetry, and bans; (3) a game‑injected DLL that performs in‑process checks and exchanges data through named pipes or shared memory sections. Major anti‑cheats—BattlEye (BEDaisy.sys), EasyAntiCheat, Riot’s Vanguard (vgk.sys), and FACEIT AC—differ mainly in driver load timing (runtime vs boot‑start) and driver‑allowlist policies. Boot‑time loading (e.g., Vanguard) enables observation of all subsequent driver loads, while runtime loading (BattlEye, EAC) relies on demand‑start drivers. Drivers must satisfy Windows Driver Signature Enforcement, typically using EV certificates and WHQL approval. Cheat developers counter these measures with BYOVD exploits, hypervisor‑level attacks, and PCIe DMA devices, prompting continual escalation in detection techniques.
+          </div>
+          <a href="https://s4dbrd.github.io/posts/how-kernel-anti-cheats-work/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong concern about game anti‑cheat software that operates with high‑level system privileges, highlighting privacy risks such as covert screen captures, data exfiltration over unencrypted channels, and kernel‑level drivers that can be exploited. Authors criticize the practice of granting such access, argue that games should be sandboxed or virtualized to limit system interaction, and question the effectiveness of existing security measures like remote attestation. Overall, the sentiment is distrustful of current anti‑cheat implementations and calls for more robust, isolated solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47382791" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.airbus.com/en/newsroom/press-releases/2026-03-airbus-is-preparing-two-uncrewed-combat-aircraft-from-kratos-for-first-flight-with-a-european" target="_blank">Airbus is preparing two uncrewed combat aircraft</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by phasnox • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Airbus aims to deliver an operational Uncrewed Collaborative Combat Aircraft (UCCA) to the German Air Force by 2029, using two Kratos‑acquired Valkyrie prototypes fitted with the European‑sourced Multiplatform Autonomous Reconfigurable and Secure (MARS) mission system. MARS incorporates the AI‑driven “MindShare” software, which substitutes a pilot and can coordinate mixed manned‑unmanned mission groups. The first Airbus‑variant Valkyrie, slated for a maiden flight in 2026, retains the original dimensions (9.1 m length, 8.2 m wingspan) and performance (MTOW ≈ 3 t, >5 000 km range, ceiling 45 000 ft). The system is designed for autonomous operation or integration with Eurofighter command aircraft via enhanced Litening 5 targeting pod connectivity and minor avionics updates, enabling manned‑unmanned teaming. Intended roles include kinetic and non‑kinetic missions, with initial focus on delivering credible combat air power quickly and affordably. Airbus and Kratos emphasize sovereign European technology, reduced development time, and “affordable mass” production.
+          </div>
+          <a href="https://www.airbus.com/en/newsroom/press-releases/2026-03-airbus-is-preparing-two-uncrewed-combat-aircraft-from-kratos-for-first-flight-with-a-european" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the development of “loyal‑wingman” unmanned aircraft integrated with manned fighters via Airbus’s MARS architecture, highlighting its potential for software‑defined, networked operations and EU defense‑industry growth. Concerns are raised about the increased radar signature of drone formations, the reliability of command‑and‑control links, rules‑of‑engagement without a human‑in‑the‑loop, and the true cost‑effectiveness of “attritable” platforms. Opinions vary between optimism about technological validation and skepticism regarding practical deployment challenges and expense. Overall, the comments balance interest in the concept with caution about its operational implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47382277" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ayushtambde.com/blog/tree-search-distillation-for-language-models-using-ppo/" target="_blank">Tree Search Distillation for Language Models Using PPO</a>
+        </h2>
+        <span class="article-meta">
+          19 points • by at2005 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post investigates whether search‑distillation can boost language‑model reasoning. Using parallel Monte‑Carlo Tree Search (MCTS) over “Tree‑of‑Thoughts” reasoning steps, the author searches Qwen‑2.5‑1.5B‑Instruct on the combinatorial game Countdown, then distills the selected trajectories into the model via an online PPO loop (CISPO loss). Nodes represent contiguous token blocks (steps or answers); action priors are derived from summed log‑probs, and a learned value head (MLP + tanh) guides expansion. Trajectories are chosen greedily by maximum visit count after M iterations and stored in a shared buffer for PPO training (AdamW, KL regularisation, dense reward = 1 − 2·min(|t−p|/t,1)). Evaluation (mean@16) without a search harness yields 11.3 % success, outperforming a CISPO baseline (8.4 %) and a best‑of‑N (7.7 %) reference. Experiments run on an 8 × H100 node (six generators, two trainers) with Rust workers, gRPC inference, and Redis streaming. The author notes higher inference compute for MCTS, potential small‑model effects, and plans to scale workers, iterations, and model size.
+          </div>
+          <a href="https://ayushtambde.com/blog/tree-search-distillation-for-language-models-using-ppo/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The submitted comments contain only placeholder markers without any substantive text, providing no material for analysis. Consequently, there are no discernible sentiments, themes, or viewpoints to aggregate, and no consensus or patterns can be identified from the given input.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47383059" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://terrytao.wordpress.com/2026/03/13/mathematics-distillation-challenge-equational-theories/" target="_blank">Mathematics Distillation Challenge – Equational Theories</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by picafrost • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Equational Theories Project (ETP) formalized over 22 million true‑false statements in universal algebra using Lean and automated theorem provers. Building on this dataset, the SAIR Foundation, with board member Damek Davis, has launched the Mathematics Distillation Challenge. Participants must design a cheat sheet ≤10 KB that raises the accuracy of inexpensive open‑source models on a public benchmark of 1 200 universal‑algebra true‑false problems (1 000 easy, 200 hard) from the baseline ~50 % to the highest possible rate (early results show 55‑60 % with prompting). Submissions close 20 April; the top 1 000 entries advance to a second stage involving larger models and requiring full proofs or counterexamples. Evaluation will use a private test set. The competition is coordinated on a dedicated Zulip channel, and aims to capture effective problem‑solving techniques transferable to other mathematical domains. Additional, more collaborative mathematical challenges are planned by SAIR.
+          </div>
+          <a href="https://terrytao.wordpress.com/2026/03/13/mathematics-distillation-challenge-equational-theories/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47374924" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://atgreen.github.io/repl-yell/posts/sbcl-fibers/" target="_blank">SBCL Fibers – Lightweight Cooperative Threads</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by anonzzzies • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            SBCL’s fiber subsystem implements lightweight cooperative threads (fibers) that run on a pool of OS “carrier” threads. Each fiber has its own 256 KB control stack, 16 KB binding stack, and preserves Lisp dynamic bindings, unwind‑protect chains, and condition handlers across suspension. Fibers are created with **make‑fiber**, submitted to a scheduler group, and scheduled via per‑carrier lock‑free Chase‑Lev deques with work‑stealing, enabling scalable multi‑core utilization. The runtime provides a minimal‑overhead context‑switch routine (**fiber_switch**) that saves only callee‑saved registers and incurs no heap allocation. Scheduling supports simple blocking (**run‑fibers**) and dynamic long‑lived workloads (**start‑fibers/submit‑fiber/finish‑fibers**). Fiber‑aware blocking primitives (mutexes, condition variables, semaphores, **wait‑until‑fd‑usable**, **sleep**) detect fiber context and park the fiber instead of blocking the carrier; pinned fibers fall back to OS primitives. Garbage collection integrates via conservative stack scanning and precise binding‑stack scavenging, with safety windows to avoid interruption. I/O multiplexing uses platform‑specific epoll/kqueue abstractions with edge‑triggered one‑shot registration. The design targets sub‑microsecond switches, low per‑fiber memory, and tens of thousands of concurrent fibers.
+          </div>
+          <a href="https://atgreen.github.io/repl-yell/posts/sbcl-fibers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a desire for clearer documentation on the memory‑arena feature, noting that existing official resources provide limited guidance on its usage. There is a expressed preference for the term “fiber” rather than “green threads,” accompanied by light‑hearted remarks about naming conventions. Despite the documentation gap and terminology debate, the overall tone remains positive, acknowledging appreciation for the feature’s presence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47382398" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/xodn348/han" target="_blank">Show HN: Han – A Korean programming language written in Rust</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by xodn348 • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Han is a statically‑typed, compiled language whose entire syntax uses Korean Hangul keywords (e.g., 함수, 만약, 반복, 변수). Implemented in Rust, the toolchain includes a lexer, recursive‑descent parser, AST, tree‑walking interpreter, and a code generator that emits plain‑text LLVM IR, which clang then compiles to native binaries. The language supports:
+
+- Primitive types: 정수, 실수, 문자열, 불, 없음.  
+- Arrays with indexing (including negative indices) and methods (.추가, .삭제, .정렬, .역순, .합치기).  
+- Structs with field access and impl blocks; closures with environment capture.  
+- Control flow: if/else (만약/아니면), for loops (반복), while loops (동안), break/continue (멈춰/계속), pattern matching (맞춰).  
+- Error handling via try/catch style (시도/실패).  
+- File I/O (파일읽기, 파일쓰기, 파일추가, 파일존재).  
+- Built‑in math, format strings, generics syntax, and module imports (가져오기).  
+
+The project ships a REPL, LSP server, and VS Code extension. Build requires Rust 1.70+ and clang; the interpreter runs without clang. The repository includes examples, a formal SPEC.md, and 46 tests under an MIT license.
+          </div>
+          <a href="https://github.com/xodn348/han" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong interest in exploring programming languages that use non‑English scripts, especially Korean Hangul, and see the project as a creative extension of LLM‑driven language design. Multiple remarks cite existing Korean languages, note potential ergonomic and input‑method challenges, and ask whether Hangul’s structural features could be leveraged beyond simple keyword substitution. Opinions are generally supportive and curious, with occasional technical questions about compilation speed, symbol handling, and naming, while acknowledging inertia and practical barriers as reasons such languages remain rare.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47381382" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.smithsonianmag.com/science-nature/bumblebee-queens-breathe-underwater-to-survive-drowning-revealing-how-they-can-live-submerged-for-a-week-180988330/" target="_blank">Bumblebee queens breathe underwater to survive drowning</a>
+        </h2>
+        <span class="article-meta">
+          72 points • by 1659447091 • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bumblebee queens (Bombus impatiens) can remain submerged for up to seven days and still survive. Laboratory tests (126 queens, 90 % survival) showed that during diapause the queens lower their metabolic rate to ≈5 % of normal resting levels, reducing oxygen demand. When fully immersed for eight days, water oxygen dropped by 40 % and CO₂ production remained low, indicating active underwater respiration. Post‑submersion, CO₂ output spiked tenfold before returning to baseline, reflecting a recovery from anaerobic metabolism. Lactate concentrations doubled during submersion, confirming that anaerobic pathways supplement oxygen uptake. Researchers hypothesize that queens retain a thin air layer (a “physical gill”) beneath their hairy exoskeleton, facilitating gas exchange, though this has not been directly visualized. The combined use of underwater breathing and anaerobic metabolism likely enables queens to survive winter flooding, but the limits of submersion duration, repeated flood exposure, and long‑term fitness effects remain unknown.
+          </div>
+          <a href="https://www.smithsonianmag.com/science-nature/bumblebee-queens-breathe-underwater-to-survive-drowning-revealing-how-they-can-live-submerged-for-a-week-180988330/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment recounts finding dozens of hibernating bumblebees in stored leaves, emphasizing the insects’ resilience and unexpected behaviors such as flood avoidance and learned use of structures. It cites a recent Royal Society paper on the topic, notes a correction regarding terminology, and critiques the experimental methods used to study drowning, expressing discomfort about insect welfare. It also remarks on excessive image sizes on webpages.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47381011" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://drams.framer.website/journal/from-braun-t3-to-apples-ipod" target="_blank">From Braun T3 to Apple&#39;s iPod (2024)</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by corpano • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Braun T3 pocket radio, released in 1958 by Dieter Rams and Braun, featured a compact, minimalist form with clean lines and simple controls, exemplifying Rams’ emphasis on functional simplicity. In the early 2000s, Apple’s iPod adopted a comparable design language—rectangular shape, streamlined navigation (scroll wheel), and a white‑plastic/metallic finish—reflecting the T3’s influence on portability, usability, and aesthetic restraint. The iPod’s success in reshaping portable music consumption reinforced the enduring relevance of the Braun T3’s principles, which have continued to inform subsequent digital audio devices and broader consumer‑electronics design.
+          </div>
+          <a href="https://drams.framer.website/journal/from-braun-t3-to-apples-ipod" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a generally favorable view of Dieter Rams, noting his lasting influence and invoking admiration, including a reference to a Jony Ive interview discussing Rams’s impact. At the same time, several remarks criticize the post’s execution, pointing out errors such as a misspelled label and describing the content as low quality. The overall tone blends appreciation for Rams with disappointment in the presentation’s polish and accuracy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47325606" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
