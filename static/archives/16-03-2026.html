@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 16, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.michaelgeist.ca/2026/03/a-tale-of-two-bills-lawful-access-returns-with-changes-to-warrantless-access-but-dangerous-backdoor-surveillance-risks-remains/" target="_blank">Canada&#39;s bill C-22 mandates mass metadata surveillance of Canadians</a>
+        </h2>
+        <span class="article-meta">
+          445 points • by opengrass • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bill C‑22, the Lawful Access Act, revises Canada’s lawful‑access framework in two parts. The first section replaces the broad, warrant‑less “information demand” power of Bill C‑2 with a limited “confirmation of service” request that lets police ask telecoms only whether they serve a specific person; any further subscriber data requires a production order signed by a judge, applying a “reasonable grounds to suspect” standard. The bill also codifies rules on voluntary disclosure, challenges, exigent circumstances and foreign requests.
+
+The second part, the Supporting Authorized Access to Information Act (SAAIA), largely retains Bill C‑2’s obligations for electronic service providers (ESPs). Core providers must assist law‑enforcement testing of access capabilities, keep related requests secret, and retain categories of metadata (including transmission data) for up to one year, while being prohibited from retaining content, browsing history, or social‑media activity. An exemption permits non‑compliance when compliance would create systemic vulnerabilities. Oversight is shifted to the Intelligence Commissioner, but concerns remain about security risks, secrecy, and alignment with international regimes such as the Budapest Convention and the CLOUD Act.
+          </div>
+          <a href="https://www.michaelgeist.ca/2026/03/a-tale-of-two-bills-lawful-access-returns-with-changes-to-warrantless-access-but-dangerous-backdoor-surveillance-risks-remains/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion is dominated by concern that Bill C‑22 expands state surveillance by allowing warrant‑free data access and obligating service providers, which many view as a serious erosion of privacy and democratic safeguards. Critics highlight a subjective loophole, potential foreign influence, and risk of abuse, while a minority argue that broader police powers could improve investigations and recover stolen property. Overall the consensus leans toward opposition, citing insufficient safeguards and the threat of a permanent surveillance infrastructure.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47392084" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session" target="_blank">Chrome DevTools MCP</a>
+        </h2>
+        <span class="article-meta">
+          389 points • by xnx • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Chrome DevTools MCP server (M144 beta) now supports an “auto‑connect” feature that lets coding agents attach to an active Chrome instance. By enabling remote debugging at **chrome://inspect/#remote‑debugging** and launching the MCP server with the **--autoConnect** flag, the server requests a remote‑debugging session; Chrome displays a permission dialog and, when approved, shows the “Chrome is being controlled by automated test software” banner. This allows agents to reuse the current browsing session (e.g., avoiding extra sign‑ins) and to inspect selected elements or network requests directly from the Elements or Network panels. Configuration examples (e.g., gemini‑cli) illustrate the required command line and JSON settings. After granting permission, the agent can open pages, capture performance traces, and investigate issues without switching between manual and automated workflows. The announcement notes that further panel data will be exposed to agents in future updates.
+          </div>
+          <a href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong interest in using Playwright‑based agents for low‑overhead web automation while acknowledging the token‑intensive nature of Chrome DevTools MCP and its impact on cost. Many favor direct CLI tools for speed and efficiency, noting that MCP remains useful for discovery and one‑off integrations but can become a “mega token guzzler.” Concerns recur about API brittleness, frequent site changes, authentication handling, and potential terms‑of‑service or security risks. Numerous alternatives and wrappers are shared, highlighting a community focus on balancing performance, stability, and ethical considerations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47390817" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thatshubham.com/blog/news-audit" target="_blank">The 49MB web page</a>
+        </h2>
+        <span class="article-meta">
+          360 points • by kermatt • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article documents how contemporary news sites generate extremely heavy page loads—e.g., a New York Times article triggers 422 network requests and transfers ~49 MB of data, equivalent to downloading ten 5‑MB MP3s. This bloat stems from programmatic ad auctions that download and execute megabytes of JavaScript, continuous tracking beacons, and third‑party overlays. The resulting CPU load, battery drain, and high cumulative‑layout‑shift (CLS) degrade performance and user privacy. Economic pressure to maximize CPMs drives hostile UI patterns: multiple intrusive modals, low‑contrast close buttons, oversized sticky ads, autoplaying video players, and “read‑more” truncations that increase interaction cost and impede readability. The author recommends mitigating these issues by limiting pop‑ups, serializing overlays, reserving fixed‑size ad containers to prevent layout shifts, and consolidating consent/subscribe prompts into non‑blocking elements. Lightweight alternatives such as text‑only sites (e.g., text.npr.org) and RSS feeds illustrate that a user‑centric, low‑bloat experience is technically feasible.
+          </div>
+          <a href="https://thatshubham.com/blog/news-audit" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a broadly negative view of modern web pages, especially news sites, criticizing excessive JavaScript, large media files, intrusive ads and pervasive tracking that inflate page sizes, slow loading, and raise privacy concerns. Users report disabling scripts, employing ad‑blockers or reader modes, and preferring minimalist sites as coping strategies. While many attribute the bloat to ad‑driven revenue models and pressure from product managers, some acknowledge similar issues in enterprise tools and mobile apps. Overall, there is a call for leaner design, better business models, and reduced reliance on heavy client‑side code.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47390945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/" target="_blank">What Is Agentic Engineering?</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by lumpa • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Agentic engineering refers to developing software with the assistance of coding agents—LLM‑based systems that can both generate and execute code (e.g., Claude Code, OpenAI Codex, Gemini CLI). An agent is prompted with a goal, then iteratively produces and runs code until the goal is satisfied; code execution distinguishes these agents from pure text generators. Human engineers focus on problem definition, solution selection, and trade‑off analysis rather than manual coding. Effective use of coding agents requires supplying appropriate tools, specifying problems at the correct level of detail, and continuously verifying and refining outputs. Although LLMs do not self‑learn from errors, agents can be improved by updating prompts and tool harnesses based on observed failures. The approach aims to increase the quantity, quality, and impact of software produced. This guide outlines evolving patterns for working with coding agents, emphasizing reproducible techniques that remain relevant as the technology advances.
+          </div>
+          <a href="https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that agent‑assisted coding is useful for well‑defined, narrowly scoped problems where tests and output formats are clear, but it struggles with evolving requirements and architectural decisions that demand deep domain insight. Participants stress the necessity of separate verification steps, loud failure signals, and human accountability to mitigate alignment and safety risks. The naming debate—whether to call it “agentic coding” or “agentic engineering”—is seen as secondary to recognizing these boundaries. Skepticism about industry hype and the novelty of agents is also expressed, emphasizing that the core concept predates recent LLM advances.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47393908" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tomjohnell.com/llms-can-be-absolutely-exhausting/" target="_blank">LLMs can be exhausting</a>
+        </h2>
+        <span class="article-meta">
+          114 points • by tjohnell • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author reflects on exhaustion when using LLMs such as Claude and Codex and identifies two main technical pain points: degraded prompt quality due to mental fatigue and slow, context‑heavy feedback loops. Fatigue leads to incomplete prompts, interruptions, and poorer model outputs, while iterative tasks (e.g., parsing large files) require repeated re‑parsing, inflating the context window and slowing the cycle. To mitigate these issues, the author recommends:
+
+- Recognize when prompting feels uncertain or impatient and pause to avoid “doom‑loop” degradation.  
+- Write highly descriptive prompts with clear end‑state expectations; confidence in the prompt correlates with better results.  
+- Treat slow feedback loops as the target problem: start a fresh session, define explicit success criteria (e.g., reproduce a failure case within five minutes), and let the LLM propose optimizations.  
+- Apply a test‑driven approach, asking the model to generate minimal reproducible examples and leverage levers for faster iteration, which reduces context consumption and debugging time.
+
+Overall, the piece frames exhaustion as a skill‑management issue, emphasizing disciplined prompting and engineered feedback cycles to improve LLM productivity.
+          </div>
+          <a href="https://tomjohnell.com/llms-can-be-absolutely-exhausting/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that using LLMs for code generation shifts work from writing to intensive verification, creating higher cognitive load and fatigue. Review of AI‑produced code is described as more draining than manual coding, especially under corporate mandates for large pull requests. Several participants suggest mitigating strategies such as test‑driven prompts, limiting concurrent agent sessions, asynchronous workflows, and prompt libraries. Opinions differ on whether the difficulty stems from skill gaps or inherent tool design, but most agree the current workflow can lead to burnout without careful process adjustments.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47391803" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sebastianraschka.com/llm-architecture-gallery/" target="_blank">LLM Architecture Gallery</a>
+        </h2>
+        <span class="article-meta">
+          284 points • by tzury • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The LLM Architecture Gallery compiles visual schematics of a wide range of large language models, illustrating design choices across dense, Mixture‑of‑Experts (MoE), Multi‑Layer‑Attention (MLA), and hybrid decoder families. The collection includes architecture diagrams for models such as Llama 3 8B, OLMo 2 7B, DeepSeek V3 and V3.2, DeepSeek R1, Gemma 3 27B, Mistral Small 3.1 24B, Llama 4 Maverick, Qwen‑3 variants (4B, 8B, 32B, 235B‑A22B, Next 80B‑A3B), SmolLM3 3B, Kimi K2 and Kimi Linear 48B‑A3B, GLM‑4.5 355B, GPT‑OSS 20B/120B, Grok 2.5 270B, MiniMax M2/M2.5 230B, Arcee AI Trinity Large 400B, GLM‑5 744B, Nemotron 3 series, Xiaomi MiMo‑V2‑Flash 309B, Step 3.5 Flash 196B, Nanbeige 4.1 3B, Tiny Aya 3.35B, Ling 2.5 1T, Qwen3.5 397B, and Sarvam 30B/105B. A summary overview figure provides a comparative layout of these architectures.
+          </div>
+          <a href="https://sebastianraschka.com/llm-architecture-gallery/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments praise the gallery’s clear visualization and note that contemporary open‑weight models have largely converged on a dense decoder‑only transformer with similar components, making architectural variations minor. Consensus is that recent capability gains stem chiefly from scaling, refined training pipelines, and reinforcement‑learning techniques rather than fundamental design changes. Viewers express appreciation, request sortable or hierarchical layouts, and suggest extensions such as agent diagrams while acknowledging the resource’s usefulness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47388676" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://man7.org/tlpi/academic/index.html" target="_blank">The Linux Programming Interface as a university course text</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by teleforce • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author notes that, despite not initially targeting the academic market, “The Linux Programming Interface” (TLPI) is already being adopted by university instructors as required or recommended reading for Linux/UNIX system‑programming courses. To improve future editions for educational use, the author is requesting feedback from teachers who employ TLPI. The inquiry asks for institutional details (name, URL), course outlines, academic level (e.g., third‑year, fourth‑year), enrollment numbers, whether the book is mandatory or supplemental, and suggestions for enhancements specific to a university textbook. An accompanying image is referenced only by the alt text “Web Analytics.”
+          </div>
+          <a href="https://man7.org/tlpi/academic/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong approval of TLPI as an optional text for a computer‑science operating‑systems course, describing it as the most comprehensive resource for understanding Linux internals. Users report incorporating its material into lectures, even extracting specific pages for instructional use, indicating a high level of trust in its depth and clarity for teaching purposes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47393388" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.msn.com/en-us/news/us/a-new-bigfoot-documentary-helps-explain-our-conspiracy-minded-era/ar-AA1Yv6px" target="_blank">A new Bigfoot documentary helps explain our conspiracy-minded era</a>
+        </h2>
+        <span class="article-meta">
+          56 points • by zdw • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.msn.com/en-us/news/us/a-new-bigfoot-documentary-helps-explain-our-conspiracy-minded-era/ar-AA1Yv6px" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed view of conspiracies, combining skepticism about specific claims—such as alleged political memos, corporate age‑verification schemes, and cryptid cover‑ups—with acknowledgment that some theories contain elements of truth or become verified over time. Several remarks point to human pattern‑seeking and the ease of debunking myths given modern technology, while others express personal shifts from dismissing to partially accepting conspiratorial ideas. Overall, the discussion balances criticism of sensational claims with a tentative acceptance that certain narratives may later prove factual.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47392547" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://go.dev/blog/inliner" target="_blank">//go:fix inline and the source-level inliner</a>
+        </h2>
+        <span class="article-meta">
+          121 points • by commotionfever • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Go 1.26 introduces a new implementation of the go fix subcommand that includes a source‑level inliner. Unlike compiler‑time inlining, this tool rewrites the source by replacing a function call with a copy of the callee’s body, handling argument substitution, imports, and preserving behavior. It is exposed via a //go:fix inline directive, allowing package authors to annotate deprecated or flawed APIs so that go fix automatically rewrites calls (e.g., replacing ioutil.ReadFile with os.ReadFile). The inliner also supports type and constant forwarding, and is used by gopls for refactorings like “Change signature” and “Remove unused parameter”. Internally it must manage complex cases: parameter elimination, side‑effect ordering, constant‑expression safety, identifier shadowing, unused‑variable elimination, and defer handling (which may require wrapping the callee body in a function literal). The implementation is ~7 kLOC and already generated >18 k changelists in Google’s monorepo, though some transformations remain conservative and may need manual cleanup.
+          </div>
+          <a href="https://go.dev/blog/inliner" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that the Go inline directive functions as a source‑level transformation applied during a go fix step rather than a compile‑time feature, making it most effective within closed, monorepo environments where an organization can rewrite all call sites. While it can reduce deprecated API usage without breaking external code, the approach is viewed as a workaround rather than a clean language addition, raising concerns about potential rewrite quality and the need for clearer documentation of its limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47339463" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://isaacfreund.com/blog/river-window-management/" target="_blank">Separating the Wayland compositor and window manager</a>
+        </h2>
+        <span class="article-meta">
+          242 points • by dpassens • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            River 0.4.0 introduces a non‑monolithic Wayland architecture that separates the compositor from the window manager via the stable river‑window‑management‑v1 protocol. Traditional Wayland compositors combine three roles—display server, compositor, and window manager—mirroring X11’s legacy and requiring WM developers to implement a full compositor. The new protocol grants window managers full authority over window positioning, keybindings, and policy while the compositor retains frame‑perfect rendering, low latency, and all low‑level plumbing. State is divided into “window‑management” (dimensions, focus, bindings) and “rendering” (position, order, decorations) categories, updated atomically in manage and render sequences, eliminating per‑frame round‑trips. Benefits include a lower entry barrier for WM development, crash isolation, ability to use high‑level or garbage‑collected languages without performance loss, and easier debugging. Limitations restrict the model to 2‑D desktop use cases (no VR or heavy visual effects). The protocol is stable, future‑compatible through River 1.0.0, and the project seeks financial support via Liberapay or GitHub Sponsors.
+          </div>
+          <a href="https://isaacfreund.com/blog/river-window-management/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge the solid technical design of separating the compositor from the window manager and view the new protocol as a meaningful step toward simplifying Wayland WM development. However, there is widespread doubt about its adoption beyond River, with concerns that Wayland’s ecosystem remains fragmented by compositor‑specific extensions and that convergence on common standards may take years. Users appreciate River’s simplicity and similarity to X11 tiling managers, yet many cite persistent Wayland pain points—clipboard reliability, remote access, and missing features—as reasons to remain skeptical or prefer X11. Overall sentiment mixes optimism about the design with caution about broader standardization and usability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47388137" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
