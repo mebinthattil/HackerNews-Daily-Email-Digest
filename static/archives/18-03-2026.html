@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://terathon.com/blog/decade-slug.html" target="_blank">A Decade of Slug</a>
+        </h2>
+        <span class="article-meta">
+          465 points • by mwkaufma • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Slug algorithm, created in fall 2016 for GPU‑based rendering of fonts directly from Bézier curves, was detailed in a 2017 JCGT paper and released as version 1.0 of the Slug Library. It has been licensed by numerous game‑industry and visualization companies (e.g., Activision, Ubisoft, Adobe) and is used for high‑quality text and vector graphics in applications such as the C4 Engine and the Radical Pie equation editor. The core rendering pipeline remains unchanged: it computes root eligibility and winding numbers to guarantee robustness against floating‑point artifacts, while rendering without texture atlases. Recent library revisions removed the optional band‑split optimization and adaptive supersampling, simplifying the pixel shader and reducing memory usage. The major addition is **dynamic dilation**, which automatically computes per‑vertex expansion distances in the vertex shader using the current MVP matrix and viewport size, ensuring half‑pixel coverage without excess padding. In March 2026 the author released the Slug patent (US 10,373,352) to the public domain and published reference vertex/pixel shaders under an MIT license.
+          </div>
+          <a href="https://terathon.com/blog/decade-slug.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express strong appreciation for the author’s decision to release the algorithm into the public domain, noting the previous patent constraints that limited its use in open‑source projects. Contributors highlight the technical merits of the approach, especially its GPU‑based Bézier handling and potential advantages over traditional texture‑atlas or SDF methods. There is enthusiasm about future applications in game engines and other graphics tools, with several remarks anticipating broader adoption now that the code is openly available.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47416736" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fidget-spinner.github.io/posts/jit-on-track.html" target="_blank">Python 3.15&#39;s JIT is now back on track</a>
+        </h2>
+        <span class="article-meta">
+          297 points • by guidoiaquinti • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Python 3.15’s JIT has reached its performance targets early, delivering ≈11‑12 % speed‑up on macOS AArch64 and ≈5‑6 % on x86_64 Linux versus the standard interpreter (geometric means; individual results range from a 20 % slowdown to >100 % gain). The improvements stem from several technical and organizational changes:
+
+- **Trace‑recording redesign**: a dual‑dispatch mechanism reduced interpreter bloat, raising JIT code coverage by ~50 % and converting an initial 6 % slowdown into a modest net gain.
+- **Reference‑count elimination**: removing per‑instruction decrement branches cut overhead across the bytecode stream.
+- **Modularization of the JIT pipeline**: front‑end, middle‑end, and back‑end now have multiple active maintainers, lowering the bus factor and enabling contributions from developers with limited JIT experience.
+- **Incremental issue splitting**: large optimization tasks were broken into granular, actionable tickets, attracting 11 contributors who rewrote most interpreter instructions into a JIT‑friendly form.
+- **Infrastructure support**: daily automated JIT runs provide rapid performance feedback, aiding regression detection.
+
+Future goals include free‑threading support in 3.15/3.16 and further speed gains.
+          </div>
+          <a href="https://fidget-spinner.github.io/posts/jit-on-track.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects strong interest in a CPython JIT while noting significant gaps in high‑level documentation and clarity around implementation details such as trace projection, refcount elimination, and dual‑dispatch mechanisms. Contributors express frustration with the perceived difficulty of adding a JIT to Python compared with other dynamic languages, cite problematic features like __del__, and question funding and ecosystem support. There is optimism about upcoming free‑threading and hybrid optimization approaches, but also skepticism about Python’s long‑term relevance and the readability of current performance graphs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47416486" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tomshardware.com/video-games/console-gaming/microsofts-unhackable-xbox-one-has-been-hacked-by-bliss-the-2013-console-finally-fell-to-voltage-glitching-allowing-the-loading-of-unsigned-code-at-every-level" target="_blank">Microsoft&#39;s &#39;unhackable&#39; Xbox One has been hacked by &#39;Bliss&#39;</a>
+        </h2>
+        <span class="article-meta">
+          575 points • by crtasm • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.tomshardware.com/video-games/console-gaming/microsofts-unhackable-xbox-one-has-been-hacked-by-bliss-the-2013-console-finally-fell-to-voltage-glitching-allowing-the-loading-of-unsigned-code-at-every-level" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments acknowledge that the original 2013 Xbox’s security was unusually robust, keeping it largely unhacked for years, but view the recent successful exploit as a significant technical achievement that could enable emulation and homebrew development. Many consider the “unhackable” label misleading, emphasizing that physical access always presents vulnerabilities and that no system is flawless. There is both admiration for Microsoft’s layered defenses and criticism of the notion that such measures guarantee absolute protection, alongside curiosity about how future consoles or other hardware might be affected.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47413876" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openhardware.directory" target="_blank">More than 135 open hardware devices flashable with your own firmware</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by iosifnicolae2 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page titled “Open Hardware Directory – Flashable IoT Boards & Devices” appears to be a listing or catalog of open‑hardware, flash‑able Internet‑of‑Things boards and related devices, intended as a reference for developers and hobbyists seeking hardware that can be programmed or re‑flashed. No further details are provided.
+          </div>
+          <a href="https://openhardware.directory" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The overall view acknowledges the appeal of the new microcontroller development board but notes it currently lacks the extensive device coverage found in established repositories such as the large flashable device collections and community projects for Tuya and ESP32 devices. Pricing is perceived as significantly higher than typical alternatives, and the presentation as an advertisement feels unconventional. Nevertheless, the accompanying resources and community efforts are regarded positively.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47369883" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mistral.ai/news/forge" target="_blank">Mistral AI Releases Forge</a>
+        </h2>
+        <span class="article-meta">
+          173 points • by pember • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Forge is Mistral AI’s enterprise platform for building AI models that embed an organization’s proprietary knowledge. It supports training on internal documentation, codebases, structured data, and operational records, enabling models to learn domain‑specific vocabulary, reasoning patterns, and constraints. The platform offers a full model lifecycle: pre‑training on large internal datasets, post‑training fine‑tuning for specific tasks, and reinforcement learning for alignment with internal policies, evaluation criteria, and operational objectives. Forge ensures strategic autonomy by keeping models, data, and intellectual property under the enterprise’s control, which is critical for regulated environments. It accommodates dense and mixture‑of‑experts (MoE) architectures, as well as multimodal inputs, allowing optimization of performance, cost, and latency. Designed for “agent‑first” usage, Forge provides infrastructure, data‑pipeline recipes, and automated hyperparameter tuning accessible via plain‑language commands. Continuous improvement is enabled through reinforcement‑learning pipelines and internal benchmark evaluation. Use cases span government, finance, software development, manufacturing, and large enterprises, where custom models improve policy analysis, compliance, code assistance, diagnostics, and workflow automation. Forge positions AI models as strategic assets that evolve with an organization’s knowledge and processes.
+          </div>
+          <a href="https://mistral.ai/news/forge" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed but generally cautious optimism toward Mistral’s “pre‑training” and “post‑training” services. Many recognize the appeal of domain‑specific models and custom engineering for European customers, while questioning the feasibility and cost of true pre‑training versus extensive fine‑tuning or synthetic data generation. Concerns arise about vendor lock‑in and the need for abstraction layers to swap providers. Interest is expressed in the specialization trend, the potential of RAG versus fine‑tuning, and the practical limits of frequent model updates.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47418295" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/gsd-build/get-shit-done" target="_blank">Get Shit Done: A Meta-Prompting, Context Engineering and Spec-Driven Dev System</a>
+        </h2>
+        <span class="article-meta">
+          221 points • by stefankuehnel • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository provides “Get‑Shit‑Done” (GSD), a lightweight meta‑prompting and context‑engineering framework for Claude Code and other code‑generation models (OpenCode, Gemini CLI, Codex, Copilot, Antigravity). It mitigates “context rot” by supplying each model with a complete, XML‑formatted prompt that includes specifications, requirements, and verification steps, keeping the model’s context window small and fresh. Installation is via `npx get-shit-done-cc@latest`, with options for runtime selection (Claude, OpenCode, Gemini, etc.) and global or local deployment. The workflow consists of:
+
+* `gsd:map-codebase` – parallel agents analyze the existing codebase.  
+* `gsd:new-project` – creates PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md and a planning directory.  
+* Phase execution (`gsd:discuss-phase`, `gsd:plan-phase`, `gsd:execute-phase`, `gsd:verify-work`) iteratively gathers detailed specifications, performs domain research, generates atomic XML‑based task plans, runs them in parallel “waves”, and commits each task separately.  
+
+Verification checks code presence and test results, spawning debug agents for failures. Additional commands support quick mode, milestone management, branching strategies, and sensitive‑file protection via Claude settings. The system is open‑source (MIT) and used by engineers at major tech companies.
+          </div>
+          <a href="https://github.com/gsd-build/get-shit-done" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed view of AI‑assisted coding frameworks. Users note that planning‑heavy tools like GSD or Superpowers can boost productivity for simple or green‑field tasks but often consume many tokens, add ceremony, and struggle with larger, evolving codebases. Many cite the need for plan and work review agents, better memory handling, and robust verification to avoid security lapses. A recurring demand is for concrete production examples and benchmarks. While some report successful deployments and speed gains, others find the overhead outweighs benefits and prefer direct prompting or simpler workflows.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47417804" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/adammiribyan/zeroboot" target="_blank">Show HN: Sub-millisecond VM sandboxes using CoW memory forking</a>
+        </h2>
+        <span class="article-meta">
+          71 points • by adammiribyan • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Zeroboot provides sub‑millisecond sandboxing for AI agents by launching each sandbox as a full KVM virtual machine with hardware‑enforced memory isolation. A one‑time “template” step boots a Firecracker VM, pre‑loads the desired runtime, and snapshots its memory and CPU state. Subsequent forks create new KVM VMs in ~0.8 ms by memory‑mapping the snapshot with `MAP_PRIVATE` (copy‑on‑write) and restoring the saved CPU registers. The resulting VMs are isolated from each other despite sharing the snapshot base. The project includes SDKs for Python (`from zeroboot import Sandbox`) and TypeScript (`import { Sandbox } from "@zeroboot/sdk"`), allowing code execution via a simple API (`POST https://api.zeroboot.dev/v1/exec`). The prototype is functional but not production‑hardened; contributors are invited to open issues. The code is released under the Apache‑2.0 license.
+          </div>
+          <a href="https://github.com/adammiribyan/zeroboot" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion acknowledges the security risk of duplicated entropy in cloned random number generators while praising the snapshot support added by the Firecracker team. Users report successful experiments with VM cloning, noting reliable operation but considerable setup effort for networking and a preference for clean systemd starts when startup latency is acceptable. There is enthusiasm for applying the technique to lightweight workloads such as Python interpreters, alongside questions about version specificity, CPU limits, memory overhead, and the complexity of scaling snapshots across production nodes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47412569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.inconspicuous.info/p/the-pleasures-of-poor-product-design" target="_blank">The Pleasures of Poor Product Design</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by NaOH • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Uncomfortable is a design project founded in 2011 by Greek architect Katerina Kamprani, producing “deliberately inconvenient” everyday objects such as a fork with a chain handle. Inspired by personal setbacks, Kamprani’s goal was to create humorous, impractical designs that invert conventional user‑experience principles. The website showcases 50‑60 concepts, roughly half rendered digitally and half fabricated as single or limited prototypes; a 2015 collaboration with an ad agency yielded 20 units each of three items, and a 2017 exhibition prompted small‑batch production (up to five pieces per design). Kamprani’s creative process involves spontaneous idea generation and iterative 3D modeling, with feedback from peers. She rejects AI tools, citing a desire to avoid faster, less personal methods. Interactions with disabled users highlighted how ordinary design can be uncomfortable for them, informing her understanding of functional design. Kamprani declines commercial sales to avoid business logistics and to keep the work artistically driven rather than market‑oriented.
+          </div>
+          <a href="https://www.inconspicuous.info/p/the-pleasures-of-poor-product-design" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey appreciation for visually appealing designs that are functionally ineffective, noting a tension between aesthetic allure and practical usability. References to notorious poorly designed interfaces, such as an infamous volume control and a “useless teapot” illustration, illustrate this critique. There is curiosity about deliberately creating uncomfortable or counter‑intuitive command‑line tools, while acknowledging existing examples of intentionally challenging text editors. Overall, the sentiment balances admiration for beauty with frustration over unusability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47420432" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Launch HN: Kita (YC W26) – Automate credit review in emerging markets</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by rheamalhotra1 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights the completion of an automated real‑estate appraisal review tool, noting that careful schema design, multi‑step workflows and limited agent integration addressed technical challenges similar to those in other projects. It also critiques the notion that improving predatory financing is the solution for emerging‑market capital access, arguing that micro‑credit, despite lower returns, is unlikely to scale. Additionally, it points out a linguistic nuance where “Kita” carries an unintended meaning in German, suggesting caution in naming.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47417335" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=3Ploi723hg4" target="_blank">It Took Me 30 Years to Solve This VFX Problem – Green Screen Problem [video]</a>
+        </h2>
+        <span class="article-meta">
+          182 points • by yincrash • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The excerpt is a footer‑style list from a YouTube page. It includes the site title “YouTube” followed by navigation links: About, Press, Copyright, Contact us, Creators, Advertise, Developers, Terms, Privacy, Policy & Safety, How YouTube works, Test new features, and NFL Sunday Ticket. The section ends with a copyright notice “© 2026 Google LLC.” These items represent corporate information, user‑facing resources, and legal or policy links typically provided at the bottom of the YouTube website.
+          </div>
+          <a href="https://www.youtube.com/watch?v=3Ploi723hg4" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express enthusiasm for the new synthetic‑data keying approach, noting impressive results, convenient Photoshop tools, and emerging GUIs that simplify workflow. At the same time, they highlight practical concerns: limited hardware support (only Nvidia), occasional bugs (e.g., glass distortion), and the need for better production lighting to reduce post‑production fixes. Suggestions such as color‑cycling screens, polarized backdrops, or lidar are mentioned as alternatives. Overall sentiment is positive about the technology’s potential but critical of current implementation constraints and on‑set practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47368425" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
