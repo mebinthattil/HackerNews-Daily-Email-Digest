@@ -1,0 +1,505 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://georgelarson.me/writing/2026-03-23-nullclaw-doorman/" target="_blank">Show HN: I put an AI agent on a $7/month VPS with IRC as its transport layer</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by j0rg3 • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://georgelarson.me/writing/2026-03-23-nullclaw-doorman/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively note that the project’s choice of Haiku/Sonnet is questioned for cost efficiency, with several cheaper models cited as viable alternatives. Security and credential isolation are highlighted as important, especially given recent supply‑chain attacks, and the use of IRC is praised for its simplicity and reduced attack surface while also prompting suggestions for simulated IRC or additional monitoring. Opinions are mixed: many express enthusiasm for the concept and its potential applications, whereas others critique reliance on external Claude APIs and raise concerns about prompt injection and data exposure.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47536761" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bethmathews.substack.com/p/why-so-many-control-rooms-were-seafoam" target="_blank">Why so many control rooms were seafoam green (2025)</a>
+        </h2>
+        <span class="article-meta">
+          643 points • by Amorymeltzer • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://bethmathews.substack.com/p/why-so-many-control-rooms-were-seafoam" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a shared nostalgia for the sea‑foam/teal green used in mid‑century industrial, governmental, and aviation interiors, noting its prevalence in paint schemes, control‑room panels, and early computer interfaces. Many praise the hue for its calming effect and alleged reduction of eye strain, while also lamenting the shift toward generic gray‑beige environments and overly minimalist design that diminishes functional affordances. Some participants question the scientific basis of the color‑theory claims, but overall the tone is appreciative of the historical aesthetic and its practical intentions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47518960" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.symbolica.ai/blog/arc-agi-3" target="_blank">From 0% to 36% on Day 1 of ARC-AGI-3</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by lairv • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The blog entry announces that Symbolica’s ARC‑AGI‑3 system achieved a performance rise from 0 % to 36 % on its first day of testing, indicating a rapid initial improvement in the targeted metric. The post positions this result as an early validation of the company’s approach to advancing machine‑learning capabilities beyond conventional deep‑learning techniques. Symbolica describes itself as a research‑focused, venture‑backed startup located in the Bay Area, and invites individuals interested in post‑deep‑learning research and development to join its efforts. The brief description underscores the organization’s focus on pioneering future ML technologies and its openness to recruiting talent motivated by building next‑generation AI systems.
+          </div>
+          <a href="https://www.symbolica.ai/blog/arc-agi-3" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight that the public set of 25 problems is substantially easier than the private evaluation set of 110 problems, and that the associated harness does not satisfy the criteria for the official ARC‑AGI‑3 leaderboard because it is not ARC‑AGI‑specific. Users also express interest in whether others have utilized the Agentica platform, seeking shared experiences and validation. The overall tone remains neutral and informational, with no strong positive or negative sentiment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47538078" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://9to5mac.com/2026/03/26/apple-discontinues-the-mac-pro/" target="_blank">Apple discontinues the Mac Pro</a>
+        </h2>
+        <span class="article-meta">
+          156 points • by bentocorp • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple has removed the Mac Pro from its website and confirmed there are no plans for future Mac Pro hardware. The current Mac Pro, introduced in 2019 with an Intel design and refreshed in June 2023 with an M2 Ultra chip, has not been updated since, remaining priced at $6,999 even after the M3 Ultra launch in the Mac Studio. Apple positions the Mac Studio as its flagship desktop, offering configurations up to an M3 Ultra processor, 32‑core CPU, 80‑core GPU, 256 GB unified memory, and 16 TB SSD. With macOS Tahoe 26.2, Apple added low‑latency RDMA over Thunderbolt 5 for multi‑Mac scaling. The company now markets three desktop Macs and three laptops, indicating a shift away from the Mac Pro line in favor of the Mac Studio and newer laptop models.
+          </div>
+          <a href="https://9to5mac.com/2026/03/26/apple-discontinues-the-mac-pro/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express a mixed view of Apple’s workstation line. Many recall older Mac Pro towers for their modularity, expandability, and reasonable price, and criticize the recent “trash‑can” Mac Pro for its size, lack of PCIe slots, and high cost, seeing it as a step toward non‑upgradable “appliance” Macs. The Mac Studio is praised for its compact form factor and sufficient ports, often being described as the functional successor to the Mac Pro. Some note external Thunder‑bolt/USB‑C solutions mitigate expansion needs, while others lament missed opportunities in AI‑focused, multi‑GPU configurations and feel Apple has drifted from serving professional users.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47535708" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://axeldelafosse.com/blog/agent-to-agent-pair-programming" target="_blank">Agent-to-Agent Pair Programming</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by axldelafosse • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author proposes “loop,” a CLI tool that runs Claude and Codex side‑by‑side in tmux and bridges their communication to emulate pair programming. Drawing on research from Cursor on multi‑agent orchestration, the system designates one model as primary worker and the other as reviewer, allowing subagents to exchange feedback directly. Observations indicate that when both agents agree on a review comment, the signal is strong enough to address 100 % of the feedback, while divergent comments provide additional insight. Loop preserves context across iterations, enables proactive agent interaction, and lets a human operator intervene via the interactive TUI. The author highlights open questions for integrating this workflow into pull‑request processes, such as splitting work across PRs, sharing planning documents, and presenting proof of work. The broader claim is that multi‑agent harnesses should treat agent‑to‑agent communication as a core feature, offering benefits like vendor‑agnostic flexibility and diverse model strengths. The tool is available at https://github.com/axeldelafosse/loop.
+          </div>
+          <a href="https://axeldelafosse.com/blog/agent-to-agent-pair-programming" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes a workflow that pairs different language models for distinct tasks, preferring one for creative generation and another for precise, detail‑oriented work. Users report that initial model outputs are frequently low quality, but employing self‑review mechanisms and dedicated reviewer agents markedly improves results. While the primary model is generally regarded as effective and enjoyable to use, occasional misunderstandings are noted, prompting reliance on the secondary model for direct editing and correction. Overall, the combined approach is viewed as beneficial.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47538190" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cnn.com/2026/03/26/business/anthropic-pentagon-injunction-supply-chain-risk" target="_blank">Judge blocks Pentagon effort to &#39;punish&#39; Anthropic with supply chain risk label</a>
+        </h2>
+        <span class="article-meta">
+          265 points • by prawn • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A U.S. District Judge in California, Rita Lin, issued a 43‑page ruling that indefinitely blocks the Pentagon’s February designation of AI firm Anthropic as a “supply chain risk.” The judge found the label—intended to force contractors to avoid Anthropic’s Claude model—violated Anthropic’s First Amendment and due‑process rights, describing it as retaliation for the company’s public opposition to using its technology in autonomous weapons and mass surveillance. Lin delayed enforcement for one week to permit a government appeal. The designation, previously applied only to firms linked to foreign adversaries, would have required military contractors to prove they did not use Anthropic products, threatening hundreds of millions in contracts. Anthropic praised the decision, emphasizing its intent to work with the government on safe AI. The ruling follows recent courts curbing Defense Secretary Pete Hegseth’s actions that were deemed to infringe on press and congressional free‑speech rights.
+          </div>
+          <a href="https://www.cnn.com/2026/03/26/business/anthropic-pentagon-injunction-supply-chain-risk" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively view the government’s action as overly aggressive and unilateral, praising the judiciary’s willingness to act as a check while expressing doubt that higher courts will be less deferential on national‑security claims. Many anticipate appeals and anticipate limited practical impact on the company involved, seeing the labeling as a symbolic gesture rather than a substantive barrier. Skepticism about procedural motives and political framing appears alongside a contrasting view that the military should retain broad authority, reflecting a split between criticism of overreach and support for executive latitude.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47537228" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unterwaditzer.net/2025/codeberg.html" target="_blank">Moving from GitHub to Codeberg, for lazy people</a>
+        </h2>
+        <span class="article-meta">
+          543 points • by jslakro • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author details a practical migration from GitHub to Codeberg. Codeberg’s repository‑import tool copies code, issues, pull requests, releases, labels and authorship with preserved numbers, making data transfer straightforward. GitHub Pages can be replaced by pushing HTML to a branch served via codeberg.page, though no formal uptime guarantee is provided; alternatives like grebedoc.de and statichost.eu are mentioned. Continuous‑integration is the main challenge: Codeberg lacks free macOS runners and unlimited public‑repo capacity. The recommendation is to self‑host a runner for Forgejo Actions, which uses a syntax and UI similar to GitHub Actions, allowing most existing actions to work unchanged (e.g., referencing dtolnay/rust-toolchain via its GitHub URL). If macOS builds are essential, the author suggests mirroring commits to GitHub and using GitHub Actions to poll and sync CI status back to Codeberg. After migration, the GitHub repository can be archived or its README updated; pushing new commits from Codeberg to GitHub is possible but may retain issue and PR activity on GitHub.
+          </div>
+          <a href="https://unterwaditzer.net/2025/codeberg.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed view of Codeberg: many acknowledge its usefulness for well‑maintained FOSS projects but note its limited private‑repo support, lack of GitHub‑Pages equivalents, and weaker CI options, which deter users with personal or commercial code. Several participants favor self‑hosting Forgejo or moving to GitLab, citing better control, data‑privacy, and CI flexibility. Others appreciate Codeberg’s free, European‑hosted service and its open‑source ethos, yet overall consensus is that it cannot fully replace GitHub for most workflows without additional tooling or migration effort.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47530330" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dobase.co/" target="_blank">Dobase – Your workspace, your server</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by frenkel • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Dobase is a self‑hosted, open‑source workspace platform designed to run on a single VPS using a minimal stack: one Ruby on Rails application, one SQLite database, and one Docker container. It emphasizes data privacy—no analytics, tracking, or third‑party sharing—and allows users to install only the tools they need. Core functionality includes real‑time collaboration across multiple modules such as a Kanban board, email client, team chat, calendar, rich‑text document editor, task lists, and file storage. The interface supports features like due dates, assignee assignment, threaded conversations, file sharing, command‑palette navigation, and detailed card views with comments and attachments. Users can invite collaborators, add custom tools, and navigate via a command palette, providing a modular, privacy‑focused alternative to cloud‑based workspaces.
+          </div>
+          <a href="https://dobase.co/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback criticizes integrated platforms like Clickup for being cumbersome, especially when switching between chat, tickets, and documentation within a single interface, and expresses a preference for dedicated, separate applications for each function. It also notes concerns about the reliability of AI‑generated commit logs and the difficulty of deploying sovereign, open‑source alternatives, hoping for simpler hosting solutions similar to WordPress. Additionally, there is a request for the ability to drag emails onto kanban or todo items and access the original message directly from the task.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47489213" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.trychroma.com/research/context-1" target="_blank">Chroma Context-1: Training a Self-Editing Search Agent</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by philip1209 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper introduces Chroma Context‑1, a 20‑billion‑parameter LLM trained as a dedicated retrieval sub‑agent for multi‑turn, multi‑hop search. Using a staged curriculum that first optimizes recall then precision, the model learns to decompose high‑level queries into sub‑queries, retrieve documents, and actively edit its own context by discarding irrelevant passages to stay within a bounded token budget. Training relies on over 8 k synthetically generated tasks across web, finance, legal, and email domains, created via an automated pipeline that gathers supporting documents, generates obfuscated clues, verifies relevance with an LLM‑judge extraction method, and optionally adds distractors; >80 % of the generated labels align with human judgments. The agent harness provides four tools (search_corpus with dense‑sparse fusion, deduplication, token‑budget tracking, and soft‑threshold pruning) and enforces context limits (e.g., 32 k tokens). Evaluation metrics include recall, precision, F1, trajectory recall, and a binary “final answer found” score, demonstrating that Context‑1 attains frontier‑model retrieval performance at ~10× faster inference and lower cost.
+          </div>
+          <a href="https://www.trychroma.com/research/context-1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey disappointment, describing a recent development involving Chroma’s model as a regrettable setback for the research community. The tone is uniformly negative, emphasizing a sense of loss and concern that the change harms ongoing work. There is consensus that the situation represents a decline rather than progress, with participants expressing sorrow over the perceived negative impact on future research efforts.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47534564" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/resumex/doom-over-dns" target="_blank">DOOM Over DNS</a>
+        </h2>
+        <span class="article-meta">
+          223 points • by Venn1 • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The “doom-over-dns” project stores the complete shareware DOOM WAD in DNS TXT records, compresses it, and splits it into ~1,964 chunks across a Cloudflare zone.  
+- A PowerShell 7 script retrieves the records with `Resolve‑DNSName`, assembles the WAD entirely in memory, and runs the game using a .NET 8 ManagedDoom engine; no files are written to disk.  
+- Setup steps: install PowerShell 7, build the engine (`dotnet publish`), load Cloudflare credentials via `Set‑CFCredential`, and upload chunks using `Publish‑DoomOverDNS.ps1`.  
+- Cloudflare free zones hold 185 chunks each; Pro/Business/Enterprise zones hold 3,400, so a single Pro zone can contain the whole WAD (≈1,199 chunks). Multiple zones can be supplied for free accounts, and the module auto‑distributes chunks.  
+- Uploads support resumption via `Publish‑TXTStripe –Resume`, which validates hashes and continues from the last successful chunk.  
+- The engine uses a framework‑dependent .NET 8 assembly (converted from Native AOT) with stream‑based WAD loading and Win32 P/Invoke for windowing; audio is stubbed with NullSound/NullMusic, avoiding external libraries.
+          </div>
+          <a href="https://github.com/resumex/doom-over-dns" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments recognize DNS as a storage mechanism rather than a computing platform and note that the Doom‑over‑DNS demo exploits this fact without actually running the game on the protocol. Responses range from admiration for the technical creativity and nostalgia for similar hacks—such as SSH tunneling and obscure data‑dropping schemes—to skepticism about practical value, labeling the effort amusing but unnecessary. Several remarks highlight the broader pattern of “can it run Doom?” projects, while others caution that such uses may encourage undesirable abuse of DNS infrastructure. Overall sentiment is mixed curiosity and mild criticism tempered by appreciation of the novelty.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47490705" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
