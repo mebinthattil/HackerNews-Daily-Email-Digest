@@ -1,0 +1,502 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 28, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jai.scs.stanford.edu/" target="_blank">Don&#39;t YOLO your file system</a>
+        </h2>
+        <span class="article-meta">
+          85 points • by mazieres • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Jai is a lightweight sandbox for running AI‑generated commands on a local machine without granting full account access. It gives the current working directory read/write permissions while overlaying the rest of the home directory with a copy‑on‑write layer, leaving original files untouched. Temporary directories (/tmp, /var/tmp) are private; all other paths are read‑only. Jai operates via a single prefix command (e.g., “jai codex”) and requires no Docker images, Dockerfiles, or complex bubblewrap flags.
+
+Three isolation levels let users balance convenience and security, though even the strict mode is not equivalent to a hardened container or VM. Jai is positioned between containers, bubblewrap, and chroot: lighter than Docker, simpler than bubblewrap’s manual namespace setup, and more isolated than chroot (which lacks namespace and credential separation). It is intended for ad‑hoc tasks such as quick coding assistance or running untrusted installer scripts, reducing blast radius but not guaranteeing full confidentiality or protection against determined attackers.
+          </div>
+          <a href="https://jai.scs.stanford.edu/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show cautious optimism toward sandboxed AI agents, praising the ability to confine file‑system access while allowing work in the current directory and noting that such defaults would improve safety. Users express frustration with building C++ tools and request ready‑to‑run binaries. Security concerns focus on agents writing unexpected files, potential privilege escalation, and the need for mechanisms like git‑filtered transfers, overlay directories, or snapshotting to mitigate damage. Alternative sandbox solutions (firejail, seatbelt, safety‑net projects) are mentioned, and calls for clearer UI, documentation, and broader discussion of risks are common.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47550282" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lr0.org/blog/p/macos/" target="_blank">Make macOS consistently bad (unironically)</a>
+        </h2>
+        <span class="article-meta">
+          324 points • by speckx • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post discusses the UI inconsistency of rounded window corners in macOS 26 and proposes a programmatic fix that enforces a uniform corner radius for third‑party GUI applications. The author supplies Objective‑C source that swizzles private NSThemeFrame methods (_cornerRadius, _getCachedWindowCornerRadius, _topCornerSize, _bottomCornerSize) to return a constant radius of 23.0 points. The code is compiled as a universal dynamic library (arm64e + x86_64) with clang, signed, and placed in /usr/local/lib. A launch‑agent plist (com.local.dyld‑inject.plist) sets the environment variable DYLD_INSERT_LIBRARIES to load the library at login via launchctl. Because the tweak modifies system‑level libraries, System Integrity Protection must be disabled, which reduces security. The author frames the change as a way to make macOS 26 “consistently bad” rather than having mixed corner radii across apps, and includes the full compile command, file placement steps, and plist XML needed to activate the tweak.
+          </div>
+          <a href="https://lr0.org/blog/p/macos/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on recent macOS UI changes, especially inconsistent window corner rounding and new tab designs, which many describe as visually unappealing and unnecessary. Performance complaints cite high CPU usage by WindowServer and sluggish dialogs, prompting users to apply tweaks or third‑party tools. Opinions diverge: some dismiss the issues as minor or adapt by using tiling managers, while others prefer alternative operating systems for stability and customization. Discussions also touch on security misunderstandings about System Integrity Protection and broader dissatisfaction with forced design decisions, though a few users remain neutral or indifferent.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47547009" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/sports-betting-is-everywhere-especially-on-credit-reports/" target="_blank">Sports Betting Is Everywhere, Especially on Credit Reports</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by m-hodges • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Since 2018, more than 30 U.S. states have legalized mobile sports betting, generating over $0.5 trillion in wagers. Using anonymized transaction data, the authors compare county‑quarter sportsbook deposits in legal versus non‑legal states. Average deposits per adult rose sharply after mid‑2020, following NFL seasonality and continuing through 2025, while average deposits per bettor plateaued after 2022, indicating that growth is driven by new participants (≈ 3 % of the population). Spillover analysis shows counties within 15 miles of a legal state experience about 15 % of the direct effect—roughly $30 per adult per quarter initially, rising to $40 after three years. Credit‑delinquency data from the NY Fed Consumer Credit Panel reveal that legalization raises the share of accounts 90+ days past due by > 0.5 percentage points three years after adoption (from a 10.7 % baseline) in legal counties, with a smaller but similar increase in nearby illegal counties. The rise is concentrated among borrowers under 40 years (≈ +1.02 pp for credit‑card and +0.55 pp for auto‑loan delinquency). Conditional on the 3 % new bettors, delinquency increases by roughly 10 percentage points. Legal states collected ≈ $3 billion in betting taxes in 2024, which can offset these costs; non‑legal neighboring states bear the credit‑risk spillover without revenue, potentially motivating further legalization.
+          </div>
+          <a href="https://libertystreeteconomics.newyorkfed.org/2026/03/sports-betting-is-everywhere-especially-on-credit-reports/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a generally critical view of expanding sports betting, noting research that links participation to roughly doubled loan‑delinquency risk and questioning whether that effect is sufficiently addressed. Several remarks connect deregulation of gambling to broader liberalization of other vices such as nicotine and alcohol, emphasizing perceived collective costs despite claims of personal liberty. Moral reservations about gambling appear alongside calls for problem‑gambler support, while some contributors request comparative data from jurisdictions where betting has long been legal. Overall, the sentiment leans toward concern over societal impacts and skepticism of market‑driven liberalization.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47516297" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/" target="_blank">AMD&#39;s Ryzen 9 9950X3D2 Dual Edition crams 208MB of cache into a single chip</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by zdw • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            AMD’s Ryzen 9 9950X3D2 Dual Edition expands the company’s “3D V‑Cache” concept by placing 64 MB of stacked L3 cache on both CPU chiplets, eliminating the previous hybrid layout where only one die had the extra cache. The processor therefore totals 208 MB of cache: 16 MB L2, 32 MB L3 per die (64 MB total), plus a 64 MB 3D V‑Cache chunk on each die. Earlier X3D models (e.g., 7900X3D, 7950X3D, 9900X3D, 9950X3D) required driver coordination to schedule cache‑beneficial workloads on the cache‑equipped chiplet, a process that could be error‑prone. By integrating V‑Cache on both dies, AMD claims up to a 10 % performance gain in games and other cache‑sensitive applications compared with the standard 9950X3D.
+          </div>
+          <a href="https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              No comments were supplied to analyze, so a summary of sentiment, themes, or collective opinions cannot be generated. Without any user remarks or discussion points, there are no aggregated viewpoints, agreements, disagreements, or patterns to report. Consequently, the requested 50–100 word overview of comment sentiment cannot be produced in the absence of source material.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47550878" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/c86e3eglv2go" target="_blank">Fear and denial in Silicon Valley over social media addiction trial</a>
+        </h2>
+        <span class="article-meta">
+          83 points • by 1659447091 • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Silicon Valley faces financial uncertainty after a verdict in a social‑media‑addiction lawsuit, prompting concerns about the sector’s exposure. Eric Goldman, associate dean and professor at Santa Clara University School of Law, warned that companies may intentionally downplay the magnitude of potential losses to prevent investor withdrawals. The article’s visual elements include photographs of Mark Zuckerberg in a suit, attorney Mark Lanier before a microphone array, a promotional tech‑news banner, oil‑price data on a mobile screen, ICE officers at Dulles International Airport, and various political‑themed portrait shots. No further details about the trial, settlement amounts, or specific legal arguments are provided in the excerpt.
+          </div>
+          <a href="https://www.bbc.com/news/articles/c86e3eglv2go" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread concern that social‑media platforms are deliberately engineered to be addictive and that this design harms especially younger users, with many blaming profit‑driven corporations for prioritising engagement over wellbeing. Opinions diverge on the adequacy of regulation: some call for strong legal action or bans for children, while others question the feasibility of defining “addictive” and resist government interference. Skepticism appears about isolated insider statements and the effectiveness of current safeguards, and a few participants note personal disinterest or see social media as filling a broader social need.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47550726" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://coloradonewsline.com/briefs/surveillance-pricing-wage-setting/" target="_blank">Colorado House passes bill to limit surveillance pricing and wage setting</a>
+        </h2>
+        <span class="article-meta">
+          72 points • by jprs • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://coloradonewsline.com/briefs/surveillance-pricing-wage-setting/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of the proposed legislation, viewing it as overly broad and likely to impede routine workplace analytics such as HR pay‑band recommendations. Skepticism is voiced about its practical impact, with concerns that enforcement mechanisms are absent and violations would go unchecked. Observers also question how the law might affect dynamic pricing models used by services like rideshare platforms, suggesting the bill could have unintended consequences for pricing transparency. Overall, the sentiment is wary, emphasizing potential overreach and insufficient accountability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47547602" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.pcworld.com/article/3096432/lgs-new-1hz-display-is-the-secret-behind-a-new-laptops-battery-life.html" target="_blank">LG&#39;s new 1Hz display is the secret behind a new laptop&#39;s battery life</a>
+        </h2>
+        <span class="article-meta">
+          147 points • by robotnikman • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            LG Display’s “Oxide 1 Hz” OLED panel can vary its refresh rate from 1 Hz to 120 Hz, allowing the display to drop to a 1 Hz rate when high‑speed updates aren’t needed. LG claims this dynamic range can reduce display power consumption by up to 48 % on a single charge, making the screen the primary factor in laptop battery life. Dell has already integrated the panel as the default option in its XPS lineup, demonstrating early adoption. LG plans to begin mass production of 1 Hz OLED panels by 2027, targeting broader use in laptops and external displays. The technology combines LED‑based OLED construction with ultra‑low refresh rates, approaching e‑ink power efficiency while retaining higher visual quality. It complements other battery‑saving measures such as low‑power CPUs (e.g., Intel’s Panther Lake, Qualcomm Snapdragon X2 Elite). Visual performance at higher rates and potential artifacts remain to be evaluated.
+          </div>
+          <a href="https://www.pcworld.com/article/3096432/lgs-new-1hz-display-is-the-secret-behind-a-new-laptops-battery-life.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed curiosity and skepticism about the claimed 48 % power savings from a 1 Hz refresh mode. Many note that OLED backlight power dominates display consumption, questioning whether reducing controller activity alone yields such gains. Existing variable‑refresh implementations on phones, watches, and laptops are referenced, with doubts about whole‑screen versus zone‑based rate control and potential input lag at very low rates. Overall sentiment leans toward cautious interest, emphasizing the need for real‑world data to assess actual battery impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47495245" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder" target="_blank">Anatomy of the .claude/ folder</a>
+        </h2>
+        <span class="article-meta">
+          393 points • by freedomben • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The .claude folder serves as Claude Code’s configuration hub, with a project‑level copy (committed to Git) and a global ~/.claude copy (personal state). The key file CLAUDE.md is read first and becomes the system prompt; it should contain concise build/test commands, architectural decisions, gotchas, naming and error‑handling conventions, and folder structures, kept under 200 lines. Personal overrides go in CLAUDE.local.md, which is git‑ignored. Large instruction sets can be split into .claude/rules markdown files, optionally scoped by YAML paths to apply only to matching directories. Slash commands are added by placing markdown files in .claude/commands (e.g., review.md creates /project:review); personal commands live in ~/.claude/commands. Skills are more complex workflows defined in subfolders with a SKILL.md descriptor and can include supporting files; they trigger automatically or via /security-review. Agents are isolated sub‑agents with their own system prompt, tool whitelist, and model choice, stored in .claude/agents or ~/.claude/agents. Permissions and tool access are managed in .claude/settings.json (allow/deny lists), with personal overrides in settings.local.json. Session memory and auto‑memory are stored under ~/.claude/projects, while personal preferences reside in ~/.claude/CLAUDE.md. The recommended setup sequence is: initialize CLAUDE.md, add settings.json, create core commands, split rules as needed, and add personal global files. This structure enables consistent, automated AI behavior across team projects.
+          </div>
+          <a href="https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on a preference for lean, minimally‑configured Claude setups, noting that excess skills, documentation, and complex folder structures often degrade performance and increase confusion. Users criticize the over‑prescriptive nature of many guides, the brittleness of Claude’s CLI, and the lack of standard file conventions across model providers, while calling for clearer, reusable standards. Appreciation appears for concise explanations of the .claude directory, but overall sentiment is skeptical of “AI‑slop” content, demanding practical, lightweight tooling and better documentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47543139" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cursor.com/blog/real-time-rl-for-composer" target="_blank">Improving Composer through real-time RL</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by ingve • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Real‑time reinforcement learning (RL) uses live inference tokens from production to generate reward signals that directly update model weights. After initial success with Tab, the method is applied to Composer, allowing a new checkpoint roughly every five hours. The pipeline instruments client interactions, aggregates billions of tokens into rewards, computes weight adjustments, and validates the updated model against internal suites (e.g., CursorBench) before deployment, keeping data largely on‑policy. This approach eliminates train‑test mismatch caused by simulated user models, as real users provide authentic feedback. Reward‑hacking risks are managed by treating invalid tool calls as negative examples and revising the edit‑reward function to prevent avoidance of risky edits. Ongoing work targets longer‑duration task loops, where feedback is less frequent but higher‑fidelity, and explores specialization for specific organizations by leveraging population‑specific interaction data.
+          </div>
+          <a href="https://cursor.com/blog/real-time-rl-for-composer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary expresses mixed feelings, acknowledging the technical ambition of continuous model refinement while questioning the business rationale and long‑term viability. Concerns center on insufficient attribution of underlying models and infrastructure, potential loss of trust, and the difficulty of maintaining consistency, avoiding catastrophic forgetting, and managing costs in real‑time training. Skepticism is voiced about the announced performance gains without longer‑term production evidence, yet the engineering challenge is recognized as significant and noteworthy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47532770" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitchroulette.net/" target="_blank">Show HN: Twitch Roulette – Find live streamers who need views the most</a>
+        </h2>
+        <span class="article-meta">
+          63 points • by ellg • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Twitch Roulette is a platform that identifies live Twitch streams currently attracting 0–2 viewers, aiming to connect users with these low‑viewership broadcasters. Its purpose is to increase exposure for streamers who have little or no audience, thereby helping them gain viewers and improve their streaming experience. The service encourages users to “make someone's day” by watching and supporting these under‑seen streams.
+          </div>
+          <a href="https://twitchroulette.net/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show overall enthusiasm for a random‑stream discovery tool, with many users sharing enjoyable experiences finding diverse Twitch content, including low‑viewership channels and niche games. Suggestions frequently focus on adding user preferences, handling age‑gated or login‑restricted streams, and expanding the concept to platforms like YouTube or audio services. Some remarks note the prevalence of streams with minimal audiences and critique Twitch’s moderation policies, while others provide related resources and express appreciation for the idea’s novelty.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47549160" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
