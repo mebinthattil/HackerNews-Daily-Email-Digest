@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://smcleod.net/2026/03/new-apple-silicon-m4-m5-hidpi-limitation-on-4k-external-displays/" target="_blank">New Apple Silicon M4 and M5 HiDPI Limitation on 4K External Displays</a>
+        </h2>
+        <span class="article-meta">
+          102 points • by smcleod • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple Silicon M4/M5 Macs no longer expose full‑resolution HiDPI modes for 4K external panels. The highest HiDPI mode reported for a 3840×2160 display is 3360×1890 (backing store 6720×3780), whereas M2/M3 machines still list 3840×2160 HiDPI (backing store 7680×4320). Diagnostic data show identical DCP (Display Coprocessor) capabilities on M2 Max and M5 Max (MaxW = 3840, MaxH = 2160, MaxActivePixelRate ≈ 5×10⁸). The limitation originates in the GPU driver layer (AppleDisplayCrossbar), which caps the framebuffer allocation to ~1.75× native resolution instead of the required 2.0×. Attempts to force higher modes via display‑override plists, EDID patching, IOKit registry changes, WindowServer cache clears, or SkyLight private APIs all fail because the driver’s mode‑generation policy is enforced in kernel space and cannot be overridden from userspace. The regression is not hardware‑bound; the M5 Max can drive 8K displays per Apple specs. Remedy requires Apple to adjust dynamic framebuffer allocation or expose a user‑controlled override; users can only file feedback.
+          </div>
+          <a href="https://smcleod.net/2026/03/new-apple-silicon-m4-m5-hidpi-limitation-on-4k-external-displays/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread frustration with macOS’s handling of high‑refresh‑rate 4K displays, noting loss of functionality after system updates and difficulty obtaining reliable support. Users report bandwidth limitations, inconsistent behavior across devices, and the need for third‑party tools or extensive workarounds to achieve desired resolutions. While some successes are mentioned—such as fixes after contacting Apple—overall sentiment is critical of Apple’s responsiveness and documentation, with calls for clearer guidance and better native support for modern monitors.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47569502" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ryelang.org/blog/posts/cognitive-dark-forest/" target="_blank">The Cognitive Dark Forest</a>
+        </h2>
+        <span class="article-meta">
+          308 points • by kaycebasques • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post reflects on a shift from an open, decentralized internet to a consolidated “cognitive dark forest” driven by AI. In 2009 the author used a refurbished ThinkPad, Xubuntu, and public GitHub sharing, assuming ideas were cheap and execution hard, with openness rewarding success. Drawing on Liu Cixin’s *Dark Forest*, it argues that when civilizations (or developers) reveal themselves, larger actors can eliminate or absorb them; thus hiding becomes rational. By 2026 the web is dominated by corporations and governments that monetize data and erode privacy, turning connection from advantage to risk. Large AI platforms now execute code cheaply; every user prompt becomes a data point that maps collective intent, allowing these platforms to anticipate and incorporate novel ideas into their models. Consequently, individual innovation is quickly subsumed, reducing differentiation and discouraging public knowledge exchange. The author warns that continued openness will be privatized, while attempts to resist merely feed the system, creating a self‑reinforcing cycle where the essay itself becomes part of the training data.
+          </div>
+          <a href="https://ryelang.org/blog/posts/cognitive-dark-forest/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to the “cognitive dark forest” claim that AI makes ideas instantly replicable and forces secrecy. Many consider the argument exaggerated, noting that execution, network effects and capital still dominate competition and that similar dynamics existed before AI. Others acknowledge that large models lower barriers for copying simple projects but doubt they fundamentally alter innovation cycles. Suggestions range from embracing open‑source and community‑focused development to protecting work through private sharing or legal licensing. Overall, participants view the article as over‑dramatic, while recognizing some genuine shifts in idea dissemination.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47566442" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://techfixated.com/a-1977-time-capsule-voyager-1-runs-on-69-kb-of-memory-and-an-8-track-tape-recorder-4/" target="_blank">Voyager 1 runs on 69 KB of memory and an 8-track tape recorder</a>
+        </h2>
+        <span class="article-meta">
+          422 points • by speckx • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://techfixated.com/a-1977-time-capsule-voyager-1-runs-on-69-kb-of-memory-and-an-8-track-tape-recorder-4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express strong admiration for Voyager 1 and 2, highlighting their remarkable longevity, minimalist engineering, and the ingenuity required to operate and update them across decades. Viewers note the emotional impact of the missions and related documentaries, while drawing parallels between the probes’ constrained resources and modern software development practices. Critics point to the article’s formatting and perceived AI‑generated tone as offputting, but overall the discussion emphasizes the probes’ inspirational legacy and a desire for future deep‑space endeavors.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47564421" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.inquirer.com/news/philadelphia/smart-glasses-ai-meta-courts-20260326.html" target="_blank">Philly courts will ban all smart eyeglasses starting next week</a>
+        </h2>
+        <span class="article-meta">
+          106 points • by Philadelphia • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The First Judicial District of Pennsylvania will prohibit any smart or AI‑integrated eyewear with video or audio recording capability in all district buildings, courthouses, and offices beginning Monday. The ban applies even to prescription glasses; other recording devices (cell phones, laptops) remain permitted if powered off and stored. Violations may result in denial of entry, removal, or criminal contempt charges, unless a judge grants written permission. The rule targets covert recording that could intimidate witnesses or jurors. Pennsylvania joins other jurisdictions—Hawaii, Wisconsin, North Carolina—that have enacted similar restrictions. Previously, courts have allowed judges discretion over devices; a recent Los Angeles trial forced Meta executives to remove smart glasses after a judge warned of contempt. Market data notes that Ray‑Ban and Oakley now sell AI‑enabled smart glasses under $500, with reported sales of 7 million units in 2025, while Apple plans a release in 2027.
+          </div>
+          <a href="https://www.inquirer.com/news/philadelphia/smart-glasses-ai-meta-courts-20260326.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong distrust of expanding surveillance technologies, especially audio‑enabled cameras in courthouses and smart glasses that can record covertly. There is widespread criticism of the lack of reliable safeguards, worries about violating attorney‑client privilege, and concerns that bans could unintentionally affect users who need glasses for vision or accessibility. The discussion calls for industry standards or outright prohibitions, highlights potential legal and privacy liabilities of commercial use, and broadly condemns the adoption of such devices in public, workplace, and governmental settings.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47569471" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.buchodi.com/chatgpt-wont-let-you-type-until-cloudflare-reads-your-react-state-i-decrypted-the-program-that-does-it/" target="_blank">ChatGPT won&#39;t let you type until Cloudflare reads your React state</a>
+        </h2>
+        <span class="article-meta">
+          378 points • by alberto-m • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cloudflare Turnstile executes a hidden program for every ChatGPT request. The server sends a turnstile.dx field (≈28 KB base64) that is XOR‑decoded with the p_token from the prepare request, yielding 89 VM instructions and a 19 KB encrypted blob. The blob is decrypted with a float literal (e.g., 97.35) embedded in the bytecode, producing a custom 28‑opcode VM script (417–580 instructions). The script gathers 55 properties across three layers:
+
+* **Browser fingerprint** – WebGL vendor/renderer, screen dimensions, hardware concurrency, device memory, font metrics, DOM probing, and localStorage entry 6f376b6560133c2c.
+* **Cloudflare network** – edge headers cfIpCity, cfIpLatitude, cfIpLongitude, cfConnectingIp, userRegion.
+* **React application state** – __reactRouterContext, loaderData, clientBootstrap, which exist only after the ChatGPT SPA is fully hydrated.
+
+The collected data are JSON‑stringified, XOR‑masked, and resolved into the OpenAI‑Sentinel‑Turnstile‑Token header. Turnstile is complemented by a Signal Orchestrator (behavioral event monitoring) and a lightweight proof‑of‑work challenge. The decryption key resides in the payload, making the “encryption” an obfuscation rather than a cryptographic barrier.
+          </div>
+          <a href="https://www.buchodi.com/chatgpt-wont-let-you-type-until-cloudflare-reads-your-react-state-i-decrypted-the-program-that-does-it/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to OpenAI’s new integrity checks. Several users acknowledge the intent to curb abuse and preserve free access, but many describe noticeable friction such as captchas, delayed typing ability, and slower page performance, especially in long conversations. Technical curiosity is evident, with requests for clarification on how Cloudflare Turnstile and client‑side JavaScript detection are integrated and why checks run before user input. Overall, the community balances acceptance of anti‑bot goals against dissatisfaction with the resulting user‑experience impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47566865" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.waterfox.com/blog/15-years-of-forking/" target="_blank">15 Years of Forking</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by MrAlex94 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Waterfox began in 2009 when a 16‑year‑old compiled a 64‑bit build of Firefox and released it on SourceForge, quickly reaching 50 k downloads. Over fifteen years it has accumulated roughly 1 million monthly active users and over 25 million lifetime downloads. The founder studied electronics engineering at York, earned a software‑engineering master’s at Oxford, and later served as VP of Engineering at System1, helping scale the browser team through an IPO before returning Waterfox to independent ownership under BrowserWorks.
+
+Financially, the privacy‑focused browser relies on search‑partner revenue (currently Startpage); loss of third‑party search contracts has caused recent deficits. In 2026 Waterfox introduced a native content blocker built on Brave’s MPL‑2‑licensed ad‑block library (adblock‑rs), running in the main process for speed and integration, while allowing text ads on the default search page to support sustainability. The browser remains free of AI features, focuses on privacy, and expands support for varied architectures, notably ARM64 Linux. Membership in the Browser Choice Alliance underscores its commitment to market competition.
+          </div>
+          <a href="https://www.waterfox.com/blog/15-years-of-forking/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend lighthearted appreciation for the juxtaposition of “15 Years of Forking” with “There is no Spoon” and curiosity about Waterfox, noting many have not encountered it before but find it intriguing. There is also a recurring theme of skepticism toward Waterfox’s decision to include text ads for sustainability, suggesting that while the rationale is acknowledged, some view it as a profit‑driven shift from original ideals. Overall, the tone mixes humor, interest, and cautious criticism of monetization choices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47545607" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/BryanLunduke/DoesItAgeVerify" target="_blank">DoesItAgeVerify: The age verification status of Open Source Operating Systems</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by pkaeding • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository maintains a status list of open‑source operating systems (Linux, *BSD, etc.) concerning legal age‑verification requirements.
+
+- **Jurisdictions with enacted OS‑level age‑verification laws:** Brazil and California.  
+- **Jurisdictions with proposed legislation:** Colorado, Illinois, New York, and Michigan.
+
+Current categorization of operating systems:
+
+1. **Not implementing age verification** – developers have chosen not to add verification or are restricting access in regions where such laws apply.  
+2. **Planning to implement** – developers have announced intent to comply with upcoming laws, but verification features are not yet deployed.  
+3. **Implemented** – as of the latest update, no open‑source OS has fully satisfied the legal age‑verification requirements for Brazil or California.
+
+The document includes an image placeholder (Alt text: “@BryanLunduke”) but provides no additional technical details.
+          </div>
+          <a href="https://github.com/BryanLunduke/DoesItAgeVerify" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express skepticism toward blanket legal mandates for happiness and environmental goals, viewing them as unrealistic and akin to authoritarian control. They raise concerns that mandatory age‑verification features in operating systems could be exploited for tracking or illegal targeting, and warn that such mechanisms might enable overzealous enforcement or privacy violations. There is a preference for satirical critique of forced verification, distrust of centralized authority figures, and interest in open‑source solutions that resist surveillance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47569167" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/anthropics/claude-code/issues/40710" target="_blank">Claude Code runs Git reset –hard origin/main against project repo every 10 mins</a>
+        </h2>
+        <span class="article-meta">
+          204 points • by mthwsjc_ • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Code (v2.1.87, Homebrew Bun binary on macOS 15.4) automatically runs `git fetch origin` followed by `git reset --hard origin/main` in the user’s project directory every 600 seconds. The reset occurs silently, discarding all uncommitted changes to tracked files while leaving untracked files untouched; Git worktrees are not affected. Evidence includes >95 reflog entries exactly at 10‑minute intervals across multiple sessions, live reproduction where a modified tracked file reverts at the next interval, fswatch logs showing lock file creation typical of a fetch‑reset sequence, and lsof confirming only the Claude Code CLI process (PID 70111) has the repository as its CWD. No external `git` binary is invoked, implying the operation is performed programmatically (likely via libgit2) within the Claude Code process. The timer appears tied to session start time, with offsets such as :08, :36, :41, :09. Workarounds are to use Git worktrees or commit changes frequently. The issue seeks clarification from the Claude Code team on the internal mechanism that triggers these periodic resets.
+          </div>
+          <a href="https://github.com/anthropics/claude-code/issues/40710" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey mixed reactions to reports of Claude‑generated git commands resetting repositories. Several contributors view the incident as likely isolated or user‑error, emphasizing insufficient monitoring and suggesting wrappers, remote‑reject policies, or reflog recovery as mitigations. Others stress the probabilistic nature of language models, arguing that deterministic guardrails are needed to prevent destructive actions, while a few treat the situation humorously or as an expected feature of AI‑assisted development. Overall, the discussion balances technical critiques, safety concerns, and skepticism about the issue’s prevalence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47567969" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fi-le.net/nobo/" target="_blank">Interview: Nobonoko, Master of the Minimal Sequencer</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by fi-le • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The interview profiles nobonoko, a creator who composes music exclusively with ultra‑minimal browser sequencers derived from BeepBox—a TypeScript‑based, sub‑2 MB tool whose UI fits on a single screen and uses a “normal” major scale. Despite the limited interface, nobonoko produces complex tracks and albums such as Strawberry+, Gato, Swamp, and Music for Animal Cafés, often reworking earlier pieces and embedding self‑made visual art as contextual clues. His releases inhabit an alternative history populated by anthropomorphic animal characters, blending furry aesthetics with subtle gay themes and a humor‑driven approach that disregards algorithmic optimization. Each finished composition is encoded as a compact URL‑based program (≈23 KB), functioning as both the source and the compiler for the sound. The interview highlights how this minimal software enables extensive artistic expression, world‑building, and a distinctive Gesamtkunstwerk that contrasts mainstream music production practices.
+          </div>
+          <a href="https://fi-le.net/nobo/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47543198" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/chenglou/pretext" target="_blank">Pretext: TypeScript library for multiline text measurement and layout</a>
+        </h2>
+        <span class="article-meta">
+          222 points • by emersonmacro • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Pretext is a pure JavaScript/TypeScript library for measuring and laying out multiline text without accessing the DOM, avoiding costly reflows. It uses the browser’s font engine via canvas to pre‑measure text segments, then performs arithmetic on cached widths. Primary API `prepare(text, font, options?)` does one‑time normalization, segmentation, and measurement, returning an opaque handle; `layout(prepared, maxWidth, lineHeight)` computes paragraph height and line count in ≈0.09 ms for a 500‑item batch (prepare ≈19 ms). Options include `{whiteSpace:'pre-wrap'}` to preserve spaces, tabs, and line breaks. Advanced usage replaces `prepare` with `prepareWithSegments`, enabling `layoutWithLines`, `walkLineRanges`, and `layoutNextLine` for manual line construction, width probing, or variable‑width flow (e.g., around floated images). Supported features cover Unicode, emojis, bidi text, and common CSS white‑space/word‑break rules; `system‑ui` fonts are discouraged on macOS. Helpers include `clearCache()` and `setLocale()`. The library targets normal white‑space, `word-break: normal`, `overflow-wrap: break-word`, and `line-break: auto`, and is usable for DOM, Canvas, SVG, WebGL, and future server‑side rendering.
+          </div>
+          <a href="https://github.com/chenglou/pretext" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The response is overwhelmingly positive, emphasizing how the library dramatically simplifies accurate text‑height calculation by pre‑measuring and caching word segments, handling complex wrapping cases, and avoiding costly reflows. Commenters note its usefulness for responsive layouts, accordions, text bubbles, and datagrids, while also comparing it to existing solutions such as Skia‑wasm, CanvasKit, and emerging CSS properties. Concerns include potential maintenance overhead, inconsistent demo rendering on some browsers, and a desire for native browser support or standardization through APIs like Font‑Metrics. Overall, the consensus views the project as a significant, much‑needed advancement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47556290" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
