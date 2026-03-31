@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">March 31, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/drona23/claude-token-efficient" target="_blank">Universal Claude.md – cut Claude output tokens by 63%</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by killme2008 • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository provides a single CLAUDE.md file that, when placed in a project root, instructs Claude models to suppress default verbosity—removing greetings, restating questions, unnecessary suggestions, smart quotes, and other formatting noise. Benchmarks on Claude (not statistically controlled) show roughly a 63 % reduction in output tokens, e.g., a 384‑token saving across four prompts, with the same factual content preserved. Net token savings occur only in high‑output scenarios because the file itself adds input tokens to each request. It is most beneficial for automation pipelines, repeated structured tasks, and persistent sessions; it is less useful for short queries, casual use, or tasks requiring deep reasoning or guaranteed parseable output (where JSON or tool schemas are preferred). The file can be layered (global ~/.claude/CLAUDE.md, project‑level, subdirectory) to keep rules scoped. Community members can submit rule fixes via GitHub issues; contributions are merged under an MIT license. Installation options include direct curl, cloning the repo, or copying the file.
+          </div>
+          <a href="https://github.com/drona23/claude-token-efficient" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed view of Claude’s coding agents, balancing appreciation for its generally concise, useful output against frustration with perceived verbosity, unnecessary reasoning, and token waste in agentic loops. Users highlight a lack of benchmark data for token‑efficient behavior, discuss external tools for context compression, and compare Claude’s output style unfavorably to more chatty models. Concerns recur about error‑prone self‑healing code, problematic Unicode handling, and the risk that aggressive prompt tweaks could degrade capability, while some remain satisfied with a near‑vanilla setup.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47581701" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan" target="_blank">Axios Compromised on NPM – Malicious Versions Drop Remote Access Trojan</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by mtud • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            StepSecurity discovered two compromised axios releases (axios @1.14.1 and axios @0.30.4) published on 31 Mar 2026 using a hijacked maintainer account (jasonsaayman → ifstap@proton.me). The attacker added a malicious dependency, plain‑crypto‑js @4.2.1, which contains a postinstall script (setup.js) that drops a cross‑platform remote‑access trojan (RAT). The trojan contacts C2 server sfrclak.com:8000/6202033 and delivers platform‑specific payloads: an AppleScript‑based binary on macOS (saved to /Library/Caches/com.apple.act.mond), a PowerShell script on Windows (saved to %PROGRAMDATA%\wt.exe) and a Python script on Linux (saved to /tmp/ld.py). After execution the dropper self‑deletes, replaces its package.json with a clean stub, and removes its own files to evade detection.  
+
+**Indicators of compromise**  
+- Malicious package shasums: axios @1.14.1 (2553649f…), axios @0.30.4 (d6f3f62…), plain‑crypto‑js @4.2.1 (07d889e2…).  
+- Network: C2 domain sfrclak.com (IP 142.11.206.73).  
+- Files: /Library/Caches/com.apple.act.mond, %PROGRAMDATA%\wt.exe, /tmp/ld.py.  
+
+**Remediation**  
+- Downgrade to safe versions (axios @1.14.0 or @0.30.3).  
+- Remove plain‑crypto‑js, reinstall with --ignore-scripts, and add overrides/resolutions to lock versions.  
+- Rotate all secrets, block C2 traffic, and treat affected systems as fully compromised.
+          </div>
+          <a href="https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong concern about the security of package managers, highlighting a recent incident where compromised credentials were used to publish malicious versions of a popular library. Users question the effectiveness of existing safeguards such as two‑factor authentication, suggest longer update windows to mitigate risk, and note growing mistrust of npm and similar ecosystems. Some indicate a preference for alternative languages they perceive as better protected, reflecting broader anxiety about supply‑chain vulnerabilities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47582220" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.sambent.com/the-white-house-app-has-huawei-spyware-and-an-ice-tip-line/" target="_blank">Fedware: Government apps that spy harder than the apps they ban</a>
+        </h2>
+        <span class="article-meta">
+          469 points • by speckx • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article documents extensive data‑collection practices in dozens of U.S. federal agency Android apps, coining the term “Fedware.” It notes that the White House app (v 47.0.1) requests precise GPS, biometric fingerprint, storage modification, auto‑start, overlay, Wi‑Fi, and badge‑notification access, and embeds three trackers, including Huawei Mobile Services Core. Similar over‑permissions are found in other apps: the FBI’s myFBI Dashboard requests 12 permissions and includes four trackers (one from Google AdMob); FEMA’s app requests 28 permissions; IRS2Go has three trackers and ten permissions; and TSA’s MyTSA uses nine permissions with location access. Border‑control apps (CBP Mobile Passport Control, CBP One, Mobile Fortify) request numerous “dangerous” permissions, retain facial‑recognition data for up to 75 years, and share it across DHS, ICE, and the FBI. ICE’s SmartLINK, built by a GEO Group subsidiary, collects geolocation, facial images, voice prints, medical data, and contacts, granting unlimited data‑use rights. The government also purchases bulk location data from brokers such as Venntel, circumventing the Carpenter warrant requirement. A 2023 GAO report found that about 60 % of privacy and security recommendations issued since 2010 remain unimplemented, highlighting systemic oversight gaps.
+          </div>
+          <a href="https://www.sambent.com/the-white-house-app-has-huawei-spyware-and-an-ice-tip-line/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of federal mobile apps, focusing on excessive data collection, inclusion of sanctioned Chinese SDKs, and perceived government incompetence. Many highlight privacy risks, call for limiting or removing these apps, and argue that web alternatives would suffice for basic information delivery. Some acknowledge limited justification for specific functions, such as location in emergency apps, while others complain about the site’s distracting animations and the onerous personal‑information requirements of services like PACER. Overall, the tone is skeptical and wary of governmental digital surveillance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47577761" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://alexhwoods.com/dont-let-ai-write-for-you/" target="_blank">Do your own writing</a>
+        </h2>
+        <span class="article-meta">
+          410 points • by karimf • 55 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The text argues that relying on large language models (LLMs) to draft documents, essays, or specifications sacrifices critical thinking and credibility. Writing is framed as a process of posing a question, structuring understanding, and enhancing personal capability—analogous to exercise that strengthens mental faculties. Using an LLM to produce content bypasses this reflective work, diminishing both the writer’s comprehension and the trust others place in them. The author warns that LLM‑generated prose can signal superficial engagement, potentially undermining leadership credibility. While LLMs have legitimate roles—research assistance, fact‑checking, quick transcription, and idea generation—they should not replace the core act of writing. Effective use involves leveraging LLMs for peripheral tasks while maintaining personal responsibility for analysis, synthesis, and articulation, thereby ensuring that efficiency gains are matched by an increase in thoughtful reasoning.
+          </div>
+          <a href="https://alexhwoods.com/dont-let-ai-write-for-you/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments emphasize that writing functions as a critical thinking tool, and many see AI as useful for automating repetitive, boilerplate tasks such as code scaffolding, release‑note drafting, or transcription, while warning against letting LLMs replace the core creative or analytical work that solidifies understanding. Respondents note that AI‑generated prose often lacks nuance, can promote homogenized viewpoints, and may diminish personal accountability and deep comprehension. The consensus favors using LLMs as augmentative aides—editing, grammar checks, and low‑value content creation—while preserving human‑driven writing for idea formation, learning, and artistic expression.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47573519" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://android-developers.googleblog.com/2026/03/android-developer-verification-rolling-out-to-all-developers.html" target="_blank">Android Developer Verification</a>
+        </h2>
+        <span class="article-meta">
+          170 points • by ingve • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Android developer verification is being rolled out to all developers via the Android Developer Console and Play Console to add a security layer against malware, especially from sideloaded sources. Key points:
+
+- Developers distributing outside Google Play can create an account now; Play Console users should check for upcoming updates. Verified developers will have their apps automatically registered; otherwise a manual claim process applies.
+- User download experience remains unchanged until September 2026, when enforcement begins in Brazil, Indonesia, Singapore, and Thailand, expanding globally in 2027. Unregistered apps will require ADB or an advanced sideloading flow.
+- Integration enhancements: Android Studio will display app registration status during signed bundle/APK generation; Play Console will show per‑app status.
+- Special provisions: a free “limited distribution” account (no government ID) for students/hobbyists to share with up to 20 devices (early access June 2026). Power users retain choice to install from any source.
+- Timeline: Android Developer Verifier appears in system settings April 2026; registration deadline September 30 2026; global rollout in 2027.
+          </div>
+          <a href="https://android-developers.googleblog.com/2026/03/android-developer-verification-rolling-out-to-all-developers.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on widespread frustration with Google’s new Android Developer Verification system, which many see as an overly burdensome, slow, and intrusive process that threatens open‑source app stores and sideloaded software. Commenters argue it undermines user autonomy, imposes costly identity checks, and could disadvantage developers and users in restricted regions, while a minority point to potential security gains against malicious apps. Overall sentiment is largely negative, calling for alternatives such as custom ROMs, Linux‑based phones, or regulatory intervention, with limited support for the verification’s purported safety benefits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47580297" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm" target="_blank">Artemis II is not safe to fly</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by idlewords • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Artemis II will be the first crewed flight of Orion and the second launch of the SLS. Post‑flight analysis of Artemis I revealed severe heat‑shield damage: Avcoat panels suffered deep gouges and spalling, large fragments detached, and four separation bolts partially melted, exposing the capsule structure and creating potential burn‑through, hot‑spot formation, and possible impact on the parachute compartment. An OIG report highlighted these three failure modes as crew‑risk hazards. NASA attributed the spalling to trapped gases in insufficiently permeable Avcoat and planned to mitigate it by altering the re‑entry trajectory, while a new shield design is slated for Artemis III. The agency faced schedule and budget constraints that precluded replacing the shield or conducting an uncrewed test, prompting criticism that safety margins were reduced to meet launch dates. Experts argue that an additional uncrewed flight would be needed to validate the heat‑shield performance before risking astronauts.
+          </div>
+          <a href="https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong skepticism toward NASA’s Artemis program, questioning its underlying motivations and suggesting that the agency may be willing to endanger crew safety to protect its reputation. Critics highlight past budget overruns, staff reductions, and perceived repeated failures, using the Orion heat‑shield issue as an example of insufficient risk management. The tone is distrustful, emphasizing concerns that NASA could repeat past mistakes rather than prioritizing astronaut safety.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47582043" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.railway.com/p/incident-report-march-30-2026-accidental-cdn-caching" target="_blank">Incident March 30th, 2026 – Accidental CDN Caching</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by cebert • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Railway experienced a CDN‑caching incident on 30 March 2026. Between 10:42 UTC and 11:34 UTC a configuration change unintentionally enabled caching for ~0.05 % of domains that had CDN disabled. During this 52‑minute window GET responses, including those containing authenticated data, were stored in edge caches and could be served to users other than the original requester. The issue was first detected at 11:14 UTC via internal monitoring and user reports; the change was reverted and all cached assets were purged globally at 11:34 UTC. Affected users will receive email notification. Railway has added automated tests for caching behavior, implemented staged CDN rollouts over hours, and committed to prioritizing safety over new feature development to prevent recurrence. The incident details are posted on Railway’s status page.
+          </div>
+          <a href="https://blog.railway.com/p/incident-report-march-30-2026-accidental-cdn-caching" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the incident’s explanation, criticizing the blog post for omitting the root cause, using vague metrics, and containing contradictory statements about which data were exposed. Reviewers note that the status page provides clearer details, especially regarding cached content without cache‑control. While some express respect for Railway’s transparency and execution, others request insight into the QA or testing process that missed the issue and suggest unique session‑specific URLs as a mitigation. Overall, the discussion balances critique of communication with acknowledgement of the company’s openness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47581721" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://anishathalye.com/macbook-touchscreen/" target="_blank">Turning a MacBook into a touchscreen with $1 of hardware (2018)</a>
+        </h2>
+        <span class="article-meta">
+          230 points • by HughParry • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Project Sistine demonstrates a low‑cost method to convert a MacBook into a touchscreen using a $1 mirror assembly placed before the built‑in webcam. The setup consists of a small mirror, rigid paper plate, door hinge, and hot glue, angled so the webcam captures the screen and its reflection. Finger detection relies on classical computer‑vision steps: skin‑color filtering, binary thresholding, contour extraction, selecting the two largest overlapping contours, and defining the touch/hover point as the midpoint between contour extremes. Touch versus hover is distinguished by the vertical gap between contours. A homography matrix maps webcam coordinates to screen coordinates; it is calibrated by prompting the user to touch known points and estimating the transformation with RANSAC. The system translates detected contacts into mouse events, enabling existing applications to respond to touch. The prototype uses a 480p webcam; higher‑resolution cameras and a curved mirror could improve coverage, making the approach a viable, open‑source, MIT‑licensed low‑cost touchscreen solution.
+          </div>
+          <a href="https://anishathalye.com/macbook-touchscreen/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show strong skepticism toward touchscreen MacBooks, emphasizing ergonomic discomfort, fatigue, and fingerprint issues, with many preferring the existing non‑touch design. Practical concerns dominate, including lighting variability, accuracy limits, and the difficulty of adapting software for reliable use across diverse conditions. Nevertheless, the prototype is praised for its inventive use of existing hardware, open‑source code, and potential niche applications such as outdoor displays, though most view it as a fun proof‑of‑concept rather than a viable consumer product.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47578572" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nbailey.ca/post/router/" target="_blank">How to turn anything into a router</a>
+        </h2>
+        <span class="article-meta">
+          618 points • by yabones • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A Linux‑based router can be built from any device that runs Debian (or similar) and provides at least two network interfaces—either built‑in Ethernet ports or USB‑to‑Ethernet adapters. The setup uses only base‑install packages plus:
+
+- **hostapd** – creates a Wi‑Fi access point on a USB dongle.  
+- **dnsmasq** – supplies DHCP and DNS services on the internal bridge.  
+- **bridge‑utils** – merges LAN ports and the wireless interface into a single bridge (br0).  
+- **nftables** – implements firewall/NAT rules, with a default drop policy, permitting established/related traffic, ICMP, and DNS/SSH on the LAN, and masquerading outbound traffic on the WAN interface (eth0).
+
+Configuration steps include disabling PXE, fixing interface names via systemd‑link files, enabling IPv4 forwarding (`net.ipv4.ip_forward=1`), and creating `/etc/nftables.conf` and `/etc/dnsmasq.conf` with the appropriate bridge, address range, and DNS options. After enabling and starting the services (`hostapd`, `dnsmasq`, `nftables`), the router can be tested with `brctl show`, `nft list ruleset`, and DNS lease logs. Optional serial‑console access is enabled through GRUB and a getty service. Extensions such as VLANs, VPNs, IPv6, or advanced monitoring can be added, but the core system remains a lightweight, fully functional router.
+          </div>
+          <a href="https://nbailey.ca/post/router/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that turning virtually any Linux‑capable computer into a router is both feasible and educational, with many contributors sharing scripts, hardware recommendations, and tuning tips. Opinions diverge between advocates of lightweight, custom builds—often repurposing old PCs, SBCs, or single‑NIC systems—and supporters of purpose‑built distributions or appliances such as OPNsense, OpenWrt, or pfSense for convenience and reliability. Concerns about performance, hardware acceleration, and potential regulatory bans appear alongside praise for flexibility, low cost, and the value of hands‑on learning.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47574034" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.nagdy.me/" target="_blank">Learn Claude Code by doing, not reading</a>
+        </h2>
+        <span class="article-meta">
+          189 points • by taubek • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Learn Claude Code Interactively provides a browser‑based environment where users can practice Claude’s slash commands, hooks, and skills without installing software or supplying an API key. The interactive terminal simulator lets learners try commands directly in the browser. As users progress, form‑driven modules generate ready‑to‑copy configuration files—including CLAUDE.md, hook definitions, and plugin settings—that can be inserted into real projects. Each instructional module concludes with a quiz; incorrect answers trigger explanatory feedback rather than just the correct response, reinforcing comprehension. The platform emphasizes hands‑on experimentation, automated config generation, and immediate assessment to facilitate practical mastery of Claude code.
+          </div>
+          <a href="https://claude.nagdy.me/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a split view on Claude Code. Users appreciate its low entry barrier, pedagogical quiz, and usefulness for beginners, while others criticize rapid quota consumption, inconsistent output, and perceived marketing hype. Several remarks question the value of learning a non‑deterministic, frequently changing tool versus traditional programming fundamentals. Comparisons to alternatives such as Gemini and ChatGPT appear, with some favoring those. Overall, the discussion balances appreciation for convenience with concerns about cost, reliability, and long‑term relevance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47579229" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
