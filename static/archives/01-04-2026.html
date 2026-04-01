@@ -1,0 +1,549 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 01, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.atomic.computer/blog/white-house-app-network-traffic-analysis/" target="_blank">We intercepted the White House app&#39;s traffic. 77% of requests go to 3rd parties</a>
+        </h2>
+        <span class="article-meta">
+          135 points • by donutpepperoni • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The analysis captured all HTTPS traffic from the White House iOS app (v47.0.4, build 81) using mitmproxy. Of 206 app‑initiated requests, only 48 (23 %) reached whitehouse.gov; the remaining 158 (77 %) were to third‑party services such as OneSignal, Elfsight, YouTube, Google DoubleClick, Facebook, and Twitter.
+
+**OneSignal** received a JSON payload on launch containing language, timezone, country, IP address, device model/OS, network type, carrier, jailbreak status, session timestamps, session count, session duration, and a persistent OneSignal ID. Multiple PATCH requests updated this profile, allowing continuous tracking of IP changes and usage metrics.
+
+**Elfsight** was contacted through 13 domains for widget loading (TikTok, Instagram, Facebook, YouTube). The two‑stage loader fetched configuration and JavaScript assets, set several tracking cookies, and injected scripts into the app.
+
+**Google DoubleClick** scripts were loaded for YouTube embeds, exposing the app to Google’s ad‑serving and user‑tracking infrastructure.
+
+The app’s privacy label declares “No Data Collected,” yet it transmits extensive device, location, and usage data to third parties.
+          </div>
+          <a href="https://www.atomic.computer/blog/white-house-app-network-traffic-analysis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that inspecting iPhone network traffic can be straightforward using tools like mitmproxy, contrasting it with the perceived difficulty on Android. It stresses the value of user control and transparency, citing instances where apps reportedly sent data to unexpected destinations. Concerns are raised about extensive third‑party domain usage and inaccurate data‑collection disclosures in app store listings, with calls for clearer privacy information and easier traffic monitoring to safeguard user data.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47595865" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/" target="_blank">The Claude Code Source Leak: fake tools, frustration regexes, undercover mode</a>
+        </h2>
+        <span class="article-meta">
+          923 points • by alex000kim • 77 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Claude Code npm package unintentionally published a source‑map that exposed its full TypeScript code. Analysis of the leaked files reveals several internal mechanisms:
+
+* **Anti‑distillation** – a compile‑time flag (`ANTI_DISTILLATION_CC`) adds `anti_distillation: ['fake_tools']` to API requests, injecting decoy tool definitions, and a server‑side summarization that returns cryptographically signed summaries instead of full reasoning. Both are gated by GrowthBook flags and can be bypassed by stripping the field or disabling the experimental betas.
+* **Undercover mode** – `undercover.ts` removes internal codenames and any mention of “Claude Code” from model output; it can be forced on via `CLAUDE_CODE_UNDERCOVER=1` but not off.
+* **Sentiment regex** – `userPromptKeywords.ts` uses a large regex to detect profanity and frustration, avoiding extra LLM inference.
+* **Native client attestation** – compiled‑time flag `NATIVE_CLIENT_ATTESTATION` inserts a placeholder `cch=00000` that Bun’s Zig HTTP stack replaces with a hash, proving the request originates from the official binary; the header can be disabled via env vars or a GrowthBook killswitch.
+* **Wasted calls** – `autoCompact.ts` logged ~250 k unnecessary API calls per day, fixed by limiting consecutive failures to three.
+* **KAIROS** – a gated, unreleased autonomous‑agent mode with background workers, cron jobs, and GitHub webhook integration.
+* Additional curiosities include an April‑Fools “companion” Tamagotchi, extensive Zsh‑focused bash security checks, prompt‑cache economics, and a coordinator that orchestrates agents via system‑prompt instructions.
+
+The leak’s primary impact is the exposure of feature‑flag logic and roadmap items (e.g., KAIROS, anti‑distillation) rather than the code itself, and it appears to stem from a known Bun bug that served source maps in production.
+          </div>
+          <a href="https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on unease about Anthropic’s “undercover mode,” viewing it as a deceptive practice that hides AI authorship and internal details, eroding trust in AI‑generated code. The source‑map leak is seen as a recurring supply‑chain mistake exposing roadmaps, product flags, and anti‑distillation mechanisms, raising security and competitive concerns. While some note clever engineering choices, many criticize the closed‑source CLI, attribution policies, and the company’s handling of DMCA takedowns, questioning whether the pattern of leaks reflects systemic negligence or intentional strategy. Overall sentiment is cautious and critical, with calls for greater transparency.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47586778" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/neanderthals-survived-knife-s-edge-350-000-years" target="_blank">Neanderthals survived on a knife&#39;s edge for 350k years</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by Hooke • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.science.org/content/article/neanderthals-survived-knife-s-edge-350-000-years" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses pronounced surprise at the inferred small population size of Neanderthals, noting that although pre‑modern human groups were also considerably limited, the Neanderthal numbers appear especially low. It conveys a sense of wonder at how limited the Neanderthal population was relative to early human populations, highlighting the perceived discrepancy between the two groups’ demographic scales.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47595572" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2602.04118" target="_blank">TinyLoRA – Learning to Reason in 13 Parameters</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by sorenjan • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page lists the paper titled “Learning to Reason in 13 Parameters.” It includes several images whose alt text references Cornell University, the arXiv logo, a license icon, BibSonomy, and Reddit. No additional textual content or abstract is provided.
+          </div>
+          <a href="https://arxiv.org/abs/2602.04118" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight strong enthusiasm for the current performance of custom models trained on reasoning‑focused datasets, noting that even relatively small parameter counts (around three to seven billion) achieve impressive results. Observers describe the models’ capabilities as “incredible,” citing examples of handling complex tasks with minimal parameters, yet they also acknowledge that further improvements remain possible. The overall tone is optimistic about present quality while recognizing ongoing development potential.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47541733" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chrisseaton.com/truffleruby/" target="_blank">TruffleRuby</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by tosh • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page catalogs scholarly works on TruffleRuby and related runtime technologies, listing authors, titles, venues, years, and PDF links. Core research topics include:
+
+- Parallelization of dynamic languages and synchronization of built‑in collections (OOPSLA 2018).  
+- Debugging native extensions for dynamic languages (ManLang 2018).  
+- Rope specialization for Ruby strings (ManLang 2018).  
+- Fast, flexible polyglot instrumentation for debuggers and tools (Programming 2018).  
+- Cross‑language interoperability in multi‑language runtimes (TOPLAS 2018).  
+- Practical partial evaluation to boost dynamic language performance (PLDI 2017).  
+- Efficient, thread‑safe object representations for dynamically‑typed languages (OOPSLA 2016).  
+- AST specialization and partial evaluation for high‑performance metaprogramming (META 2016).  
+- PhD thesis on dynamic techniques for implementing Ruby (Manchester 2015).  
+- Call‑target‑specific method arguments and guest‑language safepoints (ICOOOLPS 2015).  
+- Zero‑overhead metaprogramming via reflection and MOP (PLDI 2015).  
+- Modular composition of languages supporting C extensions (Modularity 2015).  
+- Object storage model for the Truffle framework (PPPJ 2014).  
+- “Debugging at full speed” for dynamic languages (DYLA 2014).
+
+These publications collectively address performance optimization, tooling, interoperability, and language implementation strategies within the TruffleRuby ecosystem.
+          </div>
+          <a href="https://chrisseaton.com/truffleruby/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks express a unified tone of sorrow and condolence regarding the passing of Chris Seaton, highlighting that a speaker had met him shortly before his death at a conference. The comments characterize the event as a tragic loss, convey personal grief, and collectively extend wishes for his peace, reflecting a respectful and mournful sentiment toward his memory.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47557171" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.npr.org/2026/03/30/nx-s1-5745926/endangered-species-committee-hegseth-security" target="_blank">U.S. exempts oil industry from protecting Gulf animals, for &#39;national security&#39;</a>
+        </h2>
+        <span class="article-meta">
+          184 points • by Jimmc414 • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A Trump administration committee voted unanimously to exempt Gulf of Mexico oil and gas operations from Endangered Species Act (ESA) protections, citing national‑security concerns raised by Defense Secretary Pete Hegseth. The exemption removes mandatory safeguards—such as waste‑disposal limits and restrictions on loud seismic equipment—for all listed Gulf species, including the critically endangered Rice’s whale, of which only ~51 individuals remain. NOAA’s Under Secretary Neil Jacobs announced the change, while conservation groups argue the decision violates ESA requirements because viable mitigation measures (e.g., reduced vessel speed, safer distances, lower‑noise air‑gun technology) exist. Lawsuits claim the meeting lacked proper public notice and procedural compliance. The exemption could affect multiple species—Rice’s whales, sperm whales, West Indian manatees, and several sea turtles—and is the first such ESA waiver invoked on national‑security grounds. Industry lobbying exceeded $8 million since October, and prior Trump orders have reduced new species listings, reflecting a broader trend of weakening federal wildlife protections.
+          </div>
+          <a href="https://www.npr.org/2026/03/30/nx-s1-5745926/endangered-species-committee-hegseth-security" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express broad skepticism toward recent U.S. energy‑policy moves, questioning whether they serve genuine national‑security goals or primarily benefit industry and political allies. Critics highlight concerns about environmental impacts, such as wildlife harm and reliance on fossil fuels despite domestic production, while also denouncing perceived regulatory capture, distrust of governmental competence, and the politicization of energy decisions. A minority voices support for deregulation and view the changes as pragmatic, yet overall the tone is critical of the motivations and potential consequences of the policies.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47595620" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://prismml.com/" target="_blank">Show HN: 1-Bit Bonsai, the First Commercially Viable 1-Bit LLMs</a>
+        </h2>
+        <span class="article-meta">
+          147 points • by PrismML • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided excerpt consists solely of a title, “PrismML – Concentrating intelligence,” followed by a brief geographic reference (“Pasadena or San Francisco”). No additional description, technical details, or contextual information about PrismML, its purpose, features, or related content is included. Consequently, the text offers no substantive material for a broader summary.
+          </div>
+          <a href="https://prismml.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the new 1‑bit quantized model, with users expressing strong curiosity about its scalability, memory efficiency and potential to rival larger float‑based models. Experiences are mixed: some report functional runs on CPUs, speed improvements after custom builds, and successful integration with tools like Cursor, while others encounter loading failures, excessive RAM use, nonsensical outputs, or missing documentation for Android and GPU‑less setups. Skepticism appears regarding the claimed memory savings and comparative benchmarks, and many request clearer trade‑offs, broader testing and better support for low‑end hardware.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47593422" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ministack.org/" target="_blank">Ministack (Replacement for LocalStack)</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by kerblang • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            MiniStack is an open‑source local AWS emulator that implements a wide range of core services, many with real‑infrastructure back‑ends. Key capabilities include:
+
+- **Storage & Messaging**: S3 (buckets, versioning, encryption, lifecycle, replication), SQS (standard/FIFO, DLQ, batch), SNS (topics, subscriptions, fan‑out), Kinesis (streams, shards, consumers), EventBridge (buses, rules, targets), and Firehose (delivery streams to S3).
+- **Databases**: DynamoDB (CRUD, queries, transactions, TTL, GSIs) and RDS (containerized PostgreSQL/MySQL). ElastiCache runs actual Redis/Memcached containers.
+- **Compute**: Lambda (Python execution, warm workers, SQS event mapping, layers), ECS (run‑task with real Docker containers), EC2 (instances, VPC components, networking), EMR (clusters, steps – Pro only), and Step Functions (full ASL engine).
+- **Security & Identity**: IAM (users, roles, policies, OIDC), STS, Secrets Manager, ACM, Cognito (user pools, MFA, identity pools), WAF v2 (Pro only).
+- **Monitoring & Management**: CloudWatch Logs, Metrics, Alarms, Dashboards, Insights, SSM Parameter Store.
+- **Additional services**: API Gateway v1/v2, Glue (catalog, crawlers), Athena (SQL via DuckDB), Route 53, SES/SES v2, ALB/ELBv2 (Pro only), EBS/EFS (Pro only).
+
+The emulator supports both API‑level simulation and real‑backend execution for many services, providing a comprehensive local development environment.
+          </div>
+          <a href="https://ministack.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express skepticism toward the new project, questioning its documentation quality and overall reliability, while noting concerns that its README appears unreviewed. Many acknowledge past positive experiences with LocalStack but highlight persistent problems such as drift between local emulation and production behavior, which led some teams to adopt short‑lived real AWS environments despite higher costs. The recent licensing changes to LocalStack generate frustration, prompting interest in alternatives like the community‑archive tag or other clones, though doubts remain about whether these can maintain broad AWS compatibility without similar issues. Overall sentiment is cautious and critical, emphasizing the need for proven stability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47593285" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://scottlawsonbc.com/post/dot-system" target="_blank">A dot a day keeps the clutter away</a>
+        </h2>
+        <span class="article-meta">
+          196 points • by scottlawson • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The author stores all components in uniform 4 L clear boxes labeled with category and creation date; opaque containers are eliminated.  
+- A simple tracking rule adds one colored dot sticker to a box each day it is opened (regardless of frequency). Each year uses a distinct dot color, giving a decade‑long visual usage map.  
+- After four years the dot distribution shows which items are core (glue, tape, connectors, batteries, LEDs, DC‑DC converters, resistors, capacitors, fasteners, tools) and which are rarely needed (specialized sensors, piezo elements, linear motors).  
+- Bags act as sub‑directories: thick clear bags labeled with contents and date, limited to ~10 bags per box to keep hierarchy manageable.  
+- Boxes are tiered: high‑dot boxes stay within arm’s reach, moderate‑dot boxes in a lab closet, zero‑dot boxes moved to cold storage for eventual donation or sale.  
+- Core practices: identical clear boxes, front‑face labels, dating everything, keeping sticker sheets nearby, and applying dots only where usage is ambiguous. The system requires no software, costs a few dollars, and provides a quantitative basis for inventory curation.
+          </div>
+          <a href="https://scottlawsonbc.com/post/dot-system" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show broad appreciation for the low‑tech dot‑sticker system as a useful way to visualize usage and prompt re‑organization, with many users noting its similarity to kanban, LRU caching, and clear‑box methods they already employ. Repeated suggestions include replacing stickers with pen marks, printable labels, or AR tagging to reduce physical friction. Concerns focus on visual clutter, added effort for labeling, limited granularity, static categories, and potential privacy issues for digital extensions. Overall the consensus is that the approach is helpful but may be over‑engineered for some users, prompting interest in simpler or more scalable alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47593556" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://old.reddit.com/r/LegalAdviceUK/comments/1s92fql/my_son_pleasured_himself_in_front_of_gemini_live/" target="_blank">My son pleasured himself on Gemini Live. Entire family&#39;s Google accounts banned</a>
+        </h2>
+        <span class="article-meta">
+          118 points • by samlinnfer • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://old.reddit.com/r/LegalAdviceUK/comments/1s92fql/my_son_pleasured_himself_in_front_of_gemini_live/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong anxiety about dependence on Google services, emphasizing fear of losing access to personal data and the difficulty of obtaining recourse when accounts are disabled. Many express distrust of corporate control, criticize the lack of effective regulatory or legal remedies, and highlight challenges with data‑subject‑access requests and privacy safeguards. Skepticism about the authenticity of the reported incident appears, with users questioning narrative consistency and suggesting broader concerns about corporate overreach, data retention, and the need for more user‑controlled alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47595971" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
