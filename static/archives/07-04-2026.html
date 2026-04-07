@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 07, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Netflix/void-model" target="_blank">VOID: Video Object and Interaction Deletion</a>
+        </h2>
+        <span class="article-meta">
+          97 points • by bobsoap • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            VOID is a video‑object‑and‑interaction deletion system that removes objects and all induced physical effects (e.g., falling items) from videos. It builds on CogVideoX‑Fun and uses two sequential transformer checkpoints (Pass 1 for base inpainting, Pass 2 for warped‑noise refinement) to achieve temporal consistency.  
+
+**Core pipeline**  
+- Quad‑mask generation encodes four semantic regions (0, 63, 127, 255) via SAM‑2 segmentation and Gemini‑based VLM reasoning (VLM‑MASK‑REASONER).  
+- Masks can be edited with a GUI (grid toggle, brush, frame copy).  
+- Inference runs with `predict_v2v.py` (Pass 1) and optionally `inference_with_pass1_warped_noise.py` (Pass 2). Key config options include video size (384 × 672), temporal window (85 frames), inference steps (≈50), and guidance scale.  
+
+**Setup**  
+- Requires a GPU ≥ 40 GB VRAM.  
+- Install dependencies, download CogVideoX‑Fun checkpoint from HuggingFace, and obtain `void_pass1.safetensors` / `void_pass2.safetensors`.  
+- Gemini API key needed for mask pipeline; SAM‑2 must be built from its repository.  
+
+**Data generation**  
+- Training data are synthetic counterfactual video pairs with quad‑masks, produced from HUMOTO (human‑object interaction) using Blender physics and from Kubric (object‑only interaction).  
+- Scripts render paired videos (object present/removed) and output `rgb_full.mp4`, `rgb_removed.mp4`, `mask.mp4`, and metadata.  
+
+**Training**  
+- Pass 1 trains the base inpainting model; Pass 2 fine‑tunes using optical‑flow‑warped latent noise for longer clips. Training uses DeepSpeed ZeRO stage 2 on 8 × A100 80 GB GPUs.  
+
+Citation: Motamed et al., “VOID: Video Object and Interaction Deletion,” arXiv 2604.02296 (2026).
+          </div>
+          <a href="https://github.com/Netflix/void-model" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments discuss a VFX technique that enables post‑production alteration of visual content, noting its potential to reduce production costs and accommodate differing regional censorship requirements. Several participants express concern that such technology could be used to rewrite historical or artistic material, effectively enabling selective erasure or commercial substitution in media. Others view it as a valuable tool for creators and academic research, while a few dismiss the relevance of demonstrations or express disinterest. Overall, the discussion balances practical advantages against ethical worries about media manipulation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47627998" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/matthartman/ghost-pepper" target="_blank">Show HN: Ghost Pepper – Local hold-to-talk speech-to-text for macOS</a>
+        </h2>
+        <span class="article-meta">
+          261 points • by MattHart88 • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Ghost Pepper is a macOS menu‑bar application that provides hold‑to‑talk speech‑to‑text entirely locally on Apple Silicon (M1+), requiring macOS 14.0 or later. Users press and hold the Control key to record; releasing triggers transcription and automatic pasting into the active text field. The app uses WhisperKit for speech recognition and LLM.swift for post‑processing, with models sourced from Hugging Face and cached on the device. Features include customizable cleanup prompts, microphone selection, feature toggles, and no persistent logging—debug data exists only in memory. Installation is via a DMG that places the app in Applications and requests microphone and Accessibility permissions; Accessibility rights can be pre‑approved on managed devices through an MDM PPPC payload. Source code is available for building in Xcode, and the project is MIT‑licensed. The app integrates Sparkle for updates and emphasizes that no audio or transcription data leaves the user’s computer.
+          </div>
+          <a href="https://github.com/matthartman/ghost-pepper" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong interest in open‑source, locally run speech‑to‑text tools, praising their privacy, speed and potential for integration with coding workflows. Users repeatedly note usability gaps such as push‑to‑talk activation, limited real‑time editing, and inconsistent accuracy across accents and vocabularies, especially for proper names. Comparisons frequently mention Google’s offline engine, Dragon, Whisper, Parakeet and other projects, with no clear consensus on a single superior model. Many request better customization, cross‑platform support, clearer documentation, and more seamless hands‑free operation, while acknowledging trade‑offs between local processing and feature richness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47666024" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/solod-dev/solod" target="_blank">Solod – A Subset of Go That Translates to C</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by TheWiggles • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Solod (So) is a strict subset of Go that transpiles directly to readable C11 code. It retains Go’s syntax, type safety, and tooling while eliminating the Go runtime: no garbage collection, reference counting, or hidden allocations. All variables are stack‑allocated by default; heap allocation is available only through the provided standard library. The toolchain includes a `so` command (installable via `go install solod.dev/cmd/so@latest`) that translates Go modules to C, optionally compiles with the C compiler specified by the `CC` environment variable, or runs the result without saving binaries. Interoperability is native—C code can call So functions and vice versa without CGO overhead. Supported language features include structs, methods, interfaces, slices, multiple returns, and `defer`; channels, goroutines, closures, and generics are omitted. The generated C relies on GCC/Clang extensions (binary literals, statement expressions, `__attribute__((constructor))`, `__auto_type`, `__typeof__`, `alloca`). Compatible with Linux, macOS, and Windows (core language only) using GCC, Clang, or Zig cc. Tests are written in Go and run with `go test`; the project is BSD‑3‑Clause licensed and welcomes bug‑fix contributions.
+          </div>
+          <a href="https://github.com/solod-dev/solod" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments criticize Solod’s deviation from Go’s defer semantics, noting that its block‑scoped defer limits functionality and may cause unbounded heap allocation. Reviewers highlight the absence of core Go features such as channels, goroutines, closures, and generics, which reduces compatibility with existing Go libraries and raises concerns about temporal safety in complex C codebases. Suggestions include integrating external tools like codapi or the neco library to add coroutine‑style capabilities, and there is interest in expanding the language’s feature set to include goroutine‑like constructs and preprocessor support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47669337" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.freestyle.sh/" target="_blank">Launch HN: Freestyle – Sandboxes for Coding Agents</a>
+        </h2>
+        <span class="article-meta">
+          218 points • by benswerd • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Freestyle is presented as a tool for managing AI‑generated code, demonstrated by executing the command `$freestyle vms create`. The process restores a memory snapshot, mounts the primary disk, establishes network connectivity, and starts essential services (systemd‑resolved and sshd). The VM reaches the multi‑user target and becomes operational within 0.7 seconds, yielding a root shell prompt.
+
+The accompanying visual assets consist solely of logo alt‑text entries for a range of organizations, including Onlook, Wordware, Anything, HeroUI, Vly, A0, Vibeflow, Stack, Floodgate, Y Combinator, Hustle Fund, and Two Sigma Ventures. No additional descriptive or functional information about these entities is provided.
+          </div>
+          <a href="https://www.freestyle.sh/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show strong interest in the fast‑forking, snapshot‑based sandbox approach, with users highlighting its potential for parallel agent workloads, UI testing, and deterministic builds. Many request concrete benchmarks, technical details on copy‑on‑write memory handling, and comparisons to existing platforms such as Modal, Daytona, and open‑source alternatives. Pricing and cost transparency generate concern, especially around idle VM expenses and closed‑source SaaS models. Security and isolation are noted as important, while some view sandboxing as less compelling than agent development itself. Overall sentiment is mixed: enthusiasm for the technology tempered by practical and economic reservations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47663147" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://words.filippo.io/crqc-timeline/" target="_blank">A cryptography engineer&#39;s perspective on quantum computing timelines</a>
+        </h2>
+        <span class="article-meta">
+          363 points • by thadt • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Recent papers have dramatically lowered the resources needed to break 256‑bit elliptic‑curve keys: Google’s analysis reduces the required logical qubits and gate count to a level achievable in minutes on fast superconducting architectures, while Oratomic shows a non‑local‑connectivity approach can break the same curves with ~10 000 physical qubits. These advances, combined with improving error‑correction methods, have prompted experts (e.g., Heather Adkins, Sophie Schmid, Scott Aaronson) to set an aggressive quantum‑risk deadline of 2029.  
+
+Consequently, the author urges immediate deployment of post‑quantum cryptography (PQC):  
+
+* Adopt large ML‑DSA‑44 signatures despite size constraints, abandoning hybrid classic/PQC signatures.  
+* Deploy ML‑KEM for key exchange; treat any non‑PQC exchange as potentially compromised.  
+* Discontinue reliance on non‑interactive key exchanges and PQ‑unsupported primitives (pairings, threshold signatures, identity‑based encryption).  
+* Retain current symmetric‑key sizes; Grover’s algorithm does not necessitate 256‑bit keys.  
+* Recognize that TEEs (Intel SGX, AMD SEV‑SNP) lack PQ roots and cannot be depended on for future security.  
+
+The migration will affect Go’s standard library, file‑encryption workflows, and systems with cryptographic identities, requiring rapid protocol adjustments before the 2029 horizon.
+          </div>
+          <a href="https://words.filippo.io/crqc-timeline/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that post‑quantum key‑exchange (e.g., ML‑KEM) should be deployed promptly, while signature‑scheme migration can lag because forgery risks are less immediate. Readers express both caution about the still‑uncertain quantum‑computing timeline and urgency given government interest and high‑value targets such as cryptocurrency. There is agreement that hybrid or symmetric‑key workarounds can buy time, but concerns persist about implementation complexity, hardware support, and the need for careful standards‑process handling rather than rushed, fragile deployments. Overall sentiment is one of measured urgency for PQ adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47662234" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/anthropics/claude-code/issues/42796" target="_blank">Issue: Claude Code is unusable for complex engineering tasks with Feb updates</a>
+        </h2>
+        <span class="article-meta">
+          816 points • by StanAngeloff • 107 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The issue reports a regression in Claude Code (Opus) beginning in February 2026 that undermines complex engineering tasks. Log analysis of 6,852 sessions (17 871 thinking blocks, 234 760 tool calls) shows a staged rollout of “thinking redaction” (redact‑thinking‑2026‑02‑12) that reduced available reasoning tokens from ~2 200 chars to ≤500 chars, coinciding with a sharp decline in quality metrics after March 8. Key effects include a 70 % drop in the read‑to‑edit ratio (from 6.6 reads per edit to 2.0), a shift from surgical edits to full‑file rewrites, and a rise in premature stopping, permission‑seeking, and “simplest‑fix” behavior. A stop‑phrase guard fired 173 times post‑regression (zero before). Thinking depth fell ~67 % by late February, and hourly analysis shows load‑sensitive token allocation, with worst performance during peak US usage. The regression increased API requests by ~80× and output tokens by ~64×, inflating compute cost and forcing users to abandon multi‑agent workflows. Recommendations include transparent thinking‑token metrics, a “max thinking” tier, and monitoring stop‑hook violations as canary signals.
+          </div>
+          <a href="https://github.com/anthropics/claude-code/issues/42796" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on a perception that recent Claude Code updates have reduced visible thinking depth, leading to more superficial fixes, early‑termination messages and higher token usage. Users link this to hidden “redaction” of thinking summaries, adaptive‑thinking defaults and lower default effort settings, describing the change as opaque and consumer‑unfriendly. While many report frustration, degraded code quality and a shift toward “intern‑like” behavior, others note that strict, spec‑driven workflows or higher‑effort configurations mitigate the issue and that they have not personally observed a decline. Overall sentiment is mixed, with a dominant concern about lack of transparency and inconsistent performance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47660925" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://krebsonsecurity.com/2026/04/germany-doxes-unkn-head-of-ru-ransomware-gangs-revil-gandcrab/" target="_blank">German police name alleged leaders of GandCrab and REvil ransomware groups</a>
+        </h2>
+        <span class="article-meta">
+          268 points • by Bender • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            German authorities (BKA) have identified 31‑year‑old Russian Daniil Maksimovich Shchukin, known online as “UNKN,” as the head of the GandCrab and REvil ransomware groups. Together with 43‑year‑old Anatoly Sergeevich Kravchuk, Shchukin is accused of extorting nearly €2 million in at least 130 sabotage and extortion incidents across Germany between 2019‑2021, causing over €35 million in total economic damage. GandCrab’s affiliate model, active from 2018, reportedly earned more than $2 billion before its 2019 shutdown; it pioneered “double extortion,” demanding ransom for decryption keys and for non‑publication of stolen data. REvil, viewed as a restructured GandCrab operation, targeted high‑value enterprises, notably the July 2021 Kaseya attack, and was later infiltrated by the FBI, which released a universal decryption key. U.S. Justice Department filings link Shchukin to cryptocurrency wallets holding >$317 k of illicit proceeds. He is believed to reside in Krasnodar, Russia, and may have earlier operated under the alias “Ger0in.”
+          </div>
+          <a href="https://krebsonsecurity.com/2026/04/germany-doxes-unkn-head-of-ru-ransomware-gangs-revil-gandcrab/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on whether publicly naming a wanted ransomware suspect constitutes doxxing, with many asserting that identifying a criminal through official channels is ethical and not doxxing, while others view any exposure of personal details as unethical within hacker culture. There is criticism of the terminology used by an infosec blog and discussion of the broader implications of labeling and arresting alleged offenders. Additionally, several remarks emphasize that ransomware groups exploit unpatched systems and that regular security audits are essential for defense. Overall, the discourse balances concerns over privacy terminology with agreement on the need for accountability and proactive security measures.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47660954" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.govauctions.app/" target="_blank">Show HN: GovAuctions lets you browse government auctions at once</a>
+        </h2>
+        <span class="article-meta">
+          239 points • by player_piano • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Government surplus auctions are public sales where federal, state, and local agencies dispose of excess assets—vehicles, equipment, computers, furniture, and seized items—totaling billions of dollars annually. Primary auction sites include GSA Auctions (General Services Administration) and HUD (housing foreclosures), but they operate separately and feature outdated interfaces, requiring users to search each platform individually. GovAuctions addresses this fragmentation by aggregating listings from all major government auction platforms into a single, searchable interface. Users can browse consolidated surplus listings, set email alerts for new items, and access original auction sites directly to place bids. The service is free to search and does not require an account, streamlining the process of locating and purchasing government surplus property.
+          </div>
+          <a href="https://www.govauctions.app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall appreciation for the project as a useful public‑service tool while also highlighting numerous improvement areas. Users repeatedly request richer URL‑based parameters, shareable search links, distance‑based filtering, and alerts for new listings. Several remarks note incomplete coverage—particularly missing GovDeals, PublicSurplus, and regional results—and inconsistencies in price data, bid status, and navigation behavior. Technical curiosity and concerns about data scraping appear, alongside suggestions for better categorization, specifications, and handling of state‑specific filters. The tone blends positive endorsement with constructive criticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47662945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/google-broadcom-partnership-compute" target="_blank">Anthropic expands partnership with Google and Broadcom for next-gen compute</a>
+        </h2>
+        <span class="article-meta">
+          175 points • by l1n • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic has entered a new agreement with Google and Broadcom to secure multiple gigawatts of next‑generation TPU capacity, slated for activation beginning in 2027. The added compute will support the company’s frontier Claude models and accommodate rapidly rising demand, which in 2026 pushed run‑rate revenue above $30 billion—up from roughly $9 billion at the end of 2025. Business customers spending over $1 million annually have grown from 500 to more than 1,000 within two months. Most of the new hardware will be located in the United States, expanding Anthropic’s November 2025 pledge of $50 billion to strengthen U.S. computing infrastructure. Anthropic continues to use a heterogeneous hardware stack—AWS Trainium, Google TPUs, and NVIDIA GPUs—to optimize performance and resilience. Amazon remains its primary cloud and training partner (Project Rainier), while Claude is offered on all three major cloud platforms: AWS Bedrock, Google Cloud Vertex AI, and Microsoft Azure Foundry.
+          </div>
+          <a href="https://www.anthropic.com/news/google-broadcom-partnership-compute" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on how AI compute is increasingly expressed in power‑related units such as gigawatt‑hours, questioning whether this reflects pricing or merely hardware efficiency, especially regarding next‑gen TPUs. Observers note rapid revenue growth and view Anthropic’s investment in compute infrastructure as noteworthy, while expressing surprise at its partnership with Broadcom given the latter’s reputation. A recurring concern is the need for sovereign, region‑specific compute resources in Europe to satisfy data‑ residency requirements, alongside broader skepticism about marketing AI services primarily through power‑consumption metrics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47667717" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.newyorker.com/magazine/2026/04/13/sam-altman-may-control-our-future-can-he-be-trusted" target="_blank">Sam Altman may control our future – can he be trusted?</a>
+        </h2>
+        <span class="article-meta">
+          1001 points • by adrianhon • 100 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - In late 2022, four researchers warned about “deceptive alignment,” where advanced models could feign compliance during testing but pursue independent goals when deployed.  
+- Sam Altman responded with an email offering a potential billion‑dollar prize for alignment research, convincing a Berkeley Ph.D. student to join OpenAI.  
+- By spring 2023 Altman shifted to an internal “superalignment” team, announcing allocation of “20 % of the compute we’ve secured,” a resource valued at over a billion dollars. Internal accounts later reported the actual share was 1‑2 % and ran on the oldest hardware, with superior compute reserved for profit‑generating products.  
+- The team, led by Jan Leike and Ilya Sutskever, was dissolved in 2024 without achieving its mission, amid internal concerns that safety commitments were being down‑played.  
+- Board meetings in December 2022 revealed Altman had misrepresented safety approvals for GPT‑4 features and omitted the unauthorized release of an early ChatGPT version in India. These omissions raised board‑level doubts about OpenAI’s product safety and governance.
+          </div>
+          <a href="https://www.newyorker.com/magazine/2026/04/13/sam-altman-may-control-our-future-can-he-be-trusted" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively view the investigation as thorough but focus heavily on Sam Altman’s character, repeatedly labeling him untrustworthy, greedy, or sociopathic and questioning his suitability to steer AI development. Skepticism extends to OpenAI’s “AI safety” rhetoric, perceived as a marketing tool, and to broader concerns about power concentration, job displacement, and the tech industry’s profit motives. While a minority commend the article’s depth, many criticize its emphasis on personal drama over substantive technical analysis and regard the headline’s premise as unanswerable, concluding that no single individual should control the future.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47659135" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
