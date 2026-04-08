@@ -4,31 +4,31 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Archive - HackerNews Digest</title>
-    <meta name="description" content="Browse past HackerNews Digest editions.">
+    <title>{{ month_name }} {{ year }} Archives - HackerNews Digest</title>
+    <meta name="description" content="Browse HackerNews Digest editions from {{ month_name }} {{ year }}.">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
     <main class="container archive-container">
-        <a href="/" class="back-link">← Back to Home</a>
+        <a href="/archives/{{ year }}" class="back-link">← Back to {{ year }}</a>
 
-        <h1>Digest Archive</h1>
-        <p class="tagline">Browse previous editions of HackerNews Digest.</p>
+        <h1>{{ month_name }} {{ year }}</h1>
+        <p class="tagline">Daily digests from this month.</p>
 
-        {% if years %}
+        {% if digests %}
         <ul class="archive-list">
-            {% for year in years %}
+            {% for archive in digests %}
             <li class="archive-item">
-                <a href="/archives/{{ year }}" class="archive-link">
-                    <span class="archive-date">{{ year }}</span>
+                <a href="{{ archive.url }}" class="archive-link">
+                    <span class="archive-date">{{ archive.display_date }}</span>
                     <span class="archive-arrow">→</span>
                 </a>
             </li>
             {% endfor %}
         </ul>
         {% else %}
-        <p class="archive-empty">No archived digests yet. Check back after the next digest is generated!</p>
+        <p class="archive-empty">No archived digests found for this month.</p>
         {% endif %}
 
         <div class="opensource">

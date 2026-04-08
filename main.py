@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, abort
 from src import tools
+from src import render
 import os
 import hmac
 import hashlib
@@ -7,6 +8,12 @@ import subprocess
 from datetime import datetime
 
 app = Flask(__name__)
+
+# Untrusted LLM summaries are rendered through markdown + a strict HTML
+# sanitizer (see src/render.py). Registered as `md` and used by digest.html
+# instead of the unsafe `| safe` filter, which allowed raw tags in a summary
+# to break the digest layout.
+app.jinja_env.filters["md"] = render.render_summary
 
 ARCHIVES_DIR = os.path.join(os.path.dirname(__file__), 'static', 'archives')
 WEBHOOK_SECRET = os.environ.get('GITHUB_WEBHOOK_SECRET', '').encode()
@@ -47,14 +54,12 @@ def subscribe():
     return render_template("error.html", error=result_msg), 400
 
 
-@app.route("/archives", methods=["GET"])
-def archives():
+def get_all_archives() -> list:
+    """Helper to fetch and parse all archive files."""
     archive_files = []
-    
     if os.path.exists(ARCHIVES_DIR):
         for filename in os.listdir(ARCHIVES_DIR):
             if filename.endswith('.html'):
-                # Parse date from filename (DD-MM-YYYY.html)
                 try:
                     date_str = filename.replace('.html', '')
                     date_obj = datetime.strptime(date_str, "%d-%m-%Y")
@@ -66,10 +71,50 @@ def archives():
                     })
                 except:
                     continue
-    
-    archive_files.sort(key=lambda x: x['date'], reverse=True) # sort, latest first
-    
-    return render_template("archives.html", archives=archive_files)
+    archive_files.sort(key=lambda x: x['date'], reverse=True)
+    return archive_files
+
+
+@app.route("/archives", methods=["GET"])
+def archives_years():
+    archives = get_all_archives()
+    years = sorted(list(set(a['date'].year for a in archives)), reverse=True)
+    return render_template("archives.html", years=years)
+
+
+@app.route("/archives/<int:year>", methods=["GET"])
+def archives_months(year):
+    archives = get_all_archives()
+    year_archives = [a for a in archives if a['date'].year == year]
+
+    if not year_archives:
+        abort(404)
+
+    # Extract unique months for this year (number, name)
+    months_dict = {}
+    for a in year_archives:
+        m_num = a['date'].month
+        if m_num not in months_dict:
+            months_dict[m_num] = a['date'].strftime("%B")
+
+    # Sort months descending
+    months = [{'num': k, 'name': v} for k, v in sorted(months_dict.items(), reverse=True)]
+    return render_template("archives_year.html", year=year, months=months)
+
+
+@app.route("/archives/<int:year>/<int:month>", methods=["GET"])
+def archives_digests(year, month):
+    archives = get_all_archives()
+    month_archives = [
+        a for a in archives
+        if a['date'].year == year and a['date'].month == month
+    ]
+
+    if not month_archives:
+        abort(404)
+
+    month_name = month_archives[0]['date'].strftime("%B")
+    return render_template("archives_month.html", year=year, month_name=month_name, digests=month_archives)
 
 
 @app.route("/webhook", methods=["POST"])
@@ -78,23 +123,23 @@ def github_webhook():
     if not verify_github_signature(request):
         write_log(f"WARNING: Signature verification failed from {request.remote_addr}")
         abort(403)
-    
+
     data = request.json
     if data.get('ref') != 'refs/heads/main':
         write_log(f"Ignored push to branch: {data.get('ref')}")
         return 'Ignored: Not main branch.', 200
-    
+
     write_log("\n" + "=" * 40)
     write_log("MAIN BRANCH PUSH - Starting Repository Update")
     write_log("=" * 40)
-    
+
     repo_path = os.path.dirname(os.path.abspath(__file__))
     write_log(f"Repository path: {repo_path}")
-    
+
     git_path = "/usr/bin/git"
     sudo_path = "/usr/bin/sudo"
     systemctl_path = "/usr/bin/systemctl"
-    
+
     # Fetch latest changes
     try:
         write_log("Step 1: Fetching latest changes from origin...")
@@ -109,7 +154,7 @@ def github_webhook():
     except subprocess.CalledProcessError as e:
         write_log(f"ERROR: Fetch failed: {e.stderr.strip()}")
         return 'Git fetch failed', 500
-    
+
     # Hard reset to origin/main
     try:
         write_log("Step 2: Hard resetting to origin/main...")
@@ -124,7 +169,7 @@ def github_webhook():
     except subprocess.CalledProcessError as e:
         write_log(f"ERROR: Reset failed: {e.stderr.strip()}")
         return 'Git reset failed', 500
-    
+
     # UV sync
     try:
         write_log("Step 3: Running uv sync...")
@@ -136,13 +181,13 @@ def github_webhook():
     except subprocess.CalledProcessError as e:
         write_log(f"ERROR: UV sync failed: {e.stderr.strip()}")
         return 'UV sync failed', 500
-    
+
     # Restart the gunicorn service
     try:
         write_log("Step 4: Restarting hackernews-digest service...")
         restart_command = f"{sudo_path} {systemctl_path} restart hackernews-digest"
         restart_result = os.system(restart_command)
-        
+
         if restart_result == 0:
             write_log("  -> Service restarted successfully")
         else:
@@ -153,10 +198,11 @@ def github_webhook():
         write_log(f"ERROR: Service restart error: {str(e)}")
         write_log("Deployment partially complete - service restart failed\n")
         return 'Repository updated, but service restart failed', 200
-    
+
     write_log("Deployment completed successfully!\n")
     return 'Success: Repository updated and service restarted.', 200
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
