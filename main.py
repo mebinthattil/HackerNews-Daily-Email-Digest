@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, abort
 from src import tools
+from src import render
 import os
 import hmac
 import hashlib
@@ -7,6 +8,12 @@ import subprocess
 from datetime import datetime
 
 app = Flask(__name__)
+
+# Untrusted LLM summaries are rendered through markdown + a strict HTML
+# sanitizer (see src/render.py). Registered as `md` and used by digest.html
+# instead of the unsafe `| safe` filter, which allowed raw tags in a summary
+# to break the digest layout.
+app.jinja_env.filters["md"] = render.render_summary
 
 ARCHIVES_DIR = os.path.join(os.path.dirname(__file__), 'static', 'archives')
 WEBHOOK_SECRET = os.environ.get('GITHUB_WEBHOOK_SECRET', '').encode()
@@ -47,14 +54,12 @@ def subscribe():
     return render_template("error.html", error=result_msg), 400
 
 
-@app.route("/archives", methods=["GET"])
-def archives():
+def get_all_archives() -> list:
+    """Helper to fetch and parse all archive files."""
     archive_files = []
-    
     if os.path.exists(ARCHIVES_DIR):
         for filename in os.listdir(ARCHIVES_DIR):
             if filename.endswith('.html'):
-                # Parse date from filename (DD-MM-YYYY.html)
                 try:
                     date_str = filename.replace('.html', '')
                     date_obj = datetime.strptime(date_str, "%d-%m-%Y")
@@ -66,10 +71,50 @@ def archives():
                     })
                 except:
                     continue
+    archive_files.sort(key=lambda x: x['date'], reverse=True)
+    return archive_files
+
+
+@app.route("/archives", methods=["GET"])
+def archives_years():
+    archives = get_all_archives()
+    years = sorted(list(set(a['date'].year for a in archives)), reverse=True)
+    return render_template("archives.html", years=years)
+
+
+@app.route("/archives/<int:year>", methods=["GET"])
+def archives_months(year):
+    archives = get_all_archives()
+    year_archives = [a for a in archives if a['date'].year == year]
     
-    archive_files.sort(key=lambda x: x['date'], reverse=True) # sort, latest first
+    if not year_archives:
+        abort(404)
+        
+    # Extract unique months for this year (number, name)
+    months_dict = {}
+    for a in year_archives:
+        m_num = a['date'].month
+        if m_num not in months_dict:
+            months_dict[m_num] = a['date'].strftime("%B")
+            
+    # Sort months descending
+    months = [{'num': k, 'name': v} for k, v in sorted(months_dict.items(), reverse=True)]
+    return render_template("archives_year.html", year=year, months=months)
+
+
+@app.route("/archives/<int:year>/<int:month>", methods=["GET"])
+def archives_digests(year, month):
+    archives = get_all_archives()
+    month_archives = [
+        a for a in archives 
+        if a['date'].year == year and a['date'].month == month
+    ]
     
-    return render_template("archives.html", archives=archive_files)
+    if not month_archives:
+        abort(404)
+        
+    month_name = month_archives[0]['date'].strftime("%B")
+    return render_template("archives_month.html", year=year, month_name=month_name, digests=month_archives)
 
 
 @app.route("/webhook", methods=["POST"])
@@ -159,4 +204,9 @@ def github_webhook():
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+    # Bind 0.0.0.0 so the app is reachable when containerized behind a published
+    # port (Docker forwards the host port to the container's external interface,
+    # not its loopback — a 127.0.0.1 bind would be unreachable). PORT comes from
+    # the environment (the homelab compose sets it); defaults to 5000 for local.
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
