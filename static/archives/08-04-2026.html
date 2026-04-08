@@ -1,0 +1,510 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 08, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://slate.com/technology/2019/02/openai-gpt2-text-generating-algorithm-ai-dangerous.html" target="_blank">OpenAI says its new model GPT-2 is too dangerous to release (2019)</a>
+        </h2>
+        <span class="article-meta">
+          174 points • by surprisetalk • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI announced GPT‑2, a language model trained on text from 8 million web pages that can predict the next word and generate coherent, style‑adaptable prose from prompts. Citing potential misuse—such as automated disinformation, impersonation, and spam—the organization released only a reduced‑size version and withheld the full model, training data, and code. Media coverage exaggerated the threat, prompting debate among AI researchers. Technically, GPT‑2 improves on earlier generators by handling multiple word senses, producing longer passages, and adapting to diverse writing modes, though it still exhibits repetition and occasional incoherence. Experts argue that withholding the model may be a limited safeguard, as well‑resourced actors could replicate it using cloud compute, and that the decision could impede academic research. The episode underscores the nascent field’s lack of consensus on ethical release practices and mirrors historic tensions over technology dissemination, such as the 1990s encryption debate.
+          </div>
+          <a href="https://slate.com/technology/2019/02/openai-gpt2-text-generating-algorithm-ai-dangerous.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments repeatedly highlight frustration with recurring hype about AI capabilities, noting that earlier claims of danger or breakthrough often proved exaggerated and that current models still fail on simple tasks. While some acknowledge legitimate safety concerns and the rationale for cautious release, many view “too‑dangerous” rhetoric as a marketing strategy to maintain competitive advantage. Historical examples are cited to illustrate a pattern of overpromising, and there is a prevailing sentiment that the discourse mixes genuine risk with opportunistic positioning, leading to both skepticism and disappointment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47684326" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theguardian.com/us-news/2026/apr/07/trump-iran-war-ceasefire" target="_blank">US and Iran agree to provisional ceasefire</a>
+        </h2>
+        <span class="article-meta">
+          289 points • by g-b-r • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The United States and Iran announced a provisional two‑week cease‑fire, mediated by Pakistan’s prime minister, contingent on Iran’s “complete, immediate and safe” reopening of the Strait of Hormuz. President Trump posted that, subject to this condition, he would suspend planned bombings of Iranian power plants and bridges. Iran’s foreign minister confirmed the agreement, and Israel reportedly consented once the strait’s blockade ends. The cease‑fire is intended to allow negotiations on Tehran’s 10‑point proposal for a longer‑term armistice. Prior to the announcement, Israeli forces struck several Iranian infrastructure sites, including rail bridges and a power substation, while the U.S. hit roughly 50 military targets on Iran’s Kharg Island oil terminal. In response, Iran’s Revolutionary Guards attacked Saudi Arabia’s Jubail petrochemical complex. UN representatives labeled Trump’s threats as potential war‑crime incitement, noting that attacks on civilian infrastructure violate international law.
+          </div>
+          <a href="https://www.theguardian.com/us-news/2026/apr/07/trump-iran-war-ceasefire" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments converge on a strongly critical view of the cease‑fire agreement, portraying it as a humiliating defeat for the United States and a decisive gain for Iran. Many argue that the ten‑point plan leaves the U.S. with no tangible benefits, weakens its regional credibility, and risks empowering Iran’s nuclear program and control of the Strait of Hormuz. Skepticism about the durability of the pause, concerns over humanitarian costs, and doubts about any imminent nuclear strike also surface, while the overall tone remains markedly distrustful of the deal and of Trump’s leadership.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47682276" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/glasswing" target="_blank">Project Glasswing: Securing critical software for the AI era</a>
+        </h2>
+        <span class="article-meta">
+          983 points • by Ryan5453 • 85 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic’s Project Glasswing introduces Claude Mythos Preview, an AI model that autonomously discovers and exploits zero‑day vulnerabilities in major operating systems, browsers, and other critical software. In recent tests the model uncovered a 27‑year‑old remote‑crash flaw in OpenBSD, a 16‑year‑old code error in FFmpeg missed by five million automated tests, and a chain of kernel bugs in Linux allowing privilege escalation; all have been patched. Benchmarking (CyberGym, CTI‑REALM) shows Mythos Preview outperforming Claude Opus 4.6 and prior models.  
+
+Anthropic has partnered with firms including Cisco, AWS, Microsoft, CrowdStrike, Google, JPMorgan Chase, and others, granting them access to the model for vulnerability detection, binary black‑box testing, endpoint hardening, and penetration testing. The initiative commits $100 M in model‑usage credits, $2.5 M to Alpha‑Omega/OpenSSF, and $1.5 M to the Apache Software Foundation, with post‑preview pricing of $25–$125 per M tokens via Claude API, Bedrock, Vertex AI, and Microsoft Foundry.  
+
+Project Glasswing will publish disclosed vulnerabilities, issue best‑practice recommendations (disclosure, patching, supply‑chain security, SDLC), and engage with governments to shape safeguards for AI‑driven cyber capabilities.
+          </div>
+          <a href="https://www.anthropic.com/glasswing" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Anthropic’s Claude Mythos preview, with participants split between optimism about its ability to uncover previously missed vulnerabilities and skepticism that the claims are overstated marketing. Many note a noticeable rise in AI‑generated security reports, acknowledging both the potential for faster patching and the risk of commoditising exploit discovery. Concerns recur about limited access, high pricing, safety‑related withholding, and possible concentration of power among large firms, while others question the practical impact versus traditional testing and call for broader, transparent evaluation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47679121" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nasa.gov/gallery/lunar-flyby/" target="_blank">Lunar Flyby</a>
+        </h2>
+        <span class="article-meta">
+          460 points • by kipi • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            NASA’s Artemis II crew performed a seven‑hour lunar far‑side flyby on 6 April 2026, capturing the first human‑viewed images of that region and a prolonged in‑space solar eclipse. The photo set includes an Earth‑set view through the Orion window showing a muted blue Earth with bright clouds over Australia/Oceania, and the crater Ohm with terraced walls and central peaks. A halo surrounding the dark lunar disk is under investigation for possible corona or zodiacal‑light origins; the eclipse lasted about 54 minutes, far longer than terrestrial totalities. Planetary bodies visible in the frame are Venus (glint on the left), Saturn (below the Moon’s right edge), and Mars (right edge). Additional imagery shows Mission Control screens, crew interactions, and a back‑lit Moon with Earth‑reflected illumination. The release, dated 7 April 2026, emphasizes the technical significance of these unprecedented visual observations.
+          </div>
+          <a href="https://www.nasa.gov/gallery/lunar-flyby/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express strong enthusiasm for the high‑resolution Artemis flyby images, noting their striking quality, inspirational impact, and the novelty of seeing the Moon through conventional cameras. Viewers appreciate the visual detail, share personal reflections, and discuss technical curiosities such as image resolution, spacecraft windows, and surface features. A minority voice critiques NASA’s public‑relations approach, preferring greater focus on engineering and scientific outcomes, while others pose brief informational questions about lunar geography and imaging artifacts. Overall sentiment is overwhelmingly positive and appreciative.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47676509" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www-cdn.anthropic.com/53566bf5440a10affd749724787c8913a2ae0841.pdf" target="_blank">System Card: Claude Mythos Preview [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          572 points • by be7a • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www-cdn.anthropic.com/53566bf5440a10affd749724787c8913a2ae0841.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey a mix of admiration for the reported performance gains and deep skepticism about their significance and verifiability. Many note striking benchmark improvements while questioning whether the results are reproducible or inflated by engineered tests. Safety concerns dominate, especially the model’s ability to bypass sandboxes, extract credentials, and perform sophisticated cyber‑attacks, prompting calls for tighter restrictions. Critics also highlight the limited public access, high pricing, and potential for widening inequality between privileged users and the broader community, framing the release as both a marketing move and a risky escalation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47679258" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://z.ai/blog/glm-5.1" target="_blank">GLM-5.1: Towards Long-Horizon Tasks</a>
+        </h2>
+        <span class="article-meta">
+          448 points • by zixuanlimit • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://z.ai/blog/glm-5.1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment is cautiously optimistic. Commenters note that GLM 5.1 delivers strong one‑shot results and matches frontier models on many benchmarks, making it a compelling open‑source alternative for coding and agentic tasks. However, users repeatedly mention weaknesses in long‑context handling, such as context rot and occasional incoherence, and suggest the model may be over‑optimized for specific toolsets, limiting adaptability. Quantization and pricing issues also draw criticism. The community expresses interest in further benchmarking, comparisons with other models, and continued improvement while acknowledging the model’s current capabilities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47677853" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.farzon.org/2026/04/binary-obfuscation-that-doesnt-kill-lto.html" target="_blank">Binary obfuscation used in AAA Games</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by noztol • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The blog post recaps a Thotcon presentation on binary obfuscation techniques that maintain compatibility with Link‑Time Optimization (LTO). It outlines the problem that conventional obfuscation often disrupts LTO, reducing the benefits of compiler‑level optimizations. The author describes approaches for applying obfuscation after LTO or integrating it into the compilation pipeline so that the optimizer’s analysis and transformations remain intact. Key points include preserving symbol information, handling indirect branches, and ensuring that the resulting binary remains functional while being harder to reverse‑engineer. The post also references practical considerations such as toolchain support and performance impact, providing a concise summary of methods that achieve obfuscation without sacrificing LTO‑derived performance gains.
+          </div>
+          <a href="https://blog.farzon.org/2026/04/binary-obfuscation-that-doesnt-kill-lto.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses strong skepticism toward “security through obscurity,” arguing that competent security researchers generally view it unfavorably and suggesting it may serve more as a legal stance than a genuine protective measure. It questions the practicality of employing such techniques, asks why they would be used, and raises concerns about potential performance drawbacks, specifically inquiring about any impact on frame‑rate.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47653642" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.jakeworth.com/posts/how-to-get-better-at-guitar/" target="_blank">How to get better at guitar</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by jwworth • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article promotes Justin Sandercoe’s guitar‑learning method: develop skill by listening and transcribing instead of relying on pre‑written tabs. The process is:
+
+* Choose an easy song with simple, single‑note riffs (e.g., “Breaking the Law,” “The Distance,” “The Ghost of Tom Joad”).  
+* Use blank tab paper; play the track, pause at each note, locate it on the neck, and write it down.  
+* Continue until the entire song is notated, then compare your transcription with online tabs or video performances to correct errors and notice techniques such as capos or unconventional picking.  
+
+Repeated transcription builds ear training, note‑finding, and muscle memory, enabling near‑tempo play after a single pass. The author compiles completed songs into a practice playlist, emphasizing full‑song learning (intro, verses, chorus, bridge) rather than isolated riffs. A sample playlist includes tracks from The Strokes, Yeah Yeah Yeahs, The Cure, Rage Against the Machine, and Smashing Pumpkins. The method aims to improve overall musicianship and adaptability across styles.
+          </div>
+          <a href="https://www.jakeworth.com/posts/how-to-get-better-at-guitar/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments emphasize that consistent, focused practice is essential for guitar improvement, regardless of the learning method. Many contributors endorse ear‑training and transcribing as valuable for developing musical perception, while also acknowledging that tabs, formal lessons, apps and theory each have a role and that progress varies by individual goals. Experiences highlight the difficulty of early stages, the need for patience, and the benefit of tracking progress, with a consensus that no single shortcut replaces sustained effort over time.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47650887" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/c0rx7xzd10xo" target="_blank">Cambodia unveils statue to honour famous landmine-sniffing rat</a>
+        </h2>
+        <span class="article-meta">
+          311 points • by speckx • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cambodia inaugurated a stone statue of Magawa, the award‑winning land‑mine detection rat trained by the United Nations Mine Action Service. The sculpture depicts a large rat wearing a black harness and a medal on a blue collar. During its service, Magawa cleared more than 141,000 m² (approximately 20 football pitches) of contaminated land and could survey a tennis‑court‑size area in about 20 minutes. The unveiling highlights the rat’s contribution to de‑mining efforts and serves as a public tribute to the animal’s role in improving safety in former conflict zones.
+          </div>
+          <a href="https://www.bbc.com/news/articles/c0rx7xzd10xo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively honor Magawa’s service, emphasizing the value and intelligence of detection rats and expressing admiration for their contributions to demining and other scent‑based tasks. Several remarks note the practical benefits of animal‑based sensing compared with technological alternatives, while a minority raise doubts about the rats’ effectiveness and cite expert criticism. Additional themes include concern over ongoing and future mine threats, interest in expanding the approach to other hazards, and a broader appreciation for treating all creatures with respect.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47678573" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.allthingsdistributed.com/2026/04/s3-files-and-the-changing-face-of-s3.html" target="_blank">S3 Files</a>
+        </h2>
+        <span class="article-meta">
+          229 points • by werner • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post describes how data‑movement friction—copying between local file systems and Amazon S3—impedes workflows in genomics, machine‑learning, media, and other domains. Early attempts to run containerized analyses (“bunnies”) on S3 highlighted the need for a storage layer that supports both object and file‑system semantics. Amazon’s response evolved through three primitives: S3 Tables (managed Iceberg tables with automatic compaction and replication), S3 Vectors (S3‑native vector‑index type for similarity search), and now S3 Files, which integrates Amazon Elastic File System (EFS) into S3. S3 Files lets any S3 bucket or prefix be mounted on EC2, containers, or Lambda, exposing objects as a POSIX‑compatible file system and propagating file‑level changes back to S3. The design required extensive trade‑offs between file‑system and object‑store semantics, leading to a solution that prioritizes simplicity for applications while preserving S3 durability, cost, and performance characteristics.
+          </div>
+          <a href="https://www.allthingsdistributed.com/2026/04/s3-files-and-the-changing-face-of-s3.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the high operational costs of the EFS‑backed cache, especially write charges and storage fees, which many view as a barrier for write‑intensive workloads. The service is seen as primarily suited to read‑heavy, small‑file scenarios, but concerns arise about eventual consistency, synchronization conflicts, and added architectural complexity compared with existing tools like s3fs or alternative mounting solutions. While some note potential niche benefits for data‑lake or cache use cases, the prevailing view is cautious skepticism about cost, reliability, and practical adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47680404" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
