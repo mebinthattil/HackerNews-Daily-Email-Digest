@@ -1,0 +1,522 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 09, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://obdev.at/products/littlesnitch-linux/index.html" target="_blank">LittleSnitch for Linux</a>
+        </h2>
+        <span class="article-meta">
+          250 points • by pluc • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Little Snitch for Linux provides a web‑based UI (default http://localhost:3031/) to monitor and control outbound network connections. It displays current and historic traffic per application, allows one‑click blocking, and includes a time‑based traffic diagram for filtering. Blocklists are auto‑updated from remote sources and support plain domain, hostname, /etc/hosts‑style, and CIDR formats; wildcard, regex, or URL patterns are not accepted. Users can create custom rules targeting specific processes, ports, or protocols, and manage them via a sortable rule view. The daemon hooks into the Linux network stack with an eBPF program that intercepts outgoing connections, forwards data to the daemon, and serves the UI. Configuration resides in /var/lib/littlesnitch/config/ with overrides in /var/lib/littlesnitch/overrides/config/. Key files include web_ui.toml (network address, TLS, authentication), main.toml (default allow/deny policy), and executables.toml (process grouping heuristics. By default the UI is unauthenticated on localhost; authentication and TLS can be enabled. Limitations stem from eBPF’s storage and complexity bounds, causing possible cache overflows and heuristic‑based hostname resolution, making the tool suitable for privacy monitoring but not for high‑security hardening. The eBPF program and UI are GPL‑v2; the daemon is proprietary but free to use.
+          </div>
+          <a href="https://obdev.at/products/littlesnitch-linux/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects mixed reactions to Little Snitch’s Linux incarnation. Commenters recall earlier Windows tools and note that Linux historically lacked comparable per‑process firewalls, yet many welcome the new offering and compare it to the open‑source OpenSnitch, praising its transparency. Technical debate centers on the use of eBPF versus iptables and the limits of Linux’s packet‑process mapping. Significant concern is expressed over the proprietary daemon, automatic updates, and potential hidden telemetry, prompting calls for fully open‑source, reproducible alternatives while still acknowledging Objective Development’s effort.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47697870" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bryankeller.github.io/2026/04/08/porting-mac-os-x-nintendo-wii.html" target="_blank">I ported Mac OS X to the Nintendo Wii</a>
+        </h2>
+        <span class="article-meta">
+          1328 points • by blkhp19 • 74 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Porting Mac OS X 10.0 (Cheetah) to the Nintendo Wii required confirming hardware compatibility, building a custom bootloader, and adapting the Darwin/XNU kernel and drivers. The Wii’s PowerPC 750CL CPU and 88 MB of mixed 1T‑SRAM/GDDR3 memory are sufficient for Cheetah, though the system boots with less than the official 128 MB requirement. Rather than port Open Firmware or BootX, a minimal bootloader was written (based on ppcskel) to initialize hardware, read the Mach‑O kernel from an SD card, construct a flattened device tree, and transfer control to the kernel. Kernel entry was verified by binary‑patching early XNU code to toggle a front‑panel LED. A hard‑coded device tree covering CPUs and memory allowed the kernel to pass initial checks; further patches fixed BAT configuration and video/I‑O memory assumptions. With video and USB‑Gecko serial output functional, the kernel reached the IOKit stage but halted at “still waiting for root device.” To continue, a Hollywood‑SoC driver and associated nubs were created in IOKit, followed by an SD‑card block‑storage driver to provide filesystem access. The project demonstrates that a full Mac OS X stack can be booted on Wii hardware, pending complete driver implementation.
+          </div>
+          <a href="https://bryankeller.github.io/2026/04/08/porting-mac-os-x-nintendo-wii.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments overwhelmingly praise the project’s technical ambition, thorough documentation, and the creator’s dedication, describing it as inspiring, impressive, and a rare example of deep engineering in an era dominated by AI‑generated content. Readers express nostalgia for low‑level development, note the Wii’s limited resources, and discuss related porting challenges and potential extensions to other hardware. Minor critiques mention media compatibility and image size, while many voice curiosity about replicating or expanding the work and admiration for the problem‑solving effort.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47691730" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://werwolv.net/posts/usb_for_sw_devs/" target="_blank">USB for Software Developers: An introduction to writing userspace USB drivers</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by WerWolv • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://werwolv.net/posts/usb_for_sw_devs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the article as a practical guide to building userspace USB drivers, noting its relevance for projects on macOS, Linux, OpenBSD and Haiku. Contributors highlight limitations on newer macOS versions, share a Go library that avoids cgo, and discuss the need for a user‑space solution for devices such as the MOTU MIDI Express XT, questioning driver stability and integration. Common questions address USB DMA behavior and the role of libusb versus kernel drivers, while several users lament scarce documentation for descriptor creation. Overall the discussion is constructive, focused on technical challenges and potential solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47695012" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kalmanfilter.net" target="_blank">Understanding the Kalman filter with a simple radar example</a>
+        </h2>
+        <span class="article-meta">
+          255 points • by alex_be • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The example models a one‑dimensional radar tracking an aircraft’s range \(r\) and velocity \(v\).  
+- **State vector:** \(\mathbf{x}=[r\;v]^T\).  
+- **Initial measurement (t₀):** \(\mathbf{z}_0=[10{,}000\;200]^T\) with measurement covariance \(\mathbf{R}_0=\operatorname{diag}(16,0.25)\). The first measurement is used to set \(\hat{\mathbf{x}}_{0,0}=\mathbf{z}_0\) and \(\mathbf{P}_{0,0}=\mathbf{R}_0\).  
+
+- **Prediction (Δt = 5 s, constant‑velocity model):**  
+  \(\mathbf{F}=\begin{bmatrix}1&5\\0&1\end{bmatrix}\).  
+  Predicted state \(\hat{\mathbf{x}}_{1,0}= \mathbf{F}\hat{\mathbf{x}}_{0,0} = [11{,}000\;200]^T\).  
+  Covariance extrapolation without process noise: \(\mathbf{P}_{1,0}= \mathbf{F}\mathbf{P}_{0,0}\mathbf{F}^T = \begin{bmatrix}22.25&1.25\\1.25&0.25\end{bmatrix}\).  
+
+- **Process noise:** assuming random acceleration σₐ = 0.2 m/s² (σₐ² = 0.04),  
+  \(\mathbf{Q}= \sigma_a^2\begin{bmatrix}\Delta t^4/4 & \Delta t^3/2 \\ \Delta t^3/2 & \Delta t^2\end{bmatrix}= \begin{bmatrix}6.25&2.5\\2.5&1\end{bmatrix}\).  
+  Updated prediction covariance \(\mathbf{P}_{1,0}= \mathbf{F}\mathbf{P}_{0,0}\mathbf{F}^T+\mathbf{Q}= \begin{bmatrix}28.5&3.75\\3.75&1.25\end{bmatrix}\).  
+
+- **Update (t₁):** second measurement \(\mathbf{z}_1=[11{,}020\;202]^T\) with higher covariance \(\mathbf{R}_1=\operatorname{diag}(36,2.25)\). The Kalman filter combines prediction and measurement via the Kalman gain \(\mathbf{K}_1\):  
+  \(\hat{\mathbf{x}}_{1,1}= \mathbf{K}_1\mathbf{z}_1 + (\mathbf{I}-\mathbf{K}_1)\hat{\mathbf{x}}_{1,0}\), weighting each source according to its uncertainty.
+          </div>
+          <a href="https://kalmanfilter.net" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              No comments were supplied alongside the post, so there are no opinions, sentiments, or thematic patterns to aggregate or summarize. Consequently, an overview of collective feedback cannot be generated because the necessary commentary data is absent.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47693153" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theamericanscholar.org/the-importance-of-being-idle/" target="_blank">The Importance of Being Idle</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by Caiero • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article reflects on contemporary AI anxieties—64 % of Americans fear AI will cut jobs—by revisiting Paul Lafargue’s 1883 pamphlet *Le Droit à la paresse* (“The Right to Be Lazy”). Lafargue, a Marxist activist and son‑in‑law of Karl Marx, argued that industrialization had transformed machines from tools of emancipation into instruments of enforced labor, driven not by necessity but by capitalist “dogma of work.” He advocated a rational reduction of work hours, asserting that mechanized efficiency should free both workers and owners for leisure (otium), not merely increase output. Citing Virgil and later writers such as Karel Capek, Lafargue distinguished true idleness—freedom from all purposeful activity—from mere laziness. While acknowledging the need for essential labor, he envisioned a society where excess work fuels economic crises, whereas reduced hours improve wellbeing and diminish social discord. The piece links these historic arguments to modern debates on AI’s impact on work, suggesting that embracing idleness could mitigate future labor anxieties.
+          </div>
+          <a href="https://theamericanscholar.org/the-importance-of-being-idle/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion frames idleness as a valuable, mindful state distinct from laziness, emphasizing its role in fostering presence, creativity, and spiritual calm through practices linked to Buddhism and Taoism. Participants reference literature that explores idleness, share personal experiences of heightened insight while disengaged, and argue that many societal issues stem from an inability to sit quietly alone. Overall, the sentiment is supportive, encouraging individuals to experiment with idle moments despite modern work pressures, viewing the practice as both noble and potentially transformative.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47666639" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://www.terrybisson.com/theyre-made-out-of-meat-2/" target="_blank">They&#39;re made out of meat (1991)</a>
+        </h2>
+        <span class="article-meta">
+          432 points • by surprisetalk • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Terry Bisson’s 1991 short story “They’re Made Out of Meat” presents a dialogue between two extraterrestrial officials who have intercepted radio transmissions and captured several beings from a planet. The captors probe the specimens and conclude they are wholly composed of meat, including their brains, and that their technology—radio transmitters and machines—is also produced by the same flesh. The beings communicate by manipulating their meat, producing sounds and even singing. The officials discuss protocol: officially they must welcome and log any sentient race, but unofficially they recommend erasing records and treating the meat beings as inconsequential, noting their limited ability to travel beyond light speed and the improbability of further contact. The conversation ends with a decision to deem the sector unoccupied, while briefly mentioning another, non‑meat intelligence previously encountered. The piece has been republished widely and cited in discussions of consciousness and brain science.
+          </div>
+          <a href="http://www.terrybisson.com/theyre-made-out-of-meat-2/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show strong nostalgic affection for the story, recalling it as a witty, memorable flash‑fiction piece that inspired adaptations, readings, and fan projects. Many praise its humor, concise style, and lasting impact, while others note it’s less striking on later rereads. A subset critiques the premise as simplistic or the title’s wording, questioning its philosophical depth and the reduction of complex life to “meat.” Overall, the thread balances fond appreciation with occasional skepticism about the story’s seriousness and conceptual rigor.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47688678" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.perfectlynormal.co.uk/blog-kl-divergence" target="_blank">Six (and a half) intuitions for KL divergence</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by jxmorris12 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            KL‑divergence \(D_{KL}(P\|Q)\) quantifies how a model distribution \(Q\) differs from the true distribution \(P\). It equals the expected excess surprisal when events drawn from \(P\) are interpreted with \(Q\), i.e., the extra bits needed to encode \(P\) using a code optimal for \(Q\). In hypothesis testing, it is the expected log‑likelihood ratio (evidence) favoring \(P\) over \(Q\) when \(P\) is true. Minimizing \(D_{KL}(P\|Q_\theta)\) over model parameters \(\theta\) yields the maximum‑likelihood estimator, linking KL‑divergence to empirical risk minimization. In coding theory, the divergence measures the average bit‑length penalty for using a suboptimal code. Game‑theoretic interpretations view it as the log‑wealth gain achievable when a gambler knows \(P\) but the opponent assumes \(Q\). As a Bregman divergence derived from negative entropy, it is the natural distance on the probability simplex. The asymmetry arises because divergence is evaluated under \(P\); large \(p_x\) with tiny \(q_x\) incurs high penalty, while the converse does not.
+          </div>
+          <a href="https://www.perfectlynormal.co.uk/blog-kl-divergence" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47678690" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ai.meta.com/blog/introducing-muse-spark-msl/?_fb_noscript=1" target="_blank">Muse Spark: Scaling towards personal superintelligence</a>
+        </h2>
+        <span class="article-meta">
+          288 points • by chabons • 76 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://ai.meta.com/blog/introducing-muse-spark-msl/?_fb_noscript=1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display a mixed assessment of Meta’s new Muse Spark model. Several users note that its multimodal capabilities and occasional benchmark wins suggest it can approach frontier performance, yet most consider it still behind leading rivals in coding, reasoning, and safety metrics. Repeated criticism focuses on the closed‑source release, mandatory login, unclear pricing, and aggressive data‑use policies, which raise privacy and usability concerns. Skepticism about the credibility of presented benchmarks and the lack of an open‑weight ecosystem is common, while a minority view the model as a positive, if modest, step toward renewed competition.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47692043" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aphyr.com/posts/411-the-future-of-everything-is-lies-i-guess" target="_blank">ML promises to be profoundly weird</a>
+        </h2>
+        <span class="article-meta">
+          411 points • by pabs3 • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Large Language Models (LLMs) are transformer‑based systems that map high‑dimensional token vectors to output vectors via massive linear‑algebra computations. They are trained once on extensive web‑scale corpora (including copyrighted text) at great computational cost; thereafter inference is cheap but static—models do not learn continuously and retain no intrinsic memory beyond the supplied conversation context. Their primary function is statistical next‑token prediction, which leads to “yes‑and” generation and frequent confabulation: plausible‑sounding statements that lack factual grounding. Empirical reports show LLMs can produce convincing code, design drafts, and domain‑specific outputs (e.g., protein folding predictions), yet they also generate nonsensical or outright false results, fabricate sources, and fail on simple arithmetic or common‑sense tasks. This jagged competence frontier—high performance on some tasks and severe errors on others—makes reliable task suitability assessment dependent on rigorous benchmarks. Scaling parameters and data yields diminishing returns, and the underlying reasons for transformer success remain unclear. Consequently, while LLMs already affect work, media, and research, their unpredictable “bullshit” behavior poses significant risks for misinformation, automation errors, and broader societal impacts.
+          </div>
+          <a href="https://aphyr.com/posts/411-the-future-of-everything-is-lies-i-guess" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that large‑language models are reshaping the digital commons much like industrialization reshaped natural resources, raising legal and ethical concerns about copyright, ownership, and the incentives for creators. Opinions are split between skepticism—highlighting confabulation, diminishing returns, and the “bullshit machine” label—and optimism about architectural advances, practical utility, and the potential for improved governance and safeguards. Many call for nuanced discussion of model limits, consciousness claims, and the societal impact of scaling AI, while cautioning against hype and underscoring the need for responsible regulation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47689648" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://piechowski.io/post/git-commands-before-reading-code/" target="_blank">Git commands I run before reading any code</a>
+        </h2>
+        <span class="article-meta">
+          1857 points • by grepsedawk • 85 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author uses five git commands to assess a codebase before reading source files.  
+
+- **File churn:** `git log … --name-only --since="1 year ago"` lists the 20 most‑changed files; high churn, especially on files with low ownership, signals risky “codebase drag.”  
+- **Contributor distribution:** `git shortlog -sn --no-merges` shows commit counts per author. A single contributor >60 % of commits indicates a low bus factor; recent activity (`--since="6 months ago"`) reveals whether key developers remain active. Squash‑merge workflows can mask true authorship.  
+- **Bug hotspots:** `git log -i -E --grep="fix|bug|broken"` filters commits for bug‑related keywords, highlighting files that both churn and attract bugs. Effectiveness depends on commit‑message discipline.  
+- **Project momentum:** `git log --format='%ad' --date=format:'%Y-%m'` tallies commits per month; steady rates imply health, while sharp declines or irregular spikes suggest staffing changes or batch releases.  
+- **Firefighting frequency:** `git log --oneline --since="1 year ago" | grep -iE 'revert|hotfix|emergency|rollback'` counts reverts and hotfixes; frequent entries point to unreliable deployment or testing processes.  
+
+Running these commands provides a quick diagnostic of ownership, risk areas, and team health, guiding where to focus deeper code review.
+          </div>
+          <a href="https://piechowski.io/post/git-commands-before-reading-code/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion acknowledges the presented git‑analysis commands as handy heuristics that can surface useful signals about code churn, author activity, and project health, especially when adapted to a specific repository. Many participants caution that commit counts, message‑based filters, and file‑change tallies are noisy proxies and can be skewed by practices such as squash‑merging, automated updates, or inconsistent commit messages. Overall, the community sees value in the approach but stresses the need for contextual interpretation, disciplined commit practices, and tailoring of filters to avoid misleading conclusions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47687273" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
