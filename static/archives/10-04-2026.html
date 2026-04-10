@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cacm.acm.org/news/how-nasa-built-artemis-iis-fault-tolerant-computer/" target="_blank">How NASA built Artemis II’s fault-tolerant computer</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by speckx • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://cacm.acm.org/news/how-nasa-built-artemis-iis-fault-tolerant-computer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mix of technical curiosity and criticism, noting that modern Agile and DevOps practices appear at odds with the deterministic, time‑triggered architectures used in aerospace systems. Readers request concrete specifications—hardware, operating system, language, and failure statistics—while questioning the frequency of radiation‑induced faults and the extent of redundancy required. Several remarks emphasize that the hardware and software were developed by aerospace contractors rather than NASA, and they reference longstanding safety‑critical standards such as ARINC, INTEGRITY‑178B, and LynxOS‑178B, as well as interest in rad‑hard fabrication and simulation tools.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47704804" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arhan.sh/blog/native-instant-space-switching-on-macos/" target="_blank">Native Instant Space Switching on macOS</a>
+        </h2>
+        <span class="article-meta">
+          358 points • by PaulHoule • 67 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article critiques existing macOS space‑switching methods and presents a native solution. It notes that the “Reduce motion” setting only replaces the default animation with a fade, and that Yabai achieves instant switching via binary patches requiring System Integrity Protection (SIP) disablement and forces use of its tiling window manager, which conflicts with alternatives like PaperWM.spoon. Third‑party virtual workspace tools (e.g., FlashSpace, AeroSpace) are deemed unnecessary because they emulate spaces rather than disabling animation. BetterTouchTool can provide “Move Right/Left Space (Without Animation)” but requires a paid license. The author recommends InstantSpaceSwitcher (GitHub: jurplel/InstantSpaceSwitcher), a menu‑bar app that simulates a high‑velocity trackpad swipe to switch spaces instantly without disabling SIP. It supports left/right moves, direct jumps to a specific space index, and offers a CLI. Installation steps: clone the repo, run `./build.sh`; the CLI becomes available at `.build/release/ISSCli`. The project has minimal GitHub stars, and the author encourages users to star it if useful.
+          </div>
+          <a href="https://arhan.sh/blog/native-instant-space-switching-on-macos/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express widespread frustration with macOS’s space‑switching animation, especially on newer 120 Hz displays where it feels slower and disrupts muscle memory. Users frequently cite accessibility concerns, productivity loss, and a perception that Apple has deprioritized power‑user needs, prompting many to adopt third‑party tools, reduce‑motion settings, or switch to alternative window managers and operating systems such as Linux. While a minority enjoy the visual effect, the dominant view calls for faster, customizable transitions and criticizes Apple’s limited options for disabling or adjusting the animation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47708818" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://david.coffee/i-still-prefer-mcp-over-skills/" target="_blank">I still prefer MCP over skills</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by gmays • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author argues that the Model Context Protocol (MCP) remains the superior architectural pattern for granting LLMs access to services, while “Skills” are limited to pure knowledge or tool‑use guidance. MCP provides an API‑style abstraction where the LLM calls functions (e.g., devonthink.do_x()) and the server handles authentication, sandboxing, auto‑updates, and remote portability. Advantages listed include zero‑install remote usage, seamless updates, OAuth‑based auth, true portability across devices, sandboxed execution, smart tool discovery, and frictionless auto‑updates.  
+
+In contrast, Skills often require a dedicated CLI, creating deployment complexity, secret‑management issues, fragmented ecosystems, and context‑window bloat when loading full SKILL.md files. They work only in environments with compute access and fail in standard web interfaces.  
+
+The author proposes a hybrid model: use MCP for any service integration (e.g., Google Calendar, Chrome, Hopper, Xcode, Notion) and reserve Skills for pure knowledge, workflow standardization, or secret‑management patterns. Terminology could shift to “Connectors” for MCP and “LLM_MANUAL.md” for Skills. Examples of deployed MCP servers (DEVONthink, microfn, Kikuyo, MCP Nest) illustrate the approach, and a Skill can serve as a cheat‑sheet for MCP quirks without replacing the protocol.
+          </div>
+          <a href="https://david.coffee/i-still-prefer-mcp-over-skills/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a nuanced view that MCPs and Skills address different layers of tool integration, with many users emphasizing their complementary nature rather than an either‑or choice. Indie developers often favor local CLI‑based skills for simplicity and cost, while enterprise contexts value MCPs for standardized authentication and portable interfaces. Recurrent concerns include MCP reliability, context‑window overhead, and progressive‑disclosure mechanisms, alongside praise for the composability of CLI pipelines. Overall, the consensus acknowledges both approaches as useful, recommending combined use tailored to specific workflows and environments.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47712718" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.veitheller.de/Generative_art_over_the_years.html" target="_blank">Generative art over the years</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by evakhoury • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Since 2016 the author has created roughly 114 generative sketches in p5.js, documenting a progression from pure algorithmic exploration to a personal visual vocabulary. Early work centered on mathematical forms—e.g., a 30‑line phyllotaxis spiral using cos, sin, and sqrt—focused on parameter tweaking rather than aesthetics. Dissatisfaction with “clean” outputs led to a greyscale phase emphasizing texture: simulated brush strokes, particle‑based fur, and dense line layering produced material‑like surfaces. This evolved into heuristic material simulators (watercolor washes, dry brush, felt‑tip pen, cracked glaze) that capture characteristic visual traits without physical accuracy. Color theory remains underdeveloped; the author now builds intuition through repeated experimentation and observation. The accumulated techniques form a “vocabulary” that guides compositional decisions, shifting the primary question from “what can I do?” to “what do I want to say?” despite limited time, the practice continues as a low‑pressure, patient creative outlet.
+          </div>
+          <a href="https://blog.veitheller.de/Generative_art_over_the_years.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion blends nostalgia for earlier, hands‑on generative‑art experimentation with a sense of displacement caused by AI’s growing capabilities, while simultaneously affirming the value of traditional algorithmic approaches. Contributors recall past tools such as Processing, p5.js, and shader coding, share resources and personal projects, and stress prioritizing visual character over precise physical simulation. Overall, the tone is reflective yet optimistic, emphasizing continued interest in non‑AI generative techniques and community collaboration despite concerns about AI superseding some tasks.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47675906" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bigbrotherwatch.org.uk/blog/apples-new-iphone-update-is-restricting-internet-freedom-in-the-uk/" target="_blank">Apple&#39;s New iPhone Update Is Restricting Internet Freedom in the UK</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by josephcsible • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple’s iOS 26.4 update introduces system‑wide age and identity verification for UK users. The update automatically enables web‑content filtering and AI‑driven “Communication Safety” tools, blocking many sites and blurring images unless the user confirms their age. Verification can be done only with an Apple account older than 18 years, a credit card, a driver’s licence or other limited “government‑issued” IDs; debit cards, passports and most PASS cards are not accepted. Consequently, many adults—especially low‑income, disabled, or younger users—may be unable to lift the restrictions, effectively turning iPhones into child‑locked devices.
+
+The article notes that UK law (Online Safety Act 2023, Data Protection Act 2018) does not mandate such OS‑level checks, and that Apple already offers optional parental controls. Critics argue the measure could set a precedent for broader digital‑ID requirements, undermine privacy and freedom of expression, and encourage users to delay updates, exposing them to security risks. The piece calls for Apple to make age checks optional rather than mandatory.
+          </div>
+          <a href="https://bigbrotherwatch.org.uk/blog/apples-new-iphone-update-is-restricting-internet-freedom-in-the-uk/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary conveys skepticism toward Apple’s age‑verification implementation, criticizing the article’s lack of external sources and questioning the reliance on Apple rather than governmental responsibility. It highlights concerns about privacy, data centralization, and potential corporate overreach, while noting that the requirement may be driven by legal risk and industry lobbying. The writer suggests alternative solutions, such as a one‑time verification token or switching platforms, and warns that broader adoption could expand governmental control and limit user choice.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47712222" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://charcuterie.elastiq.ch/" target="_blank">Charcuterie – Visual similarity Unicode explorer</a>
+        </h2>
+        <span class="article-meta">
+          155 points • by rickcarlino • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Charcuterie is a visual Unicode explorer that lets users browse the entire character set, view related glyphs, and explore scripts, symbols, and shapes within the Unicode standard. Visual similarity is generated by rendering each glyph, embedding it with the SigLIP 2 model, and comparing the resulting vectors in a shared space. The project remains actively developed, encourages user feedback, and accepts donations to support ongoing work.
+          </div>
+          <a href="https://charcuterie.elastiq.ch/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall reaction is highly favorable, praising the novel visual‑similarity interface, smooth animation, sound design, and the ability to sketch a character and receive accurate matches directly in the browser. Reviewers note the “spotlight” navigation is intriguing yet unclear, and suggest a more intuitive metaphor, clearer naming, and better scaling on mobile devices. Requests include support for additional scripts such as Japanese kanji and broader matching criteria like color or emojis. Utility is seen as limited but potentially fun as a game.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47709158" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=KKbgulTp3FE" target="_blank">RAM Has a Design Flaw from 1966. I Bypassed It [video]</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by surprisetalk • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The text is a YouTube page footer listing navigation links and legal information. It includes sections for “About,” “Press,” “Copyright,” “Contact us,” “Creators,” “Advertise,” “Developers,” “Terms,” “Privacy,” “Policy & Safety,” “How YouTube works,” “Test new features,” and “NFL Sunday Ticket,” followed by a © 2026 Google LLC notice.
+          </div>
+          <a href="https://www.youtube.com/watch?v=KKbgulTp3FE" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments overall commend the work as impressive, thorough, and valuable, highlighting the creative re‑implementation of Google’s optimization technique for RAM, the detailed experimentation, graphing, and the release of a usable library. Viewers appreciate the clear demonstration of DRAM refresh stalls and the engaging presentation style. At the same time, some express doubt about the practical applicability of the hedging approach, noting the increased memory bandwidth and cache pressure for modest latency gains and questioning its relevance in real‑world scenarios such as high‑frequency trading.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47680005" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eaw.app/picoz80/" target="_blank">PicoZ80 – Drop-In Z80 Replacement</a>
+        </h2>
+        <span class="article-meta">
+          163 points • by rickcarlino • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            picoZ80 is a drop‑in replacement for the Z80 DIP‑40 CPU that fits directly into legacy Z80‑based computers. It uses a dual‑core RP2350 Cortex‑M33 (up to 300 MHz) whose three PIO blocks provide cycle‑accurate control of the host’s address, data and control lines, preserving original Z80 bus timing while handling every transaction in real time. The board includes 8 MiB external PSRAM (64 × 64 KB banks) and 16 MiB SPI Flash, offering 4 MiB of banked address space per CPU context and 512‑byte‑granular ROM/RAM banking. A co‑processor ESP32‑S3 adds Wi‑Fi, Bluetooth, SD‑card storage and a web‑based management interface; configuration is driven by a single JSON file on the SD card, eliminating recompilation. Virtual‑device support maps any 512‑byte block or I/O range to C functions, enabling floppy/QuickDisk emulation, virtual disks, and other peripherals. Firmware runs on two 5‑MiB partitions with OTA updates via USB or the ESP32. The architecture separates real‑time bus handling (Core 1) from non‑real‑time tasks (Core 0) via an inter‑core message queue, while PIO state machines manage address/data phases, control signals, refresh cycles, wait‑state insertion and T1 synchronization to maintain precise timing across the host system.
+          </div>
+          <a href="https://eaw.app/picoz80/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on retro‑computer hardware experimentation, especially using the RP2350 to act as a bus‑level participant or in‑circuit emulator for systems like the C64, Z80‑based machines, and Sharp MZ series. Contributors express enthusiasm for cartridge‑based approaches that avoid invasive CPU swaps, note practical tips such as simplifying power regulation, and highlight the potential for detailed debugging through trace memory and cycle‑accurate control. While the project is framed as a hobbyist endeavor, participants also consider possible industrial relevance, acknowledging cost concerns and the broader appeal of preserving and extending classic computing platforms.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47708041" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.gitbutler.com/series-a" target="_blank">We&#39;ve raised $17M to build what comes after Git</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by ellieh • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitButler announced a $17 million Series A round led by a16z, with continued participation from seed investors Fly Ventures and A Capital, and added a16z partner Peter Levine to its board. Co‑founder Scott Chacon, a former GitHub co‑founder, explained that the company aims to redesign version‑control workflows that were built for older, linear Git models. The technical preview of the GitButler CLI targets short‑lived, trunk‑based GitHub Flow, enabling stacked branches, multitasking, easy undo, and seamless integration into existing Git projects. Chacon emphasized that current development friction stems from fragmented context across tools, people, and AI agents, and that GitButler intends to make coding more “social” by surfacing merge‑conflict warnings early, allowing branches to be stacked on teammates’ work, and preserving conversation and change metadata within Git. The funding will accelerate development of this next‑generation collaboration layer, which the team describes as infrastructure for future software construction rather than merely a better Git implementation.
+          </div>
+          <a href="https://blog.gitbutler.com/series-a" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects skepticism about the high development cost and the ability to achieve sufficient network effects for a commercial version‑control tool, questioning whether it can truly replace Git or merely abstracts it. Commenters note Git’s widespread adoption, reliability once mastered, and the difficulty of displacing it, while also acknowledging existing pain points that the new tool might address. References to alternative projects such as Pijul and jj illustrate interest in alternatives, but overall confidence in the new offering’s market viability remains low.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47712656" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/aloshdenny/reverse-SynthID" target="_blank">Reverse engineering Gemini&#39;s SynthID detection</a>
+        </h2>
+        <span class="article-meta">
+          121 points • by _tk_ • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository reverse‑engineers Google Gemini’s SynthID watermark, an invisible spread‑spectrum signal embedded in generated images. Using only signal‑processing, the authors identified that SynthID selects resolution‑dependent carrier frequencies with fixed phase values, strongest in the green channel, and adds learned noise via a neural encoder. They built a multi‑resolution SpectralCodebook that stores carrier positions, magnitudes, and phases for each supported resolution (e.g., 1024×1024 from pure black/white references and 1536×2816 from diverse watermarked samples). Detection (≈90 % accuracy) and removal are performed by FFT‑domain subtraction weighted by phase‑consistency and cross‑validation confidence, followed by multi‑pass iterative subtraction (aggressive → moderate → gentle) and anti‑aliasing. The V3 bypass achieves up to 75 % carrier‑energy reduction, 91 % phase‑coherence drop, and >43 dB PSNR improvement across resolutions, while respecting per‑channel weighting (G = 1.0, R = 0.85, B = 0.70). The code includes tools for codebook construction, bypass execution, and robust detection, and is intended for academic research on watermark robustness.
+          </div>
+          <a href="https://github.com/aloshdenny/reverse-SynthID" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively view the watermark‑removal effort as technically straightforward and question its value, arguing that SynthID’s ease of bypass suggests it was never a robust solution. Participants criticize the repository’s quality and testing scope, noting it lacks verification against Google’s own detection tools and appears to prioritize removal over detection. Some acknowledge the relevance of the extraction method and express interest in the underlying technique, while overall sentiment remains skeptical about the practicality and significance of the work.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47709130" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
