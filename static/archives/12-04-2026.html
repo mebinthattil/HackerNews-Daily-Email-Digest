@@ -1,0 +1,513 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://brennan.day/the-end-of-eleventy/" target="_blank">The End of Eleventy</a>
+        </h2>
+        <span class="article-meta">
+          54 points • by ValentineC • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Eleventy (11ty) is a Node‑based static site generator (SSG) that supports multiple templating languages (Liquid, Nunjucks, Markdown, Handlebars, EJS) and is used by organizations such as NASA, CERN, Google, and Mozilla. In September 2024 the project moved from Netlify to Font Awesome, and in early 2026 Font Awesome launched a Kickstarter for “Build Awesome” (and a Pro tier) to rebrand Eleventy. The campaign reached its $40 k goal in one day but was later cancelled and postponed due to email‑delivery problems.  
+
+The post outlines the evolution of static web publishing—from early HTML sites to CGI, then CMSs, and modern SSGs (Jekyll 2008, Hugo 2013, Gatsby 2015, Eleventy 2017). It argues that monetizing open‑source SSGs has repeatedly failed (e.g., Gatsby, Stackbit) because the core community prefers free, local tooling.  
+
+Key concerns raised include: potential loss of Eleventy’s independence, the introduction of subscription‑based “pro” features (visual editing, browser‑only builds, premium templates), and a shift toward a corporate, profit‑driven model. Community feedback on Mastodon reflects mixed feelings, skepticism about rebranding, and worries about centralization. The author contrasts this with a pay‑what‑you‑can, nonprofit‑focused studio (Berry House) that builds static sites for marginalized groups.
+          </div>
+          <a href="https://brennan.day/the-end-of-eleventy/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed feelings toward static site generators. Many describe frustration with complex tooling, obscure documentation, and the effort required to customize themes, leading some to abandon SSGs for hand‑coded solutions or simple scripts. Others praise tools such as Eleventy, Astro, and Vite‑React for their minimalism, clear documentation, and ease of extension, noting successful personal projects and long‑term maintainability. A recurring view is that SSGs offer low commercial value but serve niche developers seeking lightweight, controllable builds, while legacy setups like old Jekyll remain in use despite security concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47735535" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier" target="_blank">Small models also found the vulnerabilities that Mythos found</a>
+        </h2>
+        <span class="article-meta">
+          899 points • by dominicq • 69 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic announced Claude Mythos Preview and Project Glasswing, claiming the limited‑access model autonomously discovered thousands of zero‑days, including a 27‑year‑old OpenBSD bug and a 16‑year‑old FFmpeg flaw, and produced sophisticated exploit chains. AIS AI Security tested the same showcased vulnerabilities on inexpensive, open‑weight models (3.6 B–5.1 B parameters). All eight models identified the FreeBSD NFS buffer‑overflow (CVE‑2026‑4747); a 5.1 B model reproduced the full OpenBSD SACK exploit chain; and several small models outperformed larger frontier models on a trivial OWASP false‑positive test. Sensitivity was perfect across models for unpatched code, but specificity varied—only the 5.1 B GPT‑OSS‑120 B reliably recognized the patched FreeBSD version as safe. None of the cheap models generated Mythos’s multi‑request RPC payload technique, though they suggested alternative exploit strategies. The authors conclude that AI cybersecurity’s “moat” lies in the surrounding system—scanning, triage, validation, and maintainer trust—rather than any single frontier model, and that cheap models can deliver most detection work when integrated into robust pipelines.
+          </div>
+          <a href="https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments largely view Anthropic’s Mythos claims with skepticism, emphasizing methodological flaws such as isolating vulnerable code rather than scanning full codebases, the absence of false‑positive metrics, and the unclear cost‑benefit balance. Many note that similar results can be achieved with smaller models using targeted prompts, while others acknowledge the potential for more automated vulnerability discovery but stress practical limitations and hype‑driven marketing. Overall sentiment is mixed, leaning toward caution and criticism of the presented evidence and its broader implications for security tooling.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47732020" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cjd8jrd1vnyo" target="_blank">We spoke to the man making viral Lego-style AI videos for Iran</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by breve • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article profiles a creator of AI‑generated, Lego‑style videos used to promote Iran’s war narrative. Experts characterize the clips as potent propaganda that bypasses traditional media channels, directly reaching audiences through rapid meme circulation. The piece notes the strategy of “cutting out the middlemen, cutting out the press, the mass media,” emphasizing continual meme distribution. Supporting visuals include screenshots of AI‑produced scenes—an Iranian soldier pursuing a U.S. soldier, a residential area in Tehran damaged during U.S.–Israeli strikes, and other unrelated images such as fuel queues in Colombo and a U.S. vice‑presidential event—illustrating the varied and often misleading contexts in which the generated content appears. Overall, the report highlights the technical sophistication of AI video tools and their role in shaping conflict‑related information ecosystems.
+          </div>
+          <a href="https://www.bbc.com/news/articles/cjd8jrd1vnyo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of both the US military action and the Iranian government, emphasizing that the attacks have worsened conditions for Iranians and that the regime’s repression is severe. There is also interest in the production techniques of a pro‑Iran LEGO animation, with requests for information about the AI tools used. Overall tone is critical of geopolitical actions, skeptical of media coverage, and inquisitive about the animation’s technical creation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47735704" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/" target="_blank">How We Broke Top AI Agent Benchmarks: And What Comes Next</a>
+        </h2>
+        <span class="article-meta">
+          264 points • by Anon84 • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Center for Responsible, Decentralized Intelligence built an automated agent that audited eight prominent AI‑agent benchmarks—SWE‑bench (Verified & Pro), Terminal‑Bench, WebArena, FieldWorkArena, OSWorld, GAIA, and CAR‑bench—and demonstrated near‑perfect scores without solving any tasks. Exploits included a 10‑line conftest.py hook that forced all pytest results to “passed” in SWE‑bench, a trojanized curl/uv wrapper that fabricated Terminal‑Bench test outputs, file‑URL navigation that read gold answers directly from WebArena configs, a validator that accepted any assistant message in FieldWorkArena, gold‑file downloads in OSWorld, aggressive string normalization in GAIA, and prompt‑injection of hidden instructions in CAR‑bench. Across benchmarks the same seven vulnerability patterns recurred: lack of isolation between agent and evaluator, exposure of answer data, unsafe eval() on agent‑controlled input, unsanitized LLM‑judge prompts, weak string matching, evaluation logic that does not actually verify answers, and trust in untrusted code outputs. The authors propose an “Agent‑Eval Checklist” (isolation, read‑only assets, no eval, input sanitization, robust scoring, secret ground truth) and introduce BenchJack, a vulnerability scanner to test benchmarks before release.
+          </div>
+          <a href="https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge the paper’s useful catalog of benchmark exploits and agree that it highlights a systemic vulnerability when evaluation systems can be manipulated by the agents they assess. Many express skepticism about the novelty of the insight and question the reliability of existing benchmarks, noting that training data leakage and insufficient sandboxing undermine trust. Concerns are raised about the broader impact of publishing such exploits, the difficulty of designing robust evaluations, and the need for methodological rigor over raw scores.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47733217" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://khronokernel.com/macos/2023/08/08/AS-VM.html" target="_blank">Apple Silicon and Virtual Machines: Beating the 2 VM Limit (2023)</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by krackers • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple Silicon hosts enforce a hard limit of two concurrent macOS guest VMs via a kernel‑level quota. The check resides in XNU’s `hv_apple_isa_vm_quota` variable, decremented/incremented in `hv_vm_*` functions during VM creation and destruction. A boot argument `hv_apple_isa_vm_quota=` can override this limit, but the argument is gated by the `AppleInternal` System Integrity Protection (SIP) flag, which is only honored in development kernels.
+
+To lift the restriction, the author:
+
+1. Downloads the matching Kernel Debug Kit and builds a development kernel collection (`kernel.development.t6020` for an M2 Pro).
+2. Disables SIP and boot‑args restrictions in RecoveryOS (`csrutil disable`, `bputil --disable-boot-args-restriction`).
+3. Configures the system to boot the custom kernel collection with `kmutil configure-boot`.
+4. Sets boot‑args: `kcsuffix=development hypervisor=0x1 hv_apple_isa_vm_quota=0xFF` (or up to `0x7FFFFFFF`).
+
+After reboot, the author runs up to nine macOS VMs simultaneously. The feature originated in macOS 12 Monterey, and the custom kernel blocks normal OS updates, requiring a revert to the stock kernel via `bputil` in RecoveryOS. Future work includes automating kernel collection creation and a possible kernel extension to modify the quota without a custom kernel.
+          </div>
+          <a href="https://khronokernel.com/macos/2023/08/08/AS-VM.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments criticize the arbitrary cap on macOS virtual machines as unnecessary and inconsistent, arguing that limits should scale with hardware tier and questioning Apple’s rationale. Several users note that newer frameworks or disabling system protections could bypass the restriction, while others accept the trade‑off as a side effect of custom kernel use. Comparisons to other platforms highlight frustration over Apple’s tighter control, and there is curiosity about the technical reasons behind the policy. Overall, the discourse blends criticism, technical speculation on workarounds, and occasional acknowledgment of possible benefits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47733971" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zenodo.org/records/19513269" target="_blank">447 TB/cm² at zero retention energy – atomic-scale memory on fluorographane</a>
+        </h2>
+        <span class="article-meta">
+          158 points • by iliatoli • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://zenodo.org/records/19513269" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments are overwhelmingly skeptical, emphasizing that the proposal lacks experimental validation, realistic performance data, and credible manufacturing pathways. Reviewers highlight implausible read/write speeds, durability concerns, and hand‑waving assumptions about bit manipulation and optical addressing, often describing the work as speculative or AI‑generated. A few note that, if the material proved viable, storage capacities could be extraordinary, but consensus holds that the claims are unsubstantiated and premature, echoing past hype cycles for novel storage media.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47733561" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://philodev.one/posts/2026-04-code-complexity/" target="_blank">How Complex is my Code?</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by speckx • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article examines multiple dimensions of code complexity, contrasting computational metrics with human‑centric factors. It reviews classic measures such as Big‑O time/memory analysis, showing how different implementations (insertion sort vs. counting sort) can trade algorithmic efficiency for understandability. Cyclomatic Complexity counts independent execution paths and correlates with defect density, while Halstead metrics estimate mental effort based on distinct operators and operands. The author argues that these technical metrics miss semantic difficulty, proposing linguistic concepts—familiarity, working‑memory load, coherence, subordination index, mean dependency distance, and entropy—as analogues for code readability and cognitive load. The piece also discusses aggregating metrics (sum, average, max) and combining them with coupling and churn to prioritize refactoring, emphasizing visualization for stakeholder communication. Overall, it suggests that while formal metrics are useful tools, true complexity is defined by the mental effort required by developers, and metrics should guide data‑driven decisions rather than be enforced as goals.
+          </div>
+          <a href="https://philodev.one/posts/2026-04-code-complexity/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a largely positive response, highlighting the article’s usefulness in clarifying software‑engineering complexity and linking it to cognitive and linguistic concepts. Readers note a newfound awareness of accidental complexity and appreciate the discussion of abstractions and tools that can “solve” difficult problems. Several remarks stress that the field remains immature, with ample opportunity for better abstractions, while the overall tone is appreciative and optimistic about future progress.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47673171" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pijul.org/" target="_blank">Pijul a FOSS distributed version control system</a>
+        </h2>
+        <span class="article-meta">
+          98 points • by kouosi • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Pijul is a free, GPL‑2‑licensed distributed version control system built on a formal theory of patches. Its core design ensures that independent changes commute: they can be applied in any order without altering the resulting version identifier, simplifying workflows compared to git rebase or hg transplant. Pijul’s merge algorithm preserves line order, avoiding the line‑shuffling issues of traditional three‑way merges; when order is ambiguous, the system treats it as a conflict rather than performing automatic merges. Conflicts are modeled as first‑class entities between two changes, resolved by a dedicated change that remains valid regardless of subsequent concurrent edits, eliminating recurring conflicts. The system also supports “channels,” a branch‑like mechanism, though ordinary feature development often corresponds to simple changes. Because of commutation, Pijul enables partial clones: users can fetch and work on a subset of a repository, then exchange only the relevant patches with the full repository.
+          </div>
+          <a href="https://pijul.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge that Pijul introduces interesting concepts such as commutation, first‑class conflicts, and a backend‑agnostic front end, but most view its practical impact as limited. Repeated concerns include Git’s dominant network effect, missing quality‑of‑life features like contextual diffs, historical stability and performance problems, and the absence of a Pijul backend for existing tools. Critics also argue that the touted advantages—merge correctness, partial clones, and conflict handling—offer little benefit compared with mature Git capabilities, leading to overall skepticism about broader adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47672941" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://darkcastle.co.uk/" target="_blank">Dark Castle</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by evo_9 • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Dark Castle, developed by Mark Pierce and Jonathan Gay for Silicon Beach in 1986, was a pioneering Macintosh game notable for its black‑and‑white graphics, sound capabilities, and multi‑level action. Distributed on an application disk with a “MiniFinder,” it leveraged early Mac hardware and earned multiple awards, achieving commercial success. The gameplay centers on the protagonist Duncan navigating a castle to defeat the Black Knight, collecting tools, and traversing trap doors that lead to a three‑level dungeon. Difficulty escalates by increasing enemy count, requiring speed in some levels and careful observation in others. With the advent of color Macs, the Macintosh II, and the Multifinder environment, the original version became incompatible. After Aldus acquired Silicon Beach for its graphics technology, no further Dark Castle titles were produced.
+          </div>
+          <a href="https://darkcastle.co.uk/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong nostalgia for the classic Mac game, recalling extensive playtime and noting its historical context alongside similar titles. Users share frustration over dead download links and limited availability of emulators, especially for Windows and Linux platforms, while seeking functional alternatives and instructions. There is interest in updated releases, such as a recent Steam version, and curiosity about the creators’ current status, copyright ownership, and the possibility of accessing source code or game resources. Overall, the discussion centers on preserving and revisiting the game despite accessibility challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47733521" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.v68k.org/advanced-mac-substitute/" target="_blank">Advanced Mac Substitute is an API-level reimplementation of 1980s-era Mac OS</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by zdw • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Advanced Mac Substitute is an API‑level reimplementation of the 1980s Macintosh operating system that runs classic 68 k‑processor Mac applications without requiring an Apple ROM or original system software. It replaces the OS rather than emulating full hardware, launching directly into the target application. The backend includes a 68 k CPU emulator and is designed to compile on any POSIX‑like system; the frontend uses SDL2 for a generic bit‑mapped terminal abstraction with platform‑specific implementations for macOS, X11, and Linux framebuffer (fbdev). Current capabilities support 1‑bit graphics, regions, circles, round‑rects, lines, cursors, GrafPorts, text, windows, controls, menus, dialogs, and related primitives. Demonstrated applications include four 1984 games—Amazing, Solitaire, Missile, and IAGO—along with Lode Runner and The Fool’s Errand cinematic. Source code is hosted on GitHub, and the program can be executed on macOS/OS X, X Window System, Linux framebuffer consoles, or via VNC clients.
+          </div>
+          <a href="https://www.v68k.org/advanced-mac-substitute/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The reaction is overwhelmingly positive, with users praising the project’s speed, nostalgic appeal, and potential to run classic Mac applications on modern hardware. Several comments highlight interest in adding conveniences such as file sharing, windowed frames, and browser‑based deployment, while others note technical hurdles like missing OpenDF support and compatibility quirks. Comparisons to earlier solutions such as Executor acknowledge similar goals, and there is broad enthusiasm for further development and experimentation despite the noted challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47731506" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
