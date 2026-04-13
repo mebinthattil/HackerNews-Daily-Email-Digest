@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2603.21852" target="_blank">All elementary functions from a single binary operator</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by pizza • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper introduces a single binary operator eml(x, y) = exp(x) − ln(y) together with the constant 1, and proves that this primitive can generate the full set of elementary functions typically available on a scientific calculator. Using eml, the author constructs constants (e, π, i), arithmetic operations (addition, subtraction, multiplication, division, exponentiation), and transcendental functions (sin, cos, sqrt, log, etc.) via explicit formulas—for instance, exp(x) = eml(x, 1) and ln(x) = eml(1, eml(eml(1, x), 1)). The resulting expressions form uniform binary trees described by the simple grammar S → 1 | eml(S, S). This uniformity enables gradient‑based symbolic regression: treating EML trees as trainable circuits optimized with Adam, the method can exactly recover closed‑form elementary formulas from numerical data for tree depths up to 4, while also fitting arbitrary data. The work was submitted on 23 Mar 2026 and revised on 4 Apr 2026.
+          </div>
+          <a href="https://arxiv.org/abs/2603.21852" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express curiosity about the EML formulation, with several users asking for comprehensive tables of mathematical operations expressed in the eml(x, y) form and questioning whether the required gate combinations are simpler than existing primitives. There is interest in potential hardware realizations, including analog calculators, and comparisons to traditional math coprocessors, alongside remarks that the concept feels novel yet abstract. While some find the idea intriguing and promising, others remain uncertain about practical implementation and complexity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47746610" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://haunt.madebywindmill.com" target="_blank">Haunt, the 70s text adventure game, is now playable on a website</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by jscalo • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The excerpt consists exclusively of a title and a heading. The title is presented as “HAUNT – Chez Moose Terminal Mk IV,” and the heading repeats the product designation as “CHEZ MOOSE TERMINAL MODEL IV.” No additional narrative, specifications, functional description, technical data, release information, or contextual commentary follows these headings. As a result, the provided text does not supply any substantive details about the terminal’s purpose, hardware architecture, software environment, operational use cases, or relationship to the “HAUNT” title. The content is limited to the identification of the item by name and model version, with all other informational elements absent.
+          </div>
+          <a href="https://haunt.madebywindmill.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47747248" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.eetimes.com/taking-on-cuda-with-rocm-one-step-after-another/" target="_blank">Taking on CUDA with ROCm: &#39;One Step After Another&#39;</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by mindcrime • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.eetimes.com/taking-on-cuda-with-rocm-one-step-after-another/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a largely skeptical view of AMD’s ROCm ecosystem, highlighting frequent installation hurdles, extensive dependencies, limited and delayed support for consumer GPUs, and ongoing driver instability. Comparisons to CUDA and Vulkan emphasize ROCm’s perceived lag in features, performance, and ecosystem maturity, while some users note occasional successes on newer hardware. There is recurring criticism of AMD’s engineering resources and roadmap transparency, alongside suggestions that alternative approaches such as Vulkan or Rust‑GPU might offer more reliable or future‑proof solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47745284" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2604.07902" target="_blank">Optimization of 32-bit Unsigned Division by Constants on 64-bit Targets</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by mpweiher • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided excerpt contains only the paper’s bibliographic header and a list of visual elements. It includes the title “Optimization of 32-bit Unsigned Division by Constants on 64‑bit Targets” (arXiv identifier 2604.07902) and references to several images: institutional logos for Cornell University and arXiv, a license icon, and logos for BibSonomy and Reddit. No abstract, introduction, methodology, results, or conclusions are present in the supplied text, and therefore no technical details, algorithms, performance data, or implementation specifics can be extracted. The content is limited to metadata and placeholder captions for the images, without substantive discussion of the optimization techniques or target architectures.
+          </div>
+          <a href="https://arxiv.org/abs/2604.07902" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47737542" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://boringbar.app/" target="_blank">Show HN: boringBar – a taskbar-style dock replacement for macOS</a>
+        </h2>
+        <span class="article-meta">
+          274 points • by a-ve • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            boringBar is a macOS utility that replaces the traditional Dock with a taskbar‑style interface. It displays open windows grouped by desktop, offers a desktop‑switcher for navigating macOS Spaces, and includes a searchable app launcher. The bar provides thumbnail previews for window selection, notification badges on window chips, and an attention pulse to highlight apps needing user focus. Licensing options consist of a personal one‑time purchase of $40, covering two devices and including two years of support and updates (software remains functional thereafter without further updates). Business licenses are annual, start at six users, and use volume pricing: $20.99 / year for six users, $69.99 / year for twenty users, and $144.99 / year for fifty users.
+          </div>
+          <a href="https://boringbar.app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments praise the app’s clean design and useful task‑bar features, but overwhelmingly criticize the subscription pricing model, calling it inappropriate for a static macOS utility and preferring a one‑time or upgrade‑based license. Reviewers compare the cost unfavorably to existing alternatives, note concerns about long‑term support and potential incompatibility with older macOS versions, and point out bugs and performance hiccups. Overall sentiment is positive about the concept and UI yet strongly negative toward the subscription approach and perceived price.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47742200" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://essays.johnloeber.com/p/4-bring-back-idiomatic-design" target="_blank">Bring Back Idiomatic Design (2023)</a>
+        </h2>
+        <span class="article-meta">
+          495 points • by phil294 • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The essay argues that “idiomatic design” – standardized, familiar UI patterns such as checkboxes, menu structures, and keyboard shortcuts – enabled fast, low‑cognitive‑load interactions in the desktop era (e.g., Windows 95–7). Consistency across applications and the OS’s GUI libraries produced homogeneous interfaces, clear labeling, and reliable behaviors (status bars, underlined menu shortcuts, predictable button actions). By contrast, modern web applications exhibit heterogeneous designs: divergent date pickers, credit‑card inputs, and disparate keyboard shortcuts, largely because developers must support both mouse/keyboard and touch, reuse modular components, and prioritize technical possibilities over UI polish. Rapid front‑end evolution (React, WebAssembly) further erodes HTML/CSS idioms, breaking expectations like back‑button behavior. The author cites Apple’s tightly controlled design system and platforms like Substack as rare examples of convergent idioms. Recommended practices for builders include: adhering to HTML/CSS standards (e.g., native `<a>` and `<button>`), preserving browser conventions (back button, Ctrl‑click), maintaining internal consistency, preferring clear text over icons, and consulting proven designs and historic UI literature.
+          </div>
+          <a href="https://essays.johnloeber.com/p/4-bring-back-idiomatic-design" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread frustration with contemporary UI/UX, citing a loss of consistency, flat visual styles, obscure shortcuts, and over‑customized components that hinder usability. Many callers lament missing standard controls, clear affordances, and predictable behaviors across platforms, while also noting that branding and rapid product cycles prioritize novelty over functional design. Some acknowledge that professional tools may require specialized patterns, but overall the consensus calls for clearer conventions, stronger standards, and a return to more idiomatic, user‑focused interfaces.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47738827" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blinry.org/diy-soft-drinks/" target="_blank">DIY Soft Drinks</a>
+        </h2>
+        <span class="article-meta">
+          299 points • by _Microft • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author documents a personal DIY soft‑drink project begun in 2020, focusing on caffeine‑free, sugar‑reduced cola and several fruit‑flavored sodas. Recipes are stored on GitHub and draw on Open Cola and Cube Cola formulas. Key steps for cola include creating a 2 ml essential‑oil emulsion (orange, lime, lemon, nutmeg, cassia, coriander, lavender) using 2 g gum arabic and 4 ml water, then adding 40 ml caramel color, 5 g citric acid, and optional caffeine. The concentrate is sweetened with a cyclamate‑saccharin blend (≈70 ml) or sucralose in later batches, diluted to 1 L and mixed 1:8 with water for serving. Subsequent batches adjust sweetener levels, add vanillin, and modify oil ratios. Additional drinks include orange soda, almond‑blood‑orange soda, and almond soda, each using varied oil mixes, sucralose or sugar (≈400 g sugar ≈0.6 g sucralose), and food coloring. The post references Jan Krüger’s and Richard Grove’s notes on cola chemistry and notes safety precautions (gloves for essential oils) and equipment upgrades (precision syringes, glass containers).
+          </div>
+          <a href="https://blinry.org/diy-soft-drinks/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Enthusiasm for crafting homemade sodas dominates the discussion, with practical advice on using pre‑hydrated gum arabic, water‑soluble flavor concentrates, and inexpensive CO₂ rig setups to carbonate water. Contributors favor low‑sugar or sugar‑free formulations, noting challenges with artificial sweeteners and emphasizing careful pH and temperature control. Suppliers such as Apex Flavors, Nature’s Flavors, and Bakto are repeatedly recommended. Safety cautions address pressurised bottles and gas handling, while interest in historical recipes and ingredient sourcing—including caramel color alternatives and natural extracts—adds depth to the collective guidance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47741701" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://adlrocha.substack.com/p/adlrocha-how-the-ai-loser-may-end" target="_blank">Apple&#39;s accidental moat: How the &#34;AI Loser&#34; may end up winning</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by walterbell • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://adlrocha.substack.com/p/adlrocha-how-the-ai-loser-may-end" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express approval of Apple’s limited AI integration, noting the absence of intrusive prompts compared with other platforms, while questioning the value of Apple’s forthcoming AI features and suggesting they may be more hype than substance. There is confidence in Apple’s hardware focus and recent financial success, especially in China, alongside skepticism that AI initiatives will deliver meaningful benefits. Additionally, the discussion criticizes the quality of recent Apple software and analysis, perceiving a decline in polish and relevance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47747017" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: What Are You Working On? (April 2026)</a>
+        </h2>
+        <span class="article-meta">
+          160 points • by david927 • 378 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively showcase a wave of personal projects and early‑stage products spanning photography galleries, financial tracking, elder‑care sensors, habit‑forming apps, educational AI tools, niche programming languages, puzzle games, privacy‑focused parental controls, offline rail planners, and various developer utilities. Authors frequently emphasize open‑source or privacy‑first designs, request community feedback, and note challenges such as market validation, user adoption, or junior job prospects. Overall sentiment is optimistic and constructive, with creators highlighting progress, seeking input, and acknowledging uncertainties about reach and sustainability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47741527" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.lesswrong.com/posts/jTGbKKGqs5EdyYoRc/most-people-can-t-juggle-one-ball" target="_blank">Most people can&#39;t juggle one ball</a>
+        </h2>
+        <span class="article-meta">
+          286 points • by surprisetalk • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A concise tutorial explains juggling fundamentals and progression. Begin with a neutral stance, then practice one‑ball throws that peak at eye level and land in the fingers without moving the catching hand. Correct common errors by avoiding upward reaches and maintaining brief visual contact. For two balls, launch the first ball, wait for its apex, then throw the second inside the first’s arc; timing and equal heights are crucial. Extend to three balls by alternating “two‑ball swaps” between hands, achieving a “flash” after three catches and a “qualify” after six. Common three‑ball issues include overly fast or forward throws; slower practice and constrained spaces help. Advanced tricks involve outside throws, under‑arm, behind‑back, and overhead catches; Mill’s Mess is highlighted. Skill scaling follows: 4‑ball fountains (vertical throws) typically require a month; 5‑ball cascades can take years due to mid‑air crossing complexity; 7‑ball cascades demand dedicated half‑hour daily practice. Siteswap notation assigns a number to each throw’s tempo, with averages indicating ball count; extensions use letters for throws ≥10. Passing patterns, club and ring juggling, and distinctions between cascade and shower styles are also covered, noting world records of 14‑ball cascade and 8‑ball shower.
+          </div>
+          <a href="https://www.lesswrong.com/posts/jTGbKKGqs5EdyYoRc/most-people-can-t-juggle-one-ball" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express enthusiasm for juggling as an enjoyable, accessible skill that benefits from consistent practice and simple teaching methods, such as using hand‑kerchiefs or focusing on steady toss arcs. Many recount personal breakthroughs, highlight the rewarding “muscle‑memory” aspect, and note that clubs add visual interest. Several participants praise community workshops and supportive peers, while a few suggest improvements like VR practice tools. Overall, the tone is positive, emphasizing the ease of learning basic patterns, the value of shared resources, and the lasting satisfaction of the activity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47702887" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
