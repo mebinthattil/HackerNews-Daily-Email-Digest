@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://anchor.host/someone-bought-30-wordpress-plugins-and-planted-a-backdoor-in-all-of-them/" target="_blank">Someone bought 30 WordPress plugins and planted a backdoor in all of them</a>
+        </h2>
+        <span class="article-meta">
+          762 points • by speckx • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A supply‑chain attack compromised a portfolio of 30 + WordPress plugins sold on Flippa. The original “Essential Plugin” business, founded by WP Online Support, was bought in early 2025 by an individual (“Kris”) with SEO/crypto background. In August 2025 the new owner added a PHP deserialization backdoor to the plugin’s wpos‑analytics module (class‑anylc‑admin.php), creating a fetch_ver_info() method that unserialized data from a remote server and exposed an unauthenticated REST endpoint. The code remained dormant for eight months, then on 5‑6 April 2026 downloaded wp‑comments‑posts.php, injected ~6 KB of spam‑link payload into wp‑config.php, and served Google‑bot‑only SEO spam via a C2 domain resolved through an Ethereum smart contract.
+
+WordPress.org forced an auto‑update (v2.6.9.1) on 7 April 2026, which disabled the phone‑home function but left the wp‑config infection intact, and closed all 31 plugins that day. The author’s account was removed. For remediation, the author patched 10 affected plugins by stripping the wpos‑analytics directory, removing the loader function, and bumping the version to “‑patched”. Site owners should audit wp‑config.php for the extra 6 KB injection and replace or remove any Essential Plugin slug.
+          </div>
+          <a href="https://anchor.host/someone-bought-30-wordpress-plugins-and-planted-a-backdoor-in-all-of-them/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong concern about the vulnerability of modern software supply chains, especially WordPress plugins and npm packages, where transitive dependencies and automatic updates create easy attack vectors. Many blame the monetization of crypto and the lack of robust governance or signing mechanisms, calling for decentralized, verifiable package systems and stricter legal or industry standards. Opinions also critique reliance on AI‑driven automation and suggest moving away from fragile ecosystems toward self‑maintained code or static sites, while acknowledging the difficulty of implementing comprehensive solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47755629" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.github.com/gh-stack/" target="_blank">GitHub Stacked PRs</a>
+        </h2>
+        <span class="article-meta">
+          505 points • by ezekg • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GitHub Stacked PRs enable developers to organize related changes as an ordered series of pull requests, each building on the previous one and ultimately merging into the main branch in a single action. The UI displays a stack map, allowing reviewers to navigate layers, see individual diffs, and enforce branch‑protection rules against the final target branch. CI runs for each PR as if targeting the final branch. The `gh stack` CLI extension (installable via `ghextension install github/gh-stack`) automates local workflow: creating stacked branches, performing cascading rebases, pushing branches, and opening PRs with correct base references. Stacks can be merged wholly or partially; after a merge, remaining PRs are automatically rebased to target the base branch. An AI agent integration (`npx skills add github/gh-stack`) lets coding agents manipulate stacks. The tool aims to improve reviewability, reduce merge conflicts, and maintain context for large changes.
+          </div>
+          <a href="https://github.github.com/gh-stack/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong enthusiasm for native stacked PR support, citing benefits for breaking large changes into smaller, reviewable units, especially in monorepos and long‑running feature work. Users appreciate the UI navigation widget and expect smoother rebasing, conflict handling, and AI‑assisted workflows, while many also rely on external tools like the gh‑stack CLI. Skepticism remains about added complexity, redundancy with existing commit‑level review, limitations for cross‑repo stacks, and the need for clearer merge semantics. Concerns about documentation, domain authenticity, and the learning curve also appear throughout.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47757495" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.blackmagicdesign.com/products/davinciresolve/photo" target="_blank">DaVinci Resolve releases Photo Editor</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by thebiblelover7 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            DaVinci Resolve Photo provides a full‑featured photography workflow integrated with DaVinci’s color‑grading engine. It supports native RAW import from Canon, Fujifilm, Nikon, Sony and iPhone ProRAW, processing images at source resolution up to 32 K (≈400 MP) without down‑sampling. Standard adjustments—white balance, exposure, color, saturation—are available alongside non‑destructive transformations such as cropping, reframing and sensor‑data reinterpretation. GPU acceleration enables batch processing of entire albums faster than typical photo editors. The interface includes familiar photography tools (curves, nodes, scopes) and Resolve FX, plus AI‑driven features: Magic Mask, depth‑map segmentation, Relight, Face Refinement, AI SuperScale upscaling, UltraNR noise reduction, Patch Replacer and a Film‑Look creator. Workflow extensions cover image management, album organization, camera tethering, quick export, and hardware panel integration (Speed Editor, Micro Color, Mini, Advanced). Collaboration is supported across platforms, and the suite is complemented by Fairlight audio tools and additional Resolve modules.
+          </div>
+          <a href="https://www.blackmagicdesign.com/products/davinciresolve/photo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong approval of DaVinci Resolve’s capabilities and value, highlighting its speed, cinematic grading, and appeal as a free alternative to subscription‑based photo editors. Users note a desire for better Linux compatibility and a standalone app without needing a full Resolve project. Comparisons cite frustrations with Lightroom, Capture One, and other tools regarding performance, camera support, and platform limitations. There is speculation that Resolve’s revenue derives from its professional‑grade hardware, while many see the software as a compelling, cost‑effective solution for both video and photo workflows.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47760529" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kirancodes.me/posts/log-who-watches-the-watchers.html" target="_blank">Lean proved this program correct; then I found a bug</a>
+        </h2>
+        <span class="article-meta">
+          139 points • by bumbledraven • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A verified Lean implementation of zlib, called **lean‑zip**, was shown to correctly decompress data for any byte array under 1 GiB, as proven by the theorem `ZlibDecode.decompressSingle (ZlibEncode.compress data level) = .ok data`. Over 105 million fuzzing runs using AFL++, AddressSanitizer, Valgrind, and UBSan revealed no memory bugs in the verified Lean code itself, but uncovered two separate issues:  
+
+- A heap‑buffer overflow in the Lean 4 runtime function `lean_alloc_sarray`, present in all released Lean versions and reported for fixing.  
+- A denial‑of‑service vulnerability in lean‑zip’s archive parser, which was not covered by verification.  
+
+The findings illustrate that while formal verification can eliminate implementation bugs in the target program, runtime libraries and unverified components may still contain exploitable flaws. This case underscores the need for comprehensive verification of both application code and its underlying runtime environment.
+          </div>
+          <a href="https://kirancodes.me/posts/log-who-watches-the-watchers.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments largely criticize the article’s click‑bait title and stress that the discovered bugs reside in the Lean runtime rather than the verified kernel, limiting their relevance to the proof’s guarantees. Recurrent themes emphasize that formal verification only ensures correctness within a specified envelope, and that flawed or incomplete specifications can render proofs misleading, especially when unverified components like parsers or memory allocators are involved. While some express optimism about AI‑assisted verification, most caution that proofs cannot guarantee absolute bug‑free software and that spec quality remains a fundamental challenge.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47759709" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/fabienmillet/WiiFin" target="_blank">WiiFin – Jellyfin Client for Nintendo Wii</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by throwawayk7h • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            WiiFin is an experimental homebrew client for Jellyfin designed for the Nintendo Wii, written in C++ and built with devkitPro (devkitPPC, libogc, wii‑dev). It uses GRRLIB for graphics, libpngu, freetype, libjpeg, and integrates MPlayer CE (libmplayer.a) for video playback. Authentication supports username/password and QuickConnect; multiple profiles store only access tokens. The UI provides library browsing (movies, TV shows, music) with cover art, detail view (synopsis, rating, cast, audio/subtitle selection), Continue Watching/Next Up rows, and season/episode navigation. Playback is server‑side transcoded, streamed via the integrated MPlayer engine; only stereo audio is available and subtitles are embedded by the server. Progress is reported back to the Jellyfin server for resume. HTTPS connections use mbedTLS with self‑signed certificate support. Input is handled via Wiimote IR pointer and a virtual on‑screen keyboard. The project ships as a .dol and .wad installable via the Homebrew Channel or WAD manager, and can run in Dolphin emulator. It is GPL‑v3 licensed and actively developed.
+          </div>
+          <a href="https://github.com/fabienmillet/WiiFin" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight Jellyfin’s increasing popularity, noting it now surpasses Plex in TrueNAS catalog installs and is praised for reliable performance across devices such as Samsung TVs and custom Wii setups. Users appreciate its open‑source nature and potential for broader developer contributions, while also expressing interest in features like OpenSubsonic API support and better native transcoding options. Several remarks inquire about scaling the server for multi‑household use or clustering, and a few suggest creative hardware integrations, indicating overall positive sentiment tempered by technical improvement requests.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47759341" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developers.google.com/search/blog/2026/04/back-button-hijacking" target="_blank">A new spam policy for &#34;back button hijacking&#34;</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by zdw • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Google is adding “back button hijacking” to its spam policies as a prohibited “malicious practice,” effective June 15 2026. The tactic interferes with a user’s browser back navigation, redirecting them to unexpected pages, ads, or recommendations and preventing a normal return to the prior site. Google cites rising instances and user frustration, stating such behavior creates a mismatch between expectations and outcomes, potentially harming security or privacy. Sites employing scripts, libraries, or ad platforms that insert or replace history entries must remove or disable the code. Violations may trigger manual spam actions or automated demotions in Search results. Owners can submit a reconsideration request via Search Console after fixing issues. The policy announcement provides a two‑month grace period before enforcement.
+          </div>
+          <a href="https://developers.google.com/search/blog/2026/04/back-button-hijacking" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall dissatisfaction with web practices that prioritize advertising and user manipulation, citing Microsoft sites as notable examples. There is frustration that such intrusive features have persisted for a long time, coupled with a sense of relief that recent steps are being taken to address the issue. The tone blends criticism of current web design trends with cautious optimism about forthcoming improvements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47760764" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://duckdb.org/library/design-and-implementation-of-duckdb-internals/" target="_blank">Design and implementation of DuckDB internals</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by mpweiher • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page describes a 15‑week undergraduate course on DuckDB internals, created by Torsten Grust for the Database Research Group at the University of Tübingen. Course materials—including slides and auxiliary files—are hosted on GitHub. The syllabus covers selected core components of the DuckDB kernel: introductory setup, query performance spectrum, memory management and grouped aggregation, large‑table sorting, ART indexing, execution plans and pipelining, vectorized query execution, and query rewriting/optimization. Basic SQL proficiency (SELECT‑FROM‑WHERE‑GROUP BY‑HAVING) is required; optional background on the tabular data model is offered via a companion “Tabular Database Systems” course. Images include the DuckDB logo and a placeholder for a developer discussion illustration.
+          </div>
+          <a href="https://duckdb.org/library/design-and-implementation-of-duckdb-internals/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback indicates disappointment and confusion regarding the availability of lecture videos, with the impression that the platform may lack such content. Users are uncertain whether the omission is intentional or an oversight, and they seek clarification on whether lecture material is absent or hidden. The overall tone reflects a negative perception of the missing instructional resources.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47718284" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/sterlingcrispin/nothing-ever-happens" target="_blank">Nothing Ever Happens: Polymarket bot that always buys No on non-sports markets</a>
+        </h2>
+        <span class="article-meta">
+          370 points • by m-hodges • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository implements an asynchronous Python bot for Polymarket that automatically buys “No” on standalone yes/no markets for entertainment purposes.  
+
+**Structure**  
+- `bot/`: runtime, exchange clients (live or `PaperExchangeClient`), dashboard, recovery logic, and the `nothing_happens` strategy.  
+- `scripts/`: helpers for deployed instances and local inspection (e.g., DB stats, export, wallet history, log parsing).  
+- `tests/`: unit and regression tests.  
+
+**Operation**  
+- Scans markets, selects “No” entries below a configurable price cap, tracks open positions, provides a web dashboard, and persists state for recovery.  
+- Live trading requires `BOT_MODE=live`, `LIVE_TRADING_ENABLED=true`, `DRY_RUN=false`, plus `PRIVATE_KEY`, `FUNDER_ADDRESS`, `DATABASE_URL`, and `POLYGON_RPC_URL`. Missing variables default to the paper client.  
+
+**Setup & Deployment**  
+- Install with `pip install -r requirements.txt`; copy `config.example.json` → `config.json` and `.env.example` → `.env`.  
+- Runtime reads `config.json` (non‑secret) and `.env` (secrets); alternative config via `CONFIG_PATH`.  
+- Dashboard binds `$PORT` or `DASHBOARD_PORT`.  
+- Heroku deployment uses environment variables and runs only a web dyno; a worker dyno exists solely to fail fast.  
+
+Local configuration, ledgers, and export artifacts are ignored by default.
+          </div>
+          <a href="https://github.com/sterlingcrispin/nothing-ever-happens" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed view of the “always‑no” prediction‑market bot. Many describe it as an amusing meme or academic experiment rather than a reliable profit source, noting that frequent small wins can be offset by occasional large losses and that the implied edge may already be priced in. Skepticism centers on the lack of transparent performance data, the risk of long‑tail events, and the idea that widespread use would erode any advantage. A few users point to similar bots on non‑real‑money platforms as modestly successful, while others highlight the broader informational value of prediction markets despite these concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47753472" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.orhun.dev/code-responsibly/" target="_blank">Write less code, be more responsible</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by orhunp_ • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The author reflects on the rapid rise of AI‑assisted programming tools (e.g., GitHub Copilot, OpenAI Codex) and how they have altered development workflows.  
+- Initial experiments with Codex on a terminal UI for cargo‑tree showed that unrestricted AI generation caused confusion; switching to a “commit‑by‑commit, quality‑checked” approach improved comprehension and reduced reliance on AI.  
+- A mixed strategy is now used: AI handles repetitive or time‑consuming tasks, while the developer writes and reviews the core, creative code, followed by a final quality pass.  
+- Concerns are raised about the potential decline in project quality and maintainability when developers prioritize speed (“vibe‑coded” apps) over robustness, especially in open‑source contributions.  
+- Licensing questions remain unresolved; the legal status of AI‑generated code within existing open‑source licenses is uncertain, and disputes have yet to produce clear precedents.  
+- The author advocates personal responsibility, encouraging transparent AI use and continued focus on building high‑quality software rather than viewing AI as a replacement for creativity or effort.
+          </div>
+          <a href="https://blog.orhun.dev/code-responsibly/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary reflects a solo developer’s pragmatic view on software creation, emphasizing that coding itself is rarely the bottleneck compared to design thinking. It critiques the hype around generating more, faster code, arguing that excessive lines increase bugs and maintenance costs, and that quality should outweigh raw output. While acknowledging that AI assistance can improve accessibility and enable work from limited devices, the author stresses the need for deep understanding of generated code and prefers configuration‑first approaches to reduce unnecessary complexity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47728970" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.farre.se/posts/2026/04/10/caching-webidl-codegen/" target="_blank">How to make Firefox builds 17% faster</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by mbitsnbites • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post describes adding a Lua‑based wrapper to Mozilla’s **buildcache** so that the Firefox WebIDL binding generation step can be cached. The WebIDL step runs `python3 -m mozbuild.action.webidl`, producing thousands of deterministic C++ files on every clobber build, making it suitable for caching. A small change in `dom/bindings/Makefile.in` conditionally passes `$(CCACHE)` (the buildcache command wrapper) to the `py_action` macro, causing the Python action to be invoked as `buildcache python3 …`. The accompanying `webidl.lua` script tells buildcache how to recognize the command, enumerate its input `.webidl` files and Python scripts (via `file‑lists.json` and `codegen.json`), and list its generated outputs, enabling direct‑mode hashing of inputs.
+
+Benchmarking shows a warm build time reduction from ~5 min 35 s to 1 min 12 s, with the WebIDL cache shaving an additional ~15 s. Setup requires cloning the `buildcache‑wrappers` repository and adding its path to `~/.buildcache/config.json` or the `BUILDCACHE_LUA_PATH` environment variable, with a large `max_local_entry_size` to accommodate big Rust crate entries. The author plans to apply the same approach to other deterministic code‑generation steps in the Firefox build.
+          </div>
+          <a href="https://blog.farre.se/posts/2026/04/10/caching-webidl-codegen/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions to build‑caching efforts. Contributors note difficulties with caching Rust procedural macros and Windows builds, citing non‑determinism and low cache‑hit rates. Some argue that adding a cache layer is a temporary fix compared to improving the underlying build system, while others point out measurable gains such as a 17 % reduction in code size or faster compilation with tools like ccache. There is also skepticism about focusing on performance when broader concerns, such as user adoption, are seen as more critical.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47756321" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
