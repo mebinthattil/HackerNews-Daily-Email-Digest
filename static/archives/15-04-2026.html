@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://code.claude.com/docs/en/routines" target="_blank">Claude Code Routines</a>
+        </h2>
+        <span class="article-meta">
+          486 points • by matthieu_bl • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Code “routines” automate tasks via scheduled, API‑triggered, or GitHub‑event triggers (research preview; behavior and limits may change). Users define a routine by naming it, writing a self‑contained prompt, selecting a model, and linking one or more GitHub repositories (cloned at run start; Claude creates `claude/`‑prefixed branches; unrestricted push permission may be required). Environment settings include network access, secret variables, and a setup script for dependencies. Triggers are added through the UI, CLI, or desktop app:  
+- **Schedule** – recurring cadence (hourly, daily, etc.).  
+- **API** – HTTP POST to `https://api.anthropic.com/v1/claude_code/routines/<id>/fire` with bearer token and required headers (`anthropic-beta`, `anthropic-version`, `Content-Type`). Response returns a session ID and URL.  
+- **GitHub** – events such as `pull_request.opened`/`closed`; requires installing the Claude GitHub App and can be filtered by branch, fork status, draft flag, or labels.  
+
+Runs generate separate sessions viewable in the Claude Code interface; users can run immediately, pause schedules, edit prompts, repositories, environments, or delete routines. Past sessions persist after deletion. Limits and API shapes are subject to change under dated beta headers.
+          </div>
+          <a href="https://code.claude.com/docs/en/routines" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion shows broad skepticism toward Anthropic’s expanding platform features, with many users fearing lock‑in, potential nerfing, and limited long‑term reliability, especially given recent usage caps and perceived instability. While a minority report occasional practical benefits from the new routines and scheduled tasks, most highlight bugs, inconsistent connector behavior, and concerns about pricing and vendor dependence. There is a strong preference for commodity‑style access, local orchestration, and clearer, more stable tooling rather than a rapidly shifting, feature‑heavy service.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47768133" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://techcrunch.com/2026/04/13/thousands-of-rare-concert-recordings-are-landing-on-the-internet-archive-listen-now/" target="_blank">Rare concert recordings are landing on the Internet Archive</a>
+        </h2>
+        <span class="article-meta">
+          563 points • by jrm-veris • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Chicago music fan Aadam Jacobs has recorded live shows since the 1980s, accumulating over 10 000 cassette tapes.  
+- To prevent tape degradation, volunteers from the nonprofit Internet Archive began digitizing the collection; about 2 500 tapes are now online.  
+- The digital archive includes rare early performances such as a 1989 Nirvana set (pre‑“Smells Like Teen Spirit”), plus previously unknown recordings from Sonic Youth, R.E.M., Phish, Liz Phair, Pavement, Neutral Milk Hotel, and numerous punk groups.  
+- Volunteer audio engineer Brian Emerick regularly collects boxes of tapes from Jacobs, plays them on vintage cassette decks, and converts them to digital files.  
+- Additional volunteers clean, organize, and label the files, often researching obscure song titles for forgotten bands.  
+- Despite Jacobs’ original low‑grade equipment, the restoration process has significantly improved audio quality, exemplified by a 1988 Tracy Chapman recording now available on the Archive.
+          </div>
+          <a href="https://techcrunch.com/2026/04/13/thousands-of-rare-concert-recordings-are-landing-on-the-internet-archive-listen-now/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments celebrate the lasting value of fan‑made concert bootlegs, describing personal memories of recording shows and the thrill of hearing rare performances online. Contributors praise large‑scale archival efforts such as the Internet Archive and volunteer collections for keeping thousands of live recordings accessible, noting how they aid music discovery and preserve cultural history. There is consensus that many artists have embraced or tolerated this practice, while also expressing concern about copyright enforcement, DMCA takedowns, and the need for sustainable, possibly decentralized, preservation methods. Overall the tone is nostalgic, supportive of preservation, and cautious about legal challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47765604" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stopflock.com" target="_blank">Stop Flock</a>
+        </h2>
+        <span class="article-meta">
+          440 points • by cdrnsf • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Flock Safety sells AI‑driven “vehicle‑fingerprint” cameras that record license plates plus visual traits (color, make, model, dents, bumper‑sticker placement, roof racks, wheel type) and generate searchable profiles. The platform adds “convoy analysis” to link vehicles that frequently travel together and stores all data in a nationwide law‑enforcement network accessible without a warrant. As of 2025, over 100,000 cameras are deployed, with more than 3,000 agencies using the system; a public map shows roughly half of the units. Legal challenges cite Fourth‑Amendment violations, with a 2024 trial court labeling the network a city‑wide dragnet equivalent to GPS tracking. Documented abuses include a Kansas chief’s 228 unauthorized stings of an ex‑girlfriend and a journalist’s 300‑mile route being logged by ~50 cameras. Demographic analyses reveal disproportionate stops of Black drivers (84 % in Oak Park). Flock expands via partnerships with HOAs, retailers (e.g., Lowe’s) and employers, sharing footage with police. The system is part of a broader trend toward mass AI surveillance, intersecting with tools such as Palantir’s data‑integration platforms, raising significant privacy and civil‑rights concerns.
+          </div>
+          <a href="https://stopflock.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary expresses strong opposition to pervasive surveillance systems like Flock, arguing that data collection should carry prohibitive liability and require warrants and notification comparable to physical privacy protections. It acknowledges law‑enforcement needs but stresses that current practices lack sufficient oversight, accountability, and public consent, and that reliance on private data brokers deepens mistrust. Calls are made for tighter legal frameworks, limited retention periods, and community‑driven safety alternatives, while expressing skepticism toward established civil‑rights groups and warning of potential abuse or security breaches. Overall, the tone is cautionary and critical of expanding surveillance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47772012" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://llama.gs/blog/index.php/2026/04/10/friday-archaeology-a-communist-apple-ii-and-fourteen-years-of-not-knowing-what-youre-testing/" target="_blank">A communist Apple II and fourteen years of not knowing what you&#39;re testing</a>
+        </h2>
+        <span class="article-meta">
+          67 points • by major4x • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post contrasts current AI hype with the disciplined practice of reverse engineering. It recounts how Bulgaria’s Pravetz (Правец) computers were built in the 1970s‑80s as Apple II clones: engineers at Sofia’s Institute of Technical Cybernetics copied the 6502‑based design, replaced the ROM and case, added Cyrillic uppercase character encoding, and later integrated Z80 CPUs and CP/M support. By the mid‑1980s Pravetz accounted for ~40 % of personal computers in COMECON, illustrating how detailed schematic replication enabled a national computing base without proprietary access.
+
+The article then describes the ISCAS‑85 benchmark suite, released in 1985 as gate‑level netlists without functional documentation. In 1999, Hayes, Hansen, and Yalcin reverse‑engineered all ten circuits, revealing real hardware functions (e.g., a 27‑channel interrupt controller, an 8‑bit ALU, a 16×16 multiplier). Their work provided functional specifications that improve test generation, synthesis verification, and hierarchical analysis.
+
+Finally, the author links reverse engineering, model‑based diagnosis, and synthesis as mathematically dual problems—each solving for a circuit’s behavior given different fixed variables—arguing that careful analysis yields lasting understanding unlike opaque, resource‑intensive AI development.
+          </div>
+          <a href="https://llama.gs/blog/index.php/2026/04/10/friday-archaeology-a-communist-apple-ii-and-fourteen-years-of-not-knowing-what-youre-testing/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses enthusiasm for the article’s coverage of Bulgaria’s coordinated approach to reverse‑engineering computing technology, noting its historical significance and the surprising ability to read Bulgarian. It reflects curiosity about the broader impact of such initiatives and highlights interest in evaluating AI agent performance, questioning whether systematic metrics exist beyond informal impressions. Overall, the tone is positive, inquisitive, and focused on both historical context and contemporary measurement challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47724571" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://taoofmac.com/space/reviews/2026/04/11/1900" target="_blank">The Orange Pi 6 Plus</a>
+        </h2>
+        <span class="article-meta">
+          136 points • by rcarmo • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Orange Pi 6 Plus uses the CIX P1 (CD8180/CD8160) SoC with a 12‑core big.LITTLE CPU (4 × Cortex‑A520 @ 1.8 GHz, 8 × Cortex‑A720 @ 2.6 GHz), Mali‑G720/Immortalis GPU, three‑core Zhouyi NPU, 16 GiB RAM (≈14 GiB usable), dual Realtek RTL8126 5 GbE, RTL8852BE Wi‑Fi/Bluetooth, and standard USB. The board ships with CIX UEFI 1.3.
+
+The author built a custom Debian 13 (Trixie) image via a fork of orangepi‑build, removing Ubuntu‑specific packages, adding reproducible kernel 6.6.89‑cix, and integrating GPU/NPU firmware and development tools. Initial boot failures were due to an incorrect EFI stub and a partition‑resize script; patches corrected GRUB entries and the resize helper. NVMe boot was achieved by migrating EFI, root and swap partitions from the SD card.
+
+GPU support required installing vendor userspace (cix‑gpu‑umd, libglvnd, libdrm, libmesa) and rebinding the Mali driver; Vulkan then reported a Mali‑G720‑Immortalis device. NPU kernels detected three cores, but userspace packages were fragmented and needed manual validation.
+
+Inference benchmarks (llama.cpp, ik_llama, PowerInfer) showed the Qwen 3.5 4 B model on Vulkan as the most stable, delivering ~8 tokens /s with acceptable memory usage; larger models caused failures or excessive RAM consumption. Vulkan descriptor‑set limits required micro‑batch tuning for reliable operation. Overall, the board is functional for edge AI within a limited model/runtime envelope.
+          </div>
+          <a href="https://taoofmac.com/space/reviews/2026/04/11/1900" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments emphasize that insufficient software support limits the usefulness of many single‑board computers, especially newer Orange Pi models, leading users to favor Raspberry Pi for its reliable ecosystem. Several contributors stress evaluating required features and existing drivers before purchasing, suggesting that platforms with established support or more powerful options like NVIDIA Jetson are preferable for intensive workloads. Practical concerns such as standard USB‑C ports, modular docks, power‑bank integration, and price constraints for advanced ARM boards also recur, highlighting a demand for better hardware‑software alignment and affordable, well‑supported solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47732535" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://guernica.museoreinasofia.es/gigapixel/#3/63.11/-120.59" target="_blank">Picasso&#39;s Guernica (Gigapixel)</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by guigar • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The analysis of Picasso’s Guernica combines infrared reflectography, structural assessment, and conservation history. Reflectography shows early compositional revisions: the soldier’s head was initially inverted and later rotated, revealing numerous eyes, while hidden eyes appear in the bull’s head beneath the white layer. The canvas suffers severe support damage from repeated nailing and removal of its original unstressed frame, leaving torn, holed edges. Extensive handling created cracks and fissures; fissures are more numerous, whereas deeper cracks affect multiple layers (preparation, paint, protective) and correlate with thicker impasto. A 1957 MoMA restoration introduced a wax‑resin consolidation applied from the reverse, now detectable as surface wax and under UV fluorescence. In 1974 a red acrylic spray attack was removed, leaving only microscopic red residues in some fissures.
+          </div>
+          <a href="https://guernica.museoreinasofia.es/gigapixel/#3/63.11/-120.59" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey a generally positive appreciation for high‑resolution access to Guernica and related exhibitions, noting the impact of immersive displays and the value of resources such as Google Arts & Culture. Several users criticize intrusive labeling overlays that obscure the artwork, while others praise technical solutions like OpenSeadragon for enabling detailed viewing. Nostalgic references to past educational programming highlight the painting’s lasting educational role. A recurring theme emphasizes the work’s communicative power about war, contrasting human artistic intent with AI‑generated images. Technical advice on creating tiled images is also shared.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47728662" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Easiest UX for Seniors</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by khoury • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments emphasize that traditional password‑based login poses significant difficulty for older adults and users with motor or cognitive impairments, leading to frustration and reliance on external help. Many suggest replacing passwords with simpler methods such as one‑time codes, magic‑link email logins, or biometric passkeys, while stressing the need for reliable recovery options. Accessibility standards, larger fonts, minimal UI changes, and clear, phone‑friendly instructions are repeatedly recommended. Overall, the consensus favors streamlined, low‑effort authentication that reduces error potential without compromising security.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47729327" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kb.databasedesignbook.com/posts/5nf/" target="_blank">5NF and Database Design</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by petalmind • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article critiques common 5NF teaching examples as artificial and argues that proper design starts with a clear logical model derived from business requirements. It surveys three typical sources—the Wikipedia salesman/brand/product‑type case, the “ice‑cream” brand‑flavour‑friend scenario, and the “musicians” concert‑instrument‑musician example—and shows their shortcomings. From these, two generic patterns emerge:  
+
+* **AB‑BC‑AC triangle** – three many‑to‑many links connecting three anchors (e.g., brands, flavours, friends). Implemented with three two‑column junction tables.  
+* **ABC + D star** – a fourth anchor (Performance) links three primary anchors; links are 1:N and can be stored in a single table with either a composite primary key (concert_id, musician_id, instrument_id) or a synthetic ID plus a uniqueness constraint.
+
+The article demonstrates how to choose composite versus synthetic keys based on uniqueness requirements and extends the models (e.g., adding specific preferences or musician skills). It concludes that 5NF decomposition is unnecessary when the logical model is built correctly; the two patterns yield fully normalized schemas without redundancy or anomalies.
+          </div>
+          <a href="https://kb.databasedesignbook.com/posts/5nf/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Commenters critique the 4NF definition as mischaracterized, arguing that multivalued dependency should be understood as a set of unique values and noting the article’s roundabout explanation highlights the combinatorial row explosion problem. Consensus views normal forms primarily as teaching tools that provide vocabulary rather than strict engineering specifications; they are valued after practical experience but recognized as having limitations and occasional justification for denormalization. Appreciation is expressed for the pragmatic style, while some observe that formalism can obscure common‑sense understanding, with occasional side remarks on related topics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47767676" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hypirion.com/musings/understanding-persistent-vector-pt-1" target="_blank">Understanding Clojure&#39;s Persistent Vectors, pt. 1 (2013)</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by mirzap • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Clojure’s persistent vectors are immutable tree‑based structures that achieve effectively constant‑time (`O(log₃₂ n)`) appends, updates, lookups and sub‑vector operations. They replace mutable array‑list semantics with a balanced, ordered tree whose interior nodes have a fixed branching factor (32 in Clojure), and leaf nodes store actual elements. Persistence is obtained by *path copying*: when inserting, updating, or removing an element, only the nodes along the path to the affected leaf are duplicated, while the remaining sub‑trees are shared between the old and new vectors.
+
+**Updates** traverse the tree to the target leaf, copy each node on the path, replace the value, and return the new root.  
+**Appends** are similar but must handle three cases: (1) space in the rightmost leaf, (2) need to create intermediate nodes when the leaf is full, and (3) root overflow, which occurs when the size is a power of the branching factor and requires a new root node.  
+**Popping** mirrors append logic with three cases: (1) leaf still has elements after removal, (2) leaf becomes empty and is pruned, propagating null pointers upward, and (3) root contains a single child and is collapsed.
+
+Because the tree depth is shallow (max 6 levels for ≤ 1 billion elements), these operations are treated as “effectively O(1)” despite their logarithmic nature. Subsequent posts will cover tails, transients, and sub‑vector mechanics.
+          </div>
+          <a href="https://hypirion.com/musings/understanding-persistent-vector-pt-1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment highlights that Scala provides an immutable vector data structure similar to the one under discussion, supplying a direct link to the official API documentation. It also notes that the feature was already present around 2013, suggesting its established availability at that time. The tone is informational, focusing on pointing readers to the relevant resource and indicating the historical context without expressing personal opinion.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47721076" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jcs.org/2026/04/09/openbsd-dm250" target="_blank">Installing OpenBSD on the Pomera DM250 Writerdeck</a>
+        </h2>
+        <span class="article-meta">
+          6 points • by djfergus • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The guide documents installing OpenBSD‑current on Japanese‑model Pomera DM250/DM250X/DM250XY devices using a custom kernel and U‑Boot image. It warns of risks: full battery drain can render the device unbootable, and loss of U‑Boot may require USB‑C recovery or opening the device. A full eMMC backup via tools from EKESETE.net is recommended. The factory U‑Boot boots a recovery Linux kernel when Right Shift + Left Alt are held at power‑on, which runs an _sdboot.sh script from an SD card. The script backs up firmware, replaces U‑Boot with the provided image, and then reboots into the new EFI‑enabled U‑Boot. Preparing the SD card involves GPT partitioning with a ≥100 MiB EFI partition, copying BOOTARM.EFI, uboot.img, the _sdboot.sh script, OpenBSD armv7 snapshot sets, bwfm Wi‑Fi firmware, and custom bsd/bsd.rd images. Installation boots via the new U‑Boot, uses the “whole” disk option to create an MBR with an EFI offset, and disables the upstream reorder_kernel script. Post‑install steps include restoring Wi‑Fi firmware (nvram_ap6212a.txt) and optional logo.bmp. Recovery methods cover MaskROM/loader mode USB mass‑storage access with xrock and a restore script, as well as accessing the U‑Boot prompt or UART if needed.
+          </div>
+          <a href="https://jcs.org/2026/04/09/openbsd-dm250" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express a positive reception to the flying toaster screensaver, describing it as enjoyable and a pleasant surprise. The novelty of the moving toaster imagery is highlighted as a delightful addition, with users indicating appreciation for its whimsical nature and visual appeal. Overall sentiment is favorable, emphasizing satisfaction with the unexpected creative element and a desire for similar content.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47725897" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
