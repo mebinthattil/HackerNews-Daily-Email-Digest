@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 17, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Claude Opus 4.7</a>
+        </h2>
+        <span class="article-meta">
+          1551 points • by meetpateltech • 202 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Opus 4.7 is now generally available across Anthropic’s Claude products, API, Amazon Bedrock, Google Vertex AI, and Microsoft Foundry at the same pricing as Opus 4.6 ($5 M input tokens, $25 M output tokens). Key technical upgrades include:
+
+- **Software engineering**: 13 % higher resolution on a 93‑task coding benchmark, solving four tasks unsolved by Opus 4.6 or Sonnet 4.6; 3× more production tasks resolved on Rakuten‑SWE‑Bench; 10‑15 % lift in task success for complex workflows; reduced tool‑call errors and higher token efficiency.  
+- **Multimodal vision**: Accepts images up to 2,576 px (≈3.75 MP), improving performance on visual‑acuity tests (98.5 % vs 54.5 % for Opus 4.6) and enabling detailed diagram and chemical‑structure interpretation.  
+- **Autonomy & reasoning**: Better long‑context performance, self‑verification of outputs, and higher scores on internal research‑agent (0.715) and finance‑agent (0.813) evaluations.  
+- **Safety**: Similar overall safety to Opus 4.6 with modest gains in honesty and prompt‑injection resistance; safeguards block prohibited cybersecurity requests.  
+- **Operational changes**: Updated tokenizer (1.0–1.35× token count) and new “xhigh” effort level for finer reasoning‑latency trade‑offs; task‑budget beta and ultrareview command added.  
+
+The model is positioned as a step toward broader Mythos‑class releases, with a Cyber Verification Program for legitimate security use.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments on Claude Opus 4.7 are largely mixed to negative, emphasizing confusion over the new “adaptive thinking” mode, increased token overhead, and default‑high effort settings that raise costs. Users report regressions in reasoning visibility, stricter cybersecurity filters that block legitimate tasks, and a perception that performance has not improved over 4.6, prompting many to switch back to Codex or earlier models. While a few note strategic gains and appreciate the caveman variant, overall sentiment points to disappointment with communication, trust, and usability changes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47793411" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/codex-for-almost-everything/" target="_blank">Codex for almost everything</a>
+        </h2>
+        <span class="article-meta">
+          735 points • by mikeevans • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/codex-for-almost-everything/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed reactions to the new Codex/Cowork features. Many acknowledge the functionality as comparable to existing tools and express enthusiasm for a robust, user‑friendly GUI that could broaden adoption among non‑technical users. At the same time, there is notable skepticism about security, sandboxing, data access, and potential job displacement, as well as frustration over limited platform support, tight usage limits, battery drain, and a lack of open‑source transparency. Opinions also highlight competitive pressure from other AI agents and uncertainty about the product’s long‑term value and differentiation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47796469" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cadquery.github.io/" target="_blank">CadQuery is an open-source Python library for building 3D CAD models</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by gregsadetsky • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CadQuery is presented as a Python‑based solution for creating parametric CAD models. The page’s title, “CadQuery | Create parametric CAD models with Python,” identifies the library’s core purpose: enabling users to generate and manipulate geometry programmatically via Python scripts. A logo image is included, serving as visual branding for the project. No additional descriptive text, features, or usage details are provided in the scraped excerpt.
+          </div>
+          <a href="https://cadquery.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights a generally positive view of programming‑oriented CAD tools, noting that build123d and CadQuery facilitate rapid prototyping and complex geometry creation more comfortably than traditional sketch‑based workflows. Users find AI autocomplete useful for assembling snippets, though current AI generation remains imperfect. Comparative remarks mention similarity to OpenSCAD aside from Python syntax, and there is interest in developing new CAD kernels, including a Rust‑based project with potential Blender integration. Overall, code‑centric modeling is favored for flexibility and precision.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47772725" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/gainsec/autoprober" target="_blank">Guy builds AI driven hardware hacker arm from duct tape, old cam and CNC machine</a>
+        </h2>
+        <span class="article-meta">
+          112 points • by scaredpelican • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            AutoProber is an open‑source flying‑probe automation stack for hardware hacking, providing end‑to‑end target discovery, microscope mapping, safety‑monitored CNC motion, and controlled pin probing. The system is operated via a Flask web dashboard, Python scripts, or an autonomous agent, and includes Python control code, CAD files for a printable toolhead, and documentation. Core hardware comprises a GRBL‑compatible 3018‑style CNC controller (USB serial), a USB microscope served by mjpg_streamer, a Siglent oscilloscope (LAN/SCPI) for safety monitoring on Channel 4 and measurement on Channel 1, an optical endstop wired to the oscilloscope, and optional LAN‑controlled power outlet. Safety rules require continuous monitoring of Channel 4; any trigger, ambiguous voltage, CNC alarm, or limit pin forces an immediate stop, with manual operator recovery. Workflow: ingest project, connect hardware, run homing and calibration, attach probe, detect target, capture and stitch microscope frames with XYZ logging, annotate map, approve probe points on the dashboard, then execute bounded probe motions. Configuration is via environment files; runtime values include log path, calibration root, microscope URL, and oscilloscope host/port. The code is released under the PolyForm Non‑commercial License; commercial use requires a paid license.
+          </div>
+          <a href="https://github.com/gainsec/autoprober" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments recognize the demo as technically interesting but largely view it as premature for practical use. Concerns focus on the difficulty of achieving sub‑millimeter precision with a probabilistic AI, the lack of real probing hardware, and missing details on how the agent interprets designs. Several users note that commercial flying‑probe systems already exist and question the added cost and nondeterminism of an AI‑controlled approach, while a minority express enthusiasm about the concept’s creative potential. Overall sentiment is skeptical yet curious about future development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47800033" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lucasgerads.com/blog/lecroy-mcp-spice-demo/" target="_blank">Show HN: Spice simulation → oscilloscope → verification with Claude Code</a>
+        </h2>
+        <span class="article-meta">
+          35 points • by _fizz_buzz_ • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author experimented with Claude Code for hardware development, finding natural‑language prompts adequate for simple circuits but cumbersome for complex designs. To improve feedback, he integrated Claude with an oscilloscope and a SPICE simulator, enabling rapid validation of SPICE models, embedded firmware, and data analysis (e.g., time‑axis normalization and alignment). A minimal demo circuit and MCU illustrate a workflow that scales to larger projects. Key practical guidelines emerged:
+
+- **Oscilloscope use**: Claude cannot infer the physical wiring; provide explicit connection details, keep measurement data current, and avoid feeding raw traces directly—store data in files for indirect access.  
+- **Microcontroller integration**: Supply a complete pin‑out/pin‑mux map, and use a Makefile exposing standard commands (build, flash, ping, erase) that Claude should invoke rather than constructing ad‑hoc commands.  
+
+These practices streamline iterative design, testing, and analysis with Claude Code.
+          </div>
+          <a href="https://lucasgerads.com/blog/lecroy-mcp-spice-demo/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed feelings about using large language models for circuit design. They note that combining LLMs with visual tools like mermaid diagrams can simplify description and modification of circuits, and that integrating models with hardware such as jumperless systems offers a promising closed‑loop workflow. However, there are concerns about reliability: an LLM (Claude Opus) generated unrealistic board specifications that failed in practice, requiring manual correction and verification. Overall, the discussion balances enthusiasm for automation with caution about hallucination and the need for human oversight.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47801255" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ropensci.org/blog/2026/04/02/tree-sitter-overview/" target="_blank">A Better R Programming Experience Thanks to Tree-sitter</a>
+        </h2>
+        <span class="article-meta">
+          99 points • by sebg • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Tree‑sitter is a C‑based incremental parsing generator with bindings for Rust and R. A JavaScript grammar for R, created by Davis Vaughan and collaborators, enables Tree‑sitter to parse R code quickly and reliably. The {treesitter} R package exposes this capability, allowing users to obtain S‑expressions for R snippets and to query the syntax tree. Built on this foundation are several tools that improve the R development workflow:  
+
+* **Air** (Rust CLI) reformats R code at high speed; **Jarl** (built on Air) lints, fixes unreachable code, unused functions, and duplicate definitions.  
+* **Ark**, the R kernel used in Positron IDE, provides auto‑completion and hover help via Tree‑sitter.  
+* GitHub leverages the grammar for precise code browsing, showing definitions directly in search results.  
+* The {gander} package and {treesitter} query language enable code analysis, while {igraph.r2cdocs} uses it to link C‑level documentation.  
+* {pkgdepends} detects dependencies, **ast‑grep** (wrapped by {astgrepr}) offers robust AST‑based search and refactoring, {muttest} implements mutation testing, and **difftastic** supplies syntax‑aware diffs.  
+
+These tools illustrate how integrating the R grammar with a general parsing engine yields fast, accurate formatting, linting, navigation, and analysis, and the ecosystem continues to evolve.
+          </div>
+          <a href="https://ropensci.org/blog/2026/04/02/tree-sitter-overview/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong appreciation for tree‑sitter’s capabilities, highlighting its role in enabling static analysis, hover information, and navigation enhancements within VS Code extensions for pipelines and other languages. Users note that similar autocomplete and documentation features have long existed in RStudio, but view tree‑sitter as a powerful, extensible foundation that simplifies complex code structures and formatting tasks. There is enthusiasm for its integration across editors, requests for broader language‑specific support, and acknowledgment of the effort required to configure complementary tooling.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47799573" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://android-developers.googleblog.com/2026/04/build-android-apps-3x-faster-using-any-agent.html" target="_blank">Android CLI: Build Android apps 3x faster using any agent</a>
+        </h2>
+        <span class="article-meta">
+          152 points • by ingve • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Android Developers blog announces a preview of Android CLI, a terminal‑based interface for Android SDK tasks designed for agentic workflows and automation. Key commands include `android sdk install` for selective SDK component download, `android create` for rapid project scaffolding from official templates, `android emulator` and `android run` for virtual device management and deployment, and `android update` for keeping the CLI current. Internal tests show the CLI cuts LLM token usage by >70% and speeds task completion threefold versus standard toolsets.  
+
+A new “Android skills” repository on GitHub provides modular markdown specifications (SKILL.md) that trigger automatically when prompts match, covering migrations, edge‑to‑edge UI, AGP 9, XML‑to‑Compose, R8 analysis, etc.; these can be installed via `android skills`.  
+
+The Android Knowledge Base, accessible with `android docs`, offers agents up‑to‑date guidance from official docs, Firebase, Google Developers, and Kotlin resources, compensating for LLM training cutoffs.  
+
+All tools integrate with Android Studio, allowing projects started with the CLI to be opened for UI design, debugging, profiling, and AI‑assisted development across phones, tablets, foldables, Wear OS, Android Auto, and TV. The CLI preview and related resources are available at d.android.com/tools/agents.
+          </div>
+          <a href="https://android-developers.googleblog.com/2026/04/build-android-apps-3x-faster-using-any-agent.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall optimism that AI‑driven agents improve Android development setup, noting streamlined workflows and enthusiasm for future capabilities such as building directly on phones and extending support to Apple platforms. Repeatedly, users report installation failures on Windows, script errors, and a desire for simpler disabling of usage‑data collection. Additional requests include exposing source jars, better Gradle integration, and publishing without personal IDs. Skepticism appears about reliance on AI and potential privacy implications, while the prevailing tone remains cautiously positive yet focused on needed fixes and enhancements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47797665" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ycombinator.com/companies/substrate/jobs/QJU9023-harness-engineer" target="_blank">Substrate AI Is Hiring Harness Engineers</a>
+        </h2>
+        <span class="article-meta">
+          1 points • by kunle • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Substrate is developing an AI‑native business process outsourcing platform focused on healthcare revenue cycle management, handling over 500 k claims monthly. The company seeks a Harness Engineer to design, deploy, and measure AI agents that process claims, interpret contracts and payer policies, assess medical necessity, reconcile payments, and interact with sensitive healthcare and financial infrastructure. Responsibilities include extending the agent suite, building production‑scale measurement infrastructure for precision and cost optimization across tens of millions of annual claims, and collaborating with clients on high‑sensitivity use cases. Candidates should have strong ownership, deep experience building and shipping ML/AI products, expertise in modern LLM architectures, fine‑tuning, and large‑scale evaluation, and preferably healthcare domain knowledge. Prior startup experience, independent product launch, or founding experience is valued. The role is on‑site in San Francisco three days per week, with competitive salary and equity.
+          </div>
+          <a href="https://www.ycombinator.com/companies/substrate/jobs/QJU9023-harness-engineer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47802016" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://clojure.org/about/documentary" target="_blank">Official Clojure Documentary page with Video, Shownotes, and Links</a>
+        </h2>
+        <span class="article-meta">
+          124 points • by adityaathalye • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The documentary “Clojure” chronicles the language’s development from a two‑year sabbatical and a determined effort to build the engineering stack for one of the world’s largest fintech firms. It follows founder Rich Hickey, along with contributors such as Alex Miller and Stuart Halloway, detailing Clojure’s unconventional origins, the formation of its values‑driven community, and the language’s subtle but significant influence on software design thinking. The film highlights how Clojure’s functional, immutable approach has been adopted in production environments and examines the cultural and technical principles that guide its ecosystem. Production was supported by Nubank.
+          </div>
+          <a href="https://clojure.org/about/documentary" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong nostalgic enthusiasm for Clojure, recalling early adoption, community events, and pioneering uses on AWS, while welcoming the documentary and noting notable participants such as David Nolen. There is curiosity about Clojure’s current relevance amid newer languages and AI‑driven development, coupled with surprise that Datomic’s licensing is now free. Some disappointment is voiced over the documentary’s omission of certain contributors, and criticism appears regarding the producers’ handling of AI‑related content. Overall the tone is appreciative yet inquisitive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47798345" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://marcindudek.dev/blog/xmlrpc-brute-force-cache-rate/" target="_blank">288,493 Requests – How I Spotted an XML-RPC Brute Force from a Weird Cache Ratio</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by taubek • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cloudflare analytics showed a cache‑hit ratio of 0.8 % on a mostly static WordPress site, revealing a flood of uncacheable traffic. One Singapore‑based DigitalOcean IP sent 288 493 POST requests to /xmlrpc.php within 24 hours, using the system.multicall method to embed hundreds of credential pairs per request and brute‑force WordPress logins. Because /xmlrpc.php is always dynamic, each request drove the cache‑rate down, serving as a clear indicator of abuse.  
+
+Detection: query Cloudflare’s GraphQL analytics (or use the dashboard) for top paths; a high‑count, dynamic /xmlrpc.php entry signals an attack.  
+
+Mitigation:  
+- Deploy a Cloudflare WAF rule `http.request.uri.path eq "/xmlrpc.php"` to block at the edge, eliminating origin CPU load.  
+- Disable XML‑RPC in WordPress (e.g., `add_filter('xmlrpc_enabled', '__return_false');` or via WP Multitool’s Frontend Optimizer, enabled by default in v1.1.19).  
+
+Recommendations: monitor cache‑hit ratios, review top paths weekly, pre‑emptively block /xmlrpc.php, and rely on the REST API instead of XML‑RPC unless required (e.g., Jetpack mobile). This layered approach restores normal cache performance and prevents similar brute‑force floods.
+          </div>
+          <a href="https://marcindudek.dev/blog/xmlrpc-brute-force-cache-rate/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong dissatisfaction with the article’s AI‑generated style, describing it as excessively verbose, repetitive, and difficult to read. Readers find the phrasing irritating and the repeated points unnecessary, leading to a sense of nausea. The content is viewed as lacking value beyond niche WordPress advice, and the criticism extends to questioning the effectiveness of Cloudflare in mitigating basic brute‑force attacks. Overall sentiment is markedly negative toward both the writing quality and practical usefulness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47751608" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
