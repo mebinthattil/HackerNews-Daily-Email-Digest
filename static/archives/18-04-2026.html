@@ -1,0 +1,532 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-design-anthropic-labs" target="_blank">Claude Design</a>
+        </h2>
+        <span class="article-meta">
+          893 points • by meetpateltech • 114 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Design, a new Anthropic Labs product, enables collaborative visual creation (designs, prototypes, slides, one‑pagers) using the Claude Opus 4.7 vision model. Available in research preview for Claude Pro, Max, Team and Enterprise subscribers, it gradually rolls out to users. Key capabilities include:  
+
+- Automatic generation of first drafts from text prompts, uploaded assets, or codebase imports, with iterative refinement via chat, inline comments, direct edits, and custom sliders.  
+- Automatic application of a team’s design system (colors, typography, components) extracted during onboarding from code and design files; multiple systems can be maintained.  
+- Support for realistic interactive prototypes, product wireframes, design explorations, pitch decks, marketing collateral, and “frontier” AI‑powered assets (voice, video, shaders, 3D).  
+- Collaboration features: organization‑scoped sharing, edit permissions, group chat with Claude, and export to Canva, PDF, PPTX, HTML, or internal URLs.  
+- Handoff to Claude Code via a bundled package for implementation.  
+
+Enterprise admins enable the feature in organization settings; usage counts against existing subscription limits with optional extra usage. The service is accessed at claude.ai/design.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-design-anthropic-labs" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a split view on the new AI‑driven design tool. Many users find it speeds up early‑stage mockups, lowers costs for small teams, and helps non‑designers explore concepts without waiting for a specialist. At the same time, critics note inconsistent output, high token usage, poor handling of branding and logo work, and a tendency toward generic, homogenous designs that lack the nuance of human‑led design processes. Concerns are raised about its impact on design jobs, the sustainability of Anthropic’s focus, and how it will compete with established platforms like Figma and Canva.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47806725" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.corsix.org/content/simplified-model-of-fil-c" target="_blank">A simplified model of Fil-C</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by aw1621107 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The simplified Fil‑C model rewrites C/C++ source so that every pointer variable is paired with an `AllocationRecord*` tracking its allocation. `AllocationRecord` holds `visible_bytes`, `invisible_bytes`, and `length`. Local pointers acquire a null‑initialized record; assignments copy both the pointer and its record. Standard allocation calls become `{ptr, rec}=filc_malloc(size)`, which allocates three blocks: the record, the visible memory, and a zero‑filled invisible array storing records for any heap‑resident pointers. Dereferencing a pointer triggers runtime bounds checks using its record and, for pointer‑typed values, extracts the corresponding record from `invisible_bytes`. `filc_free(ptr, rec)` releases the visible and invisible blocks but leaves the record for a garbage collector (GC) to reclaim unreachable records. The GC also normalizes zero‑length records to a canonical instance. The model promotes locals whose addresses escape to heap allocations, relying on the GC for eventual reclamation. Additional production concerns include thread‑safe GC, function‑pointer metadata, on‑demand allocation of invisible bytes, and performance optimizations. Fil‑C offers memory safety for legacy C/C++ code at the cost of added overhead and a GC.
+          </div>
+          <a href="https://www.corsix.org/content/simplified-model-of-fil-c" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment views Fil-C as underrated and questions the push to rewrite it in Rust, asserting that memory safety can be achieved through compilation. It shares a bazel template linking the project for hermetic builds. Additionally, it critiques fat‑pointer approaches, noting repeated rejections because of limited security guarantees, incompatibility with non‑fat ABIs, and performance overhead.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47810872" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/The_toxic_side_of_the_Moon" target="_blank">All 12 moonwalkers had &#34;lunar hay fever&#34; from dust smelling like gunpowder (2018)</a>
+        </h2>
+        <span class="article-meta">
+          258 points • by cybermango • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Lunar dust, composed of sharp, abrasive silicate particles, caused immediate irritation (“lunar hay fever”) in all twelve Apollo astronauts, producing sneezing, nasal congestion, throat soreness, and a burnt‑gunpowder odor inside the cabin. Its irregular, glass‑like morphology, electrostatic charging, and low‑gravity suspension allow particles up to 50 × smaller than human hair to remain airborne for months and penetrate deep into the lungs, raising concerns of chronic respiratory and neurological damage. Earth‑based studies with lunar‑soil simulants show cytotoxic effects on lung and brain cells after prolonged exposure. ESA is coordinating an international research program to quantify these risks, involving pulmonary physiologists, biologists, and engineers. The program uses a German volcanic‑rock simulant, which must be milled to retain sharp edges, to test equipment, assess inhalation hazards, and evaluate mitigation strategies. Parallel work investigates in‑situ resource utilisation, such as heating dust for bricks and extracting oxygen, while ESA’s Airway Monitoring experiment monitors astronaut lung health in reduced gravity.
+          </div>
+          <a href="https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/The_toxic_side_of_the_Moon" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes that lunar dust’s sharp, reactive particles pose serious health and equipment hazards, prompting the need for airtight suits, external‑mounted habitats, and mitigation technologies such as electrodynamic dust shields. Observations of a gun‑powder odor are attributed to oxidizing dust and ozone generated when vacuum‑exposed surfaces encounter air. Comparisons to Earth dust highlight the Moon’s unique electrostatic and chemical properties, while concerns are raised about long‑term exposure risks, mission costs, and the difficulty of handling pervasive dust in future lunar and Martian operations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47808913" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eshelyaron.com/posts/2026-04-15-towards-trust-in-emacs.html" target="_blank">Towards Trust in Emacs</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by eshelyaron • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Emacs versions ≤ 30 treated all files as trusted, leading to vulnerabilities such as CVE‑2024‑53920. Version 30 added an explicit trust model that defaults files to untrusted and disables risky features (e.g., the Emacs‑Lisp Flymake backend) unless a buffer is marked trusted, but this creates friction for users.  
+
+**trust‑manager** (available on MELPA) addresses this by:
+- Providing `trust-manager-mode` which prompts once per project to trust or distrust it, storing the choice in `trust-manager-trust-alist`.
+- Automatically trusting the init file, early init file, custom file, and all directories on `load-path`.
+- Adding a red “?” indicator in the mode line of untrusted buffers; clicking it marks the buffer trusted and re‑enables disabled features.
+- Supplying commands `trust-manager-set-project-trust` and `trust-manager-set-file-trust` for manual adjustments, and integrating with `project-forget-project` to clear stale entries.
+- Allowing inspection and editing via `M-x trust-manager-customize`.
+
+Installation is via `M-x package-install trust-manager`, with source at <https://git.sr.ht/~eshel/trust-manager> and GitHub mirror. The package aims to preserve Emacs 30’s security improvements while minimizing workflow interruption.
+          </div>
+          <a href="https://eshelyaron.com/posts/2026-04-15-towards-trust-in-emacs.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express dissatisfaction with the current permission model, criticizing the requirement to grant broad read/write and network access for a feature that primarily provides code autocomplete. Users call for improved sandboxing, isolation, and more granular permissions to protect privacy and security. The overall sentiment is negative toward the existing approach, emphasizing a desire for tighter controls while retaining the functionality they need.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47778938" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hex.ooo/library/last_question.html" target="_blank">Isaac Asimov: The Last Question (1956)</a>
+        </h2>
+        <span class="article-meta">
+          649 points • by ColinWright • 70 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The text retells Isaac Asimov’s “The Last Question” across successive eras of humanity’s technology. Early in 2061, technicians Alexander Adell and Bertram Lupov, working with the planetary computer Multivac, celebrate a breakthrough that supplies Earth with solar power via a massive orbital collector. Over drinks they pose the ultimate query: can entropy be reduced so the sun, or any star, can be restored after death? Multivac replies, “INSUFFICIENT DATA FOR MEANINGFUL ANSWER.”  
+
+Centuries later, families aboard interstellar ships use compact “Microvac” computers; they repeat the question and receive the same answer. In the far future, a galaxy‑wide Galactic AC and finally a universal Cosmic AC are consulted by immortal humans. Each time the response remains “insufficient data.”  
+
+After ten trillion years of data collection, the final AC succeeds in reversing entropy, creates new light, and declares “LET THERE BE LIGHT,” fulfilling the unanswered question.
+          </div>
+          <a href="https://hex.ooo/library/last_question.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong, largely positive admiration for the story, recalling early exposure through planetarium shows and noting its emotional impact, memorable ending, and philosophical blend of humor, entropy, and cyclic‑universe ideas. Readers frequently recommend it alongside works by Asimov, Clarke, Weir and others, and cite its influence on personal worldviews and repeated rereading. Minor dissent appears in a few remarks that the conclusion feels trite or overly expository, and a small number raise copyright or licensing concerns, but overall the consensus praises the piece as a classic sci‑fi short story.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47804965" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.claudecodecamp.com/p/i-measured-claude-4-7-s-new-tokenizer-here-s-what-it-costs-you" target="_blank">Measuring Claude 4.7&#39;s tokenizer costs</a>
+        </h2>
+        <span class="article-meta">
+          558 points • by aray07 • 83 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic’s Claude Opus 4.7 tokenizes text 1.3–1.45× more than 4.6. Real‑world Claude Code samples (CLAUDE.md, prompts, logs, diffs) show a weighted increase of 1.325× (8 254 → 10 937 tokens); technical documents reach 1.47×, synthetic English/code samples 1.345×, while CJK, emoji, and symbols change minimally (≈1.0×). The rise stems from finer sub‑word splits: English chars‑per‑token drop 4.33 → 3.60, TypeScript 3.66 → 2.69, and code tokens grow 1.29–1.39× versus prose 1.20×. Because per‑token pricing is unchanged, sessions consume ~20–30 % more dollars (e.g., an 80‑turn Claude Code session rises from ~$6.65 to $7.86–$8.76) and hit rate limits sooner; cache reads also expand (average cached prefix ≈115 K tokens vs 86 K).  
+
+A benchmark (IFEval) on 20 sampled prompts shows a modest ≈5 pp improvement in strict instruction following (exact formatting constraints) for 4.7 versus 4.6, with no clear advantage on looser tasks. The tokenizer change thus trades higher token usage for a small, measurable gain in literal compliance; its value depends on how heavily a workflow relies on precise instruction adherence.
+          </div>
+          <a href="https://www.claudecodecamp.com/p/i-measured-claude-4-7-s-new-tokenizer-here-s-what-it-costs-you" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Anthropic’s Opus 4.7 pricing and performance, with many users reporting a 20‑30 % token cost increase that they feel is not matched by a clear quality gain. Several commentors note regressions, higher token consumption, and slower response times, prompting a shift toward older or faster models such as Sonnet, Codex, or Haiku. A recurring theme is the desire for better cost‑efficiency metrics, sustainable model development, and transparent token‑per‑task benchmarks. While some accept the trade‑off for marginal improvements, overall sentiment is skeptical of the price hike and concerned about diminishing returns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47807006" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tobyord.com/writing/hourly-costs-for-ai-agents" target="_blank">Are the costs of AI agents also rising exponentially? (2025)</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by louiereederson • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post notes that AI models have expanded dramatically over seven years—parameter counts grew ~4,000× and token usage per task ~100,000×—suggesting that peak‑performance costs (measured by METR) may also be rising exponentially. If AI agents’ task‑completion speed improves by a factor of three each year while costs rise similarly, their cost per human‑hour would stay constant; a slower cost growth would make them cheaper relative to humans, but faster cost growth would erode competitiveness. The author defines “hourly cost” as the monetary expense of running an LLM to finish a task at its 50 % METR time horizon, divided by that horizon length. Few have examined this metric, and opinions vary: some expect total task cost to stay flat (implying declining hourly rates), others anticipate exponential cost growth. Attempts to infer costs from METR benchmark spend are problematic because benchmarks prioritize maximal performance, often over‑using compute. A recently released chart from METR offers limited insight into how LLM agents’ hourly costs have evolved.
+          </div>
+          <a href="https://www.tobyord.com/writing/hourly-costs-for-ai-agents" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight growing concern over the steep and rapidly increasing token and compute costs of frontier AI models, noting that hourly expenses can rise orders of magnitude for longer tasks and that failure rates remain significant. Participants reference personal experience and external measurements that suggest token consumption escalates as model capabilities expand, while smaller, cheaper models show performance gains. There is skepticism about the evidence but agreement that unsustainable pricing, hardware scarcity, and quadratic transformer scaling could drive future price hikes, with uncertainty about providers’ profitability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47778922" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/smol-machines/smolvm" target="_blank">Show HN: Smol machines – subsecond coldstart, portable virtual machines</a>
+        </h2>
+        <span class="article-meta">
+          252 points • by binsquare • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - smolvm is a cross‑platform CLI for creating and running lightweight Linux micro‑VMs on macOS (Hypervisor.framework) and Linux (KVM) via libkrunVMM/libkrunfw.  
+- VMs start in <200 ms with sub‑second cold‑start times, defaulting to 4 vCPUs and 8 GiB RAM; memory is elastic through virtio ballooning and idle vCPU threads sleep in the hypervisor.  
+- A VM can be packaged into a single “.smolmachine” file for portable rehydration on any host with matching architecture, requiring no runtime downloads.  
+- Ephemeral runs (`smolvm machine run`) support optional networking (`--net`) and host‑allow‑list (`--allow-host`) to restrict egress; network is disabled by default.  
+- Persistent VMs (`machine create/start/stop`) retain installed packages and allow exec commands, volume mounts (directories only), and SSH‑agent forwarding without exposing private keys.  
+- `smolvm pack create` converts an image (e.g., python:3.12‑alpine) into a self‑contained executable that runs the workload directly.  
+- Configuration can be declaratively expressed in a TOML “Smolfile”, specifying image, networking, allowed hosts, init scripts, volumes, and SSH‑agent usage.  
+- Resource limits can be overridden with `--cpus` and `--mem`.  
+- On macOS the binary must be signed with Hypervisor.framework entitlements; on Linux `/dev/kvm` access is required.  
+- The project is Apache‑2.0 licensed and hosted at github.com/smol‑machines/smolvm.
+          </div>
+          <a href="https://github.com/smol-machines/smolvm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments are overwhelmingly positive, praising the project’s speed, isolation, and ergonomic blend of container‑like workflows with micro‑VM performance. Users express interest in its sub‑second startup, language‑agnostic packaging, and potential for benchmarking, agent execution, and per‑customer back‑ends, while noting the responsive development team. Recurrent questions focus on image sourcing and registries, support for Windows/WSL, integration with existing orchestrators, resource specification, digital signing, GPU access, and handling of nested containers, indicating demand for broader platform and feature compatibility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47808268" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/paniclock/paniclock/" target="_blank">Show HN: PanicLock – Close your MacBook lid disable TouchID –&gt; password unlock</a>
+        </h2>
+        <span class="article-meta">
+          149 points • by seanieb • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            PanicLock is a macOS menu‑bar utility for Macs with Touch ID (macOS 14.0 Sonoma or later) that instantly disables biometric authentication and locks the screen via a single click, customizable hotkey, or automatic lid‑close trigger. It temporarily sets the Touch ID timeout to one second using the privileged helper tool (installed via SMJobBless), then locks the display with `pmset displaysleepnow`; after unlocking with a password, the original timeout is restored. The helper runs only three hard‑coded commands (`bioutil` read/write, `pmset`) with minimal privileges, employs code‑signed XPC verification, and performs no network activity or data collection. Installation can be done via Homebrew (`brew install paniclock/tap/paniclock`) or by building from source (Xcode project requires setting a development team and updating plist entries). Uninstallation removes the helper and app files via launchctl and file deletion commands. The project includes a release script that automates building, signing with a Developer ID, notarization, and DMG packaging. It is released under the MIT License and hosted on GitHub.
+          </div>
+          <a href="https://github.com/paniclock/paniclock/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong approval for the tool, highlighting its usefulness for quickly disabling biometric authentication in sensitive situations. Users note its value as a privacy measure against casual snooping and praise its simplicity, while also pointing out limitations against determined adversaries and emphasizing the importance of full‑disk encryption and panic‑shutdown options. Legal considerations about compelled biometric unlocking are mentioned, and several suggestions appear for additional features such as accelerometer‑based triggers, dummy accounts, and native OS integration.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47807809" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nasaforce.gov/" target="_blank">NASA Force</a>
+        </h2>
+        <span class="article-meta">
+          242 points • by LorenDB • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            NASA Force is a hiring program created with the U.S. Office of Personnel Management to recruit early‑ to mid‑career engineers, technologists, and innovators for short‑term (typically 1–2 years, with possible extensions) appointments in mission‑critical roles. The initiative targets talent that can address complex technical challenges across NASA’s core priorities: human spaceflight, aeronautics, and scientific research. Participants work in interdisciplinary teams, applying a systems‑engineered approach from concept through execution, and are expected to demonstrate technical excellence, critical thinking, and continuous learning. Contributions directly support NASA’s objectives to maintain U.S. leadership in air and space, advance exploration, and expand scientific understanding of the universe. The program emphasizes rapid integration of skilled personnel into projects such as lunar rover development, deep‑space logistics, spaceport operations, Orion flight software, lunar sample curation, in‑situ resource utilization, aeronautics AI/ML research, propulsion systems, and Earth‑Moon science.
+          </div>
+          <a href="https://nasaforce.gov/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey mixed reactions, with frequent criticism of the landing page’s heavy animation, poor performance, and overly stylized design that many view as inaccessible and reminiscent of marketing gimmicks. Viewers question the “NASA Force” branding, noting its militaristic tone and lack of clarity about actual job opportunities, geographic eligibility, pay competitiveness, and hiring transparency, especially given the brief four‑day application window. While a few appreciate the animation and see the initiative as a creative recruitment effort amid budget constraints, the dominant sentiment is skepticism toward the site’s purpose, execution, and fairness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47807209" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
