@@ -1,0 +1,518 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 20, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/shivampkumar/trellis-mac" target="_blank">Show HN: TRELLIS.2 image-to-3D running on Mac Silicon – no Nvidia GPU needed</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by shivampkumar • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            TRELLIS.2, Microsoft’s image‑to‑3D model, has been ported to run natively on Apple Silicon via PyTorch MPS, eliminating the need for CUDA GPUs. The repository provides a setup script that creates a virtual environment, installs dependencies, patches CUDA‑only components, and downloads ~15 GB of model weights (access via HuggingFace). Supported platforms are macOS on M1 or later with Python 3.11+, recommended 24 GB unified memory; generation of a 400k‑vertex mesh from a single image takes ~3.5 min on an M4 Pro. Output includes textured OBJ and GLB files (PBR materials), though texture baking and hole filling are disabled due to missing CUDA rasterizer (nvdiffrast) and mesh‑hole filler (cumesh). Core modifications replace CUDA libraries with pure‑PyTorch/Python equivalents: sparse 3D convolution, mesh extraction, and attention (using scaled‑dot‑product attention). Performance is ~10× slower than the original CUDA flex_gemm kernel, and only inference is supported. The code is MIT‑licensed; upstream model weights retain their original licenses (Microsoft Research, Meta, BRIA AI).
+          </div>
+          <a href="https://github.com/shivampkumar/trellis-mac" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions: the effort and overall execution receive acknowledgment, while the model’s performance is broadly deemed insufficient, with comparisons labeling alternatives as inferior and calls for stronger open‑source options. Users note the absence of example content on the landing page, and technical discussion highlights that MPS backend support is omitted in certain deployments to avoid severe speed penalties. Additionally, there is confusion about the prominence of the entry on a major news aggregator. Overall sentiment balances modest praise with notable criticism and technical concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47828896" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.legalnomads.com/fish-sauce/" target="_blank">A Brief History of Fish Sauce</a>
+        </h2>
+        <span class="article-meta">
+          108 points • by vinhnx • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Fish sauce (nuoc mam in Vietnam, nam pla in Thailand) is a staple condiment in Southeast Asia, used by 95 % of Vietnamese households and in dishes such as nuoc cham. Traditional production ferments fish (often anchovies) with salt in a 3:1 ratio for nine‑to‑twelve months, draining and re‑fermenting the liquid until it reaches the desired concentration.
+
+The earliest recorded fish sauce was the Greek **garos**, later Romanized as **garum** and **liquamen**, produced from whole small fish layered with salt and fermented up to four months. Roman texts (e.g., Apicius) show its widespread culinary use, and archaeological DNA from a 1st‑3rd century AD Spanish vat identified European sardine as the primary ingredient. Production sites spanned the Mediterranean, including Spain, Portugal, North Africa, Israel, and Tunisia.
+
+Scholars dispute the sauce’s origin: some link Asian fish sauce to independent Chinese fermenting traditions (Zhou Dynasty), while others propose transmission from Roman garum via the Silk Road. Modern Vietnamese varieties differ regionally; Phú Quốc nuoc mam, made from *Stolephorus commersonii* anchovies, holds an EU Protected Designation of Origin. Despite academic debate, fish sauce remains culturally central to Vietnamese identity and cuisine.
+          </div>
+          <a href="https://www.legalnomads.com/fish-sauce/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys broad enthusiasm for fish sauce and related fermented condiments, highlighting personal experiences that introduced the flavor and its impact on diverse dishes. Contributors note its versatility, citing successful applications in salads, eggs, pasta, and as a dip, while acknowledging that the pronounced fishy aroma can be off‑putting for some, especially when used outside seafood contexts. Historical references to garum, Worcestershire sauce, and regional variations appear alongside suggestions for homemade recipes and curiosity about similar sauces from other culinary traditions. Overall, the tone is appreciative and exploratory.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47822734" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data/" target="_blank">Vercel April 2026 security incident</a>
+        </h2>
+        <span class="article-meta">
+          600 points • by colesantiago • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Vercel, the cloud platform behind Next.js, disclosed a security incident affecting a limited subset of customers. Unauthorized access originated from a compromised Google Workspace account belonging to a Vercel employee, which was obtained via a breach at the AI service Context.ai. The attacker leveraged the OAuth credentials of the third‑party Google Workspace app (client ID 110671459871‑30f1spbu0hptbs60cb4vsmv79i7bbvqj.apps.googleusercontent.com) to infiltrate Vercel environments and retrieve environment variables that were not marked as “sensitive,” thus not encrypted at rest. Vercel confirmed that all customer environment variables are encrypted by default and that core services, including Next.js, Turbopack, and other open‑source projects, remain unaffected. The company has engaged incident‑response experts, notified law enforcement, and urged customers to review and re‑classify environment variables, rotate secrets, and enable the sensitive‑variable feature. A threat actor claiming affiliation with the “ShinyHunters” extortion group posted alleged stolen data—access keys, source code, employee records, and internal dashboard screenshots—and mentioned a $2 million ransom demand, though Vercel has not confirmed negotiations.
+          </div>
+          <a href="https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong concern and criticism over Vercel’s recent OAuth‑token breach, highlighting the extensive potential impact on development tools, CI pipelines, and secrets. Readers repeatedly note the company’s vague disclosures, limited actionable guidance, and the broader risk of concentrated trust in a few managed platforms. Many suggest immediate credential rotation, tighter isolation of environment variables, or moving to self‑hosted alternatives, while others link the incident to rising AI‑driven attack surfaces and call for more robust architectural safeguards. Overall sentiment is distrustful and calls for greater transparency and security controls.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47824463" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://warontherocks.com/cogs-of-war/the-bromine-chokepoint-how-strife-in-the-middle-east-could-halt-production-of-the-worlds-memory-chips/" target="_blank">The Bromine Chokepoint</a>
+        </h2>
+        <span class="article-meta">
+          170 points • by crescit_eundo • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article identifies bromine, sourced 97.5 % of which by South Korea from Israel, as a critical, non‑substitutable input for semiconductor‑grade hydrogen bromide gas used in DRAM and NAND flash etching. Conversion of raw bromide to the ultra‑pure gas requires dedicated gas‑phase distillation infrastructure, which currently exists only at ICL Group’s Dead Sea extraction‑conversion complex in Israel. Iranian missile strikes on the Negev threaten this facility; disruption would instantly curtail global memory‑chip production because external producers (Resonac, Air Liquide, Adeka) have no spare capacity and are already committed to TSMC, Samsung and SMIC. A shortage would force Samsung and SK Hynix to allocate hydrogen bromide to high‑bandwidth memory for AI, reducing supply of commodity DRAM/NAND and raising device costs, especially in emerging markets, while also affecting U.S. military systems that rely on the same chips. The paper recommends (1) pre‑positioning bromine feedstock and forward contracts, (2) building diversified conversion capacity outside Israel, and (3) designating bromine and its gases as critical minerals in South Korea, the United States and Israel.
+          </div>
+          <a href="https://warontherocks.com/cogs-of-war/the-bromine-chokepoint-how-strife-in-the-middle-east-could-halt-production-of-the-worlds-memory-chips/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express skepticism toward claims of an imminent bromine shortage, emphasizing that the United States and other regions already produce ample bromine and that alternative sources and by‑products exist. Many critique the tendency to overstate scarcity risks for various materials, noting that supply chains typically adapt through substitution and diversified production. There is also criticism of the article’s geopolitical framing, with remarks that the alleged threats are exaggerated or misplaced, and a broader cynical tone toward alarmist narratives about resource constraints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47826100" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sheets.works/data-viz/keyboard-sounds" target="_blank">Mechanical Keyboard Sounds - A listening Museum</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by akashwadhwani35 • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page presents a curated collection of mechanical‑keyboard audio samples sourced exclusively from open‑source community libraries (Mechvibes, Bucklespring, keyboardsounds, Monkeytype, keyBeats, daktilo, wayclick, keebsound). The curators did not record any sounds themselves; they act solely as archivists. The note emphasizes that each playback reflects a single recording chain—including microphone, room, host board, keycap set, codec, and speakers—so listeners hear a specific build rather than an abstract “keyboard” sound. Entries marked as proxies indicate approximations (e.g., Topre Purple Hybrid as an analogue to HHKB/Realforce). “Full travel” recordings use the same switch on a different host board, so audible differences arise from plate and case, not the switch itself. Attribution corrections or removal requests can be sent to akash@sheets.works.
+          </div>
+          <a href="https://sheets.works/data-viz/keyboard-sounds" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions, noting that the concept of searchable keyboard sounds is appealing but the execution suffers from inconsistent recordings and intrusive subscription prompts that limit usability. Users criticize the lack of controlled recording conditions, which reduces confidence in the accuracy of the samples, and describe the site’s user experience as disruptive. At the same time, some appreciate the ability to filter by “thock” and enjoy experimenting with silent tactile switches, while others find the recorded sounds unpleasant to listen to. Overall, demand for higher fidelity, less intrusive access, and physical testing options is evident.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47780743" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.pcgamer.com/games/world-of-warcraft/turtle-wow-classic-server-announces-shutdown-after-blizzard-wins-injunction/" target="_blank">Turtle WoW classic server announces shutdown after Blizzard wins injunction</a>
+        </h2>
+        <span class="article-meta">
+          153 points • by Brajeshwar • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Turtle WoW, a private “Classic Plus” World of Warcraft server that recreated the pre‑expansion experience with additional raids, zones, playable races and dungeons, was forced to shut down after Blizzard won an injunction. A September copyright suit led to a court‑ordered settlement requiring specific actions by the parties; the server announced a final closure of its game servers on May 14, delivering a last patch for remaining players, and a complete shutdown of its forum and social channels by Oct 16. The community posted farewells on Reddit and the server’s forum, expressing disappointment after the project’s eight‑year run. Turtle WoW’s model—an Old‑School‑RuneScape‑style revamp of vanilla WoW without raising the level cap or adding recent lore—mirrored earlier fan projects such as Nostalrius. Despite appeals for an official fan‑server licensing framework, Blizzard has only approved a few projects (e.g., Project 1999, City of Heroes Homecoming), leaving Turtle WoW without a viable path forward.
+          </div>
+          <a href="https://www.pcgamer.com/games/world-of-warcraft/turtle-wow-classic-server-announces-shutdown-after-blizzard-wins-injunction/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments emphasize that privately run emulated servers require substantial engineering effort, effectively constituting independent game development, and that their operators often transition from hobbyists to revenue-generating services, prompting legitimate copyright concerns for the original IP holder. Opinions are split: many praise the creativity, quality, and unique gameplay of projects like Turtle WoW, viewing them as superior to official offerings, while simultaneously acknowledging Blizzard’s legal right to protect its assets. Criticism of Blizzard’s handling of legacy content and calls for official incorporation of community‑created features also recur.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47825160" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ashley.rolfmore.com/stop-trying-to-engineer-your-way-out-of-listening-to-people/" target="_blank">Stop trying to engineer your way out of listening to people</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by walterbell • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article critiques the tendency in software design to replace direct human interaction with abstract “frameworks” or “socio‑technical systems,” arguing that this avoids the harder work of genuine listening. It enumerates common listening failures: conflating listening with simply delivering stated requests; underestimating one’s own specialization bias; treating “technical” as a monolith; assuming uniform resources, characteristics, or static behavior across individuals and organizations; misreading spoken statements for underlying thoughts; judging or dismissing users; and aggregating diverse stakeholders into a single profile. These misconceptions lead to missed opportunities, increased technical debt, and misaligned product outcomes. The piece stresses that effective listening requires recognizing varied expertise, resource constraints, evolving contexts, and group dynamics, especially in B2B settings, to capture insights that drive competitive advantage and reduce future development costs.
+          </div>
+          <a href="https://ashley.rolfmore.com/stop-trying-to-engineer-your-way-out-of-listening-to-people/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the inefficiency of excessive meetings and the need to trim communication to essential, minimum‑viable time, while still addressing knowledge gaps. Several remarks request concrete references to established frameworks such as Jobs‑to‑Be‑Done and empathy mapping, and desire actionable techniques rather than abstract advice. A recurring view emphasizes that practical experience, including confronting difficult discussions, outweighs theoretical shortcuts. Overall sentiment blends frustration with current practices, a call for clearer resources, and skepticism toward overly prescriptive guidance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47827259" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.swiss-ai.org" target="_blank">Swiss AI Initiative (2023)</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by doener • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Swiss AI Initiative launched in December 2023, funded with over 10 million GPU‑hours on the “Alps” supercomputer (CSCS) and a CHF 20 million grant from the ETH Domain. It is the largest open‑science/open‑source effort for AI foundation models worldwide and forms the first project of the Swiss National AI Institute, a partnership of the ETH AI Center and the EPFL AI Center. The program draws on more than 800 researchers—including 70 AI‑focused professors—from over ten Swiss academic institutions. Frontier AI work is powered by the Alps supercomputer, equipped with more than 10 000 GH200 GPUs, and supported by CSCS engineers. Regular compute calls enable cross‑institution collaboration, while the initiative releases transparent software, models, and data for trustworthy use by Swiss SMEs, start‑ups, and other stakeholders.
+          </div>
+          <a href="https://www.swiss-ai.org" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express appreciation for the open‑source 8B and 70B LLM from Swiss‑AI, noting it as a noteworthy and valuable project. At the same time, there is mild confusion about the listed 2023 date, suggesting the release timeline may be inaccurate, and a request for German language documentation. Overall, the tone is positive toward the model’s availability, with minor concerns about dating and language presentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47828444" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonwillison.net/2026/Apr/18/opus-system-prompt/" target="_blank">Changes in the system prompt between Claude Opus 4.6 and 4.7</a>
+        </h2>
+        <span class="article-meta">
+          245 points • by pretext • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The April 16 2026 release of Claude Opus 4.7 updates the system prompt originally published for Opus 4.6 (Feb 5 2026). Key changes:  
+
+- “Developer platform” renamed “Claude Platform”.  
+- New tool listings added: Claude in Chrome (autonomous browsing), Claude in Excel (spreadsheet), and Claude in PowerPoint (slides); all usable via Claude Cowork.  
+- Child‑safety instructions expanded and wrapped in a `<critical_child_safety_instructions>` tag, requiring extreme caution after a safety‑related refusal.  
+- Conversation‑ending behavior revised: Claude no longer prompts the user to continue once a termination request is made.  
+- `<acting_vs_clarifying>` section directs Claude to act with available tools to resolve minor ambiguities before asking the user, and to complete tasks without stopping midway.  
+- Introduction of a tool‑search mechanism (`tool_search`) to verify capability before claiming lack of access.  
+- Conciseness emphasized: responses should remain focused, with brief disclosures only.  
+- Removal of a prior “emotes” restriction section, suggesting the model no longer misbehaves in that way.  
+- New disordered‑eating guard disallows precise nutrition or exercise guidance.  
+- `<evenhandedness>` clause now blocks single‑word answers to complex or contested queries, requiring nuanced responses.  
+- The explicit statement that “Donald Trump is the current president” was dropped, reflecting an updated knowledge cutoff (Jan 2026).  
+
+The list of available tools (e.g., `web_search`, `weather_fetch`, `tool_search`, etc.) remains unchanged from 4.6.
+          </div>
+          <a href="https://simonwillison.net/2026/Apr/18/opus-system-prompt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments on Claude 4.7 show a mixed response. Users note the new “acting‑vs‑clarifying” rule reduces friction by having the model act on reasonable interpretations without extra questions, which many find helpful. At the same time, a substantial portion expresses frustration with the expanded system prompts that heavily restrict actions related to malware, security research, and certain medical or scientific inquiries, leading to false positives, blocked sessions, and perceived over‑censorship. Several reviewers criticize the hard‑coded, non‑configurable nature of these constraints and the large prompt size, while others miss features of earlier versions such as more balanced guidance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47823270" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mxmap.ch/" target="_blank">2,100 Swiss municipalities showing which provider handles their official email</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by doener • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A map visualizes the email service provider for roughly 2,100 Swiss municipalities by analyzing each municipality’s official domain. The classification uses eleven public signals—including DNS records, SMTP banners, ASN lookups, and a Microsoft API endpoint—to identify the handling provider and assign a confidence score. The project highlights digital‑sovereignty concerns, noting that US‑based providers fall under the US CLOUD Act, which can compel data disclosure irrespective of physical storage location. Results are grouped by jurisdiction, showing the distribution of providers across municipalities. The underlying code and the compiled dataset are released as open‑source on GitHub, with a mechanism for users to report inaccuracies via issue submission. A disclaimer clarifies that DNS information reflects mail routing and authorized senders, not the actual data‑hosting location.
+          </div>
+          <a href="https://mxmap.ch/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a reflective and appreciative tone toward the breadth of the global internet, noting satisfaction that it isn’t dominated solely by major providers like Google and Microsoft. They highlight the existence of numerous regional domain maps and question how specific locales end up using particular hosting services. There is curiosity about the lack of a unified national hosting solution that could simplify municipal decisions, suggesting interest in more centralized options.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47828420" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
