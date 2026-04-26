@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">April 26, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.scientificamerican.com/article/amateur-armed-with-chatgpt-vibe-maths-a-60-year-old-problem/" target="_blank">Amateur armed with ChatGPT solves an Erdős problem</a>
+        </h2>
+        <span class="article-meta">
+          138 points • by pr337h4m • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Liam Price, a 23‑year‑old without formal advanced training, used ChatGPT‑5.4 Pro to resolve a 60‑year‑old conjecture concerning “primitive sets” of integers—sets in which no element divides another. For any primitive set one can compute the Erdős sum \( \sum_{n\in S} \frac{1}{n\log n}\); Erdős proved the sum’s maximum is ≈1.6 and conjectured it attains this value for the set of all primes (proved by Jared Lichtman, 2022). Erdős also conjectured the sum’s minimum is 1, approached as the set’s elements tend to infinity, a claim that had resisted proof. Price entered the problem into ChatGPT, which generated a proof using a formula from a different branch of mathematics that had never been applied to primitive‑set questions. Mathematicians including Terence Tao and Lichtman verified the argument, streamlined it, and noted the new methodological link could inform broader problems involving large numbers. The result illustrates a novel, AI‑originated insight rather than merely reproducing existing techniques.
+          </div>
+          <a href="https://www.scientificamerican.com/article/amateur-armed-with-chatgpt-vibe-maths-a-60-year-old-problem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion recognizes that large language models can occasionally produce unexpected angles on difficult number‑theory problems, offering alternative approaches that human researchers might overlook. However, the output is generally regarded as rough, requiring expert filtering, and its practical significance is questioned. Skepticism appears regarding the broader impact of such demonstrations, the allocation of research funds, and the true intelligence of the systems. Overall, opinions balance curiosity about novel contributions with doubt about their reliability and value.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47903126" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://freakonomics.com/podcast/why-has-there-been-so-little-progress-on-alzheimers-disease/" target="_blank">Why has there been so little progress on Alzheimer&#39;s disease?</a>
+        </h2>
+        <span class="article-meta">
+          120 points • by chiefalchemist • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://freakonomics.com/podcast/why-has-there-been-so-little-progress-on-alzheimers-disease/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey widespread criticism of Alzheimer’s research being dominated by the amyloid hypothesis, describing it as a misdirected focus that consumed billions with limited results. Many view gatekeeping and funding structures as reinforcing this narrow approach, limiting exploration of alternative explanations such as lifestyle, vascular, endocrine, or viral factors. While acknowledging that Alzheimer’s receives relatively high funding compared with other disorders, the consensus stresses that financial incentives and academic hierarchies hinder broader investigation, and that diversifying research priorities is essential for progress.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47905984" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fabiensanglard.net/usbcheat/index.html" target="_blank">USB Cheat Sheet (2022)</a>
+        </h2>
+        <span class="article-meta">
+          198 points • by gwerbret • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            USB generations use the notation “Gen Ax BA” where A is the generation and B is the number of lanes. Multi‑lane systems employ lane‑striping on transmit (TX) and lane‑bonding on receive (RX). Rates quoted on packaging include encoding overhead (e.g., 8b/10b adds ~20 %); actual sequential read throughput is lower.  
+
+Cable wiring:  
+- 4‑wire cable (V BUS, GND, D+, D‑) = one half‑duplex lane.  
+- 8‑wire cable adds RX⁺/RX⁻ and TX⁺/TX⁻ = two full‑duplex lanes (one up, one down).  
+- 12‑wire cable provides four lanes (two up, two down).  
+
+Connectors: USB‑A/B support 4 or 8 wires; only USB‑C has enough pins for the 12‑wire, two‑lane configuration.  
+
+Specification timeline: USB 1.0 (1996), 1.1 (1998), 2.0 (2000), 3.0 (2008), 3.1 (2013), 3.2 (2017), 4.0 (2019).
+          </div>
+          <a href="https://fabiensanglard.net/usbcheat/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall approval of the article while noting several inaccuracies and omissions, such as the definition of SBU and the absence of low‑speed specifications. Contributors repeatedly criticize USB’s confusing naming conventions and inconsistent marketing, proposing clearer labeling schemes and emphasizing the need for product listings that faithfully reflect specifications. Additional points raise interest in related standards like Thunderbolt, request more detail on connector pinouts, voltage, signaling, and power‑delivery profiles, and suggest expanding the cheat sheet to cover these areas.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47904876" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://petapixel.com/2026/04/22/flickr-the-first-and-last-great-photo-platform/" target="_blank">Flickr: The first and last great photo platform</a>
+        </h2>
+        <span class="article-meta">
+          77 points • by Nrbelex • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Flickr, launched in 2004, pioneered Web 2.0 photo sharing and survived Yahoo’s decade‑long stewardship before SmugMug’s 2018 acquisition. By 2026 the service remains a photo‑centric platform with a chronological feed, limited video support, and a strong emphasis on community Groups that cater to niche equipment, genre, and aesthetic interests. Robust metadata handling includes extensive tag, geotag, EXIF, and organized Sets/Galleries/Albums, while open RSS feeds and APIs enable embedding and syndication. The Explore page highlights ~500 daily photos via an opaque “Interestingness” algorithm. Flickr Pro, priced at $82 / year, removes the 1 000‑photo cap, provides unlimited full‑resolution JPEG storage, ad‑free streams, Advanced Stats, and partner discounts (Adobe, Blurb, KEH, etc.). Benefits are offset by technical issues such as occasional AWS‑related outages, slow loads, and aging legacy tools (Camera Finder, World Map). The platform lacks support for modern image formats (JPEG XL/HEIC/AVIF) and its group discussions have shifted to external sites. Nonetheless, Flickr’s privacy‑focused terms, extensive tagging, and active real‑world events keep it a valued, stable home for hobbyist and serious photographers.
+          </div>
+          <a href="https://petapixel.com/2026/04/22/flickr-the-first-and-last-great-photo-platform/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a largely nostalgic appreciation for Flickr’s early community focus, simple architecture, and features such as photo notes, Pro accounts, and reliable auto‑uploading, which many credit for fostering artistic connections and influencing later platforms. Critics note shortcomings like a missing markdown embed option, occasional poor support, and an outdated interface, while expressing concern that public sharing may feed AI training. Comparisons repeatedly favor Flickr over Instagram and other services, though some users mention alternatives (Immich, glass.photo, SmugMug) that address specific needs. Overall sentiment is positive but tempered by acknowledged flaws and evolving preferences.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47867473" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-openai-privacy-filter/" target="_blank">OpenAI Privacy Filter</a>
+        </h2>
+        <span class="article-meta">
+          139 points • by tanelpoder • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/introducing-openai-privacy-filter/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong interest and optimism about the new locally runnable privacy‑filter model, noting its compact size, effective performance and straightforward architecture. Contributors highlight technical details, compare it to existing regex‑based solutions like Presidio, and reference similar lightweight redaction models from other providers. They seek clarification on handling multiple entity reconstructions and suggest broader example coverage beyond easy‑regex cases. Overall, the tone is supportive, inquisitive and focused on evaluating the model’s capabilities and potential extensions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47870901" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fffff.at/free-universal-construction-kit/" target="_blank">The Free Universal Construction Kit</a>
+        </h2>
+        <span class="article-meta">
+          288 points • by robinhouston • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Free Universal Construction Kit, created by F.A.T. Lab and Sy‑Lab, is a collection of nearly 80 3D‑printable adapter bricks that enable direct connection between ten popular construction‑toy systems—Lego, Duplo, Fischertechnik, Gears! Gears! Gears!, K’Nex, Krinkles/Bristle Blocks, Lincoln Logs, Tinkertoys, Zome, and Zoob. STL files are freely downloadable from Thingiverse, the F.A.T. website (29 MB ZIP), and forthcoming on The Pirate Bay “physibles” channel. Dimensions were reverse‑engineered with an optical comparator (±0.0001 in accuracy) to ensure snap‑fit tolerances; however, typical 2012‑era desktop printers (≈100 µm XY, 360 µm layer) may lack sufficient precision, while higher‑resolution services (Objet, Ponoko) can meet tighter tolerances. The kit is licensed under CC‑BY‑NC‑SA 3.0, permitting personal, non‑commercial reproduction but prohibiting mass production. Most supported toys are out of patent; adapters for Zoob (patented 1996) and Zome (patented 2002) were delayed to respect active patents. The project frames the adapters as a civic reverse‑engineering tool to overcome proprietary lock‑in and extend “forward compatibility” of existing playsets.
+          </div>
+          <a href="https://fffff.at/free-universal-construction-kit/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight enthusiasm for the adapter project enabling compatibility between LEGO and other building systems, noting its utility for children and appreciation for the open‑source organization behind it. Several remarks express nostalgia for classic construction toys such as Lincoln Logs, Duplo, Tinkertoys, and Construx, reinforcing the emotional connection to such kits. Criticism focuses on the limited range of adapter sizes and the omission of systems like VEX IQ, while technical observations note encoding artifacts in the source article. Overall tone is supportive with modest suggestions for expansion.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47860198" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.hypertalking.com/2023/05/08/1-bit-pixel-art-of-hokusais-the-great-wave-off-kanagawa/" target="_blank">1-Bit Hokusai&#39;s &#34;The Great Wave&#34; (2023)</a>
+        </h2>
+        <span class="article-meta">
+          536 points • by stephen-hill • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author began a project to render all 36 Hokusai woodcut prints of Mount Fuji as 1‑bit pixel art at the original Macintosh screen resolution (512 × 342 px). The work is driven by personal enjoyment of the creative “flow state,” nostalgia for early Macintosh computers, and admiration for Susan Kare’s iconic MacPaint graphics. Production uses vintage hardware (Quadra 700 or PowerBook 100 running System 7) and Aldus SuperPaint 3.0. The first completed piece, “The Great Wave off Kanagawa,” is shared under a Creative Commons Attribution‑NonCommercial‑NoDerivatives 4.0 license, with a request for attribution when reproduced. A supplemental desktop‑pattern version (PNG/PICT in a zip) is provided for Macs with 640 × 480 displays. The author plans to release additional prints from the series in the future.
+          </div>
+          <a href="https://www.hypertalking.com/2023/05/08/1-bit-pixel-art-of-hokusais-the-great-wave-off-kanagawa/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Commenters express strong admiration for Hokusai’s mastery, noting that high‑resolution zoom reveals extraordinary stroke efficiency and emotional depth, while the 1‑bit reproductions are praised for their precision and the way constraints enhance creativity. The project’s retro aesthetic and compact layout receive positive feedback, and many value its human‑made character amid rising AI‑generated art. Practical concerns arise about locating Hokusai’s tessellation studies, licensing nuances of the non‑derivative CC‑BY‑NC‑ND terms, and technical issues such as emulator choices and sub‑pixel antialiasing artifacts. Overall sentiment is appreciative and supportive.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47863570" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.matthewbrunelle.com/its-ok-to-use-coding-assistance-tools-to-revive-the-projects-you-never-were-going-to-finish/" target="_blank">Using coding assistance tools to revive projects you never were going to finish</a>
+        </h2>
+        <span class="article-meta">
+          219 points • by speckx • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author used Claude Code to rebuild an unfinished “shim” that exposes YouTube Music via the OpenSubsonic API. Starting from a manual proof‑of‑concept, they created a FastAPI project with dependencies (fastapi, pydantic, ytmusicapi, yt‑dlp) and added the OpenSubsonic OpenAPI spec. By prompting Claude to generate stubbed async endpoints for the newer JSON routes, they iteratively refined the plan, corrected mistakes, and used Claude’s search tool for idiomatic solutions. Core functionality added included:
+
+- Minimal endpoints (getLicense, getUser, getGenres, getMusicDirectories) returning empty but valid collections.  
+- Search via ytmusicapi, streaming via yt‑dlp wrapped in asyncio.to_thread to obtain the “bestaudio” URL.  
+- Cover‑art retrieval using yt‑dlp.  
+- In‑memory caching for API calls and SQLite storage for metadata, with file‑system caching of streamed tracks and cleanup on client disconnect.
+
+The project, dubbed “Sub‑standard,” became a functional service usable with Subsonic clients after a few evenings of AI‑assisted development, illustrating how coding assistants can revive low‑priority personal projects while the author cautions against over‑reliance on such tools.
+          </div>
+          <a href="https://blog.matthewbrunelle.com/its-ok-to-use-coding-assistance-tools-to-revive-the-projects-you-never-were-going-to-finish/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show broad enthusiasm for AI‑assisted coding as a way to quickly realize personal tools, finish long‑standing ideas, and overcome knowledge gaps, with many citing rapid prototypes, revived game projects, and useful utilities. At the same time, several contributors question the depth of learning, the sense of ownership, and the quality or lasting value of code produced mainly for convenience, expressing wariness about low‑effort “slop” and the broader push of AI services. Overall, the discussion balances strong appreciation for productivity gains with caution about motivation and result integrity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47902525" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://oilprice.com/Alternative-Energy/Geothermal-Energy/Americas-Geothermal-Breakthrough-Could-Unlock-a-150-Gigawatt-Energy-Revolution.html" target="_blank">America&#39;s Geothermal Breakthrough</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by sleepyguy • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The United States operates 99 geothermal power plants—53 in California, 32 in Nevada, and the remainder in Oregon, Utah, Hawaii, Alaska, Idaho and New Mexico—providing about 2.7 GW (≈0.2 % of summer generation). Enhanced geothermal systems (EGS), which use horizontal drilling and hydraulic stimulation to create artificial hydrothermal reservoirs, could expand capacity dramatically. The U.S. Geological Survey estimates 135–150 GW of EGS potential in the Great Basin alone.  
+
+Houston‑based Fervo Energy, partnered with Turboden America for 1.75 GW of organic Rankine‑cycle turbines, is developing the world’s largest EGS project: a 100 MW phase of a 500 MW “Cape Station” in Utah, targeting up to 4.3 GW of geothermal resource. A second Nevada project, “Corsac Station,” will deliver 115 MW to Google and NV Energy. Fervo has leased ~600,000 acres, projects >42 GW of developable capacity, and has filed for a Nasdaq IPO (ticker FRVO).  
+
+The DOE has allocated $171.5 million for next‑generation geothermal field tests, reflecting continued federal support. EGS deployment could diversify the U.S. energy mix, enhance grid reliability, and lower consumer electricity costs.
+          </div>
+          <a href="https://oilprice.com/Alternative-Energy/Geothermal-Energy/Americas-Geothermal-Breakthrough-Could-Unlock-a-150-Gigawatt-Energy-Revolution.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects practical experience with geothermal cooling systems and explores broader uses such as neighborhood utilities, noting that ownership models appear feasible. It questions the existence of a true technological breakthrough behind recent hype, especially regarding Fervo Energy, and expresses cautious optimism that economies of scale could improve viability over the next decade. The writer also doubts whether projected capacity figures are realistic, wonders about the role of geothermal compared to solar, and seeks evidence that large‑scale geothermal development can deliver a meaningful contribution to the energy mix.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47903945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.korny.info/2026/04/19/the-joy-of-folding-bikes" target="_blank">The Joy of Folding Bikes</a>
+        </h2>
+        <span class="article-meta">
+          107 points • by pavel_lishin • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A Brompton folding bike, purchased for £1,000 through a pre‑tax Ride‑to‑Work scheme (£4 weekly), has been used for 11 years of commuter riding. Weighing ~12 kg, it folds compactly enough to be carried in one hand, stored in a study, placed in a car boot, or taken on trains (even those with “no bikes” policies) and into offices or cafés without needing a street lock. After replacing the original tyres with puncture‑proof Schwalbe Marathon Plus models, no flats have occurred. Maintenance requires only occasional cable replacements; the original frame, wheels, and gears remain. An Abus Bordo folding lock is used sparingly, mainly where theft risk is higher. Economic analysis shows that, with station parking at £10 per day, the bike’s £1,400 price (current baseline) would be recouped after roughly 140 commuting days (≈28 weeks). The author also notes the freeCycle Streets app, which leverages OpenStreetMap for safe, low‑traffic routes in London.
+          </div>
+          <a href="https://blog.korny.info/2026/04/19/the-joy-of-folding-bikes" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight folding bikes’ main advantage as portable, easy to store and allowed on public transport, which many users value for commuting, travel and avoiding theft. Frequent drawbacks noted include reduced speed, limited gearing, uncomfortable small wheels, and poor suitability for heavy loads or steep climbs. Opinions diverge on cost: some praise inexpensive models that restore cycling activity, while others find premium options like Brompton expensive yet reliable, and a few express dissatisfaction with weight or handling. Overall, users appreciate the convenience but recognize performance and price trade‑offs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47866127" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
