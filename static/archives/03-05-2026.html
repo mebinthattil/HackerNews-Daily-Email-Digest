@@ -1,0 +1,506 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.haskell.org/a-couple-million-lines-of-haskell/" target="_blank">A Couple Million Lines of Haskell: Production Engineering at Mercury</a>
+        </h2>
+        <span class="article-meta">
+          109 points • by unignorant • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Mercury, a fintech handling $248 B in transactions, runs a ~2 M‑line Haskell codebase maintained by engineers who often learn the language on the job. The team’s reliability philosophy stresses “adaptive capacity”: systems must degrade gracefully, be understandable by newcomers, and encode operational knowledge in the type system so it survives personnel turnover. Purity is treated as a bounded interface rather than an absolute property; side‑effects are confined within scoped constructs (e.g., `runST`) and exposed through tight APIs. Types are used to make correct operational procedures the only viable path—e.g., structuring transaction‑with‑events APIs so event emission cannot be omitted. Durable workflows are implemented with Temporal, which records step histories, enables deterministic replay, and isolates side effects into activities, aligning with Haskell’s pure‑core/impure‑shell model. The authors warn against leaking transport concerns (HTTP status codes) into domain logic, advocating domain‑specific error types with thin translation layers. Finally, they discuss the trade‑off of encoding invariants in types: essential safety‑critical constraints merit type‑level enforcement, whereas overly rigid encodings hinder evolution; a balanced middle ground is recommended.
+          </div>
+          <a href="https://blog.haskell.org/a-couple-million-lines-of-haskell/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments collectively praise Haskell’s strong type system and its role in enabling reliable, traceable code, especially within Mercury’s engineering culture, and many view Mercury’s product as highly functional and user‑friendly. The discussion highlights that the language’s benefits are underused in industry, while also noting practical challenges such as slow builds, large binaries, and limited cross‑compilation support, which some compare unfavorably to languages like Go. Concerns appear about the scarcity of experienced Haskell developers and the lack of concrete metrics proving Haskell’s direct impact on Mercury’s success.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47991802" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cvgzk91leweo" target="_blank">Clandestine network smuggling Starlink tech into Iran to beat internet blackout</a>
+        </h2>
+        <span class="article-meta">
+          72 points • by 1659447091 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article reports on efforts to smuggle Starlink satellite‑internet equipment into Iran to circumvent a state‑imposed internet blackout that blocks dissenting voices. Executive director Roya Boroumand of the Abdorrahman Boroumand Centre for Human Rights explains that the blackout creates an information vacuum, enabling the government to control narratives, portray protesters as violent or foreign‑backed, and silence victims, including those sentenced to death. Visual documentation includes: a Starlink terminal in a cardboard box; a mobile phone displaying Iran’s new supreme leader; protestors holding a “90 million voices, 216+ hours offline” placard; a Falcon 9 launch of 25 Starlink satellites; damage to a Tehran apartment block; and assorted political and cultural images. The material underscores the technical and humanitarian dimensions of circumventing state censorship via satellite internet.
+          </div>
+          <a href="https://www.bbc.com/news/articles/cvgzk91leweo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights the use of portable Starlink transceivers by Ukrainian forces to evade ground‑based signal detection, and suggests that financial support could expand this capability. It also questions the rationale behind Iran’s recent internet blackout, arguing that the shutdown is less about suppressing citizens and more about protecting compromised infrastructure from external hacking and surveillance by foreign actors. The overall tone is analytical, focusing on tactical applications and geopolitical motives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47992338" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://retrocoding.net/windows-api-is-successful-cross-platform-api" target="_blank">Windows API Is Successful Cross-Platform API</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by phendrenad2 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://retrocoding.net/windows-api-is-successful-cross-platform-api" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47992859" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ladybird.org/newsletter/2026-04-30/" target="_blank">This Month in Ladybird - April 2026</a>
+        </h2>
+        <span class="article-meta">
+          206 points • by richardboegli • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In April 2026 Ladybird merged 333 PRs from 35 contributors (7 first‑time). Key updates include an inline PDF viewer built on pdf.js, address‑bar autocomplete with history, favicons and search shortcuts, and a SQLite‑backed HistoryStore with clear‑history controls. The HTML parser now works incrementally and speculatively, pre‑fetching resources while a script blocks. JavaScript compilation runs off‑thread, shifting ~200 ms of main‑thread work, while numerous engine optimizations—AsmInt‑based call/return/end, LIFO register allocation, for‑in cache, zero‑copy identifier sharing, lazy Substring, TransferArrayBuffer, promise‑resolver static dispatch, and GC‑time reductions—boost performance. Rasterization is per‑Navigable, enabling parallel iframe painting. A new GTK4/libadwaita frontend adds GNOME‑style UI; bookmark management UI, full Cache/CacheStorage, and CSS enhancements (image‑set, float‑based color interpolation, presentational‑hint cascade, stroke‑dasharray animation, autofocus, RTL list markers, inline flex/grid baseline fixes) were added. Networking improvements include non‑blocking getaddrinfo, AVIF/WebP Accept headers, and RequestServer memory‑churn fixes. Style invalidation for :has() was heavily optimized. Linux GPU painting now uses dmabuf, and mimalloc v2 is the unified allocator. Test‑suite coverage rose to 2,067,263 subtests (97.8 % of imported test262). Numerous site‑specific fixes (Reddit, YouTube, gocomics, Yandex Maps, etc.) and UI enhancements (Ctrl‑Tab, middle‑mouse autoscroll, address‑bar error page, TextDecoderStream, cross‑process BroadcastChannel) were also delivered.
+          </div>
+          <a href="https://ladybird.org/newsletter/2026-04-30/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall enthusiasm for the emerging no‑JavaScript browser prototype and Ladybird’s progress, highlighting its Rust‑based architecture, independence from established engine code, and improving web compatibility demonstrated by sites like Reddit and Strava. Users note typical challenges such as DRM and battery‑API handling, and some raise doubts about the legitimacy of a funding source linked to AI‑focused human‑rights initiatives, speculating about possible corporate or political motives. Nonetheless, the prevailing tone is supportive, eager for early releases and broader site support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47990318" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.david-smith.org/blog/2026/04/29/maps-on-watchos/" target="_blank">Six Years Perfecting Maps on WatchOS</a>
+        </h2>
+        <span class="article-meta">
+          218 points • by valzevul • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Since the Apple Watch’s launch, the developer spent six years creating a native watchOS mapping experience for the Pedometer++ app.  
+- Early versions relied on server‑generated tiles and required a network round‑trip, which was unsuitable for offline navigation.  
+- In 2021 a fully SwiftUI‑based map rendering engine was built, enabling performant tile‑based maps and overlay of location data directly on the watch.  
+- Multiple UI concepts were trialed to balance map interaction with workout metrics on the limited screen; the final layout uses a modal approach with metrics in the top‑left and the map as the primary page, entered by a tap to “browse mode.”  
+- With watchOS 26’s Liquid Glass, a custom basemap was commissioned from cartographer Andy Allen, optimized for contrast, saturation, and a dark‑mode variant to maintain legibility under glassy layers.  
+- The design was refined with designer Rafa Conde, leading to the shipped version praised for readability and native feel.  
+- The author avoids Apple’s MapKit on watchOS because it forces dark mode, limits animation/overlay control, and lacks detailed topographic coverage required for the app’s use cases.
+          </div>
+          <a href="https://www.david-smith.org/blog/2026/04/29/maps-on-watchos/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express disappointment that Apple Watch lacks a first‑party hiking or topographic map and GPX import, viewing this as a notable shortfall even on premium models. Third‑party solutions such as custom static‑tile maps and pedometer apps are praised for detail and engineering, though concerns arise about subscription transparency and occasional UI bugs. Users note Apple Maps’ watch implementation can be intrusive during workouts and suffer reliability issues, leading some to prefer alternative devices like Garmin while still appreciating the effort behind the independent apps.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47990606" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://code.videolan.org/videolan/dav2d" target="_blank">Dav2d</a>
+        </h2>
+        <span class="article-meta">
+          387 points • by dabinat • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anubis is a server‑side protection system that presents a Proof‑of‑Work (PoW) challenge, similar to Hashcash, to deter large‑scale AI scraping. The PoW adds minimal load for individual users but becomes costly for mass scrapers, reducing unauthorized data extraction. The system serves as a temporary measure while development continues on more sophisticated fingerprinting methods (e.g., detecting headless browsers via font rendering) to limit challenge presentation to legitimate users. Anubis relies on modern JavaScript; extensions like JShelter that block such features must be disabled for the site to function.
+          </div>
+          <a href="https://code.videolan.org/videolan/dav2d" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion is largely optimistic about AV2 and the new dav2d decoder, with participants expressing enthusiasm for its potential speed and efficiency gains over AV1 and anticipation of future encoder development. Technical interest focuses on the heavy use of assembly for critical paths, curiosity about how much C will remain, and suggestions to reduce assembler preprocessing. Minor criticisms include a package description typo, naming confusion, and concerns about default unsafe language choices. Overall sentiment remains positive and forward‑looking.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47988504" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.universiteitleiden.nl/en/news/2025/07/neanderthals-ran-fat-factories-125000-years-ago" target="_blank">Neanderthals ran &#39;fat factories&#39; 125,000 years ago (2025)</a>
+        </h2>
+        <span class="article-meta">
+          135 points • by andsoitis • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Neanderthals at the Neumark‑Nord 2 site in central Germany (≈125 ka, interglacial climate) systematically produced bone‑derived fat. Excavations revealed that they fractured and boiled tens of thousands of fragments from ≥172 large mammals—including deer, horses, aurochs, and straight‑tusked elephants—to render calorie‑rich bone grease in a dedicated lakeside area. This “fat factory” required substantial bone volumes, indicating organized transport, caching, and task‑specific processing. The findings, published in *Science Advances*, extend complex, labour‑intensive resource management in hominins by tens of millennia, previously attributed only to later modern humans. Combined with earlier evidence of elephant butchery, fire‑driven vegetation management, and limited plant use, the site demonstrates strategic planning, ecological engagement, and a broad behavioural repertoire within a single, well‑preserved landscape. The scale of herbivore exploitation suggests significant Neanderthal impact on local fauna during the Last Interglacial.
+          </div>
+          <a href="https://www.universiteitleiden.nl/en/news/2025/07/neanderthals-ran-fat-factories-125000-years-ago" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend enthusiasm for recent findings on Neanderthal cognition with a mix of speculative and humorous reflections, ranging from analogies to modern logistics and party‑driven evolution to quirky etymological tidbits about “Neander” and “dollar.” Readers express curiosity about population size, the purpose of bone processing, and the broader ecological impact of hominins, while also noting parallels to contemporary practices like lean manufacturing. Overall, the tone is inquisitive and appreciative, interspersed with light‑hearted anecdotes and occasional technical questions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47990284" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://donottrack.sh/" target="_blank">Do_not_track</a>
+        </h2>
+        <span class="article-meta">
+          236 points • by RubyGuy • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The text highlights that many command‑line tools, SDKs, and frameworks enable telemetry or usage reporting by default, each requiring a distinct environment variable to opt out (e.g., DOTNET_CLI_TELEMETRY_OPTOUT, GATSBY_TELEMETRY_DISABLED, HOME‑BREW_NO_ANALYTICS). It proposes a unified environment variable—**DO_NOT_TRACK=1**—to express a user’s intent to disable all forms of tracking, including ad tracking, usage reporting, telemetry, crash reporting, and any non‑essential network requests. Users are instructed to add `export DO_NOT_TRACK=1` (or the equivalent syntax for their shell) to their configuration files (e.g., ~/.bashrc, ~/.zshrc, fish config, PowerShell). For developers, the recommendation is to check for this variable and, when set to 1, disable any telemetry, respecting it alongside existing opt‑out mechanisms and ideally shifting to an opt‑in model.
+          </div>
+          <a href="https://donottrack.sh/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong disapproval of default‑opt‑in telemetry, characterizing it as a dark‑pattern that burdens users with opting out via numerous environment variables or DNS blocklists. Contributors suggest technical workarounds such as setting DO_NOT_TRACK‑style flags, using network namespaces, or maintaining comprehensive opt‑out lists, while also arguing for legal safeguards that would require explicit consent. Opinions diverge on effectiveness: some view automated blocking as practical, others deem it insufficient without enforceable standards, but the consensus favors protecting privacy through mandatory opt‑in rather than permissive opt‑out.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47988592" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/microsoft/vscode/pull/310226" target="_blank">VS Code inserting &#39;Co-Authored-by Copilot&#39; into commits regardless of usage</a>
+        </h2>
+        <span class="article-meta">
+          943 points • by indrora • 84 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The pull request titled “Enabling ai co‑author by default” (microsoft/vscode #310226) proposes making the AI co‑author feature active automatically in VS Code. The submission includes visual assets: dark‑theme and light‑theme screenshots of the editor before and after the change, hosted on a Hediet screenshots service. The description lists numerous contributor and reviewer identifiers (e.g., @cwebster‑99, @vs‑code‑engineering, @github‑actions, and many individual usernames) likely representing participants in the review. No code diffs, implementation details, or technical specifications are present in the scraped text; the content consists mainly of image references and contributor tags.
+          </div>
+          <a href="https://github.com/microsoft/vscode/pull/310226" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Microsoft’s decision to add automatic AI co‑author attribution to VS Code Git commits, which many view as a breach of developer trust, an unwanted alteration of standard tooling, and a potential legal and intellectual‑property risk. Critics cite poor change management, lack of transparency, and corporate motives to boost AI usage metrics, while some acknowledge the intent to provide provenance but question its implementation. Microsoft’s acknowledgment of the mistake and plan to revert the default is noted, prompting calls for disabling the feature, using alternative editors, and scrutinizing AI‑driven development practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47989883" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.epo.org/en/news-events/news/inventions-battery-reuse-and-recycling-increase-more-seven-fold-last-decade" target="_blank">Inventions for battery reuse and recycling increase seven-fold in last decade</a>
+        </h2>
+        <span class="article-meta">
+          175 points • by JeanKage • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Battery demand is projected to drive end‑of‑life EV batteries from 1.2 million in 2030 to 14 million by 2040. Circular‑economy technologies—collection, sorting, recycling, repurposing, and metal‑refining—are rapidly expanding. Patent analysis (≈16 000 inventions, 4 000 international families across 24 tech areas) shows a 42 % CAGR in battery‑circularity IPFs since 2017, far outpacing 16 % for rechargeable‑battery manufacturing and 2 % overall. Global battery sales grew from 180 GWh (2020) to 1 100 GWh (2024) and are forecast at 3 500 GWh by 2030. Asian entities dominate, holding 63 % of 2023 IPFs; China’s Brunp (CATL) leads recycling, while Chinese filings account for ~70 % of metal‑refining patents and 29 % of circularity IPFs (2013‑2023). Europe’s share fell slightly to 21 % but remains strong in collection and chemical transformation (remote handling 34 %, isolation 30 %, hydrometallurgical extraction 26 % of its IPFs). Key European actors include Umicore, BASF and the CEA, with ~60 startups/universities profiled. EU policies—Industrial Accelerator Act, RESourceEU, Battery Booster Facility, and the 2023 Batteries Regulation—aim to scale innovation, lower recycling costs, and address fragmented waste streams and heterogeneous designs. The EPO’s clean‑energy platform now indexes 24 battery‑circularity categories, and its Deep Tech Finder lists the identified European innovators.
+          </div>
+          <a href="https://www.epo.org/en/news-events/news/inventions-battery-reuse-and-recycling-increase-more-seven-fold-last-decade" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion frames patents as a factor that artificially inflates the market value of incumbent businesses, enabling monopolistic control through restricted supply. This restriction is portrayed as hindering recycling efforts, implying that without patent limitations, recycling would be more widespread. The overall tone is critical of the patent system’s impact on market dynamics and environmental practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=47960015" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
