@@ -1,0 +1,537 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 06, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank">Agents can now create Cloudflare accounts, buy domains, and deploy</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by rolph • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Agents can now provision Cloudflare resources automatically through a new protocol co‑designed with Stripe and exposed via Stripe Projects. The workflow lets an AI agent:
+
+* Discover available Cloudflare services through a REST‑based catalog API.  
+* Create a Cloudflare account on‑demand (or link an existing one via OAuth) using Stripe as the identity provider, receiving an API token for authenticated calls.  
+* Start paid subscriptions and register domains by sending a Stripe‑issued payment token to Cloudflare; raw credit‑card data never reaches the agent. A default $100 USD/month spend limit is applied, adjustable via budget alerts.  
+
+Human users only need to log into Stripe, grant consent, and accept Cloudflare’s terms of service; no manual dashboard navigation, token copying, or credit‑card entry is required. The system also offers $100 k of Cloudflare credits to new startups using Stripe Atlas. Any platform with signed‑in users can act as the “Orchestrator,” replicating this integration pattern for other services. Stripe Projects is in open beta; installation requires the Stripe CLI and the Projects plugin.
+          </div>
+          <a href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys frustration with Cloudflare’s previous account verification restrictions, describing them as a barrier that limited illicit activity. It highlights how large‑language‑model agents now automate domain purchases and deployments, accelerating fraudulent schemes. The integration of Stripe as a central hub for these agents is noted as a strategic move, though uncertainty remains about Cloudflare’s partnership status within Stripe’s Atlas program. Overall, the comments blend criticism of past enforcement with enthusiasm for newer automation tools that simplify domain acquisition.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48031684" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dnssec-analyzer.verisignlabs.com/nic.de" target="_blank">.de TLD offline due to DNSSEC?</a>
+        </h2>
+        <span class="article-meta">
+          566 points • by warpspin • 65 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The DNSSEC debug output for **nic.de** shows the zone’s authoritative data and cryptographic signatures:
+
+- **DS record** (key tag 26155, algorithm 8, digest type 2) with SHA‑256 digest `2f06c8cd…c565d`; signed by an RRSIG (type DS, key tag 26155, validity 2026‑05‑05 to 2026‑05‑19).
+- **DNSKEY set**:
+  - ZSK (key tag 36463, algorithm 8) – public key `AwEAAdkJ…j`.
+  - KSK (key tag 26155, algorithm 8) – public key `AwEAAb/x…GQ==`.
+  - Both keys covered by an RRSIG (type DNSKEY, signed with KSK, same validity window as DS).
+- **A record** `nic.de. 3600 IN A 81.91.170.12` with an RRSIG (type A, signed by ZSK, same validity window).
+- **NS records** (ns1–ns4.denic.*) with an RRSIG (type NS, signed by ZSK, same validity window).
+- **SOA record** (`ns1.denic.de.` primary, `dns-operations.denic.de.` contact, serial 1778019826, refresh 10800 s, retry 1800 s, expire 3600000 s, minimum 1800 s) with an RRSIG (type SOA, signed by ZSK).
+
+All responses include EDNS0 (UDP size 1452) and indicate DNSSEC OK (`do = 1`). No errors were reported (RCODE 0, AA = 1).
+          </div>
+          <a href="https://dnssec-analyzer.verisignlabs.com/nic.de" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on a DNSSEC validation failure in the .de TLD, traced to a malformed NSEC3 signature during a ZSK rollover, causing validating resolvers to return SERVFAIL and rendering many German‑registered sites unreachable. Users report widespread access problems, stress, and business impact, while others analyze the technical cause, note temporary mitigations (e.g., disabling DNSSEC validation or using insecure settings), and criticize DNSSEC’s centralised risk and lack of robust disaster‑recovery testing. Humor and speculation appear alongside calls for better fallback planning.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48027897" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63" target="_blank">Telus Uses AI to Alter Call-Agent Accents</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by debo_ • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Telus’s Digital unit has deployed a real‑time speech‑to‑speech system, built by Tomato.ai, to alter the accents of offshore call‑centre agents as they speak with customers. The technology modifies the agents’ voices on‑the‑fly to reduce perceived “accent‑related friction.” Labour organizations have condemned the practice as deceptive and are calling for mandatory disclosure to callers. In response, rival carriers Rogers and Bell have publicly stated they have no intention of implementing comparable voice‑alteration tools. The rollout has sparked immediate public criticism across Canada, prompting media coverage from iPhone in Canada and The Globe and Mail.
+          </div>
+          <a href="https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments reflect mixed reactions to AI‑driven accent modification in customer‑service calls. Many express frustration with understanding agents whose accents differ from their own, noting that unclear speech hampers both sales and support interactions and wishing for technology that eases comprehension. Others acknowledge potential benefits, such as smoother conversations and reduced reliance on offshored staff, while some raise ethical concerns about masking accents and possible racial implications. Overall, there is a desire for clearer communication balanced by skepticism about the motivations and effects of the technology.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48031109" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/" target="_blank">Accelerating Gemma 4: faster inference with multi-token prediction drafters</a>
+        </h2>
+        <span class="article-meta">
+          496 points • by amrrs • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Multi-token prediction (MTP) in Gemma 4 uses speculative decoding to reduce the latency of large‑language‑model inference, which is typically memory‑bandwidth bound. A lightweight “drafter” model generates a sequence of candidate tokens, while the full‑size target model (e.g., Gemma 4 31B) verifies the draft in a single forward pass, simultaneously producing an additional token. This decouples token prediction from verification, allowing idle compute to be used for parallel token generation and cutting the time per output token. Benefits include:
+- Lower latency for real‑time chat, voice, and agentic workflows.  
+- Faster execution of large dense (31B) and MoE (26B) Gemma 4 models on consumer GPUs and edge devices.  
+- No loss in model quality, since the target model performs final verification.  
+The approach is positioned as a means to run high‑performance LLMs locally with improved responsiveness and reduced power consumption.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight that Gemma 4 models achieve markedly higher token efficiency and inference speed than competing open‑source models, often delivering comparable benchmark performance with a fraction of the compute time. Users report successful integration with llama.cpp, vLLM, Ollama, and Google AI Edge, noting substantial cost and latency benefits for solo developers. However, several remarks mention accuracy trade‑offs, especially in smaller variants, and stress the need for high‑end hardware or quantization challenges. Opinions on Google’s strategy emphasize a focus on compute efficiency over raw performance, generating both praise for rapid progress and caution about deployment constraints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48024540" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://us.starlabs.systems/pages/starfighter" target="_blank">StarFighter 16-Inch</a>
+        </h2>
+        <span class="article-meta">
+          98 points • by signa11 • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Star Labs’ StarFighter 16‑inch laptop (Mk I) features an oversized solid‑state haptic trackpad that detects pressure and provides vibration feedback to simulate a click, enabling 100 % of the surface to be clickable with consistent response. The glass surface is dyed, toughened, and treated with an oleophobic coating. The device includes a 4K 10‑bit IPS display with a wide viewing angle, a backlit keyboard, optional webcam attachment, and a glass trackpad integrated with a fingerprint reader. Security hardware comprises an Infineon OPTIGA TPM module and the system runs an open‑source coreboot BIOS, visible via its CFR menu. Power is supplied by a 65 W gallium‑nitride USB‑C charger. Additional images depict various national flags (likely for market or shipping representation) and the related StarBook Mk VII model.
+          </div>
+          <a href="https://us.starlabs.systems/pages/starfighter" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show generally positive reception for the device’s open‑warranty policy, Linux‑friendly design, abundant ports, high‑resolution 16:10 display and privacy features, while also noting several drawbacks. Reviewers criticize the older‑generation CPUs, lack of OLED or high‑end GPU options, limited battery‑life claims, absence of Wi‑Fi 7 and full‑speed USB ports, and missing conveniences such as built‑in Ethernet, SD slot, DP output, numpad and ergonomic keyboard layout. Pricing concerns, forced accessories, and potential shipping tariffs are also mentioned, leading to a mixed overall assessment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48031261" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nonogra.ph/write-some-software-give-it-away-for-free-05-05-2026" target="_blank">Write some software, give it away for free</a>
+        </h2>
+        <span class="article-meta">
+          175 points • by nohell • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The site hosts Nonograph, an open‑source writing program that the author released for free after spending roughly $600 on security reviews. Hosting costs are about $5 per month for several hundred thousand daily users and three proxies. The author argues that adding subscription or ad‑based monetization would increase development overhead and deter users, contending that monetizing hobby‑driven software often shifts motivation from personal fulfillment to profit goals. Citing personal experience selling video‑game content, the author observes that financial pressure can degrade the quality and user‑friendliness of software. The piece advocates treating software development as a creative pursuit rather than a revenue engine, suggesting many projects should remain small, hobby‑level efforts without obligatory commercial structures.
+          </div>
+          <a href="https://nonogra.ph/write-some-software-give-it-away-for-free-05-05-2026" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments present a nuanced view of open‑source versus paid software. Contributors note that paying users often behave more constructively, while free projects can attract entitlement and unrealistic support expectations. Many acknowledge a need to earn a living and see payment as a practical filter, yet they also value the community benefits and personal satisfaction of releasing work freely. Criticism of FOSS includes concerns about low financial incentives and quality erosion, while praise focuses on innovation, collaboration, and the ability to experiment without commercial pressure. The prevailing consensus favors a balanced approach: monetize selectively while preserving open‑source contributions for broader impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48028842" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/microsoft/vscode/issues/314311" target="_blank">Update on &#34;Co-authored-by: Copilot&#34; in commit messages</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by extesy • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            In VS Code 1.110 a setting `git.addAICoAuthor` was introduced to append “Co‑authored‑by: Copilot <copilot@github.com>” to commit messages. The setting offered three modes: `off` (no attribution), `chatAndAgent` (attribution when code is generated via chat), and `all` (attribution for any AI‑generated code). The default was `off`. In version 1.117 the default was changed to `all`, but a bug caused the attribution to be added even when the `disableAIFeatures` option was enabled, mistakenly marking non‑Copilot completions as Copilot‑authored. The default was reverted to `chatAndAgent` in 1.118, and users could still disable it by setting the value to `off`.  
+
+For the upcoming 1.119 release (rollout beginning 5 May), the default is restored to `off` and the feature is forced disabled when `disableAIFeatures` is true. Future changes will ensure attribution is added only for AI‑related changes, require explicit user consent before inserting a commit trailer, and consider switching to an “Assisted‑by” format that can include model details. The team is also reviewing testing and release processes to prevent similar issues.
+          </div>
+          <a href="https://github.com/microsoft/vscode/issues/314311" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong dissatisfaction with the lack of explanations for recent changes, emphasizing a need for transparency. Users describe alternative methods for tracking content authorship, rejecting imposed attribution labels as intrusive. There is pronounced criticism of a major technology corporation, accusing it of overreach, non‑compliance with legal agreements, and advocating for its division or even nationalization of its products. Overall sentiment is negative, focusing on demands for clearer communication, resistance to forced metadata, and broader concerns about corporate control of technology.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48031707" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://susam.net/inverse-laws-of-robotics.html" target="_blank">Three Inverse Laws of AI</a>
+        </h2>
+        <span class="article-meta">
+          390 points • by blenderob • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Three Inverse Laws of AI (Susam Pal, Jan 2026) argue that humans, not robots, need guiding principles to avoid over‑reliance on generative AI. The article notes that AI chatbots are now embedded in search, development, and office tools, and that design choices—such as surfacing AI answers at the top of results—encourage users to accept them uncritically, risking habitual trust in potentially inaccurate output.  
+
+**Inverse Law 1 – Non‑anthropomorphism:** Users must not ascribe emotions, intentions, or moral agency to AI; treating conversational tone as evidence of understanding distorts judgment and can foster emotional dependence.  
+
+**Inverse Law 2 – Non‑deference:** AI output should never be taken as authoritative without independent verification appropriate to the context; verification may involve peer‑reviewed sources, automated checks (e.g., proof checkers, unit tests), or personal scrutiny, especially where errors are costly.  
+
+**Inverse Law 3 – Non‑abdication of responsibility:** Humans and organizations retain full responsibility and accountability for decisions that use AI; “the AI told us” is not an acceptable excuse, even in real‑time systems like autonomous vehicles.  
+
+The author urges adoption of these concise principles to preserve critical judgment, clarify accountability, and treat AI as a tool rather than an authority.
+          </div>
+          <a href="https://susam.net/inverse-laws-of-robotics.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a split view: many see anthropomorphizing AI as inevitable and even useful for engagement, while others warn it can distort judgment, foster emotional dependence, and lead to misplaced trust. Across the discussion, there is broad agreement that ultimate responsibility and accountability must remain with human users and organizations, and that AI output should be independently verified for critical tasks. Concerns are raised about over‑reliance, maintenance burdens, and the limited effectiveness of simple warnings, with some questioning whether true AI safety is achievable.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48023861" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/" target="_blank">Computer Use is 45x more expensive than structured APIs</a>
+        </h2>
+        <span class="article-meta">
+          351 points • by palashawas • 65 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The benchmark compared two Claude Sonnet agents performing the same task on a React‑Admin‑style admin panel:  
+
+* **Vision agent** (browser‑use 0.12) interacted via screenshots and clicks. With a detailed 14‑step UI walkthrough it completed the task, but required 14 minutes, 400‑750 k input tokens (≈ ½ M on average), and 749‑1257 s wall‑clock time across three runs. It missed off‑screen items without explicit scrolling instructions, showing high non‑determinism (43‑68 reasoning cycles).  
+
+* **API agent** called the app’s HTTP handlers directly (auto‑generated REST surface of ~30 lines). It finished in under 8 seconds, using < 10 k tokens and exactly 8 tool calls on each of five runs, with token variance of only ±27.  
+
+The cost gap is roughly **45 ×** (vision token count vs. API). Engineering a structured API surface incurs upfront effort, but eliminates the massive token and time overhead of vision‑based “see‑to‑act” loops, whose step count is fixed by the UI regardless of model improvements. Vision agents remain useful only for unmodifiable third‑party or legacy systems; for internal tools the data show API‑based agents are far more efficient.
+          </div>
+          <a href="https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments emphasize that vision‑based “computer use” agents are presently too slow, token‑hungry and costly for real‑time consumer applications, making structured APIs, CLI tools or well‑designed endpoints the preferred solution for most tasks. Contributors note that while UI automation can fill gaps where APIs are missing—particularly for legacy, proprietary, or regulated systems—its brittleness and latency limit broad adoption. Hybrid approaches that combine accessibility layers, reverse‑engineered APIs, or selective vision assistance are discussed, but the consensus is that deterministic, API‑driven methods remain more efficient and reliable.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48024859" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.stripes.com/opinion/2026-04-23/stripes-former-ombudsman-pentagon-trying-to-silence-21465037.html" target="_blank">Ombudsman column: The Pentagon is trying to silence me</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by petethomas • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Jacqueline Smith, the 13th (and first female) ombudsman for *Stars and Stripes*, was notified via DA Form 3434 that her employment will end on April 28, 2026, with no reason given and the action deemed “not grievable.” Smith asserts the Pentagon—specifically Secretary of Defense Pete Hegseth, Assistant Secretary Sean Parnell, and Deputy Secretary Steve Feinberg—has imposed new restrictions on the newspaper, rescinded a Code of Federal Regulations process that previously protected its editorial independence, and issued an interim policy on March 9 that could be altered arbitrarily. The ombudsman role, created by Congress in 1991 to safeguard *Stars and Stripes* from censorship, reports directly to the House and Senate Armed Services committees. Smith informed those committees of her concerns; Senators Elizabeth Warren, Richard Blumenthal and others sent a letter urging immediate rescission of the policy, while Rep. Jamie Raskin and 38 House members warned Hegseth of political interference. Smith suggests her dismissal aims to silence an outspoken ombudsman while preserving the position in name.
+          </div>
+          <a href="https://www.stripes.com/opinion/2026-04-23/stripes-former-ombudsman-pentagon-trying-to-silence-21465037.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The reaction shows surprise at discovering the issue and a clear, supportive approval of the individual’s decision to speak out. It emphasizes gratitude for the newfound awareness, acknowledging that the topic was previously unknown, and commends the act of bringing it into public view, reflecting a positive reception focused on both informational value and the encouragement of open discussion.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48031769" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
