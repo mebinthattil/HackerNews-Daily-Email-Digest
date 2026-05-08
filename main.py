@@ -140,13 +140,17 @@ def github_webhook():
     # Restart the gunicorn service
     try:
         write_log("Step 4: Restarting hackernews-digest service...")
-        restart_command = f"{sudo_path} {systemctl_path} restart hackernews-digest"
-        restart_result = os.system(restart_command)
+        restart_result = subprocess.run(
+            [sudo_path, systemctl_path, "restart", "hackernews-digest"],
+            capture_output=True, text=True
+        )
         
-        if restart_result == 0:
+        if restart_result.returncode == 0:
             write_log("  -> Service restarted successfully")
         else:
-            write_log(f"WARNING: Service restart failed (exit code: {restart_result})")
+            write_log(f"WARNING: Service restart failed (exit code: {restart_result.returncode})")
+            if restart_result.stderr:
+                write_log(f"Error output: {restart_result.stderr.strip()}")
             write_log("Deployment partially complete - service restart failed\n")
             return 'Repository updated, but service restart failed', 200
     except Exception as e:
