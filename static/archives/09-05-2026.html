@@ -1,0 +1,513 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 09, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://reclaimthenet.org/google-broke-recaptcha-for-de-googled-android-users" target="_blank">Google broke reCAPTCHA for de-googled Android users</a>
+        </h2>
+        <span class="article-meta">
+          741 points • by anonymousiam • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Google’s next‑generation reCAPTCHA is now tied to Google Play Services (version 25.41.30 or higher) on Android. When reCAPTCHA flags activity as suspicious, it replaces image puzzles with a QR‑code scan that requires Play Services to run in the background and communicate with Google’s servers. Devices without Google’s proprietary framework—such as GrapheneOS or other de‑Googled ROMs—cannot complete the verification and are blocked. The requirement was announced as part of Google Cloud Fraud Defense at Cloud Next on 23 April and has been documented in an Internet Archive snapshot from October 2025, indicating a rollout of at least seven months before being reported by a Reddit de‑Google community and covered by PiunikaWeb and Android Authority. iOS devices (iOS 16.4+) perform the same verification without additional apps, highlighting an asymmetry that ties Android web access to Google’s ecosystem. Web developers using this reCAPTCHA should note that implementation effectively excludes users of de‑Googled Android phones.
+          </div>
+          <a href="https://reclaimthenet.org/google-broke-recaptcha-for-de-googled-android-users" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong criticism of the new reCAPTCHA implementation, viewing it as a privacy‑invasive device‑attestation system that can link user accounts, enforce de‑facto KYC, and marginalize devices without Google Play services. Users express frustration over blocked access, increased reliance on Google’s infrastructure, and perceived monopolistic and anti‑competitive behavior, while calling for alternative anti‑bot solutions or regulatory action. Several contributors report personal workarounds or migration to self‑hosted services, but the dominant view is that the change threatens anonymity and broad web accessibility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48067119" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://moq.dev/blog/webrtc-is-the-problem/" target="_blank">OpenAI&#39;s WebRTC problem</a>
+        </h2>
+        <span class="article-meta">
+          179 points • by atgctg • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI’s recent blog describes a voice‑AI service built on WebRTC. The author, a former WebRTC SFU engineer, argues that WebRTC is ill‑suited for this use case because:
+
+- **Aggressive packet loss and small jitter buffers** prioritize low latency over audio fidelity, causing dropped or distorted prompts that cannot be retransmitted in browsers.  
+- **Complex, multi‑step handshakes** (ICE, DTLS, SCTP, etc.) require at least eight RTTs, inflating connection‑setup time even when signaling and media run on the same host.  
+- **Port and NAT issues** limit scalability; each session needs an ephemeral port, firewalls block many ports, and Kubernetes environments exacerbate the problem.  
+- OpenAI’s implementation sidesteps most WebRTC layers, using only STUN and storing source‑IP/port to backend mappings in Redis, a hack that breaks when client addresses change.
+
+The author proposes **WebSockets** for simple TCP‑based streaming or **QUIC/WebTransport (MoQ)** as a better alternative. QUIC provides:
+
+- Connection IDs that decouple routing from source IP/port, enabling single‑port operation and seamless address changes.  
+- Stateless load balancing via embedded backend IDs, eliminating external state stores.  
+- Fewer RTTs for connection establishment and support for anycast handshakes with unicast data paths.
+
+Overall, the piece suggests replacing WebRTC with QUIC‑based transport to improve reliability, latency, and scalability for voice‑AI applications.
+          </div>
+          <a href="https://moq.dev/blog/webrtc-is-the-problem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a divided view on using WebRTC for voice‑AI streaming. Critics highlight its complex setup, heavyweight handshake, and perceived latency, favoring lighter alternatives such as WebSockets, QUIC, WebTransport, or emerging MoQ approaches. Proponents stress WebRTC’s mature NAT traversal, built‑in audio processing (AEC, noise suppression), browser ubiquity, and reduced long‑term engineering overhead. Users express a strong preference for minimal response delays, while developers note that practical implementations (e.g., Gemini, Alexa‑style connections) can achieve acceptable latency despite protocol intricacies. Overall, the discussion balances concerns over complexity with appreciation for WebRTC’s robustness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48051951" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://martinfowler.com/bliki/MythicalManMonth.html" target="_blank">Mythical Man Month</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by ingve • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Mythical Man‑Month, written by Fred Brooks after managing IBM’s System/360 project in the early 1960s, became a seminal software‑development text following its 1975 release. It introduces Brooks’s law—adding staff to a delayed project typically extends the schedule—attributing the effect to the exponential growth of communication pathways as team size increases, which must be deliberately organized to avoid breakdown. Brooks emphasizes conceptual integrity as the paramount design principle: a system should embody a single coherent set of ideas rather than a patchwork of independently good features. Simplicity and composability underpin this integrity. The anniversary edition, recommended for new readers, also contains Brooks’s influential 1986 essay “No Silver Bullet.”
+          </div>
+          <a href="https://martinfowler.com/bliki/MythicalManMonth.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a nuanced view of AI‑assisted programming, noting that current prompting practices often produce flawed results and that existing methods fail to capture essential theoretical aspects of software design. While some claim recent tools have yielded large productivity gains, most emphasize that conceptual integrity remains critical and that no single technology has delivered an order‑of‑magnitude improvement. The overall tone is cautiously optimistic, recognizing both the motivational potential of AI advances and the need for deeper, theory‑focused approaches.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48046436" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mceglowski.substack.com/p/bitter-lessons-from-the-isspresso" target="_blank">Bitter Lessons from the ISSpresso</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by zdw • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://mceglowski.substack.com/p/bitter-lessons-from-the-isspresso" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments collectively praise the visual quality and comprehensiveness of the fracture‑control flow diagram, describing it as striking, thorough, and artistically impressive. The accompanying explanations are valued for clarifying the high cost and difficulty of space projects. Readers also express interest in the inverter discussion, noting practical observations about small heating devices affecting inverter performance and requesting deeper insight into how inductive versus resistive loads impact design. The Pressurized Payloads Interface Requirements document receives similar appreciation for its detailed diagrams and potential aesthetic uses.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48040306" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lachlan.nz/blog/the-react2shell-story/" target="_blank">The React2Shell Story</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by mufeedvh • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author discovered a critical remote‑code‑execution flaw in React’s Flight protocol (used by Next.js Server Components/Server Functions), reported it to Meta on 30 Nov 2025, and received CVE‑2025‑55182 with a patch on 3 Dec 2025. Flight serialises complex JavaScript values (Date, BigInt, Map, Promises, references) into “chunks” that can be sent asynchronously. The protocol lacked a safety check for prototype property lookup, allowing attackers to reference inherited members (e.g., Number.prototype.toString). By crafting Flight payloads that exploit thenable handling, the attacker can force the server to invoke arbitrary functions. The exploit chain hijacks React’s Chunk object, manipulates its internal state, and ultimately triggers Function("…")() via a controlled _formData.get call, achieving RCE on the Node.js server. The proof‑of‑concept works on a fresh Next.js app, and Meta triaged, reproduced, and patched the issue within 17 hours, issuing the advisory and CVE. The vulnerability impacted many Next.js sites, prompting coordinated disclosure and remediation.
+          </div>
+          <a href="https://lachlan.nz/blog/the-react2shell-story/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong appreciation for the collaboration between the researcher and Meta, highlighting the researcher’s helpfulness, responsiveness, and thoroughness throughout the disclosure process. Reviewers commend the rapid triage and confirmation of the vulnerability, noting the sub‑24‑hour turnaround as impressive. The write‑up itself is praised for clarity and insight, with particular interest in its visual representations of the investigative cycle. A minor technical note mentions an incorrect link reference, but overall the feedback is uniformly positive and emphasizes the value of the partnership in enhancing security.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48065511" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.jefftk.com/p/ai-is-breaking-two-vulnerability-cultures" target="_blank">AI is breaking two vulnerability cultures</a>
+        </h2>
+        <span class="article-meta">
+          277 points • by speckx • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The text contrasts two vulnerability‑handling cultures. Coordinated disclosure involves privately notifying maintainers and granting a typical 90‑day embargo so a fix is released before the flaw becomes public. The “bugs are bugs” approach, common in Linux, treats any unintended behavior as a security risk and pushes immediate fixes without drawing attention, relying on low visibility of individual changes. AI‑driven vulnerability discovery is increasing the signal‑to‑noise ratio of code commits, making both long embargoes and silent patches less effective. In the cited case, Hyunwoo Kim’s ESP‑related patch was intended for a short embargo, but another researcher disclosed it publicly within hours, illustrating how rapid, AI‑assisted scanning can outpace traditional timelines. Experiments with Gemini 3.1 Pro, ChatGPT‑Thinking 5.5, and Claude Opus 4.7 showed that AI can identify security patches from diffs, though model accuracy varies. The author suggests moving toward very short embargoes, leveraging AI to accelerate defensive responses as well as offensive discovery.
+          </div>
+          <a href="https://www.jefftk.com/p/ai-is-breaking-two-vulnerability-cultures" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread concern that AI‑driven analysis is dramatically accelerating the discovery and exploitation of software vulnerabilities, rendering traditional coordinated‑disclosure timelines and long embargoes increasingly ineffective. Contributors note that open‑source transparency, combined with cheap automated reverse‑engineering, is prompting a shift toward faster patch cycles, automated testing, and tighter security processes, while some advocate for more restrictive development models or centralized binary distribution. There is agreement that current practices are lagging, but disagreement over whether closed‑source approaches, shorter embargoes, or industry‑wide automation best address the emerging risk landscape.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48066524" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wiisfi.com/" target="_blank">Wi is Fi: Understanding Wi-Fi 4/5/6/6E/7/8 (802.11 n/AC/ax/be/bn)</a>
+        </h2>
+        <span class="article-meta">
+          120 points • by homebrewer • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Wi‑Fi generations 4‑8 share the same maximum PHY rate for a 2×2 MIMO client; real performance depends on distance, interference, channel width, and MIMO use. Typical max PHY speeds are: Wi‑Fi 4 ≈ 144‑300 Mbps (20/40 MHz, 64‑QAM); Wi‑Fi 5 ≈ 866‑1733 Mbps (80/160 MHz, 256‑QAM); Wi‑Fi 6/6E ≈ 1201‑2402 Mbps (80/160 MHz, 1024‑QAM); Wi‑Fi 7 ≈ 5764 Mbps (320 MHz, 4096‑QAM). Throughput averages 60‑80 % of PHY (≈70 % ± 10 %). Speed degrades quickly with distance; each MCS step roughly doubles the distance needed for the same QAM level. Client hardware often limits speed more than the router—e.g., devices limited to 1×1 MIMO, HT20, or older standards may cap at 72 Mbps even on a Wi‑Fi 7 router. Reported PHY rates are best‑case values, fluctuate with channel conditions, and may represent Tx, Rx, or the higher of both. Wider channels provide larger gains than additional MIMO streams; 4×4 Wi‑Fi consumes more power and is rare in battery‑powered devices. Tools such as AirPort Utility, nOversight, router dashboards, and MCS Spy reveal actual Tx/Rx rates and PHY behavior.
+          </div>
+          <a href="https://www.wiisfi.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments recognize Wi‑Fi’s technical complexity and applaud its ability to function on a shared, half‑duplex medium, while also emphasizing that this fundamental limitation heavily impacts performance. Readers express frustration with the slow evolution of standards, inconsistent feature implementation, confusing naming conventions, and the practical challenges of multiple access points and mesh back‑hauls. There is interest in deeper wired‑networking resources and a tendency toward hard‑wired solutions, such as 10‑gigabit fiber, to overcome perceived Wi‑Fi bottlenecks. Overall sentiment is appreciative yet critical of current Wi‑Fi implementations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48037760" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cp3pww9g0p5o" target="_blank">David Attenborough&#39;s 100th Birthday</a>
+        </h2>
+        <span class="article-meta">
+          498 points • by defrost • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The World Wide Fund for Nature (WWF) released a birthday tribute video for Sir David Attenborough’s 100th anniversary, featuring narration by Dame Judi Dench, Morgan Freeman, Miranda Richardson, Asa Butterfield, Sam Heughan, Iwan Rheon, former Spice Girl Geri Halliwell‑Horner, and wildlife presenter Liz Bonnin. Accompanying the article are several images: Sir David Attenborough and King Charles III in formal attire; a 1958 black‑and‑white photo of Prince Charles with Princess Anne meeting Attenborough and a cockatoo; Attenborough observing an iguana on a rock; a promotional banner for a news newsletter; King Charles III drafting a letter at Buckingham Palace; a close‑up of a blue morph butterfly; a Piccadilly Circus billboard displaying Attenborough; Lindsay McCrae filming Emperor penguins in Antarctica; and a sculpture of Attenborough in a suit with an animal toy on his shoulder. The collection emphasizes the monarchs’ involvement and the breadth of Attenborough’s influence across media, conservation, and public recognition.
+          </div>
+          <a href="https://www.bbc.com/news/articles/cp3pww9g0p5o" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely express admiration for David Attenborough, highlighting his long career, distinctive narration, and influence on public interest in natural history and scientific fields. Personal anecdotes emphasize his accessibility and the esteem held by fans and local bookshops. A minority voice critiques the focus on his voice over the crews who film under harsh conditions. Several remarks underscore frustration that his environmental warnings have been largely ignored, calling for stronger conservation action and noting the challenges of sustaining such a lifestyle for future generations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48061884" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.webdesignmuseum.org/flash-game-exhibitions/cartoon-network-flash-games" target="_blank">Cartoon Network Flash Games</a>
+        </h2>
+        <span class="article-meta">
+          301 points • by willmeyers • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.webdesignmuseum.org/flash-game-exhibitions/cartoon-network-flash-games" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong nostalgic appreciation for the Cartoon Network flash games of the early 2000s, recalling specific titles and recalling how integral they were to childhood entertainment. Contributors lament the disappearance of many games after Flash’s demise, criticize the shift of content to major platforms, and praise archival efforts such as Flashpoint and the Internet Archive for preserving what remains. There is a recurring hope that additional titles will be restored or re‑hosted, while acknowledging that the broader web has become less diverse since that era.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48065360" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.colorado.edu/today/2026/05/06/light-without-electricity-glowing-algae-could-make-it-possible" target="_blank">Light without electricity? Glowing algae could make it possible</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by geox • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CU Boulder researchers demonstrated that the bioluminescent alga *Pyrocystis lunula* can be induced to emit sustained blue light using simple chemical stimuli. Exposing the algae to an acidic solution (pH 4) produced continuous luminescence for up to 25 minutes, while a basic solution (pH 10) caused a shorter, diffused glow. The algae were incorporated into a naturally derived hydrogel and shaped via 3D printing into various structures; when treated with the same chemical triggers, the printed constructs glowed uniformly. Viability assays showed the algae remained alive for weeks, with acidic‑treated prints retaining ≈75 % of initial brightness after four weeks. The authors propose applications such as self‑illuminating autonomous robots for deep‑sea or space missions, and chemically responsive living sensors for water‑quality monitoring. Because *P. lunula* photosynthesizes, the system simultaneously sequesters dissolved carbon while producing light, offering a carbon‑negative alternative to conventional electric lighting.
+          </div>
+          <a href="https://www.colorado.edu/today/2026/05/06/light-without-electricity-glowing-algae-could-make-it-possible" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects cautious optimism about using luminescent, photosynthetic algae for lighting, noting potential environmental benefits but also highlighting practical and regulatory challenges. Contributors question the energy balance, compare the concept to existing bioluminescent plants, and suggest simpler alternatives such as uniform glowing mats behind displays or incorporating LEDs. Concerns about feasibility, necessary electricity input, and regulatory barriers for genetically modified organisms surface, while the idea’s novelty and possible niche applications, like dashboards, receive tentative interest.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48040470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
