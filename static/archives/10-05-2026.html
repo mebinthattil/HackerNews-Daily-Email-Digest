@@ -1,0 +1,515 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/imtomt/ymawky" target="_blank">Show HN: Building a web server in assembly to give my life (a lack of) meaning</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by imtomt • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            ymawky is a static‑file web server written entirely in hand‑crafted ARM64 assembly for macOS (Apple Silicon). It operates without libc, using only syscalls, and follows a fork‑per‑connection model (debug mode disables forking). The server serves files from a configurable document root (default www/), automatically prepending this path, and provides custom error pages from err/. Supported HTTP methods are GET, PUT, DELETE, OPTIONS, and HEAD. Features include percent‑encoding decoding, path‑traversal protection, symlink rejection (O_NOFOLLOW_ANY), 10‑second receive timeout, and rate‑limited PUT uploads (default max 1 GiB, configurable via PUT_GRACE_SECS, PUT_MIN_BPS). It handles byte‑range requests, MIME type detection based on extensions, and directory listings. Configuration constants (e.g., DEFAULT_DIR, ERR_DIR, RECV_TIMEOUT, MAX_PROCS) are defined in config.S. macOS‑specific syscall conventions, error handling, fork return values, and certain flags (SO_NOSIGPIPE, renameatx_np) make porting to Linux require substantial adjustments. The server responds with a wide set of HTTP status codes and can be built with Xcode command‑line tools.
+          </div>
+          <a href="https://github.com/imtomt/ymawky" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for low‑level development, highlighting Go’s performance and simplicity alongside ARM64 assembly as exciting, rewarding endeavors. Contributors appreciate the minimal stack, fast binaries, and efficient deployment, often noting personal success with SQLite and lightweight services. Several remarks seek learning resources, documentation, and tooling support, while a few caution that large assembly projects may become hard to maintain and question broader applicability. Overall, the tone is positive and admiring, with interest in expanding knowledge and practical guidance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48080587" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/jarredsumner/status/2053047748191232310" target="_blank">Bun&#39;s experimental Rust rewrite hits 99.8% test compatibility on Linux x64 glibc</a>
+        </h2>
+        <span class="article-meta">
+          465 points • by heldrida • 70 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page consists solely of an error notice indicating a failure to load the intended content (“Something went wrong, but don’t fret — let’s give it another shot”) and a placeholder for visual media. Under the “Images and Visual Content” heading, a single image entry is listed, identified only by an alt‑text label of a warning emoji (⚠️). No additional text, data, headings, or functional information is provided beyond this brief apology and the image placeholder. Consequently, the document contains no substantive narrative, technical details, or actionable content to summarize further.
+          </div>
+          <a href="https://twitter.com/jarredsumner/status/2053047748191232310" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight the rapid AI‑generated rewrite of Bun from Zig to Rust, noting the 99.8 % test‑suite pass rate and the demonstration of large‑scale code conversion speed. Many view it as a promising proof of concept that could improve safety and performance, while others worry about maintainability, limited human review, and the future health of the Zig ecosystem. Skepticism is expressed about the practicality of such rewrites for production use and the broader impact on development practices and job security.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48073680" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemini-api-file-search-multimodal-rag/" target="_blank">Gemini API File Search is now multimodal</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by gmays • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gemini API File Search now supports multimodal queries, enabling retrieval from text documents and images. Users can attach custom key‑value metadata (e.g., department, status) to unstructured files, and apply metadata filters at query time to narrow results, reducing irrelevant hits and improving RAG speed and accuracy. The service records page numbers for each indexed segment, allowing responses to be directly linked to source locations for precise verification. File upload and search are handled by the File Search tool, abstracting infrastructure concerns. Early adopters report strong performance on mixed‑modality scientific corpora and image‑rich collections, noting higher semantic retrieval quality, reduced hallucinations, and significant context‑window savings when indexing diagrams and other visual assets. The update emphasizes reliable, citation‑backed outputs across text and visual content.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanded-gemini-api-file-search-multimodal-rag/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Feedback highlights frustration with AI Studio’s search capabilities, noting that it only indexes conversation titles and lacks content search. Users also report that recent scrolling changes interfere with the reliability of standard browser find functions like Ctrl+F, further complicating navigation. The overall tone is critical, emphasizing a desire for more robust in‑conversation searching and stable scrolling behavior to improve usability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48080702" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.casio.com/jp/basic-calculators/premium/en-s100x-jc1-u/" target="_blank">Casio S100X Japanese Lacquer Edition (JP Page Only)</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by dr_kiszonka • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.casio.com/jp/basic-calculators/premium/en-s100x-jc1-u/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong aesthetic appreciation for the product’s finish and design, with many noting its visual appeal and rarity, citing limited production numbers. There is enthusiasm for owning it despite high price points and limited availability, including disappointment when it sold out. Some users mention a cautious interest, fearing it could spark obsessive behavior or a shift in taste toward similar items, while others consider creating custom versions inspired by the design. Overall sentiment is admiring but tempered by cost and availability concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48048407" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.archive.org/2026/05/06/internet-archive-switzerland-expanding-a-global-mission-to-preserve-knowledge/" target="_blank">Internet Archive Switzerland</a>
+        </h2>
+        <span class="article-meta">
+          567 points • by hggh • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Internet Archive has launched a Swiss non‑profit foundation, Internet Archive Switzerland (https://internetarchive.ch/), based in St. Gallen. The organization will operate independently within Switzerland, initially concentrating on preserving endangered archives worldwide and archiving generative‑AI artifacts. It is coordinating a UNESCO‑linked conference in Paris (November 2026) to address protection of vulnerable collections. In partnership with the University of St. Gallen’s School of Computer Science, the foundation supports the “Gen AI Archive” project led by Prof. Damian Borth, aimed at systematically preserving AI models. The choice of St. Gallen leverages the city’s long archival tradition and strong academic environment. Internet Archive Switzerland joins other regional arms—Internet Archive, Internet Archive Canada, and Internet Archive Europe—to create a distributed, resilient digital library network. Roman Griesfelder serves as executive director and is the primary contact.
+          </div>
+          <a href="https://blog.archive.org/2026/05/06/internet-archive-switzerland-expanding-a-global-mission-to-preserve-knowledge/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights strong support for a decentralized, resilient digital‑library model, citing the Internet Archive’s various regional entities as a basis for broader, mission‑aligned peer networks. It also raises concerns about legal handling of takedown notices, the independence of overseas branches, and the implications of collecting generative‑AI content for privacy and copyright. Practical issues such as unclear site design, accessibility barriers, and the need for user‑controlled, peer‑to‑peer archiving solutions are noted alongside overall optimism about preserving knowledge.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48074265" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chrismorgan.info/no-query-strings" target="_blank">I’ve banned query strings</a>
+        </h2>
+        <span class="article-meta">
+          313 points • by susam • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author bans all unauthorised query strings on their site, citing concerns that query parameters are often used for tracking (e.g., ref, utm_source) and can abuse users. They argue that referral information should be obtained from the Referer header, and if absent it is likely intentional. Historically they used query strings for cache‑busting CSS files (e.g., ?t=…, &h=…) but now consider any such usage unnecessary and are willing to let those requests fail. If future functionality requires query parameters, only explicitly approved ones will be allowed. The restriction is enforced via a rule in the server’s Caddyfile configuration, which blocks any request containing a query string unless it matches a predefined whitelist. The post invites readers to test the behaviour by appending query strings to URLs.
+          </div>
+          <a href="https://chrismorgan.info/no-query-strings" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a split view on unsolicited query strings. Many acknowledge that query strings are a standard, percent‑encoded part of URLs useful for tracking, state sharing, and internal routing, and that servers can safely ignore unknown parameters. Others criticize adding tracking parameters without consent, citing privacy concerns, broken links, excessively long URLs, and unnecessary server errors such as 404 or 414 responses. While some advocate strict rejection of unexpected queries, a significant portion argues for tolerant handling or graceful redirects, emphasizing that robust sites should not fail when extra parameters appear. Overall sentiment balances practical utility against perceived misuse and user inconvenience.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48076173" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://evilgeniuslabs.ca/blog/visual-basic-history-chapter-1-launch" target="_blank">I&#39;m writing a history of Visual Basic, Chapter 1 is up</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by speckx • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post announces a new, multi‑chapter online “Book” documenting the history of Visual Basic. Chapter 1, “Origins (1964–1992),” consists of six sequential articles covering:  
+
+* The creation of Dartmouth BASIC and its early commercial implementations (1964‑1975).  
+* Microsoft’s BASIC lineage from Altair to QBasic (1975‑1991) and the branding decision to retain “BASIC” in Visual Basic.  
+* Alan Cooper’s Tripod drag‑and‑drop Windows shell (1985‑1988) and its sale to Microsoft, which introduced the VB form designer.  
+* Project Thunder (1989‑1991), the internal codename merging a rejected shell tool with an embeddable BASIC interpreter, led by Scott Ferguson.  
+* Bill Gates’s May 1989 BYTE Magazine pitch and the 1991 Windows launch, outlining Microsoft’s marketing narrative and $199 price point.  
+* The simultaneous release of Visual Basic for Windows and for DOS (1991‑1992), their divergent code bases, and the rapid demise of the DOS version.  
+
+The author emphasizes a focus on lesser‑known contributors (Cooper, Merker, Kratkin, Geary, Raab, Ferguson, Whitten) rather than the well‑documented Gates/Allen narratives, and notes upcoming chapters on version‑by‑version evolution and a “Notable Characters” directory.
+          </div>
+          <a href="https://evilgeniuslabs.ca/blog/visual-basic-history-chapter-1-launch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions, combining criticism of the site’s navigation and the poor quality of the AI‑generated banner image, including misspelled text and inaccurate visuals, with a call for clearer calls to action and better image review. At the same time, there is appreciation for the subject matter, noting Visual Basic’s practical value, interest in broader historical context such as MacBasic and competing products, and enthusiasm for future content and potential documentary coverage. Overall, the feedback urges usability improvements while acknowledging the project’s relevance and potential.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48039249" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kohlschuetter.github.io/blog/posts/2026/05/07/serial-ttl-connector/" target="_blank">The Serial TTL connector we deserve</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by kohlschuetter • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article critiques the common practice of using exposed Dupont jumper wires to access a device’s UART‑TTL pins (RX, TX, GND) for bootloader or recovery debugging, noting reliability, strain‑relief, and back‑feeding issues. It proposes adopting Julet connectors—robust, IP68‑rated M6 (or M8) plugs used on e‑bikes—as a standardized solution. Julet cables are available on AliExpress, come as pre‑tinned 20 cm pigtails, and can be assembled quickly with standard crimping tools. The author assigns red and black wires (adjacent to the notch) to TX/RX and blue to GND, using the arrow on Dupont housings to denote the RX side; the female socket on the device carries the red‑arrowed wire, while the male plug on the USB‑TTL adapter carries the black‑arrowed wire, ensuring correct cross‑connection. Strain relief is provided with zip ties. The three‑pin Julet plug remains compatible with larger 5‑ or 6‑pin sockets for future expansion, while different connector sizes (M8) can differentiate voltage levels (3.3 V vs. 5 V) and Micro‑Q adapters address lower‑voltage logic. This results in a cleaner, safer, plug‑and‑play serial interface.
+          </div>
+          <a href="https://kohlschuetter.github.io/blog/posts/2026/05/07/serial-ttl-connector/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight a general preference for using 3.5 mm audio jacks as inexpensive, readily available TTL‑serial connectors, noting their low cost and ease of cable extension. Several contributors raise safety concerns about mismatched voltages and powering off devices through UART pins, recommending a dedicated Vref/V IO line or automatic voltage detection. Many suggest alternatives such as USB‑C, Bluetooth RFCOMM, or compact magnetic or edge‑connect solutions, criticizing Dupont headers and emphasizing the need for standardized, robust, and easily disconnectable interfaces. Overall, users favor small, reliable connectors while calling for better voltage handling and standardization.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48049828" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.freebsd.org/security/advisories/FreeBSD-SA-26:13.exec.asc" target="_blank">Local privilege escalation via execve()</a>
+        </h2>
+        <span class="article-meta">
+          111 points • by Deeg9rie9usi • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            FreeBSD-SA-26:13.exec, announced 2026‑04‑29, addresses a local privilege‑escalation vulnerability in the execve(2) system call (CVE‑2026‑7270). An operator‑precedence bug in the kernel permits a buffer overflow that can overwrite adjacent execve argument buffers, allowing an unprivileged user to gain superuser privileges. No workaround exists; remediation requires updating to a patched FreeBSD branch released after the correction dates. Affected releases include all supported FreeBSD versions (13, 14, 15) on amd64, arm64, and i386 (FreeBSD 13). Patching options are:
+
+* Base‑system package upgrades via `pkg upgrade -r FreeBSD-base` (amd64/arm64, 15.0‑RELEASE) followed by reboot.
+* Binary‑set updates via `freebsd-update fetch && freebsd-update install` (amd64/arm64 RELEASE, i386 13) followed by reboot.
+* Source‑code patch application using the provided `exec.patch` and recompiling the kernel.
+
+The fix is incorporated in specific Git commits for each branch (e.g., stable/15 c3e943e78e06, releng/15.0 934b48683c4f, stable/14 ae00a52921ca, etc.). Systems must be updated and rebooted to apply the correction.
+          </div>
+          <a href="https://www.freebsd.org/security/advisories/FreeBSD-SA-26:13.exec.asc" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights a recent security issue, noting its discovery, patch status, and lack of workarounds, while emphasizing the significance of the bug due to unsafe arithmetic within a memory operation. It reflects frustration with operator‑precedence mistakes in C code, advocating for explicit parentheses or separate statements to improve readability and reduce errors. The tone is appreciative of the author’s contributions and the firm’s recent work, and it questions the prevalence of similar vulnerabilities across other operating systems.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48077971" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ThatXliner/rust-but-lisp" target="_blank">Show HN: Rust but Lisp</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by thatxliner • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            rlisp is a weekend project that provides a Lisp‑style front‑end for Rust. Source files written as s‑expressions are transpiled to ordinary Rust code (.rs) and then compiled with rustc, preserving full Rust semantics: ownership, borrowing, lifetimes, generics, traits, pattern matching, and unsafe blocks. The tool implements a transparent syntax conversion without adding a runtime or garbage collector. Common Rust constructs (structs, enums, impl blocks, functions, macros, loops, match, if‑let, while‑let, etc.) have direct s‑expression equivalents, and binary operators are emitted as infix forms. rlisp’s macro system consists of compile‑time functions that transform s‑expressions; it uses quasiquote, unquote, and unquote‑splicing rather than the procedural‑macro token‑stream model. The project supports embedding raw Rust via a (rust "...") form. Missing features include some syntax such as turbofish (now fixed) and lifetime bounds (on the roadmap). The repository includes a CLI with commands to transpile, build, and run .lisp files.
+          </div>
+          <a href="https://github.com/ThatXliner/rust-but-lisp" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed reactions to the Rust‑inspired Lisp project. Several contributors appreciate the concept of directly compiling s‑expressions to Rust but question its practical value, noting absent Rust‑specific syntax support, unclear error reporting, and limited IDE integration. Critics point to the reliance on LLM‑generated code, suggesting the language’s design and tooling are under‑engineered and that a more conventional grammar would aid both developers and AI tools. Overall, interest is tempered by concerns over usability, documentation quality, and the project’s readiness for production.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48078575" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
