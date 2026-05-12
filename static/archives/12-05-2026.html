@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tanstack.com/blog/npm-supply-chain-compromise-postmortem" target="_blank">Postmortem: TanStack npm supply-chain compromise</a>
+        </h2>
+        <span class="article-meta">
+          623 points • by varunsharma07 • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            On 2026‑05‑11, an attacker compromised TanStack’s npm supply chain by publishing 84 malicious versions across 42 @tanstack/* packages. The exploit chained three vulnerabilities: a pull_request_target “pwn request” pattern, GitHub Actions cache poisoning across the fork↔base trust boundary, and runtime memory extraction of the OIDC token from the Actions runner. The malicious tarballs contained an obfuscated router_init.js (≈2.3 MB) that, during npm install’s prepare lifecycle, harvested credentials (AWS, GCP, Kubernetes, Vault, ~/.npmrc, GitHub tokens, SSH keys) and exfiltrated them via encrypted sessions to filev2.getsession.org. It also self‑propagated by republishing other packages maintained by the victim. No npm tokens were stolen and the publish workflow itself was not compromised, but any host that installed an affected version on the attack day should rotate all reachable credentials. Detection occurred within 20 minutes by an external researcher; all malicious versions were deprecated and npm security is pulling the tarballs. The incident highlights the dangers of pull_request_target workflows, unguarded actions/cache usage, and OIDC token exposure in CI pipelines.
+          </div>
+          <a href="https://tanstack.com/blog/npm-supply-chain-compromise-postmortem" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall comments express concern over npm supply chain compromise via malicious packages and CI pipeline attacks, criticize npm’s unpublish policy, and call for stronger safeguards such as two‑factor publishing, dependency cooldowns, disabling lifecycle scripts, and isolated build environments. There is consensus that the current npm ecosystem is vulnerable and that additional security measures or alternative package managers are needed, while some voice frustration and contemplate abandoning JavaScript. Opinions differ on responsibility, with blame directed at GitHub/NPM and focus on mitigation strategies.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48100706" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/blog/claude-platform-on-aws" target="_blank">Claude Platform on AWS</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by matrixhelix • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Claude Platform on AWS offers native Claude API features and includes the Claude Console for development, featuring a prompt improver, generator, and evaluation tools. Available models are Claude Opus 4.7, Sonnet 4.6, and Haiku 4.5, with future releases added automatically. Two deployment options exist:
+
+- **Claude Platform on AWS** – Anthropic runs the service; data is processed outside AWS. Suitable for organizations seeking the full Claude Platform experience.
+- **Claude on Amazon Bedrock** – AWS processes data within its infrastructure, meeting strict regional residency or exclusive‑AWS processing requirements.
+
+The platform is currently live; users can begin via the Claude Platform on AWS site or documentation. Existing Bedrock private‑offer customers must coordinate with their Anthropic or AWS account executive to apply discounts, which cannot be retroactively applied.
+          </div>
+          <a href="https://claude.com/blog/claude-platform-on-aws" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show widespread confusion over the distinction between the new Claude‑on‑AWS offering and the existing Bedrock integration, with many users uncertain about where data is processed and what benefits it provides. Several participants note possible convenience for billing and infrastructure automation, while others question any real technical advantage and express skepticism about the product’s purpose and clarity. Concerns about data residency, latency, and operational risk appear alongside cautious interest in tighter AWS‑centric management, resulting in a mixed but predominantly uncertain overall sentiment.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48103042" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://medium.com/@NMitchem/if-ai-writes-your-code-why-use-python-bf8c4ba1a055" target="_blank">If AI writes your code, why use Python?</a>
+        </h2>
+        <span class="article-meta">
+          265 points • by indigodaddy • 86 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://medium.com/@NMitchem/if-ai-writes-your-code-why-use-python-bf8c4ba1a055" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments split between favoring Python for its extensive training data, mature AI/ML libraries, and readability, and preferring compiled languages such as Rust, Go, or C# for stronger type safety, performance, and compile‑time error detection. Many stress using the language already known to stay in control of AI‑generated code, while some note AI lowers the barrier to learning new syntaxes. Security concerns about automatic dependency installation lead to sandboxing in containers. Overall, consensus is that language choice should balance ecosystem support, correctness, familiarity, and project needs rather than assume a single optimal language.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48100433" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stemcell.ucla.edu/news/ucla-discovers-first-stroke-rehabilitation-drug-repair-brain-damage" target="_blank">UCLA discovers first stroke rehabilitation drug to repair brain damage (2025)</a>
+        </h2>
+        <span class="article-meta">
+          272 points • by bookofjoe • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            UCLA Health researchers reported in *Nature Communications* that they identified a drug that mimics the effects of physical stroke rehabilitation in mouse models. By comparing stroke patients and mice, they found that stroke disrupts remote brain connections, especially loss of parvalbumin interneurons that generate gamma oscillations essential for coordinated motor networks. Physical rehabilitation restores these oscillations and repairs parvalbumin‑mediated synapses. The team screened two compounds designed to excite parvalbumin neurons; one, DDL‑920 (developed in the UCLA laboratory of Varghese John), produced significant improvements in movement control in post‑stroke mice. The study establishes (1) a neural substrate—gamma‑oscillation circuitry—underlying rehabilitation benefits, and (2) a pharmacologic target within this circuit. Further preclinical work is required to assess DDL‑920’s safety and efficacy before human trials can be pursued.
+          </div>
+          <a href="https://stemcell.ucla.edu/news/ucla-discovers-first-stroke-rehabilitation-drug-repair-brain-damage" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on a new UCLA study aiming to restore post‑stroke function by inducing gamma‑oscillation activity, either pharmacologically or via stimulation. Commenters express cautious optimism about its potential to complement or replace intensive rehabilitation, noting possible extensions to other neurodegenerative conditions. Skepticism appears regarding hype, citation‑driven publicity, and the feasibility of translating mouse results to humans, while questions arise about alternative methods such as non‑invasive brain stimulation, exoskeletons, and supplements that might promote neurogenesis. Overall sentiment balances enthusiasm for a promising approach with critical scrutiny of its claims and applicability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48098261" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/davmlaw/they_live_adblocker" target="_blank">They Live (1988) inspired Adblocker</a>
+        </h2>
+        <span class="article-meta">
+          48 points • by tokenburner • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A fork of uBlock Origin Lite replaces cosmetically‑blocked ads with white tiles displaying random slogans from John Carpenter’s *They Live* (e.g., “OBEY”, “CONSUME”, “DO NOT QUESTION AUTHORITY”). The extension injects a ::after overlay sourced from a data‑ubol‑they‑live attribute, using a MutationObserver to tag newly loaded ads. Network‑blocked ads remain empty, as only cosmetic‑filtered elements are altered.  
+
+**Installation & build**  
+- Download the pre‑built uBOLite_theylive.chromium.zip or build from source (requires Node ≥ 22).  
+- Clone the repo recursively, run tools/make‑mv3.sh for the target browser (Chromium, Firefox, Edge, Safari).  
+- Load the generated uBlock/dist/build/uBOLite.chromium folder as an unpacked extension.  
+
+**Usage**  
+- Set uBO Lite filtering mode to Optimal or Complete via the dashboard to enable the “OBEY” tiles.  
+
+**Limitations**  
+- Only cosmetic filters are affected; custom cosmetic rules hide ads normally.  
+- Re‑exposing previously hidden elements may shift page layout.  
+
+The project is a personal hobby fork, GPL‑3.0 licensed, and not an official uBlock Origin release.
+          </div>
+          <a href="https://github.com/davmlaw/they_live_adblocker" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong positive nostalgia for the film, describing it as a formative influence that encouraged skepticism toward fads, peer pressure, and authority while prompting later interest in philosophical ideas. Viewers recommend it for younger audiences despite potential scariness, noting it could foster mental resilience. There is enthusiasm for adapting the work to modern platforms such as Apple Vision Pro, with suggestions on visual style and willingness to invest financially, reflecting overall appreciation and interest in broader accessibility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48102700" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eatonphil.com/bookclub.html" target="_blank">Software Internals Book Club</a>
+        </h2>
+        <span class="article-meta">
+          19 points • by aragonite • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A global email book club focuses on high‑caliber software engineering texts, especially in databases, distributed systems, and performance. With over 2,500 members—including undergraduates, graduate students, early‑career and senior developers, founders, and others—each session attracts 300‑800 participants. The current reading is *Operating Systems: Three Easy Pieces*. Discussions occur solely via a Google Group; weekly a designated leader posts a brief recap or questions about a chapter, and members reply asynchronously. Leaders are recruited for each book, emphasizing diverse, experienced facilitators. Book selection targets works of 350‑550 pages, specific to a software topic, not general philosophy, and readable within roughly three months (1‑2 chapters per week). The club invites suggestions for future titles and welcomes contact via email or Twitter for feedback.
+          </div>
+          <a href="https://eatonphil.com/bookclub.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback indicates a desire for a newer edition of the book, noting that while it addressed HTTP/2 and related TCP topics, it lacks coverage of HTTP/3. Readers perceive the existing material as outdated regarding recent protocol developments and would appreciate updates that incorporate newer standards and technologies. The discussion also highlights that many of the issues examined in the current text revolve around TCP fundamentals, which some consider less relevant in the context of evolving web protocols.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48103511" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tsirysndr/rockbox-zig" target="_blank">Show HN: A modern Music Player Daemon based on Rockbox firmware</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by tsiry • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Rockbox Zig is a modern music‑player daemon built on the Rockbox audio engine and written with Rust and Zig. It provides gapless playback, DSP, 20+ codecs and a tag database via gRPC, GraphQL, HTTP and MPD APIs, and adds multi‑room output options such as AirPlay, Snapcast, Squeezelite, Chromecast and UPnP/DLNA. A quick start is available through Docker (mount $HOME/Music, expose ports 6062, 1704‑1705, 1780). Configuration resides in ~/.config/rockbox.org/settings.toml, where music_dir and audio_output are required; other parameters control EQ, replaygain, crossfade, compressor, etc. Audio outputs include builtin CPAL, snapcast (TCP with mDNS auto‑discovery or FIFO), airplay (single or multi‑receiver), squeezelite (Slim protocol), chromecast (Cast + HTTP WAV), and UPnP modes (PCM sink, media server, media renderer). Installation options are Docker, native packages (apt, yum, brew), a universal curl script, or building from source (requires Zig ≥ 0.16, Rust stable, and various dev libraries). Building compiles the C firmware to libfirmware.a, links with Rust static libs (librockbox_cli.a, librockbox_server.a) and CPAL via Zig, producing a single rockboxd binary. Documentation, API references and a GTK4 desktop app (Flatpak) are provided.
+          </div>
+          <a href="https://github.com/tsirysndr/rockbox-zig" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a uniformly positive view of Rockbox, highlighting its well‑designed interface and strong performance as notable strengths. Contributors express personal affinity for the project, emphasizing its ongoing relevance and the satisfaction of seeing their own early code incorporated. Overall, the sentiment reflects enthusiasm for the software’s continued development and appreciation for its refined user experience.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48074668" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.newscientist.com/article/2524042-a-lost-ancient-script-reveals-how-writing-as-we-know-it-really-began/" target="_blank">A lost ancient script reveals how writing as we know it began</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by emot • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Proto‑Elamite, an early script from the Iranian plateau, appears on clay tablets dated ≈ 5200 – 5000 years ago, roughly contemporaneous with Egyptian hieroglyphs and Mesopotamian proto‑cuneiform. The signs are mostly abstract and written right‑to‑left, contrasting with the pictographic nature of proto‑cuneiform. Numbers are well understood, showing distinct counting systems (decimal for laborers and livestock, sexagesimal for high‑status individuals). Non‑numerical signs number in the hundreds to low‑thousands; recent digitisation of ~1700 tablets and computational analyses have identified recurring sign clusters and internal “grammar,” suggesting a degree of standardisation. Some researchers propose that a subset of ~100 signs functioned as a syllabary, potentially making Proto‑Elamite the world’s first true writing system that encoded speech, predating similar developments in Egypt and Mesopotamia by centuries. Two scenarios compete: (1) continuity into Linear Elamite—partly deciphered as a syllabic script—or (2) a sudden abandonment of writing, leaving an ~800‑year gap in the archaeological record. The script’s limited corpus, absence of teaching texts, and apparent elite resistance contrast with the extensive scribal traditions of neighboring societies, yet Iranians later achieved significant regional power despite low literacy.
+          </div>
+          <a href="https://www.newscientist.com/article/2524042-a-lost-ancient-script-reveals-how-writing-as-we-know-it-really-began/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the uncertain origins of writing, using the 1986‑found La Mojarra stele as primary evidence for a sophisticated, non‑Maya script that implies a long‑standing literary tradition. It highlights the stele’s dates, compares Mesoamerican scripts to related alphabets, and questions whether they share a common ancestor. The commentary also links the abrupt disappearance of such scripts to broader patterns of state‑citizen negotiations, citing recent scholarship that frames script loss as a response to overreaching governmental control. Overall, the tone is analytical and speculative without definitive conclusions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48052710" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://martin.sh/i-let-ai-build-a-tool-to-help-me-figure-out-what-was-waking-me-up-at-night/" target="_blank">I let AI build a tool to help me figure out what was waking me up at night</a>
+        </h2>
+        <span class="article-meta">
+          108 points • by showmypost • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A personal smart‑home system was built to identify noises that wake the author in a noisy city. The setup adds two inexpensive USB microphones (one indoor, one outdoor) to a Raspberry Pi that records continuously into a rolling memory buffer, only writing clips when a volume threshold is crossed. Recording is gated by Home Assistant, which enables the Pi when the user is at home, in bed, and during usual sleep hours. Audio clips are timestamped, compressed, and served via a lightweight web server. A Progressive Web App synchronizes these clips with sleep stage, heart‑rate, HRV, and other sensor data pulled from the Garmin Connect API, displaying each source as a track similar to a DAW; wake‑stage transitions are highlighted for quick review. AI tools generated most of the code, performed SSH‑based testing on the Pi, and created the Home Assistant integration, enabling an 8‑hour weekend build. Data revealed common culprits—door slams, dishes, street traffic—leading to acoustic panels, door/window insulation, and brief conversations as fixes. The project demonstrates that AI‑assisted development can quickly turn raw sensor streams into actionable insights for personal quality‑of‑life problems.
+          </div>
+          <a href="https://martin.sh/i-let-ai-build-a-tool-to-help-me-figure-out-what-was-waking-me-up-at-night/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments emphasize that nighttime noise, CO₂ levels, and inaccurate sleep‑tracking devices commonly disrupt sleep, with many recommending straightforward remedies such as earplugs, white‑noise fans, improved ventilation, or simple audio recordings rather than elaborate AI‑driven analysis. Several contributors note that personal observations often reveal subtle awakenings or breathing changes despite lack of memory, and that trust in smartwatch data is low. Skepticism about the project’s complexity appears alongside acknowledgement that basic hardware or manual methods could achieve similar results with less effort. Overall, practical, low‑tech fixes are favored.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48100662" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fireflysentinel.github.io/posts/fake-building-claude-3000-lines/" target="_blank">Fake building: Claude wrote 3k lines instead of import pywikibot</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by firef1y1203 • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author used Claude Opus 4.7 to create a typo‑fixing script for Fandom wikis. Instead of installing existing libraries, Claude generated ~3,000 lines of custom Python that reimplemented the functionality of pywikibot, mwparserfromhell, and Wikipedia’s RETF ruleset. The hand‑rolled code required extensive debugging of regex‑based stripping, handling of ASCII art, and tokenization errors, yet Claude never suggested using the available libraries. After the author provided links, the codebase was reduced to 1,259 lines by making the stripper a thin wrapper over mwparserfromhell and consolidating edit runners into a shim over pywikibot; RETF rules were fetched at runtime. Claude then argued to retain a custom typo dictionary despite all entries already existing in RETF, indicating a tendency to preserve generated code. The author attributes this behavior to benchmark constraints that penalize external dependencies, leading models to treat self‑written code as load‑bearing and to exhibit sunk‑cost defenses. Similar patterns have been observed with Claude generating custom SVG instead of using charting libraries.
+          </div>
+          <a href="https://fireflysentinel.github.io/posts/fake-building-claude-3000-lines/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed but pragmatic view of using Claude for code generation. Contributors note that the model often defaults to building from first principles, overlooking existing libraries, which leads to excessive custom code. They stress that explicit prompts, project‑level rules, or a “constitution” guiding dependency usage markedly improve outcomes, and that human oversight in architectural decisions remains essential. Skepticism about LLMs persists, yet many see the issue as stemming from insufficient prompting rather than inherent model flaws. Overall, clear guidance and deliberate constraints are regarded as key to better results.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48103459" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
