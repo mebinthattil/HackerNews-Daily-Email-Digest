@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/FULU-Foundation/OrcaSlicer-bambulab" target="_blank">Restore full BambuNetwork support for Bambu Lab printers</a>
+        </h2>
+        <span class="article-meta">
+          266 points • by Murfalo • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository provides a version of OrcaSlicer that re-enables full BambuNetwork connectivity for Bambu Lab printers, allowing remote operation over the internet rather than LAN‑only. Windows users must install WSL 2: run the commands `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart` and `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`, then restart before launching Orca Studio. Linux installations require only the standard setup. Development is ongoing, and the author recommends using the BMCU firmware, which is available in their other repositories. The page includes an OrcaSlicer logo image.
+          </div>
+          <a href="https://github.com/FULU-Foundation/OrcaSlicer-bambulab" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express widespread dissatisfaction with Bambu Lab’s shift to mandatory cloud authentication, emphasizing users’ desire for simultaneous local and cloud access that the current system does not provide. Many view the change as a reaction to backlash rather than a technical necessity, raising concerns about security, data privacy, and potential corporate espionage. Skepticism about the company’s motives—such as data collection or model training—is common, while a few remarks note the inconvenience and compare the situation to broader tech‑industry control tactics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48115127" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://googlebook.google/" target="_blank">Googlebook</a>
+        </h2>
+        <span class="article-meta">
+          668 points • by tambourine_man • 283 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Googlebook “Designed for Gemini Intelligence,” slated for release in Fall 2026, showcases the Gemini AI platform and its “Magic Pointer” interaction model, which enables users to select any on‑screen element and immediately query, compare, or generate content with Gemini. The promotional material includes visual examples: a band‑poster composition prompt, a live‑trip‑tracker widget for an Iceland itinerary, a desktop search interface suggesting mobile apps, and file‑access integration across phone and desktop. Additional imagery lists major PC manufacturers (Acer, Asus, Dell, HP, Lenovo) and highlights keyboard key designs featuring a fingerprint imprint and the Google “G” logo. The content emphasizes Gemini’s capability to blend visual selection with AI‑driven creation and information retrieval across devices.
+          </div>
+          <a href="https://googlebook.google/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey broad skepticism toward the announced device, criticizing vague marketing, the emphasis on AI over concrete hardware specifications, and the lack of clarity about the operating system and target users. Many express doubt about its market relevance, especially compared to established laptops like the MacBook Neo, and warn of potential lock‑in, privacy, and durability issues tied to Google’s ecosystem. A minority note curiosity about AI‑driven features or nostalgic appreciation for past Pixelbooks, but overall sentiment remains doubtful about the product’s purpose and viability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48111545" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/cactus-compute/needle" target="_blank">Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model</a>
+        </h2>
+        <span class="article-meta">
+          336 points • by HenryNdubuaku • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Needle is a 26‑million‑parameter “Simple Attention Network” distilled from Gemini 3.1, designed for tiny consumer devices. The architecture uses a 512‑dimensional hidden size, 8 attention heads with 4 key/value heads, a BPE‑8192 tokenizer, and replaces feed‑forward layers with gated residual blocks and ZCRMSNorm. It employs masked self‑attention with RoPE, GQA, and cross‑attention from a 12‑layer encoder to an 8‑layer decoder; embeddings are shared between encoder and decoder. Pre‑training ran on 16 TPU v6e for 200 billion tokens (≈27 h), followed by 2 billion tokens of single‑shot function‑call data (≈45 min). Inference achieves ≈6000 tokens/s prefill and 1200 tokens/s decode, surpassing FunctionGemma‑270 M, Qwen‑0.6 B, Granite‑350 M, and LFM‑2.5‑350 M on single‑shot function‑call tasks, though larger models perform better in multi‑turn dialogue. The repository provides open weights, a CLI, and a web UI for testing and fine‑tuning (e.g., `needle finetune data.jsonl`). Citations list the development team and GitHub URL.
+          </div>
+          <a href="https://github.com/cactus-compute/needle" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong interest in tiny, tool‑calling language models and their potential for personal assistants, home automation, and lightweight applications, with several users noting successful experiments such as setting alarms or adding items to shopping lists. Many ask about ambiguity handling, failure modes, dataset availability, and deployment constraints, while others report technical hurdles like repository access errors and CPU‑only execution problems. Opinions diverge on model selection—some praise the approach, others criticize the choice of Gemini as suboptimal—and there are repeated requests for demos and released data, alongside occasional concerns about licensing limits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48111896" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ericswpark.com/blog/2026/2026-05-12-my-graduation-cap-runs-rust/" target="_blank">My graduation cap runs Rust</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by ericswpark • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A blog post dated May 12 2026 describes a DIY graduation‑cap project that lights up when the tassel is moved. The author built the system using a Digispark ATtiny85 microcontroller, 48 WS2812B addressable LEDs, a reed switch with magnet for tassel detection, a USB‑C Power Delivery trigger board, and a power bank. The firmware was written in Rust, requiring forks and patches to the avr‑hal and ws2812‑avr crates to support the ATtiny85 at 16 MHz; this coding phase took roughly two hours, while hardware assembly took three-plus hours. The author notes that using Arduino libraries or a different board would have been simpler, but chose Rust for thematic consistency. The cap is not intended for actual graduation use, as it appears tacky. Source code is available on GitHub (ericswpark/gradcap-rs). Additional anecdotal notes include the cost of renting cap and gown ($94) and a warning about strobing video content.
+          </div>
+          <a href="https://ericswpark.com/blog/2026/2026-05-12-my-graduation-cap-runs-rust/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend humor, mild self‑deprecation, and occasional praise. Many readers joke about the expense and logistics of renting graduation robes, noting personal shortcuts like buying instead of renting, and express empathy for being broke. Several remarks reference the author’s choice to use Rust, mixing sarcasm about the language’s hype with light‑hearted admiration for the project’s execution. Overall sentiment is friendly and supportive, with a recurring theme of nostalgic reflection on past freedom and a subtle critique of broader software‑industry culture.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48116207" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/culture/article/20260511-kraftwerks-radical-1976-track-radioactivity-became-an-anti-nuclear-anthem" target="_blank">Kraftwerk&#39;s radical 1976 track</a>
+        </h2>
+        <span class="article-meta">
+          96 points • by tcp_handshaker • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Kraftwerk’s 1976 album *Radio‑Activity* marked a pivotal fusion of electronic music and sociopolitical commentary. The cover artwork, created by long‑time collaborator Emil Schult, paired a radioactive symbol with neon aesthetics. Live performances featured a light‑triggered “percussion cage” devised by Wolfgang Flür, which often malfunctioned onstage, illustrating the band’s experimental stagecraft. Musically, the title track evolved from an elegiac melody into a pronounced anti‑nuclear statement, influencing diverse genres and later being sampled by New Order, The Chemical Brothers and even mainstream pop acts such as Miley Cyrus. The album’s legacy lies in its synthesis of avant‑garde electronic production, visual design, and activist messaging, cementing Kraftwerk’s role in shaping synth‑pop, techno, and broader contemporary music culture.
+          </div>
+          <a href="https://www.bbc.com/culture/article/20260511-kraftwerks-radical-1976-track-radioactivity-became-an-anti-nuclear-anthem" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong admiration for Kraftwerk, highlighting their innovative sound, memorable live performances and lasting influence, with several personal accounts of attending shows and recommending the music. There is a recurring note that the band’s anti‑nuclear stance is viewed skeptically or regrettably, suggesting limited impact on policy and questioning its environmental effect. Comparisons to other early electronic works appear, and suggestions for related music are offered, while overall tone remains appreciative of Kraftwerk’s legacy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48115823" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://typesetinthefuture.com/2016/02/18/futuristic/" target="_blank">How to make your text look futuristic (2016)</a>
+        </h2>
+        <span class="article-meta">
+          256 points • by _vaporwave_ • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article outlines six typographic techniques that convey a “future” aesthetic:
+
+1. **Italic slant** – suggests forward motion.  
+2. **Mixed curvature and angles** – combines smooth and sharp forms.  
+3. **Added “V” strokes** – extra diagonal elements on letters.  
+4. **Letter merging (kerning tricks)** – reduces spacing to create a compact look.  
+5. **Selective removal of elements** – e.g., deleting a horizontal stroke.  
+6. **Surface treatments** – noise texture, steel‑brushed metal, blue lighting, embossing, and star‑field backgrounds.
+
+These rules are illustrated with progressive examples applied to Eurostile Bold Extended text, advancing from a 2016 style to a 2092 “future” look. The piece cites numerous film logos that employ most or all of the rules, including *Blade Runner*, *Battlestar Galactica*, *Transformers*, *Guardians of the Galaxy*, *RoboCop*, *Star Wars*, *The Amazing Spider‑Man*, *Captain America: The Winter Soldier*, *Alien vs. Predator*, *G.I. Joe: Retaliation*, *WALL‑E*, *Back to the Future*, and *Star Trek: The Next Generation*. An expanded version appears in the “Typeset in the Future” book (pre‑order Dec 11 2018, Amazon).
+          </div>
+          <a href="https://typesetinthefuture.com/2016/02/18/futuristic/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on typographic clichés that signal genre or culture, noting recurring use of fonts such as Eurostile, Trajan, Neuland, Papyrus and faux‑Chinese styles to evoke futuristic or regional themes. Several remarks cite the article as enjoyable and informative while suggesting it could expand on the historical development of these fonts. Opinions express a desire for more variety beyond the overused “future” typefaces and reference specific examples from film, gaming and branding, highlighting both nostalgia for past trends and interest in newer alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48113895" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2026q2/018471.html" target="_blank">CERT is releasing six CVEs for serious security vulnerabilities in dnsmasq</a>
+        </h2>
+        <span class="article-meta">
+          270 points • by chizhik-pyzhik • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CERT has disclosed six CVEs affecting dnsmasq, covering long‑standing bugs that impact virtually all non‑ancient versions. Pre‑disclosure to vendors was done, and patches are posted at https://thekelleys.org.uk/dnsmasq/CVE/. A “2.92rel2” release of dnsmasq 2.92 incorporates these patches; corresponding fixes are also being committed to the development tree, with some backported patches and several more extensive rewrites addressing root causes. The author notes that AI‑generated security research has produced a high volume of bug reports, making embargo coordination impractical and emphasizing prompt public fixes. An upcoming dnsmasq‑2.93rc1 will be tagged shortly, with testing encouraged to expedite a stable 2.93 release within weeks. Continued AI‑driven bug reporting is expected, so further rapid patch cycles are anticipated.
+          </div>
+          <a href="https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2026q2/018471.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights confidence in MaraDNS’s recent audit results, contrasting it with numerous recent dnsmasq vulnerabilities that many consider serious enough to warrant migration to memory‑safe languages such as Rust or Go. Commenters criticize Debian’s stable release practices for slow patch adoption and question OpenWRT’s update timeline, while also expressing personal dislike for dnsmasq’s monolithic design. Opinions on AI‑generated bug reports are divided, with some viewing them as a growing problem and others noting that not all projects, like MaraDNS, are affected.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48112042" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise" target="_blank">Why senior developers fail to communicate their expertise</a>
+        </h2>
+        <span class="article-meta">
+          443 points • by nilirl • 71 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Senior developers often operate within two simultaneous feedback loops: one that drives market exploration and reduces uncertainty, and another that maintains existing services and manages complexity for stability. Their primary responsibility is to keep systems understandable, debuggable, and stable, so increasing complexity directly threatens the second loop’s goals. Communication breaks down because developers explain resistance to new work in terms of complexity and maintenance costs, while the rest of the organization prioritizes rapid uncertainty reduction. The article argues that developers should reframe proposals as solutions that speed up learning—e.g., “Can we try something quicker?”—emphasizing reuse of existing tools (Google Forms, UI tweaks, minimal analytics) rather than building from scratch. This aligns their expertise with business needs, allowing them to reduce unnecessary work while preserving stability. The piece also notes that AI, despite accelerating development, cannot replace the senior developer’s responsibility for overseeing system integrity and managing complexity.
+          </div>
+          <a href="https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that expertise relies on tacit internal models that cannot be fully transferred by words, requiring mentees to invest effort to internalize guidance. Senior developers emphasize contextual judgment, caution against blanket adoption of new tools, and stress balancing speed with maintainability. Many note business incentives often drive unnecessary complexity, while AI is seen both as a rapid‑prototype accelerator and a source of hidden fragility. Consensus highlights the need for clear communication, realistic trade‑offs, and awareness that mentoring and knowledge sharing face cultural and motivational barriers.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48109460" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/quic-death-spiral-fix/" target="_blank">When &#34;idle&#34; isn&#39;t idle: how a Linux kernel optimization became a QUIC bug</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by sbulaev • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            CUBIC, the default congestion controller in Linux and Cloudflare’s QUIC implementation quiche, suffered a bug that left the congestion window (cwnd) permanently at its minimum (≈2700 bytes) after a loss‑induced collapse.  
+
+* Test: a localhost HTTP/3 download (10 MiB, RTT 10 ms) with 30 % loss for the first 2 s. After loss stopped, 60 % of runs timed out because cwnd never grew.  
+* Symptom: rapid oscillation (≈14 ms per transition) between recovery and congestion‑avoidance states while bytes‑in‑flight stayed at zero, locking cwnd at the floor.  
+* Root cause: quiche’s `on_packet_sent()` treated any send when `bytes_in_flight == 0` as an idle period, shifting `congestion_recovery_start_time` forward by `now – last_sent_time`. When cwnd is minimal, this delta equals roughly one RTT, incorrectly extending the recovery period and preventing cwnd growth. The logic mirrors a 2017 Linux kernel fix that later added a safeguard against setting `epoch_start` in the future.  
+* Fix: record the timestamp of the last ACK (`last_ack_time`) and compute the idle delta from the later of `last_ack_time` or `last_sent_time`. Updating `congestion_recovery_start_time` with this corrected delta stops the self‑perpetuating recovery loop, allowing cwnd to follow the normal CUBIC curve and restoring 100 % test success.
+          </div>
+          <a href="https://blog.cloudflare.com/quic-death-spiral-fix/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment conveys regret over incorporating Linux kernel code without fully grasping its behavior, acknowledging that subsequent fixes were overlooked and now cause problems. It highlights a cautionary perspective on reusing complex external code without thorough understanding or ongoing maintenance, emphasizing the negative consequences of technical debt that arises when updates are missed. The overall tone is reflective and critical of the decision to copy code without ensuring continued alignment with upstream changes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48116064" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.robinsloan.com/lab/referer/" target="_blank">Referer Reality</a>
+        </h2>
+        <span class="article-meta">
+          20 points • by tobr • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Chris Morgan blocks URLs containing query strings, assuming the Referrer header suffices to identify traffic sources. In practice, most visitors arrive via links in email or mobile apps (e.g., Instagram, iOS Messages, Substack) that do not send Referrer headers, causing them to be classified as “Direct/Unknown.” To compensate, the author appends a custom query parameter (e.g., utm_source=Robin_Sloan_sent_me) to every outbound link, allowing destination sites to trace the origin of clicks—especially useful for e‑commerce platforms like Shopify. The author does not use analytics but views the parameter as a digital‑etiquette practice, enabling site operators to verify and follow up on traffic (illustrated by a planetarium confirming legitimate subscriptions). Some services, notably YouTube, reject unexpected query strings; the author maintains an exception list, now including chrismorgan.info.
+          </div>
+          <a href="https://www.robinsloan.com/lab/referer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary questions the rationale for voluntarily adding tracking parameters to external links, suggesting it primarily benefits other sites rather than the originator. It emphasizes that legitimate query parameters, such as those used for search, should be allowed while unexpected or malicious values be blocked early in the processing stack. The same caution extends to the Referer header, which is viewed as prone to spam and potentially unsafe content, indicating a general distrust of unfiltered inbound data.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48087643" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
