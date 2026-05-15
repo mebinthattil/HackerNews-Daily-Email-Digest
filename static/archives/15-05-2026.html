@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tmctmt.com/posts/mullvad-exit-ips-as-a-fingerprinting-vector/" target="_blank">Mullvad exit IPs are surprisingly identifying</a>
+        </h2>
+        <span class="article-meta">
+          137 points • by RGBCube • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Mullvad assigns each WireGuard key a deterministic exit‑IP per server rather than randomizing on every connection. The key rotates every 1–30 days (or never with third‑party clients). Testing 9 servers with 3 650 keys showed only 284 distinct IP‑combination patterns despite a theoretical pool of >8 trillion possibilities. Each assigned IP occupies the same percentile within its server’s IP range, indicating a seed‑based RNG where the seed derives from the public key and the upper bound is the pool size. The RNG’s float multiplier is constant for a given seed, so changing the bound only scales the result, producing identical ratios across servers. Consequently, users sharing a key obtain correlated IPs, allowing fingerprinting: a float range estimate links ≈0.34 % of users (≈340 of 100 k active accounts) to the same IP pattern, giving >99 % confidence in identity correlation across different servers. Mitigations include limiting server switches per key and forcing key rotation by logging out of the Mullvad app.
+          </div>
+          <a href="https://tmctmt.com/posts/mullvad-exit-ips-as-a-fingerprinting-vector/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Mullvad’s deterministic exit‑IP assignment, with many commenters viewing it as a privacy weakness that makes VPN users distinguishable and vulnerable to de‑anonymisation, especially compared with Tor’s design. Several participants argue that VPNs are unsuitable for true anonymity, citing IP pool blacklisting and the ease of fingerprinting, while others note the potential for site operators to exploit the stability for bans and suggest that a simple randomisation fix would be preferable. Overall sentiment is critical of the current approach and skeptical of VPNs as privacy tools.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48143880" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start" target="_blank">How Claude Code works in large codebases</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by shenli3514 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Code runs locally, traverses the file system, and uses grep or LSP‑based symbol search instead of a RAG index, eliminating stale embeddings for large, rapidly changing codebases. Its performance hinges on a “harness” built from five extension points—CLAUDE.md context files, hooks, skills, plugins, and MCP servers—plus optional LSP integrations and subagents that isolate tasks in separate context windows.
+
+Successful deployments follow three patterns:
+
+* **Navigable codebases** – keep CLAUDE.md files lean and layered (root + subdirectory), initialize Claude in the relevant subdirectory, scope test/build commands per folder, use .ignore/.claude/settings.json to exclude generated or third‑party files, provide markdown maps for unconventional layouts, and run language‑server instances for symbol‑level lookup.
+* **Active CLAUDE.md maintenance** – periodically review and prune context files, hooks, and skills as newer models remove prior limitations (typically every 3–6 months or after major model releases).
+* **Clear ownership and governance** – assign a dedicated DRI or team (often within developer‑experience) to manage configurations, plugins, and permissions, establish approved skill sets, and coordinate cross‑functional groups for security and compliance.
+
+These practices enable Claude Code to scale across monorepos, legacy systems, and multi‑repo microservice architectures with thousands of developers.
+          </div>
+          <a href="https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks convey a skeptical stance toward proclaimed successes, emphasizing the need for concrete, measurable criteria. Commenters question whether improvements are substantiated by tangible outcomes such as preserving production data, enhancing team velocity, extending codebase lifespan, or increasing operational satisfaction. They highlight the rapid pace of industry change and demand clear evidence that the reported patterns genuinely translate into reliable, large‑scale benefits rather than mere anecdotal claims.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48144494" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arkadiyt.com/2026/05/13/removing-the-modem-and-gps-from-my-rav4/" target="_blank">Removing the modem and GPS from my 2024 RAV4 hybrid</a>
+        </h2>
+        <span class="article-meta">
+          708 points • by arkadiyt • 67 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post details a DIY method for disabling telemetry on a 2024 Toyota RAV4 Hybrid by removing its Data Communication Module (DCM) and GPS antenna. It begins with a brief survey of documented privacy and security incidents in modern vehicles, then explains that loss of the DCM eliminates all cloud‑based services (OTA updates, SOS, remote diagnostics) and disables the in‑car microphone unless a DCM‑Bypass Kit is installed. Removing the GPS prevents Apple‑CarPlay location conflicts that arise when the car’s GPS remains active without a data link. Bluetooth tethering can still leak data, so the author recommends using USB‑CarPlay or a Bluetooth‑to‑USB adapter. Required tools include a trim‑removal kit, ratchet/socket set, and optional precision screwdriver; the DCM Bypass Kit costs ≈ $90. Step‑by‑step instructions cover disassembly of the shifter, radio, seat‑heater controls, extraction of the DCM (three 8 mm bolts), installation of the bypass kit, and removal of the single‑wire GPS antenna from the head unit. Post‑reassembly checks confirm no infotainment connection icon and functional microphone. The modification may void portions of the warranty and could be affected by future integration or anti‑repair legislation.
+          </div>
+          <a href="https://arkadiyt.com/2026/05/13/removing-the-modem-and-gps-from-my-rav4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments converge on strong skepticism toward automotive telemetry, especially the claim that Bluetooth connections cause the vehicle to route data through a phone’s internet connection, with most participants noting a lack of concrete evidence and questioning how such routing would work. A recurring theme is the desire to disable or remove cellular‑modem hardware to prevent data collection, balanced by concerns about losing over‑the‑air updates, emergency services, and functionality like CarPlay. Users also discuss legal privacy rights, manufacturer opt‑in practices, and alternative approaches such as using wired connections, shielding antennas, or choosing less‑connected vehicles.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48138136" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antirez.com/news/165" target="_blank">A few words on DS4</a>
+        </h2>
+        <span class="article-meta">
+          221 points • by caust1c • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            DS4 (DwarfStar 4) quickly gained popularity as a single‑model, locally integrated AI solution. Its success stems from the availability of a large, fast “quasi‑frontier” model—DeepSeek v4 Flash—combined with an aggressive 2‑bit/8‑bit quantization that allows inference on systems with 96–128 GB RAM. The author reports intense development effort (≈14 h/day) and notes that DS4 now handles tasks previously reserved for cloud services like Claude or GPT, especially when enhanced with vector steering. Future directions include: updating the core model to newer checkpoints (potentially domain‑tuned versions for coding, legal, medical), expanding quality benchmarks, adding a coding agent, establishing a home CI hardware setup for long‑term testing, increasing platform ports, and implementing distributed inference (serial and parallel). The author emphasizes that AI should not remain solely a provided service and thanks the community for support.
+          </div>
+          <a href="https://antirez.com/news/165" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight strong interest in DwarfStar4’s ability to run DeepSeek 4 locally, noting impressive long‑context reasoning, tool‑calling reliability, and coding assistance that some users find comparable to proprietary models. Many point out the high VRAM and memory requirements, questioning practicality on commodity hardware and the value of a model‑specific engine versus broader llama.cpp integrations. Comparisons with other open‑weight models such as Qwen 3.6 reveal mixed performance and efficiency trade‑offs. Overall sentiment blends enthusiasm for the technical progress with cautious concern about resource demands and future relevance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48142108" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.calif.io/p/first-public-kernel-memory-corruption" target="_blank">First public macOS kernel memory corruption exploit on Apple M5</a>
+        </h2>
+        <span class="article-meta">
+          303 points • by quadrige • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The authors report a publicly disclosed macOS kernel memory‑corruption exploit, named **survivingMIE**, targeting Apple’s M5 silicon with Memory Integrity Enforcement (MIE) enabled. The exploit is a data‑only local privilege escalation chain for macOS 13.4.1 (build 25E253) that starts from an unprivileged user, uses only standard system calls, and yields a root shell. It leverages two previously unknown kernel vulnerabilities discovered in late April 2024, combined with techniques to bypass MIE’s hardware‑assisted memory‑tagging defenses (ARM MTE). Development was aided by the AI‑driven tool **Mythos Preview**, which identified the bugs and assisted in constructing the chain within a week. The authors plan to release a 55‑page technical report after Apple patches the vulnerabilities. They emphasize that while MIE is a high‑cost mitigation, it is not invulnerable; AI‑enhanced discovery can produce exploits that survive such protections.
+          </div>
+          <a href="https://blog.calif.io/p/first-public-kernel-memory-corruption" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express a blend of concern and skepticism about the emerging role of large language models in generating complex security exploits, noting that the current report offers limited technical detail while hinting at potentially high‑value bug‑bounty implications. Observers criticize what they perceive as marketing hype surrounding the findings, comparing it unfavorably to prior, more restrained analyses. Some express disappointment in related product choices and question the authenticity of the reported vulnerability, while others remain curious about the underlying mechanisms and broader impact.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48139219" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://scottjg.com/posts/2026-05-05-egpu-mac-gaming/" target="_blank">RTX 5090 and M4 MacBook Air: Can It Game?</a>
+        </h2>
+        <span class="article-meta">
+          521 points • by allenleee • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post documents how the author attached an NVIDIA RTX 5090 eGPU to an Apple‑silicon M4 MacBook Air via a Thunder Bolt‑to‑PCIe dock and accessed it from a Linux ARM64 VM. Key points:
+
+- macOS lacks native NVIDIA drivers; tinygrad’s experimental driver is unsuitable for gaming or general GPU use.
+- The solution runs Linux in a QEMU VM (ARM64) on macOS, passing the GPU through using PCI passthrough.
+- PCI BAR memory is mapped into the guest with hv_vm_map(); initial crashes required changing QEMU’s memory‑type flags to permit reads/writes.
+- DMA handling needed a custom “apple‑dma‑pci” virtual device because Apple’s DART IOMMU imposes a 1.5 GB total mapping limit and a 64 k mapping count limit.
+- The author patched the NVIDIA driver (via kprobe) to force smaller page sizes, avoiding alignment errors, and implemented clustering of DMA mappings (256 kB regions) to stay under the mapping‑count limit.
+- VM performance was improved by raising vCPU thread priority using macOS QoS and real‑time scheduling patches in QEMU.
+
+Benchmarks (not reproduced) show the RTX 5090 can run demanding games inside the VM once these kernel‑level and QEMU adjustments are applied.
+          </div>
+          <a href="https://scottjg.com/posts/2026-05-05-egpu-mac-gaming/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express enthusiasm for the technical achievement of running a GPU‑accelerated VM on Apple Silicon, highlighting impressive AI inference and benchmark results. Many note the long‑standing lack of eGPU support and criticize Apple’s limited hardware compatibility, wishing for official GPU passthrough. Users appreciate the detailed implementation, especially DMA and QEMU work, while also recognizing practical limits such as pre‑fill latency and small memory windows. Overall sentiment combines admiration for the hack with disappointment in Apple’s ecosystem and a desire for broader, supported solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48137145" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://writing.antonleicht.me/p/cut-off" target="_blank">Access to frontier AI will soon be limited by economic and security constraints</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by thoughtpeddler • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article argues that the prevailing belief—AI tokens will become abundant and broadly accessible—is being undermined by three converging constraints: compute scarcity, security concerns, and increasing U.S. government involvement. Recent limited releases of advanced models such as Anthropic’s Mythos and OpenAI’s “gpt‑5.5‑cyber” illustrate a shift toward selective distribution to trusted defenders, driven by misuse risk, model theft, espionage, and distillation threats. Developers face high marginal compute costs, leading to capacity crunches and tighter access controls, while governments may formalize these restrictions for national‑security or strategic leverage. Consequently, frontier AI access will likely become a privilege of a limited set of U.S.‑based firms and allied partners, with other entities receiving only constrained product layers or delayed API access. The author warns that such asymmetry could create geopolitical “haves” and “have‑nots,” amplifying economic and security gaps. Proposed mitigations include hardening global security to reduce misuse pressure, accelerating datacenter construction to alleviate compute bottlenecks, and establishing international compute‑building agreements that tie infrastructure investment to guaranteed frontier‑model access.
+          </div>
+          <a href="https://writing.antonleicht.me/p/cut-off" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the growing concern that access to frontier AI models may become restricted as data and model ownership tighten, highlighting economic challenges of continual retraining and the potential for contracts to limit availability. Opinions diverge on the severity of a “doom” scenario, with some noting that open‑weight alternatives could remain viable for startups. Political considerations are also raised, emphasizing how divergent government interests—particularly U.S. policy under Trump—could shape AI deployment and regulation, adding uncertainty to future access.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48143284" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/gyroflow/gyroflow" target="_blank">Gyroflow: Video stabilization using gyroscope data</a>
+        </h2>
+        <span class="article-meta">
+          26 points • by nateb2022 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gyroflow is an open‑source application for video stabilization using gyroscope (and optionally accelerometer) data recorded by modern cameras (GoPro, Sony, Insta360, DJI, etc.) or external sources (Betaflight blackbox, smartphones). It processes footage with real‑time preview, GPU‑accelerated multi‑threaded algorithms, rolling‑shutter correction, adaptive zoom, lens‑distortion correction, and supports 10‑bit to 32‑bit color depths. Output formats include H.264/H.265, ProRes, DNxHD, CineForm, PNG, OpenEXR, and RAW (Blackmagic, RED, Canon). Plugins are available for Adobe Premiere/After Effects, DaVinci Resolve (OpenFX), and Final Cut Pro (Toolbox). The core engine is a pure‑Rust library without external dependencies; the UI uses QML/Qt, with optional OpenCV for calibration and optical flow. GPU back‑ends use DirectX, OpenGL, Metal, Vulkan via Qt RHI and wgpu. Supported platforms: Windows 10 64‑bit, macOS 10.15+, Linux (Debian 10+, Ubuntu 18.10+), Android 6+, iOS 14+. Minimum drivers and libraries are listed per GPU vendor. Licensed under GPL‑v3 with an additional permission to link the closed‑source mdk‑sdk. The project accepts contributions, offers translations, and provides detailed build instructions for desktop, Android, and iOS.
+          </div>
+          <a href="https://github.com/gyroflow/gyroflow" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong approval of the software, highlighting its quality and the impressive benefits it provides, such as effective rolling‑shutter correction. Users also note a limitation: certain camera models, specifically the A7 iii, do not capture the required gyro data, which prevents full utilization of those features. Overall, the feedback is positive, emphasizing the software’s capabilities while acknowledging hardware compatibility constraints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48107766" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/DepthFirstDisclosures/Nginx-Rift" target="_blank">New Nginx Exploit</a>
+        </h2>
+        <span class="article-meta">
+          324 points • by hetsaraiya • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository provides a proof‑of‑concept exploit for CVE‑2026‑42945, a critical heap buffer overflow in NGINX’s ngx_http_rewrite_module introduced in 2008. The flaw occurs in the module’s two‑pass processing of rewrite and set directives: the length‑calculation pass runs with is_args cleared, producing an undersized buffer size, while the subsequent copy pass sets is_args and invokes ngx_escape_uri with NGX_ESCAPE_ARGS, expanding each escapable byte to three bytes and overflowing the heap with attacker‑controlled URI data. Exploitation relies on cross‑request heap feng‑shui, spraying POST bodies to corrupt the cleanup pointer of an adjacent ngx_pool_t structure, which is redirected to a fake ngx_pool_cleanup_s that calls system() upon pool destruction. The advisory lists affected and patched versions (see F5 advisory K000160932) and includes build/run instructions: compile via setup.sh, launch the vulnerable NGINX container with Docker Compose, and obtain a shell using poc.py --shell.
+          </div>
+          <a href="https://github.com/DepthFirstDisclosures/Nginx-Rift" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the newly disclosed NGINX “Rift” vulnerability, emphasizing that despite the published proof‑of‑concept disabling ASLR, the flaw can potentially be weaponized and should not be dismissed as low risk. Commenters note that the issue affects configurations using unnamed captures in rewrite directives, reference official patches from F5 and OpenResty, and recommend mitigations such as switching to named captures and promptly applying updates. There is widespread agreement that operators must assess their rewrite usage, patch vulnerable versions, and remain cautious about assuming mitigations fully eliminate exploitation risk.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48138268" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank">Codex is now in the ChatGPT mobile app</a>
+        </h2>
+        <span class="article-meta">
+          244 points • by mikeevans • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight strong enthusiasm for mobile‑enabled coding agents, noting that remote access saves time, enables on‑the‑go iteration, and integrates well with note‑taking tools, while many praise the free availability and reliability compared with competing solutions. Repeated concerns include limited screen space, keyboard constraints, occasional synchronization bugs, and insufficient Android support, leading some users to doubt code‑review quality and warn against constant availability. Overall, the community sees the feature as a valuable productivity boost but calls for smoother UI, broader platform coverage, and improved stability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48140529" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
