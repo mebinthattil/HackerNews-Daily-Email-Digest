@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gencad.github.io/" target="_blank">GenCAD</a>
+        </h2>
+        <span class="article-meta">
+          185 points • by dagenix • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GenCAD is an image‑conditional generative model that produces fully parameterized CAD programs, not just 3D solids. It addresses the difficulty of training AI on complex CAD data structures (e.g., B‑rep) by learning joint representations of CAD command sequences and reference images. The architecture comprises four stages: (1) an autoregressive transformer encoder for latent encoding of CAD command sequences; (2) a contrastive learning module that aligns latent spaces of CAD commands and CAD images; (3) a latent diffusion model that generates CAD‑latent vectors conditioned on images; and (4) a decoder that translates these latents into executable parametric CAD commands. By outputting the complete CAD command history, GenCAD enables accurate, modifiable models suitable for engineering, manufacturing, and design space exploration, surpassing mesh, voxel, or point‑cloud approximations.
+          </div>
+          <a href="https://gencad.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback is largely skeptical, noting that while the demo appears interesting, it offers limited practical value for complex CAD work. Commenters emphasize that essential steps such as defining dimensions, tolerances, and constraints remain unresolved, and the tool struggles with real‑world or hand‑drawn images. Setup difficulties, sparse examples, and poor mobile rendering further diminish confidence. Comparisons to established solutions like OpenSCAD highlight a preference for more mature workflows, and there is interest in tighter LLM integration and broader format support, but overall the utility is viewed as limited.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48173429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tech4bot/rk3562deb" target="_blank">I turned a $80 RK3562 Android tablet into a Debian Linux workstation</a>
+        </h2>
+        <span class="article-meta">
+          287 points • by tech4bot • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository provides **rkdebian**, a build system that creates a bootable Debian 12 (Bookworm) image for the Doogee U10 tablet (Rockchip RK3562). The image runs from an SD card, leaving the internal eMMC untouched; removing the card restores Android. It includes U‑Boot, a 6.1‑kernel (or firefly‑5.10), and a root filesystem built via debootstrap. Build dependencies are installed on an x86‑64 host, and the `build.sh` script supports targets such as `all`, `image`, `updatepkg`, and various configuration flags (UI session, GPU stack, display server, CPU governor, rootfs size, etc.). The system supports local LLM inference on the RK3562 NPU using Rockchip’s RKLLM stack; a sample conversion for Qwen 3‑0.6B (W8A8 quantization, 1 NPU core, optimization 0) shows ~1.8 s latency versus ~4.8 s for Qwen 2.5‑1.5B. Additional features include camera drivers (s5k5e8, s5k4h5yb), flashlight control, power‑profile mapping, and OTA update handling via `rk-apply-update`. Third‑party components (Mali GPU, Rockchip MPP, Seekwave Wi‑Fi/BLE) are included under their respective licenses.
+          </div>
+          <a href="https://github.com/tech4bot/rk3562deb" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong enthusiasm for running Debian on low‑end ARM tablets, emphasizing the appeal of lightweight desktop environments, SD‑card booting, and the ability to repurpose devices with modest RAM. Users express curiosity about performance, compatibility with specific Debian releases, and input‑method completeness, while also noting concerns about Android’s sluggishness, limited vendor documentation, and potential cost spikes. Several remarks praise AI assistance in reverse‑engineering and driver development, reflecting optimism about extending hardware usefulness despite practical uncertainties.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48168668" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://askanastronaut.issinrealtime.org/" target="_blank">Ask an Astronaut: 333 hours of Q&amp;A footage with astronauts</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by gaws • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided excerpt consists solely of the title “Ask an Astronaut” and contains no additional content to summarize.
+          </div>
+          <a href="https://askanastronaut.issinrealtime.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong appreciation for the project, highlighting its innovative use of technology and the novelty of the astronaut interview content. Users commend the concept and execution, noting it as a compelling example of what can be achieved with current tools. Suggestions focus on improving usability, specifically adding reliable astronaut identification and fixing transcript lag or omissions. No significant criticism or disagreement appears, and the overall tone remains enthusiastic and supportive of the initiative.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48152754" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.metalevel.at/prolog/horror" target="_blank">Prolog Coding Horror</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by RohanAdwankar • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page critiques common Prolog antipatterns and demonstrates how impurity and outdated constructs hinder declarative programming. Key issues listed are: loss of solutions (incorrect or missing answers), reliance on global state, impure I/O (e.g., `format/2` within predicates), and use of low‑level arithmetic (`is/2`) that forces procedural evaluation. An example, `horror_factorial/2`, uses `is/2` and a cut, causing instantiation errors and limiting query generality. A pure alternative replaces `is/2` with constraint‑logic programming operators (`#>`, `#=`) and omits cuts, yielding a relational factorial that correctly enumerates all solutions (`N=0,1,2,…`). The author concludes that adopting pure, constraint‑based definitions eliminates these “horrors” and restores declarative debugging capabilities.
+          </div>
+          <a href="https://www.metalevel.at/prolog/horror" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express enthusiasm for Prolog, highlighting its intellectual appeal and recommending further reading on meta‑interpreters and the four‑port model. There is curiosity about practical, real‑world applications, with some perceiving it as niche or esoteric compared to other languages. A discussion of tolerance for partially correct answers reflects a theoretical openness, while newer “LLM‑augmented” Prolog systems are viewed skeptically, considered imprecise and overhyped. Overall, the sentiment balances appreciation for Prolog’s concepts with cautious doubt about its contemporary extensions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48173268" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sites.math.rutgers.edu/~zeilberg/Opinion82.html" target="_blank">A Good Lemma Is Worth a Thousand Theorems (2007)</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by susam • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Doron Zeilberger argues that a good lemma outweighs many theorems in mathematical impact. He cites well‑known lemmas—Schur’s Lemma, Lovász’s Local Lemma, and especially Szemerédi’s Regularity Lemma—as examples of tools that have generated major advances, including two Fields Medals and the Green‑Tao theorem on arithmetic progressions in primes via a hypergraph extension. Zeilberger emphasizes that lemmas “do the work” while theorems receive credit, and that a valuable lemma must (1) apply broadly across diverse problems, (2) become instantly obvious once seen, and (3) possess an aesthetically pleasing proof. He references the “Lattice Paths and Determinants” chapter in Aigner & Ziegler’s *Proofs from THE BOOK* and notes that observations can be even more significant than lemmas.
+          </div>
+          <a href="https://sites.math.rutgers.edu/~zeilberg/Opinion82.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for simple, obvious ideas such as lemmas that reshape thinking, highlighting the practical impact of foundational tools like the Axiom of Choice, Zorn’s Lemma, and the coyoneda lemma in both theory and industry. They draw parallels to broader principles that value brevity and durability, and suggest that fields built on these concepts, like homological algebra, are exceptionally productive and widely applicable.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48157229" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://idahonews.com/news/local/two-f-18-fighter-jets-have-crashed-during-an-airshow-at-mountain-home-air-force-base" target="_blank">Two EA-18 fighter jets collide at Mountain Home airshow, pilots ejected safely</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by ChrisArchitect • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Two U.S. Navy EA‑18G Growler jets from Electronic Attack Squadron 129 collided during an aerial demonstration at the “Gunfighter Skies” airshow on Sunday at Mountain Home Air Force Base, about 80 km south of Boise. All four crew members ejected safely and were examined by medical personnel; no one on the base was injured. The base locked down and Idaho State Highway 167 was closed for a multi‑day investigation. Spectator video shows the jets contact, spin together, and explode on impact. Weather at the time was clear with wind gusts up to 29 mph. The show, the first at the base since 2018, also featured the U.S. Air Force Thunderbirds. Historical references note a 2003 Thunderbirds crash, a 2022 fatal collision at a Dallas airshow, and a long‑term decline in airshow fatalities—none since 1952. Officials, including Col. David Gunter and the Silver Wings of Idaho board, emphasized crew safety and the effectiveness of emergency response.
+          </div>
+          <a href="https://idahonews.com/news/local/two-f-18-fighter-jets-have-crashed-during-an-airshow-at-mountain-home-air-force-base" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions: many criticize deploying costly, specialized electronic‑warfare aircraft for aerobatic displays, viewing it as wasteful and risky for taxpayers, while others admire the pilots’ skill and note the successful ejection of all four crew members as a positive outcome. There is curiosity about the maneuver attempted, the physics of the mid‑air collision, and the decision‑making process for ejection. Overall, the discussion balances concern over expense and safety with appreciation for the rescue equipment and the pilots’ performance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48173468" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/MinishLab/semble" target="_blank">Show HN: Semble – Code search for agents that uses 98% fewer tokens than grep</a>
+        </h2>
+        <span class="article-meta">
+          234 points • by Bibabomas • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Semble is a CPU‑only code‑search library designed for LLM agents. It indexes a repository in ~250 ms and answers queries in ~1.5 ms, offering ~200× faster indexing and ~10× faster retrieval than a code‑specialized transformer while attaining NDCG@10 = 0.854 (≈99 % of a 137 M‑parameter model). The system splits files into code‑aware chunks (via Chonkie) and scores queries with two static retrievers: Model2Vec embeddings (potion‑code‑16M) for semantic similarity and BM25 for lexical matching. Scores are fused by Reciprocal Rank Fusion and re‑ranked using adaptive weighting, definition boosts, identifier‑stem matching, file‑coherence, and noise penalties (e.g., test files, .d.ts). Results are returned as minimal chunks, reducing token usage by ~98 % compared with grep‑plus‑read workflows. Semble can run as an MCP server for agents such as Claude Code, Cursor, Codex, OpenCode, or as a standalone CLI (`semble search`, `semble find‑related`). Installation is via `pip install semble` or `uv`, and token savings are tracked in `~/.semble/savings.jsonl`. The project is MIT‑licensed and citable via Zenodo.
+          </div>
+          <a href="https://github.com/MinishLab/semble" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects broadly favorable interest in the semantic code‑search tool, with many noting its speed, token‑efficiency and potential advantages over plain grep and conventional LSP approaches. Participants compare it to existing projects, request more rigorous agent‑level benchmarks, and explore integration details such as language coverage and compatibility with other harnesses. Concerns arise about the reliability of token‑saving metrics, the impact on agent behavior, and the need for clearer documentation and evaluation, while suggestions for implementation language and benchmark extensions are also mentioned.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48169874" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hellmood.111mb.de//wake_up_16b_writeup.html" target="_blank">WriteUp: 16 Bytes of x86 that turn Matrix rain into sound</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by HellMood • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Released at Outline Demoparty May 2026, “wake up! 16b” is a 16‑byte x86 real‑mode DOS program that uses the VGA text buffer (DS = 0xB800) as a calculation canvas to generate an infinite Sierpinski fractal while simultaneously driving the PC speaker. After BIOS int 10h sets 40×25 text mode (character 0x20, attribute 0x07), the loop performs `lodsb`, `sub si,57` (net –56 bytes per iteration), `xor [si],al`, and `out 61h,al`. Modeling the algorithm with 16‑byte steps shows a running prefix sum whose values follow 2·C(k+p, p‑1) (mod 256); replacing addition with XOR isolates bit 1, yielding Rule 60 cellular automaton behavior that maps directly to the Sierpinski triangle. The `out 61h,al` instruction toggles speaker bit 1, producing square‑wave audio whose rhythm mirrors the fractal’s geometry. The –56‑byte stride visits only addresses multiples of 8, requiring 8 192 iterations (seven wraps) and halving the audio frequency (one octave lower). Spatially, –56 ≡ 24 (mod 80) bytes shifts the pattern 12 columns right per step, resulting in ten evenly spaced vertical columns. Output varies with initial memory contents; a full clear would improve determinism but exceeds the 16‑byte constraint.
+          </div>
+          <a href="https://hellmood.111mb.de//wake_up_16b_writeup.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The passage presents a purely technical exposition of the 16‑byte “wake up! 16b” demo, describing its use of video memory to generate a Sierpinski fractal via a Rule‑60 cellular automaton and to drive the PC speaker through direct port output. It emphasizes the role of XOR operations, memory layout, and hardware quirks in shaping both visual patterns and audio tones, maintaining an objective, detail‑focused tone without expressing evaluative sentiment or contrasting viewpoints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48173962" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cognitum.one/RuView#capabilities" target="_blank">Sense Humans with WiFi – Ruview</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by unixhero • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://cognitum.one/RuView#capabilities" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey mixed reactions, noting that the concept appears overly influenced by AI trends while also recognizing the novelty of the approach. Technical concerns focus on the difficulty of maintaining efficiency in always‑on sensing, specifically avoiding unnecessary processor cycles when the environment remains unchanged, as many existing systems still rely on continuous polling. Overall, there is both skepticism about the AI framing and acknowledgment of practical implementation challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48157639" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/scientists-id-corkscrew-killer-behind-gruesome-seal-deaths" target="_blank">Cannibalistic attacks between gray seals leave telltale “corkscrew” injuries</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by gmays • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.science.org/content/article/scientists-id-corkscrew-killer-behind-gruesome-seal-deaths" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express curiosity about why seal predators consume only select parts of their prey and whether similar behavior occurs in other species, while questioning the role of human intervention in natural population dynamics. They highlight observations of brood reduction in birds and compare it to infanticide in mammals, noting the difficulty of studying such events. A recurring theme is skepticism toward idealized views of nature, emphasizing that wildlife interactions can be harsh, opportunistic, and governed by ecological pressures rather than moral considerations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48141960" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
