@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://geohot.github.io//blog/jekyll/update/2026/05/24/the-eternal-sloptember.html" target="_blank">The Eternal Sloptember</a>
+        </h2>
+        <span class="article-meta">
+          99 points • by razin • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author argues that integrating AI agents into software development is a costly mistake because current models cannot truly program. They describe agents as statistical systems that mimic code distributions, producing broken output that becomes harder to detect as model accuracy improves. Personal experiments with agents over six months (e.g., Tinygrad contributions, USB‑PCI reverse engineering) yielded slower, lower‑quality results compared to manual work, despite extensive prompt tuning. The author acknowledges AI’s usefulness for rapid prototyping and search but rejects it as a substitute for professional engineers. They warn that large organizations, with slower feedback loops and less diligent code review, will likely adopt agents indiscriminately, leading to increased low‑quality code (“slop”) and diminished overall software quality. In contrast, high‑performing individuals tend to scrutinize generated code and limit its use to narrow domains. The piece concludes that future effective programming agents will require world models and deeper reasoning beyond current reinforcement‑learning‑based approaches.
+          </div>
+          <a href="https://geohot.github.io//blog/jekyll/update/2026/05/24/the-eternal-sloptember.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments portray AI‑assisted coding as a powerful search‑and‑generation aid that accelerates boiler‑plate creation, bug detection, and routine tasks, especially when guided by skilled users. Many acknowledge its current limitations: inconsistent output quality, reliance on outdated APIs, inability to make novel architectural decisions, and the need for human review as a safety driver. Opinions diverge between optimism about rapid model improvements and caution against overhype, likening expectations to past tech fads. Overall, the consensus is that AI enhances productivity but remains a supplemental tool rather than a full replacement for human engineers.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48263238" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://audiomass.co/?multitrack=1" target="_blank">Show HN: Audiomass – a free, open-source multitrack audio editor for the web</a>
+        </h2>
+        <span class="article-meta">
+          253 points • by pantelisk • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The supplied text contains only a single line: “Title: AudioMass – Audio Editor.” No additional description, specifications, features, platform information, or usage details are provided. Consequently, the only factual element that can be summarized is that the content references a product or tool named AudioMass, which is categorized as an audio editor. No further technical or contextual information is available in the excerpt.
+          </div>
+          <a href="https://audiomass.co/?multitrack=1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the web‑based audio editor, praising its intuitive interface, FLAC support, and nostalgic feel reminiscent of classic desktop tools. Users appreciate the solid design and see it as a viable alternative to Audacity and older editors. Common requests include cloud‑based track collaboration, import of additional formats such as XM and stem bundles, and clarification on limits for project size, track count, and tooltips. Several inquiries also ask about MIDI, VST, and other advanced feature support. Overall sentiment is positive with constructive suggestions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48258015" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://esengine.github.io/DeepSeek-Reasonix/" target="_blank">DeepSeek reasonix, DeepSeek native coding agent with high caching and low cost</a>
+        </h2>
+        <span class="article-meta">
+          495 points • by Alifatisk • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Reasonix is a DeepSeek-native AI coding agent designed for use directly within a terminal environment, enabling developers to leverage AI-powered code assistance and generation without leaving the command line.
+          </div>
+          <a href="https://esengine.github.io/DeepSeek-Reasonix/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to the DeepSeek coding agent. Users acknowledge the strong cache‑hit efficiency and potential cost savings, but many question the necessity of a dedicated harness given existing tools like OpenCode, Claude Code, and Pi. Recurrent criticisms target the site’s UI—animated typing, layout issues, dark‑theme defaults—and the API documentation’s clarity. Several participants call for benchmark data, better handling of context invalidation, and clearer differentiation from other agents, while others remain cautiously interested in trying the tool.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48256953" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://corrode.dev/learn/migration-guides/go-to-rust/" target="_blank">Migrating from Go to Rust</a>
+        </h2>
+        <span class="article-meta">
+          176 points • by jabits • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The guide examines migrating backend services from Go to Rust, outlining where the languages overlap (compiled, statically typed, single‑binary deployment, strong concurrency) and where they diverge in safety guarantees, runtime control, and ergonomics. It compares toolchains (go.mod vs Cargo.toml, built‑in linting/formatting), showing Rust’s first‑party utilities replace many third‑party Go tools. Core differences include Rust’s type‑system enforcement of nil handling (Option<T>), error propagation (Result<T,E> with the ? operator), and thread‑safety (Send/Sync) versus Go’s runtime checks and linting. The article highlights Rust’s zero‑cost generics, monomorphization, and lack of garbage‑collection pauses, which can reduce latency in high‑throughput services, while acknowledging Go’s pragmatic productivity and built‑in context cancellation. Concurrency models are contrasted: Go’s goroutine + channel model versus Rust’s async/await on executors (e.g., Tokio) with explicit Send/Sync bounds. Pattern mappings, migration strategies, and trade‑offs (boilerplate vs compile‑time safety) are provided for incremental adoption.
+          </div>
+          <a href="https://corrode.dev/learn/migration-guides/go-to-rust/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments present a balanced view of Go versus Rust for web‑backend development. Go is praised for its mature standard library, stable, widely used libraries, lightweight goroutine concurrency, fast compile times and simpler deployment, making it attractive for production services and teams without deep Rust expertise. Rust is valued for its memory safety, lack of garbage‑collection pauses, deterministic performance and strong compile‑time guarantees, which suit high‑performance or safety‑critical workloads. Critiques note Rust’s fragmented error handling, larger dependency trees and immature crate ecosystem, while Go’s verbose error syntax and limited compile‑time mutex checks are seen as drawbacks. Overall, opinion leans toward choosing the language that aligns with project priorities, team skill set and required performance versus development speed.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48259808" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wired.com/story/a-fundamental-principle-of-aeronautical-engineering-has-been-overturned/" target="_blank">A fundamental principle of aeronautical engineering has been overturned</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by littlexsparkee • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Aerodynamic drag limits the speed of aircraft, cars, and high‑speed trains, and is governed by the transition of the boundary layer from laminar (low‑friction) to turbulent (high‑friction) flow. For more than eight decades engineers assumed that a perfectly smooth surface was essential to delay this transition, based on Ichiro Tani’s 1940 study linking surface roughness to earlier turbulence. In the 1990s, Yasuaki Kohama’s team showed that certain fibrous roughness could postpone transition under specific conditions, and recent work by Aiko Yakino at Tohoku University demonstrated that “distributed micro‑roughness” (DMR)—a pattern of minute, random irregularities invisible to the naked eye—reduces aerodynamic drag by up to 43.6 %. DMR differs from shark‑skin riblets, which align vortices via longitudinal grooves; instead, DMR delays laminar‑to‑turbulent switching through stochastic surface features. Precise drag measurements were obtained using the Institute’s 1‑meter magnetic support balance system, which levitates models in a wind tunnel, eliminating interference from support structures, and covering Reynolds numbers from 0.35 × 10⁶ to 3.6 × 10⁶.
+          </div>
+          <a href="https://www.wired.com/story/a-fundamental-principle-of-aeronautical-engineering-has-been-overturned/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mix of curiosity and cautious skepticism toward claims that micro‑roughened surfaces lower aerodynamic drag. Several contributors reference established examples such as golf‑ball dimples, turbulator strips, and biological surfaces, acknowledging that controlled roughness can help keep boundary layers attached. Others question the magnitude of real‑world fuel‑efficiency gains, the durability of such finishes, and request experimental data from actual aircraft. Overall, the discussion highlights interest in the concept while emphasizing the need for concrete measurements and practical feasibility assessments.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48260117" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://phabricator.services.mozilla.com/D301917" target="_blank">Bug 1950764: Work Around Crash on Intel Raptor Lake CPU</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by luu • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bug 1950764 reports a crash occurring on Intel Raptor Lake CPUs and proposes a workaround. The issue is linked to the Rust implementation of zlib (path: third_party/rust/zlib‑rs/src/deflate/). The revision was authored on 21 May 2026 and underwent multiple updates, with timestamps ranging from 21 May 23:39 UTC to 23 May 12:41 UTC. Each update appears duplicated in the event log. No additional technical details, code changes, or mitigation steps are provided in the excerpt.
+          </div>
+          <a href="https://phabricator.services.mozilla.com/D301917" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys strong criticism of Intel’s handling of a Raptor Lake errata, noting the absence of official documentation or microcode fixes and questioning whether the problem stems from design flaws or post‑manufacturing damage. Commenters emphasize that the defect appears tied to clock‑propagation edge cases rather than a universal architectural bug, and they criticize media coverage for spreading inaccurate information. There is a consensus that comprehensive regression testing and upstream compiler or microcode changes are needed, while blanket software work‑arounds are deemed impractical.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48242546" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ohwr.org/projects/white-rabbit/" target="_blank">White Rabbit – sub-nanosecond synchronization for large distributed systems</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by michaelsbradley • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            White Rabbit is an open‑hardware, Ethernet‑based platform that provides sub‑nanosecond synchronization accuracy with picosecond‑level precision for large distributed systems. It enables deterministic, reliable data delivery and precise time‑tagging of measured data, while using the same network for data acquisition and transmission. Key capabilities include:
+
+- Sub‑nanosecond timing synchronization across thousands of nodes.  
+- Support for typical inter‑node distances of up to 10 km.  
+- Gigabit‑rate Ethernet links offering reliable data transfer.  
+- Fully open hardware, firmware, and software, allowing multi‑vendor commercial production.  
+
+The system is intended for installations requiring precise trigger timing and coordinated data collection over extensive networks. Contact: Maciej Lipinski.
+          </div>
+          <a href="https://ohwr.org/projects/white-rabbit/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights a CERN‑origin paper describing a novel Ethernet‑style link in which physical layers are synchronized at layer 1, achieving sub‑nanosecond timing over distances up to 10 km. Participants note the technical intrigue of continuous gigabit transmission and the precise clock coordination, while also observing that the implementation is not hosted on GitHub and that recruitment links on the page appear as a promotional element. The overall tone is curious and mildly appreciative of the engineering approach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48245916" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lospino.so/blog/c-constructs-that-still-dont-work-in-cpp/" target="_blank">C constructs that still don&#39;t work in C++</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by jalospinoso • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - C++20 added designated initializers, but they apply only to direct non‑static members, must follow declaration order, and cannot mix with positional initializers; out‑of‑order, array, and nested designators that C99 allows remain invalid.  
+- C23 removes the old “no‑prototype” function syntax; a declaration without a parameter list now behaves like `void f(void)`, matching C++ and causing older C code to fail if it relied on the previous rule.  
+- `malloc` still returns `void*` that must be cast in C++, and object lifetime rules differ: C++20 creates implicit‑lifetime objects for trivial aggregates, but constructors, initialization, and exception safety are not provided; proper construction/destruction should use placement‑new or high‑level facilities such as `std::make_unique`.  
+- `const_cast` only removes constness from the type system; writing through the resulting pointer is undefined if the original object is truly const.  
+- Enumerations: C enumerators have integer type, with an implementation‑defined underlying type; C++ treats enums as distinct types, requiring explicit casts for integer↔enum conversion, and recommends `enum class` for C++ APIs.  
+- `restrict` is a C qualifier with no standard C++ equivalent; use compiler‑specific extensions in isolated boundaries if needed.  
+- Flexible array members are valid C only; in C++ replace them with `std::vector` or `std::span` and preserve the C layout only at ABI boundaries.  
+- Migration guidelines: explicitly label language mode, avoid assuming C works in C++, consider ownership and lifetime, and confine non‑portable extensions to tested, named boundaries.
+          </div>
+          <a href="https://lospino.so/blog/c-constructs-that-still-dont-work-in-cpp/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment outlines several incompatibilities that prevent C headers from being directly usable in C++, citing differences in atomic definitions, noreturn syntax, inline semantics, and the absence of anonymous structs in C++. It notes that many of these divergences are intentional from the C++ perspective, though some remain surprising because they disrupt historically common C patterns. The author highlights philosophical shifts such as object‑lifetime handling, stronger type systems, and ABI assumptions, and expresses particular interest in which C features, especially `restrict`, programmers still miss in modern C++.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48228608" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.dougmacdowell.com/50-hours-to-draw-some-lines.html" target="_blank">I spent 50 hours drawing a line graph</a>
+        </h2>
+        <span class="article-meta">
+          476 points • by dougdude3339 • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Doug MacDowell’s “50 Hours to Draw Some Lines” documents a hand‑drawn data visualization created over 50 hours using traditional drafting tools—rulers, pencils, ink, a lettering kit, and circle stencils—rather than software. The process begins with a precise grid drawn on a 20 × 24 in. sheet, establishing margins and 396 one‑inch squares. Data points are plotted as dots, circles define line weight, and a ruler or debit‑card edge connects circles to form clean lines, which are then inked. Pencil marks are erased, leaving crisp ink lines; titles, axis labels, annotations, and optional signatures are added with the lettering kit. MacDowell references historic hand‑drawing manuals (Tufte, Dubois, Brinton, William Willard) and notes that the technique mirrors pre‑computer professional drafting. He contrasts the labor‑intensive method with the speed of digital tools, using the project as both an artistic exercise and a study of manual visualization techniques.
+          </div>
+          <a href="https://www.dougmacdowell.com/50-hours-to-draw-some-lines.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively praise the meticulous, hand‑drawn approach, highlighting its aesthetic appeal, educational value, and the satisfaction of crafting precise visuals without software. Several contributors share personal experiences with traditional drafting tools, recommend reference books, and note the historical significance of such techniques. At the same time, a minority question the practicality of investing many hours on a single chart, contrasting it with modern, faster digital methods and the growing role of AI. Overall, the discussion balances admiration for craftsmanship with pragmatic concerns about efficiency.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48223997" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://epoch.ai/data-insights/ai-chip-component-cost-shares" target="_blank">Memory has grown to nearly two-thirds of AI chip component costs</a>
+        </h2>
+        <span class="article-meta">
+          343 points • by intelkishan • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The analysis estimates per‑chip costs for AI processors from Nvidia, AMD, Google, and Amazon across four categories: HBM memory, logic dies, advanced packaging (CoWoS), and auxiliary components. By applying quarterly production volumes, total component spending is calculated for each quarter from Q1 2024 to Q4 2025. Memory’s share of component spend rises from 52 % to 63 % over the period, while advanced packaging declines from 19 % to 15 % and auxiliary components fall from 15 % to 9 %. The logic die portion remains steady at roughly 13‑14 %. Overall AI‑chip component expenditures grow from about $22 billion in 2024 to $52 billion in 2025; HBM memory accounts for roughly $20 billion of the increase.
+          </div>
+          <a href="https://epoch.ai/data-insights/ai-chip-component-cost-shares" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey widespread frustration over rapidly rising DRAM prices and perceived supply shortages, linking these trends to heightened AI training and inference demands. Contributors note that memory costs now dominate system budgets, hinder upgrades for gamers and hobbyists, and may limit broader AI adoption unless manufacturers increase capacity growth or reduce prices. Several remarks suggest vertical integration, new fab construction, or regulatory intervention as possible remedies, while others emphasize the need for more memory‑efficient software and cite occasional success finding inexpensive used modules. Overall sentiment is pessimistic about near‑term affordability, with occasional optimism about efficiency improvements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48258684" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
