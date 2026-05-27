@@ -1,0 +1,509 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">May 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.seangoedecke.com/the-just-say-no-engineer-was-a-zirp-phenomenon/" target="_blank">The just-say-no engineer was a ZIRP phenomenon</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by jxmorris12 • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The essay defines the “just‑say‑no engineer” as a senior technical archetype whose primary function is to block changes, prioritize code quality, and limit complexity, contrasting with a “just‑say‑yes” engineer who pushes rapid delivery. During the ZIRP era (2008‑2022), low‑interest financing fueled massive hiring, allowing companies to tolerate bloated engineering staff and rely on such gatekeepers to prevent runaway projects, maintain high technical standards, and enhance hiring reputation. When interest rates rose, tech firms cut 5‑20 % of staff, shifted focus to revenue‑generating AI‑driven features, and withdrew managerial support for the gatekeeping role. Consequently, just‑say‑no engineers now face pressure to approve AI‑generated code, experience reduced influence, and must adapt or relocate to “pure” engineering domains (e.g., core infrastructure, compilers) where slower, higher‑quality development remains valuable. The author argues the archetype’s relevance contracts post‑ZIRP but does not disappear, as niche pure‑engineering teams still require stringent quality oversight.
+          </div>
+          <a href="https://www.seangoedecke.com/the-just-say-no-engineer-was-a-zirp-phenomenon/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display mixed reactions to the claim that ending ZIRP should increase “just‑say‑no” engineering. Some argue that higher capital costs justify stricter project selection and stronger technical standards, while others view the premise as overly cynical or untestable, noting that many AI firms remain unprofitable regardless of interest rates. Opinions diverge on engineering practices such as skipping code reviews, with experiences cited on both sides. Additional remarks broaden the discussion to the broader economic impact of prolonged low‑rate policies, AI hype, and differing industry contexts.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48289439" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developers.cloudflare.com/flagship/" target="_blank">Cloudflare Flagship</a>
+        </h2>
+        <span class="article-meta">
+          133 points • by tjek • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Flagship is Cloudflare’s feature‑flag service that enables safe, code‑free feature rollouts. Flags are defined with targeting rules and percentage‑based rollouts, then evaluated directly in Cloudflare Workers via a native binding. The service conforms to the CNCF OpenFeature standard, allowing the @cloudflare/flagship SDK to be used from Workers, Node.js, or browsers and to replace other providers by a single configuration change. Key capabilities include:
+
+- Type‑safe Worker binding with automatic default fallbacks.  
+- OpenFeature provider for cross‑runtime flag evaluation.  
+- Targeting rules supporting 11 comparison operators, logical AND/OR grouping, and sequential evaluation.  
+- Percentage rollouts using consistent hashing to ensure stable user assignment.  
+- Multi‑type flag variations (boolean, string, number, JSON) for delivering full configuration objects.  
+- Dashboard‑driven flag management, organized into apps per project or service.  
+
+Flagship leverages Cloudflare’s global key‑value store for distributed flag configuration delivery.
+          </div>
+          <a href="https://developers.cloudflare.com/flagship/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Cloudflare’s Flagship client SDK, noting the security warning that a shared API token can expose flag data across all apps and urging caution when used in public‑facing environments. Commenters compare this approach to other providers such as Statsig, LaunchDarkly, and OpenFeature, highlighting preferences for server‑side evaluation, fine‑grained permissions, and robust rollout controls. While many appreciate Cloudflare’s expanding free tier and integration potential, concerns persist about token scope, permission management, and the maturity of the feature‑flag ecosystem.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48287468" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pop.rdi.sh/where-does-next-token-prediction-leave-us/" target="_blank">Where does next-token prediction leave us?</a>
+        </h2>
+        <span class="article-meta">
+          74 points • by 0x5FC3 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The essay critiques the framing of large language models (LLMs) as “next‑token predictors” and the accompanying “solved/cooked” rhetoric that celebrates the obsolescence of various professions. It argues that this optimism stems from a privileged cohort insulated by social safety nets, while the majority face labor displacement as AI reduces the economic utility of human expertise. The author highlights how training data are harvested indiscriminately from publicly available content, often without opt‑out mechanisms, and how massive corporate investment ties AI development to profit motives rather than societal benefit. Claims that AI will democratize knowledge are contrasted with the concentration of compute and model ownership in the hands of a few firms, raising barriers to entry. Concerns are raised about data retention in API services, the use of AI for military purposes, and the broader capitalist dynamics that turn collective human output into rentable assets, leaving individuals with diminished bargaining power and limited agency.
+          </div>
+          <a href="https://pop.rdi.sh/where-does-next-token-prediction-leave-us/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express cautious criticism of AI’s expanding role, emphasizing that automation threatens bargaining power by making workers interchangeable and widening class divides. Observers note a paradox where “democratization” of technical ability can erode unique contributions, while also pointing to uneven global attitudes, with more skepticism in the West than in some developing regions. Ethical worries surface about AI’s use in weaponry and the moral burden on creators, and many question the efficacy of boycotts or simplistic characterizations of AI models, suggesting nuanced debate over both benefits and harms.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48288191" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/blog-post/methyl-methacrylate-tank" target="_blank">Chemistry behind the Garden Grove chemical tank</a>
+        </h2>
+        <span class="article-meta">
+          287 points • by nooks • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.science.org/content/blog-post/methyl-methacrylate-tank" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on recent chemical‑plant incidents, emphasizing technical concerns about containment failures, the absence of passive safety systems, and the risk of larger explosions such as BLEVEs. They express criticism of local and federal authorities for inadequate emergency response, poor communication, and budget pressures on safety agencies, while highlighting the value of thorough investigations like those by the Chemical Safety Board. Overall, the sentiment is apprehensive and dissatisfied, calling for stronger safeguards, better information flow, and sustained oversight to prevent future disasters.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48284712" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.superjumpmagazine.com/the-forgotten-art-of-the-lan-party/" target="_blank">The Forgotten Art of the LAN Party (2023)</a>
+        </h2>
+        <span class="article-meta">
+          67 points • by susam • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            LAN parties are physical gatherings where participants connect gaming devices via a local area network (LAN) to play multiplayer games, originally focused on PCs and later including network‑capable consoles. Their primary advantage in the pre‑broadband era was minimal latency, offering smoother gameplay than online connections. Social interaction—players sharing a space, exchanging reactions, and consuming snacks—was a key component, with events ranging from small home‑based groups (10‑15 participants) to large, sponsor‑backed conventions featuring esports tournaments (e.g., QuakeCon, DreamHack). The rise of high‑speed Internet, online matchmaking, voice platforms (Discord), and always‑online DRM reduced the latency benefit and discouraged studio support for LAN features, leading to a decline in popularity during the 2000s and 2010s. Despite this, modern hardware (gaming laptops, lightweight monitors) and ubiquitous Wi‑Fi make organizing LAN gatherings easier than before, and a mix of classic and newer titles still support LAN play. The article argues that experiencing a LAN party remains a distinctive, worthwhile activity for gamers.
+          </div>
+          <a href="https://www.superjumpmagazine.com/the-forgotten-art-of-the-lan-party/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey a broadly positive view of LAN parties, emphasizing their continued presence through regular gatherings, large events, and personal setups, while recalling nostalgic memories of all‑night sessions and memorable technical hurdles such as power limits and wiring. Participants note practical challenges like advance scheduling, aging interest, and modern platform restrictions that complicate classic LAN connectivity, yet they also highlight community enthusiasm in fighting‑game brackets, school competitions, and family gaming. Some express concern that contemporary revival narratives overlook the distinct wired experience that originally defined LAN parties.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48250300" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unsung.aresluna.org/a-few-interesting-modern-pixel-fonts/" target="_blank">A few interesting modern pixel fonts</a>
+        </h2>
+        <span class="article-meta">
+          297 points • by zdw • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Andrew Gleeson’s Analog Mono addresses the low‑baseline issue of the classic 1990s VCR‑style pixel font, raising descenders for better legibility. Kumiko Yoshida’s Coral Pixels, available on Google Fonts, is a color font that embeds the nostalgic sub‑pixel fringing once produced by chromatic aberration, using it as a stylistic element. Joseph Fatula’s Two Slice is a functional 2‑pixel‑tall font that remains marginally readable despite its extreme height constraint. All these are vector‑based fonts designed for modern operating systems while emulating pixel aesthetics. Geist Pixel, released by Vercel, is presented as a system‑level extension rather than a decorative novelty; it includes carefully tuned kerning, metadata, extra glyphs, and consistent vertical metrics to ensure proper scaling across viewports and seamless integration with existing typographic systems, overcoming typical production issues of traditional pixel fonts.
+          </div>
+          <a href="https://unsung.aresluna.org/a-few-interesting-modern-pixel-fonts/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments revolve around pixel‑style typefaces, noting historic differences in display aspect ratios and the impact on rendering older fonts on modern screens. Contributors share several recommended bitmap fonts, praise the readability of Analog Mono, Two Slice, Departure Mono, and classic options like 04b‑03 and Spleen, while critiquing others such as Geist and Coral Pixels for poor legibility or aesthetic choices. Advice on creating custom fonts with tools like FontForge appears frequently, and there is a recurring appreciation for nostalgic, low‑resolution design balanced with practical readability concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48271448" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.djspeckhals.com/posts/2026-05-22-how-i-bypassed-adobe-and-microsoft-to-build-a-git-tracked-book-production-pipeline/" target="_blank">I Bypassed Adobe and Microsoft to Build a Git-Tracked Book Production Pipeline</a>
+        </h2>
+        <span class="article-meta">
+          196 points • by dustin1114 • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author describes a self‑publishing workflow that replaces proprietary tools (Word + InDesign + Calibre + Kindle Create) with a fully version‑controlled pipeline. Original manuscripts are written in LibreOffice Writer (ODT) using semantic paragraph and character styles for language, poetry, epigraphs, etc. A custom Python/lxml script parses the ODT XML, maps styles via a TOML config, and outputs both XHTML (for Standard Ebooks‑compatible EPUBs) and LaTeX (for high‑quality print PDFs). The EPUB is linted with the Standard Ebooks command‑line tool, ensuring strict compliance with its style guide. LaTeX uses the memoir class with fontspec, polyglossia, graphicx, and microtype for advanced typography. All source files (ODT, generated XHTML, and TeX) are stored in Git, enabling diffs of content changes and reproducible builds on any platform, including Linux. The system eliminates reliance on .docx and .indd files, streamlines updates, and provides consistent print and electronic outputs while preserving the author’s preferred word‑processor editing environment.
+          </div>
+          <a href="https://www.djspeckhals.com/posts/2026-05-22-how-i-bypassed-adobe-and-microsoft-to-build-a-git-tracked-book-production-pipeline/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge the article’s usefulness while noting the author’s limited grasp of existing publishing automation. Contributors cite established workflows—such as InDesign’s placed‑text updates, LaTeX, Asciidoctor, Pandoc, Typst, and CI/CD pipelines—that streamline multi‑format production, and they share personal tools that reduce manual effort. There is a recurring call for more accessible, open‑source converters for Word, PDF, and e‑book formats, and for better handling of print‑ready PDFs. Overall, the discussion is constructive, blending praise with technical critique and suggestions for improvement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48238703" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://xlii.space/eng/from-rust-to-ruby/" target="_blank">From Rust to Ruby</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by xlii • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://xlii.space/eng/from-rust-to-ruby/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments reveal a mixed reaction to the AI‑driven code conversion and the language comparison it presents. While several contributors acknowledge that large language models can speed up development and appreciate Ruby’s concise syntax and developer‑friendly ergonomics, many criticize the reliance on AI without verification, question the claimed stability loss without static types, and dispute the portrayed superiority of Ruby over Rust or Go. Skepticism about exaggerated metrics, concerns over maintainability, and divergent preferences for language verbosity also emerge as recurring themes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48286561" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bcantrill.dtrace.org/2026/05/25/a-portentous-reunion/" target="_blank">A portentous reunion</a>
+        </h2>
+        <span class="article-meta">
+          75 points • by cafkafk • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author recounts a 30‑year college reunion in 2026, noting widespread anxiety about large language models (LLMs) and their impact on knowledge work. Amid this, former classmates reminisce about “BattleTris,” a two‑player, weapon‑enhanced Tetris created in 1993 on a null‑modem link, later polished as a software‑engineering project at Brown (1994) and run on Sun workstations. The game persisted through alumni tournaments, a Sun port, and informal play, but fell dormant as developers moved on to projects like DTrace. In 2024 the author used the LLM Claude to revive BattleTris, first fixing a splash‑screen, then porting it to Linux. Claude identified a critical bug: sendBoard allocated a stack buffer sized by sizeof(int) (4 bytes) but wrote using BTNET_PUTLONG with sizeof(unsigned long) (8 bytes) on x86‑64, causing a 1,114‑byte overflow detected by the stack canary when certain weapons (e.g., spying weapons) were used. After correcting the buffer size, the game ran successfully, prompting a nostalgic reunion game. The piece concludes that LLMs are powerful tools that can restore legacy software without diminishing human creativity.
+          </div>
+          <a href="https://bcantrill.dtrace.org/2026/05/25/a-portentous-reunion/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend nostalgia for earlier internet culture with a recognition that today’s low‑barrier development environment produces many short‑lived, low‑quality apps alongside genuinely enjoyable projects. Participants emphasize that coping with rapid change relies more on emotional regulation, planning and self‑awareness than on mastering specific technologies, and they view AI tools as extensions of human creativity rather than dehumanizing forces. While there is widespread concern among parents and mid‑life adults about AI’s future impact, many also report practical benefits, such as clarified product terminology and personalized recommendations, reflecting a cautiously optimistic stance toward AI as a powerful but manageable instrument.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48275564" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=zokKqP0plrM" target="_blank">IBM Confidential: System/360 File Organization [video]</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by DaiPlusPlus • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The excerpt lists the primary navigation elements typically found in YouTube’s footer. It includes informational links such as “About,” “Press,” and “Copyright,” which provide corporate background, media resources, and intellectual‑property details. “Contact us” offers avenues for user communication, while “Creators,” “Advertise,” and “Developers” target specific stakeholder groups with resources for content production, advertising solutions, and API integration. Legal and policy sections are represented by “Terms,” “Privacy,” and “Policy & Safety,” outlining user agreements, data handling practices, and community‑safety guidelines. Additional functional links include “How YouTube works,” explaining platform operations, “Test new features,” inviting users to trial experimental updates, and “NFL Sunday Ticket,” referencing a sports‑content offering. The footer concludes with the copyright notice “© 2026 Google LLC.”
+          </div>
+          <a href="https://www.youtube.com/watch?v=zokKqP0plrM" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48261120" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
