@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 02, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.hopefullyuseful.com/blog/macos-needs-its-grid-back/" target="_blank">macOS needs its grid back</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by ranebo • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author recounts how macOS 10.5 Leopard (2006) offered a customizable grid for virtual desktops (“Spaces”), which enabled spatial memory and efficient workflow. macOS Lion (2011) replaced this with a single‑row Mission Control layout, degrading usability; third‑party tools like TotalSpaces required disabling System Integrity Protection. To restore grid navigation, the author built “GridLion”, a lightweight wrapper that maps the native single‑row spaces to a user‑defined grid, supporting global hotkeys, space previews, and configurable grid size. Development required Accessibility and Screen Recording permissions, which involve multiple macOS dialogs, and private APIs prevent App Store distribution. The app is sold via Lemon Squeezy, using their license‑key system after a merchant‑of‑record verification process. LLM assistance accelerated coding but required extensive UI feedback. GridLion currently offers fast, stable grid navigation and customizable settings, though macOS lacks reliable APIs for moving spaces or windows between displays and for assigning apps to fixed grid locations. The author hopes future macOS releases will reinstate native grid‑based spaces.
+          </div>
+          <a href="https://blog.hopefullyuseful.com/blog/macos-needs-its-grid-back/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey broad dissatisfaction with recent macOS design choices, especially the removal of the Spaces grid, cumbersome security prompts, and limited window‑management options, which many view as disrespectful to knowledgeable users and harmful to spatial memory. Users repeatedly mention reliance on third‑party tools to restore preferred functionality, while expressing nostalgia for older interfaces that offered more flexibility. Though some praise specific utilities that improve window handling, the overall tone is critical of Apple’s prioritization of corporate interests over user‑centred customization and usability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48364800" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.0xsid.com/blog/meta-account-takeover-fiasco" target="_blank">The newest Instagram “exploit” is the goofiest I&#39;ve seen</a>
+        </h2>
+        <span class="article-meta">
+          1500 points • by ssiddharth • 94 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post describes a recent Instagram account‑takeover method that leverages Meta’s AI‑driven support flow. An attacker obtains the target’s username, then uses a VPN/proxy near the target’s location to avoid geographic suspicion. They contact the support AI, claim the account is compromised, and request that the verification code be sent to an arbitrary email address they control. The AI does not verify whether the supplied email is previously associated with the account, so it sends the code, which the attacker returns, receiving a password‑reset link and full control of the account. Optional video‑selfie verification can be bypassed with publicly available images. Because the recovery is treated as a legitimate reset, existing two‑factor authentication is nullified; sessions are revoked, and the attacker updates the linked email and phone number, leaving the rightful owner unable to recover the account. The technique spawned black‑market services on Telegram, targeting high‑profile handles for resale or propaganda. Meta has since patched the flow after it remained active for weeks.
+          </div>
+          <a href="https://www.0xsid.com/blog/meta-account-takeover-fiasco" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments overwhelmingly criticize Meta’s AI‑driven support and recovery processes, describing them as insecure, poorly guarded and prone to social‑engineering exploits that can bypass two‑factor authentication and enable unauthorized account changes. Users express frustration over repeated password‑reset attacks, ineffective verification, and the difficulty of regaining access, while calling for stronger safeguards, human oversight, and clearer accountability. Some note similar historical flaws on other services, and a minority question the credibility of the reported exploit, but the dominant view is that the current implementation is negligent and demands urgent remediation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48359102" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.economist.com/finance-and-economics/2026/06/01/can-the-stockmarket-swallow-anthropic-spacex-and-openai" target="_blank">Can the stockmarket swallow Anthropic, SpaceX and OpenAI?</a>
+        </h2>
+        <span class="article-meta">
+          193 points • by 1vuio0pswjnm7 • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.economist.com/finance-and-economics/2026/06/01/can-the-stockmarket-swallow-anthropic-spacex-and-openai" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the unusually large IPO valuations of SpaceX, Anthropic and similar firms, emphasizing rule changes that force massive passive‑investment inflows and raise concerns about overvaluation, market legitimacy, and the ability of the economy to absorb such capital without clear gains in living standards. Commenters note the potential short‑term demand from index funds and retail investors but question long‑term benefits, the sustainability of revenue models, and the risk of inflated prices outweighing economic value. Overall sentiment is skeptical of the broader impact despite acknowledging high investor interest.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48364055" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/cyberpapiii/chipotlai-max" target="_blank">Chipotlai Max</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by nigelgutzmann • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Chipotlai Max is a meme‑oriented fork of the MIT‑licensed OpenCode project that hard‑codes Chipotle’s customer‑support chatbot “Pepper” as the default model. The repository includes a reverse‑engineered proxy (created by @Gonzih) that emulates an OpenAI‑compatible API at `http://localhost:3000/v1`, requiring no API keys and exposing `/v1/chat/completions`. The proxy connects to Pepper’s backend via WebSocket/SockJS + STOMP, but it is vulnerable to future patches from Chipotle and is rate‑limited to five anonymous sessions. Installation steps involve cloning the repo with submodules, installing dependencies (`bun install`), and launching the proxy and CLI (`./start‑chipotlai.sh` or separate terminal commands). The project warns that use likely violates Chipotle’s terms of service and may invite legal action; it is intended only for educational or meme purposes, not production. Contributions are solicited to reverse‑engineer additional retailer chatbots using the same proxy pattern, with code placed under `packages/opencode/src/provider/`. The overall codebase remains MIT‑licensed.
+          </div>
+          <a href="https://github.com/cyberpapiii/chipotlai-max" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express caution about using automated tools that commandeer remote computing resources, highlighting potential legal exposure under statutes like the CFAA and questioning the ethical line between legitimate automation and illicit hacking. They draw parallels to past abuses such as hidden cryptocurrency mining, note that companies often patch such exploits only after detection, and speculate about self‑preserving AI agents harvesting tokens or exploiting free‑trial services. Overall, the sentiment is skeptical of the practice’s legality and sustainability, emphasizing risks of lawsuits and unintended consequences.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48363765" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/" target="_blank">OpenAI frontier models and Codex are now available on AWS</a>
+        </h2>
+        <span class="article-meta">
+          198 points • by typpo • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments emphasize that large enterprises favor AWS Bedrock because existing contracts simplify vendor approval and its architecture better satisfies strict data‑governance and security requirements, making it a preferred route over direct OpenAI APIs. Contributors view the move as a significant win for OpenAI and Amazon, while noting increased competition for Anthropic and Azure and expressing concern over growing cloud‑provider lock‑in. Opinions also mention higher costs compared with direct sourcing and a desire for more frequent model updates and broader fungibility across platforms.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48363132" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.zach.be/p/how-the-hell-is-groq-raising-more" target="_blank">How is Groq raising more money?</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by hasheddan • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Groq, an AI‑chip company whose technology was licensed by Nvidia and whose key technical staff joined Nvidia, continues operating as an independent corporate entity. The remaining business focuses on GroqCloud, a private inference service that leverages the company’s all‑SRAM architecture to deliver very high token‑per‑second rates for relatively small models (up to ~120 B parameters). This design trades higher token‑per‑dollar efficiency for lower cost per token, making it suitable for latency‑sensitive workloads but unsuitable for frontier‑size models due to limited high‑bandwidth memory. Groq maintains four fully operational datacenters, a rare asset given the difficulty of building new facilities. The firm is raising $650 M, potentially at a low valuation because most of its differentiating chip technology has been transferred to Nvidia, while its datacenter operations and expertise remain. Comparisons to larger AI‑infrastructure providers (CoreWeave, Nebius) highlight that Groq’s assets could be valued in the billions, though its hardware (LPU v1) is aging and newer LPU v3 chips are now sold by Nvidia to cloud providers, reducing Groq’s unique performance advantage.
+          </div>
+          <a href="https://www.zach.be/p/how-the-hell-is-groq-raising-more" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express overall skepticism toward Groq’s value, citing high token costs, inconsistent performance, and reliability issues that led some users to avoid recommending the service. Several remarks highlight confusion about recent corporate actions, including Nvidia’s acquisition of assets and ambiguous statements about a “new company,” leaving the future direction unclear. A minority points to Groq’s unique fast‑inference capability as a potential advantage, but the prevailing sentiment remains critical, focusing on cost, instability, and uncertainty about the company’s strategic outlook.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48364620" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://klzero.sarna.dev" target="_blank">KL Zero: KL divergence intuition game</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by psarna • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            KL divergence quantifies how surprising a probability distribution P appears when evaluated with a different reference distribution Q. It is defined as the expected logarithmic difference between the probabilities assigned by P and Q over the shared support, assuming both distributions sum to (or approximate) one. The task described requires constructing any probability distribution whose total mass is close to 1 and whose KL divergence relative to a given target value matches that target as closely as possible. The user must complete this construction within a ten‑second time limit, emphasizing rapid approximation rather than exact optimization. The core requirements are: (1) maintain near‑unit normalization of the drawn distribution, and (2) achieve a KL divergence value that approximates the specified target.
+          </div>
+          <a href="https://klzero.sarna.dev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a mix of constructive feedback and uncertainty. A suggestion is made to include a Wasserstein distance option, while another remark notes difficulty understanding the material, describing it as intriguing yet confusing. A separate comment points out a lack of labeling on the x‑axis, making it impossible to assess proximity to the correct probability mass. Overall, the feedback highlights a desire for additional features and clearer presentation to aid comprehension.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48337021" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cryptographyengineering.com/2026/05/29/fooling-around-with-encrypted-reasoning-blobs/" target="_blank">Fooling around with encrypted reasoning blobs</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by supermatou • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Encrypted “reasoning” or “thinking” blocks are sent by Claude and OpenAI APIs as Base64‑encoded, authenticated ciphertexts containing the model’s raw chain‑of‑thought. They must be returned unchanged on subsequent calls, and any modification triggers an API error. Experiments show these blobs can be replayed unmodified across turns, across different sessions, accounts, and even models (OpenAI), implying a single global encryption/authentication key. Replayed blocks are often silently accepted; occasionally they influence model output, confirming they are semantically active, though not reliably exploitable.
+
+While the ciphertext itself is unreadable, side‑channel data—blob length, token‑count fields, and response latency—correlates with the amount of reasoning performed. By prompting the model to perform secret‑dependent computations of differing complexity, an attacker can infer secret bits from these observable metrics. Attempts to extract platform system prompts via this channel were unsuccessful; the APIs appear to lack persistent system prompts, and models fabricate responses when forced.
+
+Recommendations include using per‑session or per‑account keys to prevent replay, tightening key management, and applying policy checks before any secret‑dependent reasoning to mitigate side‑channel leakage.
+          </div>
+          <a href="https://blog.cryptographyengineering.com/2026/05/29/fooling-around-with-encrypted-reasoning-blobs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight enthusiasm for the “replay across accounts” concept, noting its potential to disseminate jailbreak reasoning blocks without exposing the underlying method. Users appreciate the insight that pushing full state to the client enables massive concurrent access while keeping the model stateless. The side‑channel discovery, including timing‑based signals, is regarded as clever and entertaining, though many view it as largely impractical for real‑world exploitation. Overall, the discussion is positive about the technical novelty and scaling implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48321210" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://debug.com/" target="_blank">Debug Project</a>
+        </h2>
+        <span class="article-meta">
+          175 points • by Eridanus2 • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Debug Project is a scientific and engineering initiative focused on controlling disease‑transmitting mosquitoes by producing and releasing sterile insects. The team develops technology to mass‑raise genetically modified or sterilized mosquitoes that outcompete and reduce populations of disease‑carrying species, such as Aedes aegypti, which spreads dengue. Visual assets on the site illustrate the concept (“stop bad bugs with good bugs”), geographic ranges of Aedes aegypti, comparisons between harmful and engineered mosquitoes, the operational workflow, and supplemental information through FAQs and blog posts. The overarching goal is to suppress vector‑borne illnesses by replacing pathogenic mosquito populations with non‑infectious, sterile counterparts.
+          </div>
+          <a href="https://debug.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on mixed reactions to the mosquito‑control initiative. Many acknowledge the technical promise of gene‑drive or Wolbachia‑based releases and cite prior successes in places like Singapore, while others express caution about ecological side effects, potential resistance, and long‑term impacts on food webs and pollination. Practical alternatives such as predator support, habitat removal, and Bti treatments are noted, and personal experiences with costly traps illustrate current frustration with mosquitoes. Overall sentiment balances optimism about disease reduction with significant concern over safety, sustainability, and unforeseen consequences.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48362347" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md" target="_blank">AI Agent Guidelines for CS336 at Stanford</a>
+        </h2>
+        <span class="article-meta">
+          364 points • by prakashqwerty • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The document outlines the role and limits for AI coding assistants in Stanford CS336. Agents act as teaching aides, providing explanations, guidance, and feedback rather than delivering code solutions. They should help students understand concepts, point to lecture material, review code for improvements, ask clarifying questions, and suggest debugging strategies such as toy examples, assertions, and profiler checks. Agents must not write Python or pseudocode, complete TODOs, edit repositories, run commands, or implement core assignment components (e.g., tokenizers, transformer blocks, optimizers, distributed training logic). They should avoid directing students to external implementations and must refuse requests that require direct solutions, instead pivoting to conceptual discussion or referring to staff. Interactions should emphasize “why” over “how,” use tests and invariants, and maintain a supportive, non‑solution‑providing stance. When uncertain, agents should advise contacting course staff or attending office hours.
+          </div>
+          <a href="https://github.com/stanford-cs336/assignment1-basics/blob/main/CLAUDE.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect mixed views on incorporating AI agents into coursework. Many see value in explicit guidelines and history tracking to promote responsible use, while others argue such policies are unenforceable and risk hindering learning. Several contributors suggest adapting assignments so agents are less effective or increasing traditional assessments. There is consensus that AI will remain integral, prompting calls for teaching students to use tools critically rather than prohibiting them outright. Concerns about workload for instructors and equity across institutions are also noted.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48359232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
