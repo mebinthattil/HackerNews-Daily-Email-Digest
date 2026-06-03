@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.ammaraskar.com/github-token-stealing/" target="_blank">1-Click GitHub Token Stealing via a VSCode Bug</a>
+        </h2>
+        <span class="article-meta">
+          182 points • by ammar2 • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post details a vulnerability in VS Code’s web‑based editor (github.dev) that lets an attacker steal a user’s GitHub OAuth token and obtain full repository access with a single click. GitHub Dev loads a lightweight VS Code instance in the browser, which receives an OAuth token via a POST request; the token is scoped to the user’s entire GitHub account, not just the opened repository. VS Code webviews are sandboxed in an iframe (origin vscode‑webview://) and communicate with the host window via window.postMessage. A default handler forwards all keydown events from the webview to the host, enabling the webview to simulate keyboard shortcuts. By injecting malicious JavaScript (e.g., via a markdown‑cell image onerror payload) an attacker can:
+
+1. Trigger the “Notifications: Accept Notification Primary Action” shortcut (Ctrl‑Shift‑A) to approve a recommended‑extension notification.  
+2. Use a custom keybinding (Ctrl‑F1) defined in a local workspace extension to call workbench.extensions.installExtension with skipPublisherTrust enabled, installing a malicious extension that reads the OAuth token and queries https://api.github.com/user/repos.
+
+The exploit works on both github.dev and the desktop VS Code (requiring the victim to open a crafted notebook). Mitigation includes clearing site data for github.dev and avoiding use of the web interface; VS Code’s CSP and DOMPurify limit broader attack vectors. The author disclosed the issue to GitHub and VS Code on June 2 2026.
+          </div>
+          <a href="https://blog.ammaraskar.com/github-token-stealing/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments commend the write‑up’s depth while repeatedly highlighting security concerns surrounding the web‑based VS Code editor’s automatic GitHub sign‑in, noting the broad attack surface and potential token leakage. Contributors express frustration with Microsoft’s security response process, describe personal experiences of token theft, and advocate for tighter, temporary per‑repository permissions or alternative tools. Technical clarification requests about extension installation and CSP behavior appear alongside suggestions to segregate credentials and consider other editors as mitigations. Overall sentiment blends appreciation for the analysis with criticism of current security practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48371562" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://research.contrary.com/report/the-american-missile-crisis" target="_blank">The American Missile Crisis</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by JumpCrisscross • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            US missile stockpiles have fallen sharply since the Cuban Missile Crisis, with analysts warning that a Pacific conflict could exhaust munitions in days. The primary bottleneck is solid‑rocket motor (SRM) production, which depends on ammonium perchlorate (AP) as oxidizer. After the 1988 PEPCON explosion, US AP capacity contracted to a single plant (AMPAC, Utah); new facilities require >1 year for approval and up to a decade to build, making rapid scale‑up infeasible. SRM manufacture also faces strict DoD Hazard Class 1.3 safety regulations and a dwindling contractor base. Parallel material constraints include reliance on foreign rare‑earths, titanium sponge (Japan), and niobium (Brazil). Compared with China, Russia, and Iran—who employ both solid and liquid propellants—the US remains solid‑dominant. Liquid‑propulsion missiles offer throttling, higher specific impulse (300‑450 s vs ~250 s for solids), and production advantages because missiles can be assembled empty and fueled shortly before launch, enabling gigafactory‑style scaling. Developing an independent liquid‑propulsion supply chain is presented as the most viable path to restore a resilient national munitions stockpile.
+          </div>
+          <a href="https://research.contrary.com/report/the-american-missile-crisis" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively criticize the article’s credibility, noting the publisher’s financial ties to missile manufacturers and questioning the objectivity of its analysis. They argue that U.S. missile stockpiles, especially liquid‑fuel systems, are already strained and that reliance on such weapons reflects broader strategic and industrial shortcomings. Critics highlight the high cost and logistical fragility of current U.S. military programs, suggest that the conflict could be avoided through diplomacy, and contend that expanding missile inventories does not enhance safety. Overall, the tone is skeptical of both the article’s claims and U.S. defense policy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48379551" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/c0dejedi/nbd-vram" target="_blank">Use your Nvidia GPU&#39;s VRAM as swap space on Linux</a>
+        </h2>
+        <span class="article-meta">
+          212 points • by tanelpoder • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A daemon (nbd‑vram) allocates NVIDIA GPU VRAM through the CUDA driver API and presents it as a block device via the kernel’s NBD driver, allowing the VRAM to be used as a Linux swap device (/dev/nbdX). The solution avoids the NVIDIA P2P API, which is restricted to Quadro/datacenter GPUs, by using cuMemcpyHtoD/DtoH for data transfer, requiring only libcuda.so.1 (no full CUDA toolkit). It runs on any consumer RTX/GTX card, Linux kernel 3.0+, and the built‑in nbd module; no custom kernel modules or NVIDIA kernel symbols are needed, so it survives driver and kernel updates.
+
+Typical configuration (e.g., RTX 3070 Laptop, 8 GiB VRAM) allocates up to 7 GiB for swap, placed ahead of zram and SSD swap (priority 1500). Overflow order: RAM → VRAM (PCIe, ~1.3 GB/s sequential throughput) → zram (CPU‑compressed) → SSD. The service installs via `install.sh`, starts automatically via systemd, and can be limited by battery state. Configuration variables (`VRAM_SETUP_SIZE_MB`, `VRAM_SWAP_PRIORITY`) are editable in `/etc/nbd-vram.conf`. The daemon backs off in 512 MiB steps if insufficient free VRAM remains.
+          </div>
+          <a href="https://github.com/c0dejedi/nbd-vram" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a mixed but cautious interest in using GPU VRAM as a swap or ram‑drive. Contributors acknowledge the niche appeal for laptops with non‑upgradable memory and occasional idle VRAM, yet many highlight performance limitations such as low sequential throughput and uncertain random‑access speed. Compatibility concerns arise around driver stability, dynamic allocation under Wayland, and lack of benchmarks against NVMe. Historical implementations and open‑source forks are noted, while skepticism remains about practical benefits versus the risk of exhausting valuable VRAM. Overall sentiment is tentative curiosity tempered by technical reservations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48377404" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://agenticmotherfucking.website" target="_blank">Agentic Mfw</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by elmerland • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page presents a deliberately minimalist HTML site while satirically contrasting it with contemporary development trends. It argues that traditional clean‑code principles—lightweight assets, cross‑browser consistency, accessibility, semantic markup, and HTTPS—are now treated as historical artifacts. Modern practice, it claims, favors high complexity, large dependency trees, and massive bundles as signals of technical sophistication and investment potential. The author critiques the shift toward “agentic” pipelines that spin up numerous micro‑services, vector databases, and retrieval‑augmented generation (RAG) systems, intentionally consuming large token volumes to attract venture funding. Business logic is framed as token burning rather than profitability, with buzzwords such as “native” and “agentic” used to justify high compensation. Open‑source contribution processes are described as dominated by automated bots that indiscriminately merge or dismiss pull requests, rendering manual effort ineffective. The overall message is a cynical assessment of current web‑development economics and the devaluation of maintainable, accessible code.
+          </div>
+          <a href="https://agenticmotherfucking.website" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a generally negative tone toward AI‑generated content, describing it as hyperbolic, inaccessible, and exhausting, with many expressing frustration over perceived commercialization and the cycle of funding that sustains it. While a few note the piece’s satirical cleverness and acknowledge its accurate reflection of current attitudes, the dominant view criticizes the degradation of usability, the focus on attention metrics, and the broader implications of AI dominance in creative work. Overall, there is fatigue and disapproval of the prevailing direction.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48379203" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://microsoft.ai/news/introducingmai-code-1-flash/" target="_blank">MAI-Code-1-Flash</a>
+        </h2>
+        <span class="article-meta">
+          430 points • by EvanZhouDev • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            MAI‑Code‑1‑Flash is a coding model optimized for real‑world developer workflows rather than benchmark‑only performance. It was trained using GitHub Copilot production data, enabling it to interact with surrounding tools and perform agentic coding tasks. The model incorporates adaptive solution‑length control, allowing concise responses for simple queries and deeper reasoning when needed, which reduces token consumption by up to 60 % and improves latency and cost. Evaluation on the production harness compared MAI‑Code‑1‑Flash with Claude Haiku 4.5 across SWE‑Bench Verified, SWE‑Bench Pro, SWE‑Bench Multilingual, and Terminal Bench 2. MAI‑Code‑1‑Flash achieved higher pass rates on all four benchmarks, including a 16‑point advantage on SWE‑Bench Pro (51.2 % vs 35.2 %). It also required fewer solution tokens, demonstrating that increased accuracy can be achieved without higher token usage. The reported results emphasize both improved quality and efficiency for developers using Copilot‑style environments.
+          </div>
+          <a href="https://microsoft.ai/news/introducingmai-code-1-flash/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects a predominantly skeptical view of the new model’s practical value. Commenters note its modest benchmark scores—around 50 % on SWE‑Bench—especially when compared to older, smaller models like Claude Haiku, and question the relevance of such benchmarks. Pricing and token‑cost transparency are recurring concerns, with many preferring established tools that offer clearer economics. While some acknowledge Microsoft’s engineering resources and the potential of lighter models for specific tasks, overall sentiment leans toward disappointment in performance, usability issues, and marketing claims.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48374466" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://research.ligo.bio/posts/unreasonable-redundancy-of-natural-protein-folds/" target="_blank">The Unreasonable Redundancy of Nature&#39;s Protein Folds</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by ray__ • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post analyzes why expanding sequence‑derived training data does not proportionally increase structural diversity for deep‑learning protein design. AlphaFold3’s scaling converts billions of metagenomic sequences into predicted 3D structures, but natural proteins reuse a limited set of folds. By filtering low‑confidence residues (pLDDT < 65), fragmenting confident regions, and applying recursive spectral bisection (Fiedler vector on a residue‑nearest‑neighbor graph) to split multi‑domain chains, the authors isolate compact structural units. Foldseek clustering of ~2 M MGnify fragments (≈30 % sequence identity) followed by a TM‑align audit (merge if min(tm_norm) ≥ 0.7) reduces the dataset to ~25 k distinct structural neighborhoods; 71.5 % of fragments reside in the top 1 000 clusters. Uniform cluster sampling over‑represents common folds, while uniform fragment sampling repeatedly revisits them. A reweighting exponent γ (≈0.5) balances natural abundance against fold diversity. The findings suggest that enzyme‑design models will see diminishing returns from merely adding more natural sequences and must address the inherent redundancy of protein fold space.
+          </div>
+          <a href="https://research.ligo.bio/posts/unreasonable-redundancy-of-natural-protein-folds/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express enthusiasm for the idea that many natural phenomena, especially in biology, can be modeled as graphs and reduced to lower‑dimensional representations such as protein structures or neural manifolds. They note that evolutionary processes tolerate redundancy, citing concepts like genetic drift and neutral theory, which encourages exploring less natural or unconventional structures to locate informative regions of search space. The discussion also references prior work on protein fold diversity and suggests that evolution is permissive of modest structural reuse, supporting the broader viewpoint.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48379669" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.lumafield.com/scan-of-the-month/byd" target="_blank">CT scans of BYD car parts</a>
+        </h2>
+        <span class="article-meta">
+          304 points • by viasfo • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article traces the engineering evolution of disposable beverage containers, emphasizing how extensive design, materials science, and manufacturing infrastructure underlie even the simplest plastic bottles. Early bottling used glass (e.g., Coca‑Cola 1899, Pellegrino 1900) before synthetic plastics emerged; Coca‑Cola’s 1975 acrylonitrile‑copolymer “Easy‑Goer” failed due to leaching and FDA ban in 1977. DuPont’s development of polyethylene terephthalate (PET) enabled lightweight, transparent, food‑safe bottles, with injection stretch blow molding (ISBM) forming preforms that are heated, stretched, and blown to align polymer chains for strength and clarity. PET bottle walls thinned from ~0.3‑0.4 mm (early 2‑L soda bottles) to ~0.2 mm for water, cutting mass by up to 50 % and allowing designs such as petaloid bases that eliminate glued bottoms. Major brands (Aquafina, Dasani, Smartwater) drove cost‑engineering, while companies like Niagara Bottling claim 60 % plastic reduction since the late 1990s. Despite recyclability, PET bottles often become mixed waste, highlighting ongoing challenges in post‑consumer handling.
+          </div>
+          <a href="https://www.lumafield.com/scan-of-the-month/byd" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively recognize BYD’s robust construction, high‑quality power‑train components and deep vertical integration, highlighting the integrated E‑axle and efficient design as notable strengths compared with legacy manufacturers. Technical observations correct a key‑mechanism detail and note the usefulness of CT scanning for component analysis. At the same time, commenters express frustration with protectionist policies that limit access to Chinese EVs, criticize U.S. automakers for slower adaptation, and question the article’s objectivity, viewing it as promotional rather than purely educational.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48375824" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.roku.com/developer/roku-lt-os" target="_blank">Roku LT Operating System open source distribution</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by dpmdpm • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://blog.roku.com/developer/roku-lt-os" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions: there is clear concern about privacy implications of Automatic Content Recognition, viewing it as intrusive regardless of open‑source status. The availability of the SDK on GitHub, primarily in C rather than Brightscript, is seen as reasonable and well‑documented, though some users desire textual documentation to supplement videos that become outdated. Additional remarks question the need for an RTOS in the remote and request a Roku remote with a physical keyboard, indicating interest in hardware improvements.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48378495" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.capstone-engine.org/" target="_blank">Capstone – multi-platform, multi-architecture disassembly framework</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by gregsadetsky • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Capstone is a lightweight, multi‑platform disassembly framework written in pure C and released under the BSD license. It supports a wide range of architectures—including ARM/ARM64, x86 (16/32/64), MIPS, PowerPC, RISC‑V, WebAssembly, SPARC, SystemZ, and many legacy CPUs—through a single, architecture‑neutral API that returns detailed instruction information and implicit register semantics. The library is thread‑safe, suitable for embedding in firmware or OS kernels, and offers bindings for D, Clojure, F#, Common Lisp, VB, PHP, PowerShell, Haskell, Perl, Python, Ruby, C#, Node.js, Java, Go, C++, OCaml, Lua, Rust, Delphi, Free Pascal, and Vala.  
+
+Recent releases (2025‑2026) focus on security patches, ISA extensions, and performance improvements:
+- **6.0.0‑Alpha9** – fixes GHSA‑5m9f‑vqcm‑g5pr and GHSA‑jrw4‑wj52‑2vw8, adds pre‑release header.
+- **6.0.0‑Alpha8** – adds ColdFire ISA, expands M680X, refines RISC‑V details, speeds x86 decoding, introduces x86 MOVSXD.
+- **5.0.9** – corrects CS_VERSION_EXTRA, backports CVE fixes.
+- **5.0.8** – x86 speedups, RTLD_DEEPBIND for Python, MOVSXD support.
+- **6.0.0‑Alpha7** – major RISC‑V update, 32‑bit build support, consistent CS_ERR_MEM, x86‑64 segment‑override fixes.
+- **5.0.7** – CMake build fixes, CVE‑2025‑68114/67873 patches.
+- **6.0.0‑Alpha6** – improved x86 register semantics, cross‑build, M68K handling, Alpha immediates, PIC static libs, CVE remediation.
+- **6.0.0‑Alpha5** – SPARC module to LLVM 18, Apple‑specific AArch64 instructions, ABI3 Python wheels, decoder/detail fixes.
+          </div>
+          <a href="https://www.capstone-engine.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48378925" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://law.stanford.edu/press/ai-outperforms-law-professors-in-stanford-law-study/" target="_blank">AI outperforms law professors in Stanford Law study</a>
+        </h2>
+        <span class="article-meta">
+          157 points • by berlianta • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A Stanford Law School study directed by Professor Julian Nyarko evaluated whether large language models (LLMs) can serve as tutors for contract‑law questions. Sixteen law professors from U.S. schools generated 40 representative questions, wrote answers, and then blind‑rated AI‑generated responses versus peer answers across nearly 3,000 anonymized pairings. AI responses were preferred in 75 % of head‑to‑head comparisons, and only 3.5 % of AI answers were flagged as pedagogically harmful versus 12 % for human answers. The study calibrated AI output to match length and structure of human replies and included several models, such as commercial tutoring systems and Google’s Notebook LM, which all performed comparably to the top human instructor. Researchers conclude that AI can provide high‑quality, on‑demand support in judgment‑rich fields like law, though they caution that optimal implementation and safeguards remain open questions. The work was conducted through Stanford’s Legal Innovation through Frontier Technology Lab (liftlab), which aims to expand access to advanced legal services via AI.
+          </div>
+          <a href="https://law.stanford.edu/press/ai-outperforms-law-professors-in-stanford-law-study/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong skepticism toward the study’s methodology, citing a small professor sample, high variance, selective focus on Google models, and lack of raw answer data, which many view as undermining statistical validity. At the same time, participants acknowledge that LLMs could lower costs and increase access when used as tutoring or drafting aids, provided expert supervision mitigates hallucinations and legal liability. Overall the discussion balances doubt about the paper’s conclusions with cautious optimism about limited, well‑controlled applications of legal AI.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48377761" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
