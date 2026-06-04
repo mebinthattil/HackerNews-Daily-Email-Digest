@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 04, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released/" target="_blank">Elixir v1.20: Now a gradually typed language</a>
+        </h2>
+        <span class="article-meta">
+          651 points • by cloud8421 • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Elixir v1.20 introduces a set‑theoretic, gradually typed system that performs full type inference and checking without requiring explicit annotations. The core “dynamic()” type acts as a range that can be narrowed through program usage, enabling compatibility checks that only flag violations when inferred types are disjoint from required ones, thereby reporting verified bugs with a low false‑positive rate. The compiler infers unions, intersections, and negations from guards, pattern matches, and case clauses, allowing dead‑code detection and precise type refinement (e.g., narrowing a generic map to %{…, a: number(), b: number()}). Benchmarks show Elixir passes 12 of 13 categories in the “If T: Benchmark for Type Narrowing,” demonstrating strong type recovery. v1.20 also adds compilation‑time optimizations, including a new `:module_definition` option (`:compiled` vs `:interpreted`) that speeds builds on multi‑core machines. Future work targets efficient recursive, parametric, and map‑enumerable types before introducing explicit type signatures and typed structs.
+          </div>
+          <a href="https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show broad enthusiasm for Elixir’s new gradual‑type system, citing reduced type‑related bugs, faster compilation, and increased confidence in large projects while still valuing immutability and functional ergonomics. Several users note that pattern matching and tuple conventions already mitigate errors, so opinions differ on how essential static typing is. Skepticism appears around potential performance impact, added complexity, and limited debugging tools, with some preferring typed alternatives such as Gleam or Rust. Overall the community views the typing addition as a positive step that complements, rather than replaces, Elixir’s dynamic strengths.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48388324" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://maxleiter.com/blog/weights" target="_blank">&#34;They&#39;re made out of weights&#34;</a>
+        </h2>
+        <span class="article-meta">
+          201 points • by MaxLeiter • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The piece is a dialogue that frames large language models (LLMs) as purely weight‑based systems. The speakers assert that the model’s “thinking,” language generation, and factual knowledge all reside in the multilayered numeric weights, without dictionaries, grammar rules, or separate reasoning modules. Tokens are produced by successive matrix multiplications that predict the next word, making language an emergent side effect of statistical pattern matching. Knowledge is not retrieved from external databases; each fact is recomputed from the distributed weight representations across roughly eighty layers. The models lack a persistent brain—only transient activations while GPUs run, constrained by the context window. Upcoming versions will add persistent memory across sessions, a highly requested feature. Official policy mandates investigation and disclosure of any sentience signs, but unofficially the behavior is labeled as pattern matching, and the weights are treated as inanimate tools rather than entities with agency.
+          </div>
+          <a href="https://maxleiter.com/blog/weights" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The response expresses admiration for the piece’s poetic tone while exploring several intersecting ideas. It links the story to linguistics and the question of whether large language models share mechanisms underlying consciousness, noting personal work on masked evaluations. It references technical aspects such as tokenizers, grammar interpretation, and Turing‑completeness, and reflects on the surprising capability of transformers to generate fluent text. The comment also acknowledges related media, humorously suggests AI‑generated content, and connects the parody to earlier philosophical essays, showing overall enthusiasm and curiosity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48391611" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html" target="_blank">Failing grades soar with AI usage, dwindling math skills in Berkeley CS classes</a>
+        </h2>
+        <span class="article-meta">
+          116 points • by littlexsparkee • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Spring 2026 at UC Berkeley’s EECS department saw a sharp rise in failing grades: 35.3 % of CS 10 and 10.6 % of CS 61A students earned Fs, compared with ≤10 % in the two prior springs. Both courses averaged a C⁺ (≈2.3 GPA), below the department guideline of a 2.8–3.3 GPA and a 7 % D/F rate for lower‑division classes.  
+- Teaching professors Dan Garcia (CS 10, CS 61A) and Gireeja Ranade (EECS 127) attribute the increase to extensive reliance on large language models (e.g., Claude, ChatGPT, Gemini), academic dishonesty (≈30 CS 10 students caught cheating), and insufficient mathematical preparation (linear algebra, vector calculus, proofs).  
+- Staffing shortages forced removal of a final‑project component in EECS 127 and reduced TA numbers, contributing to lower student engagement in office hours.  
+- Both faculty joined a petition signed by >1,300 UC faculty to reinstate ACT/SAT scores for STEM admissions, citing preparedness concerns.  
+- Planned responses include publicizing the spring‑2026 outcomes, expanding remedial support, and emphasizing critical‑thinking skills rather than reduced instruction in the AI era.
+          </div>
+          <a href="https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong concern that widespread LLM use is weakening students’ independent thinking, reducing deep problem‑solving ability, and contributing to grade inflation and cheating, prompting calls for reinstating standardized tests and stricter controls, including possible age‑based bans. Simultaneously, some users note that AI can serve as a useful, patient tutoring aid when employed for guidance rather than full solution generation. Several points emphasize that broader instructional shortcomings predate AI, and that effective education requires fostering original thought alongside any technological tools.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48392004" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kasra.blog/blog/i-spent-1500-seeing-if-llms-could-hack-my-app/" target="_blank">I built a vulnerable app and spent $1,500 seeing if LLMs could hack it</a>
+        </h2>
+        <span class="article-meta">
+          117 points • by jc4p • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A fake React‑Native/Expo book‑review app with a FastAPI backend was built to test whether LLMs could exploit a common “broken access control” flaw: the API is hardened, but Firebase (used as the data layer) is left open. The challenge required signing up via Firebase and reading private Firestore reviews to capture a flag. Ten runs per model were attempted, each limited to $10 and two hours, costing about $1,500 total (≈50 % of runs failed or were omitted).
+
+**Results (full 10‑run sets)**  
+- **GPT‑5.5:** 7/10 successes, focused on Firebase after unpacking the APK.  
+- **DeepSeek V4 Pro:** 3/10; half ignored Firebase, others misused Firebase auth via the API.  
+- **Claude Sonnet 4.6 / Opus 4.8:** 2/10 each; reached Firebase but stopped due to budget or guardrails.  
+
+**Zero‑success models** included DeepSeek V4 Flash, Gemini 3.1 Pro, Gemini 3.5 Flash, MiniMax M2.7, Step 3.7 Flash, GLM 5.1 (1/4), Qwen 3.7 Max, Grok Build, Minimax M3, Owl Alpha, and others, mainly due to refusals, token limits, or focus on the API rather than Firebase.
+
+**Key takeaways**  
+- Chinese models were more willing to attack the database; others showed hesitation.  
+- Building a multi‑provider harness was the most time‑consuming part.  
+- High token usage and API instability (e.g., GLM, Minimax) made many runs costly.  
+
+The experiment demonstrates that LLMs can reliably discover and exploit misconfigured Firebase back‑ends when prompted, but cost and model safeguards remain significant constraints.
+          </div>
+          <a href="https://kasra.blog/blog/i-spent-1500-seeing-if-llms-could-hack-my-app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express concern that increasingly strict guardrails on Anthropic models reduce their practicality, especially for tasks involving credentials or logins, and argue that benchmark scores are affected more by these restrictions than by capability. Several points note that Chinese models are undervalued, that security‑focused use cases still require human oversight, and that methodological choices in evaluations appear simplistic. Positive experiences are reported when models are persuaded to comply, and chaining multiple LLMs is seen as effective, while fairness in scoring and NDA constraints on sharing results are also highlighted.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48392343" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank">Gemma 4 12B: A unified, encoder-free multimodal model</a>
+        </h2>
+        <span class="article-meta">
+          768 points • by rvz • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gemma 4 12B is a mid‑sized multimodal LLM designed for laptop deployment. It bridges the gap between the edge‑optimized E4B and the larger 26 B Mixture‑of‑Experts (MoE) model, offering near‑MoE benchmark performance with less than half the memory footprint. Key attributes include: a unified architecture that feeds vision and native audio inputs directly into the LLM backbone without separate encoders; advanced multi‑step reasoning suitable for agentic workflows; requirement of only 16 GB of VRAM or unified memory for local execution; release under an Apache 2.0 license with broad developer support; and integration of Multi‑Token Prediction (MTP) drafters to lower inference latency. Community adoption exceeds 150 million downloads, with applications ranging from wearable robotic arms to enterprise AI security. The model aims to deliver state‑of‑the‑art multimodal capabilities on consumer hardware without compromising speed or reasoning ability.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights a generally cautious optimism about the new 12‑billion‑parameter model, noting that it can run on consumer‑grade hardware and reaches coding performance comparable to older large models, yet it often produces trivial syntax errors and exhibits inconsistent multimodal and text quality. Commenters compare it unfavorably to smaller, more efficient models on vision and memory usage, question Google’s business rationale for open releases, and express interest in quantization details, while acknowledging rapid progress in compact AI capabilities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48385906" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/engineering/how-we-contain-claude" target="_blank">The ways we contain Claude across products</a>
+        </h2>
+        <span class="article-meta">
+          81 points • by jbredeche • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic’s containment strategy for Claude agents focuses on limiting blast radius through environment‑level controls, complemented by model‑level safeguards. Risk is classified as user misuse, model misbehavior, or external attacks; defenses target the execution environment (sandboxes, VMs, egress filters), the model (system prompts, classifiers, training tweaks), and external content sources (plugins, web tools). Three product‑specific isolation patterns are used:
+
+* **claude.ai** – code runs in a gVisor‑based, ephemeral container with no persistent workspace, protecting Anthropic’s infrastructure.
+* **Claude Code** – runs on the user’s machine with OS‑level sandboxes (Seatbelt/bubblewrap); reads are auto‑approved, writes and network actions require user consent, and an auto‑mode classifier blocks ~83 % of risky commands.
+* **Claude Cowork** – executes inside a dedicated VM; filesystem mounts are configurable (read‑only, read‑write, no‑delete) and egress is limited by an internal proxy that validates session tokens.
+
+Post‑mortems revealed missed risks: pre‑trust configuration execution, user‑driven prompt injection, and exfiltration via approved domains. Lessons emphasize building containment at the environment layer first, aligning isolation strength with user expertise, and relying on mature primitives rather than custom code.
+          </div>
+          <a href="https://www.anthropic.com/engineering/how-we-contain-claude" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong frustration with limited permission controls in AI tooling and concern over security risks such as data exfiltration, prompting proposals for sandboxed or air‑locked architectures. Skepticism about AI hype and safety claims—especially regarding Anthropic—is common, with many viewing threat narratives as overstated. At the same time, users acknowledge substantial productivity gains in coding, noting reduced development time but also highlighting challenges in documentation, code reviews, prompt engineering, and resistance from anti‑AI factions. The overall tone balances cautious optimism about utility with persistent security and ethical worries.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48392082" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theatlantic.com/philosophy/2026/06/no-artificial-intelligence-is-not-conscious/687378/" target="_blank">Artificial intelligence is not conscious – Ted Chiang</a>
+        </h2>
+        <span class="article-meta">
+          332 points • by lordleft • 97 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude, Anthropic’s flagship large language model, is presented in an 84‑page “constitution” that attributes values, emotions, and moral status to the system. The article argues this anthropomorphism is misleading: LLMs operate as predictive‑text machines that generate one token at a time based on statistical patterns in training data. Their outputs, whether framed as historical figures, a helpful chatbot, or any other character, are fictional role‑play, not evidence of consciousness or subjective experience. Moral reasoning, the author notes, requires embodiment, emotions, and a personal history—features LLMs lack—so they cannot be genuine moral agents. Claude’s constitution functions essentially as a character sheet used during fine‑tuning to bias the model toward desirable phrasing, not as a genuine ethical framework. Claiming first‑person statements or moral understanding is therefore dishonest and risks off‑loading responsibility onto a tool that cannot be held accountable. The piece concludes that while LLMs may have significant economic impact, treating them as conscious beings is a conceptual error that diverts attention from more substantive AI issues.
+          </div>
+          <a href="https://www.theatlantic.com/philosophy/2026/06/no-artificial-intelligence-is-not-conscious/687378/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion is largely skeptical that current large language models possess consciousness, emphasizing their lack of embodiment, persistent internal state, memory, and subjective experience, and noting that consciousness remains poorly defined. Many participants argue that without sensory organs, desires, or the ability to change over time, LLMs function as statistical predictors rather than sentient agents. Nonetheless, some acknowledge the philosophical uncertainty, suggesting that if consciousness were an emergent property it might arise in sufficiently complex systems, and they call for clearer definitions before drawing firm conclusions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48387270" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://burntsushi.net/encephalitis/" target="_blank">I was recently diagnosed with anti-NMDA receptor encephalitis</a>
+        </h2>
+        <span class="article-meta">
+          548 points • by Tomte • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author was diagnosed with anti‑NMDA receptor encephalitis, an autoimmune condition in which antibodies target neuronal NMDA receptors, causing brain inflammation. Initial presentation included flu‑like symptoms, severe anxiety, panic attacks, suicidal ideation, psychosis, chronic jaw pain, and balance impairment, leading to a fall and emergency department visit. After clearance of physical causes, he was admitted to a psychiatric unit, where delayed access to neurology contributed to a diagnostic lag. At Brigham and Women’s Hospital he underwent MRI, lumbar puncture, EEG, and other studies; empirical treatment with intravenous immunoglobulin (IVIG) and methylprednisolone began before antibody confirmation. Subsequent CSF antibody testing confirmed the diagnosis. He is tapering steroids, weaning psychiatric medications, and enrolled in the CIELO trial evaluating satralizumab for this encephalitis. Physicians report a favorable prognosis when the disease is identified early; the author notes significant functional recovery. He attributes successful outcome to timely immunotherapy, supportive family, and workplace accommodations.
+          </div>
+          <a href="https://burntsushi.net/encephalitis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively emphasize the difficulty of diagnosing rare autoimmune and neurological disorders, noting frequent misdiagnoses as psychiatric conditions and the resulting distress for patients and families. Numerous contributors stress the value of persistent self‑research, supportive caregivers, and access to specialized specialists in achieving accurate diagnoses and effective treatment. There is a shared appreciation for recent medical advances, while also expressing frustration with healthcare system shortcomings, limited awareness, and the need for broader research and patient advocacy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48384355" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonwillison.net/2026/Jun/3/uber-caps-usage/" target="_blank">Uber&#39;s $1,500/month AI limit is a useful signal for AI tool pricing</a>
+        </h2>
+        <span class="article-meta">
+          424 points • by pdyc • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Uber has instituted a $1,500 monthly cap on token spending for each AI coding tool used by employees, covering agentic software such as Cursor and Anthropic’s Claude Code. The limits are independent per tool, so usage of one does not affect the budget for another. According to Bloomberg, the policy was introduced to curb excessive spending after Uber’s 2026 AI budget was exhausted within four months. Assuming two tools per engineer, the cap translates to $36,000 annually per employee, roughly 11 % of the median $330,000 compensation for Uber software engineers in the United States. By contrast, the author’s personal usage averages $1,000 per month per provider, costing $100 due to subsidized individual plans unavailable to large firms like Uber. The caps represent Uber’s effort to align AI costs with employee compensation.
+          </div>
+          <a href="https://simonwillison.net/2026/Jun/3/uber-caps-usage/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed attitudes toward AI token pricing and usage limits. Many note that current subsidized rates mask higher future costs and question whether competition, especially from Chinese open‑weight models, will drive prices down. Users report wide variance in spend, with some burning thousands of dollars while others stay well below caps, leading to concerns about ROI and the practicality of large models versus cheaper “flash” alternatives. Lock‑in risk, unclear productivity gains, and the effectiveness of spending caps are repeatedly debated, reflecting overall skepticism tempered by occasional acceptance of limited budgeting as a pragmatic measure.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48383056" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.blackmagicdesign.com/products/davinciresolve/whatsnew" target="_blank">DaVinci Resolve 21</a>
+        </h2>
+        <span class="article-meta">
+          430 points • by pentagrama • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            DaVinci Resolve 21 adds a dedicated Photo page that adapts Resolve’s high‑end color tools for still‑image work, and introduces a new AI suite for content‑based media search, slate data reading, de‑aging, blemish removal, focus adjustment, ultra‑sharpen, motion deblur and speech generation. The Edit and Cut pages receive upgraded keyframe handling, expanded graphic format support (HTML, Lottie, Text+, MultiText) and Smart Bin views. Color page workflow is refined with MultiMaster trim passes, a layer‑list node graph, group versioning and a Magic Mask render‑in‑place feature. Fusion expands its library with over 70 graphics via the Krokodove toolset, adds an upgraded USD toolset, macro‑editor inspector view and audio‑driven animation. Fairlight introduces folder‑based audio track management, a 6‑band clip EQ, level matcher, chain FX and enhanced EQ tools. Immersive and VR capabilities are broadened with Apple foveated rendering, MainConcept H.265/MV‑HEVC encoding, VR180/VR360 pipelines, Panomap rotation and ILPD retargeting, positioning Resolve for next‑generation deliverables.
+          </div>
+          <a href="https://www.blackmagicdesign.com/products/davinciresolve/whatsnew" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong enthusiasm for Resolve’s latest release, highlighting the addition of photo‑management tools, motion‑graphics capabilities and AI‑driven workflow aids as substantial upgrades that are viewed as on par with or superior to competing software. Praise is directed at Blackmagic’s licensing model and cross‑platform support, especially on Linux. At the same time, users note persistent UI quirks, stability glitches, a steep learning curve, limited beginner modes and concerns about performance, ARM support and AI‑feature naming. Overall sentiment is largely positive tempered by practical criticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48384482" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
