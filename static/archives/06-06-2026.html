@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 06, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://salvagedcircuitry.com/sigma-45mm.html" target="_blank">The intracies of modern camera lens repair (2024)</a>
+        </h2>
+        <span class="article-meta">
+          107 points • by transistor-man • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author bought a broken Sigma 45 mm f/2.8 I‑Series lens and found that, while the optics and mount were intact, no electronic controls responded when mounted on a Lumix S5. Disassembly revealed a rear plastic spacer, bayonet shims, a flex‑cable contact block (10 pins), and a C‑shaped control PCB. PCB inspection showed a TI TPS62140 buck converter, a 2.2 µH inductor, a 0603 SMT fuse (labeled “N”) on the input rail, a Toshiba TMPM341FY ARM‑M3 microcontroller, an 8‑pin GigaDevice SPI flash, and a Rohm BU24020G motor controller. Continuity testing identified an open fuse; a 2 A / 32 V fast‑blow 0603 fuse (ERB‑RE2R00V) was soldered in place. Power rails and decoupling caps were verified, and focus and aperture functions were confirmed after the fuse swap. The repair, including fuse replacement and reassembly, took under an hour and restored full lens operation.
+          </div>
+          <a href="https://salvagedcircuitry.com/sigma-45mm.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments discuss several hardware topics with a largely practical tone. The consensus is that fuses are primarily fire‑prevention devices rather than component protectors, and fast fuses remain slow relative to semiconductor speeds. USB‑C integration in modern lenses is viewed as a significant improvement despite some drawbacks, offering flexibility for photographers. Using double‑sided tape to hold disassembled screws is regarded as a useful technique, while PH screwdrivers are reported to consistently strip JIS screws. There is also optimism that robotic assistance could address costly, low‑priority repairs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48420148" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://help.openai.com/en/articles/20001061-lockdown-mode" target="_blank">Lockdown Mode</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by berlianta • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://help.openai.com/en/articles/20001061-lockdown-mode" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks express skepticism about current methods for distinguishing instructions from data in LLM interactions, noting the absence of a reliable solution comparable to established practices in SQL or memory safety. They highlight concerns that existing “container” approaches may rely on system prompts and could be vulnerable to exploitation, while also suggesting that enterprise users might find the concept appealing. Overall, the tone is critical of the safety mechanisms and cautious about potential misuse.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48421145" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.0xkato.xyz/how-llms-actually-work/" target="_blank">How LLMs work</a>
+        </h2>
+        <span class="article-meta">
+          75 points • by 0xkato • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post outlines the full transformer‑based LLM pipeline. Text is first tokenized into subword IDs from a fixed vocabulary (e.g., BPE, SentencePiece). Each ID is looked up in an embedding matrix, producing a hidden‑size vector that encodes semantic meaning. Positional information is added, typically via Rotary Position Embeddings (RoPE), which rotate vectors to encode relative distances without extra parameters.  
+
+Within each transformer layer, multi‑head attention computes Query, Key, and Value projections for every token; scaled dot‑product scores are softmaxed (causal masking hides future tokens) and used to weight Value vectors. Multiple heads run in parallel on learned lower‑dimensional projections, their outputs concatenated and linearly mixed.  
+
+A feed‑forward network then expands each token vector, applies a non‑linearity (GELU, SwiGLU, etc.), and compresses it back; most model parameters reside here and store factual/semantic knowledge. Residual connections add each sub‑block’s output to the token vector, while layer‑norm (often RMSNorm, pre‑norm) stabilizes activations.  
+
+For generation, the final token vector is projected to logits over the vocabulary, softmaxed, and sampled (temperature, top‑k/p). KV caching and grouped‑query attention reduce memory cost, and speculative decoding speeds inference. Differences among models lie in data, scale, configuration (layers, heads, MoE), and post‑training, while the core architecture remains consistent across modern LLMs.
+          </div>
+          <a href="https://www.0xkato.xyz/how-llms-actually-work/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects on learning networking fundamentals through low‑bandwidth packet radio and draws a parallel to observing a slow language model’s token stream, noting the process appears mathematically deterministic though not precisely predictable. It expresses a sense of difficulty connecting with AI‑generated text, questioning what is missing compared to typical chatbot interactions, and suggests probing the underlying mechanisms by asking why large language models function as they do. The overall tone is analytical and inquisitive, seeking deeper understanding of LLM behavior.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48389360" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://acoup.blog/2026/06/05/collections-pre-modern-armies-for-worldbuilders-part-i-why-they-fight/" target="_blank">Pre-Modern Armies for Worldbuilders, Part I: Why They Fight</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by gostsamo • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Pre‑modern armies mirror the social, economic, and political structures of their societies. Key factors include whether a society is agrarian or nomadic, its level of state centralisation, and the nature of its elite (landed, bureaucratic, or religious). Recruitment follows four primary principles:
+
+* **Employment (paid service)** – rare as a primary model; seen in professional armies that require strong fiscal and bureaucratic capacity (e.g., Imperial Rome, early Han).
+* **Entitlement (citizenship‑based)** – service is a duty linked to civil rights; common in city‑states and communes where citizens equip themselves (Greek hoplites, medieval town militias).
+* **Vocational (social class)** – either an “all‑warrior” model where all free males fight (hunter‑gatherer, steppe nomads) or a specialised warrior aristocracy that supplies leadership and elite troops (medieval knights, Roman Senate officers). Variants include military settlers, slave soldiers, and prisoner armies.
+* **Clientage (feudal obligation)** – peasants or retainers provide troops in exchange for protection, land, or status; typical of fragmented polities (Carolingian levies, Anglo‑Saxon fyrd).
+
+These principles interact with land tenure, taxation, and the distribution of wealth, shaping how armies are raised, financed, and maintained in pre‑industrial societies.
+          </div>
+          <a href="https://acoup.blog/2026/06/05/collections-pre-modern-armies-for-worldbuilders-part-i-why-they-fight/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48421171" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/live/c4g44ew3g1kt" target="_blank">Astronauts told to return to ISS after sheltering over air leak repairs</a>
+        </h2>
+        <span class="article-meta">
+          371 points • by janpot • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The International Space Station presently hosts seven astronauts from five nations, comprising the Crew‑12 expedition and Russian cosmonauts. Commander Jessica Meir (48) leads Crew‑12; she holds a PhD in marine biology, previously studied emperor‑penguin physiology, and participated in the first all‑female spacewalk in 2019. Pilot Jack Hathaway (44) is a US Navy commander and test‑pilot graduate of the UK Empire Test Pilots’ School. French colonel Sophie Adenot (43), a helicopter test pilot and yoga instructor, is the second French woman in space. NASA physicist Chris Williams (42) transitioned from MIT cosmology and Harvard cancer research to astronaut duties, also serving as a volunteer firefighter and EMT. Russian commander Sergey Kud‑Sverchkov (42), a rocket engineer and Hero of the Russian Federation, leads the station. Sergei Mikaev (39) and Andrey Fedyaev (45) are Russian cosmonauts; Mikaev is on his first flight, while Fedyaev, on his second, previously flew on Crew‑6, becoming the second Russian to launch aboard a U.S. commercial vehicle.
+          </div>
+          <a href="https://www.bbc.com/news/live/c4g44ew3g1kt" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the technical challenge of detecting and sealing ISS air leaks, expressing curiosity about the RELL system, pressure‑reading ambiguities, and practical repair limits such as painting or sealants. Readers show concern for astronaut safety, questioning shelter procedures, emergency escape options, and the reliability of backup systems. There is skepticism toward media coverage and calls for more robust, perhaps robotic, solutions. A minority of remarks introduce political criticism of US‑Russia cooperation and broader speculation about future space‑industry developments. Overall sentiment blends cautious interest, safety worries, and a desire for clearer information.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48413464" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/microsoft/pg_durable" target="_blank">pg_durable: Microsoft open sources in-database durable execution</a>
+        </h2>
+        <span class="article-meta">
+          359 points • by coffeemug • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            pg_durable is a PostgreSQL extension (built with pgrx) that enables durable, fault‑tolerant execution of long‑running SQL workflows inside the database. Users define a function as a directed graph of composable SQL steps using operators such as `|=>` and `~>`, start it with `df.start(...)`, and the background worker checkpoints each step via the Rust‑based durable task framework duroxide and its PostgreSQL state provider duroxide‑pg. On crashes, restarts, or step failures execution resumes from the last checkpoint, eliminating external cron jobs, workers, queues, or orchestrators (e.g., Airflow, Temporal). The extension ships as Debian packages for PostgreSQL 17/18 and can be installed by adding `pg_durable` to `shared_preload_libraries`, restarting, and running `CREATE EXTENSION pg_durable;`. Access is controlled via RLS; privileges must be granted explicitly (e.g., `df.grant_usage`). Development tools include a VS Code dev container, scripts for local cluster start, and two test suites: fast pg_regress tests and comprehensive E2E tests. The project is preview‑stage, open‑source under the PostgreSQL License, and integrated in Azure HorizonDB.
+          </div>
+          <a href="https://github.com/microsoft/pg_durable" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express cautious interest in using PostgreSQL‑based queues, noting the appeal of a single data system and appreciating community contributions, while many raise practical concerns about embedding workflow logic in the database. Frequent criticisms include difficulty with unit testing, version control, observability, and scaling pressure on PostgreSQL, especially compared to established orchestration tools like Airflow or Temporal. Several users question the fit for heterogeneous environments, Azure limitations, and the lack of features such as high‑dimensional vector search. Overall, the sentiment leans toward skepticism, with limited enthusiasm contingent on clearer tooling, robustness, and demonstrable advantages over external solutions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48414367" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.rochester.edu/newscenter/what-is-desalination-definition-ocean-water-704732/" target="_blank">New method turns ocean water into drinking water, without waste</a>
+        </h2>
+        <span class="article-meta">
+          303 points • by speckx • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A University of Rochester team led by Prof. Chunlei Guo developed a solar‑thermal desalination system that eliminates brine waste and chemical pretreatment. Black metal panels are etched with femtosecond lasers to create a super‑light‑absorbing, superwicking surface that draws a thin water film, absorbs nearly all solar radiation, and vaporizes the water. Etched grooves and the “coffee‑ring” effect direct crystallizing salts to a passive region, preventing clogging from multicomponent seawater (e.g., Mg, Ca). Tests with Pacific, Atlantic and Indian Ocean samples showed continuous freshwater production and solid‑salt recovery. By embedding hydrogen‑titanate nanoparticles in the grooves, the device selectively isolates lithium, extracting ~50 % of lithium from Great Salt Lake brine. The process yields potable water, table salt, and recoverable minerals, and is presented as inherently scalable. Research was funded by the NSF, Bill & Melinda Gates Foundation, and Worldwide Universities Network.
+          </div>
+          <a href="https://www.rochester.edu/newscenter/what-is-desalination-definition-ocean-water-704732/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge the novelty of producing solid salt alongside freshwater but stress that the approach remains at laboratory scale and lacks demonstrated long‑term, clog‑free operation. Many compare its energy use unfavorably with reverse‑osmosis, noting that conventional methods are near theoretical efficiency and that solar‑panel comparisons are needed. Cost, material complexity, and scalability are repeatedly questioned, while potential mineral recovery is seen as interesting yet uncertain. Overall sentiment is cautiously skeptical, recognizing the concept’s intrigue but emphasizing practical, economic, and environmental challenges before it could be viable.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48413500" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/" target="_blank">Gemma 4 QAT models: Optimizing compression for mobile and laptop efficiency</a>
+        </h2>
+        <span class="article-meta">
+          306 points • by theanonymousone • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Gemma 4, released two months ago, now includes checkpoints optimized with Quantization‑Aware Training (QAT). QAT simulates quantization during training, minimizing quality loss compared with standard Post‑Training Quantization (PTQ). The update provides:
+
+- QAT models for the widely used Q4_0 quantization format, delivering higher overall quality than PTQ baselines.
+- A new mobile‑specialized quantization schema applied to the edge models (E2B and E4B), reducing the Gemma 4 E2B checkpoint to a 1 GB memory footprint, enabling deployment on consumer GPUs and edge devices.
+- Approximate VRAM requirements for loading each model (details omitted), demonstrating significant reductions in both VRAM and storage.
+
+The release follows earlier enhancements, including Multi‑Token Prediction (MTP) for faster inference and a 12 B model positioned between the 4 B and 26 B MOE variants. Overall, QAT‑trained checkpoints preserve Gemma 4’s capabilities while substantially lowering hardware requirements.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong enthusiasm for recent Gemma releases, especially the quantized models that enable 12‑billion‑parameter inference on modest GPUs and even phones, with many noting impressive speed, low VRAM usage and successful multimodal experiments. At the same time, several contributors express skepticism about the practical utility of smaller instruction‑tuned models, citing limited capabilities, lack of robust agents for tasks like web browsing, and concerns about hardware demands. There is also curiosity about Google’s partnership with Apple and a desire for broader model availability and documentation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48414653" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://classic100.gotski.workers.dev/" target="_blank">Show HN: ABC Classic 100 Rankings visualised</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by gotski • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            ABC Classic FM’s “Classic 100” annual poll results from 2001‑2021 are visualized as a dot‑and‑line chart. Each dot marks a specific composition; connecting lines show how that work’s rank shifted across the three surveyed years (2001, 2010, 2021). Interactive features allow users to select a dot, highlighting the chosen piece and related works by the same composer. The visualization illustrates trends such as “The Lark Ascending,” which ranked #2 in 2001, fell in 2010, and rose again by 2021. The page also contains a brief author note unrelated to the data.
+          </div>
+          <a href="https://classic100.gotski.workers.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall appreciation for the bump chart’s clean design, use of dashed lines for off‑chart samples, and the central highlight area that clarifies fallen entries. Several contributors suggest practical enhancements, such as making text selectable or linking titles to external sources like YouTube. Minor critiques note occasional oddities in the data, including duplicate entries and questionable categorisation of non‑classical soundtracks, while also recommending broader representation of composers. The tone remains constructive and positive, focusing on both praise and modest improvement ideas.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48420494" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mouseless.click" target="_blank">Mouseless – keyboard-driven control of macOS/Linux/Windows</a>
+        </h2>
+        <span class="article-meta">
+          490 points • by riddley • 69 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            mouseless is a web application that enables rapid mouse control using the keyboard, described as “lighting‑fast.” The interface relies on JavaScript; users must enable it in their browser settings for the service to function. No additional content or functionality is detailed.
+          </div>
+          <a href="https://mouseless.click" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reveal strong interest in keyboard‑only navigation tools, with many users praising projects like ShortCat, Homerow, Mouseless and various open‑source alternatives for improving accessibility and workflow efficiency. A recurring theme is frustration with macOS and other GUIs that lack consistent tab/arrow navigation, prompting calls for better standards. At the same time, several participants question the speed and ergonomics compared to a mouse, note limited support on Wayland or multi‑monitor setups, and express preference for terminal‑centric or trackpoint solutions. Overall sentiment is mixed: enthusiasm for mouseless utilities tempered by practical concerns and platform limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48383667" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
