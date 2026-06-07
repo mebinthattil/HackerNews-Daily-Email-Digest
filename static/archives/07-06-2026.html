@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 07, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ValveSoftware/GameNetworkingSockets/issues/398" target="_blank">Valve P2P networking broken for more than 2 months</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by babuskov • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A user reports a systemic issue affecting Steam Networking–based peer‑to‑peer (P2P) games in Israel and possibly other Middle‑East regions since March 13. In titles such as *Street Fighter 6*, Israeli players experience round‑trip latencies of ~120 ms when connected PC‑to‑PC, compared with 60–80 ms to European peers and 5–10 ms when cross‑playing with PS5. The problem is isolated to Steam’s P2P networking; games that use alternative networking stacks (e.g., *Tekken 8*) do not show the latency increase. Multiple Israeli users across various ISPs have confirmed the issue, and ISP‑level diagnostics and port‑forwarding attempts have revealed no local network faults. Anecdotal reports suggest similar symptoms in Egypt, indicating a potential regional scope. No resolution or guidance from game or Steam support has been provided.
+          </div>
+          <a href="https://github.com/ValveSoftware/GameNetworkingSockets/issues/398" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed sentiment toward Valve’s recent P2P connectivity problems. Contributors appreciate the collaborative debugging process, noting widespread STUN failures, regional impacts, and workarounds such as replacing WebRTC DLLs, while expressing interest in a formal Valve post‑mortem. At the same time, many criticize Valve’s engineering practices, API quality, and perceived business model, describing the company as inconsistent—capable of technical excellence yet prone to prolonged, disruptive bugs and opaque management decisions. The overall tone combines appreciation for community problem‑solving with frustration toward Valve’s handling of the issue.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48431461" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://knowablemagazine.org/content/article/technology/2026/cloned-polo-horses" target="_blank">Field of clones: How horse replicas came to dominate polo</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by gscott • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://knowablemagazine.org/content/article/technology/2026/cloned-polo-horses" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express speculative curiosity about cloning horses and the possibility that reliance on cloned stock might limit future improvements, while also branching into ideas about robotic alternatives, human cloning, and the societal impacts of mass‑produced intellects. Legal and ethical ramifications are noted as under‑discussed, and the mention of Argentine cloning incidents fuels a perception of the country as a potential hub for such technologies. Overall, the tone is inquisitive, mixing imaginative scenarios with concerns about consequences and oversight.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48431286" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2601.14470" target="_blank">Tokenomics: Quantifying Where Tokens Are Used in Agentic Software Engineering</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by Anon84 • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No substantive text from the paper was provided; only the title and image captions are present, which is insufficient to generate a factual summary.
+          </div>
+          <a href="https://arxiv.org/abs/2601.14470" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights growing awareness of token efficiency as a practical concern in AI deployment, noting parallels to earlier infrastructure‑optimization hiring practices. Commenters observe that many implementations add AI superficially without accounting for token consumption costs, leading to unexpectedly large token burns and unclear budgeting. There is skepticism about the term “tokenomics” being repurposed for AI, and a broader expectation that future evaluation of engineers may include their ability to manage token usage and control associated expenses. Overall sentiment is cautious and critical of current cost‑management approaches.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48430923" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/harness-engineering/" target="_blank">Harness engineering: Leveraging Codex in an agent-first world</a>
+        </h2>
+        <span class="article-meta">
+          131 points • by pramodbiligiri • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://openai.com/index/harness-engineering/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express broad skepticism toward using massive lines‑of‑code metrics as a measure of AI‑generated software value, emphasizing concerns about code bloat, reduced readability, and higher token costs. While several contributors note limited practical gains, occasional productivity improvements, and the usefulness of human‑written scaffolding, many highlight persistent quality issues, insufficient testing, and the difficulty of maintaining long‑term architectural health. The discussion also raises anxiety about the impact on engineering roles, questioning whether speed‑focused AI workflows truly deliver better software or merely inflate output.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48416264" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ntsc.rs/" target="_blank">Ntsc-rs – open-source video emulation of analog TV and VHS artifacts</a>
+        </h2>
+        <span class="article-meta">
+          303 points • by gregsadetsky • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            ntsc‑rs is a software tool that applies a precise VHS‑style video effect. The available screenshots show its user interface, a direct side‑by‑side visual comparison with Red Giant Universe’s VHS effect, and a sample render completed in 15 seconds, demonstrating its performance. The tool can also be loaded as a plugin within nonlinear editing (NLE) applications, allowing users to integrate the effect into standard video‑editing workflows. Overall, ntsc‑rs emphasizes accurate emulation of analog VHS characteristics while offering rapid rendering and compatibility with existing editing pipelines.
+          </div>
+          <a href="https://ntsc.rs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on strong enthusiasm for tools that emulate analog TV and VHS artifacts, with many users praising their visual fidelity, technical depth, and usefulness in creative workflows such as video production and retro‑gaming emulation. Several comments note a desire for broader feature sets, including PAL support, audio distortion simulation, and more accessible controls. A minority express caution, arguing that authentic analog broadcast quality offers a superior aesthetic and that overusing simulated degradation can feel contrived. Overall, the consensus is that the emulation projects are valuable, technically impressive, and well‑received, despite some concerns about complexity and authenticity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48428025" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pdimagearchive.org/" target="_blank">Public Domain Image Archive</a>
+        </h2>
+        <span class="article-meta">
+          70 points • by davidbarker • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The site hosts a public domain image archive containing 11,082 out‑of‑copyright works. All images are free to browse, download, and reuse, with the collection continuously updated each week. The archive is organized under an “Images and Visual Content” section, exemplified by an entry labeled “Image 1” with alt text referencing “The Public Domain Review.”
+          </div>
+          <a href="https://pdimagearchive.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion emphasizes the value of extensive online art archives and public‑domain image collections for creative projects, noting sites that provide provenance information and rights guidance. Participants express interest in using such images for commercial purposes, such as book covers, but raise concerns about the adequacy of the provided documentation for copyright clearance and platform acceptance. There is also mention of generative AI reducing the need for sourcing existing images, while still appreciating the visual experience offered by these archives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48430539" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://symbolica.io/posts/symbolica_2_0_release/" target="_blank">Symbolica 2.0: Programmable Symbols for Python and Rust</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by mmastrac • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Symbolica 2.0 expands the Python‑Rust symbolic computation framework with programmable symbols and extensive API refinements. Users can now attach custom hooks for simplification, differentiation, series expansion, and evaluation, enabling symbols such as γ to regularize poles via user‑defined series callbacks. The Rust API is streamlined through a prelude, builder‑style constructions, and reduced import paths; functions, settings, and evaluator configuration can be fluently combined. Evaluators rewrite expression trees into optimized instruction programs, support JIT compilation (via symjit), and now include a double‑float domain offering ~106‑bit precision at three‑fold speed over arbitrary‑precision arithmetic. Custom evaluation hooks can be registered for multiple numeric types (f64, Complex<f64>, Float, etc.) using type‑erased storage and later specialized without runtime overhead. New built‑in special functions (gamma, polylog, Bessel, zeta, etc.) provide immediate normalization and can be used inside optimized evaluators, with constants folded to numeric literals during code export. Performance improvements—faster pattern matching, byte‑slice term sorting, enhanced Horner schemes, and a modular polynomial GCD algorithm—yield 2‑10 000× speedups on real workloads. Future work includes optional GMP‑free arbitrary‑precision backends for WASM compatibility.
+          </div>
+          <a href="https://symbolica.io/posts/symbolica_2_0_release/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on a commercially licensed symbolic‑math software, noting that its website does not provide comparative information against alternative computer algebra systems. Participants highlight that this product is distinct from a similarly named project focused on symbolic code execution, clarifying that any confusion between the two is unwarranted. Overall, the tone is factual, emphasizing gaps in documentation and distinguishing the software from unrelated initiatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48415457" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hyperallergic.com/how-liminalism-became-the-defining-aesthetic-of-our-time/" target="_blank">How Liminalism Became the Defining Aesthetic of Our Time</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by zeech • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article traces the rise of “liminality” as a dominant visual aesthetic, linking contemporary internet culture to earlier artistic precedents. It cites the abandoned Century III Mall in Pennsylvania as a prime example of a “ghost mall” captured in a 2025 Facebook post, illustrating the aesthetic’s focus on empty, transitional spaces. The phenomenon is rooted in the 2019 “Backrooms” creepypasta, which imagined infinite, unpopulated rooms and spurred a community that now shares thousands of similar images across Facebook, Reddit, and Instagram—often barring AI‑generated content. The piece highlights key visual motifs (e.g., carpeted hallways, dim lighting) and compares them to works by Surrealists such as de Chirico and Magritte, as well as American painters Edward Hopper, Grant Wood, and Andrew Wyeth, noting shared themes of isolation and “in‑between” settings. Scholars cited argue that liminality reflects contemporary anxieties of anonymity, digital homogenization, and post‑industrial alienation, intensified by COVID‑19 shutdowns but persisting beyond that period.
+          </div>
+          <a href="https://hyperallergic.com/how-liminalism-became-the-defining-aesthetic-of-our-time/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments note that the image illustrates the internet‑circulated “liminality” aesthetic, describing its uncanny, in‑between quality. Several remarks distinguish liminal dreaming as a separate, fluid experience linked to creativity, contrasting it with controlled lucid dreaming. Opinions on labeling liminality as the defining aesthetic of the era are generally skeptical, viewing it as a niche comparable to vaporwave, cyber‑punk, or Y2K trends, with occasional revival of other styles. A further critique targets the art world’s perceived arrogant, exclusive discourse.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48431085" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cen.acs.org/materials/nanomaterials/buckyballs-boron-buckminster-fullerene-nanomaterials/104/web/2026/06" target="_blank">Introducing Boron Buckyballs: Theory that B80 cages can’t be made is disproved</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by crescit_eundo • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Chemists have experimentally observed a boron buckminsterfullerene (B₈₀), confirming the existence of an 80‑atom cage first predicted in 2007. The clusters were generated by laser vaporization of a boron target in a helium/argon carrier gas, allowing rapid cooling that stabilized B₈₀ into a single geometry. Photoelectron spectroscopy produced three sharp peaks that match simulated spectra for the buckyball structure, while alternative B₈₀ isomers did not fit the data. This result challenges prior density functional theory (DFT) calculations, which had ranked the buckyball geometry as less stable than other B₈₀ forms; the authors argue that DFT inadequately describes this system. B₈₀ is valence‑isoelectronic with C₆₀, sharing 240 valence electrons and similar bonding, and may exhibit higher electron affinity, suggesting potential applications as a semiconductor, hydrogen‑storage material, or doped superconductor—pending bulk synthesis. The team plans reactivity studies with water and oxygen and to explore larger boron clusters to assess the persistence of the cage motif.
+          </div>
+          <a href="https://cen.acs.org/materials/nanomaterials/buckyballs-boron-buckminster-fullerene-nanomaterials/104/web/2026/06" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion conveys cautious enthusiasm, acknowledging the novelty of a boron‑80 cage but emphasizing that the evidence is limited to photoelectron spectroscopy and theoretical modeling. Critics note the absence of mass‑spectrometric confirmation or a scalable synthesis route, describing the result as an intriguing observation rather than definitive proof of a stable, pure compound. Interest is expressed in potential properties and applications, while skepticism remains regarding the structural interpretation and the need for more comprehensive experimental validation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48405815" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/sauravrao637/oproxy" target="_blank">Show HN: Oproxy – inspect and modify network traffic from the browser</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by sauravrao637 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            oproxy is an open‑source MITM proxy that runs locally (or in Docker) and supports HTTP, HTTPS, and SOCKS5 traffic. It captures requests and responses, displaying headers, bodies, status, timing, tags, notes, and inspector data for JWT, GraphQL, gRPC, and WebSocket frames. Captured sessions can be replayed, exported as HAR, cURL, Fetch, or Python snippets, and imported back. Traffic can be modified via rule sets, map‑remote/local, access controls, throttling, breakpoints, mock responses, DNS overrides, capture filters, Lua scripts, or upstream proxy chaining. An authenticated Assistant interface allows OpenAI‑compatible chat models to inspect state and apply confirmed changes. The service runs as a forward HTTP proxy (default port 8080), optionally provides SOCKS5 and additional TLS listeners, and serves a management UI and API on the same endpoint. Persistent volumes store CA certificates and session data. Build requirements are Rust ≥ 1.85, Node.js ≥ 22, and Yarn via Corepack; Docker images are also provided. The MIT‑licensed tool is intended for developers testing browsers, CLIs, mobile apps, APIs, and automated test suites.
+          </div>
+          <a href="https://github.com/sauravrao637/oproxy" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses inquisitive interest, asking how the tool measures up against mitmproxy and inviting hands‑on testing. It requests user feedback on the experimental assistant, indicating a willingness to gather practical impressions and evaluate its usability. The tone is open‑minded and exploratory, seeking comparative insight and real‑world experience to inform further development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48431079" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
