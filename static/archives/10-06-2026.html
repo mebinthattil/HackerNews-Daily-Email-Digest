@@ -1,0 +1,516 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/apple/container/blob/main/docs/container-machine.md" target="_blank">macOS Container Machines</a>
+        </h2>
+        <span class="article-meta">
+          432 points • by timsneath • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Container machine delivers a persistent, lightweight Linux environment on macOS using standard OCI images. It automatically maps the host username and home directory ( $HOME → /Users/<user> in‑container) so macOS editors and IDEs can edit files that are compiled and run inside the container. macOS tooling (profilers, browsers, debuggers) accesses the same files without copying. Systemd‑based images support real Linux services (e.g., systemctl start postgresql). Multiple machines can target different distros (alpine, ubuntu, debian) while sharing the same home and dotfiles.
+
+Key CLI operations:
+- `container machine create <image> --name <name>`
+- `container machine run [-n <name>] [command]` (interactive shell or one‑off command)
+- `container machine set-default <name>`
+- `container machine ls`, `inspect`, `stop`, `rm`
+- `container machine set -n <name> cpus=<n> memory=<size>` (applies after restart)
+- Home‑mount mode: `rw`, `ro`, or `none`.
+
+Custom images must include `/sbin/init`; a sample Ubuntu 24.04 Dockerfile installs systemd and common tools. Adding `/etc/machine/create-user.sh` lets a custom script run on first boot with environment variables CONTAINER_UID, CONTAINER_GID, CONTAINER_HOME, CONTAINER_USER, CONTAINER_MACHINE_ID.
+          </div>
+          <a href="https://github.com/apple/container/blob/main/docs/container-machine.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment is cautiously optimistic. The feature is seen as a useful, lightweight way to run Linux containers on macOS, offering convenient sandboxing and potential integration with development workflows. However, recurring concerns include limited performance—especially filesystem latency—startup overhead, image compatibility constraints, and a focus on ARM‑64 that excludes Intel Macs. Users compare it unfavorably with established toolchains such as QEMU/Lima/Colima/Docker, questioning ecosystem maturity, feature completeness (e.g., USB passthrough), and long‑term practicality.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48469658" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank">Claude Fable 5</a>
+        </h2>
+        <span class="article-meta">
+          1950 points • by Philpax • 321 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Fable 5, a Mythos‑class model, is released for general use with state‑of‑the‑art performance across software engineering, knowledge work, vision, long‑context memory, and life‑science research. Benchmarks show it leads other Claude models on coding (FrontierCode, CursorBench), finance (Hebbia), vision (ViBench, Pokémon FireRed), and scientific tasks, often requiring fewer tokens and turns. To mitigate misuse, Fable 5 employs conservative safety classifiers that redirect queries on cybersecurity, biology/chemistry, or model‑distillation to Claude Opus 4.8; fallback occurs in <5 % of sessions. Claude Mythos 5 uses the same underlying model but lifts cybersecurity safeguards for a limited group of cyber‑defenders via Project Glasswing and will later expand through a trusted‑access program for biology researchers. Pricing is $10 per M input tokens and $50 per M output tokens, half the cost of Claude Mythos Preview. Availability: Fable 5 is open via the Claude API; Mythos 5 is currently restricted to Glasswing partners with planned broader trusted access. Data from these models is retained for 30 days for safety analysis only.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight Fable 5 as a noticeable technical improvement over previous Claude models, citing stronger code‑generation ability, higher token efficiency, a 1 million‑token context window and cleaner, more maintainable output. Reviewers also note aggressive safety filters that can block benign requests and express concern over the limited free‑access window, impending usage‑based pricing, and new data‑retention policies that may conflict with organizational compliance. Opinions diverge on whether the gains stem from architectural changes or extensive fine‑tuning, and some view the rollout as a strategic marketing move, resulting in an overall mixed but cautiously optimistic consensus.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48463808" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/" target="_blank">Upcoming breaking changes for npm v12</a>
+        </h2>
+        <span class="article-meta">
+          259 points • by plasma • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            npm v12 (scheduled for July 2026) changes default install behavior to improve security. Scripts (preinstall, install, postinstall, node‑gyp rebuild, prepare) are disabled by default; only packages explicitly allowed via `npm approve-scripts` remain executable, with the allowlist stored in `package.json`. Git dependencies are blocked unless `--allow-git` is used, closing a code‑execution vector where a dependency’s `.npmrc` could override the Git executable. Remote URL dependencies (e.g., HTTPS tarballs) are also blocked by default and require `--allow-remote`; the defaults for `--allow-file` and `--allow-directory` stay unchanged. These defaults are already available as warnings in npm 11.16.0+ (or later) so developers can test, review blocked items with `npm approve-scripts --allow-scripts-pending`, approve trusted packages, and commit the updated allowlist before upgrading. Documentation and community discussion links are provided for further guidance.
+          </div>
+          <a href="https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on npm’s new allow‑scripts feature, noting that it defaults to off and mirrors pnpm’s recent changes. Users raise practical questions about its behavior for global installs, version‑specific allowlists, and whether it truly improves security versus merely shifting the risk window. Many express skepticism, arguing the change is superficial, could repeat past defaults, and lack robust safeguards such as sandboxing or age limits. A few view it as a needed step, but overall sentiment leans toward criticism and calls for stronger, more practical security measures.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48467705" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/RichardSSutton/status/2061216087744946656" target="_blank">Rich Sutton on AI creativity and discovery</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by yimby • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Richard Sutton posted on X a brief announcement of a new video in which he argues that generative AI systems trained solely by supervised learning are fundamentally unable to produce genuinely novel discoveries. He labels the viewpoint “possibly controversial” and provides a link to the video (https://t.co/LhAU6AyDkh). The accompanying text includes the opening line of the speech, “Good day ladies and…,” indicating a formal presentation. An image is attached, showing a user avatar as the visual element of the post. No further technical details, data, or arguments are included in the scraped excerpt.
+          </div>
+          <a href="https://twitter.com/RichardSSutton/status/2061216087744946656" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments converge on the view that machine learning can participate in creative and discovery processes when equipped with mechanisms for variation, evaluation, and selection, often realized through reinforcement learning or human‑in‑the‑loop feedback. Many argue that current large language models alone are limited, but iterative loops and goal‑directed training can make them competitive with human intuition, especially in objective evaluation tasks. There is agreement that humans retain an edge in subjective judgment and taste, while AI excels at systematic, logic‑heavy generalization and efficient evaluation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48470581" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/" target="_blank">German ruling declares Google liable for false answers in AI Overviews</a>
+        </h2>
+        <span class="article-meta">
+          220 points • by ahlCVA • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A Munich Regional Court ruled that Google is directly liable for statements made in its AI‑generated search overviews, treating them as the company’s own content rather than merely linking to third‑party sites. The court found that the overviews falsely linked two local publishers to scams and other illicit practices, creating new, self‑contained assertions not present in any cited source. Existing German jurisprudence granting limited liability to traditional search engines was deemed inapplicable because AI overviews generate independent statements that only Google can verify. The court rejected Google’s defense that users could check sources, noting that users rarely follow links and that the overviews are understandable on their own. Consequently, Google cannot rely on host‑provider protections under the Digital Services Act or the notice‑and‑take‑down regime. The injunction bans the specific false claims, orders Google to cover 80 % of legal costs, and may set a precedent with international relevance, highlighting potential liability for AI‑driven services that produce unverified paraphrases.
+          </div>
+          <a href="https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on the recent ruling that makes AI providers liable for false information, with many expressing support for holding companies accountable and extending responsibility to self‑driving cars and other AI products. At the same time, commenters question the feasibility of guaranteeing accuracy from non‑deterministic models, warn of a chilling effect on innovation, and note the need for user skepticism and verification. Opinions also discuss the impact on EU digital sovereignty, the usefulness of AI summaries despite errors, and the potential for broader liability, including advertising.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48470248" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/culture/article/20260603-how-a-26-year-old-german-woman-made-the-worlds-oldest-surviving-animated-feature-film" target="_blank">The oldest surviving animated feature film at 100</a>
+        </h2>
+        <span class="article-meta">
+          59 points • by 1659447091 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Lotte Reiniger, a 26‑year‑old German filmmaker, created the world’s oldest animated feature, *The Adventures of Prince Achmed*, by employing a minimal crew. She personally crafted silhouette puppets from cardboard and lead, joined with wire hinges, and operated the camera with her husband’s assistance. Reiniger directed, designed the film’s scenario—melding several Middle Eastern fairy tales—and oversaw frame tracking. The production used stop‑motion animation on flat silhouettes placed on a glass plate lit from below, a technique that allowed intricate, fluid motion without conventional drawing. Despite limited resources, Reiniger’s hands‑on approach resulted in a landmark work that predates Disney’s early features by a decade, establishing a foundational method for silhouette animation and influencing future cinematic storytelling.
+          </div>
+          <a href="https://www.bbc.com/culture/article/20260603-how-a-26-year-old-german-woman-made-the-worlds-oldest-surviving-animated-feature-film" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks express strong enthusiasm for the film, highlighting its uniqueness, compelling story, and the innovative animation technique showcased in a short documentary. Commenters note surprise at previously being unaware of the work and appreciate its inclusion in notable film lists. The overall tone is highly positive, emphasizing admiration for the film’s artistic qualities and gratitude for the discovery.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48431213" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.oscars.dev/posts/rip-software-hackathons-long-live-the-hardware-hackathon/" target="_blank">RIP software hackathons. Long live the hardware hackathon</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by ozcap • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author describes a recent 48‑hour hackathon in Vilnius where their two‑person team retrofitted an old rotary phone with a Raspberry Pi, exposing its I/O and linking it to a server via a single WebSocket. The server handled two‑way audio, custom bell tones, and hang‑up control, while an AI agent used the Spotify API to generate playlists from natural‑language prompts (e.g., “play music by artists alleged to be on the Epstein files,” “create a 1970s Zambian psychedelic rock playlist”). Voice output was provided by ElevenLabs, giving the phone a “warm Yorkshire gentleman” persona. The team relied on AI‑generated code, noting that modern hackathons prioritize system architecture and rapid integration over manual coding. The author argues that as software problems become “solved,” future hackathons will emphasize hardware and legacy tech, proposing projects such as Apple II applications, fax‑to‑social‑media converters, Game Boy Advance Bloomberg terminals, LLM‑driven cash registers, and AI‑controlled microwaves. The piece calls for “ridiculous”, overbuilt prototypes that blend APIs, wiring, and consumer electronics.
+          </div>
+          <a href="https://blog.oscars.dev/posts/rip-software-hackathons-long-live-the-hardware-hackathon/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments portray hackathons as increasingly divided between superficial UI‑focused showcases and deeper, hands‑on creation, with participants noting that strong design talent often outweighs technical substance. Many express personal challenges in pitching, storytelling, and audience engagement, seeing hackathons as practice grounds for those skills. A recurring theme is excitement about emerging tools—affordable hardware, 3D printing, and AI—that could revive substantive product development, while others criticize the trend toward gimmicky presentations and the exploitation of participants by organizers.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48468766" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aarushgupta.io/posts/kan-fpga/" target="_blank">Ultrafast machine learning on FPGAs via Kolmogorov-Arnold Networks</a>
+        </h2>
+        <span class="article-meta">
+          188 points • by ag2718 • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article outlines hardware architectures for ultrafast inference and online learning on FPGAs using Kolmogorov‑Arnold Networks (KANs). Fixed‑point quantization encodes real‑valued neural computations as binary functions, enabling lookup‑table (LUT) implementation of univariate activation functions. By representing each KAN edge activation as a separate LUT, the design avoids exponential growth of LUT entries that occurs with multivariate functions, and leverages B‑spline bases that are local (only S + 1 active basis functions per interval) and bounded (∑B_i(x)=1), which simplifies fixed‑point range selection and stabilizes gradient updates. Inference proceeds by parallel LUT reads for activations followed by an adder tree for the summed outputs; multi‑layer networks cascade these blocks. For online learning, B‑spline values remain in LUTs while coefficients are updated in‑place on the FPGA, allowing forward, backward, and weight‑update passes to run at sub‑microsecond latency. Reported results show up to 2700× speedup over prior KAN‑FPGA implementations, scaling to >50 k parameters with near‑constant resource usage and improved convergence on benchmarks such as function approximation, qubit readout, and non‑stationary control.
+          </div>
+          <a href="https://aarushgupta.io/posts/kan-fpga/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mix of cautious interest and skepticism toward KANs on FPGA. Users acknowledge the novelty and appreciate the naming, while noting that current implementations target latency rather than the high‑throughput demands of large‑scale LLM inference. Several remarks question whether activation‑function precision yields substantial gains beyond modest models and highlight practical limits imposed by FPGA size. Resources such as a GitHub repository and related discussion threads are shared for experimentation, and overall sentiment leans toward tentative optimism tempered by concerns about scalability and real‑world applicability.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48466277" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unsung.aresluna.org/more-molly-guards/" target="_blank">More Molly Guards</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by zdw • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post surveys “molly guards”—physical or UI mechanisms that prevent accidental activation of controls. It begins with industrial examples, such as a perspex‑covered power button on an IBM electronic typewriter and softer guards that block access without removal. A red “writing to SD card” indicator is placed beside the card slot to deter ejection during write operations, and a floppy‑drive head‑lowering handle simultaneously secures the disk. The article also notes UI‑level guards that render actions disabled or require confirmation, citing Finder’s warning when opening many files, iPhone’s slide‑to‑unlock used only for silencing alarms, and Chrome’s press‑and‑hold‑Q prompt. Early iTunes featured a skeuomorphic CD‑burning guard, while a university alumni magazine displayed a literal “Molly” with her father as a visual gag. Across hardware and software, these designs employ visual cues, physical barriers, or interaction constraints to reduce user error.
+          </div>
+          <a href="https://unsung.aresluna.org/more-molly-guards/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong positive sentiment, highlighting appreciation for the whimsical hover images and the nostalgic iTunes Burn CD feature, noting its fun contrast to flat design. The IBM electronic typewriter with a perspex guard receives praise for its aesthetic appeal. Readers commend the article’s transition from physical to digital topics and indicate interest in visiting the museum mentioned.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48427468" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.oneusefulthing.org/p/what-it-feels-like-to-work-with-mythos" target="_blank">What it feels like to work with Mythos</a>
+        </h2>
+        <span class="article-meta">
+          208 points • by swolpers • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author evaluated Claude 5 Fable, the first Mythos‑class AI model, across a range of tasks. In repeated experiments Fable consistently outperformed other publicly available models, handling long, multi‑hour sessions and generating complex outputs such as a scholarly social‑science paper from a single prompt and a 10‑page all‑S rhyming poem. Notable demonstrations include:
+
+- Generation of playable games (e.g., a coin‑flip variant of “Balatro,” a self‑aware snake game) using only mathematical descriptions, as Claude cannot produce images.
+- Construction of an isochrone map: Fable coordinated dozens of subsidiary Claude Sonnet agents to retrieve over 2,200 flight records, global rail schedules, and road‑speed data, then coded, tested, and refined the visualization, iterating on remote‑location estimates.
+- Development of “Concord,” a 19‑page software design that calibrates human and AI judgments across datasets and performs statistical analysis, produced after a 9.5‑hour autonomous run.
+
+Limitations noted are high token consumption (approximately twice Opus cost) and frequent guard‑rail fallback to Claude 4.8 Opus. The workflow shifts human involvement from step‑by‑step control to high‑level specification and final approval, raising concerns about transparency and the evolving human‑AI relationship.
+          </div>
+          <a href="https://www.oneusefulthing.org/p/what-it-feels-like-to-work-with-mythos" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express a mixed view of the article and the showcased models. Reviewers note a lack of concrete details on code quality, testing, documentation, security, and token usage, questioning the practicality and cost of long‑running AI workflows. While some acknowledge impressive visual outputs and occasional bug‑finding advantages of newer models, many criticize the hype‑laden language, perceived marketing bias, pricing barriers, and unrealistic assumptions about developer oversight. Overall, the consensus leans toward cautious skepticism tempered by occasional optimism about specific capabilities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48464140" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
