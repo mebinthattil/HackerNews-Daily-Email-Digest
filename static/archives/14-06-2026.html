@@ -1,0 +1,511 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://juniperspring.org/posts/honda-evil-valet/" target="_blank">10th Gen Honda Civic Updates Are Signed with AOSP Test Keys</a>
+        </h2>
+        <span class="article-meta">
+          138 points • by librick • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post updates a three‑year‑old project that reverse‑engineered the head‑unit of a 2021 Honda Civic. Honda’s OTA update mechanism accepts a signed AOSP test‑key package via USB; the recovery binary’s signature verification matches stock AOSP, allowing anyone with physical USB access to install arbitrary code without root privileges. This “evil valet” attack enables arbitrary execution on the head‑unit when the vehicle is unattended. The author released **ota‑builder**, a tool that formats USB drives and signs updates with the public test key, and **apk‑rebuilder**, which extracts resources, decompiles smali, repacks APKs, and pulls the ramdisk from Honda OTA files, facilitating analysis without distributing proprietary code. Ongoing tasks include cataloguing head‑unit firmware versions, refining a clean ARMv7 toolchain, supporting custom UI themes (complicated by Mitsubishi’s AOSP fork), and improving an aidl‑rebuilder for mapping AIDL interfaces. Documentation is minimized in favor of deterministic tooling that can be queried by LLMs. The repository remains open for contributions and pull requests.
+          </div>
+          <a href="https://juniperspring.org/posts/honda-evil-valet/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong criticism of Honda’s firmware update process, highlighting that update packages are signed with a publicly known test key and that signature checks are ineffective, allowing arbitrary code execution without root access. This is interpreted as evidence of poor security design and a lack of protective measures for owners. The discussion expands to broader automotive security concerns, referencing similar weaknesses in other manufacturers, questioning documentation practices, and speculating on potential exploit pathways such as CAN‑gateway access or custom operating system installations. Overall, the tone is skeptical and alarmed about vehicle security.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48523080" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://desfontain.es/blog/banning-noise.html" target="_blank">Noise infusion banned from statistical products published by Census Bureau</a>
+        </h2>
+        <span class="article-meta">
+          780 points • by nl • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The U.S. Department of Commerce issued an order banning “noise infusion”—the addition of random noise to statistical outputs—from all Census Bureau and Bureau of Economic Analysis products. The order mandates coarsening (generalizing data) as the primary disclosure‑avoidance method and permits suppression only as a last resort, explicitly prohibiting differential privacy and any technique relying on randomness. Historically, the Census used swapping until 2010, then adopted differential privacy for the 2020 Census because it offered the best balance of privacy protection and data utility. Removing noise‑based methods eliminates the most effective tool for quantifying privacy‑utility trade‑offs, forcing reliance on blunt techniques that either destroy utility (especially for small or minority groups) or increase vulnerability to re‑identification attacks. Consequently, future releases may become either substantially less useful or markedly less safe, undermining the confidentiality obligations that statistical agencies must meet.
+          </div>
+          <a href="https://desfontain.es/blog/banning-noise.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions to the census’s shift toward differential privacy and reduced data granularity. Many participants worry that added noise will undermine the usefulness of statistics for policy, research, and redistricting, while others stress the need to protect individuals from identification, fraud, and political exploitation. Skepticism about political motives, especially regarding gerrymandering and partisan control, appears alongside criticism of invasive field collection practices. Overall, the discussion balances concerns about privacy safeguards against fears that the changes will degrade data quality and public trust.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48517377" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/jietang/status/2065784751345287314" target="_blank">GLM 5.2 Is Out</a>
+        </h2>
+        <span class="article-meta">
+          449 points • by aloknnikhil • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GLM‑5.2, Zhipu’s latest open‑source large language model, has been released publicly. The announcement emphasizes that access to frontier AI models should remain unrestricted and globally available, criticizing recent abrupt limitations on such models for non‑technical reasons. GLM‑5.2 features a 1 million‑token context window and superior performance on long‑horizon tasks, positioning it as a foundation for complex agent applications and as the primary engine for Zhipu’s domestic coding model. The model becomes immediately available to all users of the GLM Coding Plan (Lite, Pro, Max), with an API slated for release the following week. The release is framed as a step toward open, collaborative development of artificial general intelligence rather than a monopolized resource.
+          </div>
+          <a href="https://twitter.com/jietang/status/2065784751345287314" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong appreciation for the open‑source release of GLM‑5.2 and recent Chinese models, viewing them as a counterbalance to perceived US restrictions on frontier AI. Users request performance benchmarks, hardware requirements, and clearer documentation, while reporting mixed early experiences with coding capability and speed. Several remarks raise ethical, safety, and intellectual‑property concerns, urging regulatory review of non‑American models. Skepticism appears about the timing of the release and the ability of open‑weight models to match commercial SOTA performance without substantial compute resources.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48518684" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tonsky.me/blog/every-frame-perfect/" target="_blank">Every Frame Perfect</a>
+        </h2>
+        <span class="article-meta">
+          635 points • by ravenical • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Wayland’s design goal “every frame is perfect” is proposed as a universal UI principle: any screenshot taken at any moment should present a coherent, complete state.  
+- Consistency across frames builds user trust, signaling that developers have invested effort in both visual polish and underlying code quality.  
+- Practical criteria for perfect frames include eliminating white flashes, avoiding partially loaded content, preventing layout changes during loading, and ensuring internal UI text consistency (e.g., “1 update available” vs. “Checking for updates…”).  
+- Precise, synchronized animations are essential; jank or mismatched motion (e.g., placeholder text moving from the center while the cursor animates from the left) creates a perception of desynchronization and can mislead users.  
+- Real‑world examples (Safari address bar, Photos crop mode, YouTube UI transitions) illustrate how imperfect intermediate frames—due to technical constraints or overlooked design—undermine the user experience.  
+- The overall message: developers must treat every intermediate frame with the same rigor as start and end states, ensuring all visual transitions are smooth, accurate, and semantically consistent.
+          </div>
+          <a href="https://tonsky.me/blog/every-frame-perfect/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show broad disagreement with the article’s premise that every animation frame must be perfect. Many argue that visual fidelity can be sacrificed for lower latency and that animation’s purpose is to convey meaning, not pixel‑perfect morphs, and that unnecessary transitions add overhead. Critics note the lack of constructive alternatives or positive examples, while others defend animation as essential for usability and cite historical attention to detail. Overall, the consensus is that the critique is incomplete, the trade‑off between smoothness and performance matters, and practical solutions are desired.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48516251" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://martinfowler.com/architecture/" target="_blank">Software Architecture Guide</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by laxmena • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Graphical user interfaces increase interaction complexity, requiring architectural strategies to contain it. Simple applications can use a Forms‑and‑Controls pattern, but as the flow grows, developers often adopt Model‑View‑Controller (MVC). MVC is frequently misunderstood and implemented under various names—Application Model, Model‑View‑Presenter, Presentation Model, MVVM—each reflecting nuances but sharing core ideas. The essential principles of MVC are: (1) strict separation of presentation (view) from domain logic (model), and (2) synchronization of presentation state via events, typically employing the observer pattern. This separation isolates UI concerns, facilitates testing, and allows independent evolution of business logic and user interface components.
+          </div>
+          <a href="https://martinfowler.com/architecture/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              There is concern that poor software architecture persists and becomes more costly over time, especially when developers lack experience in system design. The prevailing “sort‑of‑works” approach—assembling disparate components without solid foundations—is seen as leading to ongoing, often ineffective, investment in incremental fixes. Additionally, the ease of combining elements using current AI tools is viewed as a factor that could worsen the tendency to adopt ad‑hoc, suboptimal architectures.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48524084" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://oldvcr.blogspot.com/2026/06/building-serial-and-vga-everything.html" target="_blank">Building a serial and VGA &#34;everything console&#34;</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by classichasclass • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A DIY “everything console” was built from a used IBM 1U 7316‑TF3 rack unit (17‑inch LCD, USB Travel Keyboard with UltraNav) to replace bulky CRT terminals and laptop serial adapters. The author installed a Tattler Solutions VT100‑compatible terminal emulator (USB‑powered, 115200 bps, VGA output, DE‑9 serial) and added USB/VGA switch boxes to toggle the keyboard and monitor between the emulator and external devices. Cable management employed Velcro strips, cable guides, and a small USB power strip; the monitor’s power brick was rerouted to the strip. The keyboard was secured with silane‑glued metal braces, reinforced with Flexseal tape, and later supported by Z‑brackets and shims to prevent contact with the screen when closed. Additional components included a miniature power strip, Velcro tape, and manually fabricated supports. The finished unit functions as a VGA‑to‑HDMI console for a POWER9 system and as a serial console for an AT&T 3B2/310, demonstrating a compact, rack‑mountable solution for serial and video console access.
+          </div>
+          <a href="http://oldvcr.blogspot.com/2026/06/building-serial-and-vga-everything.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48523615" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://garrit.xyz/posts/2026-06-13-pac-man-but-you-re-the-ghost" target="_blank">Pac-Man, but You&#39;re the Ghost</a>
+        </h2>
+        <span class="article-meta">
+          6 points • by mindracer • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author created a small game that lets players control the ghosts from the classic Pac‑Man arcade title. In this version, Pac‑Man is driven by its original AI, and the player’s objective is to intercept and capture him before he clears the maze of dots. When Pac‑Man consumes a power pellet, the standard role reversal occurs: the ghosts become vulnerable, and Pac‑Man briefly pursues them, forcing the player to evade. The post includes a link to the playable version and references two images—a generic placeholder and a cover illustration titled “Five Years of Blogging.” The game is presented as a reversal of the traditional Pac‑Man experience, emphasizing the ghost perspective.
+          </div>
+          <a href="https://garrit.xyz/posts/2026-06-13-pac-man-but-you-re-the-ghost" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback reflects a mixed assessment: the concept is viewed positively, described as appealing and inventive, while the execution, particularly the control scheme, is judged negatively and likened to the difficulty of early gaming experiences. Overall, commenters appreciate the idea but feel the poor controls significantly detract from enjoyment, leading to frustration despite the underlying novelty.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48524135" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/kekcleader/FreeOberon" target="_blank">FreeOberon – Open-Source, Cross-Platform, Free Pascal/Turbo Pascal-Like Language</a>
+        </h2>
+        <span class="article-meta">
+          54 points • by peter_d_sherman • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Free Oberon is a cross‑platform integrated development environment (IDE) for the Oberon programming language, styled after classic Pascal pseudo‑graphic screens. It runs on Windows, macOS, and Linux and includes the console‑based compiler fob.  
+
+**Key dependencies** (Linux): Allegro 5 development packages, Git, GCC. Installation commands are provided for Debian/Ubuntu/Mint (apt), Fedora (dnf), Arch (pacman), and openSUSE (zypper).  
+
+**Installation steps**: download the tar.gz archive from free.oberon.org or the latest ZIP from the GitHub repo (https://github.com/kekcleader/FreeOberon), unpack to a directory without non‑Latin characters, rename to FreeOberon, and run install.sh. An optional Bash alias (`fo`) can launch the IDE.  
+
+**Usage**: source files are stored in a `Programs` subdirectory; compiled binaries go to `bin` (or alongside the main module if outside `Programs`). Press F9 to compile/run; the IDE auto‑links multi‑module projects and opens files with compilation errors, indicating line and message. Scripts `Data/bin/compile.sh` (Linux) and `Data\bin\compile.bat` (Windows) handle the build process.
+          </div>
+          <a href="https://github.com/kekcleader/FreeOberon" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment reflects nostalgic affection for early Pascal environments, describing a sense of empowerment while acknowledging that newer languages like C and Perl ultimately surpass Turbo Pascal in capability. It expresses enthusiasm for exploring Oberon as a compact, powerful language and anticipates testing it on a Mac. At the same time, the author criticizes the project’s website for featuring a Soviet‑parliament image, labeling the choice as in poor taste. Overall, the tone blends fond recollection, pragmatic assessment, eager interest in Oberon, and disapproval of controversial visual branding.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48490927" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://economist.com/science-and-technology/2026/06/12/treating-pancreatic-tumours-may-have-revealed-cancers-master-switch" target="_blank">Treating pancreatic tumours may have revealed cancer&#39;s master switch</a>
+        </h2>
+        <span class="article-meta">
+          330 points • by andsoitis • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://economist.com/science-and-technology/2026/06/12/treating-pancreatic-tumours-may-have-revealed-cancers-master-switch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments balance cautious optimism about a new KRAS‑targeted approach—recognizing it affects only about 20 % of tumors and represents a modest step forward—with criticism of sensational headlines. Personal accounts highlight the emotional toll of aggressive cancers and emphasize the need for earlier diagnostics and broader funding for research, especially amid concerns over U.S. science budget cuts. Alternative ideas such as CRISPR therapies, electrical‑field research, and dietary interventions are mentioned, reflecting diverse hopes while acknowledging current treatments remain essential. Overall sentiment is hopeful yet measured, calling for sustained investment and realistic expectations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48517199" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theconsensus.dev/p/2026/06/06/python-3-14-garbage-collection-rigamarole.html" target="_blank">Python 3.14 garbage collection rigamarole</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by eatonphil • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Python 3.14.0 introduced an incremental cycle‑collector that replaced the traditional three‑generation collector with a two‑generation (young/old) scheme, aiming to cut pause times by collecting the young generation and a slice of the old one on each run. Users reported increased “memory pressure,” so the change was reverted in 3.14.5, restoring the classic generational collector. The article details CPython’s memory model: objects are reference‑counted; `sys.getrefcount` shows counts, and deallocation occurs when the count reaches zero. Circular references break pure reference counting, requiring the cyclic GC; examples demonstrate leaks when objects reference themselves and how weak references (`weakref.ref` or `weakref.finalize`) can break cycles. The author built both 3.14.4 (incremental GC) and 3.14.5 (traditional GC) from source to compare behavior, noting identical reference‑count outputs but differing GC invocation frequency. Both builds exhibit a reproducible seg‑fault during finalization, with a stack trace involving `free_object`, `_PyGC_ClearAllFreeLists`, and `gc_collect_main`. The change was not gated behind a PEP and lacked a runtime toggle.
+          </div>
+          <a href="https://theconsensus.dev/p/2026/06/06/python-3-14-garbage-collection-rigamarole.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express criticism of Python 3.14’s new incremental garbage collector, noting higher memory usage and disruptive effects on projects that rely on precise object‑collection behavior. Contributors suggest that a more targeted adjustment—such as prioritizing liveliness checks by object size—might resolve the issue without reverting, and they anticipate that the upcoming 3.14.5 release could alleviate required test‑suite changes. There is also disappointment with the decision to revert the changes, coupled with a negative comparison of the Python leadership’s handling of the situation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48503009" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
