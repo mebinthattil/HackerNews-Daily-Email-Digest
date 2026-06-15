@@ -1,0 +1,505 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://andreklein.net/your-epub-is-fine-kobo-disagrees-blame-adobe/" target="_blank">Your ePub Is fine</a>
+        </h2>
+        <span class="article-meta">
+          368 points • by sohkamyung • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author’s new ebook passes epubcheck 3.3 and works on Kindle, Apple Books, and Thorium, but Kobo devices report it as “corrupted.” Investigation revealed that Kobo’s rendering engine (RMSDK), derived from Adobe Digital Editions, uses an outdated CSS parser frozen around 2013. A CSS rule in the book’s stylesheet—`.copyright img { max‑width: min(150px, 30vw); }`—employs the CSS Level 4 `min()` function, which RMSDK cannot parse. When the stylesheet is disabled the book loads; replacing the rule with `max-width: 150px;` resolves the issue. RMSDK lacks support for modern CSS features (flexbox, grid, custom properties) and silently drops the book without error messages. epubcheck validates only against the EPUB specification and performs limited CSS checks; it cannot predict renderer‑specific failures. Consequently, relying solely on epubcheck is insufficient for Kobo compatibility; testing on Adobe’s engine or avoiding newer CSS syntax is necessary.
+          </div>
+          <a href="https://andreklein.net/your-epub-is-fine-kobo-disagrees-blame-adobe/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey widespread frustration with Adobe’s DRM ecosystem, citing inaccessible SDKs, unresponsive support, and anticompetitive practices that hinder indie development. Contributors describe RMSDK’s outdated CSS handling and unreliable validation tools, leading to frequent crashes and compatibility headaches across e‑readers. Many criticize the fragmented ePub standards and urge simpler, backward‑compatible formatting, while noting that alternative devices and open‑source readers like Kobo’s beta, KoReader, and BOOX offer more viable solutions. Some users prefer PDFs or minimalist text formats to avoid these systemic issues.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48533848" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://karthinks.com/software/even-more-batteries-included-with-emacs/" target="_blank">Even more batteries included with Emacs</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by signa11 • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article surveys several built‑in Emacs features that are rarely mentioned but useful, assuming Emacs 28.1+. It shows how to enable `dictionary-tooltip-mode` (with `tooltip-mode`) for on‑hover word definitions, and how `find-file` (`C‑x C‑f`) and `dired` accept wildcards, allowing bulk opening or deletion of files such as “*foo*.txt” or “*/*_region_*”. The `ffap-menu` command scans a buffer for file paths and URLs, offering a completing‑read interface that can be combined with Embark; a custom variant also extracts URLs stored as text properties. For quick diffing, `compare-windows` compares text from the two active windows from the cursor positions, reporting the first mismatch and optionally ignoring whitespace. `dired-compare-directories` marks differing files between two directory listings and supports custom predicates (e.g., modification time, size). `highlight‑changes‑mode` visualizes unsaved edits, and a small hook can turn it into a “highlight‑unsaved” minor mode. The author extends the built‑in VC commands (`vc-diff`, `vc-edrop`, `vc-revision-other-window`) to fall back on Emacs backup files when a file is not under version control, providing a unified “compare with previous version” workflow. Finally, the full `apropos` family is bound under `C‑h a` for faster access to functions, variables, libraries, commands, and customization groups.
+          </div>
+          <a href="https://karthinks.com/software/even-more-batteries-included-with-emacs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a generally positive view of Emacs’s longevity, extensibility and strong packages such as org‑mode and language‑specific tools, with many users citing personal productivity benefits. However, recurring concerns focus on instability caused by package interactions and breaking changes after updates, especially in larger configurations like Spacemacs or Doom. Some participants downplay discoverability problems, while others mention occasional visual quirks and the need to supplement Emacs with other editors for specific tasks. Overall sentiment is appreciative but tempered by frustration over maintenance overhead and occasional breakage.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48535886" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tamnd/kage" target="_blank">Show HN: Kage – Shadow any website to a single binary for offline viewing</a>
+        </h2>
+        <span class="article-meta">
+          478 points • by tamnd • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            kage is a Go‑based utility that mirrors a website into a local folder, rendering each page with headless Chrome, snapshotting the final DOM, stripping all JavaScript, and downloading CSS, images, and fonts to relative paths. The result is a static site that runs offline with no network calls. Core commands are `kage clone <url>` (to crawl breadth‑first, respecting robots.txt and sitemap.xml, with options for depth, page limit, subdomains, scrolling, and refresh), `kage serve [dir]` (to launch a tiny static file server), `kage pack <dir>` (to compress the mirror into a ZIM archive or a self‑contained binary executable, optionally using the --format binary flag), and `kage open <file.zim>` (to view a ZIM directly. Pre‑built binaries, .deb/.rpm/.apk packages, and a Docker image with bundled Chromium are provided; Chrome/Chromium must be installed locally unless the container is used. Packaging is deterministic, producing byte‑identical archives; ZIM files are compatible with Kiwix readers, while binary packs embed the archive for zero‑install execution. The repository is organized into CLI, clone, browser, sanitize, asset, url mapping, ZIM handling, packing, and viewer modules, and is released under the MIT license.
+          </div>
+          <a href="https://github.com/tamnd/kage" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights strong interest in the tool’s ability to create offline, static copies of sites for limited‑connectivity or collaborative scenarios, with many seeing it as a useful complement to existing solutions such as HTTrack, SingleFile, and wget‑mirror. Common concerns include the necessity of a server process for static output, security implications of launching Chrome without sandboxing, handling of JavaScript‑heavy pages, rate‑limiting to avoid site load, and integration with paywalls or extensions. Additional critiques point to the binary‑only distribution model and the README’s perceived AI‑generated tone.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48529990" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bitsy.org/" target="_blank">Bitsy</a>
+        </h2>
+        <span class="article-meta">
+          99 points • by tosh • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bitsy is a lightweight engine designed for creating simple games, interactive worlds, and narrative stories. The site invites users to start by making a game, playing existing games, learning through tutorials, and reading documentation. Community interaction is encouraged via a forum and links to related resources such as Bitsy Classic, press coverage, and showcases. Additional online presence includes an itch.io page for distributing games, a Mastodon account for social updates, and a GitHub repository for source code and development. The overall layout emphasizes accessibility for beginners while providing pathways for deeper engagement through documentation, community forums, and external platforms.
+          </div>
+          <a href="https://bitsy.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights Bitsy as an appealing, lightweight creation tool, appreciated for its simplicity but frequently producing experiences that feel more like interactive poems or narrative sketches than conventional games. Several participants express a desire for Bitsy projects with clearer gameplay mechanics and traditional game elements, while others note the platform’s limitations when handling larger, text‑heavy or feature‑rich works, describing development as enjoyable yet sometimes frustrating due to these constraints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48496290" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://feralui.vercel.app/#/captcha" target="_blank">Prove you&#39;re human by winning a claw machine</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by speckx • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No content was provided to summarize.
+          </div>
+          <a href="https://feralui.vercel.app/#/captcha" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a mix of amusement and criticism toward the chess‑based captcha. Several users appreciate its novelty and fun factor, suggesting it improves the user experience compared to conventional captchas. At the same time, many question its effectiveness as a human‑versus‑AI test, noting that the puzzles are easily solvable and could be automated. Concerns also appear about the broader annoyance of frequent captcha prompts and potential security implications, while a few users raise abstract doubts about what truly defines a human.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48503806" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.apnic.net/2025/12/08/21-years-and-counting-of-eight-fallacies-of-distributed-computing/" target="_blank">21 years and counting of &#39;eight fallacies of distributed computing&#39; (2025)</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by teleforce • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The “eight fallacies of distributed computing” are common mistaken assumptions about networks: (1) the network is reliable; (2) latency is zero; (3) bandwidth is infinite; (4) the network is secure; (5) topology doesn’t change; (6) there is one administrator; (7) transport cost is zero; and (8) the network is homogeneous. The first four were originally identified by Bill Joy and Tom Lyon at Sun Microsystems; L. Peter Deutsch later added three, and James Gosling coined the eighth. The blog emphasizes that these fallacies remain relevant for developers, operators, and protocol designers, who must account for packet loss, variable delay, limited bandwidth, security threats, dynamic topology, multiple administrators, real transport costs, and heterogeneous link characteristics. It cites examples such as TCP/QUIC handling loss, jitter affecting gaming/streaming, bandwidth constraints on home links, encryption limits, BGP/Multipath‑TCP managing topology changes, and differing performance of Wi‑Fi versus Ethernet. Recognizing these false premises helps design more robust networked applications and services.
+          </div>
+          <a href="https://blog.apnic.net/2025/12/08/21-years-and-counting-of-eight-fallacies-of-distributed-computing/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment questions the credibility and practical relevance of the listed fallacies, noting that many applications bypass them by prompting users to retry. It points out a perceived historical inaccuracy regarding the paper’s date and connects the discussion to the recent, now‑diminished hype around microservices. The author contrasts the Wikipedia summary with Peter Deutsch’s own account, suggesting the original authorship is unclear, and concludes that while the list isn’t incorrect, industry often prioritizes assumptions about future physics advances over meticulous optimization of every byte and cycle.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48534628" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://screen.toys/firewood/" target="_blank">Firewood Splitting Simulator</a>
+        </h2>
+        <span class="article-meta">
+          726 points • by memalign • 70 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Firewood Splitting Simulator is an interactive web application that lets users manipulate a virtual log. Users can drag to rotate the log’s orientation and click to execute a split, simulating the process of cutting firewood.
+          </div>
+          <a href="https://screen.toys/firewood/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The simulator is widely described as enjoyable and oddly satisfying, with praise for its smooth animations, sound design, and the automatic stacking of split pieces. Users appreciate its casual, arcade‑like feel and note that it can serve as a light workout. However, repeated criticism centers on unrealistic physics, such as thin slices staying upright and rotation quirks, and the omission of real‑world challenges like knots, axe handling, and dual‑block splitting. Technical observations mention texture aliasing, camera shake timing, and missing error messages when WebGL is disabled.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48471638" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/nex-agi/Nex-N2/issues/4" target="_blank">Rio de Janeiro&#39;s &#34;homegrown&#34; LLM appears to be a merge of an existing model</a>
+        </h2>
+        <span class="article-meta">
+          315 points • by unrvl22 • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository “Rio‑3.5‑Open‑397B” claims to be an original 397‑billion‑parameter model trained by IplanRIO, but analysis shows it is a deterministic element‑wise merge of two existing models: Nex (from Nex‑AGI) and Qwen 3.5‑397B‑A17B. The merge ratio is approximately 60 % Nex and 40 % Qwen. Evidence includes:
+
+- When the hard‑coded “You are Rio” system prompt is removed, the deployed model self‑identifies as “Nex, from Nex‑AGI” in 79 % of queries and never as “Rio,” even reproducing Nex’s proprietary backstory verbatim.
+- Every weight tensor across all 60 layers matches the 0.6/0.4 linear combination of the corresponding Nex and Qwen tensors to within thousands of standard deviations, indicating no additional fine‑tuning beyond the simple interpolation.
+
+Thus, the Rio model does not constitute an independently trained model but a weighted blend of Nex and Qwen.
+          </div>
+          <a href="https://github.com/nex-agi/Nex-N2/issues/4" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the claim that Rio‑3.5‑Open‑397B results from a weighted merge of Nex‑N2‑Pro and Qwen‑3.5‑397B, with many participants seeking technical clarification on how weight merging and on‑policy distillation function. There is notable curiosity about the feasibility of improving performance through simple linear interpolation, alongside skepticism toward the municipality’s lack of clear attribution and documentation. Opinions range from admiration for the municipal effort and the model’s surprising success to criticism of the opaque release process and concerns about proper credit for the original work.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48528371" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.co.uk/programmes/w3ct8k70" target="_blank">Why does paper fold so well?</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by zeristor • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The BBC World Service program “CrowdScience: Why does paper fold so well?” explores the material properties that give paper its exceptional foldability. Listener Haruka’s experience folding origami, including a cloth napkin crane, prompts an investigation into paper’s structure. Dr Steven Mann explains the papermaking process at the historic Frogmore mill, detailing the chemistry of cellulose fibers and how their bonding creates a flexible yet resilient sheet. Professor Bill Sampson (University of Manchester) uses microscopy to show how fiber orientation and surface finish differ across paper types, affecting crease retention. Host Caroline Steel demonstrates folding techniques with origami teacher Toshiko Kurata, while Professor Tomohiro Tachi (University of Tokyo) presents “The Origamizer,” a device that automates complex origami. The program links papermaking science, fiber micro‑structure, and practical origami to explain why paper holds creases so reliably.
+          </div>
+          <a href="https://www.bbc.co.uk/programmes/w3ct8k70" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback conveys a positive reception, noting that the podcast delivers a concise and enjoyable exploration of paper physics as it applies to origami. Listeners appreciate its pleasant tone, clear presentation, and usefulness for understanding the material principles behind folding techniques, describing the episode as both engaging and informative.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48520596" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://traceapp.info" target="_blank">Show HN: Trace – Offline Mac meeting transcripts you can flag mid-call</a>
+        </h2>
+        <span class="article-meta">
+          135 points • by AG342 • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Trace is an offline meeting transcription tool for macOS that operates entirely on the user’s local machine. It does not involve cloud services, require API keys, user accounts, or any form of telemetry, ensuring that audio recordings and generated transcripts never leave the Mac. The application requests macOS’s System Audio Recording permission solely to capture audio from other apps, but it does not access the screen. A privacy policy is provided for further details. The product is positioned as a no‑frills solution focused on local processing and data privacy.
+          </div>
+          <a href="https://traceapp.info" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show strong interest in a local, one‑time‑fee transcription tool, with many users praising its concept, speed, and potential for offline use. Recurrent critiques focus on reliability issues such as crashes, large disk usage, and microphone bleed, as well as missing conveniences like automatic mic switching, easy model installation, and speaker‑learning. Requests for broader language support, open‑source availability, corporate‑policy compatibility, and clear consent handling are common, while price is generally regarded as reasonable compared with subscription alternatives. Overall sentiment is supportive but calls for robust feature refinement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48521236" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
