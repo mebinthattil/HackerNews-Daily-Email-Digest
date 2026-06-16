@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 16, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://devblogs.microsoft.com/oldnewthing/20260615-00/?p=112419" target="_blank">The time the x86 emulator team found code so bad they fixed it during emulation</a>
+        </h2>
+        <span class="article-meta">
+          98 points • by paulmooreparks • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            During Windows’ era of an x86‑32 processor emulator that used binary translation (JIT‑style code generation), the team encountered a function that allocated ~64 KB on the stack and zero‑filled it. The compiler handling that function unrolled the initialization loop, emitting 65,536 separate “store byte” instructions—each 4 bytes—resulting in ~256 KB of generated code to initialize 64 KB of data. The emulator’s translators detected this pathological pattern and replaced it with a compact loop that performed the same initialization, restoring expected performance and code size. This incident illustrates how aggressive loop‑unrolling optimizations can produce inefficient code for large memory operations, prompting runtime systems to add corrective translation logic.
+          </div>
+          <a href="https://devblogs.microsoft.com/oldnewthing/20260615-00/?p=112419" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion references historical compiler behavior, suggesting that past optimization flags could unconditionally unroll loops, while questioning why modern compilers would support such options. It notes that current compatibility layers like Proton and Wine can apply hot‑fixes to improve game performance, contrasting this with earlier patches that addressed bugs directly in the operating system rather than requiring developers to ship fixes. Anecdotes about architecture support and specialized translator optimizations are mentioned, alongside the idea of disabling problematic optimizations for specific code sections.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48550693" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://roman.pt/posts/linkedin-backdoor/" target="_blank">A backdoor in a LinkedIn job offer</a>
+        </h2>
+        <span class="article-meta">
+          957 points • by lwhsiao • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A recruiter on LinkedIn sent a public GitHub repository, claiming a “deprecated Node modules” issue needed a lead engineer. The repo contains a React frontend and Node backend, but the backdoor resides in `app/test/index.js` (~250 lines). It builds the URL `https://rest‑icon‑handler.store/icons/77` from string fragments and executes any code returned by that server on line 225, hidden among commented‑out tests. The backdoor is triggered automatically because `package.json` defines a `prepare` script that runs `node app/index.js`; `npm install` runs `prepare`, loading `app/index.js`, which requires `./test` and thus executes the malicious test file. The commit history is falsified: all 39 commits are attributed to a real full‑stack developer who never touched the repo, and the recruiter’s LinkedIn profile belongs to an unrelated arts journalist who pretended technical expertise. The author avoided execution by using a read‑only analysis agent, reported the repo to GitHub and the recruiter to LinkedIn, and warned that similar supply‑chain attacks can arise from unsolicited code‑review requests.
+          </div>
+          <a href="https://roman.pt/posts/linkedin-backdoor/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on strong concern about increasingly sophisticated recruiter scams that distribute malicious npm packages via LinkedIn and GitHub, exploiting job‑seeker desperation and supply‑chain vulnerabilities. Contributors criticize the platforms’ inadequate reporting channels and slow remediation, noting repeated exposure and limited impact of reports. Advice emphasizes isolating any untrusted code, using virtual environments, and treating unsolicited installation requests as high‑risk. Several remarks suggest possible state‑backed actors and call for coordinated defensive measures, while overall sentiment remains wary and critical of current safeguards.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48546294" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.richardosgood.com/posts/banned-book-library/" target="_blank">Banned Book Library in a Wi-Fi Smart Light Bulb</a>
+        </h2>
+        <span class="article-meta">
+          283 points • by sohkamyung • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The project repurposes a Wi‑Fi smart bulb (ESP32‑C3, 4 MB flash, Tasmota pre‑installed) as an unobtrusive dead‑drop for banned‑book PDFs. After purchasing two bulbs, the author opened the housing, identified the ESP32C3 and its exposed GPIO pins, and soldered wires for serial programming. Using an FTDI adapter and the ESP‑tool, the original firmware was dumped, then a minimal Arduino sketch was flashed to run an open Wi‑Fi access point and AsyncWebServer. Attempts to add a microSD reader failed due to inaccessible pins and the need to dismantle the bulb’s potting compound. Partition analysis showed a 320 KB SPIFFS partition insufficient for book storage; the author edited the partition CSV, regenerated the binary table, and re‑flashed it to allocate ~2 MB to SPIFFS while shrinking the app partition. The resulting firmware hosts a small web server with expanded flash storage, enabling local retrieval of digital books without cloud dependence. The work highlights hardware teardown, OTA flashing, partition manipulation, and the practical limits of using off‑the‑shelf smart bulbs for covert data distribution.
+          </div>
+          <a href="https://www.richardosgood.com/posts/banned-book-library/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively express enthusiasm for the light‑bulb mesh‑network concept, praising its creativity, low cost, and potential community uses while noting practical hurdles such as Wi‑Fi auto‑disconnect behavior and ease of disabling the devices. Participants suggest alternative hardware and expanded applications, including broader mesh protocols and content hosting. A secondary thread debates censorship in the United States, with differing views on the legitimacy of “banned books,” concerns about financial and workplace speech restrictions, and occasional calls for stricter bans on extremist material.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48547985" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.iroh.computer/blog/v1" target="_blank">Iroh 1.0</a>
+        </h2>
+        <span class="article-meta">
+          1073 points • by chadfowler • 84 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Iroh 1.0 is a networking library that replaces IP‑based addressing with user‑controlled cryptographic keys, enabling devices to be reachable regardless of location or NAT state. The release stabilizes the wire protocol and language APIs, guaranteeing interoperability between any iroh v1 endpoints. Core technical features include a custom QUIC implementation with multipath routing and hot‑swap capability, QUIC‑based NAT traversal with encrypted connection metadata, and local‑first discovery allowing direct peer connections without internet access. The library compiles to WebAssembly for browser use and supports custom transports such as BLE, LoRa (in development), and Wi‑Fi Aware under the same dial‑by‑key abstraction. After pausing FFI support, iroh now offers stable bindings for Rust, Python, Node.js, Swift, and Kotlin, facilitating integration into iOS and Android apps. Public relays have handled over 200 million endpoint creations in the past month; relays are open‑source, rate‑limited, and updated within 24 hours of each release. Version 0.35 support ends Dec 31 2026; future major releases will modify the wire protocol, while minor updates remain backward compatible.
+          </div>
+          <a href="https://www.iroh.computer/blog/v1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a largely positive impression of Iroh’s ease of embedding secure, QUIC‑based peer‑to‑peer connections and its helpful developer community, with several users reporting successful production deployments and praising its Rust implementation and relays. At the same time, many raise concerns about the project’s positioning versus established tools such as Tailscale, Netbird or libp2p, question the completeness of documentation, pricing model, and lack of features like WebRTC, Go bindings, or built‑in discovery, and seek clarification on key management, anonymity, and offline‑peer support. Overall, enthusiasm is tempered by calls for clearer value articulation and broader ecosystem support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48542480" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bobdahacker.com/blog/fifa-hack" target="_blank">I Could&#39;ve Rickrolled the FIFA World Cup. All I Needed Was My ID</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by BobDaHacker • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author registered on FIFA’s public Agent Platform, which automatically added the account to FIFA’s Microsoft Entra (Azure AD) tenant used by all internal applications. Although the Angular front‑end displayed “no roles” and denied access, the backend APIs performed no role checks, allowing an unauthenticated “NO_ROLES” account to retrieve data from multiple production systems. The author accessed the Streaming Management panel (fdp.fifa.org), exposing live‑production RTMP ingest URLs and stream keys for every 2026 World Cup match and camera angle. These URLs could be used to replace live feeds, potentially hijacking broadcast content. The same account also accessed the Commentator Information System (cis.fifa.org), match‑management interfaces, analytics dashboards, and an Azure Function exposing internal spreadsheet files via direct Blob URLs. The vulnerability stemmed from client‑side only authorization. After reporting via email, phone, and contacts at MediaKind, CISA, and the FBI, FIFA patched the APIs to return 403 responses, but offered no direct acknowledgment or disclosure policy.
+          </div>
+          <a href="https://bobdahacker.com/blog/fifa-hack" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments blend amusement with admiration for the reported FIFA vulnerability, noting the author’s similar experience with a past Qatar‑2022 exploit and the quick patch but lack of promised compensation. Readers express praise for the writing and the discovery while also highlighting serious security concerns, questioning how the API allowed unchecked JWTs and emphasizing the potential for large‑scale disruption if misused. Overall sentiment acknowledges the technical cleverness, finds the situation entertaining, and critiques FIFA’s response and oversight.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48550936" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tinywind.io" target="_blank">TinyWind: A pixel pirate sailing game with real wind physics (380k+ kms sailed)</a>
+        </h2>
+        <span class="article-meta">
+          724 points • by tinywind • 72 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided text contains only a single line: the title “TinyWind – Pixel Pirate Sailing.” No additional description, details, or context are included, so the content consists solely of this title, suggesting a possible game or project named TinyWind that involves pixel‑art sailing with a pirate theme.
+          </div>
+          <a href="https://tinywind.io" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment is strongly positive, with many users describing the game as fun, well‑executed, nostalgic and visually appealing. Common praise focuses on the immediate accessibility, enjoyable combat and charming retro aesthetic. Repeated critiques point to confusing wind‑direction indicators, unintuitive mobile control placement, limited sailing‑physics realism, unclear health/healing mechanics, and a lack of difficulty or multiplayer options. Suggested improvements include larger or clearer wind displays, tutorial or auto‑trim features, more realistic turning and gust mechanics, adjustable sound, and expanded game modes such as races or regattas.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48543475" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Has anyone replaced Claude/GPT with a local model for daily coding?</a>
+        </h2>
+        <span class="article-meta">
+          848 points • by cloudking • 134 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments collectively emphasize that open‑source, locally run models such as Qwen 3.6, DeepSeek V4, Gemma, and Kimi can handle the majority of coding tasks at a fraction of the cost of commercial services, offering fast token throughput and privacy benefits. Users note that these models require precise prompting, may produce loops or less sophisticated architectural reasoning, and often need substantial hardware or careful quantization to achieve acceptable speed and quality. While many find them sufficient for personal or hobby projects, most acknowledge that frontier cloud models still outperform them on complex or large‑scale work, and that setup complexity and hardware constraints remain significant hurdles.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48542100" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=hPrtVGimBYs" target="_blank">I hacked into the worst e-bike and fixed it [video]</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by alexis-d • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The scraped text appears to be a footer or navigation panel from the YouTube website, listing standard informational and service links. Items include “About,” “Press,” and “Copyright,” which typically provide corporate background, media resources, and legal ownership details. “Contact us” offers communication channels, while “Creators,” “Advertise,” and “Developers” target content producers, advertisers, and software partners respectively. Legal and policy links such as “Terms,” “Privacy,” and “Policy & Safety” outline user agreements, data handling, and community standards. Functional links like “How YouTube works” and “Test new features” describe platform operations and beta testing. The “NFL Sunday Ticket” entry references a sports subscription service. The footer concludes with a copyright notice stating © 2026 Google LLC.
+          </div>
+          <a href="https://www.youtube.com/watch?v=hPrtVGimBYs" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses enthusiasm for a bike resurrection method while noting the bikes are currently stored and unused. It recommends a creator’s detailed trail‑build videos, praising their quality but lamenting that YouTube’s algorithm favors short reaction content over longer, evergreen projects. The writer also critiques the creator’s reliance on AI‑generated script, finding the duplicated speech style off‑putting and less authentic. Overall, the tone is appreciative of the channel’s work yet dissatisfied with platform incentives and the AI implementation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48479957" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://garden-of-flowers.heikkilotvonen.com/" target="_blank">Show HN: Garden of Flowers – an archive of pictorial typography before ASCII art</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by california-og • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Heikki’s “Garden of Flowers” is an online archive dedicated to pictorial typography, presenting a curated collection of 2,497 images that blend floral motifs with typographic elements. The site offers an adjustable grid layout ranging from 100 px to 400 px, allowing users to modify the visual density of the gallery. All images are displayed without applied filters, preserving their original color and composition. The header features a logo titled “Garden of Flowers,” reinforcing the brand identity. Navigation includes options to remove any active filters and to view the full image set, which is presented in a continuous scroll format. The archive serves as a comprehensive visual reference for designers and typographers interested in the intersection of botanical illustration and letterform design.
+          </div>
+          <a href="https://garden-of-flowers.heikkilotvonen.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a positive reception toward Arabic calligraphy, highlighting its artistic value and the practice of rendering Quranic verses, poetry, and other texts in decorative form. The idea is described as appealing, distinct, and aesthetically pleasing, with reviewers indicating appreciation for its uniqueness and overall quality. The tone is supportive and enthusiastic about the concept.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48550569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://michaelenger.com/blog/i-love-the-computer/" target="_blank">I Love the Computer</a>
+        </h2>
+        <span class="article-meta">
+          196 points • by speckx • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The essay recounts the author’s lifelong passion for computers, beginning with an IBM 486 DX6 running Windows 3.0 that his mother brought home in Norway when he was six or seven. Early exposure to print‑media magazines (e.g., TEKNO, Geek, Incite PC Gaming) shaped his “geek” identity and provided hardware/software knowledge before the Internet became widespread. Relocating to Malaysia gave him regular school Internet access, leading to extensive exploration of forums, Java games, and self‑directed learning. A failed early attempt at programming (renaming a .txt file to .exe) prompted later formal study; he subsequently mastered Java, C++, PHP, earned an honours degree in Computer Science, and pursued a career in web development, audio engines, and open‑source contributions. Reflecting on current industry trends, he critiques the commercialization and “dark‑pattern” tactics that exploit the technology he admires, while noting increased accessibility of programming and a shift toward decentralized, self‑hosted solutions. Despite these tensions, his affection for computers remains unchanged.
+          </div>
+          <a href="https://michaelenger.com/blog/i-love-the-computer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a strong, enduring affection for computers rooted in hands‑on tinkering, learning, and the deterministic nature of code. Many recall early experiences that shaped their enthusiasm and lament recent trends that restrict freedom, such as platform lock‑in, invasive software, and corporate ecosystems. Opinions on AI are mixed: several view large language models as useful accelerators for prototyping and learning, while others feel they undermine predictability and erode deep understanding. A recurring theme is the desire to preserve autonomy through self‑hosting, alternative protocols, and low‑level exploration.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48546441" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
