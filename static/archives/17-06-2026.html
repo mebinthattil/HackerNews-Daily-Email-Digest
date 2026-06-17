@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 17, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://runtimewire.com/article/openai-leaked-financials-altman-compute-burn" target="_blank">Leaked OpenAI financials show $38.5B loss and compute burn</a>
+        </h2>
+        <span class="article-meta">
+          146 points • by TechApocalypse • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI’s audited 2025 financials, revealed by Ed Zitron and confirmed by the Financial Times, show $13.07 billion in revenue against $34 billion in total costs, yielding a $20.92 billion operating loss and a $38.53 billion net loss attributable to the company after accounting for a $41.55 billion fair‑value adjustment to convertible interests and warrant liabilities. Revenue grew ~3.5× from 2024, but operating losses rose ~2.4×, driven by $7.5 billion cost of revenue, $19.18 billion R&D, $5.73 billion sales & marketing, and $1.57 billion G&A. Microsoft, holding ~27 % of OpenAI Group, received $17.2 billion in expenses (including $10.59 billion R&D) and had $3.64 billion in year‑end liabilities to OpenAI. The company’s capital structure—nonprofit foundation controlling a for‑profit public‑benefit corporation—facilitated a $122 billion capital commitment at an $852 billion post‑money valuation, but the disclosed losses highlight a cost base expanding faster than typical software businesses, posing a challenge for any forthcoming IPO.
+          </div>
+          <a href="https://runtimewire.com/article/openai-leaked-financials-altman-compute-burn" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on OpenAI’s reported 2025 revenue of $13 billion against $7.5 billion cost of revenue, highlighting a sizable R&D budget and a large non‑cash accounting charge that inflated losses. Participants note that while the revenue growth appears strong, its sustainability is uncertain given rising competition and enterprise pricing shifts. Opinions diverge: some view the financials as a plausible path to profitability by 2030 or sooner and see valuation as comparable to other tech firms, while others argue the loss magnitude and reliance on growth make an IPO risky and question the company’s long‑term moat.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48565130" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://discuss.grapheneos.org/d/36469-grapheneos-has-been-ported-to-android-17-and-official-releases-are-coming-soon" target="_blank">GrapheneOS has been ported to Android 17</a>
+        </h2>
+        <span class="article-meta">
+          552 points • by Cider9986 • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GrapheneOS has completed a full port to Android 17 and will begin public releases shortly. The team is finalizing an official build based on Android 16 QPR2 today, with an initial Android 17 release slated for tomorrow. Testing of the Android 17 port has been performed on Pixel 6a, 7, 7a, 8, 10a, 10, and 10 Pro Fold, and the code will be pushed to public repositories later today, enabling users to build and test it themselves. The forthcoming public release will cover all supported devices, and each will have been tested before availability. This marks the transition from internal testing to public testing and distribution for the Android 17‑based GrapheneOS builds.
+          </div>
+          <a href="https://discuss.grapheneos.org/d/36469-grapheneos-has-been-ported-to-android-17-and-official-releases-are-coming-soon" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Overall sentiment is positive toward GrapheneOS for its security and privacy benefits, but frustration exists over limited device support (Pixel only), app compatibility problems (banking, Strava, microG), UI differences, occasional performance quirks, and the lack of an official rooting option. Users note missing conveniences such as swipe‑cursor control and reaction‑emoji handling, and express concern about Google’s increasing integration. The community values granular permission control and privacy while recognizing trade‑offs and desiring broader hardware compatibility and better app support.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48561654" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://vickiboykis.com/2026/06/15/running-local-models-is-good-now/" target="_blank">Running local models is good now</a>
+        </h2>
+        <span class="article-meta">
+          1151 points • by jfb • 112 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Local models have become practically usable on a 2022 M2 Mac with 64 GB RAM using tools such as llama.cpp, Ollama, LM Studio, and Pi. The author notes a marked improvement since the release of GPT‑OSS, with models now requiring minimal verification against API services. Recent Google Gemma‑4 releases (26B‑A4B and 12B‑QAT) achieve roughly 75 % of frontier model accuracy and speed, enabling tasks like refactoring Python code, linting with type hints, proofreading, generating unit tests, and bootstrapping recommendation systems. The workflow runs in Docker containers for security, using Pi as the agent harness and LM Studio as the inference server; a provided Docker‑Compose configuration connects Pi to the local model endpoint. Limitations remain: slower inference, constrained context windows, and occasional prompt‑template mismatches that are quickly patched. Benefits include full introspection of token processing, adjustable context windows, quantization tweaks, and the ability to compare models directly. The ecosystem is maturing, though the author cautions that it may not yet be production‑ready.
+          </div>
+          <a href="https://vickiboykis.com/2026/06/15/running-local-models-is-good-now/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a nuanced view of locally run LLMs. Users acknowledge recent progress and appreciate the cost‑free, privacy‑preserving aspects, especially for small, well‑defined tasks, but they consistently note that performance, reliability, and speed still fall short of leading cloud models, often requiring substantial GPU memory, sophisticated quantization, and extensive tuning. Hardware constraints such as heat, noise, and budget limit widespread adoption, leading many to favor a hybrid approach that combines local models for simple work with cloud services for larger, complex projects. Optimism about future improvements coexists with realistic expectations about current limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48555993" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mll.sh/humiliating-iis-servers-for-fun-and-jail-time/" target="_blank">Humiliating IIS servers for fun and jail time</a>
+        </h2>
+        <span class="article-meta">
+          164 points • by denysvitali • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            IIS reconnaissance begins with enumeration: use Shodan/FOFA/Censys queries for “http.title: IIS”, Google dorks (e.g., site:target.com intitle:"IIS Windows Server", inurl:aspnet_client, _vti_bin), and active fingerprinting of Server/X‑Powered‑By headers via httpx or raw sockets.  
+
+Once identified, gather disclosed data such as internal IPs or X‑FEServer headers from HTTP/1.0 302 responses.  
+
+Automate vulnerability checks with Nuclei tags (microsoft, windows, asp, iis). For 404 “HTTPAPI 2.0” responses, brute‑force virtual hosts using SSL certificate SANs or tools like ffuf with Host‑header wordlists.  
+
+Leverage IIS tilde‑shortname enumeration (shortscan, Burp scanner) to reveal 8.3 filenames; resolve fragments via GitHub code search, BigQuery’s public GitHub dataset, or generated wordlists (LLMs, crunch).  
+
+Prioritize IIS‑specific paths: web.config (and backups), global.asax, trace.axd, elmah.axd, appsettings*.json, _vti_pvt files, and extensions (.asp, .aspx, .ashx, .config, .json, .xml). Access to web.config yields machine keys for ViewState deserialization RCE.  
+
+Additional exploits include path‑traversal to web.config, cookieless‑session DLL extraction, reverse‑proxy path‑normalization bypasses, NTFS alternate‑data‑stream auth bypasses, file‑upload extension tricks (trailing dots, .cer/.svg etc.), and HTTP Parameter Pollution to evade WAFs.
+          </div>
+          <a href="https://mll.sh/humiliating-iis-servers-for-fun-and-jail-time/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments combine technical discussion of IIS’s legacy 8.3 filename handling with appreciation for the article’s entertaining and well‑designed presentation on desktop browsers. Readers note occasional formatting issues, such as a sidebar overlapping main text, and express curiosity about IIS’s current relevance and interest in a comparable nginx example. Overall sentiment is positive toward the content’s depth and humor, while also highlighting minor layout problems and prompting further exploration of alternative server platforms.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48563394" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://writings.stephenwolfram.com/2026/06/launching-version-15-of-wolfram-language-mathematica-built-in-useful-ai-lots-of-new-core-functionality/" target="_blank">Wolfram Language and Mathematica Version 15, AI Assistant, Symbolic Music, More</a>
+        </h2>
+        <span class="article-meta">
+          123 points • by alok-g • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Version 15 of the Wolfram Language adds extensive core features and built‑in AI support. A new AI Assistant appears as a persistent chatbar in every notebook, offering code generation, context‑aware suggestions, and three service tiers (Basic, Pro, Research) without extra configuration. The Wolfram Agent Tools framework lets external LLM environments (e.g., Claude Code, Codex) invoke Wolfram functions, deployable via DeployAgentTools. TimeSeries is rebuilt on the Tabular framework, handling multi‑component series, missing data, and massive datasets (millions of points); EventSeries now supports discrete event collections and related utilities (TimeSeriesEvents, EventSeriesAccumulate, EventSeriesLookup). Categorical data receive a unified symbolic type distinguishing ordinal and nominal categories, usable in Tabular, TimeSeries, and EventSeries. ModelFit becomes a superfunction for fitting symbolic model outlines to data, covering exponential, logarithmic, polynomial, periodic, nearest‑neighbor, neural‑net, and decision‑tree models, with automatic reporting and multidimensional support. Symbolic music introduces hierarchical objects (MusicPitch, MusicNote, MusicChord, MusicMeasure, MusicVoice, MusicScore) and full MIDI import/export. Tabular connectivity is expanded: selective column import, faster DataConnectionObject access to cloud storage (Azure Files/Tables), OLAP sources (Databricks, Snowflake), and ExternalEvaluate integration for seamless Python‑pandas workflows.
+          </div>
+          <a href="https://writings.stephenwolfram.com/2026/06/launching-version-15-of-wolfram-language-mathematica-built-in-useful-ai-lots-of-new-core-functionality/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong appreciation for Mathematica’s expressive syntax, ease of creating visualizations, and its longstanding presence in academic environments, with many recalling positive experiences from university. At the same time, there is consistent criticism of its high cost, closed‑source model, and limited enterprise integration, leading to calls for an open‑source alternative. The bundled AI assistant is widely regarded as ineffective, prompting disappointment over its pricing. Users note that while Mathematica remains popular in research and teaching, its adoption in commercial settings appears limited, prompting interest in free alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48563609" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mareksuppa.com/til/bash-dev-tcp-http-without-curl/" target="_blank">TIL: You can make HTTP requests without curl using Bash /dev/TCP</a>
+        </h2>
+        <span class="article-meta">
+          337 points • by mrshu • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bash can issue plain‑text HTTP requests without external tools by using its built‑in “/dev/tcp” redirection. Open a bidirectional file descriptor with `exec 3<>/dev/tcp/<host>/<port>`, write a request via `printf 'GET /path HTTP/1.1\r\nHost: <host>\r\nConnection: close\r\n\r\n' >&3`, and read the response with `cat <&3`. The hostname must resolve and be reachable (e.g., a Docker service name). Additional headers (e.g., `Authorization: Bearer …`) are added as extra `\r\n`‑terminated lines before the final blank line.  
+
+Key details:  
+- `/dev/tcp` is not a real device; Bash handles it internally and performs DNS lookup and `connect(2)`.  
+- It provides a raw TCP socket only—no TLS, no automatic handling of redirects, chunked encoding, compression, retries, or HTTP parsing. Use `Connection: close` to ensure the server terminates the connection; otherwise `cat` may block.  
+- The feature is Bash‑specific (not POSIX), unavailable in `dash` or `zsh`, and requires Bash compiled with `--enable-net-redirections` (enabled in most mainstream builds).  
+
+Thus, for minimal containers lacking `curl`/`wget`, this technique offers a quick connectivity check, though `curl` remains the appropriate tool for full HTTP client functionality.
+          </div>
+          <a href="https://mareksuppa.com/til/bash-dev-tcp-http-without-curl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Bash’s /dev/tcp (and /dev/udp) feature for manual network communication, noting its utility in minimal environments, health checks, and situations where tools like curl, wget, or netcat are unavailable. Contributors highlight its simplicity, historical relevance to telnet‑style testing, and successful use in constrained containers or security‑restricted systems. At the same time, many caution that the approach is non‑portable, fragile, and unsuitable for production or complex HTTP interactions, recommending dedicated utilities for robustness and proper handling of redirects, proxies, and encoding. Overall sentiment balances enthusiasm for the trick with practical reservations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48558018" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.asimov.press/p/glass" target="_blank">Working in Glass</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by bookofjoe • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The essay traces the evolution of laboratory glassware from Justus Liebig’s 1830s innovations to modern borosilicate standards.  
+- Liebig, constrained by a modest Giessen lab, learned glassblowing in Paris and created the Kaliapparat, a potassium‑hydroxide‑filled glass apparatus for carbon analysis; its nitrogen determination proved unreliable, but it offered a low‑cost alternative to volumetric eudiometers.  
+- He promoted open dissemination of glass‑making techniques, spurring an amateur glassblowing movement in the 1840s and leading to commercial catalogs (e.g., John J. Griffin, Heinrich Geissler).  
+- Otto Schott’s development of low‑dispersion borate glass (later borosilicate) in the 1880s, in collaboration with Ernst Abbe and Carl Zeiss, yielded glass with superior hardness, thermal stability, and chemical resistance.  
+- Schott’s 1892 borosilicate formulation became the standard for lab glassware, dominating the market until WWI disrupted German exports, after which Corning’s Pyrex (borosilicate) gained prominence in the United States.  
+- Standardized ground‑glass fittings (CS 21‑36) and precision‑molded borosilicate enabled reproducible volumes and modular setups throughout the early 20th century.  
+- Glassblowing remained a required skill in chemistry education into the 1950s, but today it is largely subcontracted; glass still dominates high‑temperature and optical laboratory applications, while plastics serve low‑cost, sterile uses.
+          </div>
+          <a href="https://www.asimov.press/p/glass" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48495090" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://therepublicofletters.substack.com/p/calvin-and-hobbes-and-the-price-of" target="_blank">Calvin and Hobbes and the price of integrity</a>
+        </h2>
+        <span class="article-meta">
+          346 points • by pseudolus • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://therepublicofletters.substack.com/p/calvin-and-hobbes-and-the-price-of" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments collectively celebrate Bill Watterson’s refusal to commercialize Calvin and Hobbes, viewing his integrity as rare and admirable and crediting it for preserving the strip’s timeless appeal. Readers contrast this with other comics that have become “brand”‑like through extensive licensing, noting a loss of charm in those cases. Many express personal nostalgia and the lasting influence of Calvin and Hobbes on their childhood and values, while also speculating how the strip might have evolved in the web‑comic era and lamenting the absence of future merchandise or adaptations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48557079" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tno.nl/en/digital/artificial-intelligence/gpt-nl/" target="_blank">GPT‑NL: a sovereign language model for the Netherlands</a>
+        </h2>
+        <span class="article-meta">
+          172 points • by root-parent • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GPT‑NL is a Dutch‑language large language model developed in the Netherlands and Europe to ensure sovereign control over technology, data, and model decisions. The project emphasizes transparency: source code and model weights are open‑source under a controlled licence, with detailed documentation of data collection, bias mitigation, and risk management. Training is performed from scratch to avoid inherited data provenance issues, with strict data‑curation criteria that exclude copyrighted, personal, confidential, harmful, or duplicated content. A Content Board involving data providers and rights holders governs data use, and a portion of revenues is redistributed to creators, supporting a reciprocal innovation model. Energy efficiency is prioritized through research‑guided optimization of model size and training processes to reduce power and water consumption. Funding of €13.5 million comes from the Netherlands Enterprise Agency (RVO) for the Ministry of Economic Affairs and Climate Policy, reflecting public investment in an independent, trustworthy Dutch language AI.
+          </div>
+          <a href="https://www.tno.nl/en/digital/artificial-intelligence/gpt-nl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed view of national “sovereign” language‑model projects. Many question the practicality and cost‑effectiveness of building models from scratch, preferring to fine‑tune established open‑source baselines and to focus on shared ecosystems rather than isolated national efforts. Skepticism is expressed about the €13.5 million budget, limited compute resources, and Europe’s ability to compete with larger US and Chinese initiatives. Nevertheless, some acknowledge strategic value in having independent models to avoid reliance on foreign providers and potential export restrictions. Overall, the discourse leans toward caution and calls for collaborative, ecosystem‑based approaches.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48559188" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tim.blog/2026/06/12/has-ai-already-killed-nonfiction/" target="_blank">Has AI already killed self-help nonfiction books?</a>
+        </h2>
+        <span class="article-meta">
+          220 points • by imakwana • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Publishers Weekly data show adult nonfiction sales fell 9 % in Q1 2026 versus Q1 2025, with self‑help down 26.3 % YoY; only crafts/hobbies ( +9.6 %) and religion ( +1.6 %) grew. Tim Ferriss’ five best‑selling titles (Print + ebook + audio) dropped 5 % in 2023, 13 % in 2024, 46 % in 2025 and 57 % in 2026 after the November 2022 launch of ChatGPT (GPT‑3.5). Overall catalog volume in 2026 is projected to be ~80 % lower than in 2022. Ferriss attributes the decline to LLMs delivering rapid, personalized “lookup‑table” advice that replaces prescriptive how‑to nonfiction. He predicts similar disruption for how‑to YouTube videos, advisory podcasts, online courses, newsletters and other instruction‑focused formats, as AI can summarize and personalize content instantly. Content that relies on experience, storytelling, humor, or unique voice may endure, but mass‑market prescriptive nonfiction faces rapid erosion. Ferriss suggests creators focus on a core “1,000 true fans” model and deeper, longer‑form engagement to survive the shift.
+          </div>
+          <a href="https://tim.blog/2026/06/12/has-ai-already-killed-nonfiction/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that the self‑help book market is contracting, attributing the drop to oversaturation, a shift toward short‑form video, podcasts, and audiobooks, and the emergence of AI tools that can summarize or generate comparable advice. Many criticize the genre as commercially driven, repetitive, and replaceable by algorithmic content, while a minority note continued niche interest, especially in audio formats or well‑crafted titles. Overall sentiment is skeptical of the genre’s relevance, acknowledging both the broader media transition and isolated pockets of persisting demand.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48558489" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
