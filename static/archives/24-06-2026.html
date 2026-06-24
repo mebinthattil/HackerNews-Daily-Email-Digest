@@ -1,0 +1,545 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 24, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://words.filippo.io/vuln-reports/" target="_blank">Vulnerability reports are not special anymore</a>
+        </h2>
+        <span class="article-meta">
+          145 points • by goranmoomin • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Vulnerability reports are losing their “special” status because advances in large language models (LLMs) have democratized security analysis. Historically, maintainers owed rapid acknowledgment, investigation, and attribution to researchers who disclosed issues confidentially, enabling fixes before public exploits. The article argues that:
+
+- LLMs now provide comparable vulnerability insights to human researchers, making discovery less scarce.
+- The primary bottleneck has shifted to triage: distinguishing true issues from the high volume of LLM‑generated or emailed reports.
+- Confidentiality, embargoes, and coordination are less impactful; attackers can query their own LLMs for the same information.
+- Consequently, the emphasis should move to automated triage, rapid remediation, and prevention, integrating LLM analysis into continuous integration pipelines.
+
+The piece also mentions the author’s involvement in the CENTOPASSI motorcycle event and sponsorship from companies like Ava Labs, Teleport, Datadog, Tailscale, and Sentry, which support the open‑source Go maintenance team.
+          </div>
+          <a href="https://words.filippo.io/vuln-reports/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight a surge of AI‑generated vulnerability reports that many companies find overwhelming, with a large share being low‑quality or extortionate spam. Contributors note that while the volume makes triage harder, the fundamental challenge remains allocating resources to fix genuine issues rather than merely identifying them. Opinions diverge on whether vulnerability reports are still “special”; some argue the reports themselves have never been unique, only their impact and communication mattered, while others maintain the need for careful handling. Optimism exists that improved tooling, safer languages, and research will eventually reduce both the noise and the underlying bug prevalence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48653216" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://www.jerrysmap.com/the-map" target="_blank">Jerry&#39;s Map</a>
+        </h2>
+        <span class="article-meta">
+          377 points • by turtleyacht • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Map is a sequential, layered representation that evolves through distinct phases, each supplanting the previous iteration.  
+
+- **Base Layer** (four phases):  
+  1. Blank 8 × 10 in. page of paperboard or heavy paper with a photo/lumen print.  
+  2. Gradual coverage by successive painted color bands.  
+  3. Replacement of paint with 1‑in. paper‑collage squares.  
+  4. Substitution of collage by 1‑in. city squares coded by population: Green (400), Red (800), Grey (1,200), Black (2,400).  
+
+- **Void**: Begins with irregular white collage, followed by 2‑in. black‑and‑white collage, then 1‑in. grey city forms, and finally 1‑in. black city squares.  
+
+- **Red Dimension**: Irregular flame‑shaped solid red collage.  
+
+- **Black Ness**: 2‑in. black collage squares, overriding the Red Dimension.  
+
+- **Ziggurat Phase**: Stacked collage squares decreasing from 2 × 2 in., not yet manifested.  
+
+- **Flood**: Irregular blue collage pieces.  
+
+- **Re‑Birth**: Hand‑torn kraft‑paper fragments.  
+
+The cycle concludes with a new series of paint bands, restarting the process.
+          </div>
+          <a href="http://www.jerrysmap.com/the-map" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for Jerry’s Map, praising its creative, long‑term approach and the distinctive card‑deck system that drives map development while preserving hands‑on artistry. Many recall personal experiences with hand‑drawn, grid‑based world‑building and liken the project to outsider art, simulation games, and other long‑running analog city projects. Viewers appreciate the documentary coverage and see potential for modern extensions such as AI‑enhanced tile generation, while noting that the method may seem unfamiliar to younger generations. Overall sentiment is supportive and nostalgic.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48649435" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://swipe.futo.tech/" target="_blank">FUTO Swipe – A new swipe typing model</a>
+        </h2>
+        <span class="article-meta">
+          373 points • by futohq • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The system uses a three‑model architecture for swipe‑typing prediction.  
+
+* **Encoder** – a universal, layout‑agnostic and language‑agnostic model that generates baseline predictions; it is fast but not state‑of‑the‑art in accuracy.  
+* **ContextLM** – a very small language model trained on a single language’s text corpus; it filters out implausible word candidates by evaluating the preceding context, requiring only textual data for training.  
+* **Decoder** – a language‑specific, layout‑specific model that learns the quirks of a particular keyboard layout; it delivers the highest accuracy but needs swipe‑typing data for that layout and language. Currently only an English QWERTY decoder is available.  
+
+When combined and run with a beam width of 300, the ensemble attains a top‑4 fail rate of approximately 4 % on the test set, and, excluding out‑of‑vocabulary items, an overall error rate below 1 %.
+          </div>
+          <a href="https://swipe.futo.tech/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments highlight strong interest in swipe typing and appreciation for FUTO’s privacy‑focused, locally‑run voice and swipe models, with many users noting accuracy improvements over existing keyboards and welcoming an open‑source alternative. Repeated concerns include occasional mis‑capitalization, irrelevant suggestions, limited multilingual handling, missing gestures such as swipe‑to‑delete or case switching, and unclear licensing. Requests surface for a swipe‑optimized layout, broader language support, iOS availability, and feature parity with competitors, while overall sentiment remains cautiously optimistic about FUTO’s potential despite its current shortcomings.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48648619" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://devblogs.microsoft.com/oldnewthing/20260622-00/?p=112451" target="_blank">In memory of the man who put red and green squiggles under words</a>
+        </h2>
+        <span class="article-meta">
+          230 points • by saikatsg • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Tony Krueger, a longtime Microsoft engineer, contributed to many early versions of Word (1.0‑2.0, OS/2, Mac, 6.0 and later). He redesigned the spell‑checking system: moving from a blocking, user‑invoked process to an unobtrusive background operation that automatically underlines misspelled words with red squiggles and later marks grammatical issues with green lines. This change eliminated interruptions caused by the previous “Auto Spell Check” that halted foreground work. Krueger also ported the DOS game Chip’s Challenge to Windows for the Windows Entertainment Pack, reverse‑engineering the original code. His work on the squiggle feature earned public recognition, including a shout‑out from magician Penn Jillette and a cameo in “Weird Al” Yankovic’s “Word Crimes” video. Today, red (and other colored) squiggles appear in virtually all word processors and many other text‑editing applications, tracing back to Krueger’s implementation.
+          </div>
+          <a href="https://devblogs.microsoft.com/oldnewthing/20260622-00/?p=112451" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed feelings about text‑editing features. There is appreciation for articles that highlight quirky development decisions, but many users criticize the current handling of squiggly underlines, describing them as noisy, inaccurate, and a regression from earlier tools. Frequent frustrations include false‑positive spell‑check alerts, difficulty in multilingual contexts, and loss of formatting options, prompting calls for better auto‑correction shortcuts and logic‑error indicators. Nostalgia for previous versions and a desire for more reliable, context‑aware spelling assistance are recurring themes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48648959" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2606.24597" target="_blank">Qwen-AgentWorld: Language World Models for General Agents</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by ilreb • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            I’m unable to provide a summary because the supplied excerpt contains only the paper’s title and a list of image captions, without any substantive textual content describing the work.
+          </div>
+          <a href="https://arxiv.org/abs/2606.24597" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment shares information about the 35B model from the Qwen‑3.5 series, providing direct links to its GitHub repository and the corresponding Hugging Face model page. It serves as a resource announcement, indicating interest in making the model accessible and pointing readers toward official sources for download and further details. No evaluative language or additional context is included beyond the provision of these URLs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48654351" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.patreon.com/DanyBittel/posts/printing-splats-161333338" target="_blank">Printing Gaussian Splats</a>
+        </h2>
+        <span class="article-meta">
+          228 points • by ilnmtlbnm • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.patreon.com/DanyBittel/posts/printing-splats-161333338" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the high‑fidelity 3D printed model, noting that its realism surpasses previous expectations of the technology. Many participants are curious about the specific printing method used and view the result as a breakthrough that could enable new applications, including sci‑fi concepts and commercial products. There is a recurring desire to experiment with or purchase similar items, and the overall tone reflects confidence that the technique is both technically impressive and commercially viable.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48618481" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ps.tc/pages/blog-usbliter8.html" target="_blank">Usbliter8: an A12/A13 SecureROM Exploit</a>
+        </h2>
+        <span class="article-meta">
+          110 points • by givinguflac • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The usbliter8 research reveals a hardware flaw in Apple’s DesignWare DWC2 USB controller that creates a 12‑byte buffer‑underflow primitive. The controller stores up to three Setup packets, then resets the DMA base address by subtracting 24 bytes; because smaller packets are still stored in 4‑byte chunks, the DOEPDMA register can be decremented past its intended range, allowing arbitrary writes to SRAM. The bug is present in A12 and A13 SecureROM (A11 mitigates it by resetting the DMA address after each packet; A14+ configures DART securely, rendering it unexploitable).  
+
+Exploitation on A12 overwrites the saved LR on the USB task stack to gain PC control; on A13 the presence of PAC requires additional steps: corrupting heap metadata, disabling DART free, tampering with panic counters, and manipulating the task structure’s critical‑section depth to trigger a controlled panic that preserves the corrupted state. Post‑exploitation, code execution is elevated to EL1 via an SVC 0 in the boot‑trampoline routine (0x1000088B0), allowing injection of a custom USB DFU handler with commands to demote production mode and boot unsigned iBoot images. Persistence is achieved by copying SecureROM to SRAM and remapping the MMU so patched code runs from its original virtual address. The vulnerability affects A12, A13, S4/S5 (A12X/Z support not yet implemented) and remains unmitigated on affected devices except by hardware replacement.
+          </div>
+          <a href="https://ps.tc/pages/blog-usbliter8.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the newly disclosed USBLITER8 vulnerability, noting its hardware‑level nature that prevents straightforward patching and raises concerns about full device compromise without additional exploits. Commenters express curiosity about the security impact and potential for jailbreak development, while also highlighting the limited device scope—primarily newer iPhone and iPad models—and the historical parallel to copy‑protection schemes. There is interest in possible defensive measures, but overall the tone combines cautious optimism about a new exploitation avenue with apprehension over its unfixable characteristics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48585852" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://glyphcss.com" target="_blank">Show HN: An ASCII 3D Rendering Engine</a>
+        </h2>
+        <span class="article-meta">
+          20 points • by apresmoi • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GlyphCSS is a JavaScript library that renders ASCII polygon meshes directly in the DOM. It provides custom elements (e.g., `<glyph-camera>`, `<glyph-scene>`, `<glyph-orbit-controls>`, `<glyph-mesh>`, `<glyph-hotspot>`) and corresponding React and Vue components (`GlyphCamera`, `GlyphScene`, `GlyphOrbitControls`, `GlyphMesh`, `GlyphHotspot`). Example usage demonstrates loading the library via a module script from esm.sh, creating a camera with a 23‑degree X rotation and 1.3× zoom, and displaying a dodecahedron mesh. An interactive hotspot positioned at `[0, 1.2, 0]` triggers a click handler that shows an alert (“vertex”). The same setup is shown in both React JSX and Vue `<template>` syntax, with appropriate imports from `@glyphcss/react` or `@glyphcss/vue`. The page includes a link to the API reference.
+          </div>
+          <a href="https://glyphcss.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed reactions: users express disappointment that the tool lacks WebGL support, noting high CPU usage and a desire for GPU acceleration, while also raising curiosity about typical model file sizes. At the same time, many express strong enthusiasm, describing the tool as cool, awesome, and useful for website integration, and praising the visual impact of shading and the appeal of ASCII‑style representations. Overall, appreciation and intent to adopt the tool coexist with concerns over performance limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48612025" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/End2End-Diffusion/diffusion-bench" target="_blank">DiffusionBench: Towards Holistic Evaluation of Generative Diffusion Transformers</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by ilreb • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            DiffusionBench is a unified benchmark and codebase for training and evaluating generative diffusion transformers across multiple tasks (e.g., ImageNet classification and text‑to‑image synthesis). It provides a single interface for stage‑1 VAE/RAE tokenizer training and stage‑2 diffusion model training in VAE, RAE, REG, or pixel space. The repository supports:
+
+- Installation via the **uv** project manager, dependency sync, data preparation, and pretrained model download.
+- Environment variables for experiment naming and Weights & Biases logging.
+- Stage‑1 training (`train_stage1.py`) with bf16 precision and optional compilation.
+- Stage‑2 training (`train.py`) and online evaluation, plus offline evaluation scripts for reconstruction (rFID, PSNR, SSIM, LPIPS) and generation (FID, IS, GenEval, DPGBench, etc.).
+- Config hierarchy (`configs/stage1/`, `configs/stage2/training/`, `configs/stage2/sampling/`) allowing task‑agnostic swapping of configurations.
+- Support for multiple encoder families (VAE, RAEv2, DINOv2, SigLIP2, WebSSL, etc.) and diffusion variants (x‑prediction, v‑prediction, Flow Matching, REPA, LightningDiT, etc.).
+- Guidance on evaluating baseline CFG‑off models and per‑model CFG‑scaled variants.
+
+Contributions are welcomed per the provided contributor and contribution guidelines.
+          </div>
+          <a href="https://github.com/End2End-Diffusion/diffusion-bench" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48654274" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://swiftpackageindex.com/blog/swift-package-index-joins-apple" target="_blank">Swift Package Index joins Apple</a>
+        </h2>
+        <span class="article-meta">
+          190 points • by JDevlieghere • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://swiftpackageindex.com/blog/swift-package-index-joins-apple" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express overall approval of the Swift Package Index’s new funding and its role in supporting the Swift open‑source ecosystem, while also noting confusion over similar sites and interest in building alternatives. Many appreciate the convenience of a centralized package index and view it as beneficial for Swift’s server‑side growth, yet there is skepticism about Apple’s handling of open source and potential regulation of indexed packages. Sentiments range from enthusiasm for community‑driven success to caution regarding Apple’s future influence.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48648779" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
