@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/" target="_blank">OpenAI unveils its first custom chip, built by Broadcom</a>
+        </h2>
+        <span class="article-meta">
+          615 points • by jamdesk • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            OpenAI announced its first custom inference processor, Jalapeño, developed with Broadcom and built on the company’s AI models. The chip targets the inference workload—running pre‑trained models for user requests—and is claimed to deliver markedly higher performance‑per‑watt than existing state‑of‑the‑art solutions, though it remains in testing. Early results suggest reduced operating costs for real‑time coding models, while pre‑training is expected to continue relying on Nvidia GPUs. The partnership, publicly confirmed in October, reflects OpenAI’s effort to lessen dependence on Nvidia’s accelerators, mirroring similar moves by Google and Amazon. OpenAI’s leadership emphasized a stack‑wide optimization strategy, encompassing chip architecture, kernels, memory, networking, scheduling, and deployment, to make models faster, more reliable, and cheaper for users. The announcement positions the company to control both model development and the underlying hardware infrastructure.
+          </div>
+          <a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to OpenAI’s new inference‑focused chip partnership with Broadcom. Skepticism dominates, with many questioning the lack of technical detail, viewing the announcement as marketing hype and doubting the feasibility of a nine‑month development timeline. Some note potential cost and power advantages, comparing it to existing TPU and Nvidia solutions, while others worry about limited impact on training, rapid obsolescence, and unclear ROI. A few express enthusiasm for hardware‑level efficiency gains, but overall sentiment remains cautious and critical of the claims.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48663324" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/world/china/anthropic-says-alibaba-illicitly-extracted-claude-ai-model-capabilities-2026-06-24/" target="_blank">Anthropic says Alibaba illicitly extracted Claude AI model capabilities</a>
+        </h2>
+        <span class="article-meta">
+          179 points • by htrp • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.reuters.com/world/china/anthropic-says-alibaba-illicitly-extracted-claude-ai-model-capabilities-2026-06-24/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments focus on the low‑cost Claude token resale network in China, describing how resellers obtain tokens through pooled accounts, fraud and data harvesting, and how this fuels model distillation by Chinese labs. Many view Anthropic’s complaints about “illicit” extraction as hypocritical, pointing out that major AI firms built their models on similarly scraped data and that distillation is a common industry practice. Opinions also discuss regulatory responses, such as identity verification and export‑control pressures, while some see the resale market as inevitable and even beneficial for broader access.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48664814" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/LuaJIT/LuaJIT/issues/1475" target="_blank">LuaJIT 3.0 proposed syntax extensions</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by phreddypharkus • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The GitHub issue serves as an umbrella for proposing and documenting syntax extensions for LuaJIT 3.0. The first comment will host evolving documentation, and contributors are invited to discuss design, semantics, and improvements while keeping feedback constructive and focused on functionality rather than cosmetic symbol choices. Accepted extensions must enhance developer quality‑of‑life, be proven in other languages or Lua dialects, avoid syntactic ambiguities, preserve backward compatibility, and remain tool‑friendly (e.g., for formatters and language servers). The maintainer explicitly rejects adding the syntactic complexity found in languages such as Perl, Ruby, C++, or Rust. Prior related issues (#63 and #1379) have been closed in favor of this consolidated discussion. An accompanying image references the user “@MikePall”.
+          </div>
+          <a href="https://github.com/LuaJIT/LuaJIT/issues/1475" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions to the proposed LuaJIT syntax extensions. Several contributors worry that introducing C‑style operators, a ternary form, and other shortcuts will fragment compatibility with standard Lua, create duplicate syntax, and obscure the language’s simplicity, with some suggesting a rename to signal a new language. Others welcome the ergonomic improvements, such as compound assignments and clearer ternary syntax, seeing them as useful quality‑of‑life enhancements. Overall, the community balances appreciation for added convenience against concerns about readability, maintenance, and preserving Lua’s core identity.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48667336" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/oauth-for-all/" target="_blank">Cloudflare launched self-managed OAuth for all</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by terryds • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Cloudflare has expanded its OAuth offering to all customers, allowing them to create and manage OAuth applications for delegated access to the Cloudflare API. The move follows an upgrade of the underlying Hydra OAuth engine: first to the latest 1.x release (with concurrent index creation and custom SELECT‑only queries to avoid exclusive table locks) and then to a 2.x version using a blue‑green deployment. To preserve writes during migration, token expiry was extended and a revocation‑replay queue was added, ensuring revocations are not lost. Post‑upgrade, stricter refresh‑token invalidation caused errors, which were mitigated by adding refresh‑token coalescing in a routing worker and by leveraging Hydra’s configurable refresh‑token grace period. Additional steps included data cleanup for new schema constraints, coordinated cutovers of related services, and monitoring for session corruption that led to 403 responses. The upgrade resulted in improved performance, stability, and a clearer consent/revocation experience, enabling broader SaaS integrations and internal developer platforms on the Cloudflare platform.
+          </div>
+          <a href="https://blog.cloudflare.com/oauth-for-all/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express confusion over the article’s explanation of OAuth, describing the protocol as overly complex and frustrating, especially for headless or personal use where a simple API key would suffice. Readers voice concern that delegating permissions to third‑party clients could enable abuse, questioning the necessity and timing of Cloudflare’s implementation and fearing it may mirror larger cloud providers’ expansive, costly services. Overall sentiment is skeptical and critical, highlighting perceived lack of clarity, relevance, and potential negative impact on users.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48668033" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.jim-nielsen.com/2026/blogging-stating-the-obvious/" target="_blank">Blogging can just be stating the obvious</a>
+        </h2>
+        <span class="article-meta">
+          125 points • by Curiositry • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            John Gruber criticizes intrusive pop‑ups and “accept cookies” overlays, arguing that a webpage should simply display its content without obstructive prompts—comparable to an email that only links to a web page. The author reflects on this meta commentary, noting that blogging often feels like stating the obvious, which can seem unimportant or redundant. Despite the perceived lack of novelty, the author argues that pointing out widely ignored annoyances (e.g., intrusive UI elements) can produce valuable posts, especially when supported by examples (“receipts”). The key takeaway is that effective blogging may hinge on a willingness to articulate observations that seem evident to the writer but are rarely voiced, or to amplify similar statements from others with clear endorsement.
+          </div>
+          <a href="https://blog.jim-nielsen.com/2026/blogging-stating-the-obvious/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a mixed view of blogging: many acknowledge that repeating obvious or well‑known material can still serve novices and foster discussion, while others criticize the constant recycling of the same points as unoriginal and tiring. Reputation, depth of knowledge, and clear communication are repeatedly cited as factors that attract readers, whereas overt self‑promotion and generic “hustle” content are dismissed. The rise of AI tools is seen both as reducing the need to publish and as a potential aid for clearer, more focused writing. Overall, usefulness is judged by impact and audience relevance rather than novelty.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48666927" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/wolfoo2931/linkedrecords/" target="_blank">Show HN: Write SaaS apps where users control where their data is stored</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by WolfOliver • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            LinkedRecords is a NoSQL Backend‑as‑a‑Service that can be accessed directly from single‑page applications without custom backend code. It provides built‑in, per‑record authorization: the creator specifies read permissions, eliminating separate backend rule sets. The API is deliberately minimal—few endpoints that can be composed to support varied use cases (RBAC, etc.)—and operates independently of the consuming SPA, delivering real‑time updates.
+
+A continuous load test simulates document management: each `createDocument` builds a blueprint of eight attributes (key‑value, long‑text, collaborators, comments, references, configuration). The test runs three simulated users (continuous creator, test user creating one per ten documents up to 300, occasional creator) and measures response times for `createDocument`, `fetchDocuments`, and `fetchDocument` as total document count grows, with results plotted automatically.
+
+Deployment is configured via optional environment variables. In confidential‑client mode a session token is stored in an HttpOnly cookie; when the frontend and backend are on different domains, the token must be stored in the browser (public‑client mode). The SDK is initialized with OIDC parameters. Blob attributes can be stored in S3 (recommended) or fallback to PostgreSQL.
+          </div>
+          <a href="https://github.com/wolfoo2931/linkedrecords/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48595882" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.autodidacts.io/dostoyevsky-isnt-difficult/" target="_blank">Dostoyevsky isn&#39;t difficult</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by surprisetalk • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author recounts early attempts with *War and Peace* and later reading *Crime and Punishment*, noting that despite long length and unfamiliar Russian names, the prose of Russian classics is clear, direct, and often humorous. Translations—particularly older ones like Constance Garnet’s—are described as readable, with modern translators (Pevear & Volokhonsky) recognized as higher quality but not essential for comprehension. The piece argues that perceived difficulty of great literature stems more from academic commentary than from the texts themselves, citing G.K. Chesterton’s observation that “Great Books” are inherently accessible. By contrast, works such as *Ulysses*, *Gödel, Escher, Bach*, and *The Glass Bead Game* are highlighted as genuinely challenging. The author concludes that Dostoevsky’s lasting appeal lies in the simplicity and vividness of his storytelling, not in any intrinsic complexity, urging a reread of the final chapter of *The Brothers Karamazov* to confirm this view.
+          </div>
+          <a href="https://www.autodidacts.io/dostoyevsky-isnt-difficult/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reveal a split between admiration for Russian classics’ psychological depth and narrative power and frustration with their length, dense naming, and slower pacing. Many readers describe Dostoevsky’s works as gripping, emotionally intense, and worth persevering through, while others label them tedious, overly solemn, or inaccessible without strong translations. Translation quality, especially Pevear & Volokhonsky, sparks debate, with some finding it faithful and others deeming it clumsy. Tolstoy’s “War and Peace” is praised for its lasting resonance, whereas several participants prefer more concise, clearer storytelling. Overall sentiment is mixed, balancing high regard for literary merit with practical reading challenges.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48631366" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/business/qualcomm-buy-ai-startup-modular-2026-06-24/" target="_blank">Qualcomm to Acquire Modular</a>
+        </h2>
+        <span class="article-meta">
+          170 points • by timmyd • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.reuters.com/business/qualcomm-buy-ai-startup-modular-2026-06-24/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions to Qualcomm’s acquisition of Modular, combining surprise at the speed of the deal with uncertainty about its strategic fit. Several contributors question how a hardware‑focused company will benefit from Modular’s software stack and note Qualcomm’s limited presence in high‑end inference markets, while others recognize the value of Modular’s engineering talent and infrastructure. Opinions on Mojo diverge: some view its Python‑centric approach as a compromise that may hinder performance and debugging, whereas others suggest it could serve as a high‑level GPU language. Overall, the discourse reflects cautious optimism tempered by skepticism.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48659798" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2603.15855" target="_blank">Mixing Visual and Textual Code</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by doppioandante • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper argues that conventional programming languages restrict domain‑specific geometric expression to linear text, limiting developers who could benefit from visual syntactic constructs. It proposes a hybrid language approach where visual and textual syntax are treated equally and can be composed without disrupting standard workflows. The authors introduce **Hybrid ClojureScript**, the first language to support visual interactive syntax as a composable extension: programmers can embed visual elements directly within source code, and an enhanced IDE renders these embeddings as miniature GUIs for interaction, while other IDEs display a textual representation. The design preserves static reasoning and aims to be adoptable across domains. Evaluation shows that developers can integrate visual syntax without major learning overhead, and the paper discusses requirements for adapting the mechanism to other languages. The work was submitted on 16 Mar 2026, revised on 27 Mar 2026, authored by Leif Andersen and four co‑authors.
+          </div>
+          <a href="https://arxiv.org/abs/2603.15855" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a skeptical tone toward the timing of the technology’s commercial viability, suggesting that it emerged only after academic efforts had already been undertaken. This perspective emphasizes a perceived disconnect between scholarly work and market readiness, questioning the relevance or impact of the research given the delayed practical application. The overall sentiment is critical of the lag between academic publishing and real‑world adoption.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48667560" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.economist.com/business/2026/06/21/zombie-unicorns-are-haunting-silicon-valley" target="_blank">Zombie unicorns are haunting Silicon Valley</a>
+        </h2>
+        <span class="article-meta">
+          26 points • by andsoitis • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.economist.com/business/2026/06/21/zombie-unicorns-are-haunting-silicon-valley" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a cautious view of recent startup funding, noting that many firms secured large financing before interest rates rose and are now relying on workforce reductions to stay viable. They suggest that prolonged low‑interest conditions allowed weaker companies to persist, making it hard to retrospectively differentiate successful ventures from those merely surviving. Current market trends are described as challenging for venture capital, with declining valuations and underperformance relative to broader indexes, particularly for funds that missed high‑growth AI opportunities.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48668020" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
