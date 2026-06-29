@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 29, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank">GLM 5.2 beats Claude in our benchmarks</a>
+        </h2>
+        <span class="article-meta">
+          622 points • by jms703 • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Semgrep evaluated several LLMs on an IDOR (Insecure Direct Object Reference) benchmark using a uniform prompt and dataset, varying only the model and its surrounding harness. Their custom multimodal pipeline (which discovers endpoints and directs the model) achieved the highest F1 scores: GPT‑5.5 at 61 % and Claude Opus 4.8 at 53 %. Among open‑weight models run with a simple Pydantic harness, Zhipu AI’s GLM‑5.2 attained 39 % F1, surpassing Claude Code (32 %) while costing roughly $0.17 per true positive. GLM‑5.2 is a Mixture‑of‑Experts model with ~750 B parameters (≈40 B active per token), 1 M‑token context, and MIT‑licensed weights, making it runnable on‑premises. Other open‑weight models (MiniMax M3, Kimi K2.7 Code) lagged at 23 % and 22 % F1. The study concludes that harness design contributes more to performance than model choice, but a high‑performing, low‑cost open‑weight model like GLM‑5.2 can be a viable alternative to expensive closed‑source LLMs for security‑focused code analysis.
+          </div>
+          <a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments convey a mixed but generally positive view of GLM‑5.2, noting its affordability, speed and satisfactory performance for programming and security tasks while acknowledging it is not the top open‑model performer compared with DeepSeek V4 Pro or MiMo 2.5 Pro. Users discuss benchmark inconsistencies, the impact of harnesses, and the high hardware demands of large models, expressing both interest in and frustration over cost structures and provider reliability. Skepticism appears regarding benchmark methodology, token pricing, and geopolitical implications, alongside a broader sentiment that open‑weight models are increasingly competitive with closed‑source alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48709670" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nonogra.ph/age-verification-is-just-a-precursor-to-attribution-of-speech-06-29-2026" target="_blank">Age verification is just a precursor to automated attribution of speech</a>
+        </h2>
+        <span class="article-meta">
+          177 points • by arkhiver • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Multiple U.S. states, European nations, and Australia have enacted “age‑verification” rules, framed as child‑protection measures.  
+- The author argues these rules function as identity‑attribution mechanisms, linking online accounts to real‑world identifiers (e.g., SSN, government ID).  
+- Law‑enforcement investigations typically require (1) the incident description and (2) the offender’s identity; current methods rely on OSINT, subpoenas for IP or contact data, and manual effort, which do not scale.  
+- By mandating verified personal data for online platforms, governments can automatically retrieve a speaker’s physical identity, regardless of criminal suspicion.  
+- The text warns that once a critical mass of users is verified, automated tracking could trigger legal or police actions for dissenting speech, likening it to prior ISP‑issued “love letters” from copyright enforcement.  
+- The author advises avoiding age verification, preserving anonymity, and, if verification is unavoidable, using privacy‑focused services and cryptocurrency (Monero) for payment.
+          </div>
+          <a href="https://nonogra.ph/age-verification-is-just-a-precursor-to-attribution-of-speech-06-29-2026" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong skepticism toward mandatory age‑verification and related identity‑checking measures, viewing them as tools for government and corporate surveillance rather than genuine child protection. They highlight concerns about privacy erosion, retroactive enforcement, and the chilling effect on free speech, while criticizing the lack of systems‑thinking in policy design. Many advocate decentralized, cryptographic solutions and anonymous platforms as alternatives, noting that younger users may create new free spaces. Overall sentiment is distrustful and pessimistic about current regulatory approaches, coupled with calls for technical decentralization.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48714529" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danunparsed.com/p/hackerrank-open-source-ats" target="_blank">HackerRank open sourced its ATS. My resume scored 90/100. Oh wait 74. No – 88</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by sambellll • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The open‑source ATS (interviewstreet/hiring‑agent) parses a PDF resume, calls an LLM six times to extract basics, work history, education, skills, projects, awards, adds GitHub repo data, then scores the candidate out of 100 (35 pts open‑source, 30 pts projects, 25 pts work experience, 10 pts technical skills, up to 20 pts bonuses).  
+
+* Using the default gemma3‑4b model (temp 0.1) on the same résumé produced scores from 66 to 99; technical‑skill marks were stable (≈8/10), while project and open‑source points varied widely.  
+* Lowering temperature to 0 did not eliminate variance; GitHub issue reports show similar fluctuations.  
+* Switching to Gemini‑3.1‑flash‑lite yielded a narrower range (45–65) but still a ≈28 % failure rate for a 60‑point cutoff.  
+* Experience points were always 25/25 regardless of seniority because the prompt provides no rubric or anchors.  
+
+The author concludes that LLM‑based judgment of experience or project quality is inherently noisy, making the tool’s heavy weighting on open‑source and projects unreliable for fair candidate screening. A correction notes that scoring is position‑agnostic despite a “Software Intern” label in a template.
+          </div>
+          <a href="https://danunparsed.com/p/hackerrank-open-source-ats" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment critiques the use of large language models in resume screening, emphasizing misunderstandings about temperature settings and highlighting that AI‑driven processes often yield low success rates for applicants. It argues that the scoring rubric disproportionately favors open‑source contributions and personal projects, marginalizing experienced professionals, and points out that the sheer volume of submissions makes AI assistance insufficient without human oversight. Overall, the sentiment is skeptical of current AI hiring tools, viewing them as inefficient, opaque, and biased toward certain resume attributes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48713832" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dam.stanford.edu/memory-prices.html" target="_blank">Historical memory prices 1960-2026</a>
+        </h2>
+        <span class="article-meta">
+          242 points • by vga1 • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page provides a continuously updated dataset of historic and current memory and storage prices, focused on DRAM, NAND flash, and HBM. Prices are expressed as the lowest nominal USD $/GB (or $/TBps for HBM) from retail listings, not contract or inflation‑adjusted rates. Visualizations include:  
+
+- Overall $/GB over time for each memory type (log scale).  
+- DRAM price broken down by generation (Pre‑DDR, DDR‑1 through DDR5).  
+- Quarterly AI‑accelerator cost for Nvidia, AMD, Google (TPU), and Amazon (Trainium), stacked by component (HBM, logic die, packaging/CoWoS, auxiliary).  
+- HBM price by generation (HBM2e → HBM3 → HBM3e → projected HBM4, Q3 2026) using analyst estimates (TrendForce/SemiAnalysis).  
+
+Methodology: DRAM data extend McCallum’s dataset with Keepa Amazon prices; NAND uses Keepa’s cheapest consumer NVMe listings from 2016 onward; HBM values are modeled cost‑share estimates, not market transactions. Caveats note that listed prices often reflect end‑of‑life clearance, may lag contract pricing, and that outlier listings are filtered. Updates occur monthly for DRAM/NAND and quarterly for HBM; full CSV with sources is downloadable. Compiled by David Shim (Stanford DAM).
+          </div>
+          <a href="https://dam.stanford.edu/memory-prices.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the inadequacy of presenting memory prices solely as unadjusted $/GB, noting that inflation, changing usage patterns and unit relevance distort the picture. Commenters highlight historical context, the shift from megabyte‑scale to gigabyte‑scale, cyclical price fluctuations tied to production capacity, and recent volatility from AI and crypto demand. Concerns are raised about data source continuity and chart scaling, while acknowledging that lower memory costs have expanded feasible applications. Overall sentiment is critical of the graph’s methodology and calls for more nuanced metrics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48710092" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6298838" target="_blank">Some Simple Economics of AGI</a>
+        </h2>
+        <span class="article-meta">
+          7 points • by reasonableklout • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6298838" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48714919" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pudding.cool/2026/06/menu-story/" target="_blank">5k menus from the New York Public Library’s Buttolph Collection (1880-1920)</a>
+        </h2>
+        <span class="article-meta">
+          346 points • by xbryanx • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            No content was provided to summarize.
+          </div>
+          <a href="https://pudding.cool/2026/06/menu-story/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong interest in the historical menu collection, noting its visual appeal, the surprising continuity of dishes and pricing, and specific curiosities such as abundant celery, green‑turtle soup, and early “boiled” categories. Readers appreciate the data‑visualisation and see the menus as snapshots of past dining culture, while also sharing related resources and personal projects. Technical frustrations appear, including tap‑to‑click failures, loading problems, and difficulty linking individual items, and some suggest improvements for navigation and mobile usability. Overall the sentiment is enthusiastic curiosity tempered by minor usability concerns.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48707763" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antoine.fi/mri-analysis-using-claude-code-opus" target="_blank">I used Claude Code to get a second opinion on my MRI</a>
+        </h2>
+        <span class="article-meta">
+          383 points • by engmarketer • 86 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author experienced right‑shoulder pain and, after an orthopedist’s exam, received an MRI indicating a Grade III (>50 % width) partial‑thickness tear of the subscapularis tendon. The clinic performed shockwave therapy (contrary to recent guidelines for non‑calcific rotator‑cuff tendinopathy) and injected Traumeel, a homeopathic product without a therapeutic indication, raising confidence concerns. Seeking a second opinion, the author uploaded the 266 MB DICOM set to Opus 4.8 (via Claude Code) and instructed it to analyze the images. Opus first generated a report stating the tendon was intact, conflicting with the clinician’s finding. An arbitration step, comparing the human report and a prior ChatGPT‑generated discussion, produced a third report concluding “mild insertional tendinosis; no discrete partial‑ or full‑thickness tear identified,” with moderate‑to‑high confidence. The divergent AI and physician assessments left the author uncertain about treatment, highlighting current limits of AI in medical imaging interpretation and the need for cautious reliance on such tools.
+          </div>
+          <a href="https://antoine.fi/mri-analysis-using-claude-code-opus" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey widespread skepticism toward using AI for medical diagnosis, especially image interpretation, with many professionals noting current models are unreliable, prone to hallucinations, and lack the nuanced understanding of trained clinicians. While a few anecdotal cases describe AI offering helpful suggestions or prompting second‑opinion consultations, the prevailing view emphasizes the need for better‑quality information and human expertise rather than more AI‑generated data. Overall, AI is seen as a limited, supplementary tool useful for text‑based research, but not trustworthy for definitive clinical decisions.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48708941" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2401.07013" target="_blank">Knowledge Distillation of Black-Box Large Language Models (2024)</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by babelfish • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper addresses the challenge of distilling knowledge from proprietary, black‑box large language models (LLMs) such as GPT‑4 into smaller, more deployable models. Traditional knowledge distillation relies on access to teacher model internals, which is unavailable for closed‑source LLMs. To overcome this, the authors propose **Proxy‑KD**, a framework that introduces an intermediate proxy model that interacts with the black‑box teacher to generate high‑quality outputs and representations usable for training the student model. Experiments demonstrate that Proxy‑KD improves the performance of distilled student models compared to standard black‑box distillation and even outperforms conventional white‑box KD methods that have full access to teacher internals. The results suggest that using a proxy can effectively bridge the gap between inaccessible teacher models and efficient student training, offering a practical route for leveraging advanced LLM capabilities in resource‑constrained settings.
+          </div>
+          <a href="https://arxiv.org/abs/2401.07013" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments display a mix of technical curiosity and political frustration. Several remarks focus on the paper’s re‑publication, questioning the reason for its repetition and suggesting the title include its 2024 date. Another comment expresses a strong negative view of Chinese influence on the American AI sector, urging collective programmer action to undermine US AI subscriptions and accelerate a perceived bubble burst. Overall, the discussion combines inquiries about scholarly presentation with a polarized stance on international AI competition.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48712420" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.plover.com/lang/bismillah.html" target="_blank">Deciphering Basmala</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by lordgrenville • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The article discusses challenges of Arabic typography, emphasizing that Arabic script is inherently cursive and relies on contextual ligatures to render correctly. Early font engines lacked proper ligature handling, producing disjointed glyphs that broke the visual flow of words such as “hello, world, this is Arabic text.” A critical example is the basmala—“bismillāh al‑raḥmān al‑raḥīm”—which appears at the start of every Qur’an surah except the ninth. Rendering the basmala as separate letters yields an unacceptable jumble, so Unicode introduced a dedicated code point (U+FDFD ARABIC LIGATURE BISMILLAH AR‑RAHMAN AR‑RAHEEM) that maps to a single, correctly shaped glyph. The article notes platform inconsistencies: the glyph appears long and narrow in Firefox on desktop but differently on Android. It also breaks down the four component words, explains the assimilation of the definite article “al‑” before /r/, and cites typographic critiques of the Android design, particularly the fused letter connections.
+          </div>
+          <a href="https://blog.plover.com/lang/bismillah.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks convey strong enthusiasm for exploring complex script rendering, particularly the Arabic character ﷽, and emphasize how font variations affect its display. The author reflects pride in native Arabic proficiency, cites Quranic verses, and celebrates the beauty of Arabic calligraphy while noting broader interests in Unicode parsing and multilingual typography. A recurring theme is the enjoyment of dissecting glyph shapes, learning scripts, and appreciating the intricate relationship between language, fonts, and software rendering.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48657131" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zanagrams.com/" target="_blank">Show HN: Zanagrams</a>
+        </h2>
+        <span class="article-meta">
+          233 points • by pompomsheep • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The provided text consists solely of the title “Zanagrams – free daily word puzzle.” This indicates that the subject matter is a word‑based puzzle called Zanagrams, offered without charge on a daily basis. No additional description, rules, platform details, or contextual information is included, so the core point is simply the identification of Zanagrams as a free, everyday word‑puzzle service.
+          </div>
+          <a href="https://zanagrams.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments describe the puzzle as enjoyable and well‑designed, noting a clean interface, smooth animations, and satisfying progressive difficulty. Players appreciate the educational benefit of post‑solution definitions and the novelty of disappearing connections. Common critiques include unclear rules about minimum word length, the presence of both singular and plural forms, and the lack of features such as a timed mode, undo/hint options, a bonus‑word counter, and a scoreboard. Overall sentiment is positive, with users recommending minor refinements rather than fundamental changes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48708182" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
