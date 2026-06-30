@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">June 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://quesma.com/blog/qwen-36-is-awesome/" target="_blank">Qwen 3.6 27B is the sweet spot for local development</a>
+        </h2>
+        <span class="article-meta">
+          722 points • by stared • 87 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Qwen 3.6 is offered in two formats: a 35 B mixture‑of‑experts (A3B) model and a dense 27 B model. The author favors the 27 B variant for local development, noting its strong general‑intelligence performance despite higher GPU load. Using llama.cpp with an 8‑bit GGUF quantization (unsloth/Qwen3.6‑27B‑MTP‑GGUF:Q8_0) and options such as multi‑token prediction (draft‑mtp), full‑GPU layer loading (‑ngl 999), flash attention (‑fa on), and a 64 k token context (‑c 65536) yields a responsive server accessible at localhost:8080. On an Apple‑silicon MacBook Max M5 (128 GB RAM) the model runs at ~30 tokens / s, using 95 % of GPU, while a 4090 (Q6_K quantization) reaches ~50 tokens / s with 28 GB VRAM. Benchmarks place Qwen 3.6‑27B between Gemma 4 31B (late 2024) and GPT‑5/Claude Sonnet 4.5 (mid‑2025), often outperforming comparable local models like DeepSeek‑V4‑Flash. The post emphasizes that local quantized models enable offline, proprietary‑safe workloads and foresee future models separating knowledge from reasoning for even lighter devices.
+          </div>
+          <a href="https://quesma.com/blog/qwen-36-is-awesome/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed views on using high‑end Apple hardware for local LLMs. While a few users appreciate the MacBook Pro M5 128 GB for occasional work, most cite excessive heat, noise, and limited performance for serious coding, suggesting cheaper alternatives such as Mac Mini, dedicated GPUs, or custom PC builds. Cost is repeatedly flagged as prohibitive; many argue that cloud credits offer better value than multi‑thousand‑dollar laptops. Performance varies by model and workload, with dense models running slower on unified‑memory systems and dedicated GPUs delivering higher throughput. Software setup complexity and lack of OS‑level inference support also temper enthusiasm.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48721903" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hccf.onmy.cloud/2026/06/21/reclaiming-our-digital-selves-hccfs-vision-for-a-human-centered-top-level-domain/" target="_blank">.self: A new top-level domain designed to support self-hosting</a>
+        </h2>
+        <span class="article-meta">
+          394 points • by HumanCCF • 59 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Human‑Centered Computing Foundation (HCCF) proposes a new top‑level domain (TLD) designed to prioritize ethical, human‑centered technology. Positioning the current Internet infrastructure as a conduit for data extraction and attention exploitation, HCCF aims to create an alternative web architecture that safeguards user autonomy and privacy. As an approved participant in ICANN’s Applicant Support Program, the foundation is formally launching a campaign to secure this dedicated TLD. The initiative’s full overview—including design principles, governance models, and technical specifications—is made available for public reading, downloading, and distribution.
+          </div>
+          <a href="https://hccf.onmy.cloud/2026/06/21/reclaiming-our-digital-selves-hccfs-vision-for-a-human-centered-top-level-domain/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a largely skeptical view of a free, one‑person‑one‑subdomain TLD, emphasizing practical challenges such as preventing squatting, ensuring security, covering operating costs, and defining “self‑hosted” or “ethical” use. Many raise concerns about abuse, phishing, and the difficulty of verifying identity without privacy risks, while suggesting mechanisms like identity‑linked hashes, periodic renewal proofs, or non‑transferable domains. A minority express enthusiasm for the concept’s social goals and propose pilot implementations on existing domains, but overall the consensus questions its viability and governance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48724230" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://weblog.rogueamoeba.com/2026/06/26/free-the-icons/" target="_blank">Free the Icons</a>
+        </h2>
+        <span class="article-meta">
+          315 points • by zdw • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Apple’s macOS 26 “Tahoe” update replaced many first‑party icons with a “Liquid Glass” style and imposed a uniform squircle shape on all third‑party icons, causing blurred visuals and loss of distinctive shapes. This uniformity forced developers to redesign icons to fit the prescribed form, reducing visual cues that aid quick identification, especially for users with color‑vision deficiencies. In the macOS 27 “Golden Gate” betas, Apple refined its own icons, removing the Liquid Glass effect and producing sharper designs (e.g., the Automator icon). The author argues that while Apple has begun correcting its own iconography, it should also restore the ability for apps to use varied shapes, improving usability and creative expression. The post calls for Apple to stop mandating the squircle and to “free the icons.”
+          </div>
+          <a href="https://weblog.rogueamoeba.com/2026/06/26/free-the-icons/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed reaction to Apple’s recent icon redesign. Many note that enforcing a uniform squircle improves visual consistency and grid alignment, yet a substantial portion miss the varied shapes of earlier icons, finding the new look jarring and harder to differentiate at a glance. Criticism also targets the “Liquid Glass” style and perceived prioritization of aesthetic uniformity over usability, while a few express optimism about potential refinements and suggest flexible design options such as limited shape break‑outs or higher contrast settings. Overall sentiment balances appreciation for consistency with disappointment over reduced visual distinctiveness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48698908" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://archaeology.org/news/2026/06/18/300000-year-old-cave-site-explored-in-northern-israel/" target="_blank">300k-Year-Old Cave Site Explored in Northern Israel</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by andsoitis • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The May/June 2026 issue of *Archaeology Magazine* highlights a newly examined 300‑kiloyear‑old cave site in northern Israel, detailing its stratigraphy, artifact assemblages, and implications for Middle Pleistocene occupation patterns. The issue also includes a feature on a 4,000‑year‑old surreal painting tradition preserved in West Texas canyonlands, and a series of visual documentation: a lead sling bullet bearing the Greek inscription “MATHOU,” the Nahal Ein Gev II excavation area, ground‑floor rooms at Tel ‘Eton, Israel, teleilat Ghassul cornets, an aerial view of Ilium, modern reconstructions of Bronze‑Age houses at Lake Constance, and Flores Island, Guatemala. These images support the accompanying articles on regional archaeology, material culture, and comparative site analysis.
+          </div>
+          <a href="https://archaeology.org/news/2026/06/18/300000-year-old-cave-site-explored-in-northern-israel/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The only entry in the set is a single placeholder word, which provides no substantive language, sentiment, or topic. With no additional remarks, there are no recurring ideas, agreements, disagreements, or emotional tones to identify. As a result, the comment collection yields no discernible themes, consensus, or collective opinion for summary.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48728441" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fil-c.org/context_switches" target="_blank">Memory Safe Context Switching (longjmp, setjmp) in Fil-C</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by modeless • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Fil‑C adds memory‑safe implementations for the classic C control‑flow APIs setjmp/longjmp and the ucontext family (getcontext, setcontext, makecontext, swapcontext). Traditional use of these APIs can corrupt memory when a saved context is restored after its stack frame has been unwound or its stack freed. Fil‑C prevents this by making jmp_buf opaque (zjmp_buf) and managing it exclusively in the runtime; only direct calls to setjmp and longjmp are allowed, and any other use triggers a compile‑time ICE. Each zjmp_buf is registered with the allocating stack frame, forming a weak set of valid jump targets; longjmp panics unless invoked from an ancestor frame containing the corresponding zjmp_buf. Similar safety checks apply to makecontext and swapcontext, causing panics on freed‑stack or self‑swap misuse. The runtime also records GC roots and other state during jumps. Fil‑C’s approach eliminates dangling‑stack execution, making these APIs safe while preserving their functionality for exception handling, coroutines, and fibers. (≈150 words)
+          </div>
+          <a href="https://fil-c.org/context_switches" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express enthusiasm for the article’s treatment of setjmp/longjmp, u‑context, and fiber implementations, noting that the techniques are intellectually engaging and useful for building generators, garbage collectors, and custom fiber libraries. Contributors acknowledge the inherent complexity and safety risks of setjmp/longjmp, emphasizing the need for careful mitigation when used. Opinions converge on the practical value of Boost’s context mechanisms and on the challenges of stack management, while a minority disputes the relevance of those primitives to overall memory safety. Overall sentiment is appreciative but cautious.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48727177" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://longcat.chat/blog/longcat-2.0/" target="_blank">LongCat-2.0, a large-scale MoE model with 1.6T total and 48B Active</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by benjiro29 • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The document titled “Introducing LongCat‑2.0” provides only its heading and contains no further content.
+          </div>
+          <a href="https://longcat.chat/blog/longcat-2.0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments note that LongCat‑2.0 relies on large AI ASIC clusters but suffers from a less mature software ecosystem, leading to stability and scalability challenges. In direct testing, its answer to a nuclear‑reactor question was well‑reasoned yet incorrect, prompting a ranking that places Gemini Flash as the strongest performer, Qwen 3.7 Plus as acceptable, and LongCat‑2.0 as merely adequate. There is interest in open‑source availability, including model weights and deployment guidance, and uncertainty remains about whether detailed technical reports will be released.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48727116" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://obsolescence.dev/pdp1-lisp-introduction.html" target="_blank">Exploring PDP-1 Lisp (1960)</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by ozymandiax • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The excerpt documents a PDP‑1 workflow for loading and executing Lisp code from alphanumeric tapes. The tape **lisp‑defs.pt** is mounted, SS5 set to down to read definitions (e.g., `zerop`, `pdef`, `count`) displayed on the typewriter, then SS5 is returned to up for manual input. After starting and continuing with address switches set to 4, a Lisp form using `rplacd` and a quoted `tt` structure embeds a lambda that prints “hello”, terminates the line, and returns the integer 5. The utility `encode_fiodec` converts a source file (`test.lisp`) to tape format (`test.pt`). Mounting **test.pt**, reading it (SS5 down), and executing the program produces repeated output of the `tt` list, the string “hello”, and the value 5. Finally, evaluating `(print (cdr (quote tt)))` retrieves the stored result.
+          </div>
+          <a href="https://obsolescence.dev/pdp1-lisp-introduction.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on reviving historic Lisp implementations, highlighting a PiDP‑1 simulator and a recently uncovered 1966 BBN Lisp version of Eliza, which makes a PDP‑1 Lisp backport appealing. The author notes disappointment with “The Genius of Lisp,” expecting a technical focus rather than a historical overview, and seeks recommendations for a more suitable Lisp book. Overall sentiment expresses enthusiasm for preserving early code and a desire for resources that better match practical Lisp learning goals.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48727323" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://occ.sdf.org/" target="_blank">Old Computer Challenge</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by wrxd • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Old Computer Challenge (OCC) is a small community of retro‑computing and digital‑minimalism enthusiasts that runs an annual week‑long event each July. Founded by Solène Rapenne in July 2021 with a “7‑day 512 MiB RAM” task, the challenge imposes self‑imposed hardware or usage limits to encourage creative, low‑resource computing.  
+
+**2021:** 1 CPU core, ≤512 MiB RAM, optional USB dongles, remote services permitted; participants used personal PCs or smartphones.  
+
+**2022:** “60 minutes of internet” – total online time limited to 1 hour per day during the week, simulating early dial‑up constraints.  
+
+**2023:** Theme “The machine is not timeless”; specifications limited to 512 MiB RAM, 1 core, lowest CPU frequency.  
+
+**2024:** DIY theme – participants crafted personal experiences inspired by past years.  
+
+**2025:** No formal challenge (DIY).  
+
+**2026:** “Make Something” – participants are encouraged to hand‑make a project (story, music, program, etc.) and share it via the mailing list, IRC, or personal pages.  
+
+The mailing list (tekk/old‑computer‑challenge@lists.sr.ht) and IRC channel #oldcomputerchallenge on libera.chat serve as communication hubs. The current site administrator is “Tekk”.
+          </div>
+          <a href="http://occ.sdf.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48702320" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://investors.rocketlabcorp.com/news-releases/news-release-details/rocket-lab-acquire-iridium-historic-deal-creating-fully" target="_blank">Rocketlab acquires Iridium</a>
+        </h2>
+        <span class="article-meta">
+          385 points • by everfrustrated • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://investors.rocketlabcorp.com/news-releases/news-release-details/rocket-lab-acquire-iridium-historic-deal-creating-fully" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions to the growing satellite market and Rocket Lab’s acquisition of Iridium. Many note the potential for increased space debris and visual clutter as launch costs fall, questioning the long‑term value of proliferating constellations. Others view the deal as a strategic hedge that could diversify launch demand and strengthen competition against SpaceX, though some doubt its financial soundness and relevance of older low‑speed networks. Nostalgic references to Iridium’s history appear alongside humor and skepticism, resulting in a generally cautious but intrigued overall tone.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48719485" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://phys.org/news/2026-06-scientists-molecular-evidence-liquid.html" target="_blank">Scientists find molecular-level evidence for two structures in liquid water</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by wglb • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://phys.org/news/2026-06-scientists-molecular-evidence-liquid.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment blends scientific curiosity about water’s hydration shells and the hypothesized second critical point with criticism of the study’s methodological choices, noting the use of a specific four‑site model over more accurate alternatives and the omission of earlier experimental work. It also expresses mild skepticism about potential technological applications, interspersed with humor referencing homeopathy, dehumidifiers, and pop‑culture analogies, while acknowledging difficulty accessing the paper due to a paywall. The overall tone is inquisitive yet critical, mixing serious inquiry with light‑hearted remarks.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48726073" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
