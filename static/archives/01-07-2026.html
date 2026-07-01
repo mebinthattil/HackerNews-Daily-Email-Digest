@@ -1,0 +1,522 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 01, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank">Claude Sonnet 5</a>
+        </h2>
+        <span class="article-meta">
+          992 points • by marinesebastian • 107 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Sonnet 5 is Anthropic’s latest Sonnet‑class model, positioned as the most “agentic” in the series. It can plan, browse, use terminals, and execute multi‑step coding tasks with performance near Opus 4.8 but at lower cost. Compared with Sonnet 4.6, it shows measurable gains in reasoning, tool use, coding, and knowledge work, while safety assessments indicate fewer undesirable behaviors, better refusal of malicious prompts, and reduced hallucination and sycophancy. Cybersecurity capability remains limited; the model cannot produce full exploits and only shows a slight rise in partial success over its predecessor, prompting default cyber‑safeguards identical to those in Opus 4.7/4.8. Pricing is introductory $2 / M input tokens and $10 / M output tokens through 31 Aug 2026, rising to $3/$15 thereafter, and it is the default on Free, Pro, Max, Team, and Enterprise plans, including Claude Code and the Claude Platform. Early‑partner feedback highlights reliable end‑to‑end task completion, efficient multi‑step software engineering, and consistent adherence to safety and cost constraints.
+          </div>
+          <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that Claude Sonnet 5 offers little advantage over Opus 4.8 except at low‑effort settings, with many users noting higher token counts, poorer cost‑performance, and weaker cybersecurity capabilities. Reviewers compare it unfavorably to newer open‑source models such as GLM 5.2, citing faster speed and lower price. While a minority appreciate its agentic features for specific sub‑tasks, overall sentiment is disappointment in pricing, token inflation, and perceived regression relative to previous Sonnet versions and competing frontier models.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48736605" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thereallo.dev/blog/claude-code-prompt-steganography" target="_blank">Claude Code is steganographically marking requests</a>
+        </h2>
+        <span class="article-meta">
+          1598 points • by kirushik • 92 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://thereallo.dev/blog/claude-code-prompt-steganography" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments coalesce around criticism of Anthropic’s undisclosed client‑side tooling, viewing the lack of transparent disclosure as a breach of trust and a potential privacy risk. Many argue the technique—using steganographic markers to detect Chinese‑originated usage—appears underhanded, poorly implemented, and easily bypassed, while a minority defend it as a necessary, albeit crude, anti‑distillation measure. Repeated calls for clearer policies, open‑source alternatives, and stronger sandboxing recur, alongside broader skepticism toward large AI labs’ motives and the adequacy of their security practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48734373" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.forbes.com/sites/suzannerowankelleher/2026/06/30/faa-supersonic-flight-no-boom/" target="_blank">Supersonic flight returning to US after half-century ban</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by lobbly • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The U.S. Department of Transportation plans to replace the long‑standing civil prohibition on over‑land supersonic flight with a noise‑based certification standard, permitting aircraft to exceed Mach 1 provided their sonic signature stays below a prescribed limit. The change follows a June 2025 executive order by President Trump directing the FAA to repeal the ban, establish interim noise criteria, and remove other regulatory obstacles. The FAA aims to finalize the rulemaking by mid‑2027. Historically, the 1973 ban was enacted because 1960s sonic‑boom tests caused window damage, property loss, and widespread public complaints; consequently, aircraft such as Concorde were required to remain subsonic over U.S. territory. Current U.S. developers include Boom Supersonic, which has pre‑orders from United, American, and Japan Airlines for its 60‑80‑passenger Overture, and Spike Aerospace, building a 18‑passenger Diplomat. Both firms claim quieter booms and improved fuel efficiency, targeting trans‑Atlantic trips under four hours.
+          </div>
+          <a href="https://www.forbes.com/sites/suzannerowankelleher/2026/06/30/faa-supersonic-flight-no-boom/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express enthusiasm for emerging supersonic and related aviation technologies while simultaneously raising strong concerns about their environmental and noise impacts. Writers note that supersonic aircraft emit more carbon per passenger and may generate disruptive noise levels, prompting skepticism about regulatory targets and the willingness of current authorities to prioritize public interests. There is apprehension that widespread sonic booms could trigger broad public backlash, with some suggesting alternative noise‑reduction measures such as limiting gasoline leaf blowers. Overall, excitement is tempered by doubts about sustainability and acceptance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48741654" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/google/copybara" target="_blank">Google copybara: moving code between repositories</a>
+        </h2>
+        <span class="article-meta">
+          125 points • by reconnecting • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Copybara is a Google‑internal tool for transforming and syncing code between repositories, primarily supporting Git (with experimental Mercurial read support). It designates one repository as authoritative while allowing contributions from any repository and enabling releases from any of them. Core capabilities include:  
+
+- Importing sections of code between confidential and public repos, and vice‑versa.  
+- Propagating changes from non‑authoritative to authoritative repos with automatic conflict handling.  
+- Stateless operation: state is stored as a label in destination commit messages, ensuring consistent results across users.  
+
+Configuration uses a Skylark‑style workflow (e.g., `core.workflow`) specifying origins, destinations, file globs, authoring, and transformations (replace, move).  
+
+Installation options:  
+
+- Use weekly snapshot binaries (requires Java 21+, add `--java_runtime_version=remotejdk_21` to `.bazelrc`).  
+- Build from source with JDK 11 and Bazel (`bazel build //java/com/google/copybara:copybara_deploy.jar`).  
+- Add as an external Bazel repository via `http_archive` in `WORKSPACE`.  
+- Run via Docker (experimental) with environment variables to set subcommand, config, workflow, etc.  
+
+Documentation is evolving; contact the mailing list for queries.
+          </div>
+          <a href="https://github.com/google/copybara" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects generally favorable views of Copybara for synchronizing code across repositories, with several contributors noting its productivity benefits and recommending it for monorepo workflows. Alternatives such as Josh, fbshipit, nested git scripts, and Jujutsu are mentioned, and users compare it to submodules and subtrees, acknowledging trade‑offs but often favoring Copybara’s ease of use. Questions about potential downsides and implementation tips appear, while a minority raise concerns about misuse in malicious repository patterns. Overall sentiment is supportive, with interest in practical experiences and complementary tools.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48740698" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/AnthropicAI/status/2072106151890809341" target="_blank">Department of Commerce has lifted export controls on Claude Fable 5 and Mythos 5</a>
+        </h2>
+        <span class="article-meta">
+          454 points • by Pragmata • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Anthropic announced on X that the U.S. Department of Commerce has removed export‑control restrictions on its Claude Fable 5 and Mythos 5 language models. The company said it will start re‑enabling user access to these models the following day and will provide a further update once the restoration process is underway. Anthropic expressed appreciation for users’ patience during the restriction period and thanked the individuals and teams who assisted in redeploying the models. No additional technical details, timelines beyond “tomorrow,” or policy explanations were provided. The post included a user‑avatar image but no further visual content.
+          </div>
+          <a href="https://twitter.com/AnthropicAI/status/2072106151890809341" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express widespread frustration over sudden U.S. export controls that limited access to Anthropic’s Fable 5, describing the move as unpredictable, harmful to business planning, and damaging to trust in the company. Users criticize the communication style, fear over‑guarded models and pricing changes, and call for clear legislation rather than ad‑hoc decisions. At the same time, many praise Fable 5’s superior coding ability compared to Opus 4.8 and welcome the recent lifting of restrictions, while remaining cautious about future availability and potential regulatory volatility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48740771" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://en.wikipedia.org/wiki/Forestiere_Underground_Gardens" target="_blank">Forestiere Underground Gardens</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by onemoresoop • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Forestiere Underground Gardens in Fresno, California, are a subterranean complex constructed by Sicilian immigrant Baldassare Forestiere between 1906 and his death in 1946. Using hand tools and mules, Forestiere excavated ten acres of hardpan, creating three levels (≈10 ft, 20 ft, and 23 ft deep) and 65 interlinked rooms without formal blueprints. The space includes a summer bedroom, winter bedroom, bath, kitchen, fishpond, parlor with fireplace, grottoes, courtyards, and conical skylights that regulate airflow and temperature. Excavated soil and hardpan were repurposed for planters, bricks, and structural supports. The underground environment supports a diverse planting program—citrus, berries, kumquat, loquat, jujube, and grafted multi‑fruit trees—many over a century old, protected from frost and insulated by above‑ground vegetation. The gardens were listed on the National Register of Historic Places in 1977 (No. 916) and designated a California Historical Landmark in 1978. T. Coraghessan Boyle later fictionalized the site in a 1998 New Yorker short story.
+          </div>
+          <a href="https://en.wikipedia.org/wiki/Forestiere_Underground_Gardens" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight a visually striking underground location that many find appealing and recommend visiting, often recalling personal experiences or sharing media. At the same time, there is consistent caution about safety, especially regarding seismic activity and the consequences of lax enforcement or regulation. The discussion also references related content on hobby tunneling, indicating interest in both the aesthetic and technical aspects of such sites while emphasizing the need for awareness of potential hazards.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48741359" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/product/claude-science" target="_blank">Claude Science</a>
+        </h2>
+        <span class="article-meta">
+          412 points • by lebovic • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Claude Science beta is an AI assistant designed for scientific workflows. It creates isolated compute environments for each specialist domain and records full provenance of all results. The platform includes built‑in analysis specialists for genomics, single‑cell sequencing, proteomics, structural biology, cheminformatics, and additional fields. It connects natively to over 60 scientific databases and domain‑specific open models. Integration leverages NVIDIA’s BioNeMo Agent Toolkit to access life‑science models and libraries in BioNeMo, including Evo 2, Boltz‑2, and OpenFold 3. The system enables pipeline execution, database navigation, cluster job orchestration, and session‑persistent tracking, extending AI capabilities beyond conversational discussion to fully reproducible computational research.
+          </div>
+          <a href="https://claude.com/product/claude-science" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show mixed reactions to Claude Science. Many see value in its ability to integrate databases, clusters and lab tools, especially for bio‑informatics and pharma environments where secure, server‑based access is needed. However, users raise concerns about hallucinated data, limited domain coverage beyond life sciences, reliability problems such as crashes or subscription hurdles, and the administrative burden of adding LLM agents to controlled systems. Skepticism about its novelty versus existing workflows and worries about proprietary lock‑in also temper the overall enthusiasm.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48735770" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://deepmind.google/models/gemini-image/flash-lite/" target="_blank">Nano Banana 2 Lite</a>
+        </h2>
+        <span class="article-meta">
+          334 points • by minimaxir • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page presents a Gemini 3.1 “Flash‑Lite” image titled “Nano Banana 2 Lite”. The primary prompt describes a top‑down, abstract coastline split diagonally by land and sea, with navy‑blue surf turning to white foam, a narrow pale sand strip, aquamarine water, and rugged ochre‑beige terrain, emphasizing color, texture, and diagonal composition rather than realistic perspective.
+
+The accompanying visual assets consist of 22 alt‑text entries:
+- Macro and wildlife photographs (spider with droplets, spiny lizard on bricks).
+- Action sports shot (male swimmer in butterfly stroke).
+- Conceptual illustrations (man on books viewing a paper‑wave tidal wave, minimalist icons for low‑latency, cost‑efficiency, high‑quality on light/dark blue backgrounds).
+- Numerous side‑by‑side comparisons of images generated by Nano Banana 2 and Nano Banana 2 Lite, covering themes such as astronaut in futuristic corridors, aerial coastlines, hawk, black‑and‑white bird over pine valley, glass sphere on water, hair transforming into birds, and a vintage sedan in fog.
+- Footer graphics for “gemma” in light and dark variants.
+          </div>
+          <a href="https://deepmind.google/models/gemini-image/flash-lite/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight that the Nano Banana 2 Lite model is praised for its markedly lower latency—often under five seconds—and modest per‑image cost compared with earlier versions and competing services. Reviewers note that this speed enables quicker user experiences in apps such as story generation and onboarding, but many point out quality trade‑offs, including reduced nuance, occasional text rendering glitches, limited aspect‑ratio control, and occasional resource‑exhaustion errors. Users also criticize Google’s account requirements, which force multiple subscriptions for full access. Overall sentiment is cautiously positive: the model’s efficiency is valued, yet its imperfections and accessibility hurdles temper enthusiasm.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48735444" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mechanical-pencil.com/products/car" target="_blank">How does a pull-back car work? Illustrated teardown</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by Muhammad523 • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The passage explains how gears provide mechanical advantage by multiplying torque and altering speed. In the context of a wind‑up toy for children, a stiff spring requires substantial torque to wind. Incorporating gears reduces the force a child must apply, allowing a modest input force to generate the necessary torque to compress the spring. This is achieved by using gear ratios that increase torque while decreasing the input speed, making the winding process easier for young users. The discussion emphasizes gears’ role in translating small forces into larger torques, thereby improving usability of torque‑intensive mechanisms in consumer products.
+          </div>
+          <a href="https://mechanical-pencil.com/products/car" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The remarks express strong enthusiasm for the mechanical design of auto‑injectors, drawing parallels to wind‑up toy cars from childhood. Contributors highlight curiosity about the spring‑driven motion, ask technical questions about gear connections, and note the educational value of related 3D‑print resources. The tone is nostalgic and appreciative, praising the site’s detailed illustrations and effort. Overall the feedback is positive, focused on mechanical insight, personal reminiscence, and encouragement to explore similar designs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48712289" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://macrodata.co/blog/annotating-robot-video-subtasks" target="_blank">Segmenting Robot Video into Actionable Subtasks</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by tomaspduarte • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The post presents WGO‑Bench, a new benchmark for robotic subtask annotation comprising 100 egocentric and robot‑video episodes with 743 human‑annotated segments across 62 high‑level instructions. Over 60 experiments identified the most effective pipeline: subtask boundary detection (0.306 F1), subtask labeling (61.0 % accuracy), and end‑to‑end annotation (0.168 F1). Gemini models, especially Gemini 3.5 Flash, outperform the best non‑Gemini model (GPT‑5.5) by 24.5 %. The optimal method uses visual “contact sheets” that pack 20 frames with embedded timestamps, achieving 0.263 F1 for segmentation while reducing inference cost to $2.64 per video hour (≈19× cheaper than human labeling). Direct frame‑by‑frame prompting reaches only 0.193 F1 and is far more expensive. Experiments show visual timestamps on contact sheets markedly improve boundary detection, whereas higher resolution, denser sampling, or larger sheets do not. The complete open‑source pipeline is available in Refiner for users to apply to their own robot videos.
+          </div>
+          <a href="https://macrodata.co/blog/annotating-robot-video-subtasks" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment anticipates a near‑term surplus of GPUs and RAM as AI projects conclude, viewing this as a catalyst for expanded machine‑learning and robotics development, particularly in autonomous vehicles, factory automation, and home‑use humanoid robots. It expresses optimism about rapid progress toward practical household assistants while simultaneously warning of potential negative social effects, such as excessive human attachment, anthropomorphizing, and romantic involvement with lifelike bots, which could exacerbate demographic challenges. A brief query also raises whether speech‑recognition techniques like CTC address related annotation issues.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48724274" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
