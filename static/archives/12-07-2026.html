@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.iroh.computer/blog/mesh-llm" target="_blank">Mesh LLM: distributed AI computing on iroh</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by tionis • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Mesh LLM is a peer‑to‑peer platform that aggregates GPUs and memory from any number of machines into a single OpenAI‑compatible inference service (localhost:9337/v1). Each node runs an iroh endpoint, identified by a public key, which establishes authenticated QUIC connections (with NAT‑traversal and relay fallback) to other nodes without a central server. Requests are handled in three ways: locally on the node’s GPU, routed to a peer already hosting the model, or split across several nodes in a pipeline (“Skippy”) that partitions a model by layer ranges (e.g., layers 0‑15, 16‑31, …) so modest hardware can run very large models, up to 235 B‑parameter mixture‑of‑experts giants. The system ships with 40+ models, from laptop‑sized to massive, and uses a custom gossip layer to manage mesh membership, version compatibility, and trust. Installation is lightweight (~18 MB), supporting private or public meshes, and a forthcoming mobile app will use iroh’s Swift SDK and the ACP agent standard. Mesh LLM is open source and already deployed on hundreds of thousands of devices.
+          </div>
+          <a href="https://www.iroh.computer/blog/mesh-llm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express skepticism about the practical performance of distributed large‑model inference, noting that network bandwidth and latency are likely far slower than local memory and questioning token‑per‑second rates for split models. Contributors seek concrete throughput data, especially under varied hardware and concurrency, and inquire about encryption and privacy of inter‑node traffic. There is curiosity about novel applications such as adaptive botnets, but also recognition that current implementations (e.g., Mesh LLM, iroh, cocompute.ai) may lack sufficient speed for interactive use, prompting a desire for more accessible hardware testing.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48876505" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/" target="_blank">We Know Simple Fluids Can Flow. Turns Out, Some Can Fracture</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by Anon84 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Researchers at Drexel University discovered that simple, low‑elasticity fluids—such as a hydrocarbon blend of hydrogen and carbon—can undergo brittle fracture when subjected to sufficient extensional stress. Using extensional rheology, the team repeatedly stretched the liquid and observed loud “pop” events captured by high‑speed cameras, revealing crack propagation speeds of 500–1,500 m s⁻¹, far faster than the ~0.07 m s⁻¹ seen in viscoelastic polymers. The fracture occurs at a critical tensile stress of roughly 2 MPa, proportional to the product of viscosity and strain rate, and appears independent of fluid elasticity. The mechanism aligns with earlier predictions that cavitation‑induced void formation can nucleate cracks in any liquid, with propagation unhindered by elastic energy absorption. Findings suggest that liquid fracture may be governed by cohesive intermolecular forces rather than elasticity, with potential implications for processes such as fiber spinning, inkjet printing, propeller design, and soft‑robotic materials.
+          </div>
+          <a href="https://www.quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The reaction combines skepticism with curiosity: the discovery is likened to “silly putty,” suggesting doubt about its seriousness, yet there is a clear request for concrete analysis of which sectors will profit both immediately and over the long run, and what broader changes might unfold over the next three decades. The overall tone reflects a desire to move beyond a dismissive impression toward understanding practical, industry‑wide implications.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877668" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://goeteia.dev" target="_blank">A pure scheme web programming tool</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by guenchi • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The project implements a self‑hosting Scheme compiler written in the subset of Scheme it compiles. The compiler can rebuild itself, producing byte‑identical output verified on every change, and all tests run through both compilation stages. In WebAssembly it uses native GC objects: fixnums are unboxed i31refs, pairs and records are GC structs, and equality (`eq?`) is a single reference comparison, eliminating a shadow heap in JavaScript. Hygienic macros are supported via `syntax-rules` and `syntax-case` with fenders, nested ellipses, and `datum->syntax`, executed in a compile‑time interpreter. Functions have typed references with fast per‑arity entry points and generic closure entries; variadic calls and `apply` are cheap, and tail calls compile to `return_call`, enabling constant‑stack loops (e.g., 100 M iterations in ~150 ms). Continuations (`call/cc`) and `dynamic-wind` use the WebAssembly exception‑handling proposal, giving O(1) capture and minimal normal‑path overhead. The stack includes a reactive web framework (SX templates, fine‑grained signals, HTML renderer, JS FFI), a 3D layer built on Three.js and raw WebGL with S‑expression shaders, and a Scheme‑to‑Scheme RPC backend (Igropyr) that exchanges S‑expressions directly. Libraries follow R6RS‑style `library` forms with import resolution and dead‑code pruning.
+          </div>
+          <a href="https://goeteia.dev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments acknowledge that the existing Hoot implementation effectively runs Scheme in WebAssembly and view Spritely’s developments as innovative, especially the inclusion of Three.js in the standard library and support for self‑hosting, hygienic macros, and HTML/CSS handling via S‑expressions. At the same time, they criticize JavaScript’s lack of static verifiability and silent DOM failures, noting reliance on TypeScript and frameworks to mitigate bugs. A reported editing‑cursor bug and the perceived difficulty of Scheme’s syntax are mentioned, but overall the tone favors the reliability and potential of the Scheme‑based approach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877314" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antjs.org" target="_blank">Show HN: Ant – A JavaScript runtime and ecosystem</a>
+        </h2>
+        <span class="article-meta">
+          206 points • by theMackabu • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The input consists solely of the title “Ant, a lightweight JavaScript runtime” with no additional content; therefore, no substantive summary can be generated.
+          </div>
+          <a href="https://antjs.org" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a generally intrigued and supportive tone toward the new JavaScript runtime, emphasizing interest in its sandboxing, small binary size, fast startup and potential for serverless or embedded use. Many ask for technical details on performance claims, design choices, fuzzing, and packaging, while expressing skepticism about benchmark results and stability after recent hot‑fixes. Repeated concerns include naming confusion with Apache Ant, trust in the author’s credibility, and comparison with existing runtimes such as Node, Deno and Bun. Overall sentiment is cautiously optimistic but seeks more evidence and clarification.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48875377" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fabiensanglard.net/tb4/index.html" target="_blank">A dock that wakes up reliably</a>
+        </h2>
+        <span class="article-meta">
+          44 points • by ingve • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author experienced intermittent failures waking a docked laptop using a CalDigit TS3 Thunderbolt dock, where keyboard or mouse input, monitor power cycling, and undocking were required before the display reactivated. Thunderbolt 4’s specification (2020) promised reliable wake‑from‑sleep on docked systems, yet the CalDigit TS4 (released 2022) still showed occasional wake failures. After replacing an aging BenQ monitor with an ASUS ROG Swift PG27UCDM (240 Hz) in 2025, the wake‑up issue disappeared; the laptop now resumes and the desktop appears within a second. The author suspects the previous monitor’s firmware or latency caused the problem, though firmware updates to the MacBook Pro 16″ M1 Max and ThinkPad X1 Carbon Gen 9 may also have contributed. Configuration details are shared for users facing similar dock‑wake reliability issues.
+          </div>
+          <a href="https://fabiensanglard.net/tb4/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express widespread frustration with Thunderbolt and USB‑C docks that fail to wake monitors or maintain peripheral connections after sleep, noting inconsistent performance across brands such as Lenovo, HP, ASUS, Anker, and OWC. Users suggest testing with Android devices, updating firmware, and considering monitor‑integrated docks as a more reliable alternative. Some report successful setups after firmware updates or with older, inexpensive docks, while others highlight persistent reliability problems and the complexity of the Thunderbolt protocol, attributing occasional successes to specific hardware or configuration tweaks.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877269" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Wren6991/RISCBoy" target="_blank">RISCBoy is an open-source portable games console, designed from scratch</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by mariuz • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            RISCBoy is an open‑source, portable handheld console implemented entirely in synthesizable Verilog 2005 and designed for FPGA deployment. It features a RISC‑V‑compatible RV32IMC CPU that passes the official RISC‑V compliance suite and formal verification checks, along with M‑mode CSRs, exception handling, and vectored interrupts. The system includes a raster graphics pipeline, display controller, AHB‑lite/APB bus fabric, memory controllers, UART, GPIO, and other peripherals. The primary target hardware is a Lattice iCE40‑HX8k (7 680 LEs), though a reduced RV32I core can run on the iCE40‑UP5k, and experimental support exists for Lattice ECP5 boards using internal 256 KiB synchronous RAM. Build flow relies on the open‑source IceStorm toolchain, a custom RISC‑V GNU toolchain (RV32IMC/rv32i) and Xilinx ISIM for simulation. The repository is organized into submodules covering HDL, documentation, PCB KiCad files, and test suites. PCB Rev A is a 5 × 5 cm 4‑layer design compatible with iTead prototyping; Rev B is pending further gateware and bootloader maturation.
+          </div>
+          <a href="https://github.com/Wren6991/RISCBoy" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the RISCBoy project, praising its creative concept of a parallel‑universe Game Boy Advance and highlighting the designer’s reputable background in ASIC work. There is appreciation for the open‑source inclusion of AHB/APB components, despite previous assumptions about their proprietary nature, and a general fondness for “alternate‑universe” hardware projects. Additionally, there is curiosity about running the Godot Engine on the platform.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48876245" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://triapul.cz/automa/i_did_not_kill_stanley_lieber" target="_blank">I Did Not Kill Stanley Lieber: How to Draw (With 9front)</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by c-c-c-c-c • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The paper describes how to create digital drawings on the 9front operating system using its native program **paint(1)**.  
+- Any input device that can generate mouse events works: mouse, touch screen (left‑click only), finger‑painting, Wacom‑style pens, and external tablets (e.g., GAOMON S620). Keyboard shortcuts supplement missing mouse buttons.  
+- paint(1) stores images in the internal **image(6)** format (`*.pic`). Files are saved with **w**, opened with **r**, and can be piped through external commands (e.g., `rotate(1)`) using `|`, `<`, or `>` redirection.  
+- The canvas is defined by the furthest placed pixels; it expands automatically and can be trimmed with crop operations. Background colour is set with the fill tool by clicking outside the drawn region; it does not alter canvas size.  
+- No pressure sensitivity or layers are supported; drawing behaves like paper with a single raster layer.  
+- Core shortcuts: `0‑9` select brush size, `f` fill, `c` clear, `u` undo last continuous stroke, `-`/`+` zoom, `Escape` show full canvas.  
+- For larger artworks, multiple paint(1) windows can share a file, allowing palette consistency across sessions.
+          </div>
+          <a href="https://triapul.cz/automa/i_did_not_kill_stanley_lieber" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The passage combines three distinct remarks: an inquiry about whether a referenced Stanley Lieber is someone other than the Marvel creator known as Stan Lee, an observation expressing surprise at seeing a physical ruler applied to a touchscreen despite recognizing the method’s oddity, and a hostile comment declaring intent to keep seeding a torrent, using profanity. The overall tone shifts from curious questioning to mild amusement, ending with an aggressive, profanity‑laden statement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48846177" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/1203.5426" target="_blank">The Energetic Costs of Cellular Computation (2012)</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by lioeters • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The paper examines how cells expend energy when performing biochemical computations, focusing on the classic Berg‑Purcell problem of estimating external ligand concentration. Using a simple two‑component network that implements a noisy version of the Berg‑Purcell strategy, the authors calculate the thermodynamic cost of “learning” the concentration. They show that accurate inference requires breaking detailed balance, which necessarily consumes free energy, and that the amount of energy dissipated scales with the precision of the inferred concentration. The analysis highlights that energetic constraints can limit the design and operation of cellular signaling pathways, especially in resource‑limited contexts such as bacterial spore germination networks. The work provides a quantitative link between information acquisition and metabolic cost in cellular systems.
+          </div>
+          <a href="https://arxiv.org/abs/1203.5426" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on the idea that cost constraints fundamentally shape a system’s internal structure, with structure and cost evolving together, and critiques philosophical approaches that assume unlimited computational resources and overlook these constraints. It argues that models like the “Chinese Room” embed rule sets without accounting for hidden costs, leading to a loss of semantic insight when cost considerations are removed. The overall tone is analytical and critical of cost‑agnostic perspectives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877613" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://igropyr.com" target="_blank">A Erlang style pure Scheme Webserver and further</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by guenchi • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Igropyr is a fault‑tolerant web server written entirely in Chez Scheme, separating a minimal core (exposed via `http‑listen`) from an optional Express‑like layer (`create‑app`, `app‑get`, `send‑json!`). It runs thousands of lightweight green processes on a single OS thread, using continuation‑based preemptive scheduling; processes communicate via pure message passing (`spawn`, `send`, `receive`, `link`, `monitor`) with no shared state. A fixed worker pool under a supervisor automatically restarts crashed workers and retries tasks up to three times, killing workers stalled >30 s. Failure hooks can return structured JSON instead of plain 500 responses.
+
+Key features include:
+- Per‑dialogue green processes that preserve state across multi‑request conversations, with guaranteed rollback on crash or TTL.
+- Hot code swapping of handlers/routes without dropping connections.
+- WebSocket (RFC 6455) support, streaming/SSE via `res‑begin!`/`res‑write!`/`res‑end!`, and a full OTP‑style toolkit (`gen‑server`, process registry, PubSub).
+- Robust JSON parser/writer, form and cookie handling, middleware suite (sessions, CORS, security headers, access logging).
+- Non‑blocking Redis/MySQL clients, outbound HTTP/WebSocket clients, async file reads via libuv, gzip compression, transparent chunked decoding.
+- Rate limiting, global error handling, Prometheus metrics (`/metrics`), runtime introspection (`http‑stats`), graceful shutdown, and multi‑process scaling via `SO_REUSEPORT`. Benchmarks report ≈35 k req/s at 500 concurrent connections on an Apple Silicon laptop.
+          </div>
+          <a href="https://igropyr.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on a collection of advanced software development concepts, emphasizing resilience and flexibility in system design. Topics include the “let it crash” philosophy for fault tolerance, hot code swapping for live updates, remote retry mechanisms to handle transient failures, continuation‑based approaches to web programming, and the use of S‑expression‑based RPC as demonstrated by goeteia.dev. Collectively, the comments highlight interest in modern techniques that simplify error handling, enable dynamic code changes, and explore alternative communication protocols.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877344" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://io-fund.com/ai-stocks/nvidia-coreweave-nebius-circular-financing-gpu-boom" target="_blank">Nvidia, CoreWeave, and Nebius: Inside the Circular Financing of the GPU Boom</a>
+        </h2>
+        <span class="article-meta">
+          187 points • by adletbalzhanov • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Neocloud providers CoreWeave and Nebius are scaling AI infrastructure by securing large GPU allocations and optimizing utilization, targeting 1.7 GW (CoreWeave) and 0.8‑1 GW (Nebius) of active power by 2026‑2027.  
+- Microsoft and Meta have pledged roughly $122 billion in long‑term capacity contracts with neoclouds, a commitment comparable to ~90 % of AWS’s trailing‑12‑month revenue; additional AI labs (OpenAI, Anthropic) add further undisclosed commitments, bringing total potential contracts above $145 billion.  
+- These firms gain rapid access to Nvidia’s latest GPUs—Nvidia has invested $2 billion in each company and holds stakes dating back to 2025—creating a circular financing loop where Nvidia funds neocloud expansion and backs unsold GPU capacity (e.g., a $6.3 billion purchase obligation for CoreWeave).  
+- CoreWeave’s 2025 Q1 results show $2.08 billion revenue versus $7.7 billion capex, generating –$4.71 billion free cash flow; debt rose to $24.9 billion and a $3.5 billion senior note issuance is planned.  
+- Nebius holds $9.37 billion cash with $8.45 billion debt, but its midpoint 2026 capex guidance of $22.5 billion implies a $6‑7 billion funding gap, likely to be filled via debt or equity programs.  
+- Both companies rely heavily on GPU‑backed delayed‑draw term loans, some rated investment‑grade due to contracts with hyperscalers; rising interest rates increase financing costs, pressuring profitability.  
+- The overall model hinges on hyperscalers shifting capex to opex, neoclouds’ ability to convert contracted power to active capacity, and sustained Nvidia financing amid widening cash‑flow versus capex gaps.
+          </div>
+          <a href="https://io-fund.com/ai-stocks/nvidia-coreweave-nebius-circular-financing-gpu-boom" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Nvidia’s minority stake in CoreWeave and its broader strategy of backing “neocloud” providers to secure chip deployments and data insights, with many viewing the investment as a pragmatic hedge against hyperscaler dominance rather than a problematic circular financing arrangement. At the same time, commenters express caution about the economic viability of large‑scale AI infrastructure, noting potential over‑building, pricing pressure from newer hardware, and systemic risk from extensive, intertwined financing that could amplify market volatility if the AI boom falters.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48873836" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
