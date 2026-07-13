@@ -1,0 +1,500 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nebusec.ai/research/ionstack-part-2/" target="_blank">GhostLock, a stack-UAF that has existed in all Linux distributions for 15 years</a>
+        </h2>
+        <span class="article-meta">
+          134 points • by ranger_danger • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            GhostLock (CVE‑2026‑43499) is a stack‑UAF kernel flaw introduced in Linux 2.6.39 (2011) and fixed in 7.1 (2026). It requires only CONFIG_FUTEX_PI=y and no special privileges. The bug stems from remove_waiter() clearing current‑>pi_blocked_on instead of waiter‑>task‑>pi_blocked_on during a proxy‑lock rollback in rt_mutex, leaving a dangling pointer to a waiter’s stack frame. An attacker creates a PI futex deadlock cycle with three threads using FUTEX_WAIT_REQUEUE_PI, FUTEX_CMP_REQUEUE_PI and a chain of PI futexes, forcing the -EDEADLK path and exposing the dangling pointer. The freed stack is reclaimed via PR_SET_MM_MAP, which copies a user‑supplied auxv onto the same stack depth, forging a fake rt_mutex_waiter containing controlled fields (task = &init_task, lock = &inet6_protos[IPPROTO_UDP]‑8). This yields an arbitrary‑address write that overwrites inet6_protos[IPPROTO_UDP] with a crafted function pointer. Combined with a prefetch‑based KASLR leak, CEA spraying to locate the CPU entry area, and a UDP packet trigger, the exploit achieves reliable privilege escalation and container escape, earning a $92 k kernel‑CTF prize.
+          </div>
+          <a href="https://nebusec.ai/research/ionstack-part-2/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments focus on technical observations and advice surrounding recent kernelCTF exploits and related tooling. Users report mixed results when testing on various Android devices, noting boot loops and device shutdowns, while also sharing mitigation tips such as using a separate Chromium‑based browser and adjusting flags. There is curiosity and mild criticism about emerging terminology from large language models, particularly the use of “use after free” and “shape” descriptors, with participants questioning their novelty and relevance in established security discourse. Overall the tone remains factual and exploratory.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48834309" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://shellzine.net/cyberpunk-comics/" target="_blank">Cyberpunk Comics, Manga and Graphic Novels</a>
+        </h2>
+        <span class="article-meta">
+          112 points • by zdw • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            A chronological catalogue of cyber‑punk illustrated works highlights the genre’s evolution from early French sci‑fi graphics to modern Japanese manga. 1975’s *The Long Tomorrow* (Dan O’Bannon & Moebius) introduced noir‑detective tropes that prefigured Blade Runner and Neuromancer. Katsuhiro Otomo’s *Akira* (1982‑90) expanded dystopian, anarchic motifs across six volumes. Marvel’s *Blade Runner* comic (1982) adapts the film with added narration, while Peter B. Gills & Mike Saenz’s *Shatter* (1985‑88) is the first fully digital comic, densely packed with cyber‑punk conventions. Masamune Shirow’s *Dominion* (1986) and the *Ghost in the Shell* manga series (1989‑97) explore cybernetics, AI, and a polluted megacity. Scott Rockwell’s *Cyberpunk* books (1989‑90) depict early virtual‑reality “Playing Field” concepts. Yukito Kishiro’s *Gunnm* (1990‑95) and its side story *Haisha* (1998) blend post‑apocalyptic settings with cyborg bounty‑hunting. Marvel’s *RoboCop* comics (1990‑92) amplify cyber‑netic and cloning themes. Bruce Wagner’s *Wild Palms* (1990‑93) examines VR‑driven mind control, while Warren Ellis’s *Transmetropolitan* (1997‑2002) fuses gonzo journalism with transhumanist dystopia. Later entries—*Eden* (1998‑2008), *Blame!* (1996‑2003), *NOiSE* (2000‑01), and *Gunslinger Girl* (2002)—continue the focus on AI, robotics, surveillance, and the social impact of cyber‑enhancement.
+          </div>
+          <a href="https://shellzine.net/cyberpunk-comics/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects enthusiasm for recent and classic cyber‑punk media, noting the new Ghost in the Shell series’ lighter tone while expressing a preference for earlier, more mature entries and optimism about future adaptations. It highlights additional works such as Patlabor, Pluto, Hard Boiled, Digital Justice, Transmetropolitan, Gantz, and Eden: It’s an Endless World, emphasizing their artistic merit, thematic depth, and relevance. There is also a broader observation that many cyber‑punk manga diverge from traditional Japanese cyber‑punk and that the genre was originally intended as dystopian.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48885643" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://floooh.github.io/tiny8bit-preview/index.html" target="_blank">Tiny Emulators</a>
+        </h2>
+        <span class="article-meta">
+          176 points • by naves • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page, titled “Tiny Emulators,” presents a section labeled “Ancient Civilizations (KC85/4)” and includes a UI overview. It references visual material, specifically “Image 1,” though no description of the image is provided. The content appears to focus on a compact emulator implementation for the KC85/4 system, highlighting its user‑interface aspects and accompanying graphics. No additional textual information, technical specifications, or functional details are included in the excerpt.
+          </div>
+          <a href="https://floooh.github.io/tiny8bit-preview/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the rapid loading and nostalgic value of the emulated games, highlighting the appeal of the pin‑level modular emulation architecture and its flexibility for testing and interoperability. Several users suggest expanding support to additional platforms such as the Oric and request an updated link to the official site. Minor critiques note occasional volume levels being higher than expected and seek clarification on the source of the preview build, while acknowledging the project’s multi‑year history.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48884395" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Add flag for AI-generated articles</a>
+        </h2>
+        <span class="article-meta">
+          190 points • by levkk • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express broad unease about AI‑generated articles on Hacker News, emphasizing a desire for clearer rules, possible tagging or flagging mechanisms, and better detection tools, while acknowledging the difficulty of reliable identification. Many view low‑effort AI content as low‑quality and stigmatized, arguing that voting alone is insufficient, yet some argue that high‑quality AI work could be acceptable and that penalizing based solely on tool use may be arbitrary. Concerns also arise about false positives, enforcement challenges, and the potential impact on community culture. Overall sentiment leans toward cautious restriction rather than outright acceptance.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48886741" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.susanrigetti.com/physics" target="_blank">So you want to learn physics (second edition, 2021)</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by azhenley • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The guide outlines a self‑study pathway for physics. It recommends non‑speculative popular books (e.g., by Frank Close or Richard Feynman) to maintain perspective, and ranks them by difficulty. Required mathematical background includes high‑school algebra, geometry, trigonometry and pre‑calculus; calculus is learned during undergraduate courses. No formal biology or chemistry prerequisites are needed, though optional refresher courses are suggested (Khan Academy). Study strategies emphasize identifying one’s learning style, thorough reading, extensive note‑taking, and summarizing concepts before progressing. Mastery is achieved through solving textbook problems; reliance on answer keys is discouraged because they lack step‑by‑step reasoning, and solutions can be located online if needed. The curriculum reflects typical undergraduate and graduate physics programs, which focus on lectures, textbooks, and homework rather than laboratory work, with research and thesis components introduced at the PhD level. The listed textbooks correspond to those used in top physics curricula worldwide.
+          </div>
+          <a href="https://www.susanrigetti.com/physics" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey mixed views on using comprehensive physics courses for self‑learning. Several contributors argue that studying an entire university curriculum is inefficient, advocating instead for targeted, application‑focused learning that builds on incremental, practical topics. Others counter with recommendations of classic Soviet‑era physics texts, praising them as broad overviews and problem‑solving guides. A recurring request seeks a comparable mathematics collection, reflecting interest in similarly structured resources for other disciplines. Overall, the discussion balances criticism of exhaustive self‑study with endorsements of curated, foundational material.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48827126" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://vilkeliskis.com/b/2026/0711.html" target="_blank">Designing and assembling my first PCB</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by tadasv • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author purchased an ESP32‑Nano dev board, added an LCD and a BME280 sensor via I²C, then decided to replace the breakout module with a custom PCB. Using KiCad (free, GPL) on macOS, they recreated the sensor’s I²C schematic from the BME280 datasheet and assigned footprints—choosing 0805 SMD parts for hand soldering. After routing the single‑layer board, they filled ground on both sides and added vias for connectivity. Components (resistors, capacitors) were sourced from DigiKey; the BME280 chip was reclaimed from the original Amazon breakout due to stock shortages. Gerber and drill files were exported and ordered from JLCPCB for under $10, with a 2–3 week delivery. Assembly used a Hakko FX‑888DX soldering iron (≈650 °F) and a Quick 861DW hot‑air station (250 °C, low airflow) for SMD paste reflow, taking about 15 minutes. The finished board plugged into the existing firmware without modification, confirming the design, routing, and grounding were correct and providing confidence for future, more complex integrated boards.
+          </div>
+          <a href="https://vilkeliskis.com/b/2026/0711.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments praise the low cost and accessibility of prototype‑scale custom PCBs, highlighting reliable manufacturers such as JLCPCB and recommending group buys to offset one‑off pricing. Several contributors share personal experience with DIY board fabrication and offer technical advice on via usage, ground/power pours, and schematic symbols. Criticism focuses on long shipping times and the difficulty of sourcing small‑quantity components through services like EasyEDA. Overall sentiment is appreciative of modern PCB services while noting practical drawbacks in logistics and component procurement.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48885728" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cbc.ca/news/canada/quest-shipwreck-expedition-images-9.7262229" target="_blank">First look at Quest, the final ship of Antarctic explorer Shackleton</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by curmudgeon22 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            An RCGS‑led expedition using a remotely operated vehicle from the Woods Hole Oceanographic Institution’s submersible Alvin captured the first underwater images of the ship Quest, Ernest Shackleton’s final vessel, at about 400 m depth in the Labrador Sea’s Hawke Channel. Side‑scan sonar located the wreck in 2022; the new ROV footage shows the stern entangled in trawl nets, causing damage beyond what natural burial would have produced. Distinctive portholes below the bridge confirm the identity as Quest, which sank in 1962 after ice crushed its hull, though all crew survived and the seal‑pelt cargo was lost. The ship’s history includes use as a 1920s Antarctic exploration vessel, a WWII minesweeper, and later a Norwegian seal‑hunting boat. The mission, costing several million dollars, also aims to create a 3D digital twin of the wreck and its ~300 m debris field. After completing work on Quest, the team will proceed to the southern tip of Greenland to investigate the Terra Nova wreck, famed for Robert Falcon Scott’s 1912 South‑Pole expedition.
+          </div>
+          <a href="https://www.cbc.ca/news/canada/quest-shipwreck-expedition-images-9.7262229" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48831840" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://guseyn.com/html/posts/why-vanilla-js.html" target="_blank">Why Vanilla JavaScript</a>
+        </h2>
+        <span class="article-meta">
+          96 points • by guseyn • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://guseyn.com/html/posts/why-vanilla-js.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments emphasize that vanilla JavaScript is appealing for personal or small projects but most developers see frameworks as essential for team collaboration, maintainability, and scaling. Many note that frameworks provide shared conventions, guardrails, and ecosystem support, while custom solutions risk fragmentation and hiring challenges. Opinions on TypeScript are mixed, with some valuing its safety and others finding it burdensome. The rise of LLMs is mentioned as reducing boilerplate but not eliminating the need for widely‑adopted libraries. Overall, the consensus is that frameworks remain useful despite occasional preferences for minimal or bespoke approaches.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48885705" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: What Are You Working On? (July 2026)</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by david927 • 241 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The overall tone is upbeat and forward‑looking, emphasizing multiple independent initiatives that combine AI, open‑source tooling, and domain‑specific applications such as legal databases, nonprofit management, freelance record‑keeping, security diagnostics, and interactive games. Common themes include leveraging generative models for productivity, building narrowly focused products before scaling, integrating community feedback, and addressing personal or societal challenges through technology. The narrative repeatedly highlights iterative development, experimentation with new frameworks, and a desire to create accessible, functional solutions across diverse fields.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48884984" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://knuckledustchronicles.com/1970-plymouth-hemi-cuda/" target="_blank">1970 Plymouth Hemi &#39;CUDA</a>
+        </h2>
+        <span class="article-meta">
+          5 points • by frobinson47 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The 1970 Plymouth Hemi ‘Cuda, built on Chrysler’s new E‑body platform (shared with the Dodge Challenger), was the first Barracuda able to accommodate the 426 Hemi V8. The 426 Hemi, originally a 1964 NASCAR racing engine, was street‑rated at 425 hp and 490 lb‑ft (actual output often higher) and featured hemispherical combustion chambers, large opposed valves, and a central spark plug for superior airflow and combustion efficiency. Power was delivered through dual four‑barrel carburetors on a cross‑ram intake, with either a four‑speed manual or TorqueFlite automatic transmission, yielding quarter‑mile times in the mid‑13‑second range (potentially low‑12s). Styling emphasized aggression: a shaker hood scoop, bold “High Impact” colors (e.g., Tor‑Red, Lemon Twist), and distinctive hockey‑stick side stripes. Production was extremely limited—652 hardtops and 14 convertibles—making the model one of the rarest American muscle cars; a 1970 convertible fetched $3.5 million at auction in 2014. The Hemi ‘Cuda epitomized the peak of the muscle‑car era, embodying extreme performance, distinctive design, and cultural defiance just before regulatory and economic forces curtailed such vehicles.
+          </div>
+          <a href="https://knuckledustchronicles.com/1970-plymouth-hemi-cuda/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion reflects a general sense of doubt regarding the site’s authenticity, with observations that the article text, visuals, and biography appear artificially produced and lack genuine photographs. This perceived synthetic nature leads to curiosity and speculation about how such fully generated content might evolve, prompting questions about the reliability of the material and what implications the continued use of AI‑generated elements could have for the site’s future.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48887490" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
