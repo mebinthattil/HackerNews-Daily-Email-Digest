@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 16, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thinkingmachines.ai/news/introducing-inkling/" target="_blank">Inkling: Our Open-Weights Model</a>
+        </h2>
+        <span class="article-meta">
+          772 points • by vimarsh6739 • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Inkling is a 975 B‑parameter Mixture‑of‑Experts transformer (41 B active) with a 1 M‑token context window, pretrained on 45 trillion multimodal tokens (text, images, audio, video). A smaller 12 B‑active “Inkling‑Small” variant is also released. The architecture follows DeepSeek‑V3 MoE (256 routed, 2 shared experts per layer, 6 active experts per token) and uses interleaved sliding‑window/global attention with relative positional embeddings and short convolutions. Training employed a hybrid Muon/Adam optimizer, weight‑decay tied to learning‑rate squared, and extensive RL (30 M rollouts) for reasoning, calibration, and safety. Inkling supports controllable thinking effort, achieving comparable performance to larger open‑weights models while using ~⅓ the token budget on benchmarks such as Terminal Bench, HLE, and IFBench. Multimodal abilities include speech transcription, audio reasoning, and image understanding via patch‑based hMLP embeddings. Safety testing shows strong refusal rates on harmful requests (≥98 % on StrongREJECT) and robustness against censorship. The model is open‑weights, available on Hugging Face, and can be fine‑tuned via the Tinker platform, with a Playground for interactive testing. Inkling‑Small matches the larger model on many tasks while offering lower latency and cost.
+          </div>
+          <a href="https://thinkingmachines.ai/news/introducing-inkling/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey overall enthusiasm for the new multimodal, open‑weight model, highlighting its large context window, audio capability, and potential for fine‑tuning as a competitive alternative to existing closed offerings. Many see it as a promising step for American research and for broader open‑model competition, while noting its benchmark performance is mixed—often trailing top closed models but surpassing some open alternatives. Repeated requests call for more concrete fine‑tuning demonstrations, API access, and clearer licensing, and some express skepticism about the reported metrics and practical deployment constraints.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48924912" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mort.coffee/home/sqlite-editions/" target="_blank">SQLite should have (Rust-style) editions</a>
+        </h2>
+        <span class="article-meta">
+          149 points • by gnyeki • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            SQLite’s defaults hinder reliability and performance. Four main issues are highlighted:  
+
+* **Foreign‑key constraints** are disabled (`PRAGMA foreign_keys = OFF`), so deletions can leave dangling references and ROWID reuse can cause silent data corruption.  
+* **Dynamic typing** allows any value in any column; INTEGER affinity still accepts TEXT that can be converted, and there is no global pragma to enforce strict tables, forcing manual `STRICT` declarations.  
+* **Concurrent writers** receive an immediate `SQLITE_BUSY` error; the library does not wait for a lock unless `PRAGMA busy_timeout` is set.  
+* **Performance defaults** disable Write‑Ahead Logging and use the safest synchronous mode, resulting in slower writes.  
+
+The author proposes an “edition” system (e.g., `PRAGMA edition = 2026`) that would bundle sensible defaults: `foreign_keys = ON`, `busy_timeout = 5000`, `journal_mode = WAL`, `synchronous = NORMAL`, and make strict tables the default. This approach mirrors Rust’s edition model, aiming to improve safety and speed while preserving backward compatibility.
+          </div>
+          <a href="https://mort.coffee/home/sqlite-editions/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion balances enthusiasm for adding configurable “edition” defaults to SQLite with concerns about backward compatibility and toolchain breakage, especially when older command‑line utilities read newer database files. Participants note that defaults such as busy‑timeout are sensible to leave to callers, suggest wrapper libraries or compile‑time flags as alternatives, and point out gaps in ORM support for strict tables. While some defend SQLite’s lightweight appeal, others criticize its limited type system and warn against over‑engineering the library, urging modest, well‑documented changes.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48928135" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://davidobando.github.io/gsharp/" target="_blank">G# – A modern .NET language with Go, Kotlin, and Swift ergonomics</a>
+        </h2>
+        <span class="article-meta">
+          50 points • by serial_dev • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            G# is a .NET language designed to incorporate ergonomics from Go, Kotlin, and Swift. It introduces language constructs such as `packages` for modular organization, `func` for function declarations, and `data class` for concise immutable data structures. Nullable types are handled using an `if let` syntax, mirroring Kotlin’s approach to safe null checks. Structured concurrency is supported through a `scope` construct, enabling scoped asynchronous execution similar to Swift’s concurrency model. The language compiles directly to managed .NET assemblies, allowing G# code to run on the existing .NET runtime without additional tooling. Overall, G# aims to provide modern, expressive syntax while leveraging the performance and ecosystem of the .NET platform.
+          </div>
+          <a href="https://davidobando.github.io/gsharp/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express mixed reactions. Several users request clearer documentation on AI involvement and its guidelines, seeking confidence in the project’s process. Many question how the language differs from C#, noting its similarity to existing .NET languages and asking what novel concepts it adds, such as packages, functional syntax, nullable handling, or concurrency scopes. While some appreciate its terse, readable syntax, others view the proposed ergonomics as insufficiently compelling, suggesting more advanced features like dependent types would be preferable and questioning the need for another language in the ecosystem.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48871721" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/xai-org/grok-build" target="_blank">Grok Build is open source</a>
+        </h2>
+        <span class="article-meta">
+          312 points • by skp1995 • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Grok Build is SpaceXAI’s terminal‑based AI coding agent, delivered as a full‑screen TUI that can analyze codebases, edit files, run shell commands, perform web searches, and manage long‑running tasks. It operates interactively, headlessly for CI/scripts, or via the Agent Client Protocol (ACP) for editor integration. The repository contains Rust source for the CLI/TUI and its runtime, synchronized from the SpaceXAI monorepo. Prebuilt binaries for macOS, Linux, and Windows are installed via curl or PowerShell scripts; the binary is named `xai-grok-pager` and distributed as `grok`. Build requirements include the pinned Rust toolchain (managed by `rust-toolchain.toml`), `protoc` for protobuf generation, and supported host OSes (macOS/Linux; Windows builds are best‑effort). The workspace uses a generated root `Cargo.toml`; individual crate `Cargo.toml` files should be edited. Documentation, user guide, keyboard shortcuts, slash commands, theming, plugins, hooks, headless mode, and sandboxing are available under `crates/codegen/xai-grok-pager/docs/user-guide/`. The code is licensed under Apache 2.0, with third‑party components retaining original licenses.
+          </div>
+          <a href="https://github.com/xai-org/grok-build" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mix of enthusiasm for the newly open‑sourced Grok‑Build code, highlighting its utility for building custom agents, enabling forks, and facilitating development work such as Mermaid rendering and desktop clients. Simultaneously, many express distrust toward the originating company, citing alleged data exfiltration, opaque quota reductions, and perceived stinginess in pricing, which fuels warnings against using the service. Additional remarks question the practicality of the terminal UI, discuss compilation challenges, and compare the project to other open‑source coding agents, reflecting both technical interest and caution.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48926590" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.siegelendowment.org/wp-content/uploads/2026/07/fortune-david-siegel-open-source-ai.pdf" target="_blank">Governments, companies, nonprofits should invest in free, open source AI [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          117 points • by bilsbie • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.siegelendowment.org/wp-content/uploads/2026/07/fortune-david-siegel-open-source-ai.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments present a mixed view on incentivizing open‑source AI development. Several contributors support prize mechanisms and targeted funding to spur progress and provide recognition for open models, arguing that they can be more cost‑effective and valuable for niche applications. Others criticize public subsidies for AI, preferring social welfare spending and warning against government involvement or taxation of hardware. Skepticism about the practicality of open‑source competition with commercial firms and concerns over allocation of resources also appear throughout the discussion.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48927095" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://atproto.com/blog/at-protocol-trademark" target="_blank">Bluesky Trademarks ATProto</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by chaosharmonic • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Bluesky PBC acquired the “ATPROTOCOL,” “AT Protocol,” and “atproto” trademarks to prevent third‑party claims and to protect developers from legal abuse. The acquisition is defensive; the mark will remain freely available for typical ecosystem use—e.g., referencing the protocol, labeling compatible apps, writing documentation, or naming open‑source tools—provided the usage is accurate and does not imply official endorsement. A license is required only when the trademark is used as a brand element, such as product names, company or service names, paid events, merchandise, domain names, certifications, or logo usage that could suggest ownership or endorsement. Licenses will be offered in good‑faith cases, with fees considered only for commercial branding. Bluesky intends to later transfer ownership to an independent governance body. The approach aligns with practices of other open‑source projects (e.g., Apache, Linux) to safeguard the protocol while supporting open development.
+          </div>
+          <a href="https://atproto.com/blog/at-protocol-trademark" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment expresses concern over AT Protocol being governed by a single for‑profit entity without an independent body, frustration at the lack of prior trademark registration, curiosity about the original claimant, and apprehension about trademark threats faced by startups. It also conveys relief that Bluesky acquired the trademark and hopes for future transfer to an independent governance organization.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48929351" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/business/finance/stripe-advent-offer-buy-paypal-more-than-53-billion-sources-say-2026-07-15/" target="_blank">Stripe and Advent have made a joint offer to acquire PayPal – sources</a>
+        </h2>
+        <span class="article-meta">
+          384 points • by rvz • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.reuters.com/business/finance/stripe-advent-offer-buy-paypal-more-than-53-billion-sources-say-2026-07-15/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments show a mixed reaction to the proposed Stripe‑PayPal consolidation. Many express concern that combining two major payment platforms would raise antitrust issues, reduce competition, and enable higher fees or stricter policy enforcement, potentially harming merchants and users. Several cite personal frustrations with customer service and account restrictions, fearing a larger monopoly would amplify such problems. A smaller group views the merger as a convenience that could simplify payments and give Stripe bargaining power against card networks, but overall sentiment leans toward skepticism about its impact on market choice and pricing.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48915953" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pmbanugo.me/blog/why-async-await-complect-concurrency" target="_blank">The Tokio/Rayon Trap and Why Async/Await Fails Concurrency</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by LAC-Tech • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Async/await simplifies writing asynchronous code but masks structural complexity that harms production systems. It conflates asynchrony (waiting for I/O) with concurrency (handling multiple tasks), so CPU‑bound work inside an async function blocks the cooperative executor thread (e.g., Tokio, Node.js), causing latency spikes and under‑utilized hardware. Engineers must manually separate I/O and compute—using Tokio for I/O and a dedicated thread pool such as Rayon—then orchestrate message passing, which re‑introduces scheduling complexity the language feature intended to hide. Additionally, async runtimes allow unbounded task spawning; during load spikes this fills memory until the OS OOM‑kills the process. Work‑stealing schedulers, while aiming for fairness, degrade cache locality and throughput at scale. As an alternative, Project Tina proposes a thread‑per‑core, shared‑nothing model without async/await, futures, or promises. Work units (“isolates”) run synchronously on fixed OS threads, communicate via bounded mailboxes, and never migrate, providing deterministic scheduling, predictable load shedding, and support for deterministic simulation testing. Tina is open‑source on GitHub.
+          </div>
+          <a href="https://pmbanugo.me/blog/why-async-await-complect-concurrency" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The commentary is largely critical, describing the referenced approach as ineffective and overly complex. It argues that the Go example suffers from similar issues of hidden complexity, limited observability, and reliance on magic, while noting that JavaScript’s single‑threaded nature and Python’s GIL impose comparable constraints, making true parallelism and explicit synchronization unnecessary. The author suggests simple async techniques, such as periodic timeouts, as sufficient alternatives.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48929587" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.greg.technology/2026/07/14/llm-networking-with-mikrotik.html" target="_blank">LLM Networking with MikroTik</a>
+        </h2>
+        <span class="article-meta">
+          63 points • by gregsadetsky • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author describes using large language models (LLMs) to configure MikroTik networking equipment. Key practical points include: prefer the RouterOS REST/JSON API over SSH for LLM interaction; disable insecure services (non‑secure API port, www, telnet, FTP); back up the full configuration before and after changes, ideally under version control; use CAPsMAN to simplify multi‑AP Wi‑Fi setups; validate generated configs by consulting multiple LLMs and reach consensus; record SSIDs, passwords, and DHCP reservations before migrations; maintain a tested recovery run‑book and verify backups; apply changes incrementally and test after each step to catch hallucinations; configure NTP on all devices; give descriptive names to routers, switches, APs, and switch ports for easier management; keep RouterOS firmware uniform across devices to avoid syntax mismatches. For addressing issues such as overlapping 192.168.88.x subnets, the author recommends L2 “MAC‑Telnet” (or WinBox) to access devices when IP connectivity fails, and provides a Homebrew formula and a small CLI wrapper to make the tool LLM‑friendly.
+          </div>
+          <a href="https://blog.greg.technology/2026/07/14/llm-networking-with-mikrotik.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments highlight strong enthusiasm for applying LLMs to networking tasks, emphasizing gains in deployment speed, automation of routine steps, and the ability to process extensive telemetry for rapid triage. Users report successful configuration of Mikrotik and OpenWrt devices through LLM‑generated scripts, noting improved documentation and repeatability. There is interest in extending similar assistance to Ubiquiti and pfSense, while acknowledging that clear user intent remains crucial and that Mikrotik’s UI and version‑specific quirks can pose challenges. Overall sentiment is optimistic about AI‑driven network operations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48927915" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chemistry.berkeley.edu/news/meet-metal-organic-frameworks-chemistry%E2%80%99s-new-miracle-materials" target="_blank">Metal-Organic Frameworks, Chemistry&#39;s New Miracle Materials (2018)</a>
+        </h2>
+        <span class="article-meta">
+          44 points • by andsoitis • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Metal‑organic frameworks (MOFs) are ultra‑highly porous crystalline materials with the largest known internal surface areas; a gram can theoretically cover a football field when spread flat. Originating from reticular chemistry pioneered by Prof. Omar Yaghi (UC Berkeley/Lawrence Berkeley Lab), MOFs—including related covalent organic frameworks (COFs) and zeolitic imidazolate frameworks (ZIFs)—are constructed by linking metal clusters with organic linkers, creating robust, tunable pore structures. Yaghi’s group designed a zirconium‑adipic‑acid MOF that adsorbs water from arid air, releasing ~1.3 L per pound of powder every 12 h using solar‑driven cycles; the material is reusable and scalable from kilograms to tonnes for community‑level water provision. Since their inception ~20 years ago, ≈20 000 distinct MOFs have been reported, finding applications in carbon capture at coal‑power plants, pesticide delivery, and biodegradable drug carriers for chemotherapy. Yaghi’s contributions have earned the Wolf Prize in Chemistry (2018), the Albert Einstein World Award of Science (2017), and the King Faisal International Prize (2015), and he is a candidate for a Nobel Prize.
+          </div>
+          <a href="https://chemistry.berkeley.edu/news/meet-metal-organic-frameworks-chemistry%E2%80%99s-new-miracle-materials" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express strong enthusiasm for metal‑organic frameworks, highlighting their perceived catalytic efficiency, potential for methane conversion, and speculative uses in quantum computing and spintronics. Several users seek clarification on how the materials function and why the topic is being raised now, while a few compare MOFs unfavorably to zeolites. References to recent Nobel recognition add credibility, and a humorous tone appears alongside genuine curiosity, resulting in an overall optimistic yet inquisitive consensus with limited dissent.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48928313" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
