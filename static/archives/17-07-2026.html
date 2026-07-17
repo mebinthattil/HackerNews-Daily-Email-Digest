@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 17, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.kimi.com/blog/kimi-k3" target="_blank">Kimi K3: Open Frontier Intelligence</a>
+        </h2>
+        <span class="article-meta">
+          1277 points • by vincent_s • 120 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Kimi K3 is a 2.8‑trillion‑parameter open‑source model featuring Kimi Delta Attention, Attention Residuals, and a 1‑million‑token context window. It uses Stable LatentMoE with 16 active experts out of 896, Quantile Balancing routing, Per‑Head Muon, SiTU activation, and Gated MLA, enabling ~2.5× scaling efficiency over Kimi C2. The model achieves frontier‑level performance on internal coding and agentic benchmarks, often surpassing proprietary Claude Fable 5 and GPT 5.6 Sol, though it still trails them overall. Demonstrated capabilities include long‑horizon kernel optimization, autonomous development of MiniTriton (a Triton‑like compiler with MLIR IR and PTX codegen), procedural 3D game creation via Three.js/WebGPU, autonomous 45 nm chip design for a nano‑model, and end‑to‑end scientific workflows (e.g., reproducing astrophysics relations in hours). Knowledge‑work features include interactive research reports, financial visualizations, and multimodal video editing. Weights will be released July 27 2026; inference is recommended on ≥64‑accelerator supernodes with MXFP4/FP8 quantization and a custom vLLM prefix‑cache implementation. Availability spans Kimi.com, Kimi Work, Kimi Code, and the Kimi API (pricing $0.30/MTok input cache‑hit, $3.00 cache‑miss, $15.00 output). Limitations involve sensitivity to preserved thinking history and occasional over‑proactiveness.
+          </div>
+          <a href="https://www.kimi.com/blog/kimi-k3" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion centers on Kimi K3’s strong benchmark results and large parameter count, positioning it near top‑tier models such as Claude Fable and GPT‑5.6 while noting its higher cost and slower response times. Participants highlight both impressive capabilities—coding, chip design, and agentic tasks—and limitations, including inflexible settings, occasional tool‑calling failures, and uncertainty about open‑weight status. Opinions diverge on whether the pricing justifies the performance and on the model’s openness, but overall sentiment acknowledges K3 as a noteworthy, competitive contender with practical trade‑offs.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48935342" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/" target="_blank">Microsoft Comic Chat is now open source</a>
+        </h2>
+        <span class="article-meta">
+          581 points • by jervant • 59 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Microsoft has released the source code for Comic Chat, its 1996 IRC client that rendered chat messages as comic‑style panels with illustrated characters, speech bubbles, and expressive gestures. Originally built in Visual C++ 4.0 using MFC, the program parsed textual cues to select poses, facial expressions, and panel layouts, effectively performing real‑time editorial illustration. The project was conceived by David “DJ” Kurlander in Microsoft Research’s Virtual Worlds Group, with contributions from Tim Skelly, David Salesin (SIGGRAPH ’96 paper) and artist Jim Woodring. The open‑source release includes original snapshots and experimental updates that compile with modern Visual Studio, connect to current IRC servers, and run on high‑resolution Windows systems. By publishing the code, Microsoft aims to preserve a notable experiment in early online communication, provide a historical resource for developers and researchers, and invite community‑driven ports, enhancements, and new applications. The repository is available on GitHub.
+          </div>
+          <a href="https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey strong nostalgia and appreciation for Comic Chat, recalling its role in early internet and IRC experiences, its creative influence, and its educational use. Users celebrate the open‑source release, express interest in exploring the code, updating the client, and building new integrations such as Teams, Discord, or AI‑enhanced pipelines. Technical observations note legacy version‑control practices and potential rewrites in modern languages. A minority critique the AI‑generated prose in the announcement, but overall sentiment remains enthusiastic and supportive of further development.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48936426" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lmstudio.ai/blog/introducing-lm-studio-bionic" target="_blank">LM Studio Bionic: the AI agent for open models</a>
+        </h2>
+        <span class="article-meta">
+          181 points • by minimaxir • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            LM Studio Bionic is an AI agent designed for open‑source models, offering coding assistance, document handling, and voice interaction while prioritizing privacy and cost control. Key features include:  
+
+- **Local and cloud model execution**: Users can run models on‑device, connect via LM Link, or access frontier open models through LM Studio Secure Cloud, with zero data retention for cloud requests.  
+- **Offline voice transcription**: Integrated voice keyboard uses Mistral AI’s Voxtral multilingual model for real‑time, local transcription in any application.  
+- **Coding support**: Bionic can inspect, edit, debug, and search local codebases, presenting inline diffs; compatible with models such as GLM 5.2 and Kimi K2.7 Code.  
+- **Document productivity**: Handles PDFs, slides, spreadsheets, and other files in sandboxed work projects, offering organization, summarization, web‑search augmentation, automatic checkpoints, and in‑app previews.  
+- **Local model management**: Allows downloading and running LLMs directly via the LM Studio runtime.  
+
+The Bionic app is separate from LM Studio, requires an LM Studio account for cloud billing, and promises ongoing enhancements as open models advance.
+          </div>
+          <a href="https://lmstudio.ai/blog/introducing-lm-studio-bionic" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback is overall mixed, acknowledging that the tool functions well and feels familiar while delivering expected results, but highlighting several usability issues such as unclear directory labels, ambiguous loading status, lack of model pre‑loading and easy unloading, and unexpected folder creation. Concerns are raised about the closed‑source nature, data‑privacy assurances, and the shift toward enterprise‑focused business models, with additional interest in broader cloud‑API compatibility. The comments suggest appreciation for the core capability yet call for clearer UI cues, more flexible model management, and transparency regarding source and privacy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48939662" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.mixfont.com/experiments/decoy-font" target="_blank">Decoy Font</a>
+        </h2>
+        <span class="article-meta">
+          444 points • by ray__ • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Decoy Font is a TrueType font that encodes two different letters in the same glyph using spatial‑frequency separation: a low‑frequency blurred background forms the “hidden” message, while high‑frequency thin outlines convey a decoy text. When viewed up close, the outlines dominate and AI image‑to‑text models (e.g., ChatGPT, Gemini 3.5, GPT‑4) read the decoy; from a greater distance or when squinting, the low‑frequency mass reveals the intended message. The font implements the hybrid‑image principle demonstrated in optical‑illusion studies (e.g., Einstein/Marilyn Monroe composite). It can be installed like any TTF font, allowing typed text to carry concealed content without animation. Decoy Font is positioned among “anti‑AI fonts” that aim to hinder automated OCR and LLM scraping, though powerful models with advanced prompting may still recover the hidden text. The author suggests applications such as CAPTCHA, private messaging, and multilingual extensions, and invites further experimentation via a downloadable TTF file and an online playground.
+          </div>
+          <a href="https://www.mixfont.com/experiments/decoy-font" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights strong curiosity and appreciation for the visual trick, describing it as novel, artistic, and amusing, while repeatedly questioning its practical value. Participants note that current AI models can still decipher both messages, limiting its effectiveness as an anti‑AI measure, and raise concerns about accessibility for screen‑reader users. Technical ideas for enhancing or repurposing the technique appear alongside criticism of AI’s broader impact, resulting in a mixed view that balances enthusiasm for the gimmick with skepticism about real‑world usefulness.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48936584" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000t13l/executive" target="_blank">M 3.9 Experimental Explosion – 147 Km ENE of Ponce Inlet, Florida</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by hnburnsy • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is an Earthquake Event application that requires JavaScript to function. Users are instructed to enable JavaScript or use alternative options such as Real‑time Notifications, Feeds, and Web Services. Browser compatibility information is provided via a link to supported browsers.
+          </div>
+          <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000t13l/executive" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong criticism of naval testing activities, emphasizing concern that such exercises cause extensive harm to marine mammals. They allege that the U.S. Navy conducts these operations regularly to assess warship resilience, implying a disregard for environmental impact. The overall tone is negative, focusing on perceived cruelty toward wildlife and questioning the necessity and frequency of the tests. No supportive viewpoints are presented.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48942125" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6" target="_blank">$100 AI Music Video: Claude Fable 5 vs. GPT-5.6 Sol</a>
+        </h2>
+        <span class="article-meta">
+          166 points • by hershyb_ • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The experiment compared two frontier‑level language models—Claude Fable 5 and GPT‑5.6 Sol—in an autonomous music‑video generation task. Each model received the same inputs (the song “Uptown Funk,” a brief description, and a timestamped lyric transcript) and accessed six tools: a planning tool, web search, budget check, image/video generation (via FAL or Replicate), and a local ffmpeg shell for analysis and editing. Four runs were performed (each model at $25 and $100 budgets). Generation spend was $36.57 (Sol $100) and $48.60 (Fable $100); token costs added $3‑4 for Sol and $17‑25 for Fable. All runs produced full‑length videos; three used pure text‑to‑video, while Sol $25 employed an image‑to‑video pipeline and Sol $100 mixed three video models. Common shortcomings included inconsistent characters, literal lyric interpretation, weak tempo matching, and lack of iterative editing. Sol $25 showed the most inventive overlay effects; Fable $100 yielded slightly higher visual coherence but at higher total cost (~$73.65). Both models relied exclusively on FAL for generation. The open‑source arena (github.com/hershalb/music-video-arena) allows replication with custom songs and budgets.
+          </div>
+          <a href="https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that current AI‑generated music videos are technically impressive but artistically weak, often described as low‑quality, unsynchronised, and lacking coherent narrative or human feeling. Many criticize the practice as cheap, soulless mass‑production that undermines artistic effort, while a minority acknowledge useful niche roles such as style‑transfer, filtering, or rapid prototyping when combined with human editing. Optimism appears for future improvements and specialized applications, yet most participants doubt AI will replace skilled creators in high‑budget productions for now.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48939524" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ti.com/lit/eb/slyy228/slyy228.pdf?ts=1759892558029" target="_blank">An Engineer&#39;s Guide to USB Typе-С (2024)</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by gregsadetsky • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.ti.com/lit/eb/slyy228/slyy228.pdf?ts=1759892558029" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              None
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48862165" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pydantic.dev/articles/the-human-in-the-loop-is-tired" target="_blank">The Human-in-the-Loop Is Tired</a>
+        </h2>
+        <span class="article-meta">
+          55 points • by haritha1313 • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Developers using LLMs experience a paradox: higher output but increased mental fatigue from supervising and correcting generated code.  
+- The volume of AI‑produced pull requests forces rapid judgment calls, eroding the traditional “dopamine” rewards of problem‑solving and collaborative coding.  
+- Continuous prompting creates an “intensity trap”: more tasks can be started, but the brain‑bound review step limits completion, leading to longer work hours and isolation.  
+- The shift mirrors the 2009 transition to responsive design—core expertise remains valuable, but the focus moves from low‑level detail to system‑level judgment, architectural taste, and nuanced decision‑making.  
+- Effective LLM integration relies on deep domain knowledge; shallow‑skill areas yield plausible yet incorrect output.  
+- New practices are emerging: pre‑mortems with separate LLM sessions to expose plan gaps, and tools like AGENTS.md that encode past review rules for consistent LLM guidance.  
+- The bottleneck is now human attention and engineering judgment, making those capacities scarce and valuable despite the automation of code writing.
+          </div>
+          <a href="https://pydantic.dev/articles/the-human-in-the-loop-is-tired" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments reflect a split view on LLM‑assisted coding. Many note that automation reduces the small, satisfying rewards of manual programming, leading to fatigue, diminished enjoyment, and concerns about skill erosion, even as productivity rises. Others report positive experiences, emphasizing disciplined workflows—single‑session prompting, thorough planning, and iterative supervision—to retain control and mitigate burnout. The prevailing pattern acknowledges both efficiency gains and emotional costs, with suggestions that structured use and mindful engagement can balance productivity with sustained satisfaction.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48942000" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank">NotebookLM is now Gemini Notebook</a>
+        </h2>
+        <span class="article-meta">
+          266 points • by xnx • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - NotebookLM, launched at Google I/O 2023 as Project Tailwind, has been renamed Gemini Notebook.  
+- Over 30 million users and 600 000+ organizations currently use the tool for tasks such as creating interactive onboarding material and generating audio/video summaries from notes.  
+- Gemini Notebook remains a standalone research application but will now integrate more broadly across Google services, including the Gemini app and Google Search.  
+- An infrastructure upgrade is being rolled out: each notebook receives a secure cloud‑based compute instance, enabling native code execution for complex data analysis tied to source material.  
+- The cloud compute feature is initially available to Google AI Ultra users and Workspace business customers with AI Ultra or AI Expanded Access, with a staged rollout to all Pro users on the web in the coming weeks.  
+- The upgrade expands supported output formats and allows deeper analytical capabilities within notebooks.
+          </div>
+          <a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey mixed feelings about Google’s NotebookLM rebrand to Gemini Notebook. Users appreciate the tool’s ability to handle extensive context and support research workflows, but many express disappointment with the name change, fearing it signals reduced focus, added complexity, or eventual discontinuation. Criticism extends to Google’s audio capabilities, which are seen as inferior to alternatives like ChatGPT Live or Claude Voice. Comparisons with other AI notebooks highlight both functional gaps and occasional successes, while some users remain hopeful that the core functionality will persist despite branding shifts.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48936451" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/alxndrTL/little-book-rl/" target="_blank">The Little Book of Reinforcement Learning</a>
+        </h2>
+        <span class="article-meta">
+          74 points • by mustaphah • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The repository hosts the companion material for *The Little Book of Reinforcement Learning*, a concise introduction covering fundamentals to applied algorithms. It includes:
+
+- **algos/**: PyTorch implementations of the algorithms discussed in the book, ranging from Monte Carlo methods to Proximal Policy Optimization (PPO).
+- **supplementary/**: Detailed explanations and rigorous proofs for dynamic programming algorithms briefly presented in the main text; authored in 2021.
+- Ongoing additions are planned, and a printable version of the book is linked.
+- The book is released under a non‑commercial Creative Commons BY‑SA 4.0 license.
+          </div>
+          <a href="https://github.com/alxndrTL/little-book-rl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments critique the book for omitting information‑theoretic foundations such as trust‑region methods and the entropy‑based interpretation of rewards, arguing that real biological operant behavior involves more complex, multi‑factor influences than simple trial‑and‑error optimization. Nonetheless, readers acknowledge it as a useful preliminary overview for those interested in RLHF, noting its concise format and questioning whether its style mirrors classic guides like Strunk and White. Overall, the feedback balances disappointment over missing theory with appreciation for its introductory utility.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48941104" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
