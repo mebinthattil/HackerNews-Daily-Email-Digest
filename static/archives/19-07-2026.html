@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 19, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://workshop.cjpais.com/projects/transcribe-cpp" target="_blank">Transcribe.cpp</a>
+        </h2>
+        <span class="article-meta">
+          199 points • by sebjones • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            transcribe.cpp is a C/C++‑based ASR inference library built on ggml that targets cross‑platform, locally accelerated speech‑to‑text. It supports over 60 models across 16 transcription families, each numerically validated and word‑error‑rate (WER) tested against reference implementations. Performance is accelerated via Vulkan, Metal, CUDA, and TinyBLAS, with benchmark data provided for Ryzen 4750U (CPU + Vulkan) and Apple M4 Max. The library offers streaming and batch transcription, and functions as a near drop‑in replacement for whisper.cpp, retaining compatibility with existing .bin model files. First‑party language bindings are available for Python, JavaScript/TypeScript, Rust, and Objective‑C/Swift, with additional contributions welcome. Designed for easy embedding in the Handy application, transcribe.cpp aims to simplify local ASR deployment on macOS, Windows, and Linux, enabling real‑time transcription on low‑power devices (e.g., RK3566). Development is supported by Mozilla AI, ggml contributors, Modal, Blacksmith, and Hugging Face, with ongoing maintenance and community involvement.
+          </div>
+          <a href="https://workshop.cjpais.com/projects/transcribe-cpp" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong approval of the project’s functionality and performance, noting its usefulness for offline speech‑to‑text and potential integration into broader applications. Users highlight interest in additional features such as speaker separation, identification, and cross‑platform bindings, and compare it favorably to existing solutions while questioning backend speed differences. Several remarks discuss possible funding sources and sustainability, and many request demos or broader OS‑level support. Overall, the sentiment is enthusiastic, with consensus that the tool is valuable, technically solid, and worthy of further development and backing.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48963879" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/moonshine-ai/moonshine/tree/main/micro" target="_blank">Speech Recognition and TTS in less than 500kb</a>
+        </h2>
+        <span class="article-meta">
+          330 points • by petewarden • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Moonshine Micro is an open‑source AI toolkit for real‑time voice agents on embedded processors, demonstrated on the Raspberry Pi RP2350 (≈ $0.80). It integrates voice‑activity detection (VAD), command recognition (STT), and neural text‑to‑speech (TTS) that together occupy ~470 KB of SRAM on the RP2350’s 520 KB memory, sharing a ~384 KB TensorFlow Lite‑Micro arena. The flash footprint consists of .text and .rodata sections measured with arm‑none‑eabi‑size; .bss, heap and stacks comprise the SRAM usage. The system processes VAD, STT, and TTS sequentially, so RAM is not additive. Compute is expressed in MACs (multiply‑accumulate), with active‑stage performance in MMAC/s. All code, including the SpellingCNN and TinyVadCNN models, is released under the permissive MIT License, suitable for commercial use. The VAD, STT, and TTS libraries can operate independently, relying on the bundled TensorFlow Lite Micro library for neural inference, and an end‑to‑end example demonstrates voice‑controlled Wi‑Fi setup on the RP2350 MCU.
+          </div>
+          <a href="https://github.com/moonshine-ai/moonshine/tree/main/micro" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong enthusiasm for the tiny‑footprint neural TTS model, noting its potential to surpass traditional low‑memory synthesizers such as Flite and to enable on‑device or browser‑based deployment. Users highlight the clear documentation, ease of installation, and interest in benchmarking accuracy against alternatives like NanoTTS. Several participants discuss possible integrations with microcontroller platforms, ESPHome, and voice‑activity detection, while also asking about dataset availability and WebAssembly feasibility. Overall sentiment is positive, with a focus on practical applications and curiosity about performance metrics.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48911793" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/stupside/castor" target="_blank">Better and Cheaper Than IPTV</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by xonery • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Castor is a command‑line tool that extracts video streams from arbitrary web pages, transcodes them with ffmpeg, and casts the real‑time stream to any DLNA/UPnP MediaRenderer (e.g., Smart TVs, Kodi, VLC, Plex). It launches headless Chrome with randomized fingerprints and stealth scripts, monitors network traffic via the Chrome DevTools Protocol, solves simple Cloudflare Turnstiles, and selects the largest iframe to locate the video URL. Castor supports direct stream URLs, IMDB/TMDB IDs, and can burn auto‑generated subtitles using whisper.cpp.
+
+Installation options:
+- Native binary via Homebrew (`brew install --cask stupside/tap/castor`) requiring Chrome/Chromium, ffmpeg, ffprobe on PATH.
+- Docker image (`ghcr.io/stupside/castor`) that bundles dependencies; must run with `--network host` on a Linux host for LAN discovery.
+
+Configuration is a minimal `config.yaml` specifying the TV name and source proxies; optional TMDB API key enables an interactive TUI for browsing titles. Core commands include `castor scan`, `castor cast movie <imdb_id>`, `castor cast url <stream>`, and debugging flags. The tool does not host content and relies on user‑provided sources.
+          </div>
+          <a href="https://github.com/stupside/castor" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show mixed curiosity and uncertainty, with several users questioning the tool’s purpose—some suspecting piracy use—and asking whether bypassing Turnstile’s headless‑browser detection is genuinely simple. Technical concerns are raised about Docker on macOS failing to locate a TV and about casting compatibility with Roku devices. Others discuss the concept of a TV‑based interface, noting that a visual TV UI is not evident and expressing interest in how video could be sent to various screens. Overall, the tone is inquisitive and skeptical, seeking clarification on functionality and limitations.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48964015" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://amigafreeware.downer.tech/" target="_blank">Classic Amiga titles, free to download</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by doener • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Amiga Freeware Archive provides over 10 GB of classic Amiga software—games, applications, demos, graphics, music, and tools—from the 32‑bit home‑computer era. It aggregates public‑domain (PD) libraries, scene collections, user‑group disks, and disk‑magazine archives.
+
+**Key PD libraries**  
+- **17 Bit Software** (UK, 1987‑1997): a large catalog of freely distributable Amiga disks.  
+- **Fred Fish Disks** (USA, 1986‑1994): widely trusted pre‑Internet software collection.  
+- **Scope** (Texas): 175 numbered volumes.  
+- **Slipped Disk**: ≥20 volumes of games, utilities, demos.  
+- **USAA**: ≥23 volumes focused on utilities, source code, and occasional games.
+
+**Scene groups**  
+- **The Assassins** (UK): prolific PD games compilations.  
+- **LSD Compendium** demo group: three‑volume CD‑ROM series with thousands of demos, modules, graphics, and utilities.
+
+**User‑group series** include Miami A.M.I.G.O.S. (1990), Tampa Bay Amiga Group (1986‑), Amateur Radio User Group, New Zealand Amiga Users Group (1986‑1990, ≥29 disks), and Southern Nevada Amiga Group (1990, ≥14 disks).
+
+**Disk magazines**  
+- **JAM** (UK, 1991‑1995): 58 issues.
+          </div>
+          <a href="https://amigafreeware.downer.tech/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments praise Fred Fish’s Amiga disk collections as a significant, high‑quality contribution that shaped the community, while acknowledging the difficulty of replicating such effort today, especially without monetary incentive. Contributors express admiration for the archival value and personal nostalgia in revisiting early software, yet note challenges in locating specific titles, including obscure or unreleased demos. Overall, the discussion balances reverence for the original curatorial work with skepticism about its feasibility in the current landscape.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48962838" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.scientificamerican.com/article/mathematicians-still-dont-know-the-fastest-way-to-multiply-numbers/" target="_blank">Mathematicians still don&#39;t know the fastest way to multiply numbers</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by beardyw • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - The traditional school algorithm multiplies two n‑digit numbers with O(n²) single‑digit multiplications; its work grows quadratically with digit length.  
+- In 1960, Anatoly Karatsuba disproved the conjectured O(n²) lower bound by showing that three multiplications plus additions suffice for two halves of the numbers, yielding a recursive method with running time O(n¹·⁵⁸⁵). For example, multiplying two 1 000‑digit numbers drops from ~1 000 000 to < 57 000 elementary multiplications.  
+- Modern libraries (e.g., Python’s big‑int implementation) switch from the grade‑school method to Karatsuba once operands exceed ≈630 decimal digits (≈70 base‑2³⁰ digits).  
+- The quest for faster multiplication continued, culminating in 2019 with Harvey and van der Hoeven’s algorithm running in O(n log n) time, theoretically just above linear. Its advantage appears only for astronomically large inputs, classifying it as a “galactic algorithm.”  
+- Theoretical computer scientists now regard O(n log n) as the likely optimal asymptotic bound, though a formal proof remains open.
+          </div>
+          <a href="https://www.scientificamerican.com/article/mathematicians-still-dont-know-the-fastest-way-to-multiply-numbers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express mixed reactions, highlighting practical success with Strassen‑based CUDA kernels for structured matrices and noting performance advantages at larger sizes, while also criticizing the article’s presentation of the algorithm’s two‑digit illustration as unclear. There is enthusiasm for learning the derivation of the core identity and curiosity about potential optimality claims, alongside disappointment that the piece concludes abruptly without further development. Overall, the feedback balances technical appreciation, requests for clearer exposition, and a desire for more comprehensive coverage.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48895861" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://calculus.academa.ai/" target="_blank">LLM-Integrated Multivariable Calculus Course</a>
+        </h2>
+        <span class="article-meta">
+          7 points • by sinaatalay • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The lecture introduces foundational concepts of multivariable calculus. It begins with vector fundamentals, covering definitions, the dot product, vector projections, determinants, and the cross product. Geometric applications follow, describing equations of planes and lines and their visualizations. Parametric representations of curves are presented, leading to differential tools such as partial derivatives, tangent planes, and normal vectors for surfaces. The chain rule and directional derivatives are examined, emphasizing the gradient’s role in optimization. Techniques for locating maxima and minima, including Lagrange multipliers for constrained problems, are outlined. The session concludes with double integration, detailing integration over rectangular and general regions and illustrating practical applications of double integrals.
+          </div>
+          <a href="https://calculus.academa.ai/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              I’m unable to provide a summary because no comments were supplied to analyze.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48964585" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.benlandautaylor.com/p/if-you-build-it-they-will-come" target="_blank">If You Build It, They Will Come</a>
+        </h2>
+        <span class="article-meta">
+          317 points • by barry-cotter • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The author describes how joining new social groups is most effective by organizing events that align with the group’s core activity. Observations include: (1) demand for social events consistently exceeds supply; (2) creating or co‑hosting events accelerates relationship building compared with merely attending others’ gatherings; (3) many participants treat communities as passive, consumer‑oriented resources, assuming social opportunities arise automatically; (4) in reality, events require deliberate legwork, and leadership emerges from those willing to invest that effort; (5) organizers recognize and value peers who share this burden. The piece argues that social alienation stems partly from widespread free‑riding, where people consume community fabric without contributing to its creation. While broader societal solutions are unclear, individuals can mitigate the issue locally by actively supplying events and supporting others who do the same.
+          </div>
+          <a href="https://www.benlandautaylor.com/p/if-you-build-it-they-will-come" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that many people treat community institutions as passive consumables, leading to undervaluation and fragile social fabric. Contributors describe difficulty recruiting volunteers, the prevalence of free‑riders, and the generational erosion of grassroots organizations, while acknowledging the personal satisfaction and occasional risks of organizing events. Several note that successful gatherings require deliberate effort and marketing rather than assuming attendance will follow construction. References to works like Bowling Alone underline concerns about declining civic participation, yet some express optimism that dedicated volunteers can sustain meaningful social spaces.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48959090" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/" target="_blank">GPT-5.6 used a prompt to close a 30-year gap in convex optimization</a>
+        </h2>
+        <span class="article-meta">
+          521 points • by mbustamanter • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments display a mixed but cautiously optimistic view of AI‑assisted mathematical breakthroughs. Contributors acknowledge the significance of the recent result while stressing its unreviewed status and the extensive human‑driven prompt engineering behind it. There is broad agreement that AI can augment research, yet many emphasize that deep expertise and creative question‑forming remain human strengths. Concerns recur about job displacement, potential stratification of outcomes based on user knowledge, and dystopian implications, balanced by hopes for collaborative human‑AI workflows and broader practical benefits.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48957779" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://petapixel.com/2026/07/16/mayor-mamdani-says-landlords-cant-secretly-use-ai-images-to-advertise-properties/" target="_blank">Mayor Mamdani Says Landlords Can&#39;t Use AI Images to Advertise</a>
+        </h2>
+        <span class="article-meta">
+          318 points • by gnabgib • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Mayor Mamdani announced that landlords are prohibited from using AI‑generated images to market rental units without disclosure, emphasizing the need for transparent advertising to protect tenants from misleading visual representations. The statement underscores regulatory intent to curb deceptive practices in the housing market, requiring landlords to rely on authentic photographs or clearly label AI‑enhanced content.
+
+The accompanying page includes a collection of unrelated image captions, describing various visual elements such as a public speaking event with city officials, a split “Expectation vs. Reality” house comparison, lighting equipment, camera gear, smartphone branding, wildlife photography, and historical photographs. These alt‑text descriptions provide context for the images but do not contribute additional information about the mayor’s policy announcement.
+          </div>
+          <a href="https://petapixel.com/2026/07/16/mayor-mamdani-says-landlords-cant-secretly-use-ai-images-to-advertise-properties/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments converge on the view that AI‑enhanced property photos should be clearly labeled to prevent deception, with several noting that existing consumer‑protection laws already address false advertising. Many express frustration that disclosures are often small or ineffective, and some call for broader bans on AI‑generated images in advertising, gambling, dating and hiring. A minority supports the technology’s usefulness for visualizing spaces, provided it is disclosed, while others question the mayor’s authority to impose the rule and stress the need for enforceable consequences.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48962983" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.marciot.com/mac68k-visual-catalog/" target="_blank">A Visual Catalog of Retro Macintosh Software</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by zdw • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The site presents a visual catalog of retro Macintosh software icons. Users can hover over each icon to view its filename, country of origin, and associated media name, with links to the original media hosted on Macintosh Garden. Finder application and document icons are highlighted in green; hovering over these reveals their file type and creator codes. The interface emphasizes quick identification of classic Mac files through iconography and metadata.
+          </div>
+          <a href="https://www.marciot.com/mac68k-visual-catalog/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The feedback indicates a preference for displaying the most popular items at the top of the list, as the current pagination requires extensive scrolling and results in low recognition of entries. Even users with substantial prior experience using Classic Mac OS report difficulty identifying familiar items, recognizing only a small fraction after browsing many pages. Overall, there is a desire for a more efficient ordering that highlights commonly known content.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48877124" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
