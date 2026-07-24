@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 24, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jdan.github.io/98.css/#status-bar" target="_blank">98.css</a>
+        </h2>
+        <span class="article-meta">
+          321 points • by lopespm • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            98.css is a pure‑CSS design system that styles semantic HTML to mimic the Windows 98 desktop UI. It requires no JavaScript, making it framework‑agnostic; it can be loaded via CDN (e.g., unpkg) or installed with npm. The library provides styled components including:
+
+* **Button** – default size 75 × 23 px, raised borders, “default” class for primary actions, visual states for pressed, disabled, and focused.
+* **Checkbox** and **OptionButton** – require associated `<label>` elements; support `checked` and `disabled` attributes and consistent spacing via `.field‑row`.
+* **GroupBox** – implemented with `<fieldset>`/`<legend>` for framed control groups.
+* **TextBox** – single‑line `<input type="text">` or multiline `<textarea>`, optional `.field‑row‑stacked` for vertical label placement.
+* **Slider** – `<input type="range">` with optional `.has-box-indicator` and vertical orientation via `.is-vertical`.
+* **Dropdown**, **TreeView**, **Tabs**, **TableView**, **Progress Indicator**, and **Status Bar** – each rendered with standard HTML elements plus specific CSS classes (e.g., `.tree‑view`, `.progress‑indicator`, `.segmented`).
+
+Window structures combine `.window`, `.title‑bar`, `.window‑body`, and optional `.status‑bar`. Accessibility is emphasized through proper use of `aria-label` and label associations. The project is MIT‑licensed, with source, releases, and issue tracking on GitHub.
+          </div>
+          <a href="https://jdan.github.io/98.css/#status-bar" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express strong nostalgia for classic desktop interfaces, praising the project’s ability to recreate Windows 98‑style elements with pure CSS and noting its visual appeal, pixel‑accurate feel, and creative use of borders and shadows. Many highlight the desire for more faithful detail, such as proper button outlines, group boxes, and dropdowns, while also referencing similar retro CSS frameworks. Criticism centers on contemporary flat‑design trends, perceived unnecessary UI changes, and occasional functional quirks like inconsistent element spacing or unexpected widget behavior. Overall, sentiment balances admiration for the nostalgic effort with calls for greater precision.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49028927" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nealstephenson.substack.com/p/writing-by-hand-is-good-for-your" target="_blank">Writing by hand is good for your brain</a>
+        </h2>
+        <span class="article-meta">
+          1049 points • by dwwoelfel • 137 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://nealstephenson.substack.com/p/writing-by-hand-is-good-for-your" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments coalesce around the idea that actively marking up and writing by hand deepens engagement and improves recall, with many users citing personal habits, improved focus, and creative flow from notebooks, fountain pens, or simple pencils. At the same time, a substantial segment values digital alternatives—iPad screens, stylus accessories, and AI transcription—for their editability, searchability, and reduced physical fatigue, though some express concerns about reduced tactile feedback and ergonomic strain. Overall, participants acknowledge both the cognitive and practical benefits of analog and digital methods, emphasizing personal preference and context over a single “best” approach.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49022152" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://visual6502.org/JSSim/index.html" target="_blank">The Visual 6502</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by infiniteregrets • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The page is identified by the title “Visual 6502 in JavaScript,” indicating that it concerns a JavaScript‑based implementation of the Visual 6502 project. Visual 6502 is an interactive, visual simulator of the MOS 6502 microprocessor, originally created to illustrate the internal operation of the CPU cycle‑by‑cycle. By re‑creating it in JavaScript, the project enables the emulator to run directly in web browsers, providing real‑time visualizations of registers, memory accesses, instruction decoding, and bus activity without requiring native code. This approach makes the 6502 architecture accessible for education, debugging, and hobbyist experimentation, leveraging standard web technologies (HTML5 canvas or SVG) to render the CPU’s internal state dynamically as programs execute.
+          </div>
+          <a href="http://visual6502.org/JSSim/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comment highlights a gate‑level NES CPU/PPU emulator, noting its use as a benchmark and reporting performance around 4 Hz in advance mode with observed fluctuations between 22 Hz and 44 Hz, attributed to operating‑system power‑management or thermal throttling. It expresses interest in seeing an M‑series processor outperform the current results and references related 6502 simulators and archival resources. The author also wishes the showcased 6502 design were released as a physical circuit, indicating enthusiasm for both software emulation and hardware realization.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49029538" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Show HN: Echo – Fable-level results at 1/3 the cost using open-weight models</a>
+        </h2>
+        <span class="article-meta">
+          265 points • by adam_rida • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments show a mixed but generally skeptical reaction. Reviewers note the lack of public benchmarks, unclear model details, and sign‑up friction, questioning the claimed cost savings and practical value compared with existing routers and ensemble approaches. Several point out privacy and credit‑card concerns, while others acknowledge the underlying idea of dynamic model allocation as interesting yet familiar from prior mixture‑of‑experts work. A minority express cautious optimism about potential efficiency gains, but most request more transparency, performance data, and clearer differentiation from similar services.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49026810" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://reprodev.com/the-corporate-creep-of-plex-why-it-may-be-time-to-move-to-jellyfin-and-the-open-source-reality/" target="_blank">The Corporate Creep of Plex: Why it may be time to move to Jellyfin</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by reprodev • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Plex dominated home‑media streaming for a decade, offering self‑hosted organization and wide‑device support. Recent years show a strategic shift toward ad‑supported FAST channels and licensed studio content, pushing external media to the default home screen and introducing subscription friction such as Remote Watch Passes. Centralized authentication via Plex.tv creates outage risks and data‑collection concerns; Jellyfin authenticates locally, avoiding cloud dependence. Plex has improved features like mobile sync but removed others (e.g., Watch Together) while emphasizing discoverability and social feeds. Jellyfin, a fully open‑source fork of Emby, provides local accounts, zero tracking, and free GPU transcoding, but its client ecosystem is fragmented across volunteer projects. In July 2026 Jellyfin faced a leadership exodus, highlighting open‑source maintainer burnout and AI‑generated PR overload. Plex’s pricing escalated from a $75‑$90 lifetime pass (pre‑2021 sales) to $749.99 in July 2026, adding a $249.99 five‑year tier and $6.99 monthly option. The author recommends Jellyfin for new self‑hosters seeking full control, while retaining Plex for existing users who value its mature client support and features.
+          </div>
+          <a href="https://reprodev.com/the-corporate-creep-of-plex-why-it-may-be-time-to-move-to-jellyfin-and-the-open-source-reality/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments convey a generally favorable view of Jellyfin, highlighting its reliability, compatibility with advanced audio setups, and smooth operation over multiple years, while noting strengths such as the mpv shim and open‑source flexibility. Critics view Plex’s reliance on pirated content as unsustainable and favor open‑source alternatives. Common concerns include limited TV client support for Samsung devices and the absence of built-in library sharing, prompting interest in dual‑running both services during transition. Overall, Jellyfin is seen as a viable, well‑functioning replacement for Plex or Emby.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49030547" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://glinscott.github.io/beam-engine/" target="_blank">The Beam Engine</a>
+        </h2>
+        <span class="article-meta">
+          202 points • by glinscott • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The guide explains the operation of a beam engine from basic steam principles to full‑scale mill power. Water heated in a boiler generates steam that expands ~1,700 × its liquid volume; the resulting pressure pushes a piston whose force equals steam pressure times piston area. Early engines, limited by weak low‑pressure boilers, created a vacuum by condensing steam, allowing atmospheric pressure to drive the piston downward (Newcomen’s engine). Watt improved efficiency by adding a separate cold condenser, keeping the cylinder hot and reducing coal use by two‑thirds, and by making the engine double‑acting so steam acted on both piston strokes. A slide valve, driven by an eccentric, timed steam admission and exhaust. Reciprocating motion was converted to rotation via a crank and flywheel; the parallel‑motion linkage kept the piston’s motion linear. A small pump fed the boiler continuously. A centrifugal governor automatically regulated steam flow to maintain constant speed. Subsequent advances—higher‑pressure boilers, compound expansion, Corliss valves, and turbines—raised thermal efficiency from <1 % (Newcomen) to >40 % in modern plants.
+          </div>
+          <a href="https://glinscott.github.io/beam-engine/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion highlights strong enthusiasm for steam‑engine engineering, praising the interactive article’s clear explanations and visualizations while noting a few animation errors. Participants share resources on model engines, recommend related videos and books, and explain terminology such as “balls out” from centrifugal governors. Historical context, including early steam devices and Watt’s innovations, is appreciated, and many express personal connections to the subject through hobby projects or family experiences. Overall sentiment is positive, focused on learning, sharing knowledge, and celebrating the technology’s legacy.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49007221" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.politico.com/news/2026/07/22/startup-founders-urge-trump-not-to-shut-off-chinese-open-weight-ai-01008992" target="_blank">Startup founders urge U.S. government not to shut off Chinese open weight AI</a>
+        </h2>
+        <span class="article-meta">
+          777 points • by theanonymousone • 87 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            None
+          </div>
+          <a href="https://www.politico.com/news/2026/07/22/startup-founders-urge-trump-not-to-shut-off-chinese-open-weight-ai-01008992" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments largely view a ban on Chinese open‑weight models as ineffective, protectionist, and harmful to U.S. innovation. Contributors argue enforcement would be impractical, would not stop access, and would favor incumbent American firms while stifling startups that need affordable alternatives. Many cite concerns about intellectual‑property arguments and question the policy’s rationale, suggesting it serves narrow financial interests rather than national security. The prevailing perspective favors open‑weight models as a public good that promotes competition and warns that restrictive measures could weaken the U.S. AI ecosystem.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49023016" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stephenfollows.com/p/what-just-happened-to-thenumberscom-should-worry-us-all" target="_blank">What happened to TheNumbers.com</a>
+        </h2>
+        <span class="article-meta">
+          314 points • by nickthegreek • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            The Numbers, a long‑standing, free database of box‑office, budget and personnel data for ≈78 000 films, went offline on 5 Mar 2026 after its servers were overwhelmed by AI‑generated traffic. Founder Bruce Nash explained that human visits now represent only ~10 % of requests; the rest come from search‑engine crawlers, large‑scale LLM‑training scrapers, and “agentic” AI bots that repeatedly scrape pages and probe for back‑doors. The surge in automated traffic in 2024–2025 forced the team to spend ~90 % of their effort on keeping the legacy site (≈160 000 files) alive, ultimately abandoning the old code and launching a skeletal version on new infrastructure on 13 Mar.
+
+The incident illustrates a broader trend: AI tools have lowered the barrier to massive web‑scraping and cyber‑intrusion, causing DDoS‑like loads on sites such as Read the Docs, iFixit, GNOME and Wikipedia. Reports from Anthropic and the emergence of AI‑driven penetration testers confirm that sophisticated attacks can now be executed with minimal human input. Cloudflare’s recent pay‑per‑crawl/pay‑per‑use policies aim to monetize AI access, but the fundamental assumption that most traffic is human is now obsolete. The Numbers’ core revenue—bulk data sales and reporting—remained intact, highlighting the vulnerability of public‑facing sites that rely on legacy architectures in an AI‑intensive web ecosystem.
+          </div>
+          <a href="https://stephenfollows.com/p/what-just-happened-to-thenumberscom-should-worry-us-all" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              Comments express frustration that extensive bot scraping drove up hosting costs and forced a public data site offline, while also questioning the extent to which AI models are responsible. Many suggest technical mitigations such as static‑site generation, bot‑aware CDNs, robots.txt blocks, rate‑limiting, or charging for access, and some argue that open‑web resources are increasingly vulnerable to exploitation and may need paywalls. Others criticize the perceived entitlement of users expecting free, unlimited data and view the incident as a broader symptom of inadequate web‑scale infrastructure and security practices.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49024691" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://en.wikipedia.org/wiki/Freeze-casting" target="_blank">Freeze-Casting</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by soupspaces • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            - Freeze‑casting originated in 1954 (Maxwell et al.) for dense ceramics; modern porous‑structure use began with Fukasawa et al. (2001) and has expanded to hundreds of papers.  
+- A suspension (typically water‑based) is frozen; ice crystals template the pore network, then sublimated, leaving a green ceramic preform.  
+- Three solidification regimes: planar front (no macroporosity, < 1 µm s⁻¹), lamellar/cellular templating (targeted porous structures), and particle engulfment (high velocities, large particles, high solid loading). Critical engulfment velocity \(v_c\propto 1/R\) depends on interfacial energies, film thickness, viscosity, and particle size.  
+- Freeze‑cast microstructures exhibit three zones: Initial Zone (no macropores), Transition Zone (mixed crystal orientations, r‑crystals → z‑crystals), and Steady‑State Zone (aligned lamellae). Pore wavelength \(\lambda =A v^{-n}\) links solidification speed to wall‑pore size.  
+- Pore size and shape are tuned via solidification velocity, solids loading, additives (e.g., NaCl, glycerol), and static vs. dynamic temperature gradients; dynamic profiles can maintain constant \(v\) and uniform pore thickness.  
+- Mechanical response follows anisotropic cellular‑solid models: Young’s modulus scales with relative density squared, compressive strength with relative density, and failure is governed by lamella buckling.  
+- Applications exploit aligned porosity for biomedical scaffolds, thermal insulation, high‑performance wicks in loop heat pipes, and porous metal foams for chemical‑loop combustion and steam‑iron hydrogen production.
+          </div>
+          <a href="https://en.wikipedia.org/wiki/Freeze-casting" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The discussion views the described method as an appealing option for hobbyists seeking one‑off metal parts, noting that traditional casting can be cumbersome. An alternative approach using metal‑powder‑infused filament is mentioned as a comparable technique that avoids the slurry‑freezing step. Participants express uncertainty about repeated references to “slurry,” questioning whether it is meaningfully distinct from “suspension” or “solution.” Overall, the tone is cautiously positive with a focus on clarifying terminology.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=48973071" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md" target="_blank">Why Software Factories Fail (or: harness engineering is not enough)</a>
+        </h2>
+        <span class="article-meta">
+          216 points • by dhorthy • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            Software factories that rely on AI coding agents promise speed but often degrade code quality. Early hype (e.g., StrongDM “lights‑off” factory, OpenAI’s Symphony) suggests humans can be removed from code review, yet real‑world data show rising pull‑request comments, incidents, and bugs per developer. The bottleneck shifts from implementation to review; automated linters and adversarial review cannot replace human oversight of maintainability. Models excel at one‑off tasks but struggle to preserve long‑term code health because benchmarks focus on test‑pass rates, not architectural soundness. Reinforcement learning within the tool harness (e.g., Claude Code) improves tool use, but without penalties for design erosion models still produce “slop”—over‑use of try/catch, weak type handling, and fragile patches. Consequently, fully “lights‑off” factories fail: hidden defects force engineers back into the codebase, causing downtime and rewrites. Sustainable AI‑assisted development requires human steering, robust testing pipelines, and new benchmarks that measure maintainability, not just test success.
+          </div>
+          <a href="https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              The comments express a mixed view of AI‑driven software factories. Contributors acknowledge that generators can automate refactoring, testing and simple feature work, but they stress that intent, architectural coherence, maintainability and domain knowledge remain human responsibilities. Many note the absence of reliable feedback loops for subjective quality, the continued need to read and understand code, and the importance of disciplined engineering practices. Tooling UX for pull‑request review is seen as poor, while experimental projects and open‑source efforts are regarded as useful but still early and requiring further validation.
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49023019" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
