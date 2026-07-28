@@ -1,0 +1,553 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 28, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/news/position-open-weights-models" target="_blank">Our position on open-weights models</a>
+        </h2>
+        <span class="article-meta">
+          710 points • by surprisetalk • 296 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Anthropic does not support banning open‑weights AI models. It views non‑dangerous open‑weights models as a public good that benefits businesses, developers, and researchers. The company’s primary security concerns are: (1) authoritarian regimes, especially China, developing more powerful models for military superiority or repression, and (2) powerful models being misused for cyber or biological attacks due to alignment issues. Open‑weights models raise risk because they cannot be withdrawn, but banning their use by U.S. firms would not mitigate these threats. Anthropic proposes three measures: (a) prohibit sales of advanced chips and related equipment to China and curb smuggling, limiting China’s ability to train large models; (b) restrict large‑scale model distillation operations that allow efficient capability gains despite chip limits; and (c) require mandatory safety testing of all sufficiently capable models—open or closed—to assess cyber, biological, and alignment risks before release. The company endorses targeted legal frameworks over blanket bans and calls for global cooperation on safety testing.</p>
+          </div>
+          <a href="https://www.anthropic.com/news/position-open-weights-models" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on Anthropic’s proposed restrictions—chip bans, limits on distillation, and mandatory safety testing—and how they intersect with the company’s commercial interests. Many participants view these measures as self‑serving regulatory capture that protects Anthropic’s market position and question the sincerity of its safety claims. Others acknowledge genuine risks from powerful open‑weight models, especially regarding misuse by state actors, bioweapon or cyber threats, and call for transparent, enforceable testing regimes. A recurring theme is the tension between openness as a public good and the difficulty of preventing dangerous applications, with overall sentiment leaning toward skepticism of Anthropic’s motives while recognizing the need for robust safety oversight.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49076057" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://matthewsaltz.com/blog/using-an-open-model-feels-surprisingly-good/" target="_blank">Using an open model feels surprisingly good</a>
+        </h2>
+        <span class="article-meta">
+          186 points • by msaltz • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author, after two years using Claude and ChatGPT, set up an open‑source model via Opencode on a personal inference endpoint hosted on Modal. The motivation was a lack of suitable Claude/ChatGPT plan for a side project, prompting a trial of Modal’s newly launched Kimi K3 managed endpoint. Within five minutes the author connected Opencode to the Modal endpoint and observed immediate functionality. The experience is described as giving direct ownership of the model, with data flowing solely between the laptop and the user‑controlled endpoint, eliminating reliance on external providers. This perceived autonomy and simplicity are highlighted as the primary benefits of running an open model locally rather than through proprietary APIs.</p>
+          </div>
+          <a href="https://matthewsaltz.com/blog/using-an-open-model-feels-surprisingly-good/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments compare closed‑source tools like Claude Code with open‑source alternatives, noting that Claude excels at generating large codebases from vague prompts while smaller models perform better on targeted, iterative tasks. Users praise DeepSeek V4 Flash, GLM 5.2 and fast “nimble” models for tool‑calling and interactive coding loops, but express concerns about cost, privacy and the lack of transparent pricing metrics. There is also criticism of overly promotional posts and a broader observation that the community is shifting from DIY setups toward paid services despite a desire for self‑hosted, low‑overhead solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49078583" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fermisense.com/when-machines-take-the-wheel/" target="_blank">A $500 RL fine-tune of a 9B open model beat frontier models on catalog review</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by ilreb • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article outlines a repeatable “ownership” playbook: start with an open‑source LLM, fine‑tune it on proprietary task‑specific labels, then apply reinforcement learning using a rubric‑scored workflow. Three real‑world deployments illustrate the approach:</p>
+<ul>
+<li><strong>Bridgewater Associates</strong> trained an open‑source model on internal analyst labels, achieving ~30 % fewer mistakes than the best frontier model while cutting inference costs dramatically.  </li>
+<li><strong>Harvey</strong> applied RL to an open‑weight model for long‑horizon legal tasks (due‑diligence, memo drafting); the resulting agent outperformed GPT‑5.5 and Claude Opus 4.8 on internal rubrics.  </li>
+<li><strong>Intercom</strong> post‑trained a vertical support model (Fin Apex) on billions of service interactions, resolving more tickets than frontier alternatives at a fraction of per‑call pricing.</li>
+</ul>
+<p>A cost‑quality scatter plot shows a fine‑tuned 9B‑parameter model delivering 87 % quality at ≈ $0.50 per 1k listings, versus frontier models costing $19–$172 per 1k for 70–76 % quality. The workflow diagram emphasizes on‑premise inference, tool integration, rubric scoring, and reward updates. An appendix lists eight additional deployments with similar training and performance gains.</p>
+          </div>
+          <a href="https://fermisense.com/when-machines-take-the-wheel/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall sentiment is skeptical about the dominance of large proprietary models, emphasizing cost constraints and arguing that open‑weight smaller models, fine‑tuning, or retrieval‑augmented generation can match or exceed frontier performance. There is doubt about reported accuracy gains and concern that the industry’s economic model is unsustainable. The discussion also notes possible capability gaps, uncertainty about benchmark relevance, and a preference for pragmatic tool‑calling and search‑based approaches.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49078454" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.fermionresearch.com/models/neutrino-8b/" target="_blank">Neutrino-1 8B</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by handfuloflight • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “Neutrino‑1 8B · Fermion Research” presents visual material related to a neutrino study. Two images are included, each with descriptive alt text: the first shows an “amber cellular orbit gathering around a compact central form,” suggesting a structured, possibly particle‑like configuration; the second depicts a “honey‑toned filament carrying energy across a tactile surface,” implying a conduit or field representation. No additional narrative, data, or technical exposition accompanies the images, so the content consists solely of these visual descriptors within the context of fermion (neutrino) research.</p>
+          </div>
+          <a href="https://www.fermionresearch.com/models/neutrino-8b/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight a growing focus on converting existing large language models to compressed ternary formats, noting that many labs claim proprietary approaches while referencing publicly available research such as BitNet and HuggingFace’s gradual 1.58‑bit fine‑tuning. Observers question how much of the reported performance derives from novel techniques versus adaptation of known methods, and point to Ternary‑Bonsai‑8B’s superior results as evidence that claimed “special sauce” may be minimal. Overall sentiment is cautious curiosity about the true cost and originality of these conversions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49079490" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thedecisionlab.com/biases/the-illusion-of-explanatory-depth" target="_blank">Why do we think we understand the world more than we actually do?</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by rramadass • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article describes the “illusion of explanatory depth,” a cognitive bias where people overestimate how well they can explain familiar objects or systems. When prompted to articulate a detailed mechanism—exemplified by trying to describe a toilet to an alien—individuals realize their knowledge is shallow despite a prior sense of mastery. The illusion consists of two components: (1) the belief that one can provide a clear, detailed explanation, and (2) the assumption that the explanation will be sufficiently thorough. Empirical findings show this bias appears early in development, with kindergarten children already overrating their explanatory knowledge, and it is stronger for explanatory understanding than for factual, procedural, or narrative knowledge. The bias disappears only when people acknowledge complete ignorance about a topic.</p>
+          </div>
+          <a href="https://thedecisionlab.com/biases/the-illusion-of-explanatory-depth" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The piece reflects a mixed appreciation for curiosity and a concern about human overconfidence in understanding. It celebrates exploratory learning with children while noting that people often mistake shallow explanations for genuine knowledge, leading to misjudgments and reliance on outdated mental models. The author emphasizes the importance of predictive capability over mere explanation, critiques fields with limited predictive power, and highlights memory decay, bias, and popular fads that reinforce superficial grasp of complex topics. The overall tone is reflective and critical of assumed expertise.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49079175" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-opus-5-on-slop-code-bench.md" target="_blank">Benchmarking Opus 5 on SlopCodeBench</a>
+        </h2>
+        <span class="article-meta">
+          219 points • by dhorthy • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>SlopCodeBench, a March 2026 long‑horizon coding benchmark from G. Orlanski’s UW‑Madison lab, evaluates models on incremental “checkpoints” where the full spec is hidden until each step. In the original paper GPT‑5.4 and Opus 4.6 achieved 11 % and 17 % strict‑pass rates. The author tested three Claude models—Opus 4.8, Sonnet 5, and Opus 5—on a subset comprising three problems (circuit_eval 8 ck, database_migration 5 ck, dynamic_config_service_api 4 ck, 17 checkpoints total) using a fresh context window per checkpoint and a strict‑pass metric (all new and regression tests must pass). Opus 5 obtained 4 strict passes (24 %): the first three checkpoints of circuit_eval and checkpoint 1 of database_migration; Opus 4.8 and Sonnet 5 each achieved 1 strict pass (6 %). No model completed any challenge fully.</p>
+<p>Opus 5 wrote ~29 k source lines (≈5× more than the others) and 5× more functions, but only 14.9 % were single‑use (vs 49.1 % and 71.5 %). All models’ code triggered the benchmark’s “slop” rules (Opus 5 93 %). Complexity rose for every model; Opus 5 had the lowest mean cyclomatic complexity, while Opus 4.8’s complexity increased ~70 % and reached a max of 93. Duplication grew for Opus 4.8 (4.6 %→16.8 %) but remained flat for Opus 5. Higher monetary cost did not translate into proportionally higher correctness. The author views SlopCodeBench as an unsaturated, repeatable signal of code‑base maintainability and suggests extensions such as language‑porting of metrics, quality‑feedback loops, and evaluating smaller models on later checkpoints.</p>
+          </div>
+          <a href="https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-opus-5-on-slop-code-bench.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reactions to the new benchmark and Opus 5. Users appreciate that Opus 5 reduces token usage and runs faster, but many view its performance as only a modest gain over previous versions and criticize its tendency to produce verbose or sloppy code, especially during refactoring. Several participants call for clearer, unified benchmarking standards, inclusion of additional models such as Fable or GPT 5.6, and better system‑prompt or harness designs to mitigate code‑base degradation. Overall, there is interest in detailed results and in addressing longitudinal maintainability concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49076391" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arsastronomica.com/" target="_blank">Ars Astronomica – English translations of rare Hebrew and Latin astronomy texts</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by sweisman • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>ArsAstronomica is a scholarly imprint delivering the first English translations of historical Hebrew and Latin astronomical, cosmological, and natural‑philosophy texts, many of which have never before appeared in English. The project curates a corpus that now includes works such as Gersonides’ <em>Milchamot HaShem</em>, Hurwitz’s <em>Sefer HaBrit HaShalem</em>, Gans’s <em>Tzemach David</em>, and several medieval treatises by ibn al‑Ahdab, ibn Tibbon, Jacob ben Samson, and Comtino, alongside earlier works like <em>Cheshbon Mahalechot ha‑Kochavim</em>. Translations are produced via an AI‑assisted, multi‑stage pipeline (v2) that preserves original technical vocabulary, numerical data, and mathematical tables, adding glosses for key terms and inline editorial markings for corrections or uncertainties. PDFs are text‑only; original diagrams are replaced by detailed structured descriptions, with illustrated editions offered on request. All source texts are public‑domain; translations are © Scott Weisman under CC‑BY‑NC‑ND 4.0. Acknowledgments note assistance from Claude and the Anthropic team.</p>
+          </div>
+          <a href="https://arsastronomica.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>No comments were provided, so there is no content to summarize.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49079727" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gpusolutions.net/rbservices/graphics-card-upgrade/" target="_blank">RTX 2080 Ti Memory Upgrade to 22 GB</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by wslh • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The service upgrades an RTX 2080 Ti (TU102) graphics card by replacing its original 1 GB GDDR6 modules with 2 GB high‑density GDDR6 parts, increasing total VRAM to 22 GB. The upgrade includes removal of stock memory, BGA rework, VBIOS configuration for full VRAM detection, thermal pad and paste replacement, and comprehensive stability testing (Furmark, 3DMark, real‑world stress tests). Compatibility is limited to RTX 2080 Ti cards with suitable PCB layouts; BIOS modifications are required, and cards with severe corrosion, burnt PCBs, or prior improper repairs may be excluded. Cost varies based on part availability; replacement parts are quoted separately, and a Diagnostics/No‑Fix fee applies if the upgrade cannot be completed. Turnaround time is 12 days, subject to queue length. Workmanship and replaced memory are covered by a 90‑day warranty, excluding unrelated faults or later modifications. Pickup/delivery is available for AED 50.</p>
+          </div>
+          <a href="https://gpusolutions.net/rbservices/graphics-card-upgrade/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism about upgrading the 2080 Ti, highlighting that the upgrade service is on hold due to high memory module costs and questioning the legitimacy of the UAE‑based company offering it. Several points favor purchasing a newer, higher‑capacity GPU (e.g., 3090, 4090, 5090) over a memory upgrade, noting better performance and cost‑effectiveness. There is interest in DIY upgrade instructions and benchmark data, but overall the consensus deems the upgrade financially unattractive and potentially risky compared to acquiring a newer card.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49041256" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jacob.gold/posts/residential-proxies-are-a-national-security-threat/" target="_blank">Residential Proxies Are a National Security Threat</a>
+        </h2>
+        <span class="article-meta">
+          64 points • by joshbetz • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Residential proxies route traffic through genuine home internet connections, making it appear as ordinary user activity. They typically arise unintentionally via free VPN apps that resell bandwidth, embedded proxy SDKs in free games, or malware on computers, routers, or smart TVs (e.g., LG’s smart‑TV apps, where 42 % could covertly act as proxies). Because blocking US residential IP ranges would also affect legitimate users, online services struggle to mitigate abuse originating from these addresses. Threat‑intelligence firms catalogue such IPs for profit, creating a conflict of interest that hinders broader remediation. The author argues that US authorities, likely the NSA, should target residential‑proxy networks as a national‑security risk, citing risks of citizen data loss, audio/video‑capturing malware, platforms for foreign influence operations, and botnet‑enabled hacking or DDoS attacks. Recommendations include ISPs (e.g., Comcast, AT&amp;T) monitoring anomalous traffic on customer IPs and notifying users to remove compromised software. The issue is global, not limited to the United States.</p>
+          </div>
+          <a href="https://jacob.gold/posts/residential-proxies-are-a-national-security-threat/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a split view: many argue residential and mobile proxies are ordinary tools for legitimate data access, consent‑based use, and not a genuine national‑security danger, emphasizing that existing threats such as botnets, malware, and IoT device compromises pose greater risks. Others highlight security gaps—poor user protection, opaque firmware, and CGNAT‑enabled anonymity—that can be exploited, urging better safeguards and transparency. A recurring theme is concern that overbroad regulation could hinder legitimate computing while failing to address the broader systemic vulnerabilities underlying proxy misuse.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49078266" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theconsensus.dev/p/2026/07/19/observing-gos-garbage-collector-old-and-new.html" target="_blank">Watching Go&#39;s new garbage collector move through the heap</a>
+        </h2>
+        <span class="article-meta">
+          194 points • by matheusmoreira • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://theconsensus.dev/p/2026/07/19/observing-gos-garbage-collector-old-and-new.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects curiosity about manual object compaction in Go and how the runtime avoids failures when the heap becomes fragmented, citing an optimization that copies objects to new slices to aid garbage collection. Participants reference related material on C# and Swift GC approaches and question the practicality and expense of achieving a pause‑less collector. Overall tone is inquisitive, with a mild critique that the source material ends abruptly, but the focus remains on technical aspects of memory management and GC strategies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49045474" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
