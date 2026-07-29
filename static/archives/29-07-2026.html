@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 29, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank">More Tailscale tricks for your jailbroken Kindle</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by Error6571 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The community‑maintained Tailscale build for jail‑broken Kindles now adds three capabilities:</p>
+<ul>
+<li><strong>SSH enabled by default</strong> – the Kindle’s Tailscale daemon starts with SSH access, removing the need for the separate USB‑networking SSH setup and its default credentials.  </li>
+<li><strong>Proxy mode</strong> – a daemon listening on 127.0.0.1:1055 (SOCKS5) or 127.0.0.1:1056 (HTTP CONNECT) forwards traffic from apps such as KOReader through the tailnet, allowing them to reach other Tailscale nodes (e.g., Calibre, OPDS, Wallabag servers) despite the Kindle running in userspace.  </li>
+<li><strong>Full TUN mode</strong> – on supported models the daemon can operate in kernel TUN mode, enabling device‑wide routing of all inbound and outbound traffic over the tailnet.</li>
+</ul>
+<p>Setup is handled via the KUAL app (greywolf1499) which lets users select “Standard (Userspace),” “Proxy Mode,” or “Kernel TUN.” A KOReader plugin automates proxy creation; after installing the plugin, copying a Tailscale key, and toggling Tailscale on, the user configures KOReader to use the local proxy ports. The plugin is reported to work on Kindle PW5/PW6, Kobo, and PocketBook, and integrates with SyncThing for content sync.</p>
+          </div>
+          <a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights concerns about Tailscale’s collection of connection metadata on Kindle devices, recommending the addition of a no‑logs option to limit data gathering while acknowledging encryption protects content. It also expresses interest in finding e‑reader‑compatible RSS feeds, mentioning long‑read sources as examples. Additionally, a brief remark notes the original post’s readability issues. Overall, the sentiment combines caution about privacy implications with a request for practical feed recommendations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49093569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.datagubbe.se/scenegui/" target="_blank">User Interfaces of the Demo Scene</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by zdw • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.datagubbe.se/scenegui/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express nostalgic interest in early demoscene terminology and hardware, noting the European linguistic roots of “sinus” versus “sine” and recalling quirky C64 menu interfaces that required precise control. There is curiosity about how performance considerations intersect with developer productivity, alongside appreciation for detailed information about trackers that supports ongoing chiptune projects. Overall, the tone is positive and inquisitive, emphasizing historical reflection, technical curiosity, and a desire for practical guidance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49093434" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/codex-security" target="_blank">Codex Security</a>
+        </h2>
+        <span class="article-meta">
+          450 points • by bakigul • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>openai/codex-security provides a CLI and TypeScript SDK for detecting, validating, and remediating security vulnerabilities in codebases. It supports repository scanning, change review, finding tracking, and CI integration. Requirements are Node.js ≥ 22, Python ≥ 3.10, and access to Codex Security. Installation uses <code>npm install @openai/codex-security</code>; authentication can be performed via <code>npx codex-security login</code> or by setting the <code>OPENAI_API_KEY</code> environment variable for non‑interactive runs. When both a ChatGPT sign‑in and an API key exist, interactive scans prompt for credential choice; CI scans default to the API key unless overridden with <code>--auth chatgpt</code> or <code>--auth api-key</code>. Scan history is stored in a workbench state directory, configurable via <code>CODEX_SECURITY_STATE_DIR</code>. The SDK example shows creating a <code>CodexSecurity</code> instance, running a scan on the current directory, retrieving the report path, and closing the client. Detailed installation, authentication, scan options, and CI setup are documented in the official repository.</p>
+          </div>
+          <a href="https://github.com/openai/codex-security" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show cautious enthusiasm for the open‑sourced Codex Security CLI, noting its novelty and potential for security‑focused workflows. Users commonly report long scan times, high token consumption, and abrupt interruptions that strain usage limits, prompting calls for clearer progress indicators and budget controls. Privacy and trust concerns arise around code transmission to the cloud, while questions focus on false‑positive handling, language support, and how the tool differs from simple prompts or existing solutions. Overall, interest is balanced by practical reservations about performance, cost, and security implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49089755" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://learnvector.ai/" target="_blank">LearnVector – Andrew Ng&#39;s AI company building one‑to‑one learning experiences</a>
+        </h2>
+        <span class="article-meta">
+          132 points • by ajhai • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LearnVector, founded by Andrew Ng, aims to transform education from a one‑to‑many model to a personalized one‑to‑one approach using AI. The company will develop adaptive learning guides that plan individualized paths, adjust to each learner’s style, and provide sustained support until skill mastery. LearnVector emphasizes that effective learning requires trustworthy, accurate content; therefore, it will partner with Coursera— which has invested in the startup—and collaborate with Udemy to leverage Coursera’s vetted library of authoritative materials. The venture highlights research indicating that generic chatbots can impede learning by encouraging cognitive offloading, and positions LearnVector’s solution as a structured, guard‑rail‑enabled system rather than a simple chatbot. The announcement thanks Coursera’s team, notably Greg Hart, for their support and outlines the goal of accelerating human development through reliable, AI‑driven personalized education.</p>
+          </div>
+          <a href="https://learnvector.ai/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect a mixed view of AI‑driven personalized education. Many express enthusiasm for the promise of adaptive tutoring, Socratic prompting, and gamified learning, especially given Andrew Ng’s involvement and the sizable funding. Simultaneously, there is skepticism about the high capital raise, the platform’s differentiation from existing tools, and the difficulty of achieving sustained educational outcomes and market traction. Concerns also surface regarding model suitability, pricing, and the historical challenges of edtech ventures, while some see measurable user impact as a key success factor.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49092499" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.collabora.com/news-and-blog/news-and-events/cracking-windows-open-porting-radv-to-win32.html" target="_blank">Cracking Windows Open: Porting RADV to Win32</a>
+        </h2>
+        <span class="article-meta">
+          20 points • by zdw • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RADV, the open‑source Mesa Vulkan driver for AMD GPUs, has been ported from Linux to Windows. The project builds on Faith Ekstrand’s XDC 2024 proof‑of‑concept, which used a custom WDDM2 logging tool to reverse‑engineer undocumented D3DKMT calls and enable RADV to submit work to AMD’s proprietary kernel driver, displaying a rotating 3D model. Subsequent work extended the implementation to support additional hardware generations (RX 7900 XT), added features such as sparse bindings, tessellation, task shaders, and dynamic GPU‑property queries, and stabilized the driver enough to run Counter‑Strike 2 via the “‑vulkan” flag. Major challenges included handling opaque vendor‑specific blobs in D3DKMT, adapting Mesa’s GCC/Clang‑oriented code to MSVC (e.g., enum handling), and the lack of debugging tools for Windows hangs, prompting the development of a full WDDM2 logging layer that can dump command streams, registers, and shaders. Remaining tasks focus on establishing a stable, documented interface to AMD’s kernel‑mode driver, improving Windows‑specific presentation (DXGI swapchains, zero‑copy swaps), and achieving production‑ready reliability. The current code resides in a dedicated branch, with Valve sponsoring the effort.</p>
+          </div>
+          <a href="https://www.collabora.com/news-and-blog/news-and-events/cracking-windows-open-porting-radv-to-win32.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion questions the claim that creating a proprietary kernel‑mode driver is infeasible, suggesting that open‑source Windows GPU drivers would be valuable and that modern tools such as large‑language‑model assistance could reduce development effort. It references existing generic framebuffer drivers for legacy Windows versions and proposes porting current open‑source Linux drivers for major GPUs to those platforms, even envisioning advanced capabilities like CUDA on Windows 95. The overall tone is exploratory, emphasizing technical curiosity and the potential of community‑driven solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49093435" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://transformer-transformer.github.io/" target="_blank">Transformer Transformer: A Unified Model for Motion-Conditioned Robot Co-Design</a>
+        </h2>
+        <span class="article-meta">
+          26 points • by ilreb • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Transformer Transformer is a diffusion‑based transformer model trained on a unified tokenization called RoboTokens, which encodes robot embodiments (links, joints, motors, inertias), state trajectories, and actions. Given a manipulation demonstration, the model generates a complete robot design optimized for the demonstrated motion. The same architecture handles multiple embodiment families (wheeled bimanual, quadruped, humanoid) and tasks (design generation, cross‑embodiment control). It operates as a reward‑agnostic dynamics predictor; at inference, reward‑specific value predictions are derived and used to guide the diffusion process via “Dynamics Self‑Guidance.” Experiments on three design spaces show zero‑shot optimization of unseen rewards and trajectories, outperforming evolutionary baselines in both performance and runtime. A fabricated cloth‑flinging robot for the ALOHA2 bimanual platform achieved a 73 % reduction in tracking error and a 30 % decrease in maximum joint speed compared with the original design. The approach demonstrates scalable, task‑conditioned robot co‑design without task‑specific training.</p>
+          </div>
+          <a href="https://transformer-transformer.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49093232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/twalichiewicz/HNewhere" target="_blank">Show HN: I was tired of opening 2 tabs for every HN link, so I made a userscript</a>
+        </h2>
+        <span class="article-meta">
+          225 points • by twalichiewicz • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A lightweight userscript, <strong>HNewhere</strong>, embeds Hacker News (HN) discussion threads directly beside any web article. It automatically detects whether an article corresponds to an HN story, then loads the associated comments into a resizable, collapsible sidebar. Key functionalities include tracking links opened from HN, preserving sidebar width, and converting reply links to direct HN URLs. The script requires a userscript manager (e.g., Tampermonkey, Violentmonkey, Safari Userscripts) and operates in browsers supporting userscripts. It retrieves data via the official Hacker News API and the HN Algolia search API. Installation involves adding the <code>HNewhere.user.js</code> script through the chosen manager. The project is released under the MIT license.</p>
+          </div>
+          <a href="https://github.com/twalichiewicz/HNewhere" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments largely praise the utility of automatically opening both an article and its discussion, noting that many already use middle‑clicks, split‑view tabs, or custom scripts to achieve the same workflow and would welcome a built‑in solution or dedicated extension. Users appreciate the convenience on desktop and mobile, though several raise concerns about UI size, initial panel state, and unintended URL leakage. A minority question the problem the feature solves or view it as redundant, and a few critique related window‑management suggestions as less useful. Overall sentiment is supportive with practical improvement suggestions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49090607" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/" target="_blank">Substack writers, you need a website</a>
+        </h2>
+        <span class="article-meta">
+          482 points • by speckx • 59 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Substack functions as a distribution tool, not a full‑featured website; relying on it as a digital home limits control over SEO, customization, and long‑term visibility.  </li>
+<li>Writers who link a personal domain to Substack gain a modest improvement, but the platform still owns the content at its subdomain (e.g., xx.substack.com).  </li>
+<li>Platform dependence creates “digital sharecropping”: corporations can change rules or shut down services, jeopardizing an author’s audience and archive.  </li>
+<li>The recommended strategy is POSSE (Publish on Own Site, Syndicate Elsewhere): maintain an owned domain as the authoritative source and use Substack, social media, or other channels only for distribution.  </li>
+<li>Independent sites allow permanent “institutional memory,” easier RSS access, and protection from algorithmic bias that favors dominant, often US‑centric narratives.  </li>
+<li>Example: author John Scalzi has kept a single WordPress‑hosted site for nearly three decades, using social platforms solely to drive traffic back to his site.  </li>
+<li>The article urges writers to treat their website as an asset and view Substack (or any platform) as a channel, thereby preserving sovereignty and resilience against platform volatility.</li>
+</ul>
+          </div>
+          <a href="https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a split view on Substack versus self‑hosted sites. Many writers value Substack’s built‑in distribution, community features, and payment processing, seeing it as more than mere convenience and useful for reaching subscribers without algorithmic gatekeepers. Others stress platform dependence, subscription pop‑ups, fees and lack of control, preferring personal domains or open‑web alternatives that preserve ownership and avoid lock‑in, even though discoverability and traffic remain challenging. Hybrid workflows that combine a personal blog with Substack are noted as a practical compromise.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49086788" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank">Half-Life ported to Mac OS 9</a>
+        </h2>
+        <span class="article-meta">
+          206 points • by freediver • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Half‑Life has been ported to PowerPC‑based Macintosh computers running Mac&nbsp;OS&nbsp;9, a project completed 28 years after the game’s original 1998 release. The port was created by GitHub user doctashay, who forked the Xash3D FWGS re‑implementation of the GoldSrc engine. It provides a fully playable single‑player campaign, multiplayer support, a Uplink demo, and downloadable versions of Blue&nbsp;Shift and Opposing&nbsp;Force. Compatibility is limited to G3 or G4 PowerPC Macs with Mac&nbsp;OS&nbsp;9.0 or later; performance is heavily GPU‑dependent, and machines with under 8 MiB of VRAM may experience significant slowdowns. The effort revives a title originally slated for a 1999 Mac&nbsp;OS&nbsp;9 release (canceled before launch) and later brought to Mac&nbsp;OS&nbsp;X in 2013, marking a notable contribution to the classic Mac gaming community.</p>
+          </div>
+          <a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm and nostalgia for retro game ports, highlighting unexpected releases that enable classic titles to run on legacy Mac systems and praising the technical effort involved. There is admiration for community‑driven projects, speculation that AI tools may accelerate revivals of obsolete platforms, and a wish for broader support of older operating systems. Overall sentiment is positive and appreciative, with a shared desire to see more such ports and to preserve accessibility of legacy games.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49089814" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://abeljansma.nl/2026/07/10/truth-is-not-a-direction.html" target="_blank">Truth is not a direction: a Tarski attack on LLM probes</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by abelaer • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post argues that no probe over a language‑model’s embedding space can reliably capture truth for any language capable of describing the probe and its outputs. It begins by noting the “Linear Representation Hypothesis,” where concepts correspond to directions in embedding space, and describes a bold extension that posits a “truth direction.” Using a self‑referential sentence (“The truth probe’s score for this sentence evaluates to FALSE.”) the author constructs a diagonal (Tarski) paradox: if the probe reports TRUE the sentence is false, and vice‑versa, proving that a universal truth probe cannot exist. An experimental logistic‑regression truth probe for Qwen‑3.5‑4B achieves high accuracy on standard true/false examples but yields incoherent scores on diagonal‑attack sentences. The author relates this to Lawvere’s fixed‑point theorem and explores graded truth values on ([0,1]), where negation attains a fixed point at 0.5, but notes that not all functions admit fixed points, so paradoxes persist. Takeaways: truth‑direction probes work in limited cases, are not truth oracles, and cannot overcome fundamental definability limits, though they remain useful for model analysis.</p>
+          </div>
+          <a href="https://abeljansma.nl/2026/07/10/truth-is-not-a-direction.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses cautious skepticism toward framing advanced AI systems as definitive truth‑oracles, noting that while they are increasingly used to replace standard search and may influence public belief, their “truth vector” merely reflects the model’s internal judgment rather than objective fact. Commenters acknowledge the impossibility of a perfect oracle, highlight concerns about intentional manipulation of AI outputs, and reference logical paradoxes that challenge binary truth assessments. Overall, the view favors measuring model confidence as a practical tool while recognizing its limits and potential inconsistencies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49069033" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
