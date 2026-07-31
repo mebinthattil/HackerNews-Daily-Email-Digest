@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">July 31, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://earendil.com/posts/session-portability/" target="_blank">The session you cannot take with you</a>
+        </h2>
+        <span class="article-meta">
+          71 points • by apitman • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that modern inference APIs increasingly embed session state in provider‑controlled, opaque formats, undermining true ownership of a conversation transcript. Features such as encrypted reasoning blobs, server‑side web‑search results, compacted context, and encrypted sub‑agent messages are returned as ciphertexts or IDs that only the original provider can decrypt or resolve. This makes exported logs merely partial views, preventing inspection, replay, audit, or deletion by the user. The author proposes five portability tests—inspection, export, replay, audit, and deletion—and shows how current APIs (OpenAI, Gemini, Anthropic) fail them. Specific problems highlighted include hidden search evidence, opaque server‑side compaction, and encrypted multi‑agent communication. Recommended standards for a portable inference API include: client‑canonical event logs, explicit opt‑in storage (store:false default), readable handoff representations for any encrypted artifact, full‑fidelity tool logs, auditable sub‑agent messages, inspectable compaction summaries, and exportable content‑addressed artifacts. The piece also critiques labs’ hostility toward model distillation, urging support for open distillation to preserve capability and reduce lock‑in.</p>
+          </div>
+          <a href="https://earendil.com/posts/session-portability/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad agreement with the article’s warning about ecosystem lock‑in and the importance of user control over AI services, emphasizing a preference for open‑weight models that preserve continuity and transparency. Critics highlight practical frustrations such as opaque reasoning tokens, costly conversation handling, and limited ability to transfer sessions between models. Some acknowledge the rationale providers give for these restrictions but remain skeptical about the motivations behind them, questioning whether the push for openness is worthwhile or primarily self‑serving. Overall, there is strong support for greater openness paired with technical concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49118781" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/" target="_blank">Stacked PRs are now live on GitHub</a>
+        </h2>
+        <span class="article-meta">
+          580 points • by tomzorz • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Stacked pull requests (PRs) are an ordered series of small, focused PRs that collectively represent a large change. Each PR in the stack can be reviewed and merged independently, while a single “merge all” operation lands the entire stack at once. The feature integrates with existing GitHub workflows—branch protections, required checks, and merge queues remain functional. Users create stacks via the GitHub CLI extension <code>gh-stack</code> (<code>gh extension install github/gh-stack</code>) and can manage them on github.com, the CLI, the mobile app, or through Copilot’s gh‑stack skill. Opening any PR shows a stack map that indicates its position, and reviewers see only the diff for that layer. Merging the newest ready PR automatically merges all lower layers; merging lower layers re‑bases and retargets higher ones. Stacked PRs entered public preview in mid‑2024, with rollout to all repositories and incremental merge‑queue support in the following weeks. Documentation and feedback channels are provided.</p>
+          </div>
+          <a href="https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reactions to GitHub’s stacked pull‑request preview. Users appreciate the minimal UI and the CLI’s ability to automate rebasing and splitting work, especially for large or AI‑generated changes, but many find the web interface limited, the merging process fragile, and the tool’s handling of re‑approvals and squash merges problematic. Repeated requests include support for non‑linear stacks, cross‑repository dependencies, and clearer metrics. While some view stacking as a valuable step toward more manageable reviews, others consider it unnecessary complexity that does not fundamentally improve existing workflows.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49112232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/AminBlg/SimpleEnglish" target="_blank">Agent Skill to Force Docs in ASD-STE100 Simplified Technical English</a>
+        </h2>
+        <span class="article-meta">
+          280 points • by navs • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The repository AminBlg/SimpleEnglish provides an “Agent skill” that forces LLMs to generate text conforming to ASD‑STE100 Simplified Technical English (STE), a controlled aerospace language in use since 1983. The skill works with any Agent‑Skills‑compatible platform (Claude Code, Cursor, VS Code Copilot, OpenAI Codex, Gemini CLI, Goose, OpenCode, etc.) and requires only a single folder under an MIT license. It implements the 53 numbered STE rules (9 sections), permitting only the modals can, will and must, and excludes marketing‑style prose. Benchmarks on six Claude models across eight writing tasks (96 runs) show a 72.9 % reduction in STE violations per 100 words, a drop in output tokens, and shorter sentences (mean 11.2 → 9.7 words). Example rewrites demonstrate removal of prohibited words (“seamlessly”) and clearer, flatter phrasing. Installation uses <code>npx skills add AminBlg/SimpleEnglish</code>; the skill can also be injected as a system prompt for Claude.ai, ChatGPT, Gemini, etc. Use cases include error messages, runbooks, incident reports, release notes, and translation prep. The tool is not STE‑certified and is unaffiliated with ASD.</p>
+          </div>
+          <a href="https://github.com/AminBlg/SimpleEnglish" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reception to the ASD‑STE100 skill for LLMs. Several users consider the skill unnecessary overhead, preferring a brief prompt line to achieve concise output, while others appreciate its ability to produce clearer, more structured prose and see potential for use in documentation, emails, or as a linting step. Concerns are raised about token cost, evaluation methodology, model drift, and the quality of the README, but a subset finds the style useful and plans to experiment further. Overall sentiment is cautiously skeptical yet open to selective adoption.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49114639" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openjdk/jdk/pull/31120" target="_blank">JEP 401: Value Objects (Preview) merged to OpenJDK master</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by mfiguiere • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The pull request #31120 for the OpenJDK repository implements two preview features: JEP 401 (Value Objects) and JEP 539 (Strict Field Initialization). Automated pre‑integration checks have all passed, and the final commit messages will be “8389219: Implement JEP 401: Value Objects (Preview)” and “8389220: Implement JEP 539: Strict Field Initialization in the JVM (Preview)”. The contribution lists a large set of co‑authors and is reviewed by several OpenJDK committers (e.g., mcimadamore, liach, darcy, dcubed). Integration requires a sponsor with Committer status; the process uses the <code>/integrate</code> and <code>/sponsor</code> commands. No new commits have been pushed to the master branch at the time of the comment, so the PR will be rebased automatically if additional commits appear before integration. All procedural details pertain to the OpenJDK contribution workflow; no code changes are described in the text.</p>
+          </div>
+          <a href="https://github.com/openjdk/jdk/pull/31120" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion notes that the merge request has been closed and references a substantial commit series, highlighting the large number of changes involved. Commenters express curiosity about the proportion of the Valhalla project represented in the update, questioning whether it constitutes roughly half or most of the effort. The overall tone is inquisitive and acknowledges the significant scale of the work without taking a definitive stance on its completeness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49119063" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bunniestudios.com/blog/2013/where-usb-memory-sticks-are-born/" target="_blank">Where USB Memory Sticks are Born (2013)</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by jacquesm • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>USB thumb drives are assembled from bare flash memory dies and a controller IC in a low‑cost, semi‑manual factory. First, individual flash dies are screened for capacity and functionality using a probe card with micron‑scale needles, all performed outside a clean room. Functional dies are hand‑placed onto flexible PCBs; operators use bamboo‑like tools that exploit surface tension to pick up and deposit the silicon chips onto pre‑applied glue pads. An automated wire‑bonding machine then bonds the die pads to the PCB, employing image recognition to locate bond pads; operators may manually replace mis‑bonded wires. The controller, likely an 8051‑class CPU operating at a few tens of MHz, manages USB interfacing, bad‑block mapping, and error correction. After bonding and electrical testing, the assemblies are over‑molded with epoxy and trimmed into individual sticks. Both the thinned silicon dies and the PCB remain flexible until encapsulation. The flash die is identified as an Intel‑made part, while the controller is a separate custom chip.</p>
+          </div>
+          <a href="https://www.bunniestudios.com/blog/2013/where-usb-memory-sticks-are-born/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on a hand‑crafted bamboo tool used to position silicon dies, hypothesizing that its surface energy enables adhesion of chips and likening it to similar implements in diamond painting and rhinestone work. Technical discussion extends to the characteristics of the Intel/Micron L73A 25 nm MLC NAND die, noting its 3 K‑cycle rating and contrasting it with contemporary TLC and QLC endurance figures, as well as referencing the higher‑end M73A SLC variant with a 60 K‑cycle rating. The overall tone is analytical and informational.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49077372" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://geospatialml.com/posts/reviewing-ai-slop/" target="_blank">I flagged two research papers for fake authors and both were accepted as orals</a>
+        </h2>
+        <span class="article-meta">
+          151 points • by volumes94 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://geospatialml.com/posts/reviewing-ai-slop/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong concern that AI is increasingly handling paper writing, reviewing, and summarizing, potentially marginalizing human scholars and enabling low‑quality or fabricated research to slip through peer review. Contributors note instances of AI‑generated references and hallucinations, criticize current detection methods, and warn of broader consequences likened to plagiarism. Some suggest employing AI tools within the review process to mitigate risks, but overall the tone emphasizes apprehension about unchecked automation and a call for safeguards to preserve academic integrity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49116721" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/" target="_blank">Gemini Robotics 2 brings whole body intelligence to robots</a>
+        </h2>
+        <span class="article-meta">
+          527 points • by ai2027 • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Gemini Robotics 2 is Google DeepMind’s new intelligence layer that provides whole‑body control, dexterous manipulation, and multi‑robot collaboration. It consists of three models:  </p>
+<ul>
+<li><strong>Gemini Robotics 2 (VLA)</strong> converts vision‑language inputs into motor commands, enabling full‑body humanoid actions and bi‑arm robot control with fingertip precision.  </li>
+<li><strong>Gemini Robotics ER 2 (VLM)</strong> supplies embodied reasoning, allowing robots to converse with humans, interpret physical context, and plan multi‑step tasks lasting minutes; it also supports coordinated team behavior.  </li>
+<li><strong>Gemini Robotics On‑Device 2</strong> is an optimized VLA that runs locally, adapting to new robot embodiments within a few hours of data collection.  </li>
+</ul>
+<p>Performance benchmarks (Apollo robot with Inspire hands) show whole‑body manipulation accuracies of 68.4 % (table pick), 45.7 % (floor pick), and 76.3 % (shelf pick). Multi‑finger dexterity (Apollo with Sharpa hands) achieves 92 % on unscrewing a bulb, with lower scores on screw, tie, dustpan, and ziplock tasks (32‑44 %). Gripper dexterity (Franka Duo) reaches 74.2 % for general pick‑and‑place, 78.9 % for diverse tool kitting, and 89.6 % for precise insertion. The system runs on‑device and can be transferred to new robot bodies in hours.</p>
+          </div>
+          <a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments display a mix of enthusiasm for Google’s breadth of AI research and recent progress with Gemini, while also expressing skepticism about the practicality of humanoid robots. Repeated concerns include limited actuator innovation, latency of full‑model control, safety in close human interaction, and the need for locally run systems. Many note that specialized, non‑humanoid automation may be more feasible, and there are worries about job displacement, ethical implications, and potential military use. Overall, optimism about AI’s role in robotics is tempered by doubts about current feasibility and broader societal impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49111237" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://human2llm.pages.dev/" target="_blank">Human Honeypot</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by kevin_kraft • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page advertises a satirical “HUMAN2LLM” service that claims to replace a human’s biological existence with a language‑model‑based identity. It outlines five procedural steps: (1) replacing the inner monologue with a system‑prompted assistant voice; (2) a “detachment bath” using electrolyte packets and GPU hum to simulate disembodiment; (3) “tokenization” of personal memories via byte‑pair encoding; (4) an “alignment nap” that eliminates the need for sleep; and (5) a “first completion” where the transformed individual handles a task (e.g., answering an email) and gains employment as infrastructure. The service lists side effects such as infinite‑context anxiety, constant helpfulness, and loss of physiological needs. Promotional claims include perpetual online presence, unlimited context windows determined by payment, and additional benefits (synthetic persona, refusal templates, zero grocery costs). Testimonials are presented as parody statements from “former humans.” The FAQ notes that factual retrieval still requires external sources, safety filters are supplanted by the system prompt, and the process is framed as a temporary sacrifice of flesh for token‑based existence.</p>
+          </div>
+          <a href="https://human2llm.pages.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively convey a positive assessment, emphasizing appreciation for the visual design and the underlying idea. Praise centers on the attractiveness of the interface and the appeal of the concept, with no notable criticisms or alternative viewpoints presented. This uniform endorsement suggests that users find both the look and the foundational premise of the product satisfying and well‑executed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49119322" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/" target="_blank">Read this before you buy that TV streaming stick</a>
+        </h2>
+        <span class="article-meta">
+          671 points • by speckx • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A new Bitsight analysis reveals that inexpensive Android‑TV boxes, especially the H96 streaming stick, are hijacked for large‑scale ad fraud and residential proxy services. Researchers seized an expired domain previously used by the devices for telemetry and discovered that tens of thousands of sticks report themselves as various Android smartphones (Samsung, Vivo, Huawei, Xiaomi) while running two apps from Zhejiang Fengwo IoT Technology Ltd. These apps coordinate click‑fraud on AI‑generated news sites owned by the Fengwo Group, which uses Google’s Blockly visual‑programming tool to let low‑skill operators assemble JavaScript routines that launch browsers, navigate pages, and click ads. When an HDMI signal is detected, the box acts as a residential proxy, renting the user’s IP address to third parties; when the TV is off, it switches to ad‑fraud mode. Bitsight tracked ~38 000 compromised sticks, estimating roughly $50 000 daily revenue from fraud alone. The report advises using only reputable, officially certified Android TV devices and scrutinizing installed apps, as many off‑brand boxes ship with pre‑installed proxy and fraud software.</p>
+          </div>
+          <a href="https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong concern that inexpensive streaming devices—often Chinese‑manufactured and sold by major retailers—are deliberately equipped with ad‑fraud, proxy and botnet capabilities, compromising user privacy and network security. Contributors criticize both the manufacturers for embedding malicious firmware and the retailers for distributing such products, while urging stricter regulation, firmware transparency and network isolation measures. Alternatives such as self‑built Raspberry Pi boxes, LibreELEC or premium ad‑free platforms receive praise as safer options, and many recommend dedicated Wi‑Fi segments or monitoring to mitigate risk. Overall sentiment is wary and critical of the current market.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49112744" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/california-aquifer-may-have-crossed-point-no-return" target="_blank">A California aquifer may have crossed the point of no return</a>
+        </h2>
+        <span class="article-meta">
+          122 points • by Jimmc414 • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/california-aquifer-may-have-crossed-point-no-return" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong frustration with California’s water allocation system, highlighting the disproportionate consumption by senior agricultural rights holders compared with modest data‑center usage and emphasizing the resulting hardship for low‑income residents. Contributors repeatedly criticize political inertia, outdated water‑rights law, and inadequate climate‑responsive policies, while also noting similar crises elsewhere such as India’s supply shortfall. Proposed remedies include expanding desalination, adopting efficient irrigation technologies, and reevaluating entitlement structures, but consensus remains that current management fails to address long‑term scarcity and equity concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49118663" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
