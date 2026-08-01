@@ -1,0 +1,571 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 01, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://john.fun/elevators" target="_blank">Elevators</a>
+        </h2>
+        <span class="article-meta">
+          1125 points • by Jrh0203 • 114 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Basic single‑car control uses the SCAN algorithm (full up‑then‑down sweep) or its variant LOOK, which reverses at the highest requested floor.  </li>
+<li>Multi‑car systems rely on a central scheduler assigning requests to the nearest car; more advanced schemes evaluate suitability.  </li>
+<li>Performance is measured by wait‑time distribution; common metrics include the proportion of rides within 30 s or 90 s and percentiles (p90, p50).  </li>
+<li>Traffic patterns vary by time of day; morning lobby‑to‑upper‑floor demand creates the longest waits, while evening traffic reverses direction.  </li>
+<li>Otis’ Relative System Response (RSR) scores each car using ETA, load penalty, anti‑bunching, direction‑match, idle‑nearby, and low‑load bonuses; scores are recomputed every 5 s, allowing dynamic reassignment.  </li>
+<li>Benchmarks show LOOK can outperform RSR at high load factors or in small banks, whereas RSR reduces wait times under moderate traffic.  </li>
+<li>Destination‑dispatch kiosks, despite early knowledge of destinations, often increase waits because they limit the 5‑second re‑optimization flexibility, benefiting only very tall buildings with many cars.  </li>
+<li>A full simulation interface is available for exploring these algorithms.</li>
+</ul>
+          </div>
+          <a href="https://john.fun/elevators" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights widespread frustration with crowded elevators, especially in high‑rise buildings where wait times become excessive, and a strong desire for smarter dispatch methods that detect capacity and adapt to demand. Opinions are split: many find destination‑dispatch promising when groups share destinations, yet others criticize it for confusing interfaces and inflexibility. Users frequently blame improper button use for inefficiency, while engineers and hobbyists express interest in algorithmic improvements, simulations, and balancing passenger wait time against maintenance costs. Overall, there is enthusiasm for better scheduling but skepticism about current implementations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49124218" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://microsoft.github.io/flint-chart/" target="_blank">Flint: A Visualization Language for the AI Era</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by vinhnx • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided to summarize.</p>
+          </div>
+          <a href="https://microsoft.github.io/flint-chart/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism toward a new multi‑backend charting interface, questioning its necessity and viewing it as a redundant reinvention of existing mature libraries. Critics note that LLMs struggle to reliably produce JSON specifications and see limited value in abstracting chart creation further. Conversely, there is appreciation for grammar‑based APIs such as ggplot, citing their expressive power and aesthetic quality compared to simpler Python/JS tools. Overall, the sentiment leans toward doubt about the tool’s relevance while acknowledging the strengths of established grammar‑oriented charting systems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49130604" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.raptitude.com/2026/07/how-to-exist/" target="_blank">How to Exist</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by walterbell • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article proposes a three‑minute “existence” exercise: sit without moving, fidgeting, or entertaining thoughts, while remaining content with the experience. It argues that humans are naturally averse to the present moment, constantly seeking external stimulation to avoid the discomfort of simply “being.” A cited 2014 meta‑analysis of eleven studies found participants disliked solitary idle periods (6–15 minutes) and preferred mundane activities—or even self‑administered electric shocks—over unstructured thought. The text also notes that roughly 100 North American firefighters are convicted of arson each year, often due to frustration with inactivity. To mitigate the “allergy” to existence, the article outlines a breathing‑based practice: relax the body, take slow inhales and exhales, fully attend to the sensations of each half‑breath, and gradually extend the duration. It advises starting with single breaths, progressing to continuous cycles for five minutes, and recommends consulting a professional if psychiatric conditions are present. Regular practice is claimed to reduce reliance on distractive habits such as doom‑scrolling, snacking, or rumination.</p>
+          </div>
+          <a href="https://www.raptitude.com/2026/07/how-to-exist/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed response to the article’s portrayal of “existing” as passive. Several readers challenge the implication that inability to achieve calm equates to not truly existing, citing anxiety, PTSD, and everyday pressures as normal obstacles. Others share personal meditation practices that they find beneficial, while a few report finding stillness easy or dismiss the concept as over‑philosophizing or pseudoscientific. A recurring theme is tension between modern productivity demands and the desire for simple, present‑moment awareness, yielding both agreement and disagreement with the author’s perspective.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49129990" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sundry.jerryorr.com/2026/07/31/development-pipeline-is-a-production-system" target="_blank">The development pipeline is a production system</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by firefoxd • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that a software development pipeline—comprising issue trackers, IDEs, build tools, package repositories, CI/CD systems, test suites, and QA environments—should be treated as a production system. When any component fails (e.g., code cannot compile, QA server is down, tests fail), developers and testers are unable to work, constituting a production‑grade outage that must be prioritized for immediate resolution. The author notes that while many organizations have extensive downtime‑prevention processes for customer‑facing services, similar rigor is often lacking for internal tooling. By recognizing each step from “customer request” to “delivery” as critical infrastructure, teams can apply the same urgency, monitoring, and incident‑response practices to maintain pipeline reliability and ensure continuous software delivery.</p>
+          </div>
+          <a href="https://sundry.jerryorr.com/2026/07/31/development-pipeline-is-a-production-system" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on whether failures in testing environments and development pipelines should be treated as production outages. Many participants argue that QA downtime and broken CI/CD tools halt software delivery and thus merit top‑priority response, citing recent layoffs of QA staff and the broader industry trend toward reduced dedicated QA. Others contend that non‑customer‑facing systems are not true outages and should not automatically receive the same urgency. Themes of on‑call responsibilities, tool reliability, recruiting challenges, and the difficulty of measuring preventive work also recur.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49130726" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/yc-software/qm" target="_blank">qm – Multiplayer agent harness for work</a>
+        </h2>
+        <span class="article-meta">
+          525 points • by tosh • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>QM is a multi‑agent platform that provides isolated workspaces for individual employees while supporting collaborative interactions via Slack and a web UI. Each user, channel, or project has its own scoped memory, file system, keychain, permissions, cron jobs, web apps, and sandboxed execution environment. The core is a headless Node/TypeScript service (Fastify API) connected to PostgreSQL for session, memory, and queue persistence, and it runs an agent loop that can be powered by interchangeable models (e.g., Pi, OpenCode, Codex, Claude Code). Sandboxes expose a minimal tool set, including an <code>execute</code> command that runs commands in the user’s isolated container.</p>
+<p>Key capabilities:
+- Personal and shared scopes with grant‑based skill sharing.
+- Seamless identity across Slack (Bolt plugin) and web (Vite/Lit UI) interfaces.
+- Admin‑level organization configuration, security posture selection, and model/harness control.
+- Background processing via crons and watches.
+- Integrated search across internal notes, email, documents, databases, and the web.
+- Internal app creation, deployment, and data synchronization.</p>
+<p>Security postures (Strict, Auto, Dangerous) enforce tool‑call approvals and content screening, with a policy layer preventing destructive operations. Deployments are defined in a separate repository containing org‑specific config, sandbox images, and tools; the core remains byte‑identical to the upstream MIT‑licensed project. Contributions are made as textual change proposals, not code patches.</p>
+          </div>
+          <a href="https://github.com/yc-software/qm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mix of enthusiasm for a multiplayer agent framework and skepticism about its practicality. Many note the concept’s potential for collaborative workflows and appreciate the open‑source contribution model, while others question its differentiation from existing tools like Claude Cowork or Copilot and criticize the UI’s lack of clarity. Concerns recur about over‑engineering, token waste, and unclear real‑world problems the platform solves, alongside suggestions for better documentation and integration with established development environments. Overall sentiment balances curiosity and cautious doubt.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49126604" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://innig.net/teaching/liberal-arts-manifesto" target="_blank">What Liberal Arts Education Is for (2024)</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by mr_wiglaf • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay argues that liberal‑arts education is distinct from vocational training: it cultivates curiosity, critical reading, multiple perspectives, and the ability to navigate an unknown future, rather than delivering immediately applicable skills. The author illustrates this by recounting a religious‑studies course on Paul’s letters, where painstaking analysis of language and intent sharpened the ability to resolve ambiguous specifications in software projects. This “close‑reading” skill saved companies money by exposing hidden assumptions early. The piece defines liberal arts as an educational philosophy—centered on self‑determination and preparation for a world that does not yet exist—rather than a set of humanities subjects. It critiques societal views that treat liberal arts as a luxury for the privileged and warns against reducing education to employer‑driven vocational goals, especially when used to marginalize students. The author emphasizes that both humanities and computer‑science can be taught with a liberal‑arts approach, fostering whole‑person development that benefits careers, personal life, and civic participation.</p>
+          </div>
+          <a href="https://innig.net/teaching/liberal-arts-manifesto" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments contrast a view that narrowly focused curricula, such as intensive study of a single religious text, limit true liberal education with a belief that broader, interdisciplinary programs foster critical thinking and problem‑solving. Several contributors endorse STEM‑oriented or combined CS‑X pathways for their practical skill development, while others defend the article’s argument that curiosity and close reading are valuable regardless of discipline. Overall, the discussion questions the distinctiveness of liberal‑arts outcomes and emphasizes the importance of versatile, market‑relevant competencies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49131034" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://piegames.de/dumps/a-week-in-matrix/" target="_blank">A Week in Matrix</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by Kesseki • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>A Matrix space is technically a regular room; old clients treat it as such, while newer clients show confusing UI when users chat in the space room.  </li>
+<li>Permissions are often left permissive, allowing accidental messages that trigger notifications to all space members.  </li>
+<li>The author used Element Web devtools to gain admin rights on a space room, then set power‑level restrictions to prevent chatting.  </li>
+<li>A user reported being banned; a Draupnir query revealed a policy room (!…:example.org) containing a <code>m.ban</code> rule targeting the user’s domain, likely from a subscribed moderation list. The ban originated from an open‑registration homeserver.  </li>
+<li>Additional issues described: rooms disappearing from space lists until a space admin joins, federation outages caused by Dendrite’s default IPv6 egress block, DNS‑related port mismatches, and room‑version desynchronisation that resets permission changes across homeservers.  </li>
+<li>The author notes difficulty migrating away from Dendrite, the limited priority given to spaces, and a perceived gap between Matrix’s public messaging and the operational challenges faced by community operators.</li>
+</ul>
+          </div>
+          <a href="https://piegames.de/dumps/a-week-in-matrix/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express frustration with self‑hosting Matrix due to frequent decryption failures, reliance on experimental server implementations, and complex client choices such as Element versus Element X, especially on macOS with security restrictions. Users note limited support for large, end‑to‑end encrypted groups and difficulty finding easy‑to‑use iOS/Android clients, while praising Cinny and recent Conduit support for sliding sync. Alternatives like Discord, Stoat, Rocket Chat, and Simplex are mentioned but dismissed for security, stability, or scalability concerns. Overall, there is a desire for a reliable, FOSS, self‑hostable solution that balances security and usability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49130295" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://consumerrights.wiki/w/BMW_Spider-Man_in-car_advertising" target="_blank">BMW Spider-Man in-car advertising</a>
+        </h2>
+        <span class="article-meta">
+          165 points • by goplayoutside • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>BMW installed a full‑screen “Spider‑Man: Brand New Day” advertisement on the Control Display of customer‑owned vehicles beginning 27 July 2026. The ad appears as a startup banner that drivers can click to launch a timed animation with music and ambient‑lighting effects; it runs through 10 August 2026 in more than 70 markets. Eligibility requires a BMW equipped with Operating System 7, 8, 8.5, 9 or OS X and built after July 2020. BMW frames the animation as part of a broader brand partnership with Sony Pictures, which valued the overall campaign at $309 million in worldwide media value. The rollout contradicts a December 2023 statement by senior VP Stephan Durach, who asserted BMW would not sell screen space for commercials, citing the vehicle interior as private. The move follows BMW’s earlier post‑sale monetization attempts, notably a heated‑seat subscription introduced in 2020 and discontinued in 2023 after consumer backlash. Critics compare the ad to unsolicited billboard placement on private property and note precedent of in‑car advertising by other manufacturers.</p>
+          </div>
+          <a href="https://consumerrights.wiki/w/BMW_Spider-Man_in-car_advertising" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Negative reactions dominate, focusing on annoyance at forced advertisements, privacy and safety concerns about eye‑tracking and data collection, and calls for revenue sharing. Several remarks criticize corporate motives and view the practice as an abuse of customers, fearing distraction and legal liability. Minor notes mention BMW’s mod support and performance heritage, but these are peripheral. Overall consensus disapproves of the ad implementation, questioning its impact on driver experience and trust in the brand.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49130756" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arielsalminen.com/2026/progressive-web-components/" target="_blank">Progressive Web Components</a>
+        </h2>
+        <span class="article-meta">
+          129 points • by hosteur • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Progressive Web Components are native Custom Elements built in two layers: an immediate HTML + CSS rendering layer and a JavaScript enhancement layer for reactivity and templating. Three categories are defined: Composite components (light‑DOM markup wrapped and enhanced), Primitive components (self‑contained markup with light‑DOM CSS), and Declarative components (hybrid using Declarative Shadow DOM).  </p>
+<p>Elena is a 2.6 kB library that facilitates this design philosophy. It loads HTML and CSS first, then hydrates with JavaScript, preserving cross‑framework portability, accessibility, and server‑side rendering (SSR) compatibility. Components lacking a render() method are fully SSR‑compatible; those with render() provide initial HTML output with client‑side hydration, and an optional @elenajs/ssrtool offers full hydration. Elena supports standard custom‑element features (open/closed Shadow DOM, </p>
+          </div>
+          <a href="https://arielsalminen.com/2026/progressive-web-components/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion treats Web Components primarily as a set of Custom Elements rather than direct replacements for framework components, noting that many frustrations stem from expectations of parity with frameworks’ efficient rendering, fragment support, and context APIs. There is a recurring call for frameworks to improve shadow‑DOM, local styling, and event handling integration, while acknowledging added complexity. Practical experiments—such as custom‑element generators, mutation observers, and proof‑of‑concepts with React—illustrate feasibility but also highlight implementation hurdles. Interest in combining CSS libraries like Bulma or Bootstrap with Web Components and differentiating newer libraries from Lit is expressed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49121196" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://servo.org/blog/2026/07/31/june-in-servo/" target="_blank">June in Servo: real world compat, media queries, SharedWorker, and more</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by iamnothere • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Servo 0.4.0 introduces a record 558 commits and numerous web‑platform updates: experimental <code>attr()</code>, extended <code>image()</code> and <code>ellipse()/circle()</code> syntax, delayed evaluation of <code>calc()</code>, <code>font-feature-settings</code> in <code>@font-face</code>, and a suite of new media queries (<code>device-width/height</code>, <code>height</code>, <code>aspect-ratio</code>, <code>orientation</code>, <code>pointer</code>, <code>any-pointer</code>, <code>hover</code>, <code>any-hover</code>). New DOM APIs include SharedWorker, <code>console.dir()</code>, expanded Custom Element Registry, <code>textStream()</code> on Request/Response/Blob, pointer‑capture methods, touch event handlers, and SubtleCrypto enhancements (constant‑time RSA, ML‑DSA, ML‑KEM). Security updates upgrade SpiderMonkey to 140.11.0/140.12.0 fixing CVE‑2026‑8388, 8391, 8974, 8975 and address constant‑time RSA/ML‑DSA bugs (RUSTSEC‑2023‑0071, 2025‑0144). Real‑world compatibility improves layout on sites like lichess.org, Zulip, Speedtest, while Google Maps and OpenStreetMap render with limited interactivity. Ongoing work adds full‑power <code>attr()</code>, expanded WebGPU features, accessibility, visible text selection, Web Animations, and a C‑ABI wrapper for embedding. Embedding API removes <code>WebView::send_error</code> and updates docs. UI enhancements include Android 13+ requirement, drag‑and‑drop, horizontal tab scrolling, fullscreen behavior, and improved <code>&lt;select multiple&gt;</code>. Performance gains: &gt;1 % layout reduction, 17 % smaller BoxFragment, 23 % lower canvas power, async image decoding, incremental layout and reduced reflows. Sixteen fuzz‑found crash bugs were fixed. New contributors listed; monthly donations total $7 681.</p>
+          </div>
+          <a href="https://servo.org/blog/2026/07/31/june-in-servo/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express support for increased competition in the browser market while criticizing Servo’s recent direction. Concerns are raised about Servo’s shift toward governance and limited practical adoption, with repeated difficulty building the project and doubts about its relevance to embedded browser engineers. The perception is that despite early enthusiasm, Servo has not been successfully integrated into products for over a decade, leading to skepticism about its current utility and future viability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49126765" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
