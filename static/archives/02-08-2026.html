@@ -1,0 +1,578 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 02, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wafer.ai/blog/kimi-k3-mi355x" target="_blank">Running Kimi K3 on MI355X at Better Performance per Dollar Than B300</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by ilreb • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Open‑source large language models have reached near‑commercial quality, but their parameter counts now require massive GPU memory. Kimi K3 (2.8 T parameters, &gt;1.5 TB VRAM for weights + 1 M‑token KV cache) cannot fit on an 8‑GPU NVIDIA B200 node; it must run on larger B300 nodes (288 GB GPU⁻¹) or on AMD MI355X GPUs, which offer comparable HBM capacity at ~2.4× lower price per GPU. Benchmarks on a 1 024‑token input/400‑token output task show the MI355X achieving 952 tokens /s /node (118 tokens /s single‑stream), 3.8× the aggregate throughput of a two‑node B200 (TP16) deployment and 1.3× the single‑stream decode rate, while B300 nodes remain 1.65× faster in aggregate but cost 2.4× more. Performance‑per‑dollar is $2.50 / GPU‑hr (MI355X) vs $4.25 (B200) and $6.00 (B300).</p>
+<p>Key engineering improvements:
+* Fixed missing <code>top_k_renorm_prob</code> function in ROCm’s sglang sampling path, yielding ~2.2× single‑stream and ~1.7× moderate‑load decode speedup and 18 % higher peak aggregate throughput.
+* Resolved a head‑count shape mismatch for AITER MLA prefill kernel (zero‑pad 12→16 heads), enabling fast ASM kernel use and accelerating 172 k‑token cold prefill from ~51 s to ~23 s (2–3× faster) without affecting decode speed.</p>
+<p>These results suggest AMD GPUs can match or exceed NVIDIA in cost‑efficient serving of frontier open‑source models.</p>
+          </div>
+          <a href="https://www.wafer.ai/blog/kimi-k3-mi355x" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively convey a negative view of AI, characterizing it as low‑quality or unsatisfactory and using dismissive language. The overall tone is critical, with little indication of support or nuance, suggesting dissatisfaction with current AI outputs. The remark is brief and lacks detail, indicating strong disdain without specific examples and reinforcing a prevailing critical attitude.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49141073" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://victoriametrics.com/blog/go-1-27/index.html" target="_blank">Go 1.27 Interactive Tour</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by Hixon10 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Go 1.27 introduces several language and runtime enhancements:</p>
+<ul>
+<li><strong>Generic methods</strong>: methods can declare their own type parameters independent of the receiver, enabling constructs like <code>func (b Box[T]) Map[U any](f func(T) U) Box[U]</code>. Interfaces still cannot contain generic methods.</li>
+<li><strong>Struct literal selectors</strong>: promoted fields from embedded structs can be set directly in literals (e.g., <code>User{ID:7, Name:"Mittens}</code>).</li>
+<li><strong>Generalized function type inference</strong>: generic functions can be used in any context expecting a matching function type (assignments, conversions, composite literals) without explicit type arguments.</li>
+<li><strong>Size‑specialized allocation</strong>: the compiler emits specialized malloc calls for allocations ≤ 80 bytes, reducing cost up to 30 % (≈ 1 % overall), with a 60 KB binary size increase. Opt‑out via <code>GOEXPERIMENT=nosizespecializedmalloc</code>.</li>
+<li><strong>Goroutine labels in tracebacks</strong>: <code>runtime/pprof</code> labels now appear in panic, SIGQUIT, and <code>runtime.Stack</code> outputs; disable with <code>GODEBUG=tracebacklabels=0</code>.</li>
+<li><strong>Goroutine leak profile</strong>: a built‑in <code>runtime/pprof</code> “goroutineleak” profile detects permanently blocked goroutines without experimental flags.</li>
+<li><strong>Post‑quantum signatures</strong>: new <code>crypto/mldsa</code> implements ML‑DSA (parameter sets 44, 65, 87) and integrates with <code>crypto/x509</code> and TLS 1.3.</li>
+<li><strong>Standard UUID package</strong>: <code>uuid</code> supports RFC 9562 parsing, generation (<code>New</code>, <code>NewV4</code>, <code>NewV7</code>), and comparison.</li>
+<li><strong>JSON v2 default</strong>: <code>encoding/json</code> now runs on the v2 implementation; behavior unchanged, with optional <code>GOEXPERIMENT=nojsonv2</code> to revert.</li>
+<li><strong>Portable SIMD</strong>: experimental <code>simd</code> package offers vector‑size‑agnostic SIMD types (<code>Int32s</code>, <code>Float32s</code>, etc.) activated via <code>GOEXPERIMENT=simd</code>.</li>
+<li><strong>CutLast functions</strong>: <code>strings.CutLast</code> and <code>bytes.CutLast</code> split on the last occurrence of a separator.</li>
+<li><strong>Generic hashing</strong>: <code>hash/maphash</code> adds <code>Hasher[T]</code> interface (e.g., case‑insensitive string hasher) for custom hash/equality strategies.</li>
+</ul>
+          </div>
+          <a href="https://victoriametrics.com/blog/go-1-27/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight enthusiasm for the new release’s enhancements, especially the addition of SIMD support and improved standard‑library features such as the crypto package and generics, which many view as a significant step forward. At the same time, readers note concerns about the readability of generic syntax, the subtle impact of automatic HTTP response draining, and the long‑awaited but controversial adoption of generics after years of hesitation. Overall sentiment is largely positive with measured caution regarding backward compatibility and subtle behavior changes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49140218" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://oldvcr.blogspot.com/2026/08/mklinux-and-pimped-out-apple-workgroup.html" target="_blank">MkLinux and the pimped-out Apple Workgroup Server 9150</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by goldenskye • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="http://oldvcr.blogspot.com/2026/08/mklinux-and-pimped-out-apple-workgroup.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The passage reflects a nostalgic and generally positive view of early Linux experiences on a PowerMac, emphasizing both the challenges of limited mouse support and the satisfaction of overcoming them through custom hardware and code. It highlights the appeal of multitasking despite UI inconsistencies, notes the practical benefits of building a Pentium Pro system during university, and concludes with appreciation for Apple’s later Unix‑based laptops that offered reliable power management. Overall, the tone is retrospective and favorable.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49140702" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" target="_blank">Seedance 2.5</a>
+        </h2>
+        <span class="article-meta">
+          262 points • by njaremko • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Seedance 2.5, the latest video‑creation model from ByteDance’s Seed team, expands single‑pass generation to 30 seconds and supports multi‑round extensions, enabling multi‑minute stories with consistent audiovisual language and smoother shot transitions. The model accepts up to 30 images, 10 video clips and 10 audio clips per request, improving reference‑based generation for complex scenes, multi‑character interactions, and specific styles such as clay‑render or motion cues. Editing is refined through timestamp‑level control, allowing precise adjustments of actions, camera moves, green‑screen replacements, and perspective changes while preserving continuity and realistic lighting, texture, and physics. Seedance 2.5 is positioned for professional use in film, advertising, education, manufacturing, and autonomous‑driving simulations, where it can produce synthetic training data and immersive instructional visuals. The service is currently available on Jimeng AI, Doubao Pro, with API access planned via BytePlus ModelArk. Ongoing work targets improved physical plausibility, more intuitive generation, and broader industry integration.</p>
+          </div>
+          <a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show strong enthusiasm for the rapid improvement in AI‑generated video quality, especially for high‑action, visual‑effects content, and many view it as a potential breakthrough for filmmakers and advertising. At the same time, users note persistent artifacts, uncanny‑valley cues, and limited control over dialogue and motion, while raising concerns about high inference costs, accessibility of the models, and ethical misuse for spam or misinformation. Opinions diverge between optimism that the technology could reshape production pipelines and skepticism about its practicality, affordability, and broader societal impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49138302" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://diataxis.fr/" target="_blank">Diátaxis</a>
+        </h2>
+        <span class="article-meta">
+          271 points • by ryanseys • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is titled “Diátaxis.” It presents a navigation element labeled “Next” and a link or prompt titled “Start here – Diátaxis in five minutes,” suggesting an introductory resource. Under a section titled “Images and Visual Content,” two images are referenced: the first with alt text “Logo,” and the second with alt text “Diátaxis.” No additional textual description, explanatory content, or technical details are provided beyond these headings and image placeholders. The layout consists solely of the title, navigation cue, introductory link, and the two image descriptors.</p>
+          </div>
+          <a href="https://diataxis.fr/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad appreciation for the Diátaxis framework, noting it clarifies documentation roles, improves coherence, and aids large codebase hand‑offs. Users highlight practical benefits such as clearer voice, easier organization, and successful translation efforts, while also pointing out drawbacks: extra navigation steps, difficulty distinguishing tutorials from how‑to guides, and challenges keeping docs up‑to‑date without robust verification. Suggestions include timestamps for review, tighter structuring of the four views, and integration with other models. Overall sentiment is positive but tempered by concerns about maintenance and usability nuances.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49138188" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://plug-world.com/posts/2026/asrock-bc250-the-budget-steam-machine/" target="_blank">ASRock BC-250: Building the Budget Steam Machine</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by plug_world • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The guide details configuring an ASRock BC‑250 “budget steam machine.” It recommends allocating 6 GB of UMA VRAM via BIOS (UMA_MODE = UMA_SPECIFIED, UMA_FRAME_BUFFER_SIZE = 6 GB) rather than the common 512 MB setting. For GPU power and performance, install the cyan‑skillfish‑smu governor (via AUR on CachyOS or rpm‑ostree on Bazzite), adjust the config /etc/cyan‑skillfish‑smu/config.toml to set a frequency range of 350–1850 MHz (or up to 2000 MHz if extra compute units are not enabled), lower the minimum frequency, and tweak load‑target percentages and safe‑point voltages in 50 mV steps, testing stability after each change. Enable the 40‑CU unlock with the bc250‑cu‑live‑manager script, activating all functional compute units and installing the service to apply on boot. For CPU overclock/undervolt, install bc250‑smu‑oc, provide the “stress” binary, then run bc250‑detect with target frequencies (e.g., 4000 MHz) and VID values (≈‑34 mV) to generate an overclock.conf. Finally, increase the shader‑cache limit by adding MESSA_SHADER_CACHE_MAX_SIZE=5G to /etc/environment and disable Steam’s pre‑cached shader download to avoid repeated redownloads.</p>
+          </div>
+          <a href="https://plug-world.com/posts/2026/asrock-bc250-the-budget-steam-machine/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback is broadly positive, highlighting the card’s cost‑effectiveness, lower power draw, and quieter operation compared to older hardware, while acknowledging occasional crashes and a pending power‑connector upgrade to fully unlock its capabilities. The reviewer appreciates the ability to reuse existing components and values the incremental performance gains for recent games. Suggestions include future coverage of affordable AI‑focused computers, and there is curiosity about idle power consumption after optimization and the reliability of HDMI‑CEC functionality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49140213" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://old.reddit.com/r/linux/comments/1vcpk8i/linux_desktop_market_share_has_hit_over_10_in/" target="_blank">Linux desktop market share has hit over 10% in North America</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by dviola • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://old.reddit.com/r/linux/comments/1vcpk8i/linux_desktop_market_share_has_hit_over_10_in/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward the presented desktop‑OS market‑share figures, questioning the reliability of the data sources and the separation of OS X from macOS. Several points highlight concerns that measurement methods may include bot traffic or automated scraping, which could inflate Linux and other OS percentages. There is a recurring view that Linux desktops are more mature than popularly perceived, while also noting community bias against Linux. Overall, the sentiment is critical of the statistics and wary of methodological flaws.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49140696" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mitsloan.mit.edu/ideas-made-to-matter/ai-financial-advice-surprisingly-good-especially-if-you-ask-right-questions" target="_blank">AI financial advice is surprisingly good, especially if you ask right questions</a>
+        </h2>
+        <span class="article-meta">
+          256 points • by foxtrot8672 • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>MIT Sloan researchers evaluated financial advice from large language models (LLMs) such as GPT‑5.x and Gemini 3 Flash. Using a life‑cycle simulation of income, taxes, and investments, they asked 1,000 adults to submit prompts for spending and investing advice, then simulated outcomes for ages 22‑89 if the advice were followed. Results showed LLMs consistently recommended higher savings, diversified stock exposure, and age‑appropriate risk reductions, producing sizable wealth buffers for most users above age 30. Structured, “academic” prompts that included detailed personal and economic assumptions yielded better outcomes than typical user prompts. However, the models relied on simple heuristics, failed to rebalance portfolios actively, and responded differently based on the prompter’s gender, financial literacy, and AI experience, creating wealth gaps of 4‑6 % at retirement. The study suggests AI can offer low‑cost, broadly accessible guidance but requires careful prompting and awareness of bias, and may complement rather than replace human financial advisors.</p>
+          </div>
+          <a href="https://mitsloan.mit.edu/ideas-made-to-matter/ai-financial-advice-surprisingly-good-especially-if-you-ask-right-questions" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a view that basic personal‑finance guidance—regular saving, low‑cost diversified index funds, and age‑adjusted risk reduction—is solid and widely endorsed. Opinions on AI‑driven advice are mixed: many note that with detailed personal data LLMs can produce useful, even superior, recommendations for budgeting, tax detection, and simple investment plans, yet others warn of generic, overly conservative output, potential inaccuracies, and the inability to replace human advisors for complex, nuanced cases. Overall sentiment favors AI as a supplemental tool while recognizing the continued value of professional expertise for tailored planning.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49139102" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.kyoto-u.ac.jp/en/research-news/2026-07-28" target="_blank">Unraveling the mysteries of habit formation</a>
+        </h2>
+        <span class="article-meta">
+          63 points • by hhs • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kyoto University researchers developed a rapid‑training protocol that induces habit formation in mice within days, enabling longitudinal assessment of behavioral and neural changes. Using a two‑stage regimen—initial goal‑directed training followed by four days of habit‑facilitating training—they identified two distinct cortico‑striatal circuits that regulate habit acquisition and execution.  </p>
+<ul>
+<li>The anterior cingulate cortex (ACC) → retrosplenial cortex pathway weakens during the transition, determining whether a behavior becomes habitual.  </li>
+<li>The lateral orbitofrontal cortex (lOFC) → central striatum pathway modulates the magnitude of habit execution; stronger neural responses correspond to higher behavioral output, while weaker responses reduce execution.  </li>
+</ul>
+<p>Optogenetic manipulation of these pathways selectively promoted habit formation or altered execution levels, confirming their separate functions. The findings reveal that habit formation is not a simple replication of repeated actions but involves circuit‑specific modulation, accounting for individual differences in habit intensity. Future work will explore mechanisms underlying these differences, with potential implications for enhancing beneficial habits and treating compulsive‑behavior disorders.</p>
+          </div>
+          <a href="https://www.kyoto-u.ac.jp/en/research-news/2026-07-28" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment reflects on habit formation, emphasizing that cultivating positive routines—such as consistent gym visits or maintaining an optimistic mindset—becomes easier with practice, while breaking negative patterns is similarly achievable. It notes that once a habit is established, execution feels effortless, yet losing that routine creates significant difficulty in reestablishing it. Overall, the tone is reflective and supportive of using disciplined, repeatable actions to improve well‑being.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49139383" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.rfc-editor.org/rfc/rfc10015.html" target="_blank">RFC 10015: Deprecating Obsolete Key Exchange Methods in TLS 1.2 and DTLS 1.2</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by Jimmc414 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RFC 10015 deprecates obsolete key‑exchange methods in TLS 1.2 and DTLS 1.2. It identifies security and interoperability issues with finite‑field DH (FFDHE/FFD H) and RSA key exchange:</p>
+<ul>
+<li>
+<p><strong>Finite‑field DH (FFDHE)</strong>: lacks group‑negotiation, leading to incompatibility; custom or small groups may contain weak sub‑groups; many implementations still use 1024‑bit groups, providing only a narrow margin against the current 795‑bit discrete‑log record; a few large‑scale computations can break traffic using standardized groups; non‑ephemeral or partially‑ephemeral use is vulnerable to the Raccoon timing side‑channel unless constant‑time mitigations are applied.</p>
+</li>
+<li>
+<p><strong>RSA key exchange</strong>: provides no forward secrecy; susceptible to Bleichenbacher‑type attacks (e.g., ROBOT, DROWN) because correct countermeasures are hard to implement; lacks domain separation, so a compromised RSA key endangers all endpoints sharing it.</p>
+</li>
+</ul>
+<p>The document updates multiple TLS‑related RFCs, aligns with BCP 195, and specifies deprecation of the affected cipher suites in sections 5.2‑5.5. All other BCP recommendations remain unchanged.</p>
+          </div>
+          <a href="https://www.rfc-editor.org/rfc/rfc10015.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses a preference for a cleaner, more direct link to the referenced RFC and questions whether adopting TLS 1.3 would be a simpler solution, implying that the current approach may be unnecessarily complex or outdated. It suggests that using the newer TLS version could address the underlying concerns without additional complications. This reflects a desire for both improved accessibility to documentation and modernized security protocols.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49139711" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
