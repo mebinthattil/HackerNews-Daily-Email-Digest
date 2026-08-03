@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank">Qwen3.8-Max: A New Bar for Coding and Cowork</a>
+        </h2>
+        <span class="article-meta">
+          405 points • by ai2027 • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express cautious optimism about the visual web‑development benchmarks, noting promising image‑to‑HTML results while highlighting frequent timeouts and errors that hinder production use of Qwen 3.8. There is enthusiasm for the upcoming open‑weight release and its potential to lower costs and increase accessibility, alongside skepticism about actual pricing, hardware demands, and the reliability of self‑evolving claims. Comparisons with Claude and other models surface, with users questioning benchmark validity, token efficiency, and the broader competitive landscape between Chinese and Western AI offerings.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49150470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gruhn.me/blog/2026-08-03/" target="_blank">Don&#39;t be a meat proxy</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by ngruhn • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author warns against using AI tools like Claude merely as “meat proxies” that relay responses without personal comprehension. Frequently, colleagues copy AI‑generated answers into Slack, pull‑request comments, or group chats, then forward the verbatim output, claiming it saves time. The author argues this adds no value, as reading AI text is extra effort, often verbose, filled with jargon, and can contain plausible inaccuracies. An example given—“NATS control‑plane events: stream leader election / R3 quorum re‑form during pod churn”—required extensive lookup to interpret. The recommended practice is to read AI output, verify its correctness, and rewrite the information in one’s own words, thereby demonstrating understanding. In code reviews, simply pasting ticket descriptions into Claude and accepting its generated code without personal inspection reduces accountability, leaving reviewers as the actual implementers while the original author remains only a proxy.</p>
+          </div>
+          <a href="https://gruhn.me/blog/2026-08-03/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary expresses strong frustration with coworkers relying on AI‑generated answers without understanding them, viewing this as lazy and detrimental to professional standards. It raises concerns about the economic impact of AI agents versus human salaries, the potential erosion of technical expertise, and ethical questions about crediting AI assistance in work output. There is also skepticism about AI’s evolving tone, token efficiency, and the broader risk of reduced human competence, while affirming a personal preference to use AI only for research, not for final written communication.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49151933" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sf.isopolis.city/" target="_blank">Show HN: Isopolis – Isometric pixel map of SF</a>
+        </h2>
+        <span class="article-meta">
+          174 points • by nuwandavek • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is titled “isopolis — san francisco.” It appears to load a map interface focused on San Francisco neighborhoods. The map data is sourced from OpenStreetMap contributors and rendered via CARTO services, as indicated by the copyright notices “© OpenStreetMap contributors © CARTO.” No additional textual content, descriptions, or interactive elements are present in the excerpt beyond the loading indicator and the attribution line.</p>
+          </div>
+          <a href="https://sf.isopolis.city/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the isometric San Francisco map, highlighting its impressive visual fidelity, nostalgic SimCity feel, and the technical achievement of using 3D tiles and AI-generated textures. Users appreciate the ability to explore neighborhoods and note the project’s potential as a benchmark for model progress. Common constructive points include desires for higher zoom resolution, correction of occasional mis‑rendered features such as misplaced lakes or roads, and suggestions for navigation or mapping integrations. Overall sentiment is highly positive with modest requests for refinement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49149966" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/karpathy/status/2083749667410727319" target="_blank">Karpathy’s Pelican</a>
+        </h2>
+        <span class="article-meta">
+          534 points • by delichon • 90 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Andrej Karpathy discusses using the Opus 5 language model to generate a custom, procedurally rendered Three.js scene from the opening paragraph of <em>The Lord of the Rings</em>. Given a 1 million‑token budget (≈$10) and about two hours of processing, Opus 5 produced roughly 5,500 lines of code that placed polygon assets in 3D coordinates and animated the narrative, resulting in a “janky but fun” visualisation. Karpathy notes that such highly specific, labor‑intensive projects are impractical for humans but feasible for LLMs due to their unlimited stamina and low cost, opening possibilities for on‑demand, hyper‑custom virtual worlds (e.g., player‑driven LoTR scenarios or temporary GTA‑style environments). He also highlights a limitation: LLMs lack efficient native capabilities to audit or interact with their generated multimedia, requiring slow manual screenshot checks and leading to errors and visual roughness. This points to a broader weakness in multimodal, gameplay‑related tasks.</p>
+          </div>
+          <a href="https://twitter.com/karpathy/status/2083749667410727319" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects a mixed view of current AI‑generated graphics and animation demos. Participants acknowledge technical progress and novelty but many consider the outputs low‑quality, overly‑engineered for social media, and insufficient for real‑world applications such as games or manufacturing. Critics question the relevance and cost of benchmarks like the “pelican on a bicycle” or lengthy token‑heavy demos, emphasizing the need for practical, measurable evaluations tied to actual workloads. A recurring theme is skepticism toward hype and a call for clearer, task‑focused assessments rather than flashy but limited showcases.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49140998" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2607.28271" target="_blank">AI migrated legacy COBOL programs to Java, bugs included</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by felineflock • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The excerpt consists solely of the paper’s title—“Agentic Method for Deterministic Validation of Legacy Code Migration”—and a series of image placeholders identified only by alt‑text labels: “archive,” “BibSonomy,” “Reddit,” “Simons Foundation,” “Simons Foundation International,” and “Schmidt Sciences.” No abstract, introduction, methodology, results, or discussion text is included, and no technical details about the proposed agentic method, validation procedures, or migration workflows are presented. Consequently, the available information is limited to the bibliographic heading and a set of referenced visual resources whose content cannot be inferred from the alt‑texts alone. No factual or technical insights beyond the title and image identifiers can be extracted from the provided material.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2607.28271" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong skepticism toward AI-driven COBOL migration, emphasizing that existing commercial solutions rely on deterministic AST‑based tools rather than nondeterministic LLMs. Participants stress the high risk of introducing new bugs, the difficulty of handling mainframe‑specific components such as CICS and job control, and the impracticality of one‑shot conversions for massive codebases. Incremental, manually verified migration is viewed as the only viable low‑error strategy, while many doubt that AI will replace the entrenched COBOL environment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49150773" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/johnsonjh/cpm386" target="_blank">CP/M-386 – CP/M for 386 protected mode, derived from CP/M‑68K</a>
+        </h2>
+        <span class="article-meta">
+          59 points • by TMWNN • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CP/M‑386 is an early‑stage port of CP/M to 386 protected‑mode, derived from CP/M‑68K. It runs on 386+ hardware with ≥2 MiB RAM, supporting BIOS or UEFI (with CSM), VGA, 8042 PS/2, 8250/16450/16550 UARTs, CMOS RTC, and 8253/8254 PIT. The BDOS reports version 2.2 and matches CP/M‑68K 1.3 and CP/M 2.2, implements most CP/M‑Plus (CP/M 3) functions, ≈60 % of DOS‑Plus additions, and about half of the MP/M extensions; missing features are primarily multi‑user, multitasking, message queuing, and process control calls. Unique BDOS extensions provide direct video access, high‑resolution timing, PRNG, etc. Building requires cpmtools ≥ 2.23, gcc‑16 (or clang) and 32‑bit support libraries; supported on NetBSD, FreeBSD (with rebuilt cpmtools), and recent Linux releases (CentOS Stream 9, Fedora 36, Debian 12, Ubuntu 18.04/22.04, Alpine 3.24, openSUSE Leap 15.4). Pre‑compiled binaries and QEMU launch commands (multiboot kernel or floppy MBR) are supplied. Contributions must avoid large LLM‑generated code; AI tool use follows the LLVM AI Tool Use Policy and may be revoked. The project is MIT‑licensed, with unlimited rights granted by Bryan W. Sparks of DeviceLogics LLC.</p>
+          </div>
+          <a href="https://github.com/johnsonjh/cpm386" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments combine historical recollection of CP/M‑86 and its evolution into DR‑DOS with observations about the new CP/M‑386 project’s early stage, technical specifications, and limitations such as lack of floppy‑disk drivers. Viewers express appreciation for the modest code size and simplicity compared with modern operating systems, while also noting that protected‑mode DOS never achieved broad demand. Several participants ask clarifying questions about boot behavior and memory model, reflecting both interest in the implementation and curiosity about its practical capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49149898" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://localai.io/blog/why-we-write-our-own-engines/" target="_blank">Why we write our own C and C++ inference engines</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by eatonphil • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LocalAI maintains 18 native C/C++ backends because wrapping existing Python‑based engines would require large, non‑portable dependencies (e.g., multi‑gigabyte virtualenvs, CUDA‑only stacks, or missing C++ implementations). These ports deliver a single shared library and GGUF model file, drastically reducing deployment size (e.g., vllm.cpp: 66 MiB binary vs. 9.1 GiB virtualenv) while preserving functionality such as paged KV cache, continuous batching, and sampling. Performance measurements show parity or modest gains: vllm.cpp matches vLLM throughput with 0.7‑1.7 % variance and uses less host memory; depth‑anything.cpp runs 1.31× faster on CPU with 27 % of the memory, mainly by caching static positional embeddings. Face‑detect.cpp and voice‑detect.cpp replace Python pipelines without speed improvements but achieve exact numerical parity (box/landmark differences ≤1 pixel, embedding cosine = 1.0) and significant memory reductions (e.g., 62 MiB vs. 334 MiB). The porting workflow involves weight conversion to GGUF, graph porting with per‑component parity tests, profiling‑guided optimization, and exposing a flat C ABI. Ongoing costs are primarily maintenance of separate repositories, CI, benchmarks, and converters, while GPU kernels remain a performance bottleneck compared to tuned cuDNN implementations.</p>
+          </div>
+          <a href="https://localai.io/blog/why-we-write-our-own-engines/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion focuses on improving the installation speed of a vllm port and highlights prior successes in reducing binary size and boosting performance through WASM and native C++ conversions. It notes that while C++ implementations can outperform alternatives like Triton, they may incur modest throughput reductions that are acceptable for added flexibility. There is interest in maintaining a C++ vllm port, acknowledging existing limitations and emphasizing the value of performance‑oriented optimizations for deployment efficiency.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49125065" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mattbeton.com/blog/bitnet-6502.html" target="_blank">Autoregressive Language Model on the 6502 Processor</a>
+        </h2>
+        <span class="article-meta">
+          93 points • by nmstoker • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The project fits an autoregressive language model onto a MOS 6502‑based BBC Micro (8‑bit CPU, 32 KB RAM). User‑space memory is limited to 25 KB; the final build uses 9 KB of C inference code (compiled with cc65) and 13 KB of model weights (≈52 k ternary parameters). We adopt BitNet quantization, storing each weight in the ternary set {-1, 0, +1} and packing four parameters per byte, which reduces multiply‑accumulate to add/subtract operations (≈30 cycles vs 150 for an 8×8 multiply). The model’s vocabulary is 27 characters; embeddings map tokens to a 56‑dimensional space. A Mamba‑style recurrent layer is chosen over attention or GRU because it maintains a fixed‑size hidden state, avoiding KV‑cache growth and mitigating spectral‑radius instability in low‑precision weights. Activations are 8‑bit with a learned right‑shift scaling before hard‑tanh clipping. Inference loops perform ternary matrix multiplication via packed‑byte unpacking and shift‑saturated accumulation. Token sampling uses greedy or top‑k selection with a pre‑computed exponential lookup table; the RNG seed is fixed. The system runs on real hardware (via a 3.5 mm‑to‑tape interface) and in-browser emulators, demonstrating viable ML inference on 1980s hardware while highlighting the need for hardware‑aware model design.</p>
+          </div>
+          <a href="https://mattbeton.com/blog/bitnet-6502.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for fitting AI models into extremely limited hardware, praising the demonstration as impressive and hopeful for future edge‑device applications like glasses. Several contributors discuss technical constraints, noting that modern machine‑learning models struggle to shrink and suggesting simpler approaches such as Markov chains, banked memory paging, or hand‑written assembly to reduce size. There is acknowledgment of the 6502’s limitations for C compilation and speculation that performance could improve, while overall sentiment remains optimistic about continued miniaturization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49122655" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.inkandswitch.com/livelymerge/notebook/lm-02/" target="_blank">Convergence Is Not Enough</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by zdw • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Livelymerge project stores every object, class, and method as an Automerge document, hoping to obtain automatic merges for concurrent edits. A concrete failure case shows that merging raw pointer writes can violate program invariants: two clients concurrently swapping nodes in a linked list produce, after Automerge’s deterministic transaction ordering, either a truncated list or a cyclic list, both unusable. Automerge correctly converges on the same state, but it merges low‑level writes rather than high‑level intents, so invariants spanning multiple properties (e.g., no cycles, bidirectional links, tree ownership consistency, unique element appearance) are not preserved. The team mitigates this by preferring Automerge’s built‑in datatypes (arrays, maps) whose merge semantics respect such invariants, but complex structures still pose risks. A promising direction is “merge‑aware” user‑defined types that expose higher‑level operations (insert, delete, reparent) to Automerge, allowing merges to enforce type‑specific constraints and skip violating operations. Prior work (Kleppmann’s move operation for replicated trees, Coln’s schema constraints, ECRO) illustrates this approach, though challenges remain in ensuring operation commutativity and handling retroactive invalidation.</p>
+          </div>
+          <a href="https://www.inkandswitch.com/livelymerge/notebook/lm-02/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49076945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ssh.place" target="_blank">Show HN: ssh ssh.place</a>
+        </h2>
+        <span class="article-meta">
+          92 points • by jeninh • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>ssh.place is an r/place‑style collaborative canvas accessed via SSH. Any SSH key can connect; no registration is required. Users navigate the canvas with arrow keys or WASD/HJKL, and can scroll to view areas larger than the terminal, using Shift + ←/→ to jump a screen. Colors are selected by pressing 0‑9 (tab cycles through all 16 palette colors). Pressing Space places a solid block of the chosen color at the cursor position. A global 15‑second cooldown, linked to the user’s SSH key, applies to all participants; reconnecting does not reset it. The canvas supports only color blocks—text characters are rejected by the server. The service only reads the canvas state; all modifications occur exclusively over SSH. An accompanying image shows the current canvas view.</p>
+          </div>
+          <a href="https://ssh.place" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show curiosity about using SSH as a collaborative drawing platform, with many noting technical quirks such as cursor visibility, color rendering differences, and client compatibility problems. Users express interest in replicating the concept and seek guidance on development, while also raising security concerns about MITM risks and the lack of PKU. Frustration appears toward multiboxing and bot activity that can bypass cooldowns and clutter the experience, though overall enthusiasm for SSH‑based tools remains evident.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49149805" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
