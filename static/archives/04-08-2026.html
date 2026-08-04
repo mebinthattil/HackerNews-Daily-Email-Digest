@@ -1,0 +1,565 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 04, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank">LLMs reward expertise</a>
+        </h2>
+        <span class="article-meta">
+          709 points • by MaxMussio • 74 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LLMs let anyone generate usable code or text, leading to the perception that prompting requires no skill. The post argues that true prompting effectiveness depends on deep domain expertise. It cites Terence Tao’s interaction with ChatGPT on the Jacobian Conjecture, highlighting how Tao’s concise, expert‑driven messages steer the model into a “mathematician” mode, push back on implausible outputs, and make independent leaps rather than following the model’s suggestions. The author notes that such technique works only because Tao understands the underlying mathematics and can extract relevant ideas, evaluate correctness, and reformulate problems. The same principle applies to software: familiarity with a codebase lets users critique, simplify, or rephrase prompts, extracting higher‑quality results. Consequently, human expertise remains the bottleneck; the model stores information, but a knowledgeable user must communicate precise goals to retrieve it. Community comments on Hacker News echo these points, acknowledging both the plausibility of the claim and the need for expert validation in specialized domains.</p>
+          </div>
+          <a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments emphasize that large language models are effective when users possess domain knowledge and can formulate precise prompts, while novices often encounter confusion and unproductive loops. Many view the models as accelerators that extend expertise rather than replacements for deep understanding, noting that guidance and contextual awareness remain essential. Concerns arise about potential erosion of hands‑on learning and the risk of over‑reliance on AI, yet there is consensus that, when used skillfully, the technology functions as a powerful tool rather than a universal solution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49161518" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/leonickson1/Swiftlet" target="_blank">Show HN: Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by leonickson • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Swiftlet is a Swift + Metal runtime that enables Qwen3‑Next and Qwen3.5/3.6 Mixture‑of‑Experts (MoE) models (35 B and 80 B) to run on Apple Silicon devices, including iPhones. It retains only the dense core (attention, DeltaNet projections, routers, shared experts, embeddings) in RAM—≈1.3 GB (35 B) or 2.5 GB (80 B) at 4‑bit quantization—while streaming routed expert weights from SSD on demand via a fixed‑stride <em>.qpack</em> container. Each token activates ≈3 B parameters: the 35 B model routes to 8 of 256 experts, the 80 B to 10 of 512. A bounded LFU + recency cache mitigates miss penalties; Apple SSDs absorb the remaining latency. The forward pass runs entirely on Metal with runtime‑compiled shaders, using Gated DeltaNet linear attention (no growing KV cache). Swiftlet provides:</p>
+<ul>
+<li>Swift package (SwiftletCore) for macOS/iOS integration  </li>
+<li>CLI tools (<code>swiftlet chat</code>, <code>swiftlet generate</code>, <code>swiftlet-repack</code>)  </li>
+<li>Loopback OpenAI‑compatible server (<code>swiftlet-server</code>)  </li>
+<li>Open‑source iOS app (Priv AI) for on‑device chat  </li>
+</ul>
+<p>Models validate against mlx‑lm reference implementations; the project builds on ~10 k lines of Swift/Metal and is Apache 2.0 licensed. Requirements: Apple Silicon, macOS 14+/iOS 17+, 18 GB (35 B) or 42 GB (80 B) SSD space.</p>
+          </div>
+          <a href="https://github.com/leonickson1/Swiftlet" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express optimism that continued engineering will eventually enable large language models to run on modest consumer hardware, while also noting current limitations such as slow processing speeds, heavy reliance on disk swapping, and potential wear on storage devices. Readers seek clearer information about collaboration claims and desire configurable memory usage to exploit available RAM. Overall, there is enthusiasm for future efficiency gains but frustration with present performance bottlenecks and hardware strain.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49158333" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/odd-shapes-hidden-dense-amazon-rainforest-reveal-sprawling-ancient-civilization" target="_blank">Amazonian civilization had estimated 3M people in 3% of forest area</a>
+        </h2>
+        <span class="article-meta">
+          104 points • by marojejian • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/odd-shapes-hidden-dense-amazon-rainforest-reveal-sprawling-ancient-civilization" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight recent lidar research that challenges the notion of an untouched Amazon, indicating that pre‑colonial peoples extensively modified the forest. They note that this reshapes understanding of ancient Amazonian societies and underscores the limited archaeological record. The discussion also references significant recent forest loss and conversion to agriculture, while emphasizing the catastrophic impact of Old‑World diseases on indigenous populations and the resulting disappearance of complex settlements described by early explorers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49099336" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank">Ten advances in mathematics and theoretical computer science</a>
+        </h2>
+        <span class="article-meta">
+          509 points • by milkshakes • 75 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion acknowledges impressive AI‑generated proofs and sees them as a clear technical advance, but opinions diverge on their broader significance. Many view the results as evidence of rapidly improving capability, yet question whether they represent genuine insight, novel mathematics, or merely exhaustive search, and call for more transparency about methodology, costs, and reproducibility. Concerns are raised about the impact on academic credit, future research directions, practical applications, and potential displacement of human expertise, while some remain cautiously optimistic about longer‑term benefits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49157930" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank">Devtools must be open source</a>
+        </h2>
+        <span class="article-meta">
+          561 points • by bryanmikaelian • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post argues that modern AI agents make personalizing software as easy as editing source code, eliminating the need for extensive configuration, plugins, or large upfront development costs. Two simple prompts enable an agent to (1) download, build, and track changes to a program’s source, and (2) automatically rebase local modifications onto upstream updates via a nightly cron job. Because agents can understand and modify code, personalization no longer requires programming expertise; users can issue natural‑language commands (e.g., “make Shelley’s UI high‑contrast”) and the agent applies the change. The author illustrates this with “meat.dev,” a tool that uses LLMs to filter diffs, integrated into the Shelley IDE via a single prompt that installs the tool, runs it on each git commit, and adds a UI toggle. This agent‑driven workflow is presented as superior to traditional extension APIs (e.g., VS Code, vimdiff) because the agent handles source‑level changes automatically. Consequently, the author contends that all software—especially single‑user or small‑team products—should be open source and directly personalizable, as closed‑source agents like Claude Code lack this flexibility.</p>
+          </div>
+          <a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion acknowledges that large language models reduce the effort needed to explore and adapt open‑source code, making occasional inspection more practical, yet most participants doubt that everyday personalization through full recompilation is efficient or sustainable. Concerns dominate around maintenance burdens, reliability of automated merges, loss of stable tooling, and the business challenges of open‑source devtools when AI can generate comparable versions. While many still value open‑source transparency and modular plugins, opinions split between optimism about new AI‑enabled workflows and skepticism about their practicality, cost, and long‑term trust.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49156111" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Who is hiring? (August 2026)</a>
+        </h2>
+        <span class="article-meta">
+          149 points • by whoishiring • 115 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The collection highlights a strong focus on AI‑driven technologies across hardware design, security scanning, and personal‑assistant platforms, with multiple startups seeking engineers, product managers, and technical marketers. Remote and hybrid roles dominate, emphasizing flexibility, high‑impact contributions, and small‑team autonomy, while several positions stress expertise in machine learning, detection systems, and low‑level systems programming. Compensation ranges vary widely, often including equity, and many postings stress execution, user‑experience focus, and collaboration with experienced, technically sophisticated teams.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49156683" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank">There Will Come Soft Rains (1950) [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          101 points • by pmg101 • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight the story’s bleak yet resonant portrayal of technology outlasting humanity, with many noting its relevance to climate anxiety and modern automation. Several users reference adaptations, audio readings, and musical works inspired by the piece, indicating ongoing cultural impact. Opinions on Bradbury’s prose are divided, some praising its haunting quality while others find it overly ornate compared to more minimalist writers. Overall the discussion emphasizes the narrative’s enduring emotional power and its connections to contemporary concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49162653" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://scancad.net/wp-content/uploads/2019/02/zero-orientation-cad-libaray.pdf" target="_blank">IPC-7351B Electronic Component Zero Orientation [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by gregsadetsky • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://scancad.net/wp-content/uploads/2019/02/zero-orientation-cad-libaray.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express frustration with inconsistent component orientation, noting that pin 1 placement varies and components are often randomly positioned, making full automation difficult. The prevailing advice is to adopt a single convention—either upper‑left or lower‑left—for library entries and adhere to it. Manual verification, especially for WS2812/WS2816 LEDs, remains necessary, as manufacturers frequently request orientation confirmation, reflecting broader dissatisfaction with LED handling and a general dislike for LEDs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49126468" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/smaller-faster-safer-models/" target="_blank">Smaller, faster, safer: running Kimi and GLM at scale</a>
+        </h2>
+        <span class="article-meta">
+          191 points • by ascorbic • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Cloudflare Workers AI serves large, long‑context mixture‑of‑experts models (Moonshot’s Kimi K‑series and Z.ai’s GLM) on GPUs near users. To fit these models in memory while maintaining speed, three optimizations are layered on top of the existing prefill‑decode separation:</p>
+<ul>
+<li>
+<p><strong>KV‑cache quantization</strong> – the attention key/value cache is stored in 8‑bit floating‑point (FP8, e4m3) instead of BF16, halving its size. On Kimi K2.6 this doubles usable context (≈686 k → 1.37 M tokens) and raises concurrent‑request throughput from a BF16 peak of 1.56 k t/s (32 requests) to 2.19 k t/s at 64 requests, a ~41 % increase with ~30 % lower cost per token. Accuracy across GSM8K, ARC, MMLU, and tool‑call tests is indistinguishable.</p>
+</li>
+<li>
+<p><strong>Weight compression</strong> – GLM 5.2 weights are reduced from 8‑bit to 4‑bit integers (INT4) without accuracy loss, shrinking the checkpoint 40 % (705 GB → 421 GB) and dropping per‑GPU memory from 88 GB to 52 GB. Decode throughput gains of 16‑55 % are observed (e.g., 60 t/s → 92 t/s at single‑request concurrency). Prefill remains faster with FP8 weights due to compute‑bound nature, so the system uses INT4 for decode and FP8 for prefill.</p>
+</li>
+<li>
+<p><strong>KV‑cache integrity checks</strong> – each physical cache page is tagged; requests’ expected page/tag mappings are verified before decode reads. The safety layer adds &lt;1 % overhead to throughput and 95th‑percentile latency.</p>
+</li>
+</ul>
+<p>All experiments run on the SGLang inference framework. Ongoing work includes expanding FP8 caches fleet‑wide, testing NVFP4 weights on NVIDIA Blackwell GPUs, and further reducing integrity‑check cost. These techniques enable higher request density, lower operating cost, and unchanged model quality.</p>
+          </div>
+          <a href="https://blog.cloudflare.com/smaller-faster-safer-models/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments recognize the provider’s openness about KV‑cache quantisation but critique the limited testing, noting only a single model was evaluated and that benchmarks omit coding or long‑running tasks where degradation may appear. Users express distrust over undisclosed pricing, privacy worries linked to Cloudflare’s infrastructure, and the omission of quantisation details on model pages, calling it potentially misleading. Technical concerns include preference for more efficient 4‑bit formats and a desire for deeper performance analysis, while some readers find the material overly dense.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49158581" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/apple-is-getting-this-wrong/" target="_blank">Apple is getting this wrong</a>
+        </h2>
+        <span class="article-meta">
+          35 points • by meetpateltech • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/apple-is-getting-this-wrong/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey strong criticism of OpenAI, portraying it as fearful, opportunistic, and reliant on alleged data misuse. Observers note the company's public blog post on ongoing litigation as atypical, PR‑driven, and potentially counterproductive, questioning the practice of using personal iCloud accounts for work at both Apple and OpenAI. The lawsuit is seen as unsurprising given past behavior, with expectations that the case will proceed to discovery and trial rather than being won through public opinion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49164649" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
