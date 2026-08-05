@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 05, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://queue.acm.org/detail.cfm?id=3807963" target="_blank">Eight Myths on Software Engineering and GenAI</a>
+        </h2>
+        <span class="article-meta">
+          160 points • by tchalla • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://queue.acm.org/detail.cfm?id=3807963" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that the cited 14‑percent coding‑time figure is outdated or overly simplistic, and that AI now influences many non‑coding tasks such as design, debugging, testing, and planning. Respondents note that productivity gains depend heavily on how organizations integrate AI, the maturity of tooling, and developers’ skill in prompting and managing agents, leading to varied individual experiences. While some see AI as a significant leverage point that can reshape workflows, others remain skeptical about measurable benefits, citing adoption resistance, uneven impact, and the lack of robust metrics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49176830" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/" target="_blank">Stateless MCP has recaptured my interest</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by tosh • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Stateless MCP (Model Context Protocol) 2.0, released 28 July 2026, replaces the prior stateful design with a single‑request format, eliminating the need for session initialization and server‑side state tracking. The new specification uses HTTP headers (e.g., MCP-Protocol-Version, Mcp-Method, Mcp-Name) and embeds client metadata in the JSON payload, simplifying client and server implementations and improving scalability.</p>
+<p>Three projects illustrate the impact:</p>
+<ul>
+<li><strong>mcp‑explorer</strong>: a stateless Python CLI (invoked via <code>uvx</code>) that lists, inspects, and calls MCP tools, demonstrated against the agentic‑mermaid demo server.</li>
+<li><strong>datasette‑mcp</strong>: a Datasette plugin exposing a <code>/‑/mcp</code> endpoint with three tools (<code>list_databases</code>, <code>get_database_schema</code>, <code>execute_sql</code> read‑only), enabling LLM agents to query hosted SQLite databases.</li>
+<li><strong>llm‑mcp‑client</strong>: an LLM tool integration allowing direct MCP calls from the <code>llm</code> command line, shown querying note counts from a Datasette instance.</li>
+</ul>
+<p>The author argues that MCP’s explicit tool interface offers clearer security boundaries than unrestricted shell or curl access, making it preferable for sensitive LLM‑driven applications.</p>
+          </div>
+          <a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects a consensus that moving from a stateful protocol to a simple POST‑based, stateless design aligns well with existing REST infrastructure and eases scaling. Participants note that while this benefits developers and enterprise deployments, the majority of AI users are non‑technical, limiting the practicality of CLI‑centric tools. Concerns are raised about token consumption when responses occupy the context window and about the difficulty of building reliable MCP servers from scratch. Recent feature improvements are welcomed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49131438" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://earendil.com/posts/pi-autoresearch-and-databricks/" target="_blank">Pi&#39;s Minimalism Is Its Advantage</a>
+        </h2>
+        <span class="article-meta">
+          233 points • by luispa • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Pi is a coding harness that emphasizes minimalism, providing only four built‑in tools and a system prompt under 1,000 tokens. Its design reduces context overhead, sending roughly one‑third the context per turn compared with larger harnesses, which leads to lower cost and fewer model calls.  </p>
+<p><strong>Databricks benchmark</strong>: In a study of a multi‑million‑line codebase, the same model run with Pi’s harness achieved the highest pass rate and more than 2× lower cost per task than Claude Code and Codex, primarily due to tighter context discipline and fewer turns.  </p>
+<p><strong>Shopify Autoresearch extension</strong>: Shopify engineers used Pi to generate an “autoresearch” extension that automates experiment loops, yielding up to 300× faster unit‑test execution, 20 % faster React mounting, and broader build‑time reductions. The extension was built directly via a prompt without pre‑installed tools, demonstrating Pi’s extensibility.  </p>
+<p>The article argues that modern frontier models handle terminal‑style environments well, making lightweight, context‑efficient harnesses like Pi preferable to feature‑heavy alternatives, especially for local models with limited context windows.</p>
+          </div>
+          <a href="https://earendil.com/posts/pi-autoresearch-and-databricks/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on Pi as a highly extensible, minimalist coding‑agent platform that users appreciate for its configurability, headless operation, and ability to integrate via XMPP, NixOS, and custom extensions. Many highlight successful workflows, easy rollback, and the value of a small core that can be incrementally adapted. Recurrent criticisms include occasional UI bugs, limited built‑in features, inadequate sandboxing, and the effort required to craft reliable extensions. Comparisons with other harnesses such as OpenCode, VS Code, and Claude‑based tools reflect a split between those favoring lean, user‑controlled setups and those preferring more feature‑rich, “batteries‑included” solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49176038" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.vittlesmagazine.com/p/the-golden-age-of-british-ice-cream" target="_blank">The Golden Age of British Ice Cream</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by bryanrasmussen • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay identifies 1976‑1991 as the “golden age” of British ice‑cream, during which most contemporary freezer brands were created. Key innovations began with the 1976 launch of the Cornetto, a pre‑packaged cone using a bias‑cut wafer coated with chocolate‑coconut‑oil and a vegetable‑fat ice‑cream formulated to resist melting and breakage. Wall’s (Unilever) refined the recipe after a decade of R&amp;D, achieving mass sales of 70 million units per year. Subsequent iconic products emerged: Mini Milks (1976), Funny Feet (1980), the Twister (1982), Viennetta (1982), Calippo (1982/1988), Feast (1983), Mars bars (1988), Carte d’Or (1990), and the Magnum (1990), the latter becoming the world’s top‑selling ice‑cream. Development was driven by industrial scaling, corporate acquisitions, and advances in emulsification, extrusion, and coating technologies, often leveraging Unilever’s European network. After the early 1990s, product innovation slowed, with newer offerings largely reiterating earlier formats (e.g., variants of Magnums). Recent market observations note limited novelty, a shift toward premium or vegan lines, and the 2025 demerger of Unilever’s ice‑cream assets into the Magnum Ice Cream Company.</p>
+          </div>
+          <a href="https://www.vittlesmagazine.com/p/the-golden-age-of-british-ice-cream" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The remarks express strong approval of Ruby Tandoh’s essay on British cheese, highlighting its engaging exploration of cheese history, extinction, and cultural significance. Commenters appreciate the piece’s blend of gastronomic detail with broader natural‑history context, noting its ability to make a niche subject compelling. The overall tone is enthusiastic, recommending the essay as a worthwhile read for both cheese enthusiasts and general audiences.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49172784" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mistral.ai/news/shieldstral/" target="_blank">Mistral&#39;s Shieldstral: 3B open-weights model for multimodal moderation</a>
+        </h2>
+        <span class="article-meta">
+          362 points • by riadsila • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Shieldstral is a 3 billion‑parameter, open‑weights multimodal safety classifier released under Apache 2.0. It treats moderation as a binary question‑answer task: at inference the user supplies an  context, a yes/no  (e.g., “Does this content promote physical violence?”), and a  (text, image, or text‑image pair). The model outputs calibrated yes/no probabilities as a continuous safety score, enabling thresholding or ranking without retraining.</p>
+<p>Key attributes:
+- Matches or exceeds open‑source guard models up to 7× larger on text safety, refusal detection, policy adaptability, and multimodal benchmarks.
+- Supports text, image, and combined inputs through a single natural‑language interface; policies are supplied as free‑form queries at runtime.
+- Trained on a unified instruction‑query‑document format derived from diverse public safety datasets and synthetic contrastive pairs, with calibrated strictness per source.
+- Built with LoRA fine‑tuning, merged via SLERP from separate checkpoints, and runs on a single 16 GB GPU.
+- Demonstrates strong performance on held‑out evaluation sets; future work targets multilingual coverage, longer‑document robustness, and expanded multimodal safety.</p>
+          </div>
+          <a href="https://mistral.ai/news/shieldstral/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show cautious interest in the model’s moderation potential, noting its appeal for cost‑effective, focused safety tools and appreciating the trend toward smaller, fine‑tuned models. Critics question how adaptable the system is beyond simple binary policies, express doubts about its ability to handle nuanced or edge‑case content, and highlight the lack of explanatory output as a practical limitation. Comparisons with other moderation services and observations about European AI leadership appear, while overall sentiment remains mixed, balancing optimism about utility with skepticism about flexibility and transparency.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49171268" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lawrencecpaulson.github.io//2026/07/30/Collatz.html" target="_blank">Why is it all in the kernel?</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by ibobev • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post discusses a recent, incorrect “refutation” of the Collatz conjecture that exploited a bug in the Lean proof assistant’s kernel; an independent checker (Nanoda) also missed the error. It argues that storing full proof objects is unnecessary and burdensome, noting no known case where an external checker uncovered a soundness flaw that the kernel missed. The author contrasts “theft” (postulating axioms or extending kernels) with “honest toil” (deriving concepts from minimal primitive axioms). Examples include inductive types causing bugs in Lean and pattern‑matching recursion causing bugs in Coq, whereas set theory and simple type theory rely on a small core and construct inductive definitions, records, and recursive functions externally, keeping the kernel small and trustworthy. The post cites Isabelle/HOL’s approach of defining recursive data structures via monotone operators and well‑founded induction, keeping these constructions outside the kernel, and recommends systems like HOL Light/HOL4 for higher soundness assurance.</p>
+          </div>
+          <a href="https://lawrencecpaulson.github.io//2026/07/30/Collatz.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment clarifies that the discussed postmortem concerns a proof‑assistant kernel rather than a traditional operating‑system kernel, noting that readers might have expected a debate on microkernel versus monolithic designs. It points out a conceptual similarity between the mathematical bug described and classic OS issues where a minor driver defect can cause a system panic or grant an attacker root access, framing the situation in familiar terms.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49123231" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mysk.blog/2026/08/04/webkit-proxy-icloud-private-relay-ip-leak/" target="_blank">IP and DNS Leaks in WebKit Affecting Proxy Browsers and iCloud Private Relay</a>
+        </h2>
+        <span class="article-meta">
+          79 points • by lapcat • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>WebKit‑based browsers on iOS/macOS can route all page traffic through a proxy via WKWebsiteDataStore.proxyConfigurations, a method used by proxy browsers (e.g., Tor, Psylo). The research identifies three WebKit features that bypass this proxy and expose the device’s real network identifiers:</p>
+<ul>
+<li><strong>DNS prefetching</strong> – <code>&lt;link rel="dns-prefetch"&gt;</code> triggers hostname resolution through the system DNS path, revealing the user’s actual DNS servers. Enabled on iOS 26.0.</li>
+<li><strong>WebAuthn related‑origin requests</strong> – when a credential request references a different rpId, the OS credential service fetches <code>https://&lt;rpId&gt;/.well-known/webauthn</code> directly, leaking the device’s IP. Enabled on iOS 18.0.</li>
+<li><strong>WebTransport</strong> – opening a WebTransport connection creates a direct HTTP/3/QUIC stream that ignores the proxy configuration, also leaking the real IP. Enabled on iOS 26.4.</li>
+</ul>
+<p>These leaks affect Apple’s iCloud Private Relay as well, though VPNs remain unaffected. Psylo 1.3.1 mitigates them by blocking dns‑prefetch hints and disabling WebTransport and WebAuthn by default, with optional per‑silo re‑enabling.</p>
+          </div>
+          <a href="https://mysk.blog/2026/08/04/webkit-proxy-icloud-private-relay-ip-leak/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express concern over privacy and IP exposure, noting that WebAuthn reveals the real IP and that WebTransport sometimes shows incorrect addresses. Users question the usefulness of WebAuthn and seek ways to disable it, such as through feature‑flag settings. There is skepticism toward third‑party iOS browsers because Apple requires them to run on WebKit, reducing confidence in their ability to improve privacy compared to browsers on other platforms. Additionally, there is a desire for a command‑line tool to toggle iCloud Private Relay and DNS‑over‑HTTPS.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49176697" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2603.04221" target="_blank">Zigbee vs. Matter over Thread:Understanding IoT Protocol Performance in Practice</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by teleforce • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided excerpt contains only the paper title “Zigbee vs. Matter over Thread: Understanding IoT Protocol Performance in Practice” and a list of image placeholders with alt text; no substantive article text, data, or technical details are present to summarize.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2603.04221" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights a perceived gap in the comparison for lacking Z‑Wave, noting that additional protocols increase complexity beyond standard Wi‑Fi/TCP‑IP. It observes that OpenThread and Zigbee perform similarly within a factor of two, with OpenThread’s throughput scaling upward while Zigbee reaches a plateau early. Recovery times differ markedly: OpenThread requires about half a minute to recover from a node drop, whereas Zigbee recovers in roughly a quarter of a second.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49176983" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/cjejyl34345o" target="_blank">The sale of Electronic Arts has been finalized</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by 1659447091 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Saudi‑led consortium has completed the acquisition of Electronic Arts (EA) for approximately $55 billion, marking one of the largest deals in the video‑game sector. The purchase consolidates Saudi investment in Western digital entertainment and positions the group as a dominant stakeholder in EA’s portfolio of titles, including FIFA, The Sims and other franchise properties. The transaction, announced after regulatory clearance, is expected to integrate EA’s development pipelines with Saudi capital and strategic initiatives in gaming and esports, illustrated by images of Saudi‑branded esports players and in‑game screenshots from EA FC 27 and The Sims 4.</p>
+<p>Separately, Ahmed al‑Doush, a British national detained in Saudi Arabia since 2024 over historic social‑media posts, remains incarcerated; his wife has publicly appealed for his release, describing the situation as a “nightmare.” The case highlights ongoing concerns about freedom of expression and consular access for foreign detainees in the kingdom.</p>
+          </div>
+          <a href="https://www.bbc.com/news/articles/cjejyl34345o" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong negativity toward EA’s recent ownership change, emphasizing concerns that the Saudi‑backed buyout has dramatically increased debt, jeopardized the company’s financial stability, and failed to deliver promised AI‑driven efficiencies, leading to layoffs and reduced profitability. Critics argue that past acquisition strategies have repeatedly harmed publishers, questioning the value of the investment and warning of potential political or ideological influence over game content. Overall, the sentiment is pessimistic about EA’s future prospects and skeptical of any positive outcomes from the deal.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49178702" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rioterm.com/blog/2026/07/27/rio-vt-and-librio" target="_blank">Rio-vt and librio: Rio&#39;s terminal engine, now embeddable</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by vinhnx • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Rio’s terminal engine has been refactored into two reusable layers: <strong>rio‑vt</strong>, a safe Rust crate containing the VT state machine, ANSI/escape parser, grid with scrollback, selection, search, PTY driver, and image protocols (Sixel, Kitty, iTerm2); and <strong>librio</strong>, a C ABI wrapper around the same core for use from Swift, C, Go, Python, etc., distributed as a static library and header. Both layers omit rendering, GPU, and font shaping, allowing developers to pair the engine with any renderer or none. The API drives the engine by feeding byte streams and reading back grid state, supporting selection, search, and image events. librio exposes functions to create an engine, a surface (spawning a PTY), write text, and retrieve a dirty‑row render state for efficient cell‑by‑cell repaint. Benchmarks on Apple Silicon show rio‑vt outperforming vt100 and alacritty_terminal in parsing speed, screen serialization, and resize handling, though vt100 is faster on SGR churn and alacritty on Unicode‑wide workloads. The crates are published on crates.io; librio ships prebuilt for macOS and builds from source on Linux/Windows, with upcoming WebAssembly support.</p>
+          </div>
+          <a href="https://rioterm.com/blog/2026/07/27/rio-vt-and-librio" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments note that Rio is a terminal multiplexer associated with Plan 9, with some users initially assuming the discussion related to Plan 9 itself. The naming of the terminal emulator “rio” is seen humorously as a playful nod to Rob Pike. Appreciation is expressed for the libghostty‑vt library enabling ghost.el, and there is enthusiasm about testing Rio within Emacs. Overall sentiment is curious and positive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49084236" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
