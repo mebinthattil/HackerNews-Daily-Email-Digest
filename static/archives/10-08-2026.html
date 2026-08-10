@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/blog/auto-mode-default-in-claude-code" target="_blank">Auto mode is now the default in Claude Code</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by sbehere • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Auto mode becomes the default for Claude Code sessions on Pro, Max, and Team plans starting August 14; users who set a custom default receive a one‑time prompt, while pinned defaults remain unchanged. The classifier adds a few extra tokens per tool call, and its overhead is no longer billed for these plans. Auto mode stays opt‑in for Claude Enterprise, the Claude API, and cloud deployments (AWS, Bedrock, Google Cloud, Microsoft Foundry), with admins able to set it as default via managed settings; broader rollout is planned within the next month.</p>
+<p>Safety testing—including internal and third‑party red‑team attacks, a 1,053‑tester study, and analysis of production sessions—shows auto mode blocks 89 % of dangerous commands versus 13.6 % approval by humans, maintains a flat block rate over long sessions, and reduces unintended harmful actions (2.4 % vs 6.3 % at production‑level severity). Prompt‑injection attacks succeeded against competing models but none succeeded against Claude models in auto mode. Enterprise customers (Adobe, Nuro, Gusto, Garner Health) report ~25 % more PRs shipped and fewer permission‑fatigue bypasses. Ongoing enhancements add hard‑deny rules, data‑access controls, git‑state checks, and injection screening to further improve safety.</p>
+          </div>
+          <a href="https://claude.com/blog/auto-mode-default-in-claude-code" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes caution around running Claude Code without sandboxing, favoring safe defaults that limit intrusive prompts while enabling auto mode. There is concern that providers might enforce such restrictions at the backend, especially under regulatory pressure, potentially limiting open‑source alternatives. Participants highlight the need for robust sandbox solutions and view the current approach as a practical compromise for continued use, while also noting broader implications for AI monitoring and security compliance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49239021" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.teknogeek.io/posts/what-happened-to-hackerone/" target="_blank">What Happened to HackerOne?</a>
+        </h2>
+        <span class="article-meta">
+          118 points • by hipparchus • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post recounts a long‑term user’s perspective on HackerOne’s evolution from its 2011 founding by ethical hackers to its current state in 2026. Early years featured a community‑focused model, live hacking events, and a platform that protected researchers from legal risk. Around 2020 the company shifted toward profit generation, raising $160 M in VC funding, replacing the founding CEO, and emphasizing sales, multi‑year contracts, and higher fees. This led to reduced triage quality, burnout among top triagers, and a perceived decline in report value. In 2021 the firm introduced an AI assistant (“Hai”) that automates report intake and classification, while publicly denying that researcher data trains generative models—a claim contradicted by internal statements that the system learns from report outcomes. Recent changes include the “Hacker Success Program” for top researchers, rebranding to “Continuous Threat Exposure Management,” and marketing of AI‑driven testing products, prompting community criticism over data usage, lack of feature development, and diminished focus on researcher incentives. The author concludes that HackerOne’s original mission and community ethos have been eclipsed by commercial and AI‑centric priorities.</p>
+          </div>
+          <a href="https://blog.teknogeek.io/posts/what-happened-to-hackerone/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a generally critical view of the platform, questioning the claim that token‑based in‑house solutions are cheaper and emphasizing the continued value of its payment infrastructure and liability handling. Contributors note that legal risk for good‑faith vulnerability research has diminished, while highlighting persistent problems such as low‑quality submissions, costly triage, and thin profit margins. Opinions on AI‑driven triage are divided: some see it as a useful efficiency gain, others distrust the lack of transparency and potential misuse of report data. Overall, the sentiment reflects skepticism about the company’s priorities and sustainability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49238561" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nber.org/papers/w35560" target="_blank">Long-Run Effects of H-1B Immigration on the U.S. Economy (July 2026)</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by ryzvonusef • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The entry documents the NBER Working Paper 35560, titled “Long‑Run Effects of H‑1B Immigration on the U.S. Economy,” authored by Ran Abramitzky, Leah Platt Boustan, Ahmet Gulek, and Jens Hainmueller, published in 2026 and accessible via DOI 10.3386/w35560. The record includes three image placeholders with accompanying alternative text: (1) a reference to the 2026, 18th Annual Feldstein Lecture featuring Mark Duggan on “Social Security Reform in an Era of Fiscal Deficits,” (2) a label “SI 2026 Methods Lecture,” and (3) a description “Using AI in Household Finance Research: A Practical Guide.” No further substantive content from the paper’s body, methodology, results, or conclusions is provided in the excerpt.</p>
+          </div>
+          <a href="https://www.nber.org/papers/w35560" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a mixed view of H‑1B immigration. While acknowledging that many highly skilled individuals contribute positively to the U.S. economy and that the research suggests income gains for native and immigrant workers, the discussion also highlights perceived abuses, especially in mid‑size firms where H‑1B employees are seen as low‑wage, low‑mobility labor. This perceived exploitation is described as distorting the labor market, leading to calls for stronger regulation and reform of the H‑1B system.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49239095" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://laurentiugabriel.github.io/blog/articles/how-i-use-llms-to-learn/" target="_blank">How I use LLMs to learn complex topics</a>
+        </h2>
+        <span class="article-meta">
+          521 points • by laurentiurad • 86 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author describes a personal workflow for using large language models (LLMs) to master complex subjects, exemplified by semiconductor manufacturing. The process consists of four steps: (1) prompt an LLM (e.g., Claude Chat, OpenCode) to generate a comprehensive knowledge base for the target topic; (2) ask the model to verify the accuracy of that knowledge; (3) have the model create a low‑poly, RollerCoaster‑Tycoon‑style interactive simulation that visualizes the process, with responsive UI elements for different screen sizes and pause controls; (4) deploy the generated code to a GitHub repository and serve it via GitHub Pages. The resulting animation—called ChipTycoon—shows a cart moving from raw sand collection through each chip‑fabrication stage to final delivery, providing a visual, step‑by‑step overview. The author notes that accuracy can be enhanced by converting real images to 3D assets and integrating them, and suggests adding quiz‑style challenges or puzzles to reinforce retention. The approach is presented as more effective than reading text‑only resources.</p>
+          </div>
+          <a href="https://laurentiugabriel.github.io/blog/articles/how-i-use-llms-to-learn/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a divided view of LLMs as learning aids. Many users appreciate their ability to generate quick overviews, interactive demos, code snippets, and to act as a Socratic tutor that accelerates understanding and keeps motivation high. However, a strong recurring concern is the prevalence of hallucinations, overly dense prose, and superficial simplifications that can mislead learners, especially when the material is new. Consequently, most participants pair LLM output with external verification, traditional resources, or structured review processes, treating the models as supplementary rather than authoritative sources.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49234675" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.whodunnitai.com/" target="_blank">Show HN: Voice driven murder mystery, Interview AI suspects with your voice</a>
+        </h2>
+        <span class="article-meta">
+          20 points • by MrRowTheBoat • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The supplied excerpt consists solely of the title “WhoDunnitAI – The Voice‑Driven Murder Mystery” and does not contain any additional descriptive or technical content to summarize.</p>
+          </div>
+          <a href="https://www.whodunnitai.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The reaction is generally positive, expressing enthusiasm for the concept and a desire to experience it, while simultaneously noting a personal policy against creating new website accounts. This indicates appreciation for the offering but also highlights a potential obstacle for users who prefer to avoid additional registrations, suggesting that ease of access without mandatory account creation could influence willingness to engage.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49238851" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://foldingglobes.com/" target="_blank">Turn satellite imagery into a paper globe you fold yourself</a>
+        </h2>
+        <span class="article-meta">
+          21 points • by dango2506 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Folding Globes provides printable templates and step‑by‑step instructions for creating three‑dimensional globes by printing, cutting, and folding the supplied patterns. The site details the required materials, layout options, and assembly techniques to produce accurate, customizable globes for educational or decorative use.</p>
+          </div>
+          <a href="https://foldingglobes.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback is largely critical, noting that the shape icons are confusing and do not clearly represent the corresponding patterns, especially on mobile where the full view requires scrolling. The reference to the Cahill–Keyes “classic M” is also seen as unhelpful because the term is unfamiliar. Overall, commenters find the visual cues and terminology insufficiently intuitive, reducing the usefulness of the resource.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49238735" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/shinyquagsire23/Klepton" target="_blank">Run Android ARM64 VR APKs on Apple Vision Pro</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by LorenDB • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>GitHub project <strong>Klepton</strong> provides a JIT‑less relinker and compatibility layer that enables Android ARM64 VR/AR APKs (e.g., Quest/Android XR) to run on Apple Vision Pro, visionOS, and macOS. It translates Android <code>.so</code> libraries into loadable Apple <code>.dylib</code>/<code>.framework</code> binaries, which link against the Klepton runtime. Key components:</p>
+<ul>
+<li><strong>Graphics translation</strong>: OpenGL ES 3.2 → vendored ANGLE GLES 3.0 with Metal backend; Vulkan → MoltenVK (Vulkan‑to‑Metal).</li>
+<li><strong>Runtime libraries</strong>: <code>libklepton_bionic</code> maps libc, libm, libdl, pthread, liblog to <code>libSystem</code>; <code>libklepton_ndk</code> implements ALooper, ANativeWindow, ASensor, AAsset; <code>libklepton_jni</code> provides a synthetic JavaVM/JNI; <code>libklepton_ovrp</code> re‑implements Oculus runtime functions.</li>
+<li><strong>TLS handling</strong>: Patches usage of register x18 (used by older Android apps) because macOS zeroes x18 on context switches, substituting per‑library TLS slots.</li>
+<li><strong>Runtime loading</strong>: Supports mmap‑based loading/patching of <code>.so</code> files; JIT is only needed for apps that rely on scripting engines such as LuaJIT or V8, which macOS permits.</li>
+<li><strong>Build/Run</strong>: Uses Homebrew for dependencies; <code>apktool</code> to unpack APKs; <code>make check</code> for regression; scripts (<code>build_run_viewer.sh</code>, <code>build_run_vpro.sh</code>, <code>build_run_slink.sh</code>) compile and launch Beat Saber on macOS and Vision Pro. Beat Saber runs with minor graphics issues; Steam VR Link and broader tooling are under development.</li>
+</ul>
+          </div>
+          <a href="https://github.com/shinyquagsire23/Klepton" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49238818" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.snowflake.com/en/blog/engineering/postgres-to-snowflake-replication-mirroring/" target="_blank">How We Pushed CDC into Postgres</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by craigkerstiens • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Snowflake’s “Data Mirroring” feature re‑architects PostgreSQL change data capture (CDC) by converting the process from a pull‑based logical decoding model to a push‑based replication pipeline. A custom PostgreSQL extension, <strong>snowflake_cdc</strong>, runs inside the database, continuously batching row‑level inserts, updates, deletes, and DDL events into per‑table change logs and a meta‑log. These batches are written directly to Apache Iceberg tables stored as compressed Parquet files in object storage (e.g., Amazon S3). The Iceberg tables are then applied transactionally and serverlessly in Snowflake, preserving transaction boundaries and ensuring low‑lag, cost‑effective, and fault‑tolerant replication. By operating within PostgreSQL, the extension has full visibility of schema changes, snapshots, and WAL state, eliminating the need for external clients to infer database health or coordinate snapshots. The result is a “push‑into‑lake, apply‑in‑Snowflake” workflow that simplifies back‑filling, schema evolution, failure recovery, and DML/DDL coordination, delivering a resilient, out‑of‑the‑box CDC solution for Snowflake‑PostgreSQL integration.</p>
+          </div>
+          <a href="https://www.snowflake.com/en/blog/engineering/postgres-to-snowflake-replication-mirroring/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary views ClickHouse’s acquisition of PeerDB favorably, highlighting reliable performance at terabyte scales while noting the need to moderate replication to match cluster compute and I/O limits. It draws parallels to Vertica’s WOS/ROS design and references similar approaches in systems such as Dezebium, Delta Lake, Oracle GoldenGate, and Aurora‑Redshift, emphasizing fragility around schema changes. The discussion also mentions pg_lake’s open‑source status lacking CDC features and acknowledges Snowflake as an impressive, enjoyable product despite the broader technical trade‑offs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49238050" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://theconversation.com/taxi-drivers-rarely-die-of-alzheimers-how-complex-mental-maps-and-spatial-reasoning-protect-your-brain-286650" target="_blank">Taxi drivers rarely die of Alzheimer&#39;s</a>
+        </h2>
+        <span class="article-meta">
+          227 points • by jader201 • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A 2024 analysis of nearly 9 million U.S. death certificates found that taxi and ambulance drivers have the lowest Alzheimer’s mortality among 443 occupations—about 1 % versus 1.7 % overall after adjusting for demographics. The reduced risk is linked to continuous, real‑time navigation rather than driving per se; occupations with fixed routes (e.g., bus drivers, pilots) do not show the same benefit. Researchers attribute the effect to the hippocampus, which underlies memory and spatial navigation and is an early target of Alzheimer’s pathology. Structural imaging of London cab drivers demonstrated increased posterior‑hippocampal gray matter proportional to years of navigation‑intensive work, indicating experience‑driven neuroplasticity. Parallel studies show that residents of spatially complex neighborhoods (dense street grids, many landmarks) have lower Alzheimer’s rates and larger navigation‑related brain regions. While GIS and other map‑based professions involve allocentric, screen‑based spatial reasoning, it remains untested whether this modality confers comparable neuroprotective effects. The findings suggest that sustained spatial cognition may contribute to cognitive reserve, with implications for education, professional training, and aging‑related brain health.</p>
+          </div>
+          <a href="https://theconversation.com/taxi-drivers-rarely-die-of-alzheimers-how-complex-mental-maps-and-spatial-reasoning-protect-your-brain-286650" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to the finding that taxi and ambulance drivers have lower Alzheimer’s mortality than the general population. Many note the potential role of spatial‑memory training and social interaction inherent in driving, while others point out selection bias, the small number of Alzheimer’s deaths in occupational sub‑samples, and the impact of adjusting for education. Skepticism is expressed about causal interpretation, with calls for more robust data and comparison to other cognitively demanding activities such as gaming, chess, or climbing. Genetic risk factors and the need for molecular‑level research are also emphasized.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49232253" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: What are you working on? (August 2026)</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by david927 • 540 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The post details a wide array of self‑initiated software projects spanning woodworking simulation, AI‑driven health tracking, local GitHub Actions execution, retro‑style MMORPG recreation, guitar‑practice tools, temple cataloguing, utility web tools, chess move‑distribution analysis, automotive diagnostics, festival scheduling, children’s boat game, Rust‑based native UI framework, sandbox automation game, multiplayer browser SDK, personal finance management, political deck‑builder, and Django admin extensions. Across the descriptions the tone remains consistently enthusiastic, emphasizing personal learning, functional depth, user‑oriented features, and occasional plans for broader distribution or monetization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49233423" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
