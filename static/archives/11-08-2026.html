@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 11, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/antirez/h3.c" target="_blank">H3-metal – Native MiniMax-H3 inference for Apple Silicon</a>
+        </h2>
+        <span class="article-meta">
+          109 points • by swyx • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>MiniMax‑H3 is a native inference engine for the MiniMax‑H3 video model on Apple‑Silicon (M3 / M5 Max). It builds vertically: deterministic host/model metadata, Metal block parity, prompt encoding, prompt‑to‑video/audio, first/last‑frame conditioning, and ordered Ref2VA references. The CLI (<code>h3</code>) supports model inspection (<code>--info</code>), interactive prompts, and batch generation with options for width/height (multiples of 32, max 768 × 1344), frame count or duration, and output format (<code>-o</code>). Quality/speed presets adjust denoising steps (<code>--steps</code>), transformer layers (<code>--layers</code>), and reuse strategies (<code>--reuse</code>, <code>--core-reuse</code>). Token‑reduction (<code>--token-reduction</code>) halves token count after block 3, saving 30 % runtime at slight quality loss. INT8 row‑wise FC2 (<code>--use-int8-row-fc2</code>) reduces compute by ~2.6 %. Reference conditioning uses <code>!first</code>, <code>!last</code>, or <code>!ref-image</code>/<code>!ref-video</code> flags; up to three audio references (2–15 s) are allowed. Profiling (<code>--profile</code>) reports Metal timing, tensor storage, and dispatch counts. Tests (<code>make test</code>, <code>make parity</code>) verify deterministic host behavior and Metal/MLX parity; runtime Metal compilation avoids a full Xcode toolchain. The engine outputs 24 fps video, aligns frames to <code>5 + 17·n</code>, and supports preview via <code>--show</code>.</p>
+          </div>
+          <a href="https://github.com/antirez/h3.c" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment reports that MiniMax H3 runs well on an M5 Pro 64 GB MacBook Pro via ComfyUI after adapting the workflow to use a GGUF quantization node, specifically the Q5_K_M model, while noting a larger Q8_0 option that fits the memory if resolution is limited. Performance is a concern, with a short 480×864 clip taking over an hour to render, prompting interest in faster alternatives. The author also references hardware trade‑offs, memory requirements, and asks about comparable figures and unrelated topics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49252179" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://code.call-cc.org/releases/6.0.0/NEWS" target="_blank">Chicken Scheme 6.0</a>
+        </h2>
+        <span class="article-meta">
+          106 points • by eatonphil • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Chicken Scheme 6.0.0 brings full R7RS‑small compliance: all R7RS modules are core, strings are UTF‑8, and the old (chicken blob) is replaced by (chicken bytevector) with R7RS‑compatible literals (<code>#u8(...)</code>). Process‑related procedures now return process objects; file‑locking uses <code>flock(2)</code> and is thread‑safe. Port constructors accept keyword methods, and new binary input/output ports and <code>port‑encoding</code> are provided. Symbols and locatives are indexed by code‑point; printing rules are stricter. Numerous primitives were moved to R7RS modules, and <code>define-record-type</code> became generative. The new (chicken number‑vector) module extends SRFI‑4 with 64/128‑bit complex vectors. <code>load</code> can take an environment or evaluator; several SRFI aliases were removed, and modules renamed to <code>(scheme …)</code>. Hex escapes now require <code>;</code>, and <code>#ci</code>/<code>#cs</code> syntaxes are dropped. FFI now passes strings, symbols, complex numbers, structs, and unions without copying. Tools: <code>csc</code> gains robust flag handling, <code>chicken‑install</code> locks its cache and supports component type <code>installed‑c‑object</code>. Compiler adds <code>-merge‑reusable‑closures</code>/<code>-merge‑shareable‑closures</code>. Build system uses a configure script, supports Zig as C compiler, and Windows builds require a POSIX shell (mingw‑msys renamed to “mingw”). Security fixes address CVE‑2022‑45145 and harden runtime option parsing. Additional updates include thread‑safe POSIX signal APIs, weak pairs, locative‑index, fused multiply‑add, extended flonum hyperbolic functions, improved <code>process‑execute</code> argv handling, <code>export/rename</code>, deterministic rand initialization, and numerous bug fixes across core libraries, syntax expander, runtime, compiler, and build system.</p>
+          </div>
+          <a href="https://code.call-cc.org/releases/6.0.0/NEWS" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for Chicken Scheme, highlighting its ability to compile to C for standalone binaries, an active egg ecosystem, and recent enhancements such as full Unicode support and Crunch integration. Users appreciate its suitability for web development and media‑processing scripts, while also expressing curiosity about why it is chosen over alternatives like Gambit. A minor note of disappointment appears regarding the name’s lack of connection to actual chickens, but overall the tone remains positive and focused on the language’s practical strengths and evolving features.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49251702" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://everycube.alen.is/" target="_blank">Show HN: Scroll through all 43252003274489856000 Rubik&#39;s Cube states</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by Alen123 • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page, titled “Every Cube,” consists solely of a brief numeric listing. Four large values are presented in scientific‑notation format: 11.1 × 10¹⁹, 2.2 × 10¹⁹, 3.2 × 10¹⁹, and 4.3 × 10¹⁹. The numbers appear sequentially without explanatory text, headings, or additional context. No further content, description, or analysis accompanies the values.</p>
+          </div>
+          <a href="https://everycube.alen.is/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the massive combinatorial space, noting its awe‑inspiring magnitude and playful potential for uses such as password generation. Several users praise the implementation and find exploring the configurations enjoyable, while a few request smoother URL‑driven updates. A minority raise concerns about the relevance of enumerating billions of states amid broader social issues, questioning fairness and practicality. Overall the tone is light‑hearted and appreciative, with humor interspersed and occasional constructive or critical reflections.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49251179" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.floppydisk.com/recycle" target="_blank">Recycle – Floppydisks</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by calvinmorrison • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Floppydisk Recycle Program accepts 3.5‑inch floppy disks of any quantity. For shipments exceeding 200 disks, the program provides a small shipping rebate, contingent on inclusion of the provided reimbursement form. All disks should be mailed to: Floppydisk Recycle Program, 668 North Coast Hwy #1117, Laguna Beach, CA 92651. The reimbursement form outlines the rebate eligibility criteria; those rules are detailed on the form itself. The program does not specify minimum or maximum quantities beyond the rebate threshold, and there are no additional processing fees mentioned. Participants are instructed to include the completed form with the shipment to qualify for the offset. The site includes three images: a 1.44 MB floppy disk, recycled floppy disks, and a PDF of the 2026 reimbursement form.</p>
+          </div>
+          <a href="https://www.floppydisk.com/recycle" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a strong nostalgic appreciation for 3.5‑inch floppy disks, recalling their physical handling, low cost in school libraries, and their role in sharing essays, pixel art, and early programming projects. Users describe the experience of loading old disks as reminiscent of an archaeological find and recall the tactile satisfaction of operating the media. At the same time, there is mild frustration about current availability, with complaints that purchasing options are non‑functional or that floppies seem to be disappearing in favor of newer technology.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49252462" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://resobscura.substack.com/p/the-mechanical-miracle-that-ruined" target="_blank">The “mechanical miracle” that ruined Mark Twain’s life</a>
+        </h2>
+        <span class="article-meta">
+          85 points • by benbreen • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://resobscura.substack.com/p/the-mechanical-miracle-that-ruined" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong interest in learning the mechanics of historic printing technologies and disappointment that the article glossed over technical details. Readers appreciate the historical narrative but criticize its superficial treatment and draw parallels to modern automation, noting similar patterns in humanoid robots and large language models. Several remarks highlight investment risks, using Twain’s experience as a cautionary example, while others dispute the article’s conclusions about adoption speed and transformative design, suggesting the analysis oversimplifies those lessons. Overall, the feedback calls for deeper technical explanation and more nuanced interpretation of historical and contemporary innovation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49184220" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hypercritical.co/hyperspace/" target="_blank">Hyperspace</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by swyx • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hyperspace is a macOS utility that locates files with identical contents across selected folders and replaces all but one with space‑saving clones, preserving file names while sharing a single data instance on disk. The process consists of three stages:</p>
+<ul>
+<li><strong>Scan</strong> – Choose one or more user‑owned folders (including subfolders) and run a scan. Files meeting configured criteria (type, minimum size, ownership, readability, writability, unlocked, not busy) are identified as eligible for reclamation; scan errors are reported.</li>
+<li><strong>Review</strong> – After a successful scan, a “Review Files” window lists identical‑file groups with a designated source file. Users can deselect groups or individual targets, change the source, preview contents, and export the list as CSV. “Selected Savings” shows projected reclaimed space.</li>
+<li><strong>Reclaim</strong> – Clicking “Reclaim Space” replaces selected targets with clones; reclamation errors that strand files abort the process and provide cleanup instructions.</li>
+</ul>
+<p>The app is free to download and scan unlimited files; reclamation requires purchase via Apple’s in‑app‑purchase system (one‑time unlocks for 1 month, 1 year, or lifetime, or auto‑renewing monthly/annual subscriptions). Family Sharing is supported for subscriptions and the lifetime unlock, but not for the limited one‑time periods. Settings allow adjustment of minimum file size, allowed UTIs, inclusion of packages, cloud storage, and library folders to broaden the search.</p>
+          </div>
+          <a href="https://hypercritical.co/hyperspace/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments combine criticism of the product’s marketing approach, describing the free scan followed by an unexpected purchase prompt as misleading, with admiration for its ability to recover large amounts of storage. Users discuss technical aspects such as using reflinks, handling of duplicate files via symlinks, and potential issues if originals are removed. Several remarks compare the tool to existing solutions like diskDedupe, consider its application to cloud storage such as S3, and raise questions about implementation details and overall data‑redundancy impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49252493" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cactuscompute.com/needle" target="_blank">Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots</a>
+        </h2>
+        <span class="article-meta">
+          238 points • by HenryNdubuaku • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Needle 2 is a 14 MB, 45 M‑parameter LLM designed for ultra‑low‑cost edge devices (&lt; $200) that lack GPUs/NPUs and have only a few hundred megabytes of RAM. Its architecture focuses on function‑call grounding: user utterances are mapped to typed API calls rather than generating open‑ended text, allowing a small model to handle device control, document extraction, and structured output tasks. Each interaction is constrained by a byte‑level grammar derived from declared schemas; an empty call signals refusal, and a learned confidence score determines whether to act locally or defer to a cloud model. The model is trained with lossless 2‑bit quantization (Cactus Quants) from pre‑training through KV‑cache, preserving accuracy while fitting into 14 MB. Deployment consists of a single, dependency‑free C++ binary that auto‑selects optimal kernels across Cortex‑M, x86, and WebAssembly platforms. Fine‑tuning can be performed on a standard Mac/PC using provided Python tools, enabling customization to device‑specific vocabularies.</p>
+          </div>
+          <a href="https://cactuscompute.com/needle" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for micro‑LLMs and the WebAssembly implementation, highlighting their potential for on‑device AI, low‑resource hardware, and novel tool‑use capabilities. Many users appreciate the compact size and view it as a step toward broader edge applications, while also questioning the specific 14 MB choice and seeking explanations of performance trade‑offs. Concerns recur about the demo’s limited understanding, inconsistent tool invocation, and unclear relevance to robotics, prompting requests for better documentation, fine‑tuning guidance, and examples of practical use‑cases. Overall sentiment is optimistic but seeks clearer details and improvements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49246804" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ft.com/content/4e3957f8-ea7c-4c46-a3de-cdce8e526878" target="_blank">Mark Zuckerberg attacks &#39;closed&#39; AI rivals as Meta returns to open models</a>
+        </h2>
+        <span class="article-meta">
+          428 points • by root-parent • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.ft.com/content/4e3957f8-ea7c-4c46-a3de-cdce8e526878" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects mixed reactions to Meta’s recent AI actions. Many acknowledge Meta’s history of useful open‑source contributions and view the release of an open‑weight model as a positive step for competition and research. At the same time, a substantial portion questions the timing and sincerity, interpreting the move as a reaction to commercial setbacks and a means to shape the open‑source narrative. Concerns are raised about corporate motives, centralization of power, safety implications of ubiquitous personal agents, and broader ethical and regulatory issues surrounding large‑scale AI deployment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49243880" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.vectorware.com/blog/simd-on-gpu/" target="_blank">Rust SIMD on the GPU</a>
+        </h2>
+        <span class="article-meta">
+          156 points • by sagacity • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>VectorWare has demonstrated that Rust’s portable SIMD (core::simd) can be compiled to run directly on GPUs. By mapping each std::thread to a GPU warp, they treat a warp’s 32 lanes as a SIMD vector, allowing Simd types to lower to native warp instructions without any GPU‑specific annotations. Elementwise ops, comparisons, selects, reductions, and lane shuffles map to warp arithmetic, vote, and shuffle primitives; masks become per‑lane predicates. The approach works for NVIDIA hardware and is designed to be architecture‑agnostic, extending to AMD wavefronts and Vulkan subgroups. Benefits include a single source that runs on CPU and GPU, reuse of existing portable‑SIMD code, and full Rust safety guarantees (borrow checker, lifetimes). Limitations are the instability of portable SIMD (nightly feature), inefficiencies when N ≠ warp width (idle lanes or extra instructions), and some cross‑lane ops requiring multiple instructions or synchronization. Future work targets composition with threads and async, leveraging tensor cores, auto‑vectorizing scalar loops, and broader language support.</p>
+          </div>
+          <a href="https://www.vectorware.com/blog/simd-on-gpu/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge the author’s work on Rust‑GPU and portable SIMD, expressing enthusiasm and appreciation while noting practical limitations. Several users point out that the current portable SIMD API is nightly‑only and that example code fixes vector width, reducing true portability, and they mention alternatives such as fearless_simd and a desire for a mature, open‑source Rust SIMD library comparable to Highway. Interest is shown in broader GPU applications, performance‑critical algorithms, and why SIMD has gained recent attention, alongside brief off‑topic remarks about moderation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49247477" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stowaway.live/" target="_blank">Stowaway – Take the window seat on any plane or satellite overhead</a>
+        </h2>
+        <span class="article-meta">
+          183 points • by thunderbong • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Stowaway is an interactive web application that lets users select any aircraft or satellite currently passing over their location and view a simulated window‑seat perspective. The view reflects real‑time conditions—including local weather, lighting, and terrain—by rendering the aircraft’s or satellite’s position over actual ground data. The site relies on JavaScript and WebGL 2 to generate the live graphics; enabling JavaScript activates the experience. Users click a vehicle on a map, after which the camera follows that object, creating a “stow‑away” seat view that updates as the craft moves. An example image shows a sunset view from a passenger window at cruise altitude, displaying Mount Rainier, scattered cumulus clouds over the Cascades, and a labeled airliner contrail. The tool emphasizes real‑time, geospatial visualization rather than static imagery.</p>
+          </div>
+          <a href="https://stowaway.live/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback is overwhelmingly positive, highlighting the immersive experience, realistic sound, and ability to switch between aircraft and satellites. Users appreciate the visual perspective and the nostalgic feeling of viewing the world from altitude, while also noting technical limitations such as throttled terrain textures and occasional navigation constraints after selecting a satellite. Common requests include improved caching, fallback mechanisms, more interaction options from satellite view, and integration of map labels. Overall sentiment praises the concept and execution despite minor usability issues.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49209918" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
