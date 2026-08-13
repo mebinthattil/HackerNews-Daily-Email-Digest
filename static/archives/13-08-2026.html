@@ -1,0 +1,553 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813" target="_blank">DeepSeek V4 Pro 0813</a>
+        </h2>
+        <span class="article-meta">
+          824 points • by explosion-s • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>DeepSeek V4 Pro 0813 is a large‑scale mixture‑of‑experts (MoE) language model released by DeepSeek as a general‑availability (GA) product. The OpenRouter page presents the model’s API pricing structure and benchmark performance metrics, positioning it as a high‑capacity offering within DeepSeek’s portfolio. Visual elements on the page include the OpenRouter logo and the DeepSeek favicon, indicating the hosting platform and brand identity. The description emphasizes the model’s scale and expert‑routing architecture, suggesting improvements in efficiency and capability over prior releases, though specific pricing figures and benchmark scores are not detailed in the excerpt.</p>
+          </div>
+          <a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a pragmatic assessment of DeepSeek V4‑Pro, highlighting its low cost and strong performance on many benchmarks while noting occasional bugs, high token consumption, and uneven results on complex coding tasks. Users compare it unfavorably to models such as Kimi‑K3, Opus, Fable, and Luna in speed, accuracy, or price, and express concern over upcoming price hikes and data‑training policies. Overall sentiment is cautiously positive about its value for simple workloads, but mixed regarding reliability, scalability, and privacy, leading some to prefer alternative providers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49274600" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tailscale.com/blog/sqlite-wal-reset-bug" target="_blank">Tailscale Traces Database Corruption to 16y/o SQLite WAL-Reset Bug</a>
+        </h2>
+        <span class="article-meta">
+          907 points • by ropbear • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tailscale’s control plane runs on multiple internal shards, each with a single‑writer SQLite database storing tailnet metadata. Over six months they experienced 19 incidents of database corruption, causing shard‑wide control‑plane outages while repairs restored service. Their backup pipeline snapshots databases to S3, but integrity checks revealed corruption that could not be reproduced. Collaboration with SQLite core developers led to a custom VFS shim (tmstmpvfs) that traced checkpoint operations. Logs showed a rare data‑race where a write transaction overlapped a WAL checkpoint, causing pages to be considered copied without actually being written, resulting in permanent loss and database corruption—identified as the “WAL‑Reset bug,” present in SQLite for ~16 years. SQLite 3.52.0 fixed the race, but introduced a false‑positive corruption bug in expression indexes; SQLite 3.51.3 was released with only the WAL‑Reset fix, and SQLite 3.53.0 later added self‑healing indexes. Tailscale added automated integrity monitoring, transaction‑log replay for recovery, and warnings for overlapping operations, restoring stability after four months without further incidents.</p>
+          </div>
+          <a href="https://tailscale.com/blog/sqlite-wal-reset-bug" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively praise Tailscale’s decision to fund an open‑source SQLite debugging tool and commend the thorough technical write‑up, noting it showcases strong engineering and community support. Readers express admiration for SQLite’s robustness while acknowledging the rarity yet seriousness of the discovered race condition, especially given non‑standard checkpointing practices. Some highlight the need for clearer risk communication and automated testing to reproduce such bugs, and a few reflect on broader implications for concurrency handling and open‑source maintenance. Overall sentiment is positive with minor calls for improved documentation and testing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49272832" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zed.dev/blog/introducing-delta" target="_blank">Delta</a>
+        </h2>
+        <span class="article-meta">
+          469 points • by khy • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Delta is a new multiplayer environment that links code editing with conversational context, built around DeltaDB—a real‑time replicated database that synchronizes both the worktree and thread discussions. DeltaDB integrates with existing Git repositories; edits and comments are captured between commits, and users can continue standard Git workflows (commit, push) while teammates without Delta see a normal repo. Comments can attach to any line of code or conversation element and remain anchored as the code evolves. The platform supports agents (e.g., Claude Code), allowing agents to participate in threads, explain changes, or generate code. Delta runs as a native Rust application compiled to WebAssembly for browser access, providing the same performance as the desktop client. It offers cloud‑runner support, real‑time syncing for multiple participants, and full‑visibility diffs and transcripts without collapsing or summarizing output. The first private‑beta invitations have been issued, with plans to later integrate DeltaDB into the Zed editor.</p>
+          </div>
+          <a href="https://zed.dev/blog/introducing-delta" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a split between optimism about Zed’s speed, built‑in AI and potential collaborative features for mentoring and documentation, and skepticism that real‑time multiplayer editing and extensive conversation storage solve genuine developer needs. Many criticize verbose AI summaries, UI contrast problems, and fear of lock‑in or privacy abuse, while others doubt the value compared to existing Git‑based workflows. Some praise Zed’s rapid releases and see promise in the technology, yet overall sentiment leans toward questioning the product’s focus, usability and long‑term relevance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49276574" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" target="_blank">Qwen3.8-2.4T</a>
+        </h2>
+        <span class="article-meta">
+          550 points • by Philpax • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Qwen3.8‑2.4T‑A95B is a 2.4 trillion‑parameter causal language model with 95 billion active parameters, built on the Qwen3.5 architecture. It features 92 layers, hidden dimension 8192, and a hybrid layout of Gated DeltaNet and Gated Attention modules with Mixture‑of‑Experts (512 experts, 10 routed + 1 shared). Linear attention uses 128 V and 16 QK heads (dim 128); gated attention uses 64 Q and 4 KV heads (dim 256). Rotary position embeddings are 64‑dimensional. Native context length is 262 k tokens, extendable to ~1 M tokens. The model is text‑only, always runs in “thinking” mode, emitting reasoning wrapped in <code>&lt;think&gt;</code> tags before final output. Reasoning depth can be adjusted via <code>reasoning_effort</code> (xhigh, medium, low) and <code>preserve_thinking</code> is enabled by default. Recommended sampling settings: temperature 1.0, top_p 0.95, top_k 20, min_p 0.0, presence 0.0, repetition 1.0. It is compatible with vLLM, SGLang, TokenSpeed, and can be served via the Qwen Cloud API or standard OpenAI‑compatible endpoints. Benchmarks show improvements in coding, research, and long‑horizon agentic tasks, with extensive evaluation across multiple specialized suites.</p>
+          </div>
+          <a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong interest in Qwen 3.8‑Max’s benchmark results, noting its competitive positioning relative to Opus 4.8, Fable 5, and other contemporary models. Commenters frequently point out the model’s large size—1.3 TB to 5 TB depending on precision—and the resulting hardware demands, which limit local deployment despite curiosity about quantization and context‑length extensions. The open‑weight release is criticized for missing vision support and reduced context caps, while licensing constraints and the absence of QAT are seen as drawbacks. Overall sentiment balances enthusiasm for the model’s capabilities with practical concerns about accessibility and performance verification.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49273478" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://okmij.org/ftp/Computation/Impressions/PrincipiaMathematica.html" target="_blank">Principia Mathematica is modern and insightful</a>
+        </h2>
+        <span class="article-meta">
+          100 points • by matt_d • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Principia Mathematica (Whitehead &amp; Russell, 1910) is highlighted for containing concepts that anticipate modern programming language theory. Early sections introduce extensionality/intensionality and referential transparency, defining a context C[ ] where p ⊢ q implies C[p] ⊢ C[q]; a non‑transparent example is “A believes p”. Definitions are described as typographic conveniences yet crucial for conveying intent. Chapter 1 presents “propositional functions”, essentially λ‑terms, with explicit treatment of free versus bound variables, α‑renaming, substitution, and variable scope, mirroring modern lambda calculus. The text distinguishes “any” (schematic) from “all” (universal quantification), foreshadowing intuitionistic reasoning and constructive existence proofs that require explicit witnesses. The notion of “type” appears in the requirement that predicates share argument types. Set‑membership is noted as the Greek epsilon (∈), and “descriptive functions” are defined as binary‑relation‑induced functions, precursor to definite descriptions. Overall, the work showcases early formalizations of semantics, type theory, and logical foundations that later underpin computer science.</p>
+          </div>
+          <a href="https://okmij.org/ftp/Computation/Impressions/PrincipiaMathematica.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment recommends several foundational texts, noting Russell and Whitehead’s work as less valuable compared to Frege’s notation and the modern Homotopy Type Theory (HoTT) approach, which is praised for its innovative dependent and higher inductive types. It suggests using “The Little Schemer/Typer” as preparation for HoTT and highlights the practical relevance of these ideas to functional programming, especially for Haskell and TypeScript developers. Overall, the tone is appreciative of Frege and HoTT while critical of earlier logical frameworks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49279928" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://en.wikipedia.org/wiki/Antiqua%E2%80%93Fraktur_dispute" target="_blank">Antiqua–Fraktur dispute</a>
+        </h2>
+        <span class="article-meta">
+          35 points • by buzzy_hacker • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Antiqua–Fraktur dispute was a German typographic controversy spanning the 19th and early‑20th centuries. Historically, Fraktur (black‑letter) was used for German texts while Antiqua (Roman) served Latin and foreign works, a convention that acquired ideological meaning after 1806: Antiqua was labeled “un‑German” and Fraktur as embodying German depth and sobriety. Nationalist figures such as Bismarck championed Fraktur; proponents argued it was more readable, compact, and culturally appropriate for Germanic languages. A 1911 Reichstag vote narrowly rejected a proposal to make Antiqua the official typeface. During the Nazi era, Fraktur was initially promoted as “German script,” but Hitler’s 1934 criticism led to a 1941 edict (signed by Martin Bormann) that banned black‑letter and Kurrent hand‑writing in favor of Normalschrift (Antiqua). After World War II, Latin scripts prevailed, though Fraktur persists in some signage, advertising, and among Amish/Mennonite communities. Small groups continue to advocate its cultural heritage, but its use is limited to niche contexts.</p>
+          </div>
+          <a href="https://en.wikipedia.org/wiki/Antiqua%E2%80%93Fraktur_dispute" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The input consists of a single statement describing the historical background of the Fraktur typeface, noting that Maximilian I commissioned Albrecht Dürer to produce a large printed woodcut of a triumphal arch rather than constructing a physical monument. Because only one comment is present, there is no broader set of opinions, agreements, or disagreements to aggregate, and thus no collective sentiment or thematic pattern can be identified from multiple perspectives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49242698" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sharktastica.co.uk/articles/pc-fxt-45" target="_blank">Happy 45th Birthday to the IBM PC and Model F/XT</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by tart-lemonade • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://sharktastica.co.uk/articles/pc-fxt-45" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses nostalgic reflection on early computing, highlighting a vintage New York Times article and a framed display of the era’s equipment. It notes personal memories of using CP/M, Apple II, and TRS‑80 systems, mentions the symbolic presence of an old keyboard, and references the speaker’s father’s involvement in the computer industry and the decline of a late‑adopting firm. The overall tone is sentimental, recalling the transition from early hardware to later developments and the cultural perception of IBM.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49280103" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jonty.github.io/2026_eclipse_webcams/" target="_blank">2026 Eclipse Webcams</a>
+        </h2>
+        <span class="article-meta">
+          465 points • by zoenolan • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “2026 Total Eclipse Webcams” provides a brief overview of the upcoming total solar eclipse, indicating the start time of totality and the moment the eclipse reaches the first webcam.</p>
+          </div>
+          <a href="https://jonty.github.io/2026_eclipse_webcams/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey broad enthusiasm for the eclipse, with many sharing personal travel stories, appreciation of the phenomenon’s beauty, and gratitude for webcams and tracking tools that enable remote viewing. Historical and scientific context is noted, and there is interest in future eclipses and satellite perspectives. Frustrations appear around cloud cover, technical glitches such as camera overloads or access blocks, and occasional disappointment with webcam quality. Overall, the community values both in‑person experiences and reliable online resources while acknowledging weather and technical limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49270953" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://adapt.com/blog/build-wide-ship-narrow" target="_blank">Build Wide, Ship Narrow</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by ashumz • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post argues that traditional upfront decomposition of features into many small, pre‑planned pull requests is no longer cost‑effective because AI tools now make three stages cheap: generating code, iterating on design through conversational prompts, and automatically splitting a completed branch into narrow PRs. The author’s workflow shifts to “build wide, ship narrow”:  </p>
+<ul>
+<li>Draft a detailed, decision‑rich plan or spec before coding.  </li>
+<li>Develop on a single branch, using frequent commits as save points, until the feature works end‑to‑end.  </li>
+<li>Demo the working code early (video or preview) to gather product feedback before any review.  </li>
+<li>Prompt an AI agent to split the branch into the smallest independently reviewable PRs, creating separate worktrees, stacking only true dependencies, and placing deletions in a final PR.  </li>
+</ul>
+<p>Benefits include faster, focused reviews, easier rollbacks, and clearer ownership, while costs are rebasing effort when reviewers request changes and the need to merge the split PRs together for delivery. The approach suits multi‑surface features and uncertain refactors, but is less suitable for strictly ordered migrations or single‑cut features.</p>
+          </div>
+          <a href="https://adapt.com/blog/build-wide-ship-narrow" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism toward practices that prioritize large, unstructured code changes and view line‑count metrics as poor indicators of progress. They question the usefulness of AI agents for cleaning git histories, noting current outputs often contain irrelevant modifications and raise concerns about the value of reviewing such changes. Additionally, there is criticism of AI‑generated blog articles, with the view that reliance on machine‑written prose diminishes content quality and may deter skilled readers or potential hires. Overall, the sentiment leans toward caution and doubt about these AI‑driven approaches.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49280047" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://funcall.blogspot.com/2026/08/why-vibe-code-in-lisp.html" target="_blank">Why Target Common Lisp for Code Generation?</a>
+        </h2>
+        <span class="article-meta">
+          64 points • by oumua_don17 • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="http://funcall.blogspot.com/2026/08/why-vibe-code-in-lisp.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a mixed view of Common Lisp in the era of LLM‑assisted development. Many acknowledge its expressive macro system, dense syntax, REPL workflow and performance comparable to low‑level languages, seeing economic benefits from smaller token footprints. At the same time, users cite scarce learning material, complex package and build processes, tooling quirks such as memory forking, and limited training data that lead to dialect confusion for LLMs. Overall, Lisp is regarded as powerful yet niche, with practical advantages offset by ecosystem and usability challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49269429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
