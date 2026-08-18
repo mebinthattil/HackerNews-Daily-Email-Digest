@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://timmarinin.net/2026/bluesky-screenshots/" target="_blank">How Bluesky draws its logo on screenshots</a>
+        </h2>
+        <span class="article-meta">
+          299 points • by gavide • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post explains how the Bluesky iOS app reveals its logo only in screenshots. The implementation resides in a file named GrowthHack.tsx (added Jan 2026) and relies on the expo‑privacy‑sensitive package. That package creates a UITextField with isSecureTextEntry set to true, then renders the UI element (the “Follow” button) into the field’s layer. When iOS captures a screenshot, it blanks layers belonging to secure text fields, causing the button to disappear and exposing the underlying logo that is always present in the view hierarchy. For non‑iOS platforms the content is rendered normally without masking. The behavior does not trigger when switching apps because iOS takes a snapshot before the gesture, before the secure‑text field can blank its layer, leaving the static snapshot unchanged. Similar techniques are used by Telegram’s secret chats and Signal, leveraging the privacy‑oriented API rather than a bug, and have not been patched by Apple.</p>
+          </div>
+          <a href="https://timmarinin.net/2026/bluesky-screenshots/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments are split between approval of the screenshot‑overlay as a low‑impact branding or attribution tool that can aid discovery, and criticism that it intrudes on user privacy, feels like marketing spam, and mirrors similar practices on other platforms. Several users note workarounds or compare it to iOS behavior, while others call for an optional setting to disable or control the overlay. Overall, the feature is seen as a trade‑off: useful for promotion but often perceived as unnecessary, intrusive, or “hostile” by a substantial portion of commenters.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49338459" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fabiensanglard.net/quake_shareware_cd/index.html" target="_blank">Quake Shareware, a CD-ROM just a little too full</a>
+        </h2>
+        <span class="article-meta">
+          201 points • by shdon • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Quake’s 1996 share‑ware CD was marketed as a low‑cost “shareware version” that could be upgraded to the full game via a phone‑based unlock system. The disc occupied ~22 MiB, leaving most of the 640 MiB CD capacity unused; id Software filled the remainder with encrypted copies of its catalog (DOOM, HEXEN, HERETIC, etc.). Unlocking required the user to call a toll‑free number, provide a generated “challenge” code, pay, and receive a “serial” password. The process relied on TestDrive Corp.’s encryption tool, which replaced the first 32 KiB of each executable with a custom header and stored the original header in a .ST3 file, while a .MJ3 file acted as the locked executable. The serial was derived locally from the challenge using a hard‑coded algorithm; the server supplied no secret, making the protection security‑by‑obscurity. The GNOMON group released QCRACK.EXE, which reproduced the serial automatically, exposing the flaw. Additional bugs—such as an incorrect GAME‑ID for Final Doom and unencrypted SKU files—further undermined the scheme, leading to massive unsold inventory.</p>
+          </div>
+          <a href="https://fabiensanglard.net/quake_shareware_cd/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively reminisce about 1990s shareware distribution, recalling low‑cost CD purchases, the appeal of bundled soundtracks, and the rapid appearance of cracks that made full versions accessible. They note the era’s fast‑evolving storage technology, describe how weak DRM and per‑disc key schemes limited security, and critique the commercial motives behind shareware pricing while acknowledging the marketing boost it provided. Overall, the tone is nostalgic and reflective, emphasizing both the convenience and shortcomings of the period’s distribution and protection methods.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49338328" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openrouter.ai/openai/gpt-5.6-sol" target="_blank">GPT-5.6 Sol Pricing Cut by 50%</a>
+        </h2>
+        <span class="article-meta">
+          218 points • by Topfi • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>GPT-5.6 Sol is the leading model in OpenAI’s GPT‑5.6 line, optimized for advanced reasoning, programming, and agent‑based workflows. It excels in command‑line operations, multi‑step coding tasks, and solving problems that require long‑term planning. The page lists visual assets associated with the model, including favicons for OpenRouter, OpenAI, Azure, Amazon Bedrock, Codex, Nous Research, Pi.dev, Claude, and OpenClaw. No additional pricing or benchmark data is provided in the excerpt.</p>
+          </div>
+          <a href="https://openrouter.ai/openai/gpt-5.6-sol" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed reactions to the recent price cuts and performance of GPT‑5.6‑Sol. Several users report slower, overly complex responses and view it as a regression compared with earlier Codex‑based models, while others highlight lower token usage and consider it competitive enough to replace Claude. The reduced pricing is seen as a market‑driven move that may pressure competitors, though many suspect profit motives and question the sustainability of such cuts. Cost remains a dominant factor, with cheaper alternatives and Chinese models gaining attention, and overall sentiment remains cautious and split.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49337602" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/shattered-skeleton-scottish-castle-first-confirmed-death-trebuchet" target="_blank">Shattered skeleton is first confirmed death from trebuchet</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by hermitcrab • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/shattered-skeleton-scottish-castle-first-confirmed-death-trebuchet" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mixture of curiosity and dark humor regarding the incident. Several contributors express interest in the details, noting the severity of the injury and speculating that additional factors, such as a falling wall, might have contributed to the extensive damage. The tone includes a blend of morbid amusement about the victim’s fate and analytical discussion about the mechanics of the impact, reflecting both entertainment and investigative perspectives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49285139" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://duckdb.org/2026/08/17/duckdb-20-highlights" target="_blank">A Preview of DuckDB v2.0</a>
+        </h2>
+        <span class="article-meta">
+          569 points • by ibotty • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>DuckDB v2.0 (“Cyanoptera”) introduces a client‑server mode via the Quack extension and a new CONNECT statement, allowing any DuckDB instance to serve databases over the network and push down queries to PostgreSQL/MySQL. The VARIANT type now supports full‑pipeline shredding, direct Parquet read/write, and a suite of variant_* functions; JSON will later be backed by VARIANT. Triggers are added with BEFORE/AFTER, row/statement scopes, transition tables, RETURNING, and DROP TRIGGER. New SQL capabilities include NEAREST joins for vector similarity, DML inside CTEs, nested schemas, $‑style variables, JSON mutation functions, recursive CTEs with USING KEY aggregation, FETCH FIRST, OVERLAY, UNNEST in GROUP BY, and well‑defined MERGE/UPDATE FROM semantics. Asynchronous I/O is applied throughout the engine, accelerating remote reads/writes for Parquet, CSV, and DuckDB’s own format, and adding MMAP/DIRECT_IO modes. Storage defaults switch to format v2.0 with buffer‑managed ART indexes, lazy column‑metadata loading, DICT_FSST compression, compact deletes, and stronger corruption checks. A new PEG‑based SQL parser replaces the PostgreSQL‑derived one, offering extensible grammar and better errors. The ICU dependency is removed in favor of a built‑in timezone/calendar implementation. The C API is now stable, version‑specified, and supports signed extension repositories, enabling one‑time builds that persist across releases. An advisory board will guide future development.</p>
+          </div>
+          <a href="https://duckdb.org/2026/08/17/duckdb-20-highlights" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion is largely enthusiastic, highlighting DuckDB’s speed, portability, and strong integration with tools such as dbt, Python, and various file formats, while many express anticipation for version 2.0 features like improved VARIANT handling, an extensible C++ API, async processing, and better memory‑limit controls. Common requests include native ordered tables, incremental materialized views, richer transactional guarantees, and broader migration and runtime‑size support. Concerns are noted about limited third‑party migration tooling, occasional out‑of‑memory issues, and mixed reactions to AI‑driven development and the continued C++ codebase. Overall sentiment is positive with constructive suggestions for further enhancements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49330781" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://catcrafts.net/posts/fairphone-6-postmarketos-working-main-camera" target="_blank">Fairphone 6 and PostmarketOS working main camera</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by pizzaiolo • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A new driver enables the Fairphone 6+ main camera to operate under postmarketOS, supporting auto‑focus and initial color correction; image quality is improved but remains grainy and JPEG‑compressed. Ongoing work targets further color adjustment and grain reduction. Emergency‑call functionality has been approved for testing on 18 August 2024 (13:30–14:15), confirming the Linux phone can reach 1‑1‑2. The Fairphone 6+ has been announced, and the author plans to acquire one for further testing. Donations are tracked via a live financial dashboard, and proceeds will fund the FP6+ purchase. Catcrafts aims to register as a Dutch non‑profit (stichting); any future salary will comply with market‑rate limits and be publicly disclosed. Worldwide shipping will exclude the US, Canada (due to unavailable corporate liability insurance) and Russia, Belarus, North Korea (sanctions). Four carriers (KPN NL, Telekom Deutschland, Phonero, Telia Norge) are confirmed to work with postmarketOS on the Fairphone 6. Future roadmap includes enhanced color correction, laser‑rangefinder autofocus, selfie camera, fingerprint sensor, extensive testing, and upstreaming of patches.</p>
+          </div>
+          <a href="https://catcrafts.net/posts/fairphone-6-postmarketos-working-main-camera" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a blend of enthusiasm and criticism. Positive remarks highlight the novelty of authorized emergency‑calling testing and appreciation for the work overall. Technical concerns focus on the autofocus algorithm’s unnecessary defocusing and a request for PDAF pixel data access. Opinions on organizational structure advise against non‑profit models for hobby projects, favoring for‑profit simplicity and flexibility. Criticism targets postmarketOS’s reliance on volunteer hacks and lack of OEM/ODM driver support, with a preference expressed for more robust, officially backed operating‑system solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49338285" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug" target="_blank">AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake&#39;s Jira</a>
+        </h2>
+        <span class="article-meta">
+          332 points • by galnagli • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Wiz Research’s autonomous AI tool, Red Agent, discovered a critical script‑injection flaw in Snowflake’s <code>snowflake-connector-net</code> GitHub repository (workflow <code>jira_issue.yml</code>). The vulnerability arose from a PR merged on 18 Jun 2026 (PR #1218, co‑authored by “Copilot Autofix”), which replaced a safe <code>env</code> + <code>jq</code> parsing pattern with direct interpolation of <code>${{ github.event.issue.title }}</code> into a shell command. Because the workflow triggered on any issue opening, an attacker could craft an issue title that broke out of the escaped <code>echo</code> string and execute arbitrary commands in the GitHub Actions runner, exfiltrating Jira credentials via an out‑of‑band callback.  </p>
+<p>Red Agent automatically refined its payload after an initial syntax error, successfully retrieving a base64‑encoded token and email associated with a Snowflake‑owned Jira account. Snowflake patched the workflow on the same day (23 Jun 2026, commit 1dc7766, PR #1402), revoked and rotated the token, and audit logs confirmed no external access beyond Wiz’s testing IPs.  </p>
+<p>Key insights: AI‑generated code changes can unintentionally re‑introduce insecure patterns, demanding static‑analysis and guardrails; automated discovery can shorten exposure windows to days, requiring rapid patch cycles and short‑lived credentials.</p>
+          </div>
+          <a href="https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express concern that the GitHub Actions vulnerability resulted from neglecting static analysis and inadequate code review, especially when AI‑generated fixes are applied automatically. Contributors note that YAML’s complexity creates footguns and that relying on AI to make cheap changes amplifies the risk of insecure code entering production. There is consensus that human oversight, security scanning, and proper testing remain essential, while acknowledging that AI can streamline low‑value fixes but should not replace thorough verification. The overall tone is critical of lax processes and supportive of stronger safeguards.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49331423" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2608.13759" target="_blank">GPU Offload in Rust: Portable, Safe, and Fast</a>
+        </h2>
+        <span class="article-meta">
+          173 points • by linggen • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>GPU Offload in Rust introduces a zero‑overhead, multi‑vendor compilation framework integrated directly into the Rust compiler (rustc) and LLVM back‑ends. By exploiting Rust’s ownership model, strict aliasing (noalias), and rich type system, the framework manages data transfers and generates LLVM IR for GPU kernels without resorting to vendor‑locked DSLs or unsafe raw pointers. It addresses cross‑vendor ABI mismatches between host and device targets through a two‑pass compilation pipeline that supports both manually specified and compiler‑generated memory movements. Evaluation on the RAJAPerf benchmark suite shows that the rustc‑based approach produces kernel performance comparable to hand‑optimized CUDA and HIP C++ implementations, while maintaining Rust’s compile‑time memory safety guarantees. The work demonstrates that safe, portable, and high‑performance GPU offloading can be achieved within the existing Rust toolchain.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2608.13759" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show appreciation for the project’s ambition and interest in running Rust code on GPUs, especially for developers who wish to avoid maintaining external bindings. However, many raise technical doubts, questioning the reliance on LLVM versus direct PTX/HIP generation, noting past C++ off‑load challenges and the difficulty of emulating pointers. Several participants point to existing vendor‑neutral approaches through Vulkan/SPIR‑V and ask for code releases, while others wonder about the target audience, performance portability, and comparisons to alternatives such as Mojo. Overall sentiment blends cautious optimism with significant skepticism about practicality and design choices.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49334991" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://en.wikipedia.org/wiki/Olo_(color)" target="_blank">Olo (Color)</a>
+        </h2>
+        <span class="article-meta">
+          354 points • by inigyou • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Olo is a theoretically defined color that can be perceived only when M‑cone photoreceptors in the retina are stimulated in isolation. Because natural light simultaneously activates S, M, and L cones, no monochromatic stimulus can excite M cones alone, placing olo outside the conventional visible gamut. Researchers at UC Berkeley mapped individual cone types on a retinal patch and employed precisely targeted laser pulses to activate M cones while minimizing stimulation of S and L cones. Five participants exposed to this protocol reported a highly saturated blue‑green hue, approximated in the sRGB space by hex #00FFCC. The discovery was reported on 18 April 2025 and named “olo” after its LMS color‑space coordinates (0, 1, 0), rendered as “olo” in leet‑speak. Potential applications include augmenting color perception for color‑blind individuals and exploring tetrachromacy. While the technique is praised as a notable technical achievement, some experts question whether olo constitutes a genuinely new color rather than an artifact of selective cone stimulation.</p>
+          </div>
+          <a href="https://en.wikipedia.org/wiki/Olo_(color)" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the newly reported “Olo” hue, combining technical curiosity about its coordinates, visualisation tools, and potential approximations in paint, with speculative ideas about direct neural stimulation and future consumer uses. Participants reference scientific articles, artistic analogies, and pop‑culture comparisons, expressing enthusiasm for exploring impossible or “imaginary” colors while also questioning the novelty and practical relevance. Humor and light‑hearted remarks appear alongside genuine interest in how the color might be rendered, named, or experienced beyond conventional perception.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49270194" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://responsiblestatecraft.org/israel-influence-chatgpt/" target="_blank">Israel creates fake think tank in likely attempt to dupe AI chatbots</a>
+        </h2>
+        <span class="article-meta">
+          206 points • by DeepLogin • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Hanover Institute for Public Policy is a fabricated think tank created by Piro Inc., a firm co‑founded by Daniel Rosenberg, on behalf of the Israeli Government Advertising Agency. Its website publishes over 100 “reports” on Israel‑Palestine topics, all lacking bylines and presented with footnotes, tables of contents, and citations that mimic credible academic output. The content is engineered for large language models (LLMs) to appear authoritative, a practice described by Piro as “AI Story Optimization” and referred to by analysts as “LLM poisoning.” Reports address questions such as the causes of the 1948 Palestinian displacement, alleged Israeli war crimes, and the morality of the IDF, often linking findings to antisemitism trends. While some articles contradict official Israeli narratives, most cite Israeli government sources. Piro received $900 k from the Israeli government, subcontracted through Havas Media, and has also worked with former Trump campaign manager Brad Parscale on similar chatbot‑targeted sites. AI‑detection tools flagged the majority of the institute’s articles as AI‑generated.</p>
+          </div>
+          <a href="https://responsiblestatecraft.org/israel-influence-chatgpt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express distrust of Israeli‑linked information campaigns, accusing them of creating fake think‑tanks and astroturf to sway public opinion and train AI models. They emphasize the growing risk that manipulated online content could poison large language models, highlighting the lack of reliable authority signals in AI training. Parallel critiques note that similar disinformation tactics are common in many conflicts, questioning why narratives often blame a single side and calling out perceived double standards in the evaluation of wartime propaganda.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49337392" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
