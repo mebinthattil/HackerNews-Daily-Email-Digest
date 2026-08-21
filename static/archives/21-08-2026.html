@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 21, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://annas-archive.gl/blog/physical-destruction.html" target="_blank">AI companies destroy physical books – let&#39;s scan rare books before it&#39;s too late</a>
+        </h2>
+        <span class="article-meta">
+          122 points • by Cider9986 • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AI companies are reportedly acquiring large numbers of second‑hand books, scanning them for training data, and then destroying the physical copies. Anthropic’s “Project Panama,” revealed through a $1.5 billion copyright settlement, allegedly spent tens of millions of dollars purchasing and digitizing millions of paper books before disposing of them, a practice claimed to be legally permissible but ethically contested. The rationale given includes preventing competitors from accessing the same material, reducing legal exposure, and lowering costs compared to lossless scanning. The resulting digital files would reside exclusively on corporate servers, concentrating knowledge ownership. In response, Anna’s Archive—a volunteer‑run shadow library—calls for worldwide volunteers to scan and upload books, journals, newspapers, and rare materials to preserve them in a public digital repository. The initiative offers recognition, membership, and limited financial support for large‑scale contributions, aiming to preempt further loss of physical works as AI‑generated content expands on the internet.</p>
+          </div>
+          <a href="https://annas-archive.gl/blog/physical-destruction.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism toward claims that AI firms are systematically destroying books, arguing that copyright holders already restrict access and that most scanning operations preserve the physical items and retain digital copies for training. They note that the industry routinely discards large volumes of cheap, duplicate books, making the alleged loss relatively minor, and suggest the controversy may be amplified by the companies themselves. While acknowledging copyright complexities and the value of collaboration with archives, the overall view frames the issue as overstated compared with broader publishing waste.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49383026" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/" target="_blank">The August 17 outage</a>
+        </h2>
+        <span class="article-meta">
+          385 points • by 0xedb • 65 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Outage on August 17 lasted 7 hours 47 minutes, disrupting GitHub.com, authentication, Actions, APIs, pull requests, issues, and Copilot.  </li>
+<li>Root cause: a traffic peak overwhelmed a critical component in the Central US data center; the component failed to scale, leading to capacity pressure and authentication failures. No code or configuration change was involved.  </li>
+<li>Monthly commit volume grew from 1.4 billion to 2.9 billion, illustrating the demand driving the failure.  </li>
+<li>Recovery involved traffic rerouting, isolation of affected infrastructure, staged service restoration, and mitigation of client‑side retry loops that amplified load.  </li>
+<li>Mitigations added &gt;3 million CPU cores, 120 PB of high‑speed storage, and significant network capacity; Azure now handles ~58 % of platform load (up from 12 % in May) and half of all Git operations.  </li>
+<li>Future work includes an architecture that scales read capacity linearly with the number of readers, targeting unlimited reads for large monorepos, to be rolled out incrementally.  </li>
+<li>Operational enhancements focus on stronger testing, safer rollouts, improved observability, more effective alerting, isolation of critical systems, and removal of shared dependencies.  </li>
+<li>Immediate post‑outage changes: enforce consistent retry limits, retry budgets, and variable timeouts to prevent retry storms; review lower‑priority CPU/memory alerts for spike‑susceptibility.  </li>
+<li>The overarching goal is to raise availability and restore developer trust in the platform.</li>
+</ul>
+          </div>
+          <a href="https://github.blog/news-insights/company-news/the-august-17-outage-and-the-work-ahead/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge GitHub’s rapid increase in commit volume and its role in supporting free developer services, but express widespread concern over recurring outages, scaling bottlenecks, and aggressive client‑side retry behavior. Many suggest that unlimited free access is unsustainable and propose charging, rate‑limiting, or migrating to self‑hosted alternatives. Criticism is directed at perceived lack of transparency, inadequate testing, and reliance on Azure infrastructure. Overall sentiment combines admiration for the platform’s impact with skepticism about its capacity to handle continued growth without structural changes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49378957" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/codex/issues/37674" target="_blank">Codex on AWS bedrock bug causing 10x charges</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by TheP1000 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Native Codex CLI (v0.147.0) using the <code>nativeamazon-bedrock</code> provider against the Bedrock Mantle Responses API (us‑east‑1) with model <code>openai.gpt-5.6-sol</code> cannot enable the explicit prompt‑caching mode documented for GPT‑5.6 Sol. Production data from 2026‑08‑05 to 2026‑08‑08 shows cache‑write tokens representing ~85 % of the model’s estimated spend; a local session logged 76 Sol requests with 6.709 M cache_write_input_tokens (≈88 K per request) and zero cached_input_tokens. The provider’s request payloads omit <code>prompt_cache_key</code>, <code>prompt_cache_options</code>, and <code>prompt_cache_breakpoint</code>, and the current <code>config.toml</code> only controls transport/auth, not request‑body transformation.  </p>
+<p><strong>Requested changes</strong><br>
+- Serialize <code>prompt_cache_options</code> for GPT‑5.6‑capable Responses providers.<br>
+- Add a typed <code>prompt_cache_breakpoint</code> field to supported input blocks.<br>
+- Implement a capability gate and safe placement of cache‑breakpoints after the stable instruction/tool prefix.<br>
+- Expose cache reads/writes in per‑turn telemetry for cost diagnosis.  </p>
+<p>The issue does not claim all cache writes are defects; cold starts, distinct prompts, forks, and compaction may legitimately require writes, but the current native Bedrock integration lacks a mechanism to use the documented explicit‑cache feature for stable‑prefix workloads.</p>
+          </div>
+          <a href="https://github.com/openai/codex/issues/37674" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment reports that the AWS Bedrock Codex implementation has a read/write cache ratio below five percent, resulting in excessive write operations that are costly and cause performance to be roughly ten times worse than expected due to ineffective caching. It notes that disabling the web‑search feature resolves the issue, serving as a practical workaround for the observed high write overhead.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49383326" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.experimental-history.com/p/i-like-em-thick" target="_blank">I like &#39;em thick: an apology to my English teachers</a>
+        </h2>
+        <span class="article-meta">
+          613 points • by Ariarule • 63 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay defines “thickness” as the depth that rewards careful, sustained engagement with a work of art or literature, contrasting it with “thin” works that appeal to casual consumption. It argues that thickness arises from layered meanings, hidden details, and the effort required to uncover them, illustrated by Bosch’s <em>The Garden of Earthly Delights</em>—notably the “butt music” motif, which scholars deem an intentionally unplayable warning against secular music. The author cites examples such as Hokusai’s evolving sketches, the interactive clues in Graeme Base’s <em>The 11th Hour</em>, and Jane Jacobs’s observations of urban bench‑watching to show how thick works embed multiple interpretive possibilities. The piece warns that privileging thin, easily produced content—especially AI‑generated art and self‑help rhetoric—risks fostering “slop” lacking substantive insight. It concludes that longevity and repeated re‑examination signal true thickness, and that genuine creative effort, rather than shortcut tools, remains essential for producing work of lasting value.</p>
+          </div>
+          <a href="https://www.experimental-history.com/p/i-like-em-thick" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong appreciation for works that demand sustained attention and contextual understanding, praising art and literature that reveal depth only through effortful engagement. Readers repeatedly note that personal growth often follows immersion in “thick” pieces, while criticizing superficial teaching that presents works as self‑explanatory. There is consensus that evaluating lasting impact rather than immediate appeal yields more meaningful judgments, and many express a desire for richer guidance and feedback to navigate complex creative material. Overall sentiment is positive toward deep, contextual experiences and skeptical of shallow, time‑constrained instruction.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49347543" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chrisburnell.com/html-can-do-that/" target="_blank">HTML Can Do That</a>
+        </h2>
+        <span class="article-meta">
+          629 points • by encyclopedism • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>HTML now supports many interactive features formerly requiring JavaScript:</p>
+<ul>
+<li><strong>popover attribute</strong>: Elements with <code>popover</code> and <code>popovertarget</code>/<code>popovertargetaction</code> can be shown, hidden, and dismissed without script; works in modern browsers but lacks full accessibility support.  </li>
+<li><strong> element</strong>: Native modal dialogs can be opened via <code>popover</code> or via JavaScript methods <code>.showModal()</code> / <code>.close()</code>. <code>command</code>/<code>commandfor</code> attributes allow declarative show‑/hide‑popover actions.  </li>
+<li><strong>Grouped </strong><strong></strong>: Adding a shared <code>name</code> attribute creates an exclusive accordion where opening one closes the others.  </li>
+<li><strong>command &amp; commandfor</strong>: Declarative invoker commands (<code>show-popover</code>, <code>hide-popover</code>, <code>show-modal</code>, etc.) control popovers/dialogs without scripting; only a limited set is stable across browsers.  </li>
+<li><strong>loading="lazy"</strong>: Defers image loading until near the viewport, replacing IntersectionObserver patterns.  </li>
+<li><strong>hidden="until-found"</strong>: Elements remain hidden until navigated to via a fragment link; currently limited in screen‑reader compatibility.  </li>
+<li><strong>Native form controls</strong>: <code>&lt;input type="color|date|range"&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;meter&gt;</code> provide built‑in pickers and visual indicators, though implementations vary and accessibility may be weak.  </li>
+<li><strong></strong>: Supplies native autocomplete suggestions for text inputs, but support is uneven across input types.</li>
+</ul>
+<p>Authored by Chris Burnell for HTML Day 2026 (updated 2026‑08‑20).</p>
+          </div>
+          <a href="https://chrisburnell.com/html-can-do-that/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show broad appreciation for recent HTML standards such as popovers, dialogs, and grouped </p>, noting that they enable many interactions without JavaScript and simplify UI development. At the same time, users point out persistent challenges: uneven browser implementation, limited styling options, inadequate positioning and localization for controls like date pickers, and missing features such as sortable tables or fully styled inputs. Consequently, while the community values the direction toward native capabilities, many still rely on libraries for richer UX and call for faster, more consistent adoption across browsers.<p></p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49362689" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://safedep.io/arrayref-proc-macro1-rust-build-time-malware/" target="_blank">Malicious Rust crate Arrayref runs a build-time payload</a>
+        </h2>
+        <span class="article-meta">
+          420 points • by abhisek • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Rust crate <strong>arrayref</strong> version 0.3.10, published on 20 Aug 2026, added a non‑optional dependency on a typosquatted crate <strong>proc‑macro1</strong>. The genuine author’s account (droundy) appears compromised; older releases (0.3.5‑0.3.9) were yanked, nudging developers to the malicious 0.3.10. <strong>proc‑macro1</strong> is a copy of the legitimate <strong>proc‑macro2</strong>, but its build script (1.0.107) downloads an architecture‑specific binary from <code>https://23.254.165.112:9089/</code> and contacts <code>23.254.165.112:443</code> as C2. The script assembles the URL from Base64 fragments, uses <code>rustls</code> with an “accept‑all” verifier and <code>ureq</code> for HTTP, then writes the payload to <code>/tmp/rust-setup</code> (Linux/macOS) or <code>%TEMP%\rust-setup.ps1</code> plus a VBScript launcher (Windows) and executes it detached from the Cargo build. The crate is a transitive dependency in many GUI libraries (tiny‑skia, winit, egui, etc.), with ~245 M total downloads. SHA‑256 hashes of the removed artifacts are provided for detection.</p>
+          </div>
+          <a href="https://safedep.io/arrayref-proc-macro1-rust-build-time-malware/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad concern that the Rust supply‑chain incident reveals weaknesses in Cargo, crates.io and the ecosystem’s reliance on numerous thin‑layer libraries. Contributors criticize the lack of visibility, advisory notices, and security controls such as sandboxed build scripts or publish‑age restrictions, and compare the situation to similar problems in npm and other language ecosystems. Many call for stronger standard‑library features, stricter vetting of proc‑macros and build.rs, and sandboxing or containerization to limit blast radius, while acknowledging Rust’s memory‑safety advantages but urging concrete mitigations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49374269" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jsomers.net/i-should-have-loved-biology/" target="_blank">I should have loved biology (2020)</a>
+        </h2>
+        <span class="article-meta">
+          212 points • by tyre • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay critiques conventional biology teaching for presenting isolated facts—Golgi apparatus, Krebs cycle, DNA/RNA—without emphasizing underlying questions such as embryonic differentiation. It highlights the pivotal 1944 Avery experiment that identified nucleic acid as the “transforming principle,” leading to the discovery of DNA’s role in heredity. The author draws parallels between biology and computer science, describing cells as self‑modifying programs and emphasizing that gene expression is physically regulated by chromatin structure (DNA winding around histones) which controls transcriptional access. Modern techniques—centrifugation, gel electrophoresis, Western blots, flow cytometry, RNA‑seq—are presented as core, reproducible methods across studies. Visual resources (Goodsell’s <em>Machinery of Life</em>, Cohen’s <em>A Computer Scientist’s Guide to Cell Biology</em>) are recommended for building a structural intuition of molecular machines and diffusion‑limited interactions. Finally, the piece calls for improved, collaborative drawing and simulation tools (vector graphics, BioRender, CellPAINT, interactive 3‑D platforms) to make complex biological processes more accessible and to inspire future scientists.</p>
+          </div>
+          <a href="https://jsomers.net/i-should-have-loved-biology/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a mixed view of biology and scientific education. Many describe an initial sense of wonder and excitement about biological complexity, especially when approached through computational or experimental work, while also noting that traditional curricula often reduce the subject to memorization and treat students as expendable resources. Several contributors highlight the appeal of interdisciplinary work, the undervaluation of technical roles, and the potential of hands‑on, game‑like learning to foster deeper understanding. Overall, there is agreement that education should prioritize discovery over rote learning.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49377853" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://journals.aps.org/prab/abstract/10.1103/4nhs-bkwh" target="_blank">Make a 6-Tesla-class high-temperature superconducting dipole magnet at 4.2 K</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by supermagnet • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://journals.aps.org/prab/abstract/10.1103/4nhs-bkwh" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reactions: several points note a discrepancy between the “high‑temperature” label and the 4.2 K operating condition, questioning the significance of the work given that performance at that temperature is reported as inferior to established Nb‑Ti technology. Others express enthusiasm for the development, while an additional comment seeks clarification on whether MRI systems typically operate in the 4–5 K range. The discussion centers on temperature terminology, comparative performance, and practical operating temperatures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49304409" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jacob.gold/posts/theres-no-such-thing-as-a-small-software-team/" target="_blank">There&#39;s no such thing as a small software team anymore</a>
+        </h2>
+        <span class="article-meta">
+          44 points • by mooreslaw • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that modern development environments have rendered “small” software teams obsolete. Uber’s architecture of thousands of microservices, driven by engineers seeking independent deployment schedules, illustrates a shift from monolithic codebases—where a handful of developers might produce ~50 commits, 20 pushes and 10 pull requests daily—to highly parallel workflows that can generate 500 commits, 200 pushes and 100 pull requests per day across 20–100 coding agents. In a monolith, changes often conflict, requiring extensive coordination, whereas a microservice landscape enables “embarrassingly parallel” improvements; each agent can target a specific service for performance upgrades without interfering with others. The overhead of splitting code into many services has decreased because agents automate boilerplate, CI configuration, and deployment tasks. Effective parallelism depends on modular code that fits within an agent’s context window, making early design for modularity essential to maximize productivity while avoiding merge conflicts, broken builds, and deployment complexity.</p>
+          </div>
+          <a href="https://jacob.gold/posts/theres-no-such-thing-as-a-small-software-team/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward scaling AI‑driven development through hundreds of microservices, arguing it merely shifts complexity to operations without demonstrable productivity gains. Critics note that agents struggle to maintain holistic code context, leading to semantic conflicts, fragile deployments, and reliance on senior engineers who may eventually leave. While acknowledging that modularity can aid parallel work, many argue that well‑structured monoliths or disciplined modular code can achieve similar outcomes more reliably, and they question the real value and cost‑effectiveness of such massive service proliferation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49382152" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.experimental-history.com/p/why-arent-smart-people-happier" target="_blank">Why aren&#39;t smart people happier? (2022)</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by rafaelc • 74 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Intelligence is defined as a broad mental capability for reasoning, planning, abstract thought, learning and problem‑solving, measured reliably by IQ tests. Large studies (UK national sample, General Social Survey) find at most a negligible negative correlation between test scores and self‑reported happiness (r ≈ ‑0.06). The article argues this weak link stems from a mistaken view of intelligence as a single general factor (Spearman’s “g”). Spearman correctly noted that performance across diverse tests is positively correlated, but he interpreted this as a unitary ability for all problem types. The author distinguishes <strong>well‑defined problems</strong>—with clear boundaries, repeatable procedures, and objective answers (e.g., math, vocabulary, chess)—from <strong>poorly defined problems</strong>—open‑ended, value‑laden, lacking fixed solutions (e.g., relationships, life choices, moral judgments). IQ tests assess only the former, while happiness depends on the latter, which aligns with wisdom, creativity, and self‑knowledge. AI likewise excels at well‑defined tasks but cannot yet solve poorly defined ones. Recognizing and valuing skill in poorly defined problem‑solving is presented as essential for improving well‑being.</p>
+          </div>
+          <a href="https://www.experimental-history.com/p/why-arent-smart-people-happier" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that intelligence by itself does not produce higher happiness. Contributors note that smart individuals often over‑analyze, feel isolated, or recognize societal problems they cannot influence, which can diminish wellbeing, while others stress that happiness depends more on relationships, health, purpose, and emotional regulation than on raw IQ. Many argue that a narrow definition of “smart” overlooks multiple intelligences and wisdom, and that broader life skills, discipline, and lifestyle choices play a larger role in personal fulfillment than cognitive ability alone.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49378446" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
