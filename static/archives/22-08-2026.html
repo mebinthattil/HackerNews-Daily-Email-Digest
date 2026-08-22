@@ -1,0 +1,556 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danluu.com/perf-opt/" target="_blank">There&#39;s no reason for software to be slow anymore</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by Jach • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LLMs have dramatically lowered the time and expertise required for performance engineering, making optimizations that once needed specialist teams achievable in minutes of prompting. Using an LLM‑driven agent, a custom regex engine (FRE) was over‑fitted to the rebar benchmark, then generalized via a holdout set, yielding 2‑4× speedups on long ripgrep queries and ≈7 % overall gain after AOT compilation. A rapid workload‑specific optimization run (≈2 min) produced a 2 % improvement on a holdout suite, with further gains expected when combined with native‑code compilation. The cost of such work has fallen by orders of magnitude (≈10³–10⁶× reduction in person‑days versus token cost), enabling developers to generate JIT compilers, multithreaded game AIs, and fast ingesting indexes that formerly required weeks of engineering. Dynamic, custom software tailored to particular workloads is therefore becoming feasible at scale, while the risk of over‑fitting remains a consideration. Empirical data from the author’s ripgrep usage shows long regex patterns (median 55 code points, 90‑th percentile 119) and query latencies up to 2 hours, underscoring the potential impact of these low‑cost optimizations.</p>
+          </div>
+          <a href="https://danluu.com/perf-opt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a mixed view of AI‑driven code optimization. Several contributors report notable speed gains and effective profiling when agents tackle well‑defined tasks such as regex engines or specific data structures, emphasizing the importance of strong benchmarks and test suites. At the same time, many express skepticism that most developers lack the expertise to guide agents toward truly performant, secure code, warning that market incentives favor feature churn over efficiency and that AI‑generated code often remains bloated or error‑prone. The prevailing pattern is cautious optimism tempered by concerns about discipline, incentives, and widespread impact on software performance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49395628" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.felonybench.com/" target="_blank">Felony Bench</a>
+        </h2>
+        <span class="article-meta">
+          578 points • by colinprince • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The submission consists solely of the heading “Felony Bench” and provides no accompanying narrative, data, or explanatory material. No sections, paragraphs, case descriptions, legal analysis, or contextual information accompany the title. Consequently, there are no factual points, technical terms, or thematic elements to extract or condense. The lack of content precludes any substantive summary beyond noting the existence of the title itself and the absence of further material. Without additional text, it is impossible to determine the intended scope, audience, or legal focus of the document. No jurisdiction, case law, or statutory references are present, and no narrative structure can be inferred. As a result, the only verifiable element is the title, which suggests a possible focus on criminal law proceedings, but no confirmation is available.</p>
+          </div>
+          <a href="https://www.felonybench.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments broadly discuss uncertainty over legal responsibility when an AI‑driven agent commits a CFAA violation, questioning whether users, platform providers, or model developers should be liable. Many express skepticism that computers can be prosecuted and note the difficulty of proving intent, while criticizing corporate responses to high‑profile incidents as insufficient. Opinions diverge on the usefulness of existing “felony‑bench” data, with some calling it overblown or popularity‑biased and others urging better benchmarks or legislation to limit AI memory. Overall sentiment ranges from cautious concern about accountability to sarcastic dismissal of current framing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49389430" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bandarlabs.github.io/Cobalt/" target="_blank">Kobo can run apps now</a>
+        </h2>
+        <span class="article-meta">
+          458 points • by thepoet • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Cobalt is a comprehensive SDK and app ecosystem for Kobo e‑readers, demonstrated on a Kobo Clara BW. It supplies a launcher and a dedicated Store that versions apps independently of the device platform, handling signed Wi‑Fi installation, updates, removal and reinstalls. Core applications include: an arXiv preprint browser, a full‑screen Sudoku grid, a Morse‑code front‑light messenger, an e‑ink audiobook player, OPDS catalog browsing (Project Gutenberg, Standard Ebooks, Open Library), Hacker News story ranking, feed aggregation, daily news briefs, AI‑generated answers, a coding‑agent request interface, a touch‑responsive shell with immediate key input, and utility tools such as a persistent to‑do list, tic‑tac‑toe, and hall‑sensor diagnostics. The UI toolkit provides panel‑native controls, layouts, typography and state management, while connectivity, hardware and platform updates are kept separate from the Store. Background collection of stories, touch‑friendly AI rendering, and approval dialogs for coding agents operate without keyboard reliance. All features are illustrated via e‑ink screenshots showing the launcher grid, app catalog, and individual app interfaces.</p>
+          </div>
+          <a href="https://bandarlabs.github.io/Cobalt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong enthusiasm for the new Kobo integration, noting its usefulness for manga, OPDS feeds, and potential extensions such as Zotero, Anki, or markdown viewers. Users appreciate the openness that enables community ports, PostmarketOS experiments, and broader service connectivity while many stress a preference for a distraction‑free reading experience and caution against heavy app use. Concerns focus on hardware limits—CPU cores, color versus BW models, PDF annotation tools, and the reboot‑to‑stock behavior—as well as potential future lock‑downs and unease with LLM‑generated marketing copy. Overall sentiment is largely supportive and optimistic, tempered by practical reservations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49390427" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rust-glancer.github.io/blog/hello-world/" target="_blank">Rust Glancer: Rust LSP using 100x less RAM</a>
+        </h2>
+        <span class="article-meta">
+          71 points • by matklad • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Rust Glancer is a Rust language server prototype focused on low memory consumption (target &lt; 100 MiB) and instant reuse of index data after editor restarts. It achieves this by performing a one‑time workspace indexing pass, persisting analysis results to disk, and loading only needed data for queries, rather than maintaining an incremental in‑memory database like rust‑analyzer. Consequently, Rust Glancer trades some responsiveness—updates appear after file saves—and slower frozen analysis for reduced RAM usage and restart‑friendly indexing. The server supports core LSP features (go‑to definition, hover, inlay hints, completions) and includes a full indexing pipeline with type inference and a Chalk‑based trait solver. Development spanned four months, during which the author leveraged LLM assistance for design and implementation, while manually reviewing all changes. Known limitations include incomplete LSP functionality, lack of full build‑script/proc‑macro execution, and occasional memory fragmentation. Future work aims at further performance and memory optimizations, expanded syntax and type‑inference support, code actions, and optional proc‑macro handling. The project is available as a VS Code extension and as a buildable VSIX.</p>
+          </div>
+          <a href="https://rust-glancer.github.io/blog/hello-world/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on interest in a Rust Analyzer configuration that utilizes a disk cache, motivated by the difficulty of waiting for the analyzer to construct a full in‑memory representation for large workspaces. The author notes that Rust Rover appears to handle this differently and seeks practical experiences and trade‑off assessments. Additionally, there is a request for clarification of unexplained acronyms, specifically asking what “Rust LSP” refers to.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49393052" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://grapheneos.social/@GrapheneOS/117136278553665985" target="_blank">Initial focus for our partnership with Motorola is a regular non-folding device</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by Cider9986 • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is a Mastodon post titled “GrapheneOS: ‘Initial focus for our partnership with Motorola i…’”. The site notes that the Mastodon web application requires JavaScript to function and offers alternative platform apps. The content includes a single image placeholder with the alt text “Mastodon”. No further textual details, discussion, or technical information about the partnership are provided.</p>
+          </div>
+          <a href="https://grapheneos.social/@GrapheneOS/117136278553665985" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express optimism about Motorola adding hardware security and supporting GrapheneOS, seeing it as a relief and potential alternative to Pixels despite high prices and limited availability. Users note the RAM shortage and difficulty acquiring devices, while questioning Motorola’s long‑term commitment and trustworthiness. There is interest in moving away from iOS and desire for a straightforward, non‑gimmicky phone. Technical concerns include whether future Snapdragon chips will retain non‑protected KVM support and how firmware issues will be handled.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49395605" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thomasdullien.github.io/posts/2026-08-21-three-important-steps-in-my-maturation-process/" target="_blank">Three important steps in my maturation process</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by tdullien • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author reflects on three insights that shaped his maturity.<br>
+1. Self‑awareness of incentive structures: one must question personal narratives and recognize that individual actions—such as handling zero‑day exploits—are influenced by ego, material needs, and the desire to be a hero. Meta‑cognition and considering alternative, possibly villainous, interpretations of one’s behavior are essential.<br>
+2. Monocausal determinism is largely an illusion outside debugging. Physical computers exhibit wear, noise, and probabilistic failures (e.g., bit flips), making most real‑world phenomena multicausal and stochastic. This limits guarantees for model alignment and highlights that many true facts will never be provable due to the scientific method’s bias toward high certainty.<br>
+3. The reason‑emotion split is a cultural construct, not a neurological fact. Emotions are integral to decision‑making, providing bodily and sensory information; suppressing them reduces decision quality. Integrating rational deliberation with emotional valuation yields better outcomes.</p>
+          </div>
+          <a href="https://thomasdullien.github.io/posts/2026-08-21-three-important-steps-in-my-maturation-process/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively view the piece as unusually insightful, highlighting its emphasis on health, therapy, self‑awareness, and the role of incentive structures and humility in mid‑life. Many readers praise its practical value and depth, while a notable subset critiques the dense terminology and questions the claim that reason‑emotion dichotomies lack neuroscientific basis. The discussion also explores philosophical perspectives on cognition, with agreement that understanding one’s own mental loops is useful, but disagreement persists over how sharply reason and emotion should be separated. Overall sentiment is appreciative yet analytically critical.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49394496" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://newscenter.lbl.gov/2026/08/10/scientists-release-biggest-2d-map-of-the-universe/" target="_blank">Scientists release biggest 2D map of the universe</a>
+        </h2>
+        <span class="article-meta">
+          164 points • by NKosmatos • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The new Legacy Imaging Survey map covers ~75 % of the sky in visible and near‑infrared wavelengths, providing the deepest unobscured view of the extragalactic universe. It combines 263,407 exposures from three ground‑based surveys—DECaLS (Cerro Tololo), MzLS (Kitt Peak), and BASS (Steward Observatory)—and incorporates data from NASA’s WISE infrared mission and other public sources. Over 160 scientists contributed to data acquisition; a team of 20 compiled the final dataset released today.</p>
+<p>The 2‑D map records positions and brightness of galaxies and stars, enabling target selection for the Dark Energy Spectroscopic Instrument (DESI). DESI completed its original five‑year survey in April 2026, ahead of schedule, and has already produced early results suggesting a possible weakening of dark‑energy influence over time. Improved analyses from the first five years are slated for publication in 2027, with DESI observations continuing through 2028.</p>
+          </div>
+          <a href="https://newscenter.lbl.gov/2026/08/10/scientists-release-biggest-2d-map-of-the-universe/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express awe at the scale and detail of the new sky map, noting its impressive visual impact and the sense of humility it evokes. Viewers are curious about extending the data into three dimensions, calculating distances for billions of objects, and creating more interactive or VR experiences, while also pointing out artifacts, missing objects, and the inherent limitation of a 2‑D representation of a 3‑D universe. Several remarks discuss funding concerns, predicting limited future investment in large telescopes, and reference upcoming missions such as the Roman Space Telescope as potential advances.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49392200" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nytimes.com/2026/08/21/us/politics/samuel-tunick-deleted-phone-felony.html" target="_blank">Felony charges for citizen deleting phone data at US Border</a>
+        </h2>
+        <span class="article-meta">
+          630 points • by floathub • 68 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.nytimes.com/2026/08/21/us/politics/samuel-tunick-deleted-phone-felony.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments broadly debate whether using a duress password that erases a device at a border checkpoint constitutes illegal evidence destruction, with many viewing it as risky obstruction while others argue that pre‑emptive wiping or using off‑device key storage could be permissible. Technical workarounds such as decoy partitions, GrapheneOS features, or automated far‑aday triggers are frequently suggested. A strong undercurrent of frustration with perceived overreach of customs and immigration authorities and concerns about constitutional protections appears, alongside pragmatic advice to travel with burner devices or fully reset phones before entry.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49386895" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kagi.com/changelog#11296" target="_blank">Kagi added a setting for removing paywalled links from search results</a>
+        </h2>
+        <span class="article-meta">
+          1042 points • by speckx • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Added a full “disable AI” toggle for Kagi Search (settings → ai) with plans to include it in onboarding, giving users control over AI features while preserving privacy.  </li>
+<li>Dice widget now supports custom‑sided dice; a new coin‑flip widget is also available. Users can enable or disable any widget via kagi.com/settings/more_search (descriptions include links).  </li>
+<li>Orion 1.1 for macOS released, featuring: a custom “LiquidGlass”‑inspired interface, container tabs that isolate sessions for multiple accounts, and an optional customizable border (transparent, solid, gradient, or auto‑matched colors) exclusive to Orion+ subscribers. Orion remains free; Orion+ provides paid support. Downloads for all supported platforms are at orionbrowser.com.  </li>
+<li>Kagi News and Kagi Translate saw high usage; translation service is temporarily suspended due to cost spikes and will return as a subscription‑based feature, with original‑language article access retained.  </li>
+<li>Additional minor improvements and bug fixes were applied to Kagi Search and Kagi Assistant.</li>
+</ul>
+          </div>
+          <a href="https://kagi.com/changelog#11296" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show strong appreciation for Kagi’s speed, ad‑free experience, AI‑assisted answers and new paywall‑filter feature, with many users describing the service as thoughtful, customizable and preferable to mainstream alternatives. At the same time, users express reservations about subscription cost, lack of private‑payment options, limited transparency around filtered sites, and concerns over Russian data usage. Requests for whitelist controls, plugin support and more granular settings appear frequently, while some prefer other privacy‑focused engines. Overall sentiment is largely positive but tempered by cost and feature‑flexibility concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49388154" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://matduggan.com/otel-isnt-going-well-and-i-made-a-spreadsheet-about-it/" target="_blank">OTel isn&#39;t going well (and I made a spreadsheet about it)</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by hn_acker • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>OpenTelemetry’s adoption is hindered by perceived slow progress and high complexity. The project separates <strong>core</strong> (stable, vendor‑neutral spec) from <strong>contrib</strong> (community‑driven integrations), causing a large, fragmented ecosystem across dozens of languages and hundreds of libraries. A strict binary stability gate and limited maintainer pool force lengthy debates—especially in semantic‑conventions and OTEP → specification → SDK implementation—making new features hard to promote from experimental to stable. Activity analysis shows healthy contributor distribution for Envoy and Prometheus, but OpenTelemetry SDKs (notably PHP, Ruby, and others) concentrate commits, merges, and issue closures among a few individuals, indicating a maintainer shortage. The author proposes a time‑bound “beta” stage between experimental and stable to expose features longer, gather feedback, and reduce risk without full production commitment. Overall, the core issues are (1) over‑ambitious scope versus scarce maintainer resources, and (2) rigid stability policies that delay delivery, suggesting a need for more independent contributors and refined maturity labeling.</p>
+          </div>
+          <a href="https://matduggan.com/otel-isnt-going-well-and-i-made-a-spreadsheet-about-it/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed feelings toward OpenTelemetry. Many express frustration with its separate tracing, metrics, and logs designs, perceived performance overhead, limited vendor maturity, and the need for complex collector setups, arguing that it adds code mess and hampers serverless environments. Others acknowledge its value, noting that the open specification reduces vendor lock‑in, allows custom extensions, and can be adapted to fill gaps such as dynamic sampling or plugin‑based instrumentation. Overall, users appreciate the flexibility but desire tighter integration, lower overhead, and more mature implementations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49391553" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
