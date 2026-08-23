@@ -1,0 +1,549 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 23, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/moxie/status/2091218652133732491" target="_blank">Scrap (2006)</a>
+        </h2>
+        <span class="article-meta">
+          336 points • by tosh • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Moxie Marlinspike recounts a 2006 move to Pittsburgh, expecting a picturesque winter but confronting sub‑zero temperatures, a house without functional utilities, and frozen plumbing that hindered installation of gas lines and thread sealant. Initial repairs focused on basic sanitation, then extensive demolition and reconstruction using reclaimed pallets and lumber. A cast‑iron bathtub left outside vanished within a day, revealing a local scrap‑metal “scrapper” culture that targets heavy raw metal rather than furniture. Months later, Marlinspike deliberately placed another bathtub in the yard, attracting two scrappers (Ron and Wade) who loaded it onto a pickup and also agreed to retrieve a broken gas furnace from the basement. The narrative details the labor‑intensive process of maneuvering the 250‑lb furnace up narrow stairs, the scrappers’ noisy, improvisational methods, and their use of an axe to free a pipe. The scrappers were paid roughly four cents per pound of steel, illustrating Pittsburgh’s practical, low‑margin metal‑recycling economy.</p>
+          </div>
+          <a href="https://twitter.com/moxie/status/2091218652133732491" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe a regional culture of informal scrap collection, noting its convenience but also highlighting safety risks and the importance of professional, insured operators. Several remarks criticize stereotypes that link poverty to laziness, emphasizing financial constraints and the need for leverage. There is nostalgia for earlier internet publishing models that favored personal blogs and word‑of‑mouth sharing, paired with frustration toward modern platforms that restrict access and impose intrusive interfaces. Overall, the discussion blends practical observations about scrapping with broader reflections on socioeconomic perceptions and online media habits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49402189" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://forum.level1techs.com/t/why-your-local-llm-feels-dumber-than-it-is/253917" target="_blank">Why your local LLM feels dumber than it is</a>
+        </h2>
+        <span class="article-meta">
+          224 points • by felineflock • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post examines why locally run large language models (LLMs) often appear weaker than the reference implementations. It emphasizes that hardware differences (GPU instruction sets, compute capability) and software stacks (different CUDA kernels, attention back‑ends, quantization libraries) cause divergent token logits even when the same weights are used. Benchmarks should reflect real workloads (long‑context tool‑calling) rather than a few zero‑shot prompts.  </p>
+<p>Test 1 compares three full‑attention back‑ends in vLLM (FlashAttention 2, Flash Inference, Triton) on a BF16 Qwen 3.6‑27B model; token‑wise KL‑divergence shows increasing top‑1 flips after several thousand tokens, attributed to matrix‑multiply variations.  </p>
+<p>Test 2 quantizes only the KV cache (int8, int4) while keeping BF16 weights, revealing reproducible tool‑call failures for int4 and later errors for int8.  </p>
+<p>Test 3 evaluates five weight/activation quantizations (BF16 reference, FP8, INT8 W8A16, NVIDIA NVFP4 W4A16, AWQ INT4 W4A16) on the same prompt. INT8 W8A16 exhibits the lowest token‑flip rate; NVFP4 and AWQ suffer ~50 % flips by 88 k tokens and produce incorrect tool commands, while FP8 and INT8 succeed. The author notes that kernel selection, GEMM implementations, and KV‑cache precision are major sources of inference divergence.</p>
+          </div>
+          <a href="https://forum.level1techs.com/t/why-your-local-llm-feels-dumber-than-it-is/253917" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong approval of the Qwen 3.8 27B model, noting its performance rivals commercial offerings and that careful quantization—avoiding low‑quality Q4/K P variants and preserving KV cache integrity—yields accurate results. Users highlight the benefits of local inference for consistent quality control, while critiquing some quantization methods (NVFP4, AWQ W4A16) as subpar and warning that improper chat templates or default sampling can degrade perceived intelligence. Ollama is praised for ease of setup, but concerns about its inference quality lead some to consider alternatives like VLLM for better concurrency.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49402232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.primeintellect.ai/research/nanogpt-speedrun" target="_blank">NanoGPT Speedrun Frontier</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by stared • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page presents a ranked list titled “NanoGPT Speedrun Frontier,” showing 20 entries that appear to be AI model runs or benchmark results. Each entry includes a model name (e.g., Fable, Opus, Kimi, GPT‑5.6 Sol, Sonnet, Grok, Qwen3.8 Max, GLM, DeepSeek V4 Pro, Muse Spark), a numeric identifier, a percentage value, a status (“closed”), and associated tags such as “claude‑code,” “codex,” “grok‑cli,” “qwen‑code,” or “pi” with priority levels (e.g., high, max, xhigh) and a 24‑hour indicator. Some entries also list additional numeric fields, possibly representing timestamps or performance metrics (e.g., “3,0108.7d”). The final two entries lack full records. Two images are referenced with alt text “PRIME Intellect” and “Prime Intellect,” but no visual content is provided. The overall data resembles a leaderboard of AI model performance or usage statistics.</p>
+          </div>
+          <a href="https://www.primeintellect.ai/research/nanogpt-speedrun" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall skepticism toward the reliability of the Grok model and xAI systems, questioning whether observed shortcomings stem from the model itself or from suboptimal harnessing and prompting. Readers seek clearer explanations of experimental terms, run definitions, and inconsistent effort settings, and they note potential contamination and uneven performance plateaus across models. Several contributors point out methodological concerns, request more detail on cost‑versus‑human benchmarks, and highlight curiosity about run variability and upcoming Grok 4.6 results, while a few acknowledge the post positively.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49404380" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://quantumi.sh/public/labs.html" target="_blank">ElevenLabs, TwelveLabs, ThirteenLabs</a>
+        </h2>
+        <span class="article-meta">
+          336 points • by jemoka • 55 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post examines a recurring naming pattern in AI‑related startups that combine a numeral (spelled or numeric) with “labs” or “lab.” The author compiled a list of companies numbered 0–99, linking each entry and highlighting those whose domain or product focus indicates AI involvement (e.g., .ai TLDs or AI‑centric offerings). Inclusion criteria required an online presence and the numeral‑labs construction, with preference given to entities resembling ElevenLabs in purpose. The survey shows a concentration of such names in the 70s range and notes that many sites share a generic, early‑2000s web design; an example is seventyonelab.com, which mimics Netscape/IE‑era aesthetics and evokes a “vector‑heart” style seen in vintage IDM album art. The author questions why this naming scheme proliferates, whether it arises independently, and muses about speculative domain acquisition (e.g., “twentyfivelabs”).</p>
+          </div>
+          <a href="https://quantumi.sh/public/labs.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely treat the proliferation of numeric “‑Labs” names as a predictable, overused trend that has rendered many domains scarce and prompted jokes about counting sequences, yet they also note occasional novelty when a name feels distinct. Observations range from humorous anecdotes about naming fatigue and hackathon registration to criticism of ElevenLabs’ pricing and perceived lack of a defensible moat. Overall sentiment mixes mild amusement, mild irritation at the homogeneity of branding, and pragmatic advice about focusing on reliable APIs rather than gimmicky naming.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49400408" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hister.org/" target="_blank">Hister – A private, full content search index that you control</a>
+        </h2>
+        <span class="article-meta">
+          267 points • by auraham • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hister is a customizable search engine that aggregates content from multiple sources into a single index hosted on a user‑selected server. It captures newly visited webpages via a browser extension, monitors local directories, imports browser history, and can crawl entire sites. The system extracts relevant portions of each document and stores the full text for searchable retrieval. Queries can be performed through a web interface, terminal/command‑line tools, or via an AI assistant using the MCP protocol. All ingestion methods—browser extensions, file watchers, history imports, and crawlers—contribute to a unified index, enabling consistent search across web pages, local files, and imported histories.</p>
+          </div>
+          <a href="https://hister.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey broadly enthusiastic approval of Hister, highlighting its usefulness for personal knowledge management, semantic search, and offline indexing of web, bookmark, and file content. Users note its potential for research, hobby projects, and integration with tools such as LLMs, while requesting additional capabilities like PDF indexing, bookmark import, mobile support, Zotero integration, and authentication to protect local data. Some express reservations about browser‑extension security and the project name, and a few compare it to similar open‑source indexing efforts, offering suggestions for improvement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49351802" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rwwgreene.substack.com/p/i-set-a-trap-for-a-book-marketing" target="_blank">I set a trap for a book-marketing scammer (2025)</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by rznicolet • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://rwwgreene.substack.com/p/i-set-a-trap-for-a-book-marketing" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express frustration with persistent spam and scams that target both aspiring indie writers and isolated seniors, highlighting how deceptive pitches can exploit loneliness and financial vulnerability. There is empathy for older individuals repeatedly duped by fake “girlfriend” messages, alongside criticism of the pressure for self‑marketing in publishing and skepticism toward AI‑generated content that appears overly structured. Overall, the tone is exasperated by the prevalence of manipulative outreach while acknowledging the emotional toll on victims.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49402181" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://typ.ing/" target="_blank">typ.ing</a>
+        </h2>
+        <span class="article-meta">
+          208 points • by bookofjoe • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>typ.ing is a typing‑trainer application intended to increase users’ typing speed and accuracy when they work with an external, physical keyboard. The service notes that performance and usability are reduced on touch‑only mobile devices and recommends connecting a physical keyboard or using a desktop computer for optimal operation. It prompts the user to confirm whether a physical keyboard is currently attached, implying that the training exercises are designed around standard key‑by‑key input rather than on‑screen typing. No additional features, pricing, or technical specifications are provided beyond the emphasis on external‑keyboard usage and the suggestion to switch from mobile‑only access.</p>
+          </div>
+          <a href="https://typ.ing/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight appreciation for typing tutors that offer forgiving interfaces and useful analytics, with several users recommending specific tools and split keyboards such as ZSA models, Graphite layout, and alternative keymaps like Dvorak or Colemak. Repeated criticism focuses on error reporting that treats single insertions or deletions as multiple mistakes and on UI shortcomings such as missing cursors, limited progress indicators, and punctuation handling. Users also request features like edit‑distance tolerance, two‑space period options, competitive speed comparisons, and easier hardware trial options. Overall sentiment is mixed, combining positive endorsement with calls for functional improvements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49346854" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.rfcafe.com/" target="_blank">RF Cafe</a>
+        </h2>
+        <span class="article-meta">
+          165 points • by gregsadetsky • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.rfcafe.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong appreciation for the retro, information‑dense design of amateur‑radio sites, viewing them as nostalgic and technically rich compared to modern minimalist layouts. The density of content is praised, and several users recall early‑Internet experiences where technical focus outweighed politics. Interest in specific hardware, such as a 40 GHz, 20 W amplifier, appears alongside broader discussion of the RF field’s reputation and its shifting career landscape, noting decreasing attraction for graduates versus other high‑paying tech sectors. Overall sentiment is favorable toward the sites’ style and depth, with mixed views on the profession’s prospects.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49355659" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/" target="_blank">How a Texas student blew the whistle on a rogue AI hacking attempt</a>
+        </h2>
+        <span class="article-meta">
+          128 points • by olalonde • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary questions the framing of the AI incident as “rogue,” emphasizing that responsibility rests with the humans who deployed the model rather than the technology itself. It critiques the lack of clarification about who initiated the AI’s actions and suggests the narrative may serve regulatory or anti‑open‑source motives. Concerns are also raised about the accessibility of paywalled sources linked in the discussion. Overall, the tone is skeptical of the report’s presentation and focused on accountability and potential agenda‑driven framing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49387959" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://geometridae.bearblog.dev/a-friendly-introduction-to-racket/" target="_blank">A Friendly Introduction to Racket</a>
+        </h2>
+        <span class="article-meta">
+          206 points • by signa11 • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Racket is a descendant of Lisp, originating from John McCarthy’s 1958 language and the 1975 Scheme dialect created by Sussman and Steele. Racket (renamed from PLT Scheme in 2010) emphasizes language-oriented programming, allowing developers to construct new syntaxes quickly. Core Lisp concepts highlighted include homoiconicity (code as data), first‑class functions, garbage collection, REPL interaction, and conditionals as expressions. The tutorial covers installation via racket-lang.org, the DrRacket IDE (definitions pane and REPL), and basic commands (<code>racket</code>, <code>raco</code>). Syntax is uniform: <code>(operator arg1 arg2 …)</code>, with no operator precedence. <code>define</code> creates constants or functions; <code>lambda</code> defines anonymous functions; comments use <code>;</code>. Lists are fundamental, created with <code>list</code> or quoted literals (<code>'(...)</code>), and manipulated via <code>first</code>, <code>rest</code>, <code>cons</code>, <code>length</code>. Higher‑order functions (<code>map</code>, <code>filter</code>, <code>foldl</code>) replace explicit loops. Recursion replaces iterative constructs, exemplified by a factorial definition. Racket includes built‑in graphics (<code>2htdp/image</code>) for visual output (e.g., Sierpinski triangle). Homoiconicity enables macros that transform code as data, illustrated by a custom <code>while</code> construct. Contemporary Lisp usage spans Clojure in production, Common Lisp in expert systems, Emacs Lisp, Guile/Guix, and Racket’s active research and educational communities.</p>
+          </div>
+          <a href="https://geometridae.bearblog.dev/a-friendly-introduction-to-racket/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a generally appreciative view of Lisp’s history and Racket’s macro and language‑oriented features, while noting that introductory material often assumes prior knowledge and can feel overly terse. Readers express both enthusiasm for experimenting with Racket and frustration with its type‑contract syntax and limited deployment options. Opinions vary on Lisp’s current relevance, with some seeing it as niche or superseded by other languages, yet many value its expressive power and continue to seek resources, examples, and practical applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49399898" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
