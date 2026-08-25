@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developer.apple.com/news/?id=1ptvdtcm" target="_blank">iCloud+ Hide My Email addresses will remain on icloud.com</a>
+        </h2>
+        <span class="article-meta">
+          298 points • by K7PJP • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Apple is moving Sign in with Apple email‑relay addresses from <strong>privaterelay.appleid.com</strong> to <strong>private.icloud.com</strong> later this year. Existing privaterelay.appleid.com addresses will keep functioning and forward messages without interruption. Developers must update their systems—account handling, email validation, and any whitelist rules—to accept the new private.icloud.com domain alongside the current one. iCloud+ Hide My Email addresses will remain on icloud.com. No code changes are required for the relay service itself, but validation logic must recognize both domains. Apple provides documentation on Sign in with Apple and the Private Email Relay Service for further reference.</p>
+          </div>
+          <a href="https://developer.apple.com/news/?id=1ptvdtcm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on Apple’s “Hide My Email” feature and the shift to the private.icloud.com domain. Users generally view the integration of private relays with regular iCloud addresses as a practical way to avoid blocking and appreciate the convenience and cost‑effectiveness compared with other services. Concerns appear about vendor lock‑in, the domain’s potential for targeting, and some confusion over the change and related developer fees, but most accept the trade‑off as necessary for the privacy benefits. Overall sentiment is cautiously positive with acknowledgment of drawbacks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49426564" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/lemire/status/2091894299289874926" target="_blank">Xiaomi: New CPU matches Apple cores single threaded, much faster multithreaded</a>
+        </h2>
+        <span class="article-meta">
+          770 points • by tosh • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Xiaomi’s new Xring O3 processor, highlighted by Daniel Lemire, positions the company’s smartphones as direct competitors to Apple’s iPhones. Benchmarks show the chip matching Apple cores on single‑threaded workloads (≈3,945 Geekbench score) while substantially outpacing them in multithreaded performance (≈15,221 score). Key architectural features include a massive 44 MB cache—larger than typical laptop CPUs—and the C1‑Ultra cores, which support SME2 (Scalable Matrix Extension 2) for AI acceleration and SVE2 for SIMD data parallelism. The design incorporates 21 execution ports, six dedicated to 128‑bit SIMD operations, exceeding the execution‑port count of current Intel/AMD processors; AMD’s Zen 5 can issue 4×512‑bit operations, whereas the Xring O3 offers the best‑available 6×128‑bit SIMD on ARM. This reflects a broader trend toward highly parallel cores with abundant execution units and cache, concentrating transistors on these capabilities.</p>
+          </div>
+          <a href="https://twitter.com/lemire/status/2091894299289874926" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight enthusiasm for a Chinese‑designed ARM core achieving high benchmark scores, viewing it as a sign of growing competition against established players such as Apple, MediaTek and Qualcomm. Skepticism recurs regarding the lack of power‑efficiency data, real‑world thermal performance, and independent validation of the results. Observations note the reliance on TSMC’s advanced process, concerns about manufacturing yields, and the broader geopolitical context of semiconductor self‑sufficiency and security risks. Overall, the discussion balances optimism about technical progress with caution about practical viability and the need for transparent testing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49420873" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://xusheng.dev/posts/reversing/mspaint_invisible_watermark/main/" target="_blank">MS Paint and Photos inivisibly watermark even locally generated output with GUID</a>
+        </h2>
+        <span class="article-meta">
+          605 points • by ComputerGuru • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Microsoft Paint and Photos embed an invisible, server‑issued GUID into locally generated AI images as a watermark. When a user submits a prompt, Paint sends it to a remote moderation endpoint ( https://apsaiservices‑…/moderate‑prompt ) which returns a revised prompt, a promptGenerationId, and a watermarkId (a 16‑byte GUID). After local Stable Diffusion inference (or Azure OpenAI ImageGen for cloud generation), the app calls Watermarker.dll’s WmkWriteWatermark function, which inserts the GUID plus a checksum into the image using a content‑adaptive block‑domain encoding that modifies at least three pixels per bit. The same GUID is recorded in a C2PA manifest (caBX chunk) as a soft‑binding value, signed by Microsoft’s “Responsible AI” provenance system. Paint’s visible watermark (Copilot logo) is separate and optional. Images can only be saved in C2PA‑compatible formats (PNG, JPEG, GIF, .paint); BMP is omitted. Photos uses the identical watermarking flow, but treats watermark failures as non‑fatal. The process relies on remote prompt moderation even for locally generated images.</p>
+          </div>
+          <a href="https://xusheng.dev/posts/reversing/mspaint_invisible_watermark/main/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on strong criticism of Microsoft’s introduction of visible and invisible watermarks and embedded GUIDs in images processed by Paint, Photos and related AI‑enhanced tools. Reviewers view the practice as a privacy intrusion that enables tracking of users and their devices, often without clear disclosure, and many call it a violation of anonymity and a step toward pervasive digital surveillance. While a minority acknowledge potential provenance or deep‑fake‑detection benefits, the dominant sentiment favors avoiding Microsoft software, using open‑source alternatives, and seeking ways to disable or bypass the embedded identifiers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49421158" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://paulgraham.com/prepare.html" target="_blank">How Universities Should Prepare Founders</a>
+        </h2>
+        <span class="article-meta">
+          46 points • by gmays • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided input contains only a title (“How Universities Should Prepare Founders”) and placeholders for images, without any substantive textual content to summarize. Consequently, there are no core themes, key points, data, or technical insights available for summarization.</p>
+          </div>
+          <a href="https://paulgraham.com/prepare.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments present a mixed view on the relationship between higher education and entrepreneurship. Several remarks praise PhD and liberal‑arts training for fostering deep learning, curiosity, and the ability to experiment without immediate financial pressure, suggesting such backgrounds can aid founders. Others argue that universities should focus on knowledge creation rather than cultivating startups, warning that lighter curricula or excessive emphasis on founding may mislead ambitious students. Additional points question the practicality of product‑first assumptions, highlight the importance of marketing and luck, and criticize the broad use of the term “founder.”</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49428121" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ciechanow.ski/moon/" target="_blank">Moon (2024)</a>
+        </h2>
+        <span class="article-meta">
+          120 points • by simonebrunozzi • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The Moon can be viewed from space with interactive 3‑D models that let users change viewpoint, date, and time, revealing its illuminated phases, terminator, and visible surface features.  </li>
+<li>Simulations demonstrate basic Newtonian gravity: two bodies attract with force F = G m₁ m₂ / r²; the resulting accelerations a₁ = G m₂ / r² and a₂ = G m₁ / r² cause the smaller mass to move markedly while the larger mass is barely affected.  </li>
+<li>By tracking both bodies from a moving camera the system’s barycenter (center of mass) is identified; in a two‑body system the bodies orbit this point on elliptical paths. Orbital elements such as semi‑major axis, eccentricity, apoapsis, periapsis, and line of apsides are adjustable, and angular velocity varies according to conservation of angular momentum.  </li>
+<li>For Earth–Moon: Earth’s radius ≈ 3.67 × Moon’s; mass ≈ 81.3 × Moon’s. The Moon’s average distance ≈ 384,748 km (semi‑major axis) with eccentricity ≈ 0.0549.  </li>
+<li>Orbital periods: sidereal month = 27.322 d, anomalistic month = 27.554 d; apsidal precession completes a rotation ≈ 8.85 y.  </li>
+<li>Solar gravity perturbs the Moon’s orbit, causing the line of apsides to precess. Both Earth and Moon rotate on their axes, influencing observed motion.</li>
+</ul>
+          </div>
+          <a href="https://ciechanow.ski/moon/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express curiosity about using an LLM “in the style of Ciechanowski,” with some uncertainty about whether personal, non‑shared use could be considered plagiarism, while generally appreciating the detailed, interactive visualizations it produces. Readers note the lack of a table of contents as a puzzling editorial choice but commend Ciechanowski for shaping modern AI‑assisted web experiences. Humor appears in remarks about moon imagery and conspiracy jokes, and a separate observation highlights the relatively high Patreon income for a minimally updated site, noting its contrast with similar creators.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49426466" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lectronz.com/u/lectronz/articles/how-europe-is-killing-makers-and-micro-entrepreneurs" target="_blank">How Europe is killing makers and micro-entrepreneurs</a>
+        </h2>
+        <span class="article-meta">
+          1116 points • by l-one-lone • 134 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The EU’s Packaging and Packaging Waste Regulation (PPWR), effective 12 August 2026, expands Extended Producer Responsibility by requiring every producer to register and fulfil waste‑collection obligations in each Member State where its packaging is sold. For large firms this is a standard cost, but for micro‑entrepreneurs and makers it creates disproportionate administrative fees—e.g., €110 registration plus €190‑300 authorised‑representative fees in France, similar charges in Belgium, Germany and Austria—totaling roughly €1 150 per year for a Greek engineer selling a few dozen boards across four countries. The regulation therefore threatens the viability of small‑scale hardware creators, artists, craftspeople and niche marketplaces such as Lectronz, which supports open‑source hardware with a 5 % transaction fee and minimal sales volumes. The authors propose three mitigations: (1) an EU‑wide de‑minimis threshold exempting low‑volume producers; (2) a centralized “EPR One‑Stop‑Shop” portal analogous to the VAT OSS; and (3) allowing platforms to act as single producers for their sellers. A provisional EU proposal to suspend mandatory authorised representatives until 2035 addresses only part of the burden.</p>
+          </div>
+          <a href="https://lectronz.com/u/lectronz/articles/how-europe-is-killing-makers-and-micro-entrepreneurs" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on a largely critical view of the new EU packaging‑and‑packaging‑waste rules, describing them as overly complex, fragmented across member states and disproportionately costly for micro‑enterprises that face heavy administrative burdens and severe fines. Many compare the approach unfavorably with China’s model that places responsibility on a few large logistics firms and uses longer transition periods. Suggestions repeatedly call for a single EU‑wide registry, clear de‑minimis thresholds, and more education or assistance rather than punitive fines, while acknowledging the environmental intent but doubting its practical viability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49419237" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sf.thijs.gg/" target="_blank">The entire city of San Francisco as a video game</a>
+        </h2>
+        <span class="article-meta">
+          382 points • by centrosphere • 67 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The content describes the user interface of “San Francisco – The Game,” showing a ready‑to‑explore online city environment. Key status elements include a tile‑stream system awaiting tile data, a “FILL = CURRENT OWNER” field with zone identifiers (Z20, Z17, Z16, Z15), and a loading indicator for ground files, columns, and visible corners. The display reports a 470 m range and resource counts (Wood 0, Stone 0, Metal 0). The “SAN FRANCISCO – DETAIL MODE” panel indicates the neighborhood is 100 % ready, confirming that surrounding streets are loaded. Controls are listed: WASD for movement, mouse look, Space to jump, Shift to run, C for camera, H for glider, with additional keys for speed, zoom, sprint, exit, and vehicle handling. An image placeholder is noted with alt text “City token.”</p>
+          </div>
+          <a href="https://sf.thijs.gg/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly enthusiastic, praising the ability to explore a detailed 3‑D San Francisco and expressing nostalgia for familiar neighborhoods. Many suggest enhancements such as higher‑resolution textures, street‑name overlays, teleport or GPS navigation, avatar customization, dynamic weather, and multiplayer or MMO elements. Technical frustrations recur, including heavy memory use, loading stalls, camera‑control difficulties, and browser‑specific crashes. Legal concerns about using Apple’s map data appear alongside comparisons to other city‑based games and ideas for AI‑driven upscaling or broader city implementations. Overall sentiment is positive but tempered by performance and licensing worries.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49422784" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/murerkinn/bookshelf" target="_blank">Bookshelf – Self-hosted eBook library that runs on object storage</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by arbayi • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A self‑hosted ebook library called <strong>bookshelf</strong> serves EPUB and PDF files without a database. It can run either as a Cloudflare Worker backed by R2 object storage or as a Node.js server serving a local directory. The repository provides a sync tool that scans a <code>books/</code> folder, generates cover images (using <code>cwebp</code> and <code>pdftoppm</code>), builds a searchable index, and publishes the library to the chosen storage backend. Deployment options include Docker (with a pre‑built image containing the required image tools) or direct installation on a Unix‑like system with Node 24+. Configuration is stored in <code>bookshelf.config.json</code>; the same file is used for both sync and deployment. The app offers in‑browser readers for both formats, profile handling for separate reading positions, and a simple UI with search, cover display, and download links. No authentication is built in—anyone with access to the URL can read and download the collection—so it should be placed behind trusted network controls. The project is MIT‑licensed and includes scripts for development, testing, type‑checking, and Cloudflare deployment.</p>
+          </div>
+          <a href="https://github.com/murerkinn/bookshelf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion stresses that client‑side end‑to‑end encryption is essential for hosting personal data, citing legal protection and avoidance of regulatory complications. It advocates broader adoption of such encryption in development, noting that implementation is now feasible. Multiple self‑hosted ebook management tools—including copyparty, Grimmory, Audiobookshelf, Readest, and Bookorbit—are recommended for handling diverse devices and protocols, while expressing interest in Calibre‑compatible storage options like S3 and seeking reliable object‑store solutions. Overall, the tone favors privacy‑preserving, self‑hosted alternatives over third‑party services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49427001" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://daily.jstor.org/where-did-all-the-public-bathrooms-go/" target="_blank">Where did all the public bathrooms go?</a>
+        </h2>
+        <span class="article-meta">
+          188 points • by herbertl • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article traces the rise and decline of public urinals (“pissoirs”) in 19th‑century Paris and their American counterparts. After cholera outbreaks in the 1850s, Paris banned street urination and installed ornate, cast‑iron or slate pissoirs—often single‑stall or multi‑stall units with modesty screens, decorative ironwork, and advertising, sometimes illuminated by streetlamps. They were gender‑specific, serving only men, and quickly became informal meeting spots for clandestine encounters and graffiti. Police patrols and blackmail attempts followed, leading to a crackdown. In the United States, temperance advocates promoted large, multi‑stall “comfort stations” to replace saloon bathrooms, but Prohibition halted new construction and existing facilities fell into disrepair. Consequently, most early‑20th‑century public restrooms disappeared, leaving urban pedestrians reliant on semi‑private venues (hotels, shops, cafés) where restroom access is treated as a purchasable commodity rather than a civic right.</p>
+          </div>
+          <a href="https://daily.jstor.org/where-did-all-the-public-bathrooms-go/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express widespread frustration with limited, unclean, or fee‑based public restrooms in many Western regions, especially Europe and the United States, highlighting the negative impact on people with health needs, the homeless, and travelers. In contrast, numerous remarks praise the abundance, cleanliness, and cultural acceptance of public toilets in parts of Asia, Oceania, and some European cities, attributing success to governmental prioritization, cultural norms, and well‑maintained infrastructure. Contributors note that misuse, vandalism, and funding constraints often drive closures, and they call for better investment, free access, and systematic mapping to improve overall availability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49422800" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://daily.jstor.org/was-modern-art-really-a-cia-psy-op/" target="_blank">Was Modern Art a CIA Psy-Op? (2020)</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by neom • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>In the Cold War, U.S. cultural agencies used modern art as a diplomatic tool to showcase liberalism and creative freedom, positioning it against Soviet realism.  </li>
+<li>Museum of Modern Art (MoMA) became central: under presidents Nelson Rockefeller, John Hay Whitney, and executive secretary Thomas W. Braden, it executed government contracts, organized traveling exhibitions across Latin America, and later took over the U.S. pavilion at the Venice Biennale.  </li>
+<li>The State Department funded the 1946 “Advancing American Art” tour, but domestic criticism halted it.  </li>
+<li>After the CIA’s 1947 formation, former OSS members (including Braden, Whitney, Rockefeller) integrated cultural work with intelligence. The CIA created the Congress for Cultural Freedom (CCF) in Paris, a covert front that financed magazines, concerts, prizes, and exhibitions to counter Soviet propaganda.  </li>
+<li>The CCF partnered with MoMA on shows such as the 1952 “Masterpieces of the Twentieth Century” in Paris, emphasizing that abstract expressionism could not arise under totalitarian regimes.  </li>
+<li>High‑level officials (e.g., Eisenhower, Truman) publicly praised artistic freedom while privately acknowledging the program’s strategic value, confirming modern art’s role as a covert “weapon of national defense.”</li>
+</ul>
+          </div>
+          <a href="https://daily.jstor.org/was-modern-art-really-a-cia-psy-op/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary challenges the notion that contemporary or abstract art originated from CIA initiatives, emphasizing that modern art predates the agency and that any governmental support was more about cultural promotion during the Cold War than covert manipulation. It critiques the perceived lack of artistic merit in abstract works, expresses a personal shift toward classical realism, and links broader art movements to institutional orchestration, including references to controversial modernist architects and funding disputes. Overall, the tone is skeptical of institutional influence and dismissive of modernist aesthetics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49428080" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
