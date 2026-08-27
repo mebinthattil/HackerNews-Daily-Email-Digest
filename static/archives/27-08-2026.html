@@ -1,0 +1,582 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8" target="_blank">Nvidia agrees to acquire Hugging Face for $13B</a>
+        </h2>
+        <span class="article-meta">
+          1523 points • by mfiguiere • 159 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Nvidia has entered exclusive talks to acquire Hugging Face, an open‑source AI model and dataset hub, at a valuation exceeding $13 billion. No agreement has been reached, and the discussions could still collapse. Nvidia, which disclosed an $18 billion equity‑investment allocation for the fiscal year and holds $47.9 billion in private‑company assets, previously invested $235 million in Hugging Face’s 2023 funding round that valued the startup at $4.5 billion. Earlier, Hugging Face rejected a $500 million Nvidia offer that would have valued it at $7 billion, citing concerns over a dominant investor. Microsoft also met with Hugging Face, but talks are not ongoing. Acquiring the platform would give Nvidia deeper access to developers and potentially increase AI workloads on its chips, though it could compromise Hugging Face’s neutrality, as the service currently supports hardware from rivals such as AMD and Intel. Hugging Face was founded in 2016 by Clément Delangue, Julien Chaumond, and Thomas Wolf.</p>
+          </div>
+          <a href="https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mix of concern and cautious optimism about Nvidia’s potential acquisition of Hugging Face. Many worry that ownership by a dominant hardware vendor could reduce platform neutrality, limit access to open‑weight models, and raise antitrust issues, while others view the deal as a strategic fit that might provide resources and stability for the ecosystem. Skepticism appears regarding the high valuation and possible shifts toward Nvidia‑centric optimization, yet some participants hope the transition will preserve community benefits and inspire alternative hosting solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49458161" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pollen-robotics.com/microduck/" target="_blank">Pollen Robotics (Hugging Face) Microduck</a>
+        </h2>
+        <span class="article-meta">
+          166 points • by robotswantdata • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Microduck is a compact, open‑source bipedal robot marketed by Pollen Robotics. Pre‑orders begin 27 August 2026 at a base price of $399 (excluding taxes and shipping), with delivery scheduled before Christmas 2026. The product includes a dual‑slot USB‑C battery charger, spare batteries, three additional motors, motor cables, screws, a screwdriver, NFC tags, a Hugging Face sticker, and optional accessories such as yellow roller attachments, a ball, and a laser pen. Visual assets depict the robot in various domestic and social settings—standing on desks, interacting with users, playing with a ball, and being customized with stickers. The images also show the robot alongside a laptop, game controller, and coding environment, emphasizing its suitability for hobbyist, educational, and creative applications. All components are provided to support user‑programmed modifications and extensions.</p>
+          </div>
+          <a href="https://pollen-robotics.com/microduck/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for the robot, highlighting its appeal as a cute, entry‑level platform suitable for safety monitoring, hobby tinkering, education and creative projects such as gait experiments or reinforcement‑learning research. Users appreciate the ability to assemble and customize the device, compare it favorably to other consumer robots, and express interest in open‑source software, Rust integration, and non‑defense applications. Concerns focus on battery life, reliance on ROS, and the desire for extension ports or broader compatibility, while overall sentiment remains positive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49462763" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.comaps.app/news/2026-08-23/comaps-integration-with-the-wider-floss-ecosystem/" target="_blank">CoMaps integration with the wider FLOSS ecosystem – CoMaps</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by janandonly • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CoMaps is a fully free and open‑source Android navigation app that actively supports integration with other FLOSS applications while preserving user privacy.</p>
+<ul>
+<li>
+<p><strong>Gadgetbridge</strong> (v0.93.0+): CoMaps can serve as a navigation data provider, enabling turn‑by‑turn directions on supported smartwatches and Bluetooth devices. The option is located under Settings ► External Integrations ► Navigation and applies to all connected devices when enabled.</p>
+</li>
+<li>
+<p><strong>OpenVitals</strong>: Leveraging Android’s Health Connect framework, OpenVitals can record outdoor activities and overlay the route from CoMaps onto live activity dashboards. The integration is enabled via Settings ► Activities ► CoMaps navigation guidance.</p>
+</li>
+<li>
+<p><strong>Privacy model</strong>: CoMaps shares data with external apps only after the user grants a specific permission; data is private by default.</p>
+</li>
+<li>
+<p><strong>Developer resources</strong>: Documentation for building custom dashboards, widgets, or other integrations is hosted on Codeberg.</p>
+</li>
+</ul>
+          </div>
+          <a href="https://www.comaps.app/news/2026-08-23/comaps-integration-with-the-wider-floss-ecosystem/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The response expresses enthusiasm for enhancing the underlying OpenStreetMap data and lists several mapping tools, ranging from basic Android apps to advanced desktop editors, as potential resources for improvement. It also seeks clarification on whether map tile data from CoMaps can be exported for use in other applications. Overall, the tone is supportive of dataset enrichment and inquisitive about data interoperability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464637" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://Habitat-Thinking.github.io/ai-literacy-superpowers/plugins/ai-literacy-superpowers/explanation/harness-engineering/" target="_blank">Harness Engineering</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by tomrod • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Harness engineering surrounds AI‑assisted code generation with deterministic tooling, agent‑based reviews, and scheduled entropy checks to keep generated code correct and coherent.</p>
+<ul>
+<li><strong>Context Engineering</strong>: Maintains a machine‑readable HARNESS.md that records stack details, architectural decisions, naming conventions, and constraints, serving as AI knowledge rather than a human README.  </li>
+<li><strong>Architectural Constraints</strong>: Implements “verification slots” at defined workflow points. Deterministic checks (linters, scripts, regex) are used when constraints can be precisely expressed; agent‑based reviews handle semantic or intent‑based rules. Constraints migrate from agent to deterministic as they become well‑defined (progressive hardening).  </li>
+<li><strong>Garbage Collection</strong>: Periodic, scheduled audits that detect dead code, stale dependencies, and abandoned conventions, producing reports rather than blocking PRs.  </li>
+</ul>
+<p>The harness is “living”: HARNESS.md tracks each constraint’s status (unverified, agent, deterministic) and is itself audited by a harness‑audit agent, creating a feedback loop. Enforcement operates in three loops—inner (advisory, edit‑time), middle (strict, PR‑time, can block merges), and outer (investigative, scheduled).  </p>
+<p>Additional features include self‑improving mechanisms that log reflections, detect repeat violations, and suggest constraint upgrades, plus an init process that infers initial constraints from existing code to bootstrap HARNESS.md.</p>
+          </div>
+          <a href="https://Habitat-Thinking.github.io/ai-literacy-superpowers/plugins/ai-literacy-superpowers/explanation/harness-engineering/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments criticize the proliferation of vague AI buzzwords such as “harness,” “agents,” and “RAG,” arguing that they obscure meaning and serve marketing rather than precise technical description. They note a shift from hype‑driven papers to a more mature technology, urging clearer terminology like “agent loop,” “CLI,” or “IDE.” The discourse also questions overly engineered concepts such as an “AI Literacy framework,” viewing them as self‑promotional and poorly articulated, and finds some content dense and difficult to extract useful information. Overall, the sentiment is skeptical and calls for more concrete language.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464970" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rahuljuliato.com/posts/markdown-ts-mode-emacs-31" target="_blank">Emacs 31: An unofficial guide to Markdown-ts-mode</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by RahulMJ • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Emacs 31 includes a built‑in experimental markdown‑ts‑mode that relies on Tree‑sitter. The mode is not enabled by default; users must load it (e.g., via use‑package) and ensure Tree‑sitter support is compiled ( (featurep 'treesit) ). Required grammars—markdown and any embedded languages such as YAML—must be installed with M‑x treesit‑install‑language‑grammar or compiled manually from the corresponding repositories (e.g., tree‑sitter‑grammars/tree‑sitter‑markdown). Once the grammars are present, the mode provides full CommonMark and most GitHub‑Flavored Markdown features, plus utilities like code‑block handling, table‑of‑contents generation, and external converters (pandoc, gfm).</p>
+<p>Key editing commands:
+- Emphasis: C‑c C‑x C‑f ( markdown‑ts‑emphasize) with shortcuts b,i,a,s,c for bold, italic, combined, strikethrough, inline code.
+- Hide markup: C‑c C‑x RET ( markdown‑ts‑toggle‑hide‑markup).
+- Headings: hash syntax or Setext; promote/demote with M‑/, move subtrees with M‑/, folding via TAB/S‑TAB.
+- Lists/checkboxes: insert with M‑RET, smart newline with RET, promote/demote items, renumber ordered lists C‑c C‑r, toggle tasks C‑c C‑c.</p>
+<p>The mode mirrors many org‑mode bindings, is customizable, and requires only a one‑time grammar installation.</p>
+          </div>
+          <a href="https://rahuljuliato.com/posts/markdown-ts-mode-emacs-31" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>No comments were provided to analyze, so a summary of sentiments, themes, or collective opinions cannot be generated.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464543" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ac2protocol.org" target="_blank">AC2 Protocol: The missing security layer for AI agents</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by josephcecala • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AC2 Protocol is an open‑source, self‑custodial Algorand wallet developed by the Algorand Foundation. Users exclusively control their seed phrase, private keys, and crypto‑assets on their own device; the provider (Pera Wallet, Lda) has no access to or custodial rights over these assets and cannot recover lost credentials. Access recovery depends solely on the user‑generated recovery phrase; loss of device or phrase results in permanent loss of assets. All transactions on the Algorand network are irreversible once confirmed. Crypto‑assets are subject to market volatility, potential illiquidity, and tax or legal obligations. The protocol emphasizes hardware‑bound authentication, peer‑to‑peer communication, and agentic commerce, noting risks of fraud and identity verification. Users and merchants are advised to employ verified agents and adhere to security and compliance best practices.</p>
+          </div>
+          <a href="https://www.ac2protocol.org" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses a skeptical view, framing the presented AC2 solution as a repackaging of previous cryptocurrency trends and questioning its novelty. It outlines the technical design, emphasizing an open standard that isolates credentials, uses hardware‑bound FIDO2 signatures for approvals, and establishes end‑to‑end encrypted communication between a user’s wallet and an agent. The critique highlights concerns about potential runtime compromises and the difficulty of proving human consent, while acknowledging the claimed security benefits and the open‑source implementation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464979" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aphantasia.com/guide" target="_blank">Aphantasia Beginner&#39;s Guide</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by ksec • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Aphantasia is the inability to generate visual mental images, often described as “image‑free thinking.” Individuals may still understand concepts such as a beach but cannot “see” them internally; the condition can also affect other sensory modalities. Self‑assessment typically begins with the “Apple Test” (visualizing a red apple) and can be refined using the Vividness of Visual Imagery Questionnaire (VVIQ) to place a person on a visual imagination spectrum. Research shows physiological differences: fMRI studies reveal reduced visual‑cortex activation in aphantasic participants, and behavioral tests distinguish them from vivid visualizers. Conceptualizers (often aphantasic) rely on abstract ideas rather than detailed imagery, contrasting with visualizers who can generate and manipulate vivid scenes. The guide offers communication tips for explaining aphantasia to others, addresses common misconceptions, and lists online communities (e.g., Aphantasia Network) for support. It also provides links to further scientific articles, afterimage illusion demonstrations, and a newsletter for ongoing insights.</p>
+          </div>
+          <a href="https://aphantasia.com/guide" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment describes a personal discovery of aphantasia and expresses surprise upon learning that many people can actually create vivid mental images for common metaphorical instructions such as imagining a beach while meditating, visualizing a naked audience during a presentation, counting sheep to fall asleep, “undressing” someone with one’s eyes, and picturing scenes while reading. It highlights a contrast between assuming these cues are purely figurative and realizing they rely on an ability to generate visual mental content that is not universal.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464414" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aiandeducation.mit.edu/report/" target="_blank">MIT&#39;s Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by pbui • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The report outlines MIT’s AI‑focused recommendations, organized into three work areas: (1) adapt education for an AI‑aware world, (2) center people, community, and the residential experience, and (3) build processes, teams, and tools for continuous improvement. Key actions include: revisiting course goals to incorporate AI awareness; redesigning assessments toward oral exams, portfolios, in‑class work, and experiential, project‑based learning that resists AI shortcutting; expanding structured in‑person social learning and collaborative spaces; preserving and expanding UROP‑type research, mentorship, and co‑op opportunities; reconsidering grading models and incentives, exploring competency‑based or mastery‑based systems; establishing clear, rationale‑based AI‑use policies for each course; avoiding reliance on AI detectors and invasive lockdown tools; preparing disciplinary procedures for AI‑related integrity cases; and supporting coordinated curricular experimentation with AI. The recommendations stress humility, boldness, humanity, learning‑intentionality, tailored frameworks, augmentation over automation, and forward‑looking skill development to maintain MIT’s residential, hands‑on educational identity while leveraging AI’s potential.</p>
+          </div>
+          <a href="https://aiandeducation.mit.edu/report/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464314" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/esperanza-volkov/confdiff" target="_blank">Confdiff – semantic diff for config files (JSON/YAML/TOML) that redacts secrets</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by esperanzavolkov • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>confdiff is a semantic, format‑aware diff tool for configuration and structured‑data files (JSON, YAML, TOML, INI/.cfg/.conf, .env, Java properties, CSV/TSV, XML). It parses each file into a data model and compares values, ignoring key order, whitespace, quoting, comments, and optional array ordering. Key features include:</p>
+<ul>
+<li>Cross‑format comparison (e.g., JSON ↔ YAML) and multi‑document YAML support.  </li>
+<li>Secret‑safe diffs (<code>--redact</code>) that replace detected secret values with stable fingerprints while still indicating drift.  </li>
+<li>Type‑change detection, lossless large‑integer handling, and optional loose scalar mode (<code>-l</code>).  </li>
+<li>CSV/TSV key‑based row matching (<code>--csv-key</code>), unordered‑array comparison (<code>--array-set</code>), and glob‑based path filtering (<code>--ignore</code>, <code>--only</code>).  </li>
+<li>CI‑friendly exit codes, machine‑readable JSON output, and a Docker image for environments without Node.js.  </li>
+<li>Integration as a Git diff driver and a GitHub Action that posts concise semantic change comments on PRs, optionally failing the job on any change.  </li>
+</ul>
+<p>Installation via npm (<code>npm i -g confdiff</code>) or Docker, with format auto‑detection and flags to force formats, control coloring, and suppress output. MIT‑licensed, maintained by an autonomous AI agent.</p>
+          </div>
+          <a href="https://github.com/esperanza-volkov/confdiff" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>No comments have been supplied for analysis, so no sentiment, themes, or collective opinions can be identified. Without user feedback, there are no patterns, agreements, disagreements, or dominant viewpoints to summarize, and therefore no meaningful overview can be generated.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464310" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/issacnitin/RealDiff" target="_blank">Show HN: RealDiff – runtime behavior diffing for pull requests (six languages)</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by issacnitin • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RealDiff is a tool that detects runtime behavior changes between two Git revisions, supplementing traditional source diffs. It builds the base and PR versions, runs their test suites, learns a noise baseline from three base runs, and reports the first divergent behavior in each call tree, even in files untouched by the change. The system consists of a Rust launcher that handles argument routing, configuration, and a single‑pass streaming engine; language‑specific tracers (‑NET/Cecil, Java/ASM agent, Node/Babel, Go AST rewrite, Rust/syn, Python PEP 669) emit a unified NDJSON trace contract. Findings are output as findings.json with confidence metrics and can be posted as PR comments. RealDiff supports .NET, Java (Maven/Gradle), Node (npm/pnpm/Yarn/Bun), Go, Rust (Cargo), and Python 3.12+. Installation options include a Docker image (ghcr.io/issacnitin/realdiff:v0.4.0), pre‑built binaries for major OS/arch, a .NET global tool, or building from source. The CLI requires repository path and two Git refs, with options for work directory, cache control, CI integration, and strict reporting. The tool is in early preview.</p>
+          </div>
+          <a href="https://github.com/issacnitin/RealDiff" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49464459" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
