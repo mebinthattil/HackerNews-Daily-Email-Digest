@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 29, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing" target="_blank">Samsung&#39;s Processing-in-Memory (PIM)</a>
+        </h2>
+        <span class="article-meta">
+          86 points • by ingve • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Samsung’s LPDDR5X‑PIM adds a processing‑in‑memory (PIM) block to each of the 16 banks of a standard LPDDR5X‑9600 DRAM chip, enabling internal MAC operations without using the external bus. Each block contains a MAC tree, a 1024‑bit instruction register (64 × 16‑bit ops), 4 kbit source registers for activation vectors, and 2 kbit scale registers. The MAC array can perform four INT8/FP8 MACs per data clock (eight per DDR cycle) and doubles throughput for 4‑bit weights, yielding a chip‑wide compute rate of up to 2.4 TOPS (≈614 GB/s internal bandwidth). Multi‑bank mode broadcasts register writes across all banks, acting as a constrained SIMD processor; single‑bank mode preserves normal DRAM operation. PIM is accessed via special row addresses that repurpose standard read/write commands, requiring software to isolate a PIM memory region, map it uncacheable, and avoid concurrent regular accesses. This raises OS‑level challenges (locking, context switching, cache coherence). Samsung’s approach demonstrates feasibility of standard‑compliant DRAM compute but highlights significant integration and software‑stack complexities.</p>
+          </div>
+          <a href="https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses cautious skepticism about the practicality of processing‑in‑memory architectures, emphasizing that data movement dominates energy and silicon costs and that limited DRAM bank sizes could negate performance gains when weights exceed a single bank. Historical parallels to earlier RAM‑based compute extensions are noted, and while Samsung’s continued PIM research and past demonstrations are acknowledged as technically interesting, the lack of a clear killer application leads to doubts about widespread adoption. Overall sentiment is measured, recognizing potential but questioning current feasibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49487341" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://parowozowniawolsztyn.pl/?page_id=2141" target="_blank">Europe&#39;s last regular standard-gauge steam passenger service</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by GungulSurm • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>From 20 to 28 August 2026 the steam locomotive Pt 47‑65 undergoes a periodic review; during this period scheduled services will be operated with a diesel SM 42 6D instead. The steam‑hailed train runs Monday‑Friday between Wolsztyn and Zbąszynek and on Saturdays between Wolsztyn and Poznań; it does not operate on Sundays or public holidays. Tickets can be purchased via the Wielkopolskie Railways website, at the station ticket office, or directly from the train conductor. Departure times are posted at the station. No additional service details are provided.</p>
+          </div>
+          <a href="https://parowozowniawolsztyn.pl/?page_id=2141" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight inconsistencies in how regular‑service steam trains are classified, noting that UK examples such as the Flying Scotsman, Festiniog, and heritage lines like North Yorkshire, Swanage, Bluebell, and Dartmouth meet criteria for integrated tickets yet are often excluded, while gauge differences are also cited. Australian steam operations are described as primarily tourist‑oriented rather than timetable‑regular. A separate viewpoint stresses environmental drawbacks, recounting severe coal‑particle pollution on a Polish steam trip and expressing disappointment with the experience. Overall, the discussion balances enthusiasm for heritage rail accessibility with criticism of classification and environmental impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49456819" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ckardaris.com/blog/2026/08/28/keyboard-driven-guis.html" target="_blank">GUIs should be fully keyboard-driven</a>
+        </h2>
+        <span class="article-meta">
+          808 points • by ckardaris • 125 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post discusses the Hacker News debate over whether developers should favor graphical user interfaces (GUIs) or terminal user interfaces (TUIs). While TUIs are often praised for being inherently keyboard‑driven, the author argues that this advantage merely highlights the poor keyboard navigation in many GUI applications, not an intrinsic superiority of TUIs. Modern GUI frameworks and design guidelines—e.g., the GNOME Human Interface Guidelines—explicitly require that every action be accessible via the keyboard, making full keyboard‑driven GUIs feasible. The author’s experience creating a first GUI app, Klisi, shows that implementing comprehensive keyboard shortcuts is straightforward and improves overall usability. Consequently, the decision between GUI and TUI should not hinge on keyboard support; developers must prioritize intentional, keyboard‑friendly design regardless of the interface type to ensure an intuitive user experience.</p>
+          </div>
+          <a href="https://ckardaris.com/blog/2026/08/28/keyboard-driven-guis.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad agreement that robust keyboard navigation is essential for accessibility and power‑user efficiency, yet many observe a decline in support from modern GUI frameworks and a lack of consistent shortcuts or discoverability cues. Contributors cite older native toolkits as easier to make keyboard‑friendly, criticize recent designs for treating keyboard use as an afterthought, and highlight extensions or custom tooling that restore functionality. While some view full keyboard‑driven interfaces as niche, the prevailing sentiment urges better standards, consistent implementation, and attention to both accessibility and productivity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49479837" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://matduggan.com/you-know-gdpr-is-good-based-on-who-hates-it/" target="_blank">You Know GDPR Is Good Based on Who Hates It</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by latexr • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The author cites FDR’s 1936 speech to argue that strong opposition signals effective, hard‑fought policy; by that metric GDPR is succeeding.  </li>
+<li>GDPR’s most visible symptom, the cookie consent banner, is described as a “dark pattern” that exposes users to data‑sharing practices rather than being the cause of privacy loss.  </li>
+<li>The regulation reflects a long European tradition (e.g., Germany’s 1970 law) and aligns with OECD privacy principles: data minimization, purpose limitation, security, access, and correction.  </li>
+<li>The “Brussels Effect” explains rapid global adoption: the EU’s large market and coordinated enforcement through national Data Protection Authorities compel multinational firms to comply, leading to harmonization such as the EU‑Japan adequacy agreement.  </li>
+<li>In the United States, privacy is treated as a market issue; post‑9/11 security focus, lobbying, and revolving‑door ties have prevented robust federal regulation, leaving surveillance capitalism unchecked.  </li>
+<li>The piece contrasts this with Karl Polanyi’s “double movement,” noting that while other sectors eventually receive protective regulation, the US lacks a functional counterbalance for data‑driven markets, making EU‑driven GDPR the primary driver of worldwide privacy standards.</li>
+</ul>
+          </div>
+          <a href="https://matduggan.com/you-know-gdpr-is-good-based-on-who-hates-it/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall view expresses mixed sentiment toward GDPR: it is praised for improving data protection and prompting better corporate practices, yet criticized for creating intrusive consent banners, overly complex compliance, and slow, uneven enforcement that burdens small businesses while large firms can absorb costs. Commenters note that regulators often lack technical expertise, leading to excessive legal red tape, and argue that the current implementation undermines the regulation’s intent, making the web feel uglier without delivering clear benefits to users.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49488282" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Lakr233/vphone-cli" target="_blank">Boot a Virtual iPhone via Apple&#39;s Virtualization.framework</a>
+        </h2>
+        <span class="article-meta">
+          270 points • by hentrep • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>vphone‑cli is a command‑line tool that uses Apple’s Virtualization.framework to instantiate a virtual iPhone VM based on PCC research VM infrastructure. After installing dependencies (Python 3.13, aria2, wget, GNU tar, OpenSSL 3, ldid‑procursus, sshpass, keystone, cmake, libusb, ipsw, zstd) via Homebrew, the repository is cloned and the helper scripts <code>setup_tools.sh</code> and <code>build.sh</code> compile and sign the binary and bundle it as a macOS app.  </p>
+<p>Key commands:<br>
+- <code>vphone‑cli vm create &lt;name&gt; -V &lt;variant&gt;</code> runs the full pipeline (download IPSW, patch boot chain, DFU restore, install custom firmware, first boot).<br>
+- Individual steps (<code>fw prepare</code>, <code>fw patch</code>, <code>restore</code>, <code>cfw install</code>, <code>vm launch</code>) allow manual control.<br>
+- VM management includes <code>list</code>, <code>info</code>, <code>new</code>, <code>config</code>, <code>clone</code>, <code>export</code>, <code>import</code>, <code>rename</code>, and <code>delete</code>.  </p>
+<p>Supported patch variants (less → exp) adjust security bypass levels; SSH (mobile/root) and VNC access are provided on port 22222/5901. All VM data reside under <code>~/.vphone/</code> or a user‑defined <code>$VPHONE_ROOT</code>.  </p>
+<p>Two AMFI‑bypass methods are described: disabling SIP and setting <code>amfi_get_out_of_my_way=1</code>, or keeping SIP enabled and using <code>amfidont</code>. Known limitations include lack of nested virtualization, region‑specific setup failures, EXC_GUARD crashes (remediated by <code>fw patch --force-exc-guard</code>), and a ld‑id‑procursus bug fixed by building from HEAD.  </p>
+<p>A host‑side control socket (<code>vphone.sock</code>) enables programmatic input, screenshots, and clipboard operations for automated testing.</p>
+          </div>
+          <a href="https://github.com/Lakr233/vphone-cli" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall enthusiasm for the project’s capabilities, noting its usefulness for app testing, reverse engineering, and profiling compared to existing tools. Users seek clarification on its differences from the iOS simulator, the role of virtual baseband, regional setup restrictions, and technical requirements such as SIP modifications. Several inquire about practical applications like browser testing, account recovery, and potential cross‑platform support, while also questioning whether Apple might counteract the approach. The tone is generally positive but includes curiosity and cautious concerns about limitations and future viability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49485267" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sigma-star.at/blog/2026/08/go-runtime-netpoll-bug/" target="_blank">Hunting Down a Go Runtime Bug on 32-Bit Embedded Systems</a>
+        </h2>
+        <span class="article-meta">
+          16 points • by birdculture • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Go application running on 32‑bit ARM (or i386) Linux crashed sporadically with  </p>
+<p><code>runtime: netpoll: eventfd ready for 5
+fatal error: runtime: netpoll: eventfd ready for something unexpected</code>  </p>
+<p>The panic originates in <code>netpoll_epoll.go</code>, where the netpoll loop expects only <code>EPOLLIN</code> events. The Go runtime stores event metadata in the 8‑byte <code>ev.Data</code> field of <code>struct epoll_event</code>. For socket fds it stores a <em>tagged</em> pointer (lower 4 bytes = sequence tag <code>fdseq</code>, upper 4 bytes = pointer to <code>pollDesc</code>). For the internal event‑fd it stores a raw pointer to <code>netpollEventFd</code> with the upper 4 bytes zeroed.  </p>
+<p>On 32‑bit little‑endian systems the comparison <code>*(*uintptr)(unsafe.Pointer(&amp;ev.Data)) == &amp;netpollEventFd</code> examines only the lower 4 bytes. As <code>fdseq</code> increments, it eventually equals the low 32 bits of <code>&amp;netpollEventFd</code>. The runtime then misidentifies a socket fd as the event‑fd, violates the assumption that the ready event is just <code>EPOLLIN</code>, and aborts. This alias can only appear after millions of <code>pollDesc</code> allocations, explaining crashes in long‑running programs.</p>
+<p>A reproducible test creates many poll descriptors until <code>fdseq</code> collides, triggering the panic within minutes. The fix replaces the raw pointer with a nil‑tagged <code>pollDesc</code> for the event‑fd, ensuring <code>ev.Data</code> always contains a tagged pointer and eliminating the aliasing. The patch was merged in 2026, resolving the bug introduced in Go 1.14.</p>
+          </div>
+          <a href="https://sigma-star.at/blog/2026/08/go-runtime-netpoll-bug/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes the value of leveraging the Python plugin interface of gdb to enhance debugging capabilities on embedded devices, noting a personal improvement in skill. It also conveys curiosity about additional undiscovered 32‑bit bugs, reflecting an interest in further exploration and detection within this domain. The tone is constructive and inquisitive, focusing on practical techniques and the potential for uncovering more issues.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49450782" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/kingroryg/turbokv" target="_blank">TurboKV: Insanely fast Rust key-value store</a>
+        </h2>
+        <span class="article-meta">
+          102 points • by rgbimbochamp • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>TurboKV is an asynchronous embedded key‑value store for Rust offering atomic batch writes, ordered range scans, configurable durability levels, optional compression, and background compaction. It supports hardware‑accelerated Bloom filters using AES (x86/x86_64 with <code>+aes,+sse2</code>, ARM/AArch64 with <code>+aes,+neon</code>) and can be built with <code>-C target-cpu=native</code> for CPU‑specific optimizations. The crate provides <code>Db</code>, <code>DbOptions</code>, and <code>WriteBatch</code> APIs; databases are opened via <code>Db::open</code> or <code>Db::open_with_options</code> with options such as <code>fast</code>, <code>durable</code>, or <code>paranoid</code>. Options include toggling the write‑ahead log (WAL), sync‑writes, memory‑table size, block‑cache size, and compression (LZ4, Snappy, Zstd, or none). Keys and values are arbitrary byte slices; all mutations copy inputs, and reads return owned <code>Vec&lt;u8&gt;</code>. Scans are point‑in‑time snapshots and support range, prefix, and iterator interfaces. Maintenance functions include <code>flush</code>, <code>compact</code>, and status queries (<code>logical_stats</code>, <code>physical_stats</code>). Benchmarks (TurboKV 0.6.0 vs. fjall 2.11.2 and redb 2.6.3) measured throughput on an Apple M4, detailing durability modes, batch amortization, and raw performance data.</p>
+          </div>
+          <a href="https://github.com/kingroryg/turbokv" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mixed response, combining technical critique, curiosity, and light‑hearted remarks. Several points question the terminology around durability and note that the described mode would not survive power loss, while others highlight performance claims, attributing speed to hardware‑accelerated AES, LZ4 compression, and possible SIMD use. There is interest in additional features such as atomic get‑plus‑delete operations, and jokes about developers creating personal databases and meme‑driven hype. Overall, the tone blends skepticism, technical interest, and informal humor.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49486334" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released" target="_blank">Htmx 4.0</a>
+        </h2>
+        <span class="article-meta">
+          661 points • by rmsaksida • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>htmx 4.0.0 replaces the internal XMLHttpRequest implementation with fetch(), a change that is transparent to most users. Key differences from htmx 2.x:</p>
+<ul>
+<li><strong>Attribute inheritance</strong> is now explicit; attributes must include the “:inherited” suffix to cascade to child elements, removing the need for hx‑disinherit and simplifying inheritance logic.  </li>
+<li><strong>Event naming</strong> follows a standardized “htmx:phase:action[:sub‑action]” pattern (e.g., htmx:before:request, htx:after:swap); most legacy event names are consolidated into htmx:error and htmx:response:error.  </li>
+<li><strong>History handling</strong> no longer stores page snapshots in localStorage; on back navigation the page is re‑fetched and swapped, with an optional hx‑history‑cache extension that uses sessionStorage for caching.  </li>
+<li><strong>New features</strong>: built‑in morphing swaps, the  tag for structured partial updates, and the hx‑live scripting layer (Alpine.js‑style reactivity).  </li>
+<li><strong>Extensions</strong> added or updated: hx‑preload, hx‑download, hx‑alpine‑compat, hx‑history‑cache, hx‑sse, hx‑ws, hx‑multipart, plus a bundled htmax.js for common extensions.  </li>
+<li><strong>Versioning</strong>: 2.x remains the “latest” tag on CDN; 4.x is published as “next” until early 2027. Install via npm or CDN at https://unpkg.com/htmx.org@4.0.0/dist/htmx.min.js. An upgrade‑check CLI tool flags required changes.</li>
+</ul>
+          </div>
+          <a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong enthusiasm for htmx’s simplicity, progressive‑enhancement approach and its ability to add Ajax‑like behavior with minimal JavaScript, with many users reporting productive experiences and praising its documentation and compatibility. At the same time, several developers express concerns that htmx encourages mixing presentation with business logic, can become complex for large single‑page applications, and may be less suitable when extensive client‑side state management or modern frameworks like Angular, React or Alpine are preferred. Issues with mobile navigation and version‑numbering also appear. Overall sentiment is largely positive but tempered by practical reservations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49478178" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.inventati.org/" target="_blank">U.S. sanctions against the A/I Collective</a>
+        </h2>
+        <span class="article-meta">
+          603 points • by exiguus • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Autistici/Inventati (A/I) is a volunteer‑run collective founded in 2001 within the autonomous anticapitalist movement, focusing on technology and digital rights activism. The organization offers free digital self‑defence tools and communication platforms aimed at activists and individuals, emphasizing non‑commercial use and refusing any commoditisation of user data. Services are provided without monetary compensation; funding comes solely from voluntary donations. Each service request undergoes manual review by a volunteer, requiring alignment with A/I’s manifesto, respect for its policy, and adherence to its privacy terms; requests are anonymised and subsequently destroyed. The group stresses solidarity, self‑organisation, and a commitment to free, secure communication for its aligned community.</p>
+          </div>
+          <a href="https://www.inventati.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on strong criticism of the U.S. designation of Autistici Inventati as a terrorist entity, describing it as an unprecedented and overbroad move that threatens free‑speech protections and sets a dangerous precedent for labeling digital‑infrastructure providers. Participants question the evidence linking the collective to violent groups, view the action as politically motivated antifa targeting, and express concern that similar services for activists could face sanctions, eroding anonymity and hindering legitimate dissent. Overall sentiment is skeptical and alarmed about the implications for civil liberties and online activism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49477854" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pwning.systems/posts/llm-memory-program-analysis/" target="_blank">I accidentally turned LLM memory into program analysis</a>
+        </h2>
+        <span class="article-meta">
+          157 points • by matt_d • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author describes how LLM agents used for vulnerability research lose track of established facts over long sessions, leading to repeated hallucinations. To address this, they built Lemmalog, a Datalog‑style engine that stores observations as structured facts and derives conclusions via declarative rules, enabling incremental updates, retractions, provenance tracking, and temporal validity intervals. When a fact changes (e.g., a pointer relationship is disproven), Lemmalog automatically invalidates dependent conclusions without re‑processing the entire transcript. The system separates fuzzy extraction (LLM parsing of code, debugger output, natural language) from deterministic reasoning (the Datalog engine). Benchmarks on LongMemEval and LoCoMo show Lemmalog achieving F1 scores of ~0.46 and ~0.53 respectively, outperforming full‑context prompting and matching or surpassing other memory systems on categories such as knowledge updates, temporal reasoning, and adversarial queries, while using 6–38× fewer tokens per query. Limitations include weaker inference on conditional knowledge and reliance on accurate fact extraction. The work demonstrates that maintaining a structured analysis state can improve LLM memory fidelity without expanding context windows.</p>
+          </div>
+          <a href="https://pwning.systems/posts/llm-memory-program-analysis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes that LLMs work best when confined to translating natural language to and from formal representations, while mechanical reasoning is delegated to structured systems such as Datalog, Prolog, or knowledge graphs. Contributors note that persistent, queryable memory and formal verification can reduce repeated inference costs, but warn that LLMs often forget or retain outdated facts, requiring explicit decision logs or non‑monotonic frameworks. Interest in integrating “old‑school” AI tools, linters, and specialized libraries is high, though practical challenges and the need for reliable grounding remain common concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49485416" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
