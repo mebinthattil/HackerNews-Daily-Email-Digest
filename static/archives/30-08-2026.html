@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">August 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/1804.07389" target="_blank">Longest Straight Line Paths on Water or Land on the Earth (2018)</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by joebig • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper “Longest Straight Line Paths on Water or Land on the Earth” (R. Chabukswar &amp; K. Mukherjee, submitted 9 Apr 2018, revised 2 Jul 2018) addresses two complementary geospatial optimization problems: (1) determining the maximal distance a vessel can travel along a straight line on Earth without intersecting any land, and (2) finding the longest straight‑line route a vehicle can drive without crossing a significant water body. The authors model these problems as global optimization tasks complicated by the fractal nature of coastlines, islands, and inland lakes. They apply a branch‑and‑bound algorithm to efficiently search the solution space and compute the optimal paths. Submission history shows four version updates, with file sizes around 5.5 MB. The work contributes a systematic computational approach to previously heuristic analyses of uninterrupted straight‑line travel on the planet.</p>
+          </div>
+          <a href="https://arxiv.org/abs/1804.07389" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism about the claimed “longest drivable straight line” because the route traverses impassable terrain such as the Alps, making it unrealistic for vehicles. Critics note that the accompanying paper appears to merely confirm a Reddit claim rather than rigorously challenge it, and they question the methodological depth. Despite these criticisms, readers acknowledge the paper’s readability and find the discussion engaging, though they remain disappointed that the original assertion was not disproved.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49496782" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.python.org/2026/08/riscv-now-officially-supported/" target="_blank">RISC-V is now officially supported by CPython</a>
+        </h2>
+        <span class="article-meta">
+          157 points • by lumpa • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RISC‑V has been added to CPython as an official tier‑3 platform. RISC‑V is an open instruction set architecture, distinct from proprietary ISAs such as x86 and ARM, and its ecosystem is projected to expand significantly. Support was achieved through community contributions: testing on physical RISC‑V hardware, fixing architecture‑specific bugs, improving build processes, and reviewing patches, with notable assistance from the RISE Project, which supplied machines and buildbots, and from the Sovereign Tech Agency fellowship. Future work includes integrating RISC‑V testing directly into CPython’s continuous‑integration pipeline via RISE’s RISC‑V Runners, aiming for faster feedback and earlier detection of platform‑specific issues. Long‑term goals are to promote RISC‑V to tier‑2 status, develop architecture‑specific optimizations, and broaden support across the Python ecosystem by encouraging users to test CPython on diverse RISC‑V hardware and report findings.</p>
+          </div>
+          <a href="https://blog.python.org/2026/08/riscv-now-officially-supported/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on CPython’s recent RISC‑V support, noting the current baseline target and questioning whether newer extensions such as vector and bit‑manipulation could improve performance, while emphasizing the need for further testing and CI integration. Several remarks critique the continued Tier 1 status of the obsolete i686‑Windows build and suggest promoting aarch64‑Windows or wasm32 instead. Opinions on Python’s broader relevance are mixed, with some viewing the language as declining despite its past prominence, and a few calling for changes to the GIL.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49425252" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/" target="_blank">Hy4 preview</a>
+        </h2>
+        <span class="article-meta">
+          296 points • by shenli3514 • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tencent released the open‑source Hy4 preview, a next‑generation large language model with 770 billion total parameters, 49 billion active parameters, and a context window exceeding 1 million tokens. The model is accessible via WorkBuddy, CodeBuddy, Yuanbao, ima, Tencent Cloud TokenHub, and OpenRouter; it is free on WorkBuddy and CodeBuddy for two weeks, with Hy3 access extended to 30 Sept. Internal blind testing by 163 experts on 203 engineering tasks gave Hy4 an average score of 2.99/4.00, marginally ahead of GLM‑5.3 (2.92) and Kimi K3 (2.94). Hy4 shows gains in software engineering (long‑context planning, debugging, front‑end visual quality), office productivity (complex workflow, financial analysis, cross‑document collaboration), game development (prototype generation from natural‑language prompts), and scientific research (AI, molecular dynamics, condensed‑matter physics, mathematics). The model participated in its own training‑method optimization and performed autonomous inference‑system improvements, raising throughput by 31.8 %. API pricing is $0.834 per M input tokens, $2.501 per M output tokens, and $0.042 per M cache‑hit tokens. A subsequent Hy4 series rollout is planned.</p>
+          </div>
+          <a href="https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a mixed but generally cautious optimism about the new Chinese‑released Hy4 model. Users note its impressive token throughput and competitive performance against Western counterparts, yet criticize its speed, benchmark presentation, and the lack of truly open‑source code. Several remarks express concern over chart manipulation and token‑density strategies that could limit expressiveness. Technical frustrations appear around CodeBuddy access and benchmarking limits. Political overtones surface, framing the development as a shift in AI leadership, while humor and light‑hearted jokes punctuate the discussion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49492632" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danluu.com/bug-blind/" target="_blank">Bug Blindness</a>
+        </h2>
+        <span class="article-meta">
+          248 points • by davidmckenna • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author observes a heightened sensitivity to software bugs—seeing hundreds weekly—while most users miss them, a phenomenon termed “bug blindness.” This awareness often leads to identifying issues ranging from moderate (spam‑filled search results) to severe (products that only work via non‑intuitive work‑arounds). Examples include poor search engine outputs, widely disliked platforms like Blackboard, and performance‑cheating in Discourse. The author notes that fans and developers frequently exhibit “quality blindness,” dismissing flaws because they align with internal optimism or personal habits.</p>
+<p>Key points:
+- Repeated exposure cultivates habitual work‑arounds that mask underlying defects.
+- Dog‑fooding helps but can be undermined by ingrained shortcuts.
+- Overcoming quality blindness requires deliberate feedback and willingness to notice flaws.
+- The author has successfully taught peers to notice bugs, leading to lasting improvements in their perception of software quality.
+- Similar blind spots appear in other domains, such as advertising effectiveness and user perception of ads.</p>
+          </div>
+          <a href="https://danluu.com/bug-blind/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that “bug blindness” stems from mismatched mental models: developers focus on high‑level design and deem minor fixes trivial, while users experience each flaw as a costly inconvenience. Many note pervasive low‑quality UI and reliability in enterprise tools, leading users to adopt work‑arounds or ignore issues altogether. There is broad agreement that insufficient testing, vague requirements, and normalization of deviance keep bugs hidden, while calls for stronger QA practices, clearer expectations, and higher quality standards appear frequently, though some accept a baseline level of imperfection as inevitable.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49494520" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chipsandcheese.com/p/hot-chips-2026-xcena-and-samsungs" target="_blank">Xcena and Samsung&#39;s Near Memory Compute CXL Device</a>
+        </h2>
+        <span class="article-meta">
+          5 points • by klelatti • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>XCENA and Samsung’s MX1 is a CXL.mem device that combines up to 2 TB DDR5, a PCIe 6/CXL 3.2 ×8 host interface (128 GB/s bidirectional) and eight downstream PCIe 6 lanes for SSDs presented as memory. The board (≈90 W total) hosts 3072 in‑order RISC‑V cores (1.1 GHz) organized into 24 subsystems (128 cores each). Each cluster of 32 cores shares a 128 KB L2 data cache (VIPT) and a 128 KB L2 instruction cache; four cores share an 8 KB instruction cache. Two ARM Cortex‑A53 cores manage control. A custom vector processing engine per subsystem provides FP16/FP32 dot‑product throughput of ~3 TFLOPS (≈128 FLOP per cycle). The ASIC is fabricated on Samsung’s 4 nm process, consuming ~40 W plus DRAM power. Memory hierarchy includes 4 KB L1 data cache, a 1024‑entry TLB (64 KB pages) and a map cache for SSD‑backed pages. The programming model resembles OpenCL/CUDA with a shared virtual address space and host‑device pointer compatibility. SSDs can be cached in DDR5, pinned, or prefetched to mitigate latency; RAID can increase bandwidth. Near‑memory compute exploits internal bandwidth and reduces CXL traffic, enabling &gt;200 GFLOPS effective performance despite a 3 TFLOPS peak.</p>
+          </div>
+          <a href="https://chipsandcheese.com/p/hot-chips-2026-xcena-and-samsungs" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49496543" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://freecore.org/" target="_blank">FreeCORE TrueNAS Core – Continued</a>
+        </h2>
+        <span class="article-meta">
+          93 points • by sashk • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>FreeCORE is an independently maintained operating system built on FreeBSD that continues the TrueNAS CORE 13.3 codebase. It provides a dedicated update path, allowing existing TrueNAS CORE 13.3 installations to upgrade directly to FreeCORE 15.0‑U1 in place. Version 15.0‑U1 is designated as stable, and after the upgrade users remain on the FreeCORE development train for subsequent updates. The project therefore offers a seamless migration from the upstream TrueNAS CORE release to a self‑hosted, FreeBSD‑based distribution while preserving compatibility with the original system’s features and configuration.</p>
+          </div>
+          <a href="https://freecore.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect mixed feelings about TrueNAS’s shift from FreeBSD‑based CORE to Debian‑based SCALE. Many users recount successful migrations, appreciating the smooth transition and continued functionality, while others lament the loss of build scripts and express concern over future development and support. Preferences split between the stability and familiarity of FreeBSD and the perceived flexibility of Linux, with some favoring alternative solutions like BSDNAS. Overall sentiment balances appreciation for existing reliability with skepticism about the direction and longevity of the newer Linux‑focused offering.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49494856" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tomshardware.com/software/linux/california-lawmakers-unanimously-pass-linux-exemption-from-age-verification-law-software-distributed-under-the-gpl-mit-bsd-and-apache-licenses-are-exempt" target="_blank">California lawmakers unanimously pass Linux exemption from age-verification law</a>
+        </h2>
+        <span class="article-meta">
+          268 points • by shscs911 • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>California’s legislature approved Assembly Bill 1856, amending the Digital Age Assurance Act to exempt open‑source operating systems from its age‑verification requirements, effective before the law’s Jan 1 2027 start date. The bill redefines “operating system provider” to exclude any entity distributing software under licenses that allow copying, redistribution and modification—specifically GPL, MIT, BSD, and Apache—removing distributions such as Debian, Fedora, Ubuntu, Arch and BSD families from compliance. It also excludes non‑stand‑alone components (libraries, dependencies) delivered via package managers, and storefronts for extensions that run inside host applications, taking browser‑extension stores out of scope. The amendment deletes the original “user” definition that labeled every device owner a child, and adds a provision prohibiting age‑signal requests from OS providers or app stores unless legally required, providing a safe harbor for inaccurate signals. Windows, macOS, iOS and Android remain subject to age‑collection at account setup, with a July 1 2027 deadline for pre‑Jan 1 devices. The status of SteamOS remains unclear; GrapheneOS, distributed under MIT/Apache, is now fully exempt.</p>
+          </div>
+          <a href="https://www.tomshardware.com/software/linux/california-lawmakers-unanimously-pass-linux-exemption-from-age-verification-law-software-distributed-under-the-gpl-mit-bsd-and-apache-licenses-are-exempt" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad criticism of the new age‑verification legislation, emphasizing that its exemptions for open‑source operating systems and certain licenses create inconsistent and impractical rules. Writers note that the law appears poorly drafted, likely to generate loopholes, enforcement challenges, and unintended consequences such as restricting access for non‑exempt platforms while leaving others untouched. Humor and sarcasm highlight perceived absurdities, while some suggest the measure reflects broader regulatory failures and calls for more comprehensive privacy or safety reforms rather than piecemeal fixes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49495372" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zackbartel.com/blog/2026/08/tether/" target="_blank">Tether: iMessage, SMS, etc. on Linux</a>
+        </h2>
+        <span class="article-meta">
+          457 points • by zackb • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tether is an open‑source project that bridges iPhone functionality to Linux desktops, aiming to replicate Apple’s Continuity features where technically feasible. Initial development focused on clipboard synchronization, enabling copy/paste between macOS and Linux (Wayland) and establishing a foundation for later capabilities. Security is built‑in: communication between the iOS app and the Linux daemon (tetherd) uses mutual TLS, with regular audits (Opus, Fable) for vulnerabilities. Subsequent additions include file transfer, OTP handling via WebExtension integrations for Zen Browser (Firefox) and Betterbird (Thunderbird), and, after reverse‑engineering Bluetooth protocols (ancs4linux, BlueFerry), support for iMessage, SMS, notifications, and contact sync. The Bluetooth implementation was written in C++ under an MIT license to avoid copyleft restrictions of related GPL projects. Tether’s roadmap emphasizes community contributions and aims to provide a reliable, privacy‑focused Continuity experience for Linux users with iPhones.</p>
+          </div>
+          <a href="https://zackbartel.com/blog/2026/08/tether/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express enthusiasm for the project’s effort to bridge iPhone functionality to Linux, noting its potential to improve interoperability, enable messaging, clipboard, and file‑sharing without relying on Apple’s ecosystem. Users appreciate the open‑source approach but raise concerns about licensing, incomplete features such as call handling, and the need for a more reliable connection, clearer documentation, and stronger security (e.g., end‑to‑end encryption). Technical hurdles like Bluetooth MAP limitations, Wayland dependencies, and UI bugs are frequently mentioned, while some suggest broader community support or integration with existing tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49415386" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.smithsonianmag.com/history/among-all-great-things-benjamin-franklin-invented-discovered-alter-egos-gave-him-most-freedom-180988824/" target="_blank">Benjamin Franklin&#39;s Alter Egos Gave Him the Most Freedom</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by cisc • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Benjamin Franklin repeatedly used pseudonymous personas to influence public opinion and advance reforms.  </p>
+<ul>
+<li><strong>Silence Dogood</strong> (teenage letters) let him bypass his brother’s publishing embargo and comment on women’s hardships.  </li>
+<li><strong>Polly Baker</strong> dramatized a legal case of an unwed mother, exposing gender bias in colonial courts.  </li>
+<li><strong>Richard Saunders</strong> authored <em>Poor Richard’s Almanack</em>, mixing astronomical data with maxims that shaped American folk wisdom.  </li>
+<li><strong>Americanus</strong> and <strong>Benevolus</strong> appeared in the <em>Pennsylvania Gazette</em> and British papers, respectively, to argue colonial rights, critique the transport of convicts, and counter the Stamp Act, using satire and reasoned rebuttals.  </li>
+<li>Near his death, Franklin, as an abolitionist, submitted a petition to Congress and mocked pro‑slavery rhetoric with a fabricated Algiers speech.  </li>
+</ul>
+<p>In 1769, collaborating with his cousin Captain Timothy Folger, Franklin charted the Gulf Stream (“river in the ocean”), enabling ships to avoid the warm eastward current, cutting trans‑Atlantic voyages by up to two weeks and accelerating trade. His alter egos provided anonymity, rhetorical flexibility, and a platform for social critique while his scientific work directly impacted navigation and commerce.</p>
+          </div>
+          <a href="https://www.smithsonianmag.com/history/among-all-great-things-benjamin-franklin-invented-discovered-alter-egos-gave-him-most-freedom-180988824/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion presents Benjamin Franklin as a multifaceted figure who employed pseudonyms and anonymous writing, a practice common among early American founders, while noting that anonymity enjoys stronger legal protection in the United States than in Europe or China. It highlights his association with the Hellfire Club’s decadent activities, references a recent Canadian biography that critiques his repeated, unsuccessful attempts to bring Canada into the United States, and emphasizes his talent for self‑promotion and social adaptation across different cultures. Overall, the comments convey a nuanced, critical view that balances his achievements with his less admirable conduct.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49494751" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://invention.si.edu/invention-stories/einstein-szilard-refrigerator" target="_blank">The Einstein-Szilard Refrigerator</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by EndXA • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://invention.si.edu/invention-stories/einstein-szilard-refrigerator" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the Einstein–Szilard absorption refrigerator, noting its appearance in the book and film The Mosquito Coast and describing its technical composition of water, ammonia, and butane. It highlights that the device is a refinement of an earlier three‑fluid absorption system developed by Swedish engineers Baltzar von Platen and Carl Munters, and references the historical context of Einstein and Szilárd’s contribution to eliminating leakage risk.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49453232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
