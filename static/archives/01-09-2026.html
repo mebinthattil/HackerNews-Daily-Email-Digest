@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 01, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.gpuworld.org/" target="_blank">GPU World</a>
+        </h2>
+        <span class="article-meta">
+          197 points • by simonpure • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The piece frames a speculative scenario for a story contest. It notes that today only a few million GPUs can efficiently run frontier large language models (LLMs) such as Fable or Sol, limiting widespread access. It projects that by 2040 hardware and software advances could provide each of the world’s 8 billion people with the computational equivalent of a modern GPU capable of running contemporary frontier LLMs continuously. The premise assumes AI progress halts as of 1 September 2026—models become faster and cheaper but never achieve superhuman capabilities—while GPU production continues. Participants are asked to imagine the societal effects of universal, 24/7 access to high‑quality LLMs, considering potential outcomes for surveillance, education, social media, healthcare, and the developing world, and how such pervasive AI might reshape daily life without a singularity event.</p>
+          </div>
+          <a href="https://www.gpuworld.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on a skeptical view that universal access to high‑performance LLM hardware would not fundamentally transform society, noting persistent issues such as hallucinations, limited learning, and energy costs, and emphasizing that past disruptive technologies required broader systemic changes beyond raw compute. Many express concern about corporate control, surveillance, and cultural stagnation, while a minority highlight potential creative or educational experiments. Overall the tone is cautionary, questioning the promised productivity gains and warning that widespread AI availability may reinforce existing inequalities rather than deliver revolutionary benefits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49517584" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fastpotify.rocks/" target="_blank">Fastpotify</a>
+        </h2>
+        <span class="article-meta">
+          335 points • by nreece • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Fastpotify is a lightweight, native Spotify client offering local playback, library access, and Spotify Connect controls across Linux, macOS, and Windows. The interface includes a queue panel, a sidebar library view, and a mini player with a built-in skin. Additional features shown in screenshots involve a “Late night focus” playlist view and a chat integration labeled “Chat with Work.” The client is positioned as a fast, cross‑platform alternative to official Spotify applications.</p>
+          </div>
+          <a href="https://fastpotify.rocks/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively note that the project’s marketing language feels exaggerated and oddly phrased, raising mild trust concerns about LLM‑generated documentation. Users express enthusiasm for the fast, lightweight Rust implementation and the novelty of Winamp skin support, while also criticizing Spotify’s web client performance, naming choices, and broader platform ethics. Several remarks discuss self‑hosting alternatives and related tools, and a few highlight the desire for native clients and better distribution formats. Overall sentiment mixes appreciation for the technical approach with skepticism toward branding and reliance on Spotify’s ecosystem.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49517448" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tmpout.sh/5/" target="_blank">Tmp.0ut Volume 5</a>
+        </h2>
+        <span class="article-meta">
+          46 points • by ghuntley • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The document “tmpout_v” is a structured index of 21 entries related to low‑level binary manipulation, reverse‑engineering, and security research on x86‑64 Linux ELF files. It begins with an introductory section and an interview with Doug McIlroy, then proceeds through a series of technical contributions: a 57‑byte ELF exploit analysis, a 440‑byte metamorphic ELF‑64 virus, Perl scripting tricks, an XLAT‑based code technique, and a discussion of state‑less control‑flow. Additional topics include a Brainfuck‑to‑ROP compiler, a deep dive into Linux kernel executable loading, creation of polyglot ELF files for anti‑forensics, detection of syscall‑hook side‑channels, and an overview of code virtualization. The list also covers custom ELF loaders (halfexec, halfshelf, phork), self‑extraction via reachability, the RDOFF virus, a binary‑golf recap, fine‑grained load‑time ASLR for ELF binaries, static kernel‑patching revisions, and a final “tmp.0ut 5” mixtape. Social handles for the project are provided (e.g., @tmpout, @tmpout.sh).</p>
+          </div>
+          <a href="https://tmpout.sh/5/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for the nostalgic, craft‑focused style of 1990s computer culture, especially ezines and BBS aesthetics, and praise the interview with Doug McIlroy as engaging and valuable. Readers note the visual presentation and desire for more magazine‑type explanations of technical ideas. Several remarks point out factual and typographic errors, such as misnamed citations and questionable hardware references, while also criticizing the fixed‑width layout’s poor mobile usability. Overall sentiment is positive toward the content’s substance and retro feel, tempered by suggestions for accuracy and format improvements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49516059" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://restroomarchive.com" target="_blank">Restroom Archive</a>
+        </h2>
+        <span class="article-meta">
+          109 points • by jcalx • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>"The Restroom Archive" entry dated 24 Jun 2023, recorded at Tom Sawyer Island, Disneyland, Anaheim, CA.</p>
+          </div>
+          <a href="https://restroomarchive.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on public restroom design, ranging from criticism of stressful features like timed doors and small sinks to enthusiasm for well‑designed, possibly subscription‑based facilities. Several contributors suggest leveraging technology—photogrammetry apps, mapping integrations, and data collection on usage or graffiti—to improve documentation and accessibility, while others express concern that monetizing bathrooms could erode public commons. Humor and nostalgic references appear alongside practical suggestions, reflecting a blend of curiosity, skepticism, and interest in innovative, inclusive restroom solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49517624" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/" target="_blank">I turned my security cameras into an automatic bird identification system</a>
+        </h2>
+        <span class="article-meta">
+          491 points • by speckx • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author repurposes existing outdoor security cameras with microphones to run BirdNet‑Go, a Docker‑based, 24/7 local AI system that classifies bird, bat, and frog calls from audio streams. Key features include real‑time detection, multi‑model inference (e.g., Google Perch v2 supporting 14,795 species), customizable alert rules with species‑list matching, and novelty tracking of newly observed species. The software accepts RTSP streams, integrates with Home Assistant via MQTT, and can publish data to the community platform BirdWeather. An optional iOS “BirdNET‑Go Companion” app provides mobile access. The author reports over 418 k detections in a year (271 unique species, average confidence 60.9 %), with the House Finch most frequent in Southern California. The system operates entirely on‑premises (e.g., Raspberry Pi), incurs no cloud fees, and preserves privacy unless the user chooses to share data. The setup has proven engaging for the author’s household and demonstrates a practical homelab application beyond security.</p>
+          </div>
+          <a href="https://jasontucker.blog/how-i-turned-my-security-cameras-into-an-automatic-bird-identification-system-with-birdnet-go/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad enthusiasm for repurposing security cameras and DIY hardware to run open‑source bird‑call detection models, noting successful setups with various microphones, e‑ink displays, and Home Assistant integrations. Users share project ideas, improvements, and resources while acknowledging challenges such as microphone quality, limited sampling rates, and occasional false‑positive identifications that require manual verification. Several remarks highlight the educational and entertaining aspects of the technology, with occasional humor about unexpected detections and mild concerns about privacy and system limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49511856" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://playaphone.com/" target="_blank">Playa Phone</a>
+        </h2>
+        <span class="article-meta">
+          612 points • by cutoff • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Playa Phone is a free 5‑minute public phone booth installed at the intersection of 3:30 and Ceiba in Black Rock City during Burning Man. The booth uses a modified internal system that routes calls via the Internet, eliminating payment. Users can dial +1 (775) 557‑4848 to connect with any listed number worldwide or to speak with a random attendee; busy signals or unanswered rings may occur, requiring repeated attempts. Recipients of calls from this number are advised to add “Playa Phone” to contacts to avoid silencing. The project has been featured in SFGATE and discussed on Reddit, where additional technical details and user experiences are shared. The booth’s current call activity is displayed online.</p>
+          </div>
+          <a href="https://playaphone.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show strong enthusiasm for the playa phone project, highlighting its novelty, social spontaneity and the memorable experiences it enables, such as impromptu weddings and uplifting conversations. Many participants express curiosity about technical implementation, power sources, VoIP services, and possibilities for a more permanent or expanded network of phones. A subset questions Burning Man’s culture, noting perceptions of wealthier attendees and offering critical perspectives on its evolution. Overall sentiment is largely positive and supportive, with interest in replication and modest critique of broader festival dynamics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49510514" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=3YtygAx_C6A" target="_blank">A walkable ASCII cyberpunk city in one HTML file [video]</a>
+        </h2>
+        <span class="article-meta">
+          320 points • by keithcarolus • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page presents a footer navigation list for YouTube, comprising links to: “About” (general information about the service); “Press” (media resources); “Copyright” (intellectual‑property details); “Contact us” (user support channels); “Creators” (resources for video makers); “Advertise” (information on advertising options); “Developers” (tools and APIs for integration); “Terms” (legal terms of use); “Privacy” (data‑handling policies); “Policy &amp; Safety” (community guidelines and safety measures); “How YouTube works” (operational overview); “Test new features” (beta‑testing programs); and “NFL Sunday Ticket” (specific sports‑content offering). The footer concludes with the copyright notice “© 2026 Google LLC,” indicating ownership and the year of publication.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=3YtygAx_C6A" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments largely praise the browser‑based ASCII city project, noting its impressive use of pure HTML, clever ray‑casting engine, and nostalgic aesthetic that evokes classic text adventures and cyberpunk visuals. Reviewers appreciate the ease of font control, mouse input, and profiling the browser provides compared with terminal implementations. Minor criticisms include occasional rendering mismatches, a perceived pay‑to‑play barrier, and suggestions to employ block characters for better dithering. Interest in the project’s development, accessibility, and source code consistency is evident, with overall sentiment positive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49512975" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=OOMx2BHHWtE" target="_blank">Terence Tao explains 6 essential mathematical concepts [video]</a>
+        </h2>
+        <span class="article-meta">
+          408 points • by matthewsinclair • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>YouTube’s site footer lists primary navigation and informational sections: “About,” “Press,” “Copyright,” and “Contact us” for corporate and legal details; “Creators,” “Advertise,” and “Developers” for content‑producer resources and partnership opportunities; “Terms,” “Privacy,” and “Policy &amp; Safety” covering user agreements and safety guidelines; “How YouTube works” and “Test new features” offering operational insights and beta participation; and “NFL Sunday Ticket,” indicating a sports‑related service. The page concludes with the copyright notice “© 2026 Google LLC.” This structure provides quick access to corporate, legal, creator, advertising, developer, and policy information, as well as feature testing and subscription services.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=OOMx2BHHWtE" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for Tao’s ability to convey complex mathematical ideas clearly and without condescension, highlighting his explanations of topics such as analysis, dynamics, and Fourier transforms as especially enlightening. Viewers note the usefulness of the presented list of subjects and suggest adding areas like geometry, topology, logic, and type theory. While most feedback is positive, a few critique the simplification of analogies, such as the monkey‑writing‑Hamlet comparison. Overall, the audience values the content’s accessibility, relevance to research purpose, and its inspirational impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49503521" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe" target="_blank">Dwarf Fortress is getting the mother of all magic updates</a>
+        </h2>
+        <span class="article-meta">
+          405 points • by Tomte • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Dwarf Fortress is receiving a major “Myth and Magic” update that will integrate a procedural magic system into the core world‑generation process. Co‑founder Tarn Adams describes it as a set of systems that reach “the fundamental cosmological makeup of the universe,” producing distinct forms of wizardry and witchcraft alongside terrain, rivers, and settlements. The update will let fortresses conduct magical research that includes magic materials, enchantments, rituals, ruins and conventional spells, with effects tied to each generated universe’s underlying rules. A preview video shows examples such as a goblin‑shredding hex that also shifts stone. Development has spanned several years, and the feature is slated for release later this year, expanding upon the previously limited magic mechanics in Dwarf Fortress.</p>
+          </div>
+          <a href="https://www.rockpapershotgun.com/dwarf-fortress-is-getting-the-mother-of-all-magic-updates-extending-to-the-fundamental-cosmological-makeup-of-the-universe" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed feelings about recent Dwarf Fortress developments. Long‑time supporters convey disappointment over the shift to a mouse‑driven UI that abandoned the previous keyboard interface, feeling overlooked despite substantial financial contributions. At the same time, many voice enthusiasm for the forthcoming magic system, praising its procedural design and potential for chaotic gameplay. Nostalgia for earlier versions and concern over performance issues appear alongside appreciation for the developers’ effort to reach new audiences, while overall sentiment remains cautiously optimistic tempered by criticism of past changes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49467636" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ycombinator.com/companies/collectwise/jobs/7U500pP-founding-customer-success-engineer" target="_blank">CollectWise (YC F24) Is Hiring</a>
+        </h2>
+        <span class="article-meta">
+          1 points • by OBrien_1107 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CollectWise, a Y Combinator‑backed startup using generative AI to automate debt collection in the US $35 B market, seeks a Founding Customer Success Engineer. The role involves managing post‑launch customer relationships, troubleshooting technical issues (including configuration changes, code deployment, and API integration), monitoring usage metrics, and optimizing AI agents through prompt engineering. Responsibilities also cover supporting new implementations, reducing churn by proactive outreach, and driving upsell and account expansion. Candidates must have three or more years in technical customer success, solutions or sales engineering, technical operations, product management, support, or software engineering, with strong written and verbal communication, code debugging experience, and ability to manage multiple priorities. Compensation is $150 k–$180 k OTE (base $130 k–$160 k plus variable pay) plus equity ranging from 0.03 % to 0.10 %. Success metrics include customer satisfaction, retention, product usage, and revenue expansion.</p>
+          </div>
+          <a href="https://www.ycombinator.com/companies/collectwise/jobs/7U500pP-founding-customer-success-engineer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49518877" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
