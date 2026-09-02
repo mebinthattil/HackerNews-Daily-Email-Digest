@@ -1,0 +1,558 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 02, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank">Claude Fable 5.1 and Claude Mythos 5.1</a>
+        </h2>
+        <span class="article-meta">
+          1180 points • by denysvitali • 156 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Claude Fable 5.1 and Claude Mythos 5.1 are new Anthropic models for coding and knowledge work, identical in architecture but with distinct safeguard tiers: Fable 5.1 is generally available, while Mythos 5.1 is limited to trusted‑access programs for cybersecurity and life‑science applications. Pricing for Fable 5.1 is projected ~25 % lower than Fable 5 on typical token‑based workloads, with up to ~45 % savings for highly agentic tasks due to reduced cache‑read costs. A forthcoming Enterprise Frontier Safeguards (EFS) system will give enterprise customers zero‑data‑retention by storing inputs in customer‑controlled cloud infrastructure; until EFS rollout, zero‑retention is already available for eligible users. Safeguard updates cut false‑positive rates by 60 % in cybersecurity and enable vulnerability discovery (but not exploit creation). Benchmarks show Fable 5.1 surpasses its predecessor and competing models (e.g., Opus 5) in coding, long‑running problem solving, and multidisciplinary reasoning, often with fewer tokens and faster execution. Early‑access partners report higher accuracy, better readability on complex tasks, and notable cost efficiencies across finance, software development, and scientific research use cases.</p>
+          </div>
+          <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a split between modest enthusiasm for Fable 5.1’s smoother prose and higher science benchmark scores and broader disappointment with its overall performance gains. Users note the model still feels “AI‑smelly,” often rewrites whole files, and consumes many tokens, leading to cost and quota worries. Compared to cheaper alternatives like Opus 4.8, DeepSeek, or GLM, many see little practical advantage, while some appreciate specific coding insights or reduced cache‑read pricing. Concerns also surface about safeguards, watermarking, and limited accessibility for higher‑tier usage. Overall sentiment is mixed, leaning toward skepticism about value versus price.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49525378" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2608.29530" target="_blank">The Emergent Symbolic Structure of Artificial Neural Networks</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by schmuhblaster • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper investigates how artificial neural networks develop internal symbolic representations without explicit supervision. It examines the emergence of structured, language‑like symbols within trained models, analyzing the organization, compositionality, and interpretability of these internal codes. By probing network activations and mapping them to symbolic patterns, the study characterizes the conditions under which symbolic structures arise, assesses their robustness across architectures, and evaluates their relevance for downstream tasks. Results indicate that certain training regimes and network designs promote the formation of discrete, reusable symbols that can be leveraged for improved reasoning and modularity in AI systems. The work contributes empirical evidence and methodological tools for understanding and harnessing emergent symbolic organization in deep learning.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2608.29530" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects cautious interest in the paper’s claim of deriving closed‑form symbolic representations of language models, noting that such distillation could improve computational efficiency and inform future model design. Commenters acknowledge the novelty and possible value of linking fuzzy neural representations to provable symbolic structures, but many point to the current reliance on simple tasks, limited empirical evidence, and the early‑stage nature of the work. Overall, there is a blend of optimism about potential breakthroughs and skepticism regarding practical impact and methodological rigor.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49531651" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danluu.com/zitron/" target="_blank">How accurate have Ed Zitron&#39;s AI skeptic predictions been?</a>
+        </h2>
+        <span class="article-meta">
+          656 points • by jatins • 138 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ed Zitron, a prominent AI‑skeptic blogger, repeatedly predicts that generative AI has peaked, that major tech firms (Meta, Google, Microsoft) are “dying,” and that AI companies will run out of data, growth, or profitability. The post systematically checks these claims against publicly reported revenue, profit, user‑growth, and product metrics from 2023‑2026, showing that Meta’s revenue continued rising, Google’s diversified businesses (YouTube, Cloud) sustained growth, and Microsoft’s earnings expanded. Specific forecasts—Meta’s demise, Google’s stagnation, OpenAI’s stalled growth, Anthropic’s implausibly low revenue, Gemini’s unrealistic user targets, and the notion that models no longer improve—have all been contradicted by actual financial statements, user counts, and model advancements (e.g., GPT‑5). Critics note Zitron’s reliance on cherry‑picked third‑party data, arithmetic errors in spreadsheets, and aggressive tone aimed at reinforcing a niche audience rather than rigorous analysis. Compared to other futurists, his predictions are consistently wrong, though his provocative style garners attention. The overall record indicates that Zitron’s AI‑skeptic predictions lack factual support and have not materialized.</p>
+          </div>
+          <a href="https://danluu.com/zitron/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely view Ed Zitron’s AI forecasts as frequently inaccurate and overly dramatic, criticizing his reliance on questionable numbers and biased commentary while acknowledging occasional insight into broader industry risks. Readers dispute his definition of “dying” firms, argue that AI company valuations may be speculative and unsustainable, and express distrust of pundit‑driven narratives. Some concede that his concerns about massive financing, potential bubbles, and economic impacts have merit, yet overall sentiment emphasizes the need for more rigorous, data‑driven analysis and caution toward sensational predictions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49526069" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://saladtheory.github.io/" target="_blank">Salad Theory</a>
+        </h2>
+        <span class="article-meta">
+          49 points • by colinprince • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The document proposes “Salad Theory,” asserting that every edible item qualifies as a salad. After evaluating several candidate definitions, the authors adopt a minimal definition: a salad is any collection of ≥ 2 edible ingredients, while single‑ingredient items are “low‑entropy hyper‑salads.” They introduce quantitative measures: (1) soupiness – a coefficient ranging from 0 (no exterior liquid) to 1 (no solid content); (2) ingredient entropy – log₂‑based count of distinct ingredients, with values ≥ 1 indicating a proper salad; and (3) arrangement entropy – the degrees of freedom for repositioning or rotating ingredients without perceptible change. Theorem 1 states a soup–salad duality, showing no clear threshold separates soups from salads, and beverages cannot be formally distinguished from soups. Theorem 2 formalizes hyper‑salads versus full salads; Theorem 3 notes salads are closed under union/addition but not subtraction. The authors classify sandwiches, pizza, tacos, burritos, chicken soup, nuts, Coke + ice, etc., as salads under this framework and critique alternative categorizations such as the Cube Rule for inconsistency.</p>
+          </div>
+          <a href="https://saladtheory.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments blend amusement with serious reflection, praising the detailed “salad theory” while questioning its practical relevance. Many note the humor in applying mathematical rigor to food categories, referencing family‑resemblance and prototype approaches from philosophy and linguistics. Opinions diverge on how strictly a salad must be defined—some emphasize cold vegetables, tossing, or dressing levels, whereas others view the term as flexible or figurative. Overall, the discussion is light‑hearted yet intellectually curious, highlighting both appreciation for the effort and skepticism toward over‑formalization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49505170" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://webfpga.io/" target="_blank">WebFPGA</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by gurjeet • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>WebFPGA offers FPGA development boards available for purchase directly through its site. Users are directed to the project’s Kickstarter page for detailed information on scope and goals, and are encouraged to program the hardware using a provided Web IDE. The site includes sections for a site map, command‑line/Linux tools, and user demos that showcase functionality. Technical support is offered via email at support@webfpga.io. The platform aims to simplify FPGA programming through a browser‑based interface while providing resources for both novice and experienced developers.</p>
+          </div>
+          <a href="https://webfpga.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express enthusiasm for a web‑based FPGA environment as a low‑friction way to start learning and prototype without heavy local toolchains, noting it could lower the entry barrier and be useful for quick demos. Several remarks seek more capable boards or use cases beyond simple “hello world” projects, while others criticize the limited functionality of current web IDEs and warn that serious development will soon require a full‑featured local toolchain. Suggestions include targeting professional sectors such as high‑frequency‑trading for funding, and questioning the practicality of cloud‑only synthesis.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49531525" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dbushell.com/2026/09/01/text-editor/" target="_blank">Fine, I&#39;ll build my own text editor</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by Alephinitesimal • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post documents a personal experiment in building a web‑based text editor, progressing through three rendering approaches:</p>
+<ul>
+<li>
+<p><strong>Canvas</strong>: Initial prototype draws all text on a <code>&lt;canvas&gt;</code> at 60‑120 fps, implementing cursor placement, arrow navigation, line highlighting, typing, and cursor animation. Missing features include text selection, undo/redo, multi‑line paste, and scrolling; scrolling was simulated via a hidden overflow <code>&lt;div&gt;</code> whose scroll offset drives canvas offsets. Canvas offers no native accessibility.</p>
+</li>
+<li>
+<p><strong>Content‑editable</strong>: Switching to a <code>&lt;div contenteditable="plaintext-only"&gt;</code> leverages the browser’s built‑in selection, undo history, and accessibility. The author disables spellcheck, autocorrect, and caret color for performance. However, Chromium shows degradation beyond a certain character count, making behavior unpredictable.</p>
+</li>
+<li>
+<p><strong>Textarea</strong>: A <code>&lt;textarea&gt;</code> proves more performant for large text blocks. Syntax highlighting is added with an overlay of <code>&lt;div&gt;</code> elements (MicroLighter) and mentions emerging APIs (OpaqueRange, EditContext) that could enable custom highlights. The author suggests using Tree‑sitter for efficient line‑level highlighting and virtualized scrolling.</p>
+</li>
+</ul>
+<p>The experiment reaches roughly 90 % of a functional editor with minimal features, noting issues with UTF‑16 string handling and future work on tab indentation and accessibility refinements.</p>
+          </div>
+          <a href="https://dbushell.com/2026/09/01/text-editor/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a blend of nostalgia and practical critique regarding text editors. Many recall past editors with affection while acknowledging that modern implementations often add unnecessary complexity, especially when built on web technologies. There is a recurring view that basic editing is a solved problem, yet users value the satisfaction of crafting lightweight, focused tools and appreciate features like multi‑cursor support, modal interfaces, and robust language‑server integration. Opinions diverge on the trade‑off between convenience of large IDEs and the desire for minimal, performant editors.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49524863" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lws.io/blog/my-local-model-setup/" target="_blank">My local model setup on an M4 Pro Mac Mini</a>
+        </h2>
+        <span class="article-meta">
+          177 points • by raybb • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A local LLM server runs on an M4 Pro Mac mini (48 GB RAM) using oMLX for inference and Tailscale for a private tailnet linking the mini, a MacBook, and an iPhone. Two quantized models are deployed: <strong>Qwen3.6‑35B‑A3B‑OptiQ‑4bit</strong> (≈20 GB RAM, 3 B active parameters per token) for reasoning tasks, and <strong>Gemma‑4‑E4B‑it‑4bit</strong> (≈2.4 GB RAM) for lightweight chats. MoE architecture allows the 35 B total parameters to occupy far less memory than a dense model, enabling fit on 48 GB unified memory while leaving space for OS and KV‑cache. Benefits cited include fixed hardware cost, zero per‑token fees, low latency, offline operation, and no API rate limits or data‑privacy risks. Setup steps: download models to ~/models/, oMLX auto‑detects them, select via GUI or CLI, and expose port 8000 to the tailnet. KV‑cache persistence on SSD speeds context reuse for agents like Hermes and Pi. The author plans to upgrade to a 128 GB M5 Max Mac Studio but finds the current mini sufficient for most day‑to‑day tasks.</p>
+          </div>
+          <a href="https://lws.io/blog/my-local-model-setup/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments emphasize that running large models locally depends on both RAM capacity and memory bandwidth, with users comparing quantized configurations and reporting varying token speeds across different hardware. Performance on low‑memory machines is seen as inadequate, while newer Macs (M3/M4) and dedicated GPUs are praised for smoother execution. Privacy is highlighted as a primary motive for avoiding cloud APIs, though concerns about data handling persist. Community interest centers on benchmark sharing, setup tutorials, and the possibility of shared GPU services to enable larger models without prohibitive hardware costs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49529132" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/" target="_blank">FBI Probes Service Selling 153M+ Drivers Licenses</a>
+        </h2>
+        <span class="article-meta">
+          180 points • by tatersolid • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A dark‑web service called Nexus began offering digital scans of over 153 million U.S. and Canadian driver’s licences, plus millions of ID cards, travel documents and medical cards. The listings include multiple high‑profile individuals (e.g., U.S. Defense Secretary, FBI assistant director, security researcher Zach Edwards) and show six image files per record with infrared/ultraviolet versions and GMT timestamps that often match rental‑car or dispensary transactions. Nexus claims the data originates from an ongoing breach at a “major identity‑verification company.” Investigation links the source to idscan.net, a New Orleans‑based provider that scans IDs for Hertz, Target, FedEx, Caesars, and over 1,000 marijuana dispensaries, performing 21 million verifications monthly with IR/UV imaging. The FBI’s New Orleans field office opened a formal probe into the alleged idscan.net breach. Nexus added roughly 400 000 new licence records within 24 hours, indicating continuous exfiltration. Shortly after the story’s publication, the Nexus site was taken offline, displaying a notice that the service is no longer available.</p>
+          </div>
+          <a href="https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong criticism of identity‑verification services that collect and retain extensive personal documents such as driver’s licences and Social Security numbers. They argue that the absence of meaningful penalties encourages companies to store data indefinitely, increasing the risk of large‑scale leaks. Call for stricter liability, higher regulatory standards, and alternative zero‑trust verification methods is common, as is frustration with perceived regulatory capture in the United States. The overall tone is distrustful, urging credit protection measures and accountability for firms handling sensitive data.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49529621" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/" target="_blank">Introducing Ad Blocker for Firefox on iOS</a>
+        </h2>
+        <span class="article-meta">
+          430 points • by HieronymusBosch • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Firefox on iOS includes an optional built‑in Ad Blocker that uses Apple’s WebKit Content Blocker framework combined with the EasyList filter list to prevent many third‑party ads and ad‑related trackers from loading. It is enabled via Settings → Browsing → Ad Blocker and is off by default. The blocker does not affect first‑party ads served by the visited site, ads in search results, or Firefox’s own sponsored shortcuts displayed on new‑tab pages. It operates alongside Firefox’s existing Enhanced Tracking Protection, which already blocks a range of trackers. Because iOS does not support conventional browser extensions, the ad‑blocking functionality is integrated directly into the app rather than offered as a separate extension. Users can report unblocked ads or issues through Mozilla Connect, and further documentation is available on the Firefox support site. This feature reflects Mozilla’s strategy of providing configurable privacy and content‑control tools while acknowledging the role of advertising in funding the open web.</p>
+          </div>
+          <a href="https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express overall disappointment with Firefox’s new iOS ad‑blocking feature, citing its limited scope—particularly its inability to block YouTube and search‑engine ads—and a slow, experimental rollout that requires enabling telemetry. Users compare it unfavorably to established blockers such as uBlock Origin Lite and Wipr, question Mozilla’s dependence on Google, and note iOS constraints on extensions. While some acknowledge the direction of adding built‑in blocking, the prevailing view is that the implementation is inadequate and delayed relative to alternatives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49521973" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://masteranza.github.io/weedout/" target="_blank">Show HN: Weedout – Safari extension that hides YouTube AI-labeled videos</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by masteranza • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Weedout for YouTube is a macOS‑only utility that removes videos flagged by YouTube with the “Made with AI” disclosure badge from user interfaces. It filters these videos from the home feed, search results, related video lists, playlists, and Shorts shelves, and can automatically skip AI‑labeled Shorts during playback (optional). A “dim mode” option lets users see the filtered items dimmed in place for verification before they are hidden. The tool operates locally without requiring an account, tracking, or data collection; it relies solely on YouTube’s official AI label rather than heuristics, so it does not target unlabeled content. Support is provided via email (masteranza@gmail.com) for questions, bug reports, or missed detections, with a request to include the video link when reporting.</p>
+          </div>
+          <a href="https://masteranza.github.io/weedout/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is cautiously positive about having a tool to filter AI‑generated YouTube content, with many users welcoming the added control and expressing relief at reduced “AI sludge.” Common concerns include YouTube’s lack of native labeling, inaccurate detection that misclassifies human‑made videos, and the desire for broader browser support and reporting mechanisms for mislabeled or low‑quality AI material. Users also note frustrations with algorithmic promotion of AI videos, the prevalence of AI‑generated voices, and the need for clearer, cross‑platform solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49528895" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
