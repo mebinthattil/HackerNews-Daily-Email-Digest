@@ -1,0 +1,557 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 04, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/gpt-6-astra/" target="_blank">GPT-6 Astra</a>
+        </h2>
+        <span class="article-meta">
+          1704 points • by kibae • 197 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/gpt-6-astra/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge impressive benchmark gains for GPT‑6 Astra, noting higher ARC‑AGI‑3 scores and strong tool‑use results, but many express skepticism about the AGI label, questioning benchmark validity, consistency across metrics, and the model’s genuine novelty versus incremental skill acquisition. Users discuss practical concerns such as pricing, rapid release cycles, and the impact on developers and non‑AI workers, while also highlighting usability issues like autonomous purchasing demos and interface preferences. Overall sentiment blends admiration for technical progress with caution about hype, measurement, and broader implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49554643" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://neil.fraser.name/news/2026/09/03/" target="_blank">.name Termination</a>
+        </h2>
+        <span class="article-meta">
+          1723 points • by pavel_lishin • 73 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Neil Fraser registered neil.fraser.name and beverly.fraser.name in the .name third‑level domain space nearly 25 years ago for his website, email, and API services. On 15 April 2026 Verisign proposed eliminating the entire .name third‑level hierarchy to simplify administration; ICANN approved the proposal on 28 July 2026. Unlike other third‑level domains (e.g., *.uk.co) that rely on dubious registrars, .name was designed as a fully registered third‑level namespace with complete WHOIS data. Verisign had earlier acquired the Global Name Registry that originally operated .name, a fact Fraser distrusts. The approved deletion will cause his website to disappear in February, terminate his email address, and render IoT devices that depend on the domain inoperable, despite the domain being paid through 2040. After removal, the underlying second‑level domain (fraser.name) could be re‑registered by others, enabling hijacking of accounts linked to his address and unauthorized control of services. Fraser estimates roughly 22 000 users will lose similar third‑level domains.</p>
+          </div>
+          <a href="https://neil.fraser.name/news/2026/09/03/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The reaction is overwhelmingly negative, viewing the termination of third‑level .name registrations as arbitrary, destabilizing and harmful to owners who rely on those domains for identity, email and IoT services. Commenters criticize Verisign and ICANN for breaching contractual obligations, lacking transparency, and prioritising profit over public interest, while urging regulatory pushback, legal action, or preservation of existing second‑level names. A minority suggests limiting new registrations but retaining current reservations, and several propose decentralized or alternative naming systems as longer‑term remedies. Overall sentiment reflects frustration, distrust and demand for accountability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49550772" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://inference-docs.cerebras.ai/models/overview" target="_blank">Qwen 3.8 27B available on Cerebras at 1500 tokens/s</a>
+        </h2>
+        <span class="article-meta">
+          534 points • by altertable • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “Model Catalog – Cerebras Inference” presents a brief overview of Cerebras’s inference model listings. It includes a disclaimer noting that AI‑generated responses may contain errors. Visual elements consist of two logo images, identified by alt text as “light logo” and “dark logo.”</p>
+          </div>
+          <a href="https://inference-docs.cerebras.ai/models/overview" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments portray Cerebras’ Qwen 3.8 27B as a very fast, strong coding model, yet users repeatedly criticize its high token‑rate limits, costly pricing, lack of prompt‑caching, and frequent billing or access restrictions. Many report flaky support, onboarding hurdles, and limited context windows that impede longer tasks. Comparisons to cheaper alternatives (e.g., DeepSeek‑Flash) highlight the poor cost‑efficiency for agentic workloads, while some note occasional value in speed‑for‑money trade‑offs. Overall sentiment is mixed, appreciating performance but deeming the service impractical for sustained, affordable coding use.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49554520" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=nM86DBOqgPM" target="_blank">The largest electric aircraft just flew [video]</a>
+        </h2>
+        <span class="article-meta">
+          295 points • by feb • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The scraped text is a YouTube page footer containing a list of navigational links and corporate information. The items include: “About,” “Press,” “Copyright,” “Contact us,” “Creators,” “Advertise,” “Developers,” “Terms,” “Privacy,” “Policy &amp; Safety,” “How YouTube works,” “Test new features,” and “NFL Sunday Ticket.” The footer also displays the copyright notice “© 2026 Google LLC.” These entries represent standard sections for corporate details, user resources, policy documentation, developer tools, advertising options, feature testing, and partnership information associated with the YouTube platform. No additional content or context is provided beyond this enumeration of links and the copyright line.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=nM86DBOqgPM" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on Heart Aerospace’s aircraft as a hybrid rather than a pure electric design, noting its use of sustainable aviation fuel alongside batteries. Commenters evaluate the weight and energy trade‑offs, questioning whether the added fuel and battery mass compromises payload and operating economics compared to conventional jets. Opinions diverge between optimism about the potential for reduced emissions, faster design cycles, and new market niches for short‑haul routes, and skepticism regarding range limits, noise, certification challenges, remote‑pilot safety, and the practicality of competing on busy routes. Overall sentiment is cautiously hopeful but acknowledges significant technical and commercial hurdles.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49526453" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news.mit.edu/2026/how-mit-research-project-became-global-programming-language-0831" target="_blank">How an MIT research project became the Julia programming language</a>
+        </h2>
+        <span class="article-meta">
+          82 points • by theanonymousone • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Julia began in 2009 when MIT researchers, frustrated with slow, rigid scientific languages, launched a project to create a high‑performance, easy‑to‑use language for data analysis, modeling, and simulation. The resulting open‑source language, released in 2012, combines Python‑like syntax with C‑level speed via just‑in‑time compilation based on data types. By 2024 Julia counts over 1 million users across academia, industry, and government, supporting applications from atom‑scale physics to aircraft design and black‑hole imaging. The creators formed JuliaHub, which provides commercial support and tools such as the Dyad AI platform. Dyad 1.0 (June 2025), Dyad 2.0 (Dec 2025), and Dyad 3.0 (Apr 2024) act as “physics compilers,” enabling autonomous agents to generate and verify complex hardware designs while enforcing physical laws, reportedly reducing design cycles from months to hours. Notable uses include accelerating Moderna’s COVID‑19 vaccine modeling, a 50× speedup for aircraft‑collision avoidance software, and development of a high‑efficiency audio codec for WhatsApp. The language continues to expand onto embedded devices and remains taught in MIT courses.</p>
+          </div>
+          <a href="https://news.mit.edu/2026/how-mit-research-project-became-global-programming-language-0831" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a mixed view of Julia. Users value its high performance, expressive type system, and suitability for numerical work, noting that it enables building algorithms from scratch and often outpaces Python. However, many criticize the development experience, particularly long JIT compilation times for short scripts and reliance on unstable third‑party packages to mitigate this. Additional concerns include a steep learning curve, limited simplicity compared to advertised ease, and questions about the language’s distinctiveness versus existing tools like R or MATLAB. Overall, speed is praised while tooling and justification are questioned.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49507072" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gwern.net/xanadu" target="_blank">Project Xanadu: Even More Hindsight (2025)</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by andsoitis • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author attended a San Francisco party marking the 50th anniversary of Ted Nelson’s 1974 <em>Computer Lib/Dream Machines</em> and examined vintage Xanadu hardware. Former Autodesk Xanadu programmers explained that early development was hampered by severe hardware limits: prototypes were written in Smalltalk, cross‑compiled to C++ and required week‑long compile cycles, and the systems barely ran on 1990‑era PCs. The demo UI displayed side‑by‑side range transclusions (e.g., Genesis text with zig‑zag lines), which the author found unreadable and impractical; such horizontal transclusion solves a niche (textual criticism) but lacks broad demand. The post critiques the 17 Xanadu principles—secure identifiers, universal transclusions, royalty mechanisms, etc.—as unrealistic in a world dominated by copyright constraints and spam. Comparing Xanadu to projects like Cyc, the author argues it was a “solution in search of a problem” and suffered from insufficient prototyping. Modern hypertext on Gwern.net favors pop‑up abstracts, semantic zoom, and hierarchical navigation over Xanadu’s side‑by‑side layout, providing usable transclusion without the original UI’s flaws.</p>
+          </div>
+          <a href="https://gwern.net/xanadu" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments weave together admiration for historic hardware narratives with a detailed critique of Xanadu’s ambitious design. They acknowledge the technical appeal of transclusion, bidirectional links, and advanced git extensions such as CRDT merges, while noting practical obstacles like fragile backlinks, complex metadata, and legal constraints on content reuse. There is a recurring sense that Xanadu’s concepts remain compelling but were hampered by premature scope, incremental development, and copyright realities, suggesting modern technology could address some issues yet not guarantee success.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49559522" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.discoverwildlife.com/animal-facts/artificial-beaver-dams-california" target="_blank">Artificial beaver dams saw juvenile coho salmon survival rates go from 8% to 60%</a>
+        </h2>
+        <span class="article-meta">
+          239 points • by speckx • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Artificial beaver dams were installed on Sugar Creek (2015) and later on French Creek in the Scott River watershed, northern California, using wooden posts interwoven with willow and conifer branches and filled with gravel, straw, and mud. The structures created ~9,000 m² of wetland habitat capable of supporting &gt;8,500 juvenile salmon. Compared with untreated reaches, water temperatures in the restored sections remained cooler, reducing thermal stress. Juvenile coho salmon survival increased dramatically—from 8 % before dam construction to 60 % afterward—and the Scott River recorded the highest salmon returns among monitored rivers, maintaining robust returns even during severe drought. The study, published in <em>Frontiers in Ecology and Evolution</em>, notes that occasional beaver activity further reinforced the dams, highlighting the ecological role of beavers in stream health and the effectiveness of low‑cost, nature‑based interventions.</p>
+          </div>
+          <a href="https://www.discoverwildlife.com/animal-facts/artificial-beaver-dams-california" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express cautious optimism about nature‑restoration projects, especially those involving beaver dams, while questioning their overall impact and long‑term sustainability. They note observed ecological benefits such as cooler water temperatures, improved fish survival, and groundwater recharge, and suggest that reintroducing beavers could enhance these outcomes. The discussion highlights a need for further research, policy adjustments, and broader adoption of low‑cost, high‑reward strategies, reflecting both enthusiasm for positive environmental news and concern over practical implementation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49552572" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/" target="_blank">Porting my 1993 Amiga game to Godot, with an LLM reading the 68000 assembly</a>
+        </h2>
+        <span class="article-meta">
+          275 points • by rabahs • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The 1993 Amiga 500 game <em>Babylonian Twins</em> was written in pure 68000 assembly, directly controlling hardware (copper list, blitter, joystick via CIA) with no OS involvement. After being rediscovered in 2008, it was hand‑ported in 2010 to an iPhone engine of ~34 k C++ lines, achieving 2 M downloads. Using Claude 5, the author asked the LLM to (1) migrate the 2010 C++ code to Godot 4, (2) translate the original 72 758‑line 68000 source to Godot, and (3) integrate both versions.  </p>
+<p>Step 1 recreated the C++ engine in an evening; physics retained the original 50 Hz drag factor and custom Node2D movement code rather than Godot’s CharacterBody2D.  </p>
+<p>Step 2 rebuilt the assembly with vasm, fixing ASM‑One encoding differences, org handling, truncated filenames, and variable‑snapshot mismatches, achieving byte‑identical binaries. The LLM inferred the level format: a 16‑bit cell (6‑bit property, 1‑bit tile‑bank, 8‑bit tile index) on a 256‑tile 16×16 set, recovered physics properties, and reproduced all five levels pixel‑perfect after adjusting copper sky‑gradient and water‑cycle effects.  </p>
+<p>Automation included command‑line flags for scripted level loading, player pose, input drives, state probes, and screenshots, enabling repeatable testing of both ports.</p>
+          </div>
+          <a href="https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely celebrate the AI‑assisted porting of retro games, praising the technical feat, the revival of obscure titles, and the potential for future preservation and tooling. Many express interest in performance data, comparisons to original behavior, and deeper documentation or reusable frameworks. A minority voice raises concerns about AI‑generated prose, trustworthiness, and the need for concrete demonstration in emulators. Overall the tone is enthusiastic and supportive, while also calling for more transparent metrics and resources.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49550375" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/" target="_blank">Hackers Had a Live Feed of Every ID Verification Company Scanned for over a Year</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by beardyw • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A breach at IDScan.net, a Louisiana‑based identity‑verification provider used by firms such as Hertz, FedEx, Target and many dispensaries, exposed digital scans of over 153 million U.S. and Canadian driver’s licenses. Hackers maintained a real‑time feed of every ID the company scanned for more than a year, continuously exfiltrating new records; the dark‑web “Nexus” service listed an additional ~400,000 newly stolen licenses within 24 hours. The FBI’s New Orleans field office opened an inquiry after the breach was reported by Brian Krebs. The compromised data includes full license images, photos, and personal details, with examples ranging from ordinary consumers to the sitting U.S. Secretary of Defense. Security analyst Larry Baldwin warned that such data enables identity theft, credit fraud, and could endanger individuals who rely on anonymity (e.g., domestic‑violence survivors, witness‑protection participants). The incident underscores the inherent privacy risks of any large‑scale age or identity‑verification system.</p>
+          </div>
+          <a href="http://www.techdirt.com/2026/09/03/hackers-had-a-live-feed-of-every-id-this-verification-company-scanned-for-over-a-year/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on concerns about identity verification and data privacy, favoring government‑mediated solutions such as the Irish Digital Wallet over private third‑party services. Several remarks criticize commercial practices that monetize personal records, citing the California DMV’s data sales and the broader profit motive behind ID handling. Humor appears in jokes about purchasing a driver’s license and sarcastic remarks about hacking. Additional observations address the confusing headline wording, suggesting clearer phrasing for better comprehension. Overall, the discussion reflects skepticism toward current private data practices and a preference for regulated, transparent alternatives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49561320" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://armature.tech/blog/which-tools-coding-agents-install" target="_blank">Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out</a>
+        </h2>
+        <span class="article-meta">
+          199 points • by screm • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The study evaluated 16,893 coding‑agent sessions across 75 synthetic repositories (10 languages, realistic lockfiles) to see which third‑party tools Claude Code, Codex and Cursor select. After filtering for validity, 5,292 sessions on 51 codebases remained. Experiments used four persona prompts, a rotating sandbox (E2B, Blaxel, Daytona), and a “simulated human” orchestrator (Gemini 3.7 Flash) to mimic real‑world interactions.</p>
+<p>Key findings:<br>
+- Cursor relies on web sources in ~66 % of runs; Codex searches the web in 94 % (often with site: operators); Claude Code uses web only ~30 % (but browses 3× more pages).<br>
+- All three agents agree on the same tool in just 42 % of cases; Claude Code builds in‑house solutions twice as often as the others (19 % vs 10 %).<br>
+- Repository language heavily sways choices (e.g., Resend wins for TypeScript email, Sendgrid for Python).<br>
+- Frequently mentioned vendors are rarely selected (PayPal cited 139×, never chosen; Stripe won 124 of 139 PayPal mentions).<br>
+- Vendor‑specific details (e.g., Mailgun’s 1‑day retention) can tip decisions.<br>
+- Market dominance varies: Stripe wins 90 % of payment tasks; Neon captures 66 % of databases; Amazon S3 leads file storage (45 %); Resend and Postmark split email providers (≈35 % vs 27 %).  </p>
+<p>All traces and analyses are publicly available.</p>
+          </div>
+          <a href="https://armature.tech/blog/which-tools-coding-agents-install" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects mixed views on the current AI landscape, noting rapid progress but growing concern over profit‑driven lock‑in and high pricing for developer tools. Participants observe that coding agents vary widely in behavior, with Claude Code favoring Python and limited web searches, while other models search more often; tool preferences often mirror existing market popularity, and altering repository context can shift selections. There is interest in empirical measurements of agent choices, skepticism about ad‑heavy search ecosystems, and recognition of potential business opportunities in influencing agent tool usage.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49557206" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
