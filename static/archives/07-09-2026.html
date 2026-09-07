@@ -1,0 +1,563 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 07, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.archive.org/2026/09/01/keep-our-servers-running-your-recurring-donation-goes-3x-this-september/" target="_blank">Keep Our Servers Running</a>
+        </h2>
+        <span class="article-meta">
+          373 points • by sonicrocketman • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Internet Archive’s mission is “Universal Access to All Knowledge,” delivered through a free, ad‑free digital library that relies on its own servers, storage, power, cooling, and staff. Maintaining 210 petabytes of data requires ongoing infrastructure funding, with the organization averaging about $25 per recurring donor. For September, the Archive offers a 2:1 matching program: any new recurring donation of $25 or more is tripled (e.g., $25 becomes $75, $50 becomes $150, $100 becomes $300). The matching is intended to boost reliable, year‑round support for server operations, book digitization, and web archive accessibility. Donors are invited to join the Monthly Giving Circle to sustain these services for future generations.</p>
+          </div>
+          <a href="https://blog.archive.org/2026/09/01/keep-our-servers-running-your-recurring-donation-goes-3x-this-september/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed attitudes toward the Internet Archive, combining appreciation for its accessibility and donation options with frustration over technical hurdles, recurring payment management, and limited EU‑specific giving methods. Contributors note frequent rate‑limiting errors and concerns about the archive’s hosting of copyrighted material, while some suggest expanding volunteer support and seeking contributions from large entities such as AI scrapers. Overall, there is support for the service’s value but a desire for clearer legal justification, smoother donor processes, and improved infrastructure.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49593563" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://austinhenley.com/blog/python1024.html" target="_blank">Making a Python interpreter in 1024 bytes</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by azhenley • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A 1024‑byte C program implements a minimal Python‑like interpreter. The source is stored in a fixed 999‑character buffer, with a global integer table for single‑letter variables. Parsing uses a recursive‑descent style directly on the source; expressions are evaluated while parsed, without an intermediate bytecode or AST. Control flow relies on indentation: <code>run_block</code> reads lines until indentation decreases, and loops re‑parse their bodies by jumping back to the condition position. Functions are handled similarly, saving the caller’s position and jumping to the function definition stored in the source. The interpreter supports integer literals, single‑letter variables, assignment, arithmetic (<code>+ - * %</code> with precedence), single comparison per expression (<code>&lt; &gt; &lt;= &gt;= ==</code>), truthiness, <code>if/else</code>, <code>while</code> (with optional <code>else</code>), <code>for x in range(y)</code> (with optional <code>else</code>), zero‑argument function definitions and calls (including recursion), print of literals or integer expressions, and comments. Size reduction uses single‑letter identifiers, globals, implicit <code>int</code> types (C89), ASCII codes instead of character literals, ternary and comma operators, and bitwise logic. The readable version is ~4800 bytes; aggressive golfing yields the final 1024‑byte code shown.</p>
+          </div>
+          <a href="https://austinhenley.com/blog/python1024.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize the project’s impressive code‑golfing skill and the novelty of compressing a Python‑like interpreter into a tiny source file, praising its clever tricks, readability of the expanded version, and its place among other minimalist language implementations. At the same time, many note its severe limitations—restricted syntax, lack of standard Python features such as lists or dictionaries, reliance on assumptions about source correctness, and the mismatch between source‑size metrics and actual binary size. Overall sentiment blends admiration for the technical feat with criticism of its practicality and completeness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49591876" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Fable hacked my piano, can I release the results?</a>
+        </h2>
+        <span class="article-meta">
+          144 points • by jmpman • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments revolve around the legality of reverse‑engineering a proprietary audio codec, highlighting differing US and EU frameworks and noting that other jurisdictions may be more permissive. Many advise consulting a lawyer and caution against distributing the decoder, while some suggest publishing only the technical description or integrating the work into existing open‑source projects like ffmpeg. Ethical concerns about decoy‑note schemes are noted, and several participants point to available datasets and tools as alternatives. Overall the discussion reflects uncertainty, legal caution, and a split between encouragement to share knowledge and warnings of potential infringement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49577129" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: How do you manage skills files?</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by imadtaieber • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments emphasize that effective skill management relies on version‑controlled repositories, symlinks or package‑manager‑like tools, and progressive loading to keep prompts lightweight. Users report benefits such as faster, cheaper workflows, reproducible project‑specific procedures, and easier sharing across teams, while also noting challenges in keeping skills synchronized, avoiding clutter, and handling updates. There is consensus that generic public skills are often redundant, whereas custom, concise skills that encode insider knowledge remain valuable. Some express skepticism that future model improvements may reduce the need for extensive skill libraries. Overall, practitioners seek streamlined, maintainable solutions for skill distribution and evolution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49589914" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://itsfoss.com/news/switzerland-replace-microssoft-pilot/" target="_blank">Switzerland&#39;s Federal Government Is Replacing Microsoft on 3k Computers</a>
+        </h2>
+        <span class="article-meta">
+          81 points • by ivell • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Switzerland’s federal government is piloting the replacement of Microsoft 365 on 3,000 workstations (≈7 % of its staff) with the open‑source “openDesk” suite, aiming to finish migration by the end of 2027. The pilot follows a proof‑of‑concept (“PoC BOSS”) in which 172 employees evaluated the platform; document processing and email performed well, while large‑scale video conferencing showed limitations. During the pilot the new tools run alongside Microsoft 365. The Federal Chancellery allocated CHF 9 million for this rollout and, if successful, may extend it to all 54 000 federal computers.</p>
+<p>Key drivers cited by Professor Matthias Stürmer are: (1) risk of foreign access to data under U.S. cloud law, (2) operational dependence on a single vendor, and (3) rising proprietary licensing costs. The Swiss military’s Cyber Command plans a full migration to openDesk by October 2026 for similar sovereignty reasons.</p>
+<p>The initiative aligns with the 2024 EMBAG law, which mandates default open‑source publication of government software, and the 2025 digital‑sovereignty strategy that seeks to reduce reliance on external suppliers. Microsoft is concurrently investing CHF 325 million in AI and cloud infrastructure in Switzerland.</p>
+          </div>
+          <a href="https://itsfoss.com/news/switzerland-replace-microssoft-pilot/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed views on government migration from Microsoft to Linux. Some see open‑source adoption as a step toward digital independence and a way to expose Microsoft’s limitations, especially for casual users who already rely on web‑based tools. Others stress practical obstacles: entrenched Excel workflows, legacy applications, driver compatibility, and the need for reliable support and timely patches. A few suggest a politically motivated, symbolic shift and propose an EU‑backed office suite compatible with Microsoft formats. Overall, enthusiasm for open source is tempered by concerns about feasibility and continuity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49594251" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://anubis.techaro.lol/blog/2026/anubis-wasm/" target="_blank">It took a year to ship WebAssembly in Anubis</a>
+        </h2>
+        <span class="article-meta">
+          259 points • by xena • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Anubis is a server‑side protection mechanism that presents a JavaScript‑based proof‑of‑work challenge, similar to Hashcash, to deter large‑scale automated scraping. When the page cannot load its JavaScript, it indicates the server is overloaded or the Anubis challenge failed, prompting the user to reload. The system is designed so the computational cost is negligible for individual visitors but becomes costly for mass scrapers, thereby reducing scraping incentives. Anubis also serves as a temporary measure while the site develops more sophisticated fingerprinting techniques (e.g., detecting headless browsers through font rendering) to exempt legitimate users from the challenge. The protection requires modern JavaScript support; extensions that block or modify JavaScript, such as JShelter, must be disabled for the site to function properly.</p>
+          </div>
+          <a href="https://anubis.techaro.lol/blog/2026/anubis-wasm/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall appreciation for using WebAssembly in the Anubis proof‑of‑work system, highlighting its performance benefits and clever design, while also raising practical concerns about browser compatibility, especially on older or non‑WASM platforms and the need for clear fallback messaging. Technical suggestions include using minimal‑feature Rust targets, adding detection tools, and testing against legacy browsers. Skepticism appears regarding the long‑term effectiveness and efficiency of PoW as a bot deterrent, its potential resource waste, and whether it truly raises the cost for scrapers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49590611" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/timgordontg/engrim" target="_blank">Show HN: Engrim – A universal, local-first SQLite memory engine for AI CLIs</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by timgordontg • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Engrim is a local‑first, project‑scoped SQLite engine that provides a cross‑model episodic memory layer for AI agents (Google Antigravity, Claude Code, Cursor/Windsurf). It decouples project state from any single vendor, allowing seamless model switches while preserving decisions, constraints, and architectural context. Memory entries are stored in ~/.engrim/memory.db and indexed with SQLite FTS5 (bm25) and static model2vec embeddings, enabling hybrid lexical‑vector retrieval via a reciprocal‑rank fusion router. The core architecture comprises adapters/hooks for each agent, an agent‑provenance engine (origin_agent field), a hybrid router, and storage components (curated memories, full‑text search, vectors, and a flight‑recorder log). A 105‑session case study on a 50 k‑line algorithmic‑trading codebase consolidated &gt;153 k tokens into &lt;1 k tokens (&lt;1 % of the context window), eliminating context amnesia and achieving zero test regressions. CLI utilities support auto‑detection, setup, JSON‑RPC MCP server, and CRUD operations (engrim add/recall/context/etc.). All data remain offline, permission‑restricted (0600), git‑ignored, and the project is MIT‑licensed (2026).</p>
+          </div>
+          <a href="https://github.com/timgordontg/engrim" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses interest in a provider‑agnostic memory system, noting a desire for the simplicity and low overhead associated with SQLite while exploring a newer option. It seeks clarification on what conditions cause memory entries to be written, asking whether the user must invoke specific commands or if actions from tools such as engrim add, OpenCode, Pi, or Codex automatically trigger storage. The overall tone is inquisitive and open to evaluating the alternative.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49594008" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theguardian.com/technology/commentisfree/2026/sep/04/mark-zuckerberg-resign-meta" target="_blank">It&#39;s time for Mark Zuckerberg to resign from Meta</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by domhudson • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Meta has agreed to a settlement of up to $18 billion after U.S. states alleged its platforms harm children with addictive designs. The deal imposes restrictions on teen accounts—daily two‑hour limits, nighttime bans, parental linkage, and stricter age verification—though implementation remains uncertain and broader content concerns persist. Author Joan Donovan argues that these measures are insufficient and that Meta’s leadership, particularly Mark Zuckerberg, should resign to prioritize safety over profit. She draws parallels to tobacco regulation, citing past testimonies linking Meta’s engagement algorithms to addictive practices. Donovan notes Meta’s history of litigation and harms, including privacy breaches, mental‑health impacts on youth, amplification of hate speech, misinformation, and “infodemic” effects. Whistleblowers such as Arturo Béjar and Frances Haugen have documented internal knowledge of these harms. The article calls on shareholders to demand leadership change, suggesting that Zuckerberg’s wealth insulates him from fines and that a new governance structure is needed to protect users.</p>
+          </div>
+          <a href="https://www.theguardian.com/technology/commentisfree/2026/sep/04/mark-zuckerberg-resign-meta" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a strongly negative view of Meta, calling for the platform’s shutdown and doubting that a new CEO would improve the situation. They describe social‑media operations as deliberately addictive and profit‑driven, suggesting investors would not support reforms. The critique extends to the claim that safety can be prioritized over profit, arguing it conflicts with the realities of competitive capitalism. Overall, the sentiment is skeptical and critical of both leadership and business model.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49595320" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/zedeus/nitter/commit/1428b4c2b4246f92a7e5b2673438e5fb39fcc4a3" target="_blank">Nitter and XCancel resume service after legal advice</a>
+        </h2>
+        <span class="article-meta">
+          716 points • by zImPatrick • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>On 24 August 2026 X Corp issued cease‑and‑desist letters demanding the permanent removal of all Nitter instances and the project repository. The Nitter maintainers announced, after legal counsel, that the project will continue and further details will follow.  </li>
+<li>Nitter is a free, open‑source, privacy‑focused front‑end for Twitter that operates without JavaScript or advertising. All client requests are proxied through a backend using Twitter’s unofficial API, preventing IP and fingerprint tracking. The service is lightweight (≈60 KB vs. 784 KB for twitter.com) and offers RSS feeds, theme support, responsive mobile design, and AGPL‑v3 licensing that prohibits proprietary forks.  </li>
+<li>Current roadmap items include re‑enabling embeds, implementing an account system with timeline support, adding tweet/profile archiving, and providing a developer API.  </li>
+<li>Donation channels are listed (Liberapay, Patreon, Ko‑fi, BTC, ETH, XMR, SOL, $Nitter token, ZEC) alongside CI badges for tests, Docker builds, and license status.  </li>
+<li>Community resources: a Matrix channel, personal contact email (zedeus@pm.me), and a legal/DMCA contact (legal@poast.org).</li>
+</ul>
+          </div>
+          <a href="https://github.com/zedeus/nitter/commit/1428b4c2b4246f92a7e5b2673438e5fb39fcc4a3" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express broad approval of the continued development of the alternative frontend, noting its importance for accessing content blocked on the primary platform. Contributors highlight frustration with the dominant service’s restrictive policies, legal pressures, and dependence on a few monopolistic sites, while emphasizing the need for open, decentralized solutions and reliable API access. Optimism about the project’s resilience coexists with concerns over legal risk for instance operators and criticism of corporate tactics that hinder open‑source tools, alongside suggestions to use redirectors or diversify hosting.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49588988" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://babylonian-collection.yale.edu/about/babylonian-cooking" target="_blank">Babylonian Lamb Stew with Beets (1750–1730 BCE)</a>
+        </h2>
+        <span class="article-meta">
+          139 points • by yubblegum • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Babylonian cooking collection presents two reconstructed recipes:</p>
+<ul>
+<li>
+<p><strong>Lamb stew with beets</strong> (serves 2 or 15 bite‑size portions): diced mutton, rendered sheep fat, salt, beer, water, onion, arugula, Persian shallots, cilantro, cumin, red beet, leek, garlic; garnish with dry coriander seed and a paste of cilantro and kurrat (wild leek). Procedure: sear lamb in fat, sauté aromatics, add beet and greens, deglaze with beer and water, simmer ~1 h, finish with leek‑garlic paste and garnish; serve with steamed bulgur or naan‑bread.</p>
+</li>
+<li>
+<p><strong>“Unwinding” barley sourdough stew</strong> (serves 2 or 15 bite‑size portions): barley seeds, warm water, salt, kurrat or spring onion, cilantro, garlic, leeks, toasted sesame oil, additional water and salt; sourdough bread (bappiru) made from toasted barley flour, fermented 12 h, baked at 375 °F, then crumbled. Procedure: soak and toast barley, grind to flour, ferment dough, bake, cool, crush. For broth, sauté garlic‑leek paste in sesame oil, add water and salt, simmer ~1 h, add fresh leeks and cilantro near end, stir in crushed bread before serving.</p>
+</li>
+</ul>
+<p>Both recipes credit Gojko Barjamovic and Nawal Nashrallah and aim to recreate Mesopotamian culinary practices.</p>
+          </div>
+          <a href="https://babylonian-collection.yale.edu/about/babylonian-cooking" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express interest in reconstructing an ancient Babylonian beet‑lamb stew, noting that the beets described match modern varieties and that the recipe appears similar to a contemporary lamb stew with beets. Participants reference scholarly sources and media covering historic dishes, highlight the unusually low salt content, and discuss challenges such as obtaining rendered sheep fat or substituting beef for lamb. There is curiosity about the dish’s royal origins and its flavor compared with modern beer, alongside mixed personal preferences regarding lamb.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49554622" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
