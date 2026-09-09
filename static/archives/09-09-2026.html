@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 09, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/codex-quantum-computing-experiments/" target="_blank">How GPT‑5.6 Sol helps run quantum computing experiments</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by theanonymousone • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/codex-quantum-computing-experiments/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The remarks express skepticism toward the transformative impact of AI on quantum‑hardware research, emphasizing that experimental outcomes remain constrained by physical limitations such as qubit lifetimes rather than data‑analysis tools. While acknowledging that AI can automate calibration, data logging, and routine analysis, the view is that these conveniences do not replace the need for better hardware. Additionally, there is speculation that OpenAI may be spacing announcements due to prior controversy, but the core sentiment remains that AI offers incremental efficiency rather than fundamental breakthroughs in quantum experiments.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49622561" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ai.meta.com/muse/" target="_blank">Muse – Meta’s personal AI agent</a>
+        </h2>
+        <span class="article-meta">
+          487 points • by yks • 119 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://ai.meta.com/muse/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a predominantly skeptical view of Meta’s new AI agent, emphasizing concerns over privacy, data harvesting, and the company’s track record with user information. Many question the usefulness of the showcased consumer‑focused examples, see the product as over‑engineered marketing rather than solving real problems, and doubt trust in its security safeguards. While a minority note potential productivity benefits and express interest in self‑hosted alternatives, overall sentiment leans toward wariness about commercial motives, ad‑driven design, and the sustainability of the service.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49615537" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gwern.net/on-really-trying" target="_blank">On Really Trying (2009)</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by whoami_nr • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The post examines how urgent, pragmatic motivation can accelerate scientific breakthroughs, contrasting “Eld Science” (accepting decades‑long resolution) with scenarios where clear failure or a pressing goal forces rapid progress (e.g., the Manhattan Project, a one‑month quantum‑gravity assignment).  </li>
+<li>It cites Eliezer Yudkowsky’s story of students who know a theory is wrong, noting that certainty of a correct answer boosts effort and willingness to discard existing insights.  </li>
+<li>Historical anecdotes illustrate this effect: Claude Shannon solving a puzzle after a minimal hint; Kaggle competitions where a single breakthrough quickly propagates; Ralph Merkle’s early key‑exchange work becoming viable after exposure to Diffie–Hellman preprints; DeepMind’s protein‑structure AI providing an existence proof that spurred independent replication; George Dantzig unintentionally solving two famous unsolved statistical problems, showing how perceived homework can trigger breakthroughs.  </li>
+<li>The narrative also references Bill Atkinson’s implementation of overlapping windows at Xerox PARC, attributing his success to naïve belief that the task was possible. Overall, the piece argues that decisive, time‑bounded challenges and strong conviction are critical drivers of rapid paradigm shifts.</li>
+</ul>
+          </div>
+          <a href="https://gwern.net/on-really-trying" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary views adversity as a potential catalyst for achievement, finding comfort in the idea that early hardships can become assets rather than solely burdens. It highlights examples from athletics, historical conquest, and engineering breakthroughs to illustrate how perceived limits shift once a precedent is set, suggesting mindset influences performance as much as physical constraints. Personal coping tactics—reframing setbacks as signs of imminent success and using future‑oriented imagination—are presented as ways to persist despite obstacles, while humorously critiquing the notion of divine interference.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49622305" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://phys.org/news/2026-09-trees-muscle-posture-newly-role.html" target="_blank">Tension wood: A &#39;muscle&#39; that can both bend and straighten plants</a>
+        </h2>
+        <span class="article-meta">
+          110 points • by mdp2021 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://phys.org/news/2026-09-trees-muscle-posture-newly-role.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment explains that trees naturally shed branches through cladoptosis and advises that skilled arborists should prune by following this natural process to prevent damage, warning that inexperienced pruning or topping can increase the risk of tree failure. It notes a study suggesting trees generate tension wood in response to their own curvature, likening the mechanism to proprioception, and concludes with a brief reminder about maintaining good posture and staying hydrated.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49546964" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cims.nyu.edu/~tristanb/statement.pdf" target="_blank">Navier-Stokes – Tristan Buckmaster [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          1598 points • by procedurecall • 103 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://cims.nyu.edu/~tristanb/statement.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on allegations that OpenAI may have leveraged private interactions with a research team to accelerate a Navier‑Stokes breakthrough, prompting accusations of data misuse, competitive “sniping,” and coercive authorship demands. Participants express distrust of corporate AI practices, concern that such actions could erode academic collaboration and confidentiality, and debate whether the company’s statements about limited training on user data are credible. Some view the episode as a warning about future conflicts between large AI labs and independent researchers, while others question the validity of the claims and call for clearer norms.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49605915" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://note.com/masakazu_urabe/n/n7815f5b64fab?hl=en" target="_blank">A Biography of Lee Holloway, the Architect of Cloudflare&#39;s Technology (Part 1)</a>
+        </h2>
+        <span class="article-meta">
+          42 points • by porridgeraisin • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Lee Holloway, born circa 1981 in Cupertino, California, entered technology early through his Apple‑connected family and later earned a computer‑science degree from UC Santa Cruz. After a stint at HomeWarehouse.com (acquired by Walmart), he joined Matthew Prince’s anti‑spam startup Unspam Technologies, where he helped launch Project Honey Pot. In 2009 Holloway co‑founded Cloudflare with Prince and Michelle Zatlyn, serving as CTO and lead architect. He designed the company’s core infrastructure, including the Anycast network, the “Cell” architecture, and the integrated performance‑security platform that now processes &gt;10 % of global web traffic and blocks billions of threats daily. Beginning around 2011, Holloway exhibited severe fatigue, personality changes, and apathy, later diagnosed in 2017 as behavioral‑variant frontotemporal dementia (bvFTD). He left Cloudflare in 2016 and his condition progressed to profound cognitive loss. Media coverage (Wired, TechCrunch) highlighted his technical impact and illness, while his family established the Holloway Fund within AFTD and an annual “Holloway Summit” to support FTD research and patient aid.</p>
+          </div>
+          <a href="https://note.com/masakazu_urabe/n/n7815f5b64fab?hl=en" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions, with several users encouraging others to view the full 2024 Prof. Sapolsky lecture series and praising a related Wired article about Lee Holloway, while others express frustration with the writing style, describing it as poor, possibly machine‑generated, and difficult to read. Additional remarks inquire about technical details such as Cloudflare anycast and question the purpose of bolded sections, and one comment notes surprise at the presence of note.com. Overall, the discussion balances endorsement of the material with criticism of its presentation and formatting.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49621102" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.smithsonianmag.com/smart-news/researchers-determine-how-to-spot-fake-ancient-pottery-using-the-earths-magnetic-field-180989441/" target="_blank">Researchers Spot Fake Ancient Pottery Using the Earth&#39;s Magnetic Field</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by cisc • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Researchers at Scripps Institution of Oceanography (UC San Diego) reported a magnetic‑signature method for distinguishing ancient from modern pottery (PNAS, 2024). Fired clay contains ferromagnetic minerals that acquire a thermal remanent magnetization (TRM) aligned with Earth’s magnetic field at the time of cooling. Over centuries, a weaker viscous remanent magnetization (VRM) develops as the object is exposed to subsequent geomagnetic fields. The team analyzed 45 samples—including ancient shards, royal Judean jars, modern kiln‑fired vessels, seal impressions, and souvenir pieces—by heating them in 10 °C (≈18 °F) increments. They found that pottery older than ~1,000 years retains VRM until heated to at least 234 °F (≈112 °C), whereas modern pottery loses VRM at lower temperatures. The temperature threshold thus provides a rapid test to confirm antiquity. Applying the method to three artifacts seized by the Israel Antiquities Authority indicated authentic ancient firing, demonstrating its potential for museum curation, archaeological research, and anti‑forgery enforcement.</p>
+          </div>
+          <a href="https://www.smithsonianmag.com/smart-news/researchers-determine-how-to-spot-fake-ancient-pottery-using-the-earths-magnetic-field-180989441/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses skepticism toward claims that ancient pottery’s magnetic signatures provide a foolproof dating method, noting that natural pole movement and variations in firing orientation limit relevance. It highlights temperature-dependent magnetic behavior as a more credible factor and points out that altering ceramic composition can affect Curie points, suggesting the method is not inherently unforgeable. Concerns are raised about the practicality of measuring such signals without damaging artifacts and about the possibility of deliberately replicating magnetic fields during production. Overall, the comments question the reliability and security of magnetostratigraphic dating for pottery.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49580761" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nishantjosh.dev/blogs/how-to-build-a-fking-printer/" target="_blank">How to build a printer</a>
+        </h2>
+        <span class="article-meta">
+          306 points • by cat-whisperer • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author added driverless printing to an Xteink X3 e‑ink reader by implementing an IPP (Internet Printing Protocol) server on the device. The printer advertises monochrome, 300 dpi output, A5/Letter media, Apple raster and PWG raster formats, and an “output bin” named face‑up via Bonjour using the _ipp._tcp service with the universal subtype (called directly through ESP‑IDF’s mDNS API). Because the ESP‑C3 has only 400 KB RAM (≈6.8 KB usable after Wi‑Fi), the page is not buffered entirely; incoming raster data is processed row‑by‑row, scaled, dithered to black‑white, and written directly into the display’s frame buffer, reusing the same memory. The completed image is then saved as a BMP on the SD card, leaving network buffers free. A macOS Preview print job to the “penguin” printer renders a manga page in about one second, appearing instantly on the e‑ink screen. The implementation resides in a fork of the CrossPoint firmware; saved printouts remain on the SD card as a browsable folder.</p>
+          </div>
+          <a href="https://nishantjosh.dev/blogs/how-to-build-a-fking-printer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly positive, describing the e‑ink screen hack as clever, cool, and exciting, with many noting its novelty, potential for secondary displays, and the convenience of using existing print dialogs and standard network discovery. Technical suggestions appear frequently, including defining exact screen dimensions, using bi‑level color modes, and exploring alternative formats such as DjVu. A minority express confusion about the purpose of printing to the display instead of loading PDFs directly and request more detail on printer construction. Overall, enthusiasm and constructive curiosity dominate.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49617255" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://grapheneos.social/@GrapheneOS/117231186011306184" target="_blank">Copyright does more harm than good and should be abolished</a>
+        </h2>
+        <span class="article-meta">
+          160 points • by Cider9986 • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is a Mastodon instance displaying a post titled “GrapheneOS: “@ailurocrat@scicomm.xyz @wod0bow@mastodon.social …”. It includes a standard notice that the Mastodon web application requires JavaScript to function and suggests using a native client for the platform. An image placeholder is present, identified only by the alt text “Mastodon”. No additional text, metadata, or substantive content is provided beyond the title and the generic usage instructions.</p>
+          </div>
+          <a href="https://grapheneos.social/@GrapheneOS/117231186011306184" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that current copyright law is overly long and tilted toward corporate monopolies, prompting calls for substantial reform such as shorter terms, non‑transferable rights, or limited renewals. Many acknowledge copyright’s role in enabling creators to earn a living but criticize enforcement mechanisms like the DMCA and the disproportionate power of large media firms. Opinions diverge on abolition, with most favoring adjustment rather than elimination, and several mention AI‑training exemptions and the need to balance creator protection with public‑domain access. Overall sentiment favors tightening and modernizing the system.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49622042" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/alphagenome-atlas/" target="_blank">AlphaGenome Atlas: a high-resolution map of human DNA</a>
+        </h2>
+        <span class="article-meta">
+          553 points • by utiiiD • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AlphaGenome Atlas is a database that predicts the regulatory impact of every possible single‑nucleotide variant (≈9 billion SNVs) across the human genome using the AlphaGenome AI model, producing a ~1‑petabyte dataset. The platform introduces the AlphaGenome Variant Impact (AVI) score, a unified metric that combines coding‑ and non‑coding‑region predictions to rank variant effects. Demonstrated applications include: (1) rare‑disease research, where the AVI score helped identify a splice‑site‑creating variant in the DNM1 gene at the Broad Institute; and (2) complex‑trait analysis, where grouping UK Biobank variants by predicted molecular impact increased non‑coding association detection by 22 % and revealed 19 BMI‑linked regions among the top 1 % of impactful variants. The Atlas is accessible via an intuitive, code‑free web portal, aimed at broadening genomic analysis capabilities for clinicians and biologists worldwide.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/alphagenome-atlas/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mixed response to the new genome‑wide predictive map. Many express enthusiasm about the scale of the resource and its potential for research and drug discovery, while others question its practical value, noting limited improvements over existing models and uncertainty about prediction reliability, especially for promoter regions and pathogenic variants. Concerns recur about corporate control, data access restrictions, commercial motives, and the adequacy of validation, with additional remarks highlighting the need for broader experimental data and clearer guidance on usable formats. Overall, excitement is tempered by skepticism and caution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49611251" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
