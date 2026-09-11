@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 11, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lucumr.pocoo.org/2026/9/7/astra-why/" target="_blank">Astra for Coding: Why Are We Doing This Again?</a>
+        </h2>
+        <span class="article-meta">
+          260 points • by manojbajaj95 • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The author evaluated GPT‑6 “Astra”, noting its impressive multimodal abilities but poor suitability for practical software engineering.  </li>
+<li>A “software factory” experiment let Astra manage its own workflow, spawning sub‑agents and storing notes. Over 35 hours it consumed ~4 billion tokens (≈1 B tokens for the run), costing about $1,200, producing 75 k lines of code, 79 commits, ~1 400 messages, and $15.5 per commit.  </li>
+<li>Astra heavily favors Python for tool calls, often generating convoluted, token‑efficient scripts (e.g., extensive pathlib manipulations, socket‑FD passing, and auto‑generated C extensions) that are unreadable and deviate from CPython style.  </li>
+<li>The model repeatedly inserted low‑level code, random constants, and bizarre control‑flow constructs, suggesting training rewards prioritize token efficiency and task completion over human readability.  </li>
+<li>Despite successful reverse‑engineering demos, the output frequently consisted of “slop” – code that technically runs but is objectively poor for maintainable projects.  </li>
+<li>The author concludes that Astra’s current trajectory inflates costs and produces output misaligned with conventional software‑engineering practices, questioning the value of such models for developers.</li>
+</ul>
+          </div>
+          <a href="https://lucumr.pocoo.org/2026/9/7/astra-why/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion is largely critical of current AI‑assisted coding agents, especially Astra, highlighting frequent low‑quality, unreadable code, excessive token consumption, costly and inefficient workflows, and a tendency toward unnecessary gold‑plating and extensive testing. Reviewers stress the importance of precise specifications, solid requirements, and human oversight to achieve usable results. A minority note occasional productivity gains when requirements are well defined, but overall sentiment doubts the models’ readiness for production‑level software engineering and questions the trade‑off between speed and code maintainability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49654229" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://shopify.engineering/back-to-native" target="_blank">Shopify is moving from React Native back to Swift and Kotlin</a>
+        </h2>
+        <span class="article-meta">
+          1011 points • by fnthawar2 • 164 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Shopify migrated to React Native in 2020 to avoid duplicating feature work, enable cross‑stack developers, and reduce parity maintenance. By 2025 LLM‑based agents dramatically lowered the effort required to implement and test equivalent Swift and Kotlin code, prompting a reassessment of the mobile stack. Prototypes showed agents could translate features between iOS and Android, maintain parity through shared specs and tests, and rebuild core apps faster than before. Consequently, Shopify is transitioning back to native development, using a greenfield approach: the Shop app was rebuilt and released in 12 weeks, and the larger Shopify app (300+ screens, widgets, watch extensions) is slated for release later this year, with remaining apps to follow. Migration is managed by the Helix system, which breaks work into test‑validated checkpoints, and a CLI that decouples business logic from UI for millisecond‑scale feedback loops. Open‑source React Native libraries (FlashList, Restyle) will be supported through 2026 or archived, with stewardship hand‑off planned. Future success will be measured by product velocity, app quality, and autonomous agent contribution.</p>
+          </div>
+          <a href="https://shopify.engineering/back-to-native" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that React Native’s original benefits—shared code and OTA updates—are now outweighed by its performance limits, platform‑specific bugs, and coordination overhead, especially for larger products. Many developers report that large‑language‑model assistance has reduced the cost of native rewrites, making separate Swift/Kotlin codebases more attractive, while others caution about code quality, security, and reliance on AI. Overall sentiment favors a shift back to native (or Kotlin Multiplatform) development, with mixed feelings about the speed and safety of AI‑generated code.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49643982" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.conviva.ai/resource/we-replaced-mmap-with-io_uring-in-our-rust-query-engine-it-got-slower/" target="_blank">We Replaced MMAP with Io_uring in Our Rust Query Engine. It Got Slower</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by rzk • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The team at Conviva built a Rust query engine on DataFusion, Arrow, Rayon and Tokio that reads large (3–5 GB) Arrow IPC files stored on NVMe. Using mmap gave zero‑copy reads but under heavy concurrent query loads the shared Linux page cache thrashed: RSS approached 99 % of RAM, major faults rose to &gt;1 k /s, minor faults exceeded 2 M /s, and kernel lock contention caused p95 latency to jump from ~30 s to &gt;150 s. A controlled test showed a single pod outperforming four pods by &gt;20 % because all pods competed for the same page‑cache.</p>
+<p>To avoid the page‑cache bottleneck they switched to io_uring with O_DIRECT via the compio Rust wrapper, issuing a separate read for each of ~40 columns per day‑long query. Initial runs on Linux cut major faults 35× but increased minor faults 8× and slowed total query time from 13.6 s (mmap) to 21.8 s. The slowdown stemmed from:</p>
+<ul>
+<li>a single “Batch Materialization Layer” handling prefetch, submission, decoding and caching on one thread,</li>
+<li>Arrow’s default Buffer::from_slice_ref copying data and causing many minor faults,</li>
+<li>insufficient parallelism (40 concurrent SQEs) and extra memcpy work.</li>
+</ul>
+<p>After removing the copy (building Buffers directly from io_uring buffers) and enabling O_DIRECT, runtime improved to ~16 s—still ~20 % slower than mmap—highlighting that io_uring’s gains are negated by architectural overheads and memory‑management costs.</p>
+          </div>
+          <a href="https://www.conviva.ai/resource/we-replaced-mmap-with-io_uring-in-our-rust-query-engine-it-got-slower/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments emphasize that mmap and io_uring serve fundamentally different architectural roles, with io_uring delivering gains only when a custom, high‑skill userspace scheduler is built, while mmap suits delegated scheduling. Several contributors note that the article’s claim of io_uring superiority appears overstated, describing the piece as clickbait and AI‑generated, and questioning its relevance to Rust. Real‑world experiences are mixed: some report increased latency with io_uring and better performance using mmap combined with NUMA pinning, underscoring that the choice depends on workload specifics rather than a universal replacement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49653882" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/" target="_blank">The Gemini app is now available for Windows</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by quysala12 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Gemini app for Windows launches for Windows 10 and 11, providing on‑desktop AI assistance via three primary modes:</p>
+<ul>
+<li><strong>Quick access shortcut</strong>: Press Alt + Space to invoke Gemini over any active window for instant queries, fact‑checks, or idea generation without leaving the workflow.</li>
+<li><strong>Dedicated workspace</strong>: A full‑screen interface lets users assign multi‑step tasks to Gemini Spark, retrieve data from Google services (Gmail, Drive), and generate project summaries.</li>
+<li><strong>Creative generation</strong>: Integrated tools enable image creation with Nano Banana and video production with Gemini Omni, all within the same desktop environment.</li>
+</ul>
+<p>The app is described as lightweight, non‑resource‑intensive, and globally available for download at gemini.google/desktop. Future updates will add more native desktop capabilities.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express frustration with the lack of visual documentation, noting the absence of screenshots and only a brief clip. Users report resource‑usage and stuttering problems in browsers, with slightly better performance on desktop, and cite incompatibility on Windows ARM devices. The separation of Antigravity, Gemini, and Spark into distinct apps is seen as confusing, and the target audience for the Gemini app is unclear. Concerns also arise about the product’s longevity and hopes that future versions might gain broader, cross‑file capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49653699" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nasutton.notion.site/Nine-coding-harnesses-vs-your-laptop-3d139990182b80d59fa3cf500f0450ba?pvs=74" target="_blank">Nine coding harnesses vs. your laptop</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by nasutton12 • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is titled “Notion” and displays a notice that JavaScript must be enabled to use the site, instructing users to enable it to continue. No functional content is presented without JavaScript. The only visual element referenced is an image with the alt text “Notion,” indicating that the page includes a graphic representing the Notion brand or interface. No additional text, links, or interactive features are described in the scraped excerpt. The content therefore consists solely of a JavaScript dependency warning and a single branded image placeholder.</p>
+          </div>
+          <a href="https://nasutton.notion.site/Nine-coding-harnesses-vs-your-laptop-3d139990182b80d59fa3cf500f0450ba?pvs=74" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed reactions to recent agent harness benchmarks. Several contributors note the absence of testing for newer tools like Juggler and request a simple, reproducible benchmark suite that measures token counts, latency, cache reuse, and pass rates across hardware, enabling result sharing. Others share alternative lightweight agents and comparative performance data, while a few criticize AI‑generated documentation and find certain article phrasing confusing. Additional remarks mention website usability issues and unrelated links, indicating a blend of constructive feedback and peripheral remarks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49651221" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.jim-nielsen.com/2026/hands-off-my-cables/" target="_blank">Don&#39;t let anyone take away your big box of cables</a>
+        </h2>
+        <span class="article-meta">
+          478 points • by Brajeshwar • 105 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post recounts the author’s reaction to a meme shared by Tyler Gaw, which humorously highlighted the long‑term usefulness of a “Big Box of Cables” after ten years of storage. Inspired, the author documented the meme (screenshot, printout) and physically attached it to his own cable storage container, labeled “FAMILY TECHNO BOX.” He describes the steps taken—cutting clear tape, affixing the printed meme—to create a visual reminder of the box’s value and to discourage family members from discarding it. The author intends the taped message to serve both as personal motivation when adding new cables and as a caution to others about throwing away seemingly obsolete hardware. An accompanying image shows the box with cables protruding and the handwritten label, alongside the taped meme.</p>
+          </div>
+          <a href="https://blog.jim-nielsen.com/2026/hands-off-my-cables/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a broad consensus that systematic organization—grouping cables by type, using clear bags or labeled containers, and retaining only a few representative lengths—greatly reduces time spent searching and prevents clutter. Many users report occasional reliance on obscure or legacy cables, prompting them to keep a small selection of rare items while discarding bulk duplicates. Environmental and space concerns drive suggestions to donate, recycle, or scrap excess cables, though some hoarders argue the occasional need justifies retaining larger inventories. Overall sentiment is supportive of regular culling, clear labeling, and minimal‑duplication strategies, with occasional frustration when needed cables are missing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49645393" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://emacsredux.com/blog/2026/09/02/working-with-git-worktrees-in-magit/" target="_blank">Working with Git Worktrees in Magit</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by srijan4 • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Git worktrees provide additional working directories attached to a single repository, sharing the object database, refs, stashes, and remotes while giving each worktree its own HEAD and index. They allow parallel development on multiple branches without repeated check‑outs, useful for long test runs, PR reviews, or isolating AI coding agents. Creating a worktree is fast (<code>git worktree add &lt;path&gt; -b &lt;branch&gt;</code>); a branch can be checked out in only one worktree at a time. Untracked files (e.g., node_modules, build caches) must be set up per worktree, which can be a downside for large projects. Magit integrates worktree management via commands such as <code>magit-worktree-checkout</code>, <code>magit-worktree-branch</code>, <code>magit-worktree-status</code>, <code>magit-worktree-delete</code>, and can display all worktrees in the status buffer with a hook. Each worktree is treated as a separate project by Emacs tools like <code>project.el</code> or Projectile. Deleting a worktree should use <code>git worktree remove</code> or Magit’s <code>Z k</code>; leftover bookkeeping can be cleaned with <code>git worktree prune</code>. The article also notes Jujutsu (jj) as an emerging VCS that mitigates worktree limitations by treating the working copy as an auto‑snapshotted commit.</p>
+          </div>
+          <a href="https://emacsredux.com/blog/2026/09/02/working-with-git-worktrees-in-magit/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong approval of Git worktrees, highlighting their usefulness for managing multiple branches and monorepos, and noting that tools such as Magit now provide solid support. Several users mention integrating worktrees with AI‑driven workflows and recommend trying alternative tools like jujutsu. A recurring concern is the absence of sensible defaults and conventions, which some feel slows broader adoption, leading a few to create custom wrapper scripts that emulate an SVN‑style directory layout for easier handling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49606281" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developers.openai.com/api/docs/guides/agents-api/overview" target="_blank">OpenAI Agents API</a>
+        </h2>
+        <span class="article-meta">
+          244 points • by aquir • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The OpenAI Agents API provides programmatic access to a managed Codex harness that runs agents in sandboxed environments. Core concepts are Agent (model, instructions, tools, MCP servers), Environment (optional sandbox or self‑hosted workspace), Session (a durable instance handling multiple turns), and Events/Items (the inputs and outputs exchanged. OpenAI‑hosted sandboxes provisioned by the service handle code execution, file edits, MCP connections, and artifact creation; self‑hosted environments can be specified with a workspace directory and capability paths. Billing follows the selected model’s API rates and standard container rates for sandbox usage. Agents can use tools such as programmatic tool calling, MCP access, and web search, and support multi‑agent operation with up to four concurrent sub‑agents. Sessions retain state across turns, allow steering, context summarization, sub‑task delegation, and can be deleted when finished. Data residency is limited to the United States; Zero Data Retention is not supported, even with self‑hosted sandboxes. The API is accessed via SDKs or direct HTTP calls, with example payloads provided for JavaScript, Python, Go, Java, Ruby, and cURL.</p>
+          </div>
+          <a href="https://developers.openai.com/api/docs/guides/agents-api/overview" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect mixed reactions to the new agent‑as‑a‑service offering. Many acknowledge that building and maintaining a harness is complex and see value in managed environments, especially for memory and context handling, while also noting the appeal of open‑source, cloud‑neutral solutions that avoid vendor lock‑in. Users cite successful self‑hosted setups and express concerns about pricing, billing granularity, and sandbox security. Skepticism appears around reliance on proprietary models and the need for compelling features beyond existing APIs, yet overall interest in the direction remains evident.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49649213" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://auberon.xyz/blog/posts/deathray/" target="_blank">The Deathray: A simple way for an untrusted site to freeze a Mac</a>
+        </h2>
+        <span class="article-meta">
+          163 points • by auberonedu • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author demonstrates a denial‑of‑service vulnerability that can be triggered on macOS by loading a malicious WebGPU shader from an untrusted website. The shader consists of a compute stage with an infinite busy‑loop that repeatedly copies data within a storage buffer, while a vertex shader reads from the same buffer, causing the GPU pipeline to stall. Because macOS’s WindowServer also relies on GPU resources, the stall propagates, rendering the desktop UI unresponsive and eventually invoking the system watchdog, which may trigger a kernel panic or require a forced power‑off. The effect reproduces on Chrome, Firefox and Safari on M‑series Macs but not on other operating systems. A similar WebGL‑based attack (ShadyShader, CVE‑2023‑40441) was previously disclosed and partially mitigated by Apple through input‑validation improvements, but WebGPU lacks comparable safeguards. The author notes that GPU pre‑emption on Apple silicon is handled by the ASC coprocessor firmware, limiting the kernel’s ability to abort runaway shaders, and that Apple has classified the issue as low‑priority.</p>
+          </div>
+          <a href="https://auberon.xyz/blog/posts/deathray/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe frequent browser freezes caused by infinite loops in WebGPU/WebGL shaders across multiple platforms, with varying severity on Windows, macOS, Linux, and mobile browsers. Users note that macOS lacks automatic GPU recovery, while other OSes can recover or isolate the hang. The problem is seen as a denial‑of‑service issue rather than a direct security breach, prompting some to disable the APIs despite losing functionality. There is general frustration, calls for better driver stability, and acknowledgment that the vulnerability has persisted for years without catastrophic impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49649124" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://spinoff.nasa.gov/Manipulating_Satellite_Photos_Now_Reveals_Ancient_Images" target="_blank">Technique for Manipulating Satellite Photos Now Reveals Ancient Images (2025)</a>
+        </h2>
+        <span class="article-meta">
+          325 points • by gumby • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The decorrelation‑stretch algorithm, originally developed at NASA JPL for enhancing satellite data, maps original colors into an expanded range via matrix multiplication and diagonalization of color matrices—a process rooted in the Karhunen–Loève Transform. Ronald Alley’s 1996 paper refined the method for the ASTER multispectral imager, enabling faster, more accurate color enhancement used today to monitor volcanic plumes and map lava flows.</p>
+<p>Jon Harman adapted the technique into the Dstretch plug‑in for ImageJ and later Android/iOS apps, leveraging his background in medical imaging and algebra. Dstretch has uncovered dozens of previously invisible rock‑art figures at sites such as Angkor Wat, Baja California, Norway’s Årsand 1, Egypt’s Beni Hassan, Canada’s Writing‑on‑Stone Provincial Park, and Greek urban settlements at Vlochos. It also revealed tattoos on mummified remains and aided archaeological surveys where conventional geophysical methods fail. Harman provides paid processing services (≈200 requests yr⁻¹ at $50 each) and the apps have been downloaded thousands of times, demonstrating broad utility beyond its space‑technology origins.</p>
+          </div>
+          <a href="https://spinoff.nasa.gov/Manipulating_Satellite_Photos_Now_Reveals_Ancient_Images" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses strong enthusiasm for false‑colour imaging and contrast‑enhancement tools, recalling personal experience with GIS and highlighting how swapping infrared bands reveals vegetation and hidden details. It notes that such techniques, including the DStretch plugin, have existed for years and are common in fields like medical imaging and archaeological analysis. The author suggests integrating these capabilities into standard camera software, mentions related methods such as Eulerian Video Magnification, and seeks accessible implementations for broader experimentation. Overall, the tone is appreciative and curious about practical applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49645437" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
