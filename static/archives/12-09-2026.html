@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.autom.dev/blog/google-search-goto-links" target="_blank">google.com/goto: Google&#39;s anti-scraping update</a>
+        </h2>
+        <span class="article-meta">
+          360 points • by 1e1a • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Google Search now rewrites organic result links to <code>google.com/goto?url=…</code> instead of exposing the destination URL directly in the HTML. The <code>url=</code> parameter uses a proprietary encoding that cannot be decoded offline; the real target URL is provided only in the HTTP Location header of the <code>/goto</code> response, which must be read (e.g., via a HEAD request) without following the redirect. This change, observed consistently from late August 2026 for logged‑out and private sessions, replaces the older <code>google.com/url?q=</code> wrapper and forces each result to require an additional request to Google to obtain the final URL. The shift is part of Google’s broader anti‑scraping measures aimed at increasing the cost and traceability of automated SERP harvesting by AI crawlers and SEO scrapers. In response, Autom has updated its Google Search pipeline to resolve <code>/goto</code> links by reading the Location header and return the final URLs in its API, preserving existing integration behavior.</p>
+          </div>
+          <a href="https://www.autom.dev/blog/google-search-goto-links" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread dissatisfaction with Google’s shift to redirect URLs, opaque tracking, and algorithmic result shaping, which many view as a decline in transparency, user control, and search quality. Users cite nostalgia for earlier, less‑curated results and report turning to alternatives such as Yandex, DuckDuckGo, Brave, Kagi, Mojeek, and self‑hosted solutions, valuing direct links, privacy and open indexing. A minority downplay the change or see it as routine, but the dominant sentiment condemns the practice as detrimental to user autonomy and the openness of the web.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49668386" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.claymath.org/news/navier-stokes-announcement/" target="_blank">Navier-Stokes Announcement</a>
+        </h2>
+        <span class="article-meta">
+          116 points • by rvz • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page announces the 2026 Clay Research Awards. Recipients are grouped into three teams: Tuomas Orponen (University of Jyväskylä), Pablo Shmerkin (University of British Columbia), Hong Wang (IHES and NYU), and Joshua Zahl (Nankai University); Robert Burklund, Jeremy Hahn, Ishan Levy, and Tomer Schlank; and Yu Deng together with Zaher Hani. The award citation highlights the “remarkable” contributions of Orponen, Shmerkin, Wang, and Zahl. The page also includes four images with alt‑text captions: C. Fukushima and J. Westerweel of the Technical University of Delft; a photo of mathematician Martin Bridson; Anna Skorobogatova; and a generic image representing the Clay Research Award.</p>
+          </div>
+          <a href="https://www.claymath.org/news/navier-stokes-announcement/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments emphasize that the claimed Navier‑Stokes solution does not yet meet the Clay Mathematics Institute’s eligibility requirements, noting the need for publication in a peer‑reviewed journal and a two‑year waiting period before evaluation. Skepticism is expressed about the certainty of the result and the neutral language of the announcement. Several remarks criticize the prize‑driven drama surrounding Millennium problems and voice concern that AI‑generated breakthroughs may diminish the traditionally solitary, personal nature of mathematical research, while acknowledging the broader excitement about accelerated progress.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49668706" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mathandai.org/" target="_blank">A misalignment of AI in mathematics</a>
+        </h2>
+        <span class="article-meta">
+          856 points • by meredydd • 176 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://mathandai.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects widespread unease about AI‑generated proofs reshaping mathematics, emphasizing worries that rapid, incomprehensible solutions could erode traditional measures of achievement, credit attribution, and the educational value of struggle, while also prompting fears of a secrecy shift and reduced motivation for researchers. At the same time, participants draw parallels to past technological disruptions, note potential for increased collaboration and new research infrastructure, and suggest that redefining success and credit mechanisms may be necessary rather than halting AI progress. Overall sentiment is cautious, recognizing both risks and possible adaptations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49662371" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.usenet-rewind.com/" target="_blank">Usenet rewind archive search engine</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by cstadler1869 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.usenet-rewind.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for non‑Google Usenet archives, noting they reliably retrieve old posts that Google Groups often blocks and serve as valuable historical resources. Simultaneously, there is notable concern about the permanence of personal information posted decades ago, with worries that preserved data can be exploited for unwanted surveillance or reputation damage. The discussion balances nostalgia for early internet culture with criticism of the inability to opt out of archival projects, highlighting both the utility and the privacy risks of maintaining these archives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49668777" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dayzlegame.com/blog/google-ads-bot-farm/" target="_blank">I spent $220 on Google app ads and 60% of the installs were robots</a>
+        </h2>
+        <span class="article-meta">
+          481 points • by nickabe • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author ran a Google Ads campaign for the Android puzzle app Dayzle at CA$40 per day, targeting installs. After removing the target CPA, the campaign spent CA$80 daily and reported 21 installs, but the app’s admin panel logged only one. Raw analytics showed 21 new devices, 20 of which ran an outdated app version that Play Store no longer serves—indicating the installs came from an external source despite being credited to Google Play. These devices opened the app once, recorded zero screen time, and never returned, spanning 28 phone models across 19 US states. Over two weeks, 56 billed installs occurred: 33 matched this bot‑like pattern, 7 originated from untargeted countries, and 13 were genuine users who completed 92 games. The author attributes the fraudulent installs to a bot farm that watches the ad video, then installs a locally cached APK, exploiting Google’s install‑based optimization loop. He has filed an invalid‑traffic claim, switched the campaign goal to “won a puzzle,” and advises developers to audit install metrics for similar bot activity.</p>
+          </div>
+          <a href="https://dayzlegame.com/blog/google-ads-bot-farm/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong distrust toward major ad platforms, describing pervasive bot traffic that inflates clicks and installs while delivering little genuine conversion. Many users report wasted spend, ineffective reporting mechanisms, and limited recourse, attributing the issue to systemic fraud incentivized by network operators rather than advertisers. Strategies such as extensive IP exclusions, chargebacks, and focusing on cost‑per‑acquisition rather than clicks are mentioned, while smaller businesses express frustration about the difficulty of reaching real audiences through these channels. Overall sentiment is markedly negative and skeptical.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49662990" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eiln.github.io/posts/ane.html" target="_blank">Retrospectively Reverse-Engineering Apple&#39;s Neural Engine</a>
+        </h2>
+        <span class="article-meta">
+          6 points • by zdw • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article documents a reverse‑engineering effort of the Apple Neural Engine (ANE) used in M1 chips, focusing on its internal architecture rather than trying to make it a general‑purpose accelerator. The ANE comprises 16 compute cores, each with 128 FP16 (or 256 INT8) MAC lanes, giving 2 048 parallel MACs that perform fixed‑point multiply‑accumulate with a 32‑bit accumulator saturating at 2¹⁵. Dot‑product, convolution, and attention operations are distinguished only by data‑mapping and scheduling, while the post‑MAC activation is applied point‑wise via a 33‑entry piecewise‑linear lookup table (mode 2) with linear interpolation and a scaling factor R that controls knot spacing.  </p>
+<p>The driver does not issue high‑level opcodes; instead it loads a pre‑compiled command stream of fixed‑size task descriptors (TDs) into a task queue (TQ). Each TQ holds status, priority, two descriptor slots, and a 32‑entry BAR table for virtual‑address base relocation. Submission uses TM_ADDR, TM_INFO, and TM_PUSH registers, resembling a GPU push‑buffer. The hardware walks the descriptor stream, executes DMA moves, kernel configuration, and PE operations without dynamic address calculations, indicating a highly static, data‑flow‑oriented execution model. The analysis concludes that ANE’s design reflects early CNN workloads and that later integration of its cores into the GPU marks the end of the standalone NPU.</p>
+          </div>
+          <a href="https://eiln.github.io/posts/ane.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49670032" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cbc.ca/news/canada/ontario-great-lakes-sturgeon-lifespan-study-9.7329250" target="_blank">Great Lakes sturgeon may be 400 years old:Scientists rethinking how to save them</a>
+        </h2>
+        <span class="article-meta">
+          55 points • by bookofjoe • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Lake sturgeon in the Great Lakes may live 200–400 years, far longer than the previously estimated 150 years. Researchers led by Ed Baker (Michigan DNR) analyzed over 40 years of capture‑recapture data, tracking individual growth between captures and modeling time to reach adult size. A male caught in 1990 grew only 7 cm over 34 years (≈0.21 cm yr⁻¹), yielding century‑scale age estimates. This suggests many extant individuals could have been alive when Europeans first explored the region. The species, once abundant, lost ~99 % of its historic population due to overfishing and habitat loss; it is now listed as at‑risk in Ontario and endangered across the Great Lakes. Conservation plans, currently a century‑long effort, may need revision to accommodate the sturgeon’s extreme longevity. Indigenous perspectives view the fish as “grandfather” elders, reflecting its ancient lineage (&gt;150 Myr) and cultural significance. Ongoing recovery includes hatchery releases and training programs with First Nations communities.</p>
+          </div>
+          <a href="https://www.cbc.ca/news/canada/ontario-great-lakes-sturgeon-lifespan-study-9.7329250" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express appreciation for sturgeon sightings, describing them as impressive and reminiscent of ancient creatures. Observations note clear water and size, and there is a hopeful tone regarding ongoing conservation measures. Overall sentiment is favorable, emphasizing the majesty of the fish and support for efforts to protect them in the future.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49624456" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cel.cs.brown.edu/blog/design-space-async-await/" target="_blank">A Design Space Exploration of Async/Await</a>
+        </h2>
+        <span class="article-meta">
+          259 points • by wcrichton • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper “A Design Space Exploration of Async/Await” analyzes straight‑line asynchrony across modern languages (Python, Rust, Swift, C#, JavaScript, Tokio, Smol, Trio). Using a simple pseudocode example—logging in a background task and awaiting it—the authors show that seven runtimes produce four distinct outputs, and no two produce the same result for all three program variants. They attribute this variance to design dimensions that affect observable semantics rather than performance. Nine dimensions are identified and grouped into three lifetime phases: Start of Life (e.g., eager vs. lazy task creation), End of Life (e.g., dynamic vs. indefinite extent, destruction policy such as cancellation or awaiting), and Cancellation (e.g., propagation direction, cancellation awareness). Two dimensions—Dynamic Extent and Destruction—explain why Swift prints “AC” while Trio prints “ABC”. The authors formalize the space with a core calculus and small‑step semantics, highlighting rule choices that cause divergent executions. The work demonstrates that async/await designs are far from uniform, each reflecting trade‑offs in ergonomics, memory, and semantics.</p>
+          </div>
+          <a href="https://cel.cs.brown.edu/blog/design-space-async-await/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments broadly praise the comprehensive taxonomy of async/await design dimensions as a valuable, clarifying resource that aids understanding across languages and informs language design decisions. Readers note its usefulness for navigating trade‑offs, comparing frameworks, and teaching. Critiques focus on omissions such as JavaScript’s AbortSignal, Zig, and stack‑ful coroutine models, and on perceived biases in the quiz’s developer categorization. Several contributors reflect on the complexity of async versus threading, emphasizing the need for nuanced choices tailored to specific use cases. Overall sentiment is appreciative yet calls for broader coverage and finer granularity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49626718" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://vester.si/bodily-oddities/" target="_blank">Show HN: Bodily Oddities</a>
+        </h2>
+        <span class="article-meta">
+          218 points • by vesterde • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Jamais vu: feeling that a familiar word, face, or place seems new; opposite of déjà vu; &gt;50 % of participants experience it after ~30 repetitions in lab; prevalence unknown, thought rarer than déjà vu.  </li>
+<li>Prosopagnosia (face blindness): difficulty recognizing faces, congenital or acquired after brain injury; estimates 1–2.5 % (≈1 in 100–1 in 40) depending on testing.  </li>
+<li>Aphantasia: lack of visual mental imagery; ~1 % report no images, ~4 % have faint or no images, a minority have hyper‑ vivid imagery.  </li>
+<li>Clinodactyly: permanent forward bend of the middle joint of a finger, usually the little finger; occurs in &lt;1 % of people; mild cases are asymptomatic but may progress with growth.  </li>
+<li>Accessory thumb‑index tendon: when the thumb flexes into the palm, the index fingertip bends simultaneously; prevalence averages ~20 % but reported ranges span 5–60 %.  </li>
+<li>Oculocardiac reflex: pressure on the eyeball or traction on an eye muscle can induce bradycardia; observed in 14–90 % of eye‑muscle surgeries, especially in children; not a safe method for self‑induced heart‑rate reduction.</li>
+</ul>
+          </div>
+          <a href="https://vester.si/bodily-oddities/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express enthusiasm for the site’s collection of bodily oddities, with many users sharing personal experiences such as visual phenomena, ear movement, hypnic jerks, and other rare sensations. Contributors frequently suggest additional entries, request clearer images, and note occasional inaccuracies. A notable portion critiques the reliance on AI‑generated text and visuals, describing the execution as weak or careless, while still acknowledging the concept’s appeal. Overall sentiment is supportive yet mixed, combining appreciation for the resource with calls for improved curation and higher‑quality content.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49649789" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.stephaniestimac.com/posts/2023/05/design-foldable-devices/" target="_blank">Designing for Dual Screen and Foldable Devices with CSS (2023)</a>
+        </h2>
+        <span class="article-meta">
+          26 points • by mooreds • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>CSS provides two media queries for foldable devices: <code>@media (horizontal-viewport-segments: &lt;count&gt;)</code> targets side‑by‑side screens (book mode); <code>@media (vertical-viewport-segments: &lt;count&gt;)</code> targets stacked screens (laptop mode).  </li>
+<li>A set of CSS environment variables (<code>viewport-segment-width</code>, <code>viewport-segment-height</code>, <code>viewport-segment-top</code>, <code>viewport-segment-left</code>, <code>viewport-segment-bottom</code>, <code>viewport-segment-right</code>) return the dimensions and position of each display segment using a 0‑based <code>(x, y)</code> coordinate grid.  </li>
+<li>These variables let developers create responsive layouts that adapt to any foldable geometry without hard‑coding device‑specific sizes. Example: using <code>grid-template-columns: env(viewport-segment-width 0 0) 1fr;</code> inside a horizontal‑segments media query creates a two‑column grid where the first column fills the left screen.  </li>
+<li>Adoption should be guided by user analytics; forecasts predict &gt;21 M foldable devices shipped in 2023.  </li>
+<li>Current browser support: Microsoft Edge stable implements both media queries and environment variables; Chrome stable lacks support, requiring the experimental flag (<code>chrome://flags</code>) or the Surface Duo emulator.  </li>
+<li>The article serves as a concise overview; a deeper implementation guide is available on Smashing Magazine.</li>
+</ul>
+          </div>
+          <a href="https://blog.stephaniestimac.com/posts/2023/05/design-foldable-devices/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses skepticism about automatic UI splitting, arguing that users should retain control over when and how panes are divided, even on devices with wide or foldable displays. It stresses that a larger screen is typically sought for viewing existing content rather than having applications impose a dual‑pane layout. Compatibility concerns are also raised, noting that current browsers such as Safari lack support for the relevant viewport‑segment features.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49643011" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
