@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.vals.ai/blogs/fable-solves-cyphral-distich" target="_blank">Fable 5.1 Solves the Cyphral Distich, a 370-year-old cipher</a>
+        </h2>
+        <span class="article-meta">
+          906 points • by u1hcw9nx • 83 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post documents how Claude Fable 5.1 solved Sir Thomas Urquhart’s “Cyphral Distich,” a 64‑number cryptogram that had been listed among unsolved historical ciphers. The key clue is the reference to Urquhart’s 32 “Proquiritations”; each number in the two lines indexes a word in the corresponding Proquiritation, and the first letter of that word forms the plaintext. Decoding yields the 32‑letter verse “O GOD UPHOLD KING CHARLS THE SECOND AND MAKE HIM THE SUPREME RULER OF THIS LAND,” a royalist prayer consistent with Urquhart’s politics.</p>
+<p>Using the same method, Fable 5.1 also solved the larger “Cyphral Octastich” (285 numbers) from Urquhart’s <em>The Jewel</em> (1652). Here the k‑th number indexes a word on page k of the book; extracting first letters produces an ottava rima royalist prayer, with only nine letters remaining ambiguous due to possible transcription errors.</p>
+<p>The author argues this demonstrates that large language models can resolve archival puzzles by persistent, targeted search, not by novel cryptanalytic techniques.</p>
+          </div>
+          <a href="https://www.vals.ai/blogs/fable-solves-cyphral-distich" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments broadly celebrate the AI model’s ability to locate and solve an obscure historical cipher, noting it demonstrates useful automation for niche research. Several participants reference prior blog discussions, emphasize the importance of the book‑cipher clue, and share related AI applications in historical or mapping work. At the same time, many express caution, questioning originality, potential bias, verification of solutions, and long‑term security implications for cryptography. Overall, the community shows mixed enthusiasm tempered by skepticism about methodology, reproducibility, and broader impacts of such AI‑driven problem solving.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49688695" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://spaceships.treybastian.com/" target="_blank">Spaceships (Reverse Asteroid)</a>
+        </h2>
+        <span class="article-meta">
+          231 points • by zdw • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page, titled “SPACESHIPS,” presents a configuration interface consisting of several control groups. Under “Settings” the user can adjust motion handling (“Follow system”) and choose display modes (“Reduced” or “Full”). Audio levels are exposed as separate sliders: “Master volume,” “Effects volume,” and “Ambience volume,” each shown at 100 % with a “Mute all” toggle available. Visual effects include “Bloom” and “Phosphor trail,” both set to 100 %. Additional options allow the user to “Show FPS &amp; counters,” and there are “Reset” and “Close” buttons for applying or discarding changes. The layout groups these parameters for fine‑tuning of both visual rendering and sound output within the spaceship‑related application.</p>
+          </div>
+          <a href="https://spaceships.treybastian.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express a generally positive reaction to the game’s concept and fun factor, but many players encounter confusion and frustration. Frequent issues include unclear controls and rules, difficulty tracking multiple ships, a lack of visual distinction for ships, and the high‑score not appearing on the global leaderboard. Several users note that progress stalls after early waves and request a clearer difficulty curve or guide. Suggested improvements involve adding color cues, better instructions, LRUD support, and visual feedback for player actions. Overall sentiment blends enjoyment with a desire for clearer mechanics and additional polish.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49638510" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://community.signalusers.org/t/registration-without-a-phone-number/2222?page=10" target="_blank">Registration without a phone number on Signal will use zero-knowledge proofs</a>
+        </h2>
+        <span class="article-meta">
+          250 points • by Cider9986 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Zero‑knowledge proofs (ZKP) underlie Signal’s donation badges, backup payments, groups, and verification of username character sets/lengths without revealing the actual data; the client is built to operate without trusting the server and its safety can be demonstrated independently of server code.  </li>
+<li>Users who registered with a phone number ask whether they can “unlink” that number without creating a new account, and request clarification on the technical privacy implications.  </li>
+<li>Key concerns: whether the phone number is completely removed from the username mapping, what data remnants may remain locally on the device or on Signal’s servers, and whether unlinking truly achieves full anonymity.  </li>
+<li>The discussion notes that unlinking may not provide a 100 % disassociation, suggesting that creating a new account without a phone number could be a safer approach.  </li>
+<li>Spam‑prevention implications are raised: allowing unlimited register‑unlink cycles could enable mass account creation; a cooldown period is proposed, though its adequacy is uncertain.</li>
+</ul>
+          </div>
+          <a href="https://community.signalusers.org/t/registration-without-a-phone-number/2222?page=10" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a blend of cautious optimism and criticism. Users note the new release cycle allowing tablet use without work‑arounds and see potential for zero‑knowledge sign‑on, while also questioning whether registration can occur without a phone number. Repeated calls appear for Signal to publish its backend automation code and for clearer documentation on zero‑knowledge proofs. Skepticism surfaces over privacy claims, the removal of SMS verification, and perceived security risks, especially in contexts like India where the app is linked to legal concerns. Alternatives such as molly.im are mentioned.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49689048" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://giannirosato.com/blog/post/case-against-jxl/" target="_blank">The case against JPEG XL</a>
+        </h2>
+        <span class="article-meta">
+          151 points • by contact9879 • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>JPEG XL is a royalty‑free image codec that offers lossless compression roughly 12 % smaller than lossless WebP, but its lossless advantage applies to a very small portion of Web content. In lossy mode it lags behind AVIF/AV1: it lacks directional prediction, deblocking loop filtering, and efficient edge‑preserving tools, resulting in higher bitrates and poorer handling of non‑photographic images. Its “XYB” color space provides limited gains, and encoder‑side features such as splines and patches add complexity without matching AV1’s intra‑block copy efficiency. Decode speed is slower than AVIF and significantly slower than WebP; progressive decoding is poorly supported, and crafted images can cause extreme decode times (e.g., a 1.9 KB image taking &gt;17 s), posing a denial‑of‑service risk. While JPEG XL’s flexible spec (up to 4096 channels, HDR, JPEG recompression) is technically impressive, the Web’s primary needs are bandwidth reduction, fast decode, and minimal compatibility overhead—requirements that AVIF already satisfies. Consequently, JPEG XL may be valuable for professional or non‑Web use cases, but it offers no compelling advantage for current browser adoption.</p>
+          </div>
+          <a href="https://giannirosato.com/blog/post/case-against-jxl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed sentiment toward JPEG XL. Many acknowledge its technical strengths—lossless efficiency, high‑bit‑depth support, progressive rendering, and versatility for both archival and web use—while noting limited web‑specific benefits compared to AVIF’s smaller decode times and broader video‑codec backing. Adoption concerns dominate, citing slow browser support, potential performance penalties, and the overhead of introducing another format alongside WebP and AVIF. Practical trade‑offs such as encoding speed, hardware decoder constraints, and the need for a single, universally supported image format are repeatedly highlighted.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49690554" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developer.apple.com/accessories/dimensional-drawings/" target="_blank">Apple&#39;s Dimensional Drawings</a>
+        </h2>
+        <span class="article-meta">
+          176 points • by herbertl • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Apple’s developer portal provides a dedicated section for accessory dimensional drawings, offering downloadable files that contain precise mechanical dimensions and related technical specifications. These resources are intended for hardware developers and manufacturers needing exact measurements for designing, prototyping, or validating Apple‑compatible accessories. The collection includes CAD‑compatible formats and detailed schematics, covering aspects such as connector placement, enclosure tolerances, and mounting guidelines. Access to the drawings is organized by accessory type, enabling users to locate the appropriate documentation for each product category. The portal serves as a centralized repository for the technical drawings required to ensure compliance with Apple’s hardware standards.</p>
+          </div>
+          <a href="https://developer.apple.com/accessories/dimensional-drawings/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong curiosity and admiration for the detailed dimensional drawings Apple now provides, noting the impressive level of precision shown for products like the Apple Watch Ultra 3 and the Vision Pro. Users are interested in additional data such as overhead vehicle cut‑aways, surface‑roughness tolerances, and the reasoning behind specific spec formats, and they wonder whether even more extensible files (e.g., FBX or Blender) could be released. There is also a shared surprise that Apple makes these technical drawings publicly available, along with occasional questions about fonts and why certain models, such as the MacBook Neo, are the only ones included.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49690174" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://screensize.net/reports/viewport-stats" target="_blank">Show HN: 1080p is 920px tall – 1k real browser viewports</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by zenpe • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Viewport Statistics Report indicates that data collection is currently unavailable, with no reporting period or aggregate data present. The methodology notes that the report reflects measured browser sessions on the site, not overall device or browser market share. Each browser tab contributes a single sample per session; measurements are aggregated monthly and rounded. Privacy safeguards exclude IP addresses, user IDs, precise timestamps, and full user‑agent strings, while honoring Global Privacy Control and Do Not Track signals. Data limitations include omission of viewports exceeding 6,000 CSS px in width or 4,000 px in height, normalization of historical device‑pixel‑ratio values to 0.05 steps, and approximate device‑class inference that excludes legacy tablet classifications. No raw samples, dimension anomalies, or legacy tablet samples are recorded.</p>
+          </div>
+          <a href="https://screensize.net/reports/viewport-stats" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight concerns that current reporting of only the most common viewport sizes obscures useful data about smaller, non‑maximized windows, prompting a request for cumulative size distributions to gauge scrolling impact. Users note that a typical 1920 × 920 resolution aligns with personal observations, while Chrome’s reduction of available height is reported to cause clipping for layouts designed for 1080p. Overall, there is frustration with the complexity and hack‑prone nature of web development and distrust toward certain design tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49693226" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://techcrunch.com/2026/09/12/automattic-confirms-mullenweg-has-returned-as-ceo-after-attempted-ouster-by-board/" target="_blank">Mullenweg has returned as CEO after attempted board ouster</a>
+        </h2>
+        <span class="article-meta">
+          150 points • by ilamont • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Automattic’s board voted to place founder Matt Mullenweg on a paid leave of absence and named CFO Mark Davies as interim CEO, citing undisclosed reasons. Mullenweg responded on the company’s Slack, accusing board members of conspiring against him, and subsequently removed other admins, announcing he had regained control. The company later issued a statement confirming Mullenweg’s reinstatement as chairman and CEO with full board support. Reports indicate board member Toni Schneider, a founding CEO now leading Bluesky, may be stepping down, though details remain unclear. No official comment was provided by Automattic regarding the board’s composition or the internal dispute. The episode was accompanied by Mullenweg’s informal posts on X and Slack, including remarks about being “a pirate” and references to previous leadership challenges.</p>
+          </div>
+          <a href="https://techcrunch.com/2026/09/12/automattic-confirms-mullenweg-has-returned-as-ceo-after-attempted-ouster-by-board/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the ongoing leadership conflict at Automattic, describing the board‑CEO struggle as chaotic and indicative of poor governance, with numerous remarks questioning Matt Mullenweg’s judgment and mental stability. Observers express concern that the turmoil harms WordPress’s reputation, pushes users toward alternative platforms, and reflects broader issues in the community’s tone. A minority of insiders highlight the company’s open‑source contributions and personal pride in working there, while overall sentiment remains skeptical about the company’s direction and leadership credibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49688259" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://knowablemagazine.org/content/article/society/2026/prehistory-lost-threads" target="_blank">Rope, twine and thread: Invisible technologies of the Stone Age</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by knowablemag • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://knowablemagazine.org/content/article/society/2026/prehistory-lost-threads" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment argues that fields such as textiles and agriculture are often overlooked as technologies, leading to underestimation of their complexity and significance. It highlights rope and other “soft” materials—cordage, leather, animal products—as critical force‑multipliers and infrastructure components historically used for levers, pulleys, slings, and even primitive cranes. The author suggests that prehistoric societies likely relied on rope‑based systems for major tasks, challenging the view that early technology is limited to surviving stone tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49662246" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://julialang.org/blog/2026/09/julia-1.13-highlights/" target="_blank">Julia 1.13 highlights</a>
+        </h2>
+        <span class="article-meta">
+          227 points • by eigenspace • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Julia 1.13 reduces pre‑compilation time by ~30 % versus 1.12 (10‑20 % versus 1.10) and improves startup by ~20 %, with systematic “time‑to‑first‑X” (TTFX) measurements integrated into CI (perf.julialang.org/ttfx). The REPL now includes built‑in syntax highlighting, a fuzzy history search (multi‑select, mode display, highlighted code), and bracketed‑paste support on Windows. A new @<strong>FUNCTION</strong> macro reports the innermost (including anonymous) function. The default hash algorithm switches to RapidHashNano, offering faster, streaming hashes for strings, numeric types, and custom types, while preserving non‑cryptographic semantics. Full‑GC now skips sysimage and package images, cutting collection time from ~35 ms to &lt;1 ms in empty sessions and halving GC overhead in large workloads. Scheduler fixes park idle threads, make Ctrl‑C reliable, and modify @spawn to wake a single idle thread, yielding up to 300× speedup on Windows. Introspection macros accept type arguments and broadcasting; a new --trace-eval flag reports top‑level evaluation progress. The julia.c script is now the JuliaC.jl package. Pkg gains zstd‑compressed downloads, faster resolver, efficient git cloning, automatic registry installation in manifests, and respects already‑loaded package versions; Pkg.test now inherits the parent bounds‑checking mode. Juliaup adds a cross‑platform GUI for managing channels and installations.</p>
+          </div>
+          <a href="https://julialang.org/blog/2026/09/julia-1.13-highlights/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is supportive of Julia, praising its clean design, performance gains, and recent release improvements such as faster garbage collection, reduced startup latency, enhanced REPL features, and recursive package source handling. Common concerns focus on sparse learning materials across skill levels, the absence of a dedicated IDE, fragmentation between interactive notebook tools, and heavy reliance on GitHub/GitLab for packaging, which limits alternatives. Startup time remains a notable drawback for certain workloads, while interest in memory‑saving forking capabilities is expressed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49642645" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lareviewofbooks.org/article/of-gods-and-languages-on-when-god-spoke-greek/" target="_blank">Of Gods and Languages: On &#34;When God Spoke Greek&#34; (2013)</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by bryanrasmussen • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The review outlines Timothy Michael Law’s book <em>When God Spoke Greek</em>, which examines the Septuagint (LXX) – the Greek translation of the Hebrew Scriptures produced in Hellenistic Alexandria beginning in the third century BCE. Law traces the LXX’s origins (the Letter of Aristeas narrative of 72 translators), its gradual expansion to include the prophetic and wisdom books, and its role in early Christian worship, noting that New Testament writers quoted the LXX rather than the Hebrew text. The author highlights scholarly shifts after the Dead Sea Scrolls revealed older Hebrew manuscripts that often align with the LXX, suggesting that the received Hebrew Bible incorporates later revisions. Law argues that the LXX reflects theological nuances distinct from the Masoretic text, affecting interpretations such as Exodus 15:3 and Psalm 9:21. The review praises the book for making Septuagint studies accessible beyond academia and notes the availability of the New English Translation of the Septuagint (NETS) as a reliable English source.</p>
+          </div>
+          <a href="https://lareviewofbooks.org/article/of-gods-and-languages-on-when-god-spoke-greek/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes a shared theological outlook between the Septuagint and the Hebrew texts, rejecting translation choices that appear driven by doctrinal agendas, such as the Jehovah’s Witness rendering of “ruach.” It notes the Eastern Orthodox reliance on the Septuagint, clarifies that early Christian scriptures differed from modern Bibles, and points out historical nuances in the development of Greek translations beyond the Torah. The tone is analytical, highlighting scholarly distinctions among translation traditions while questioning whether these differences influenced major ecclesiastical splits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49692765" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
