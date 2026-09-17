@@ -1,0 +1,581 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 17, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://servo.org/blog/2026/09/15/one-year-of-sponsorship/" target="_blank">One Year of Sponsored Servo Development</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by AshleysBrain • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>During the past year, Servo maintainer Josh Bowman‑Matthews worked part‑time on improving the Servo contributor experience, funded by monthly donations via OpenCollective and GitHub. His activities included diagnosing and fixing intermittent test failures, stabilizing flaky tests, and addressing broken window.open behavior. He coordinated a large‑scale rewrite of Servo’s JavaScript engine integration to resolve garbage‑collection‑related panics, reviewing many pull requests and filing issues that distributed the workload among contributors. Additionally, he supported another contributor’s grant proposal, which was approved. Bowman‑Matthews emphasized that the funded role enabled a balance between family time and substantial project contributions, enhancing Servo’s accessibility for new developers. The report thanks donors for enabling these technical improvements and looks forward to further development in the next year.</p>
+          </div>
+          <a href="https://servo.org/blog/2026/09/15/one-year-of-sponsorship/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>I’m unable to provide a summary because no comments were supplied. Please provide the set of comments you’d like analyzed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49737849" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/" target="_blank">Nvidia announces native GPU programming in Rust</a>
+        </h2>
+        <span class="article-meta">
+          659 points • by nonmaskable • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>NVIDIA announced CUDA Rust, enabling native GPU kernel development in Rust with two parallel tracks that mirror CUDA’s existing models.  </p>
+<p><strong>SIMT track (cuda‑oxide)</strong> – a custom rustc backend routes #[kernel] functions through Rust MIR, Pliron IR, and LLVM to PTX. It requires Linux, a compute‑capability ≥ 8.0 GPU, CUDA 12+, clang, and a pinned nightly toolchain. The cargo‑oxide subcommand scaffolds, builds, and runs a vector‑addition example, using types such as <code>DisjointSlice</code> and macros (<code>#[kernel]</code>, <code>#[launch_contract]</code>) to enforce compile‑time safety (e.g., preventing aliasing of mutable buffers).  </p>
+<p><strong>Tile track (cutile‑rs)</strong> – operates at a higher abstraction, compiling kernels via CUDA Tile IR at first launch. It runs on stable Rust 1.89+, needs CUDA 13.3, and no nightly or custom LLVM. The <code>#[cutile::module]</code> macro captures kernel AST; tensors are partitioned into exclusive tiles, guaranteeing safe exclusive writes without explicit thread indexing.  </p>
+<p>Both projects are early‑stage; cuda‑oxide is alpha, cutile‑rs is published and used in external projects (e.g., HuggingFace). They aim to provide safer Rust GPU programming while supporting inter‑language interoperability.</p>
+          </div>
+          <a href="https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects strong enthusiasm for Rust‑based GPU development, citing safety, ergonomics and potential to simplify debugging compared with CUDA C++. Several participants welcome Nvidia’s recent open‑source efforts and see the new Rust‑centric APIs as a promising direction, though many note the pre‑1.0 status, nightly compiler requirement, and reliance on proprietary CUDA components as drawbacks. Skepticism appears regarding Nvidia’s commitment and the quality of the LLM‑generated announcement, while there is interest in broader language support and concerns about stability and cross‑vendor applicability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49724881" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ryan.science/blog/keys-not-included" target="_blank">Keys Not Included: recovering the signing keys for US driver&#39;s license barcodes</a>
+        </h2>
+        <span class="article-meta">
+          156 points • by Ryan5453 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://ryan.science/blog/keys-not-included" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge the investigation’s technical depth while raising several criticisms: the signature field’s validation is questioned, warnings about matching encoded and visible data are urged, and the disclosure of public keys is seen as less risky than feared. Concerns recur about forgery potential, privacy implications of barcode‑linked photos, and the limited value of digital verification amid future quantum threats. Opinions also compare the design favorably to alternatives, note attribution for libraries, and express overall interest and appreciation for the article’s clarity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49735930" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.damtp.cam.ac.uk/events/strings02/dirac/speach.html" target="_blank">The Relation Between Mathematics and Physics by Paul Dirac</a>
+        </h2>
+        <span class="article-meta">
+          35 points • by rramadass • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.damtp.cam.ac.uk/events/strings02/dirac/speach.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment mixes a light‑hearted remark about Hacker News title formatting with assorted philosophical and scientific references, including a quotation attributed to Pauli, discussions of Dirac, Heisenberg, and the relationship between mathematics and physics, and reflections on Hume’s epistemology and the role of God in scientific thought. The tone is informal and speculative, weaving humor and personal musings while questioning the nature of mathematical insight and the limits of physical understanding.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49685835" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jakeasmith.com/blog/http-build-url/" target="_blank">My temporary PHP fix from 2014 has nearly 20M installs. Today I&#39;m deprecating it</a>
+        </h2>
+        <span class="article-meta">
+          86 points • by jakeasmith • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author created a 174‑line PHP shim in 2014 to replace the missing <code>http_build_url()</code> function after AOL’s CMS upgraded from PHP 5.2 to 5.3 and dropped the pecl_http extension. Published on Packagist, the package has been installed nearly 20 million times, with about 400 k monthly downloads. It is bundled indirectly through WPML (over 1.5 M WordPress sites), the <code>idna-convert</code> library used by SPIP, and is included in Debian/Ubuntu packages, meaning many public sites still run the shim. Reported issues include a bug where a trailing‑slash path causes every “a” character to be removed due to a workaround that appends and then strips an “a”. The maintainer, after a decade away from PHP, has deprecated the package, citing superior alternatives: the PHP‑League URI library and PHP 8.5’s built‑in URI API. Maintaining or transferring the package poses security risks; it will remain installable but receive no further fixes.</p>
+          </div>
+          <a href="https://jakeasmith.com/blog/http-build-url/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey nostalgia for earlier web development eras, particularly Laravel 5.x, while recognizing how current practices differ. Readers express appreciation for the long‑standing polyfill’s impact and support the author’s decision to deprecate it after many years, noting the need for clear migration guidance in future releases. Several contributors thank the maintainer for sustaining the project, offer assistance, and share personal connections, creating an overall supportive and grateful tone toward the work and its legacy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49718773" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rohanbansal.com/qorl" target="_blank">Training a 4B model to produce 81% faster query plans than Postgres</a>
+        </h2>
+        <span class="article-meta">
+          535 points • by polyphilz • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article evaluates whether a small open‑weight language model can be fine‑tuned to generate PostgreSQL query plans that outperform the database’s native optimizer. Key points:</p>
+<ul>
+<li>Prior research shows PostgreSQL’s optimizer often selects sub‑optimal join orders; join ordering is NP‑hard and the plan space explodes (e.g., 4,608 possible plans for three‑table joins, &gt;10²⁰ for ten‑table queries) due to multiple join trees, orientation choices, algorithms (hash, merge, nested‑loop) and scan types.</li>
+<li>An experiment fine‑tuned a 4‑billion‑parameter model via supervised fine‑tuning and reinforcement learning (RL) using a custom GRPO‑style reward that accounts for noisy latency measurements.</li>
+<li>A measurement rig was built to minimize Linux page‑cache contention across concurrent Docker containers, with RL rollouts executed on a 2 × H100 node while PostgreSQL instances ran locally.</li>
+<li>The trained model achieved a 44.7 % average latency reduction on 113 join‑heavy benchmark queries, improving from an initial inability to plan 99 of them to consistently faster plans.</li>
+<li>Off‑policy distillation leveraged ~500 trajectories from a GPT‑6‑style “Astra” agent to further refine the model.</li>
+</ul>
+          </div>
+          <a href="https://rohanbansal.com/qorl" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mixed reaction to the LLM‑driven query‑optimizer article. Readers acknowledge the clear writing and novelty of applying neural models, but most raise doubts about the benchmark’s relevance, noting the small in‑memory dataset, omitted training costs, and lack of realistic OLTP workloads. Concerns recur about scalability, planning latency, deterministic behavior, and reliance on proper indexing versus hints. While some see potential for automated optimizers or future model‑based tools, many consider the current approach impractical and question its advantage over existing optimizers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49731285" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://egbert.net/blog/articles/comparison-of-arena-architecture-in-malloc.html" target="_blank">Comparison of Malloc() Algorithms</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by egberts1 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article outlines challenges and evolution of dynamic memory allocation, emphasizing that frequent malloc/free operations become a scalability bottleneck in multithreaded programs, especially for packet‑processing workloads. It describes the classic malloc design—pre‑allocating OS memory pools and serving smaller requests—and traces its architectural layers:</p>
+<ul>
+<li><strong>Frontend progression</strong>: linked‑list free space → size‑class heap buckets → process‑owner encoding → core‑local allocation buffers (CLABs) → epoch encoding → large‑block mmap → hazard pointers → arena pools (per‑CPU/core) → thread‑local allocation buffers (TLABs) → constant‑time synchronization mechanisms.</li>
+<li><strong>Backend progression</strong>: remote free‑list encoding (Treiber stack) → buddy and binary‑buddy systems → BIPOP/span‑based allocator → segment queues → multi‑core distributed queues → k‑FIFO queues, all aimed at returning fragmented memory to the OS and reducing RSS.</li>
+<li><strong>Arena concept</strong> (introduced ~2006 in jemalloc) isolates memory by speed tier, NUMA node, or CPU core, enabling locality‑aware allocation.</li>
+</ul>
+<p>The piece also lists comparative criteria (CAS contention, NUMA locality, benchmark performance) and provides an extensive bibliography of seminal allocation algorithms and analyses dating from the 1960s to 2024.</p>
+          </div>
+          <a href="https://egbert.net/blog/articles/comparison-of-arena-architecture-in-malloc.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall reaction is critical, highlighting several factual inaccuracies and outdated information in the article, such as an incorrect claim about allocator serialization and misdated references to arena memory concepts. Additional points of concern include typographical errors, specifically the misuse of “infinity” instead of “affinity,” and technical problems accessing the site due to SSL configuration issues that prevent certain browsers from connecting. The tone reflects disappointment with the article’s reliability and usability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49715318" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mimo.xiaomi.com/rl/" target="_blank">Xiaomi Mimo 2.6 live post-training dashboard</a>
+        </h2>
+        <span class="article-meta">
+          421 points • by krackers • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The scraped excerpt consists solely of a page heading and a status indicator. The heading reads “mimo‑v2.6 RL,” suggesting the page pertains to a release, version, or component identified as “mimo‑v2.6” with the suffix “RL,” which may denote “release” or a related label. Directly beneath the title, the text displays “reconnecting…,” indicating that the page was in the process of re-establishing a network or server connection at the time of capture. No additional narrative, specifications, code, or contextual information accompanies these elements; therefore, the content provides only the identifier of the subject (mimo‑v2.6 RL) and a transient connectivity notice, without further technical detail or substantive data.</p>
+          </div>
+          <a href="https://mimo.xiaomi.com/rl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments overall praise MiMo‑V2.5 for delivering strong engineering assistance at very low cost, noting reliable performance, occasional hallucination loops, and improvements in multitasking and design over earlier versions. Users value the public dashboard and transparency, contrasting it with perceived secrecy at larger Western labs and calling for similar openness elsewhere. Skepticism appears regarding the authenticity of some reported training metrics and cost figures, while curiosity persists about the resources and training methods behind the model. Comparisons to other providers highlight MiMo’s favorable ROI, and there is a recurring call for broader industry transparency.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49732270" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/cloudflare/security-audit-skill" target="_blank">Cloudflare/Security-Audit-Skill</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by donk8r • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The <strong>security‑audit skill</strong> is a Cloudflare‑originated coding‑agent extension that automates multi‑phase security audits of codebases. It orchestrates isolated sub‑agents through six deterministic stages:  </p>
+<ol>
+<li><strong>Reconnaissance</strong> – maps architecture, trust boundaries, input surfaces, prior evidence, and generates <code>architecture.md</code> and <code>coverage-ledger.json</code>.  </li>
+<li><strong>Coverage‑led hunting</strong> – assigns hunters per ledger unit, records checks, and uses critics to identify gaps.  </li>
+<li><strong>Candidate validation</strong> – gives each unique finding to a fresh verifier that attempts to disprove it.  </li>
+<li><strong>Structured output</strong> – records results as <em>confirmed</em>, <em>needs_validation</em>, or <em>rejected</em> in <code>findings.json</code>, validated against <code>report‑schema.json</code>.  </li>
+<li><strong>Independent record verification</strong> – fresh agents re‑verify final claims; replacements trigger additional verification.  </li>
+<li><strong>Target‑neutral reporting</strong> – synthesizes <code>REPORT.md</code>, <code>FINDINGS‑DETAIL.md</code>, and <code>NEEDS‑VALIDATION.md</code> from verified records.  </li>
+</ol>
+<p>Validators (<code>validate‑coverage‑ledger.cjs</code>, <code>validate‑findings.cjs</code>) run after ledger updates and phase completions. Multiple audit runs are additive, improving coverage. The skill requires a tool‑using coding agent, Node.js for zero‑dependency validators, and an OS‑enforced sandbox that disables external networking and limits resources. Severity is calculated as likelihood × impact; defense‑in‑depth gaps are noted, not flagged as vulnerabilities. MIT‑licensed.</p>
+          </div>
+          <a href="https://github.com/cloudflare/security-audit-skill" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express criticism toward Cloudflare’s skill architecture, indicating that the current abundance of separate skills leads to inefficiency and excessive token consumption. Users argue that consolidating functionalities into a single skill would reduce context window usage and prevent wasted tokens, suggesting a need for streamlining the platform’s skill management to improve performance and resource utilization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49736466" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://filipovski.net/2026/09/16/backups-arent-simple.html" target="_blank">Backups Aren&#39;t Simple</a>
+        </h2>
+        <span class="article-meta">
+          225 points • by afilipovski • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Backups require more than simple mirroring. Key concepts covered:</p>
+<ul>
+<li><strong>Redundancy</strong>: Keep at least three copies of data on two different media types, with one copy off‑site (3‑2‑1 rule) to protect against hardware failure, theft, or disasters.  </li>
+<li><strong>Recovery Point Objective (RPO)</strong>: Define how much data loss is acceptable; critical systems may need sub‑second RPO, while small setups can tolerate 24 h.  </li>
+<li><strong>Snapshot rotation</strong>: Use frequent recent snapshots (daily) and less frequent older ones (weekly, monthly) to balance storage and granularity.  </li>
+<li><strong>Incremental &amp; deduplicated backups</strong>: Store only changes between snapshots, employing hard‑links or chunk‑level deduplication (e.g., rsnapshot, Borg, Restic) to reduce storage, bandwidth, and restore time.  </li>
+<li><strong>Metadata preservation</strong>: Ensure file permissions, ownership, and timestamps survive transfers, especially when using object stores like S3, which may require tarball packaging to retain metadata and control costs.  </li>
+<li><strong>Database handling</strong>: Dump databases and grant proper filesystem permissions to avoid corruption from in‑memory buffers.  </li>
+<li><strong>Automation &amp; testing</strong>: Schedule backups via cron, monitor for failures, and perform full restore tests at least semi‑annually.  </li>
+</ul>
+<p>The article concludes that mature tools abstract these complexities, providing encrypted, chunk‑level deduplicated, GFS‑rotated, point‑in‑time backups with minimal manual effort.</p>
+          </div>
+          <a href="https://filipovski.net/2026/09/16/backups-arent-simple.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a broadly pragmatic view of backups, emphasizing that data loss is common and that redundancy, off‑site storage, and regular verification are essential. Contributors share personal failures—lightning strikes, cloud service changes, hardware crashes—and recommend diverse strategies such as ZFS snapshots, restic, borg, rsync, and cloud‑based archives, often combined into 3‑2‑1 configurations. A recurring theme is the importance of testing restores and automating monitoring, while some acknowledge that many users deprioritize backups, considering them low‑risk until an incident occurs. Overall, the sentiment is cautious, experience‑driven, and focused on reliable, testable solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49732513" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
