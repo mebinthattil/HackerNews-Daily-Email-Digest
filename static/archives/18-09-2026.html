@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/jemalloc/jemalloc/releases/tag/5.4.0" target="_blank">Jemalloc 5.4.0</a>
+        </h2>
+        <span class="article-meta">
+          91 points • by gkfasdfasdf • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Release 5.4.0 of jemalloc comprises over 160 commits focused on debt reduction, refactoring, bug fixing, test expansion, and portability.  </p>
+<p><strong>New features</strong> add EXTENT_ALLOC_FLAG_PINNED for marking non‑reclaimable mappings and a suite of <code>stats.pinned</code> mallctl interfaces; a <code>thread.arena</code> control to resume per‑CPU arena selection; aligned human‑readable and JSON malloc statistics; and a compile‑time <code>--enable-cxx-infallible-new</code> option replacing the runtime experimental flag.  </p>
+<p><strong>Incompatible changes</strong> replace the fixed tcache refill/flush policy with demand‑driven bin targets and silently ignore seven legacy <code>malloc_conf</code> settings, while retaining support for <code>tcache_ncached_max</code>.  </p>
+<p><strong>Bug fixes</strong> preserve <code>errno</code> across free variants, correct size‑class overflow checks, accept NULL in <code>free_sized</code>/<code>free_aligned_sized</code>, resolve TSD lifecycle edge cases, use <code>O_CLOEXEC</code> for THP sysfs access, eliminate duplicate <code>opt.stats_print</code> fields, prevent deadlock in <code>arena_reset</code>, and address a profiler‑sampling/guard‑page interaction.  </p>
+<p><strong>Optimizations/refactors</strong> modularize the front end, streamline ctl dispatch, cap base‑block growth, isolate background‑thread management, simplify page‑allocation handling, redesign statistics collection, and introduce an OS abstraction layer.  </p>
+<p><strong>Portability updates</strong> replace <code>std::__throw_bad_alloc</code> with standard C++, use flexible array members for arenas, fix rdtscp detection, correct <code>malloc_getcpu</code> on macOS, employ <code>CLOCK_MONOTONIC</code> for thread sleeps, resolve macOS and MinGW build warnings, address GCC‑16 warnings, and improve PID‑namespace parsing.</p>
+          </div>
+          <a href="https://github.com/jemalloc/jemalloc/releases/tag/5.4.0" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the lack of acknowledgment for Jason Evans in both the homepage and repository, prompting questions about his departure and the project’s current stewardship. Contributors seek clarification on whether Meta continues development, who now drives the effort, and why a release appeared after a multi‑year gap. There is curiosity about the name’s origin and the reasons for the announcement’s prominence on Hacker News, coupled with appreciation that the tool remains maintained and valuable for Ruby on Rails applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49750152" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/astra-for-law/" target="_blank">Astra for Law</a>
+        </h2>
+        <span class="article-meta">
+          466 points • by vertigoruntime • 84 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/astra-for-law/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments recognize that LLMs can speed routine legal tasks such as document extraction, search, and drafting, but most emphasize the need for human review and caution against relying on them for substantive judgments. Opinions diverge on the broader impact: some expect modest efficiency gains and lower costs for certain practice areas, while others foresee limited effect on high‑value litigation and warn of accuracy issues, hallucinations, billing‑hour incentives, and potential market concentration. Overall sentiment is cautious optimism about productivity benefits tempered by skepticism about reliability, ethical risks, and long‑term disruption to the profession.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49745940" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fex-emu.com/Scourge-of-emulation/" target="_blank">The scourge of x86 emulation</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by dagmx • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article explains why emulating the x86 Total‑Store‑Ordering (TSO) memory model on ARM’s weakly ordered architecture is costly. x86 guarantees that every store becomes visible before subsequent loads, while ARM only provides this when using acquire‑load and release‑store instructions. Early FEX‑Emu implementations mapped every x86 load/store to these instructions, incurring large penalties because they were not designed for high‑frequency use. Microbenchmarks show severe slowdowns on several ARM CPUs (e.g., AmpereOne, Cortex‑X4/X925, Oryon‑3) when using acquire/release semantics, especially for unaligned accesses that trigger data‑memory‑barrier (DMB) patches.</p>
+<p>ARMv8.3 introduced the LRCPC load instruction (FEAT_LRCPC) which matches the required TSO behavior and restores near‑baseline performance for aligned accesses; however, unaligned loads still suffer due to natural‑alignment faults. Apple’s M1 implements a hardware TSO toggle, allowing regular loads/stores to behave like x86 and eliminating most alignment penalties, with only a modest overall overhead.</p>
+<p>The FEAT_LSE2 extension relaxes alignment requirements for acquire/LRCPC/release instructions to a 16‑byte granule, offering limited benefit because x86 applications frequently cross full cache‑line boundaries. The emulator also handles split‑lock situations by patching faulting instructions to basic loads/stores wrapped with DMBs. Overall, proper hardware support (LRCPC, TSO mode) is essential for high‑performance x86 emulation on ARM.</p>
+          </div>
+          <a href="https://fex-emu.com/Scourge-of-emulation/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary expresses strong approval of the article, highlighting the significance of Fex as a translation framework comparable to Apple’s Rosetta 2 and Microsoft’s Prism, and noting its adoption by Valve and Crossover. It emphasizes Apple’s industry leadership, referencing the company’s earlier solution of adding an x86‑compatible memory ordering mode, and admires the company’s effective vertical integration, speculating that such capabilities require extensive collaboration across many teams. Overall, the tone is enthusiastic and appreciative of the technical achievements described.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49750094" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://prismml.com/news/bonsai-2-27b" target="_blank">Bonsai 2 27B: Near-Lossless Compression in a 9x Smaller Footprint</a>
+        </h2>
+        <span class="article-meta">
+          412 points • by JonSchneider • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>PrismML released Ternary Bonsai 2 27B, a 27‑billion‑parameter multimodal model compressed to 5.9 GB (1.76 effective bits/weight) using ternary {‑1,0,+1} weights with FP16 group‑wise scaling. Built on Qwen 3.8 27B, it retains 98.2 % of the full‑precision model’s aggregate benchmark performance (score 83.9) across reasoning, math, coding, instruction following, vision, and agentic tool use, while being &gt;9× smaller. The model supports a 262 K‑token context window and text‑image inputs, and runs on NVIDIA GPUs (CUDA) and Apple devices (MLX) under an Apache 2.0 license. Throughput reaches 143 tokens/s on RTX 5090 and 46.8 tokens/s on M5 Max; energy usage on RTX 4090 is 0.714 mWh/token, ~40 % more efficient than a full‑precision 8B model. PrismML highlights the release as near‑lossless compression that enables high‑performance local inference for coding agents, computer‑use workflows, private document analysis, and hybrid cloud‑edge deployments. Technical details are provided in the accompanying whitepaper.</p>
+          </div>
+          <a href="https://prismml.com/news/bonsai-2-27b" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong interest in the Ternary Bonsai 2 27B model for running on modest consumer hardware, noting its compact size, promising speed on Apple silicon and some GPUs, and usefulness for coding‑focused tasks. Users share installation tips, compare its performance to other quantizations, and appreciate its potential to broaden local inference. At the same time, several comments point out inconsistencies in claimed “near‑lossless” quality, hardware‑specific limitations, unclear optimal use cases, and a desire for larger, more capable variants. Overall sentiment is cautiously optimistic, recognizing both the model’s advantages and its current shortcomings.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49746618" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bend-lang.com/" target="_blank">Bend – A language that blocks AI mistakes via proof, on CPU and GPU</a>
+        </h2>
+        <span class="article-meta">
+          442 points • by nicolas-siplis • 68 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Bend is a programming language designed to eliminate AI‑generated errors through formal proofs and automated parallel execution. It compiles to native code, achieving near‑C performance on a single CPU core and scaling up to 100× speed on GPUs or multi‑core systems. Its type checker doubles as a proof checker (similar to Lean or Coq), verifying code changes in under a second, enabling AI agents to validate every modification. Developers declare invariants in <strong>LAWS.bend</strong>; the compiler enforces these laws so no generated code can violate them, and proofs are stored in <strong>PROOF.bend</strong>. Parallelism is implicit: code is automatically split across available cores without explicit thread or kernel management. Installation is a single script (<code>curl -fsSL https://bend-lang.com/install.sh | sh</code>). Recommended workflow adds Bend commands to an <code>AGENTS.md</code> file (e.g., <code>bend guide</code>, <code>bend PROOF.bend</code>, and parallelization hints). The language targets backend development on Linux/macOS, emphasizes bug‑free, high‑performance applications, and provides a guide, an affine dependent type theory paper (BendTT), and a parallel runtime paper (BendRT).</p>
+          </div>
+          <a href="https://bend-lang.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a split between enthusiasm for Bend’s novel proof‑oriented, GPU‑accelerated approach and skepticism about its credibility, maturity, and practicality. Many acknowledge the language’s interesting concepts, potential for safe AI‑generated code, and appealing syntax, while others question the lack of commit history, limited documentation, performance on non‑CUDA hardware, and scalability of formal verification for real‑world projects. Concerns also arise about benchmarking, tooling, and how the system compares to established languages and proof assistants, resulting in a cautious overall reception.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49746163" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://qwen.ai/blog?id=qwen3.8-omni-flash" target="_blank">Qwen 3.8 Omni Flash</a>
+        </h2>
+        <span class="article-meta">
+          193 points • by jjcm • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://qwen.ai/blog?id=qwen3.8-omni-flash" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses frustration with the fragmented landscape of LLM offerings and a desire for a tool that matches use cases, cost constraints, and language needs to suitable models. Cost efficiency is highlighted, comparing Gemini’s higher pricing to cheaper alternatives like Qwen 3.8, while performance and multilingual capabilities are also considered. Concerns arise about the opacity of Chinese model releases, differing regional accessibility, and confusing version naming, prompting calls for clearer standards and more transparent, comparative guidance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49747925" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/asciimoo/hister" target="_blank">Hister: A private search engine for the pages you visit and the files you keep</a>
+        </h2>
+        <span class="article-meta">
+          589 points • by bookofjoe • 46 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hister is an open‑source, privacy‑focused personal search engine that indexes the full text of visited web pages and local files. It runs locally (or on self‑hosted infrastructure) without telemetry or mandatory cloud services. Key features include:</p>
+<ul>
+<li>Binary, Homebrew, Docker, and Nix installation; Go 1.26, npm, and a C compiler required for build.</li>
+<li>Browser extensions for Firefox and Chrome automatically send page content to a local server (http://127.0.0.1:4433) for indexing.</li>
+<li>Full‑text search supports field filters, phrases, wildcards, negation, aliases, and result priorities; optional semantic search can be enabled via a user‑provided embeddings endpoint.</li>
+<li>Import options for browser history, local directories, or arbitrary files; a crawler can index external sites.</li>
+<li>Clients available via web UI, terminal TUI, command‑line, and MCP for AI assistants; multi‑user separation is supported.</li>
+<li>No built‑in telemetry; only favicons are fetched externally. Optional semantic search transmits document text to the configured endpoint.</li>
+<li>Development workflow includes hot‑reload with Vite and automatic Go rebuilds via <code>air</code>. Contributions follow the standard GitHub process, with security reports directed to SECURITY.md.</li>
+</ul>
+          </div>
+          <a href="https://github.com/asciimoo/hister" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad enthusiasm for a personal, offline search tool that indexes browsing history, bookmarks, files and crawled pages, with many users reporting it fills a gap left by earlier browser history search features and complements tools like Obsidian, Zotero, or custom scripts. Positive feedback highlights the interface, search quality, and utility for recalling past reads, while requests focus on name changes, Android integration, note‑taking, and tighter extension controls. A minority voice raises security concerns about installing unreviewed software and the need for careful exclusion rules. Overall sentiment is supportive and constructive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49743097" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.hacktron.ai/blog/hacking-openai" target="_blank">A heap overflow and SSO misconfiguration to compromise OpenAI internal repos</a>
+        </h2>
+        <span class="article-meta">
+          334 points • by Handy-Man • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hacktron researchers compromised OpenAI employee ChatGPT/Codex accounts on July 25 2026 by chaining two vulnerabilities: (1) an SSO misconfiguration in OpenAI’s identity infrastructure that allowed “Sign in with OpenAI” on the public Discourse forum (community.openai.com) to be hijacked, and (2) a heap‑buffer overflow in the libheif image‑decoder bundled in Discourse’s Docker image (Debian 12/13, libheif 1.19.7/1.19.8). The libheif flaw arose from missing upstream security backports, enabling out‑of‑bounds read/write during HEIC/HEIF decoding via ImageMagick. Using Claude Opus 5, the team generated a reliable remote‑code‑execution exploit within hours, achieved RCE on the Discourse instance, and leveraged the SSO link to assume an employee’s account whose Codex was linked to OpenAI’s GitHub organization. Proof of impact was a pull request opened in OpenAI’s internal monorepo; no further data were accessed. The vulnerabilities were reported, patched by OpenAI (bounty $6,500) and Discourse (Docker rebuild, ImageMagick sandboxing). Affected systems include any deployment using libheif 1.19.x–1.23.x without the latest security patches; mitigation requires updating libheif/libde265 and isolating untrusted HEIF/AVIF decoding.</p>
+          </div>
+          <a href="https://www.hacktron.ai/blog/hacking-openai" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the recent remote‑code‑execution exploit that leveraged a HEIF image library flaw to gain access to OpenAI’s infrastructure, highlighting how quickly the chain was built and the role of AI agents in automating the attack. Contributors criticize the large attack surface of complex image parsers, advocate sandboxing, stricter updates, and reducing code complexity, often suggesting safer languages or simpler formats. The bounty size is repeatedly deemed insufficient, while broader concerns are raised about AI‑driven security risks, centralized control of advanced models, and the need for stronger defensive practices.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49749656" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://linguisticdiscovery.com/posts/pre-greek/" target="_blank">Pre-Greek: The lost language hidden within Ancient Greek</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by axiologist • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ancient Greek contains roughly 1,000 lexical items that lack any Indo‑European (IE) cognate, including core terms such as λαβύρινθος, ελαία, Ἀχιλλεύς, θάλασσα, βασιλεύς, and οἶνος. Scholars attribute these to a Pre‑Greek (“Paleo‑European”) substrate spoken by the Early European Farmers before the arrival of IE speakers from the Pontic‑Caspian steppe. Because PIE had no words for many Mediterranean flora, fauna, and maritime concepts, early Greeks borrowed local names, leaving a fossil record of the earlier language. The article outlines stratification terminology: the dominant incoming language is the superstrate, the displaced one the substrate, and neighboring influences are adstrates. Identification of substrate loans relies on (1) absence of IE etymology despite extensive comparative work, (2) phonological patterns impossible under regular PIE‑Greek sound changes (e.g., initial /dn‑, /kn‑, /ps‑), and (3) parallel unattested forms in other non‑IE Mediterranean languages (e.g., Egyptian hb‑nj ‘ebony’, Hittite winija‑ ‘wine’). Examples illustrate early borrowings (olive *elaíwā, hyacinth, cypress) and later diffusion of terms such as basileús ‘king’. The substrate hypothesis thus explains the non‑IE lexical layer in Greek.</p>
+          </div>
+          <a href="https://linguisticdiscovery.com/posts/pre-greek/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively criticize the article’s sensational title and its reliance on an outdated notion of a single “Pre‑Greek” language, noting that the concept is now largely dismissed within the field. Readers point out factual errors, such as the existence of a PIE term for “sea,” and emphasize that modern Indo‑European diversity stems partly from undocumented substrate languages. At the same time, there is appreciation for the discussion of archaeological inference without excavation and interest in how events like the Bronze Age Collapse reshaped Greek literacy, with a brief mention of speculative lost languages.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49749771" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://crocidb.com/post/when-the-fractional-part-of-a-float-fixes-your-shader/" target="_blank">When the fractional part of a float fixes your shader</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by vinhnx • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author created a Voronoi‑based fragment shader (Worley noise) with UV warping and palette lookup. On one Windows PC (RTX 4070, driver 595.79) the animation stuttered, while the same shader ran smoothly on Linux, macOS, mobile, and other GPUs. Debugging revealed the issue originated in the noise function’s use of fract on large‑magnitude floats. Replacing fract(x) with x‑floor(x) eliminated the stutter, suggesting a mis‑compilation. Further investigation showed the shader was executed via ANGLE, which translates GLSL to HLSL and then compiles to DirectX 11 bytecode (DXBC). Using RenderDoc, the author captured the compiled shader and compared builds with a literal multiplier of 398.0 vs 398.1. With 398.0 the optimizer (FXC, O3) collapsed the fract call, effectively truncating the value and causing discrete jumps in the Voronoi centers; a non‑integer multiplier prevented this optimization and restored smooth motion. Switching ANGLE to Vulkan (SPIR‑V) also avoided the bug. The root cause is an optimizer bug in the DirectX 11 HLSL compiler that incorrectly treats certain float literals as integer, leading to loss of fractional precision.</p>
+          </div>
+          <a href="https://crocidb.com/post/when-the-fractional-part-of-a-float-fixes-your-shader/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49726614" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
