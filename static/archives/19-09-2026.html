@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 19, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://med.stanford.edu/news/all-news/2026/09/two-separate-brains.html" target="_blank">Human brain is two separate organs, Stanford Medicine-led research finds</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by emigre • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The study led by Stanford Medicine shows that the human brain derives from two separate embryonic progenitor populations, not a single common precursor. One progenitor expresses Otx2 and forms the forebrain and midbrain; the other expresses Gbx2 and forms the hindbrain (brain stem). Chromatin analysis revealed mutually exclusive configurations that lock each lineage, explaining past failures to generate hindbrain neurons from forebrain‑midbrain progenitors. Using human pluripotent stem cells, the team successfully produced functional hindbrain motor neurons that display action potentials and region‑specific protein markers. Comparative analysis of mouse embryos, chickens, zebrafish, and acorn worms indicates this dual‑origin pattern dates back &gt;550 million years, paralleling the two‑system organization seen in jellyfish. The findings clarify developmental biology, enable in‑vitro models for brain‑stem diseases such as spinal muscular atrophy and amyotrophic lateral sclerosis, and suggest new avenues for therapeutic research. The work was published in <em>Nature Neuroscience</em> (Sept 18) with contributions from Caltech, UCSF, and multiple NIH, NSF, and private grants.</p>
+          </div>
+          <a href="https://med.stanford.edu/news/all-news/2026/09/two-separate-brains.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely criticize the headline’s exaggeration, emphasizing that the study identified separate embryonic progenitor lineages for fore‑/midbrain and hindbrain rather than proving the brain comprises two distinct organs. Contributors note that distinct regional functions and cell types are already well known, and that the primary novelty lies in the lineage markers and a new method for culturing brain‑stem cells, which could aid disease research. While some express enthusiasm for the technique, most view the press framing as misleading and stress that the core scientific insight is more modest.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49763697" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.prinzai.com/p/gpt-6-astra-solves-a-wwi-german-radio" target="_blank">GPT-6 Astra Solves a WWI German Radio Cipher</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by nsoonhui • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post describes how GPT‑6 “Astra” decoded a World‑I German ADFGVX radio cipher transmitted on 27 Nov 1918, one of the unsolved messages listed on Scienceblogs.de. Using the key “TRUPPENVERSCHIEBUNG”, which must be alphabetically reordered, Astra reconstructed the 6×6 polybius square, arranged the 170‑symbol ciphertext in rows of 19 under the key, and applied columnar transposition based on the key’s alphabetical positions. Decoding yielded the German plaintext: “EIN ENGLISCHER KREUZER EINLIEG X SEWASTOPOL X S4STEN X EIN GESCHWADER DER X ALLIIERTEN FOLGT 26STEN X”, interpreted in English as “An English cruiser arrived at Sevastopol on the ?4th and an Allied squadron follows on the 26th.” Historical logs confirm HMS Canterbury reached Sevastopol on 24 Nov 1918, with an allied squadron arriving on 26 Nov, matching the decoded message. The article notes the key’s later documented use (from 9 Dec 1918) may explain why this cipher remained unsolved.</p>
+          </div>
+          <a href="https://www.prinzai.com/p/gpt-6-astra-solves-a-wwi-german-radio" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express skepticism toward claims of autonomous LLM problem‑solving, emphasizing the need for clear human involvement and proper attribution such as “LLM helped solve X.” They question the plausibility of fabricated keys and suggest that known data could have been misapplied rather than brute‑forced. The discussion also warns that incremental improvements in AI capability may be overlooked, raising concerns about future AGI development while acknowledging that a diligent human analyst could have resolved the issue.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49763987" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://terrytao.wordpress.com/2026/09/18/if-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it/" target="_blank">If math is more than proof, we need to better celebrate the rest of it</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by num42 • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay argues that mathematics should value “motivated explanations” alongside traditional proofs, because the discipline’s ultimate aim is human understanding rather than merely generating formal proofs. A motivated explanation is defined by introducing definitions only after the problem context is clear, allowing provisional ideas that are later refined, and emphasizing why a theorem is the right question and how it fits within broader mathematics. The author distinguishes this genre from proofs, noting its non‑binary validity and the need for a practical rubric to assess motivation. Examples cited include the Princeton Companion to Mathematics, Bill Thurston’s essay on proof and progress, Timothy Chow’s beginner’s guide to forcing, and recent AI‑assisted work on Erdős Problem 1196, where the explanatory follow‑up paper was deemed more valuable than the proof itself. Proposed actions: require PhD students to present clear explanations of results, identify “open exposition problems” analogous to Hilbert’s problems, create journals focused on exposition, and adjust hiring/tenure criteria to reward high‑quality textbooks and exposition. The goal is to shift cultural incentives, reassure future mathematicians, and reinforce mathematics as a public good.</p>
+          </div>
+          <a href="https://terrytao.wordpress.com/2026/09/18/if-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect a blend of nostalgia for intuitive mathematics and recognition that formal proof remains central, while many express optimism about AI tools assisting proof work and expanding accessibility. Concerns recur about AI potentially displacing human mathematicians, economic implications, and the risk of metrics driving behavior. Overall, participants acknowledge both the value of traditional rigor and the transformative possibilities and challenges posed by emerging AI technologies in mathematics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49763928" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://onionfutures.com/" target="_blank">San Francisco Onion Futures Company</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by z-mach9 • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The San Francisco Onion Futures Company sells private, transferable contracts for future physical delivery of yellow onions, with contracts available up to six months in advance at prices of $3–$12 per onion. Pricing is updated daily at midnight (San Francisco time) via a proprietary algorithm and can be viewed only with JavaScript enabled; purchases are processed through Stripe. Delivery is arranged in the first week of the contract’s delivery month; the company contacts the registered owner, offers scheduled times and locations in San Francisco, Toronto, Seattle, and Chicago, and may use third‑party services at no extra cost. Contract owners receive a unique key that can be transferred; the new holder updates contact details, voiding the previous key. No refunds or cash settlements are provided, though contracts may be resold until delivery begins. The operation is claimed to be legal under 7 U.S.C. § 13‑1 because it is a private sale, not a board of trade. Contact is via onionfutures@protonmail.com; the firm is owned by Sophia Vysparov (homepage a11ce.com).</p>
+          </div>
+          <a href="https://onionfutures.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion describes a student group promoting onion‑futures trading as a humorous, campus‑based performance that draws interest through free onion giveaways and an active website. Participants express curiosity about the legal status, contract specifications, pricing and market liquidity, noting the novelty may inflate prices and questioning why traditional futures do not cover onions. There is a blend of amusement and analytical interest, with references to historical regulation, suggestions for broader applications such as tokenization, and light‑hearted remarks about recipes and future slogans.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49763296" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://grapheneos.social/@GrapheneOS/117282080803799576" target="_blank">Android 17 is the first since 3.x to add new APIs without releasing to the AOSP</a>
+        </h2>
+        <span class="article-meta">
+          794 points • by theanonymousone • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Mastodon post titled “GrapheneOS: ‘Android 17 QPR1 is the first release since Androi…’” appears on the GrapheneOS Mastodon instance. The page includes standard Mastodon interface text prompting users to enable JavaScript for the web application and references platform-specific apps. An image is present with alt text simply stating “Mastodon.” No additional technical details, announcements, or discussion are provided in the scraped content.</p>
+          </div>
+          <a href="https://grapheneos.social/@GrapheneOS/117282080803799576" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong criticism of Google’s recent Android policies, viewing the selective release of updates and new APIs as restrictive, opaque, and harmful to open‑source projects like GrapheneOS. Many participants praise GrapheneOS for its privacy and autonomy while questioning its reliance on Google services and feasibility without them. There is widespread concern that Google is consolidating control over the ecosystem, potentially endangering AOSP’s relevance, and calls for regulatory or community‑driven alternatives. Opinions on the future of Android range from pessimism about its openness to optimism that external efforts or legal pressures could restore a more open platform.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49758736" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/awlevin/typesafe-computer-use" target="_blank">Typesafe-computer-use drives a Mac toward a goal for 1/50th of a cent per step</a>
+        </h2>
+        <span class="article-meta">
+          70 points • by rahimnathwani • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The repository implements a low‑cost macOS computer‑use agent that follows plain‑English goals by repeatedly capturing the screen, performing OCR (Apple Vision), extracting actionable UI elements from the Accessibility (AX) tree, and selecting the next action with a TypeSafe decision model (up to 255 options, returning a calibrated probability distribution in a few hundred milliseconds). Only when a text field truly requires free‑form input does it invoke a writer LLM; otherwise actions are deterministic clicks, scrolls, or browser navigation, keeping per‑step cost around $0.0002. The loop stops on completion, low confidence (&lt; 0.4), repeated no‑ops, or step limits, then uses a stronger writer model to produce a final answer. The codebase (Python 3.12+, uv) includes modules for macOS Quartz/AppleScript integration, perception (capture, OCR, changed‑tile caching, block merging), date parsing, decision making, action handlers, runner, logging, and CLI tools (<code>clicker</code>, <code>clicker‑inspect</code>). Runs are logged with screenshots, payloads, and timing breakdowns. A Linux port swaps macOS APIs for xdotool/AT‑SPI and Vision OCR for PaddleOCR/RapidOCR. MIT‑licensed.</p>
+          </div>
+          <a href="https://github.com/awlevin/typesafe-computer-use" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect mixed reactions, with several users expressing confusion about the project’s purpose and questioning its novelty, while others show curiosity about technical aspects such as image‑embedding models and OCR input methods. Concerns about query costs and performance benchmarks appear alongside modest enthusiasm, including interest in a waitlist and potential use cases. Overall, the discussion balances skepticism and uncertainty with tentative interest and a desire for clearer explanations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49733647" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jepedersen.dk/blog/202505_research/" target="_blank">Science Is Open Software</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by jegp • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author argues that contemporary scientific research is inseparable from open‑source software and that such software should be considered a core component of computational science. Science is defined as a systematic discipline producing testable, reproducible hypotheses; reproducibility therefore requires not only published results but also executable, modifiable code that encodes predictive models. Bugs in research software have already caused retractions, demonstrating that unreliable code undermines scientific validity. Open‑source licenses provide two essential properties: (1) reproducibility—code can be run in identical environments (e.g., via containers or NixOS) and adapted by others; (2) reliability—public scrutiny allows errors to be detected and corrected. A future vision is proposed where every paper links to runnable analysis, software evolves collaboratively like Wikipedia, and transparent code strengthens public trust. The author urges researchers to (a) publish well‑documented code with papers, (b) use reproducible environments (NixOS, Docker, Conda), (c) leverage existing tools, and (d) recognize software contributions in academic promotion.</p>
+          </div>
+          <a href="https://jepedersen.dk/blog/202505_research/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread frustration with current academic incentives that favor rapid, low‑quality publications over thorough, reproducible research, and they highlight persistent obstacles to data and code sharing despite journal policies encouraging openness. While acknowledging that some journals and initiatives provide reproducible containers and open‑source software, contributors note practical difficulties in accessing well‑documented code and data, especially in complex fields. There is also enthusiasm for open‑science applications, such as AI‑driven medical predictions, but a prevailing view is that significant cultural and structural changes are needed to make modern science truly open and reproducible.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49762687" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sdcc.sourceforge.net/" target="_blank">SDCC – Small Device C Compiler</a>
+        </h2>
+        <span class="article-meta">
+          67 points • by lioeters • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://sdcc.sourceforge.net/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight SDCC’s strong support for recent C standards and its broad range of target CPUs, especially for retro 8‑bit processors, earning it praise as a valuable tool for various microcontrollers. Users appreciate its free, open‑source nature and consider it the best OSS option for 8051 development, though they note frequent bugs. There is a desire for added support of PIC10 and PIC12 devices. Overall sentiment is favorable despite limitations, with occasional unrelated remarks about Dallas Semiconductor and Silicon Prairie lore.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49762744" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://try.cloudflare.com/" target="_blank">Cloudflare Quick Tunnels</a>
+        </h2>
+        <span class="article-meta">
+          686 points • by jcbhmr • 84 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Quick Tunnels, a Cloudflare service, provides a single‑command tool that exposes a local server (e.g., on a laptop) as a public, encrypted URL hosted on Cloudflare’s edge network. The feature requires no Cloudflare account, DNS configuration, or open inbound ports. It includes JSON‑formatted output for programmatic use. Cloudflare advertises global coverage in over 335 cities, typical connection latency of about three seconds, and zero ports opened on the client side. The service is offered free of charge.</p>
+          </div>
+          <a href="https://try.cloudflare.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a split view of Cloudflare’s Quick Tunnels. Many users find the service simple, reliable and handy for temporary demos, webhooks, and personal projects, often preferring it over self‑hosted or alternative tunneling tools. At the same time, numerous remarks criticize the marketing page as low‑effort, note the product’s long‑standing existence rather than novelty, and raise concerns about security, abuse potential, latency, limited permissions and restrictive terms of use. Overall, the community acknowledges utility while questioning the presentation, differentiation and safety of the offering.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49754785" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rust-glancer.github.io/blog/why-lsp-is-hard/" target="_blank">Why building a Rust LSP is hard</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by agluszak • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Rust LSPs must serve queries while the project is only partially indexed. After the client’s initialize handshake, the server must respond before any workspace discovery, then schedule indexing asynchronously. Because LSP treats documents, not the filesystem, a virtual file system (VFS) with source generations is required to keep in‑memory state consistent and to cancel in‑flight read queries when mutations occur. Queries differ in cost: hover and document symbols need only parsing and an item tree, while inlay hints and references demand semantic analysis, definition maps, and body‑level type inference. Rust‑analyzer uses salsa (an incremental, memoized database) with lazy computation and optional cache‑priming to pre‑compute the semantic layer, keeping bodies on demand. Rust Glancer favors eager full indexing, persisting state to disk for low RAM usage and instant restarts; it answers queries as soon as the relevant semantic data is ready, prioritizing the open file. Workspace discovery is ambiguous—clients may open multiple Cargo workspaces or files without Cargo.toml. rust‑analyzer eagerly discovers and indexes all reachable workspaces, while Rust Glancer requires an explicit Cargo.toml and indexes a workspace only after it is opened, avoiding unwanted background work.</p>
+          </div>
+          <a href="https://rust-glancer.github.io/blog/why-lsp-is-hard/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment notes that many observations in the article apply broadly to language tooling, such as the need for asynchronous request handling and UTF‑16 conversion, while highlighting specific challenges in Rust. It describes difficulty providing reliable autocompletion for syntactically incorrect code, annoyance with JSON‑based LSP communication versus native interfaces, and friction caused by Rust’s import and module declaration conventions, especially glob imports and redundant file declarations. Overall, the tone is critical of LSP design and certain Rust tooling choices, attributing broader design shortcomings to Microsoft’s involvement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49734131" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
