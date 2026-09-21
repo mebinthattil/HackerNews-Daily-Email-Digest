@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 21, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://gameshelf.jmac.org/2008/11/13/GrimPuzzleDoc_small.pdf" target="_blank">Grim Fandango Puzzle Document (1996) [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          166 points • by kelseyfrog • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="http://gameshelf.jmac.org/2008/11/13/GrimPuzzleDoc_small.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong appreciation for Grim Fandango’s distinctive art, music, and writing, noting its lasting impact and iconic status among adventure games. Many recall personal nostalgia, discovering the game in youth and sharing it with younger players. Opinions on gameplay are mixed; while the atmosphere and style are praised, puzzles are described as both brilliant and frustrating. Additional discussion highlights Tim Schafer’s influence, interest in development documentaries, and admiration for the detailed design documentation accompanying the title. Overall sentiment is positive with some criticism of difficulty and bugs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49783495" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/jaredpalmer/kev/tree/main" target="_blank">Kev: Tiny Jev-like family of decision models built on top of Qwen3.5</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by tosh • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kev is a family of compact decision‑making models built on Qwen 3.5 (and earlier Qwen 3) that support yes/no (noul), multiple‑choice (choice), and rating (score) questions in a single API call. Three model sizes are released—0.8 B, 4 B, and 9 B—each with LoRA adapters and a pointer head; the 4 B and 9 B variants run in bf16 on a 32 GB Mac, while all sizes run on CUDA. The API matches TypeSafe’s System One, enabling use of the provided Python SDK or a local HTTP endpoint. Requests encode the state text once and attach independent question blocks; isolation is enforced by attention masks (or row‑wise processing for DeltaNet layers). Training uses cross‑entropy on public datasets and generated policy examples (≈10 k decision‑v7, 1.6 k rule‑structure samples) for two epochs with rank‑16 LoRA. Benchmarks report accuracy, Brier score, and calibration across development (decision‑v7) and out‑of‑domain (transfer‑v4/v9) suites; Kev‑9B approaches Jev but shows calibration gaps on new sources. Fine‑tuning on custom JSONL data (few hundred labeled examples) is supported via <code>--init_from</code> to retain base knowledge. Serving on Apple Silicon is slower than on GPU; caching and optional flags (<code>KEV_MERGE</code>, <code>KEV_ATTN</code>) adjust performance. All code, weights, and licenses (Apache‑2.0) are publicly available.</p>
+          </div>
+          <a href="https://github.com/jaredpalmer/kev/tree/main" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong interest in Jev‑style decision models, highlighting their appeal for quick, one‑shot classification and potential to streamline tasks such as frontend styling enforcement, routing logic, spam filtering, and simple game agents. Contributors note impressive community effort on open‑source variants and appreciate the models’ low latency on modest hardware, while also pointing out limitations like lack of tool‑calling, knowledge‑cutoff issues, and the need for continuous fine‑tuning or updates. Overall sentiment is enthusiastic yet cautious about practical constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49783999" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://agentexecutor.io" target="_blank">AX – Google’s Open Agentic Orchestrator</a>
+        </h2>
+        <span class="article-meta">
+          480 points • by blazarquasar • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AX is an open, declarative control plane for executing agentic workloads, originating from Google research on agentic runtime systems and large-scale compute. It targets a new computing paradigm characterized by stateful, bursty, long‑running actors that perform intensive computation for brief periods before pausing for model, tool, or human inputs. Traditional orchestrators for stateless microservices or batch jobs are inefficient for such workloads due to idle sandbox costs and lack of sub‑second suspend/resume capabilities. AX abstracts tasks, workspaces, network policies, and models into core primitives, enabling developers and researchers to manage massive fleets of agents without rebuilding infrastructure. The platform builds on Google DeepMind’s agent runtime research and leverages existing isolation, resumption, and scheduling expertise, while providing agentic abstractions and generative runtime components.</p>
+          </div>
+          <a href="https://agentexecutor.io" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a largely skeptical view of Google’s Agent Substrate, questioning its purpose, labeling it as over‑engineered and unnecessarily complex, especially given its reliance on Kubernetes and extensive YAML configuration. Many note that similar sandboxing and orchestration solutions already exist, and they doubt Google’s backing or widespread adoption. A minority express interest in its security and isolation features, but overall the consensus points to disappointment with the perceived mis‑marketing, lack of clear use cases, and preference for simpler, more integrated or established alternatives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49780797" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://en.sedaily.com/finance/2026/09/20/samsung-to-double-hbm4-output-next-year-sources-say" target="_blank">Samsung is expected to more than double output of its HBM4 and HBM4E DRAM</a>
+        </h2>
+        <span class="article-meta">
+          466 points • by giuliomagnifico • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Samsung Electronics plans to more than double output of its HBM4 family (sixth‑gen HBM4 and seventh‑gen HBM4E) in the coming year.  </li>
+<li>Glass‑carrier usage, essential for thinning HBM DRAM wafers, will rise 2.5 ×, with outsourced cleaning volume increasing to 50 000 sheets/month (from 20 000 this year).  </li>
+<li>HBM4/4E chips target 12‑layer and higher stacks; analysts infer at least a two‑fold rise in overall HBM4 output despite carrier reuse and yield variations.  </li>
+<li>Mass‑production shipments of HBM4 began in February, using 10‑nm‑class sixth‑gen DRAM and a base die on a 4‑nm process; 12‑layer HBM4E samples were delivered to customers such as Nvidia in May.  </li>
+<li>Expected wafer input will grow ~40 % to ~250 000 wafers/month next year (up from ~180 000).  </li>
+<li>By product mix, HBM4’s share should increase from ~40 % to ~80 % as HBM4E ramps up, positioning HBM4 as Samsung’s core high‑value memory offering.</li>
+</ul>
+          </div>
+          <a href="https://en.sedaily.com/finance/2026/09/20/samsung-to-double-hbm4-output-next-year-sources-say" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights concerns that complex manufacturing steps such as die thinning enable high‑volume HBM production, but current bottlenecks—especially sanctions limiting equipment for Chinese fabs—keep yields low and keep HBM prices elevated. This scarcity is seen as driving up consumer DRAM costs while AI data‑center demand absorbs most new supply, leading to worries that the market favors well‑funded AI buyers over everyday users. Some optimism remains that increased HBM availability could eventually lower cloud GPU prices, yet overall sentiment is that the AI‑driven memory surge worsens affordability for consumer memory products.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49778029" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://libroot.org/posts/what-happened-to-the-snowden-archive" target="_blank">What happened to the Snowden archive</a>
+        </h2>
+        <span class="article-meta">
+          430 points • by EXHades • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Snowden archive was fully distributed by mid‑2013. The Guardian, Der Spiegel, the New York Times, ProPublica and later The Intercept published documents until early 2015; The Intercept’s final batch was released on 29 May 2019, after which no outlet has published any further material. Snowden first contacted Glenn Greenwald (Dec 2012) and then Laura Poitras, who teamed with Barton Gellman. Encrypted bundles (“astro_noise”, “Pandora”) were handed to Poitras, Gellman, Greenwald, Ewen MacAskill (Guardian), Trevor Timm (Freedom of the Press Foundation) and others; many copies remain encrypted and inaccessible. The Guardian destroyed its London hard‑drives in July 2013 under government pressure but retained a copy in New York; it published ~30 of its ~58 000 documents (0.05 %). The paper ceased releasing documents in February 2014 despite continuing analysis and sharing with the New York Times. The Washington Post stored its copy in a hardened, air‑gapped facility, now in “cold storage.” Both Poitras and Greenwald assert that full copies still exist, but none have been disclosed since 2019.</p>
+          </div>
+          <a href="https://libroot.org/posts/what-happened-to-the-snowden-archive" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge that the Snowden archive offers detailed reporting and recommend reading it, but note that public attention and outrage have waned as the revelations became normalized and Snowden’s exile in Russia reduced his visibility. Many observe a shift in the Overton window, seeing former scandals as routine and questioning the current relevance of undisclosed material. There is skepticism toward ongoing leaks, concerns about “responsible disclosure” losing meaning, and a broader cynicism that institutional turmoil benefits entrenched interests, while newer privacy debates receive more focus.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49780820" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://qwen.ai/blog?id=qwen-image-2.1" target="_blank">Qwen Image 2.1</a>
+        </h2>
+        <span class="article-meta">
+          644 points • by jmillikin • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://qwen.ai/blog?id=qwen-image-2.1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight that the 7 B Qwen‑Image 2.1 model is praised for its compact size, native RGBA transparency, fast inference, and notably strong text rendering compared with other open‑weight generators. Users also value the diversity of Chinese open‑source releases. However, the restrictive commercial‑use license draws consistent criticism, and many note practical shortcomings such as inconsistent prompt adherence, artifact patterns, bias toward Asian appearances, limited video‑editing reliability, and occasional instability. Overall sentiment is cautiously optimistic about the technical progress but tempered by concerns over licensing and reliability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49775499" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://datagubbe.se/crt/" target="_blank">The Effect of CRTs on Pixel Art (2024)</a>
+        </h2>
+        <span class="article-meta">
+          208 points • by tobr • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article examines how cathode‑ray tube (CRT) displays influence the perception of pixel art and how artists compensated for hardware limits.<br>
+<em> CRTs introduce scanlines, color‑bleeding, and slight blur, which can mask blocky edges but do not eliminate visible pixels; cheap PAL/NTSC sets produce more fuzziness than high‑quality RGB monitors.<br>
+</em> Early 8‑bit systems (C64, NES) were constrained to low resolutions (e.g., 160×200) and fixed 16‑color palettes, prompting programmers to employ dithering (pixel‑level patterns to simulate intermediate colors) and anti‑aliasing (intermediate‑color pixels to smooth edges).<br>
+<em> 16‑bit platforms (Amiga 500, SNES, Mega‑Drive) expanded to 32 selectable colors from larger palettes and modest resolutions (~320×240), allowing richer graphics and more extensive use of dithering/AA.<br>
+</em> Signal quality matters: separate RGB (SCART) yields the sharpest image; composite or RF adds additional blur and color artifacts. CGA color‑blending exploits NTSC composite artifacts to create extra colors, unrelated to the CRT itself.<br>
+<em> Aspect‑ratio handling differs: CRTs supported non‑square pixels (e.g., 320×200 vs 640×480), while modern flat panels enforce square pixels, causing distortion when old assets are displayed 1:1.<br>
+</em> Modern pixel‑art creators often omit dithering/AA, resulting in overly blocky images, despite the fact that these techniques improve visual quality on any display, including CRTs.</p>
+          </div>
+          <a href="https://datagubbe.se/crt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express a mixed view of pixel art’s evolution: many acknowledge that modern high‑DPI displays define a separate aesthetic and should not be judged by CRT standards, while also recognizing the nostalgic appeal and creative constraints of older hardware that shaped classic pixel art. There is agreement that CRTs contributed specific visual artifacts—often misattributed to the technology itself—and that modern screens can simulate some of these effects but lack the “warmth” of original CRTs. Critics note a trend toward intentionally blocky modern art that neglects dithering and anti‑aliasing, contrasting it with the more nuanced techniques forced by past hardware limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49768336" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://amigaux.org/" target="_blank">Amiga Unix, Again</a>
+        </h2>
+        <span class="article-meta">
+          94 points • by doener • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Amix (Amiga Unix) is a community-driven revival of Commodore’s System V Release 4 for Amiga, originally released 1990‑92 on A2500UX and A3000UX. The project provides a modernized system for 68040/68060 machines and contemporary accelerator hardware, using an open development process documented in “the grimoire.” Installation is available via bootable floppy and CD‑ROM images for real hardware, with emulation support; a classic tape installer is planned. A remote package client, apkg, accesses a hosted repository (pkg.amigaux.org) delivering GNU/BSD tools such as grep, gzip, less, patch, and zlib, and will later include X11R6.3, Mesa, and a native gcc. Current achievements include kernel ports for 68040/68060 (MMU required), Z3660 accelerator drivers (SCSI, Ethernet), Zorro III SCSI drivers, an OpenLook desktop, and a functional Quake benchmark. Ongoing work covers RTG graphics for Z3660, accelerator Ethernet throughput, read‑only CD filesystem, and installer polishing. Future goals are native gcc, full X11/Mesa stack, firmware Ethernet fixes, and a complete release of packages, source, documentation, and manuals. Development combines generative‑AI assistance for reverse‑engineering binary kernels with manual review and hardware testing.</p>
+          </div>
+          <a href="https://amigaux.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed feelings about heavy reliance on LLM assistance, recognizing LLMs as useful tools but urging less dependence and more authentic author voice. There is notable annoyance toward AI‑generated prose, contrasted with appreciation for its capabilities. The discussion shifts to retro computing, noting historical NetBSD runs on Amiga hardware, questioning the practicality of choosing System V over BSD, and recalling past Debian support for Amiga. Concerns about potential trademark issues and a skeptical “pet‑cemetery” vibe toward AI‑driven project revivals also appear.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49781436" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/volotat/mini-AGI/" target="_blank">Show HN: Mini-AGI – Dynamic continual learning model trained on 8GB VRAM</a>
+        </h2>
+        <span class="article-meta">
+          54 points • by volotat • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>mini‑AGI is a byte‑level continual‑learning language model designed to train from scratch on a single consumer GPU with ≥8 GB VRAM. Weights reside on disk and are paged into VRAM as needed, allowing the parameter count to be limited only by available storage. The architecture processes each byte through two dense prelude blocks followed by a recurrent block applied up to 24 times; each application selects its own top‑8 experts from a shared pool, with adaptive depth governed by a PonderNet‑style halting head. Trunk components (embeddings, attention, routers, halting head) run at 0.1× the expert learning rate, drastically reducing catastrophic forgetting (≤0.01 nats loss increase after 524 k characters of single‑subject training). The expert pool grows or prunes based on demand, using recombination of hidden units for new experts and retaining Adam moments per expert. Training uses batch‑1 streaming of raw bytes (256‑byte alphabet), no tokenizer, and rotary positional encodings. The model runs on an RTX 3070‑laptop GPU, occupies ~540 M parameters (≈32 experts resident at a time), and achieves ~2.4 GFLOP/byte training cost comparable to a dense 400 M byte‑level transformer.</p>
+          </div>
+          <a href="https://github.com/volotat/mini-AGI/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey overall curiosity and optimism about the new approach, with many expressing enthusiasm for its potential to reduce costs, enable local deployment, and more closely emulate brain‑like learning while avoiding catastrophic forgetting. Several users ask about concrete performance, specifically memory retention after topic shifts and ability to generalize beyond memorization, requesting simple tests such as arithmetic. A few playful remarks add a light‑hearted tone, but the dominant view is positive interest coupled with demand for clearer evidence of generalization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49783133" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://reclaimthenet.org/spain-blocks-archive-today-and-mirrors" target="_blank">Spain orders blocks on Archive.today and its mirrors</a>
+        </h2>
+        <span class="article-meta">
+          415 points • by latein • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Spain’s Second Section of the Intellectual Property Commission, within the Ministry of Culture, issued a resolution ordering the blocking of several Archive.today domains and related mirrors. The order required no judicial ruling; it was based solely on a complaint and an internal censorship protocol designed for rapid implementation. Spanish users attempting to reach the service are redirected to a government notice stating the site is “illegal” and accusing them of “facilitating illegal access to content protected by intellectual‑property rights.” The notice warns that such access contributes to criminal activity and may jeopardize the user’s security, data, and devices. The action illustrates an administrative approach to enforcing intellectual‑property enforcement online, bypassing court involvement and applying nationwide DNS or ISP-level blocks.</p>
+          </div>
+          <a href="https://reclaimthenet.org/spain-blocks-archive-today-and-mirrors" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong frustration with governmental and ISP restrictions that block access to archival services and other online content, especially during events like soccer matches, viewing such measures as infringements on a basic right to information. Critics denounce copyright enforcement that hampers large‑scale data collection for AI, labeling it counterproductive and politically motivated. There is widespread support for preserving web history through services like archive.today, with calls for technical workarounds such as VPNs or proxies, while also questioning the role of authorities and private interests in shaping internet accessibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49772961" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
