@@ -1,0 +1,566 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nathan.rs/posts/gzip-lm/" target="_blank">Can gzip be a language model?</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by networked • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post demonstrates that gzip’s DEFLATE compressor can function as a non‑neural language model by exploiting the compression‑prediction equivalence: a compressor implicitly assigns probabilities p to symbols, with required bits = ‑log₂p. DEFLATE keeps a 32 KiB sliding window and encodes repeated byte sequences as cheap back‑references; thus a continuation that matches recent context yields a short compressed length. Scoring candidates uses len(gzip(context + candidate)), where lower length indicates a higher‑probability continuation. Simple greedy byte selection fails because gzip reports only integer byte lengths, causing many ties. The author therefore applies beam search: starting from a prompt, repeatedly extend each of the top‑k partial continuations with every byte that appears in the training corpus, score each extension by compressed length, prune back to the beam width, and repeat for a fixed horizon. Only the most recent tail bytes remain in the scoring window to prevent degenerate verbatim loops. The method is implemented in pure Python with the standard zlib library; source code is on GitHub.</p>
+          </div>
+          <a href="https://nathan.rs/posts/gzip-lm/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely critique the idea of equating large language models with traditional compressors like gzip, emphasizing fundamental differences in speed, scope, and architecture. Participants note that while there is a conceptual link between prediction and compression, LLMs operate over vastly larger narrative spaces and require attention mechanisms absent in simple compressors. Skepticism is expressed about the validity of using beam search to approximate optimal compression, and curiosity about potential classifier applications is mentioned, but overall the tone is analytical and doubtful of direct comparisons.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49797323" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mimo.xiaomi.com/mimo-v2-6" target="_blank">MiMo v2.6</a>
+        </h2>
+        <span class="article-meta">
+          874 points • by volf_ • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided to summarize.</p>
+          </div>
+          <a href="https://mimo.xiaomi.com/mimo-v2-6" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong appreciation for the model’s transparent training process, detailed reporting and competitive pricing, with many users noting its solid performance relative to other frontier models and its suitability for cost‑sensitive applications. Recurrent themes include comparisons of benchmark results, interest in open‑weight releases, and practical concerns such as token efficiency, API stability, hosting options, and long‑term degradation. Skepticism appears around benchmark methodologies, the significance of “frontier” labeling, and the broader strategic implications of rapid advancements by Chinese labs, especially regarding safety and market dynamics. Overall sentiment is cautiously optimistic yet critical of certain implementation details.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49792730" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://brand.io/article/spymarks/" target="_blank">Spymarks, Not Watermarks</a>
+        </h2>
+        <span class="article-meta">
+          395 points • by possibilistic • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Spymarks are covert signals embedded in digital media that enable persistent, user‑level tracking without the creator’s knowledge or consent. Unlike traditional watermarks—visible marks used for authenticity or ownership—spymarks are invisible, often inserted in the frequency or time domains of images, audio, video, or text. Google’s SynthID embeds up to a 136‑bit payload (e.g., a 64‑bit database ID) in a 512×512 image; similar techniques exist for audio (e.g., Timbre, AudioSeal, WavMark) and text (statistical word‑choice patterns). These signals survive common transformations such as compression, re‑encoding, and metadata stripping, making them robust to standard file edits. Early examples include printer‑tracking dots from the 1980s. Companies claim spymarks aid AI‑generated content detection, but they also allow reconstruction of content propagation and linking of media to personal identifiers (name, IP, address, political affiliation, etc.). Open‑source tools (e.g., audiowmark) can hide 128‑bit payloads protected by AES keys. The term “spymark” emphasizes the privacy risk inherent in such hidden metadata.</p>
+          </div>
+          <a href="https://brand.io/article/spymarks/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments recognize spymarks as a form of invisible watermarking similar to steganography, highlighting both potential benefits such as provenance verification and advertising attribution and significant privacy risks from pervasive tracking by platforms and devices. Users express skepticism about the durability of the technique, the possibility of circumvention, and the ethical implications of covert identification, especially for whistle‑blowers. There is a recurring call for transparent, open‑source implementations and concern that widespread adoption could erode analog loopholes and increase surveillance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49794615" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://alicegg.tech/2026/09/21/attention" target="_blank">Attention is all you have</a>
+        </h2>
+        <span class="article-meta">
+          782 points • by zer0tonin • 61 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article uses the Tetris effect—a psychological phenomenon where prolonged focus on a task leads to recurring mental imagery—to illustrate how sustained attention shapes cognition. It argues that modern digital platforms increasingly hijack user attention through recommendation algorithms on services like YouTube, Spotify, LinkedIn, and Reddit, directing content consumption and embedding advertisements or biased material. The author contrasts this with earlier internet usage, when users manually selected sites via bookmarks and engaged with niche blogs, RSS feeds, and tutorials, limiting exposure to unwanted or extremist content. Although problematic sites still existed, access required deliberate effort. The piece suggests reclaiming an “intentional internet” by consciously choosing slower, less algorithm-driven sources, emphasizing that consistent, purposeful engagement can rewire attention patterns and restore autonomy over information intake.</p>
+          </div>
+          <a href="https://alicegg.tech/2026/09/21/attention" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments coalesce around a critique of modern, algorithm‑driven platforms that prioritize engagement over user intent, leading to pervasive doom‑scrolling, attention hijacking, and an overload of personalized but shallow content. Many express nostalgia for earlier web experiences with manual bookmarking and intentional browsing, while advocating tools such as RSS feeds, ad blockers, and self‑control apps to reclaim focus. Some acknowledge occasional benefits of recommendation engines for discovery, yet the dominant view favors deliberate, distraction‑free habits, offline reading, and structured planning to mitigate the mental toll of pervasive digital feeds.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49787726" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://poloclub.github.io/transformer-explainer/" target="_blank">Transformers Explained Visually</a>
+        </h2>
+        <span class="article-meta">
+          383 points • by aray07 • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Transformer models use self‑attention to predict the next token in a sequence. Core components are:  </p>
+<ul>
+<li><strong>Embedding</strong>: Input text is tokenized (≈50 k tokens for GPT‑2 small), each token mapped to a 768‑dimensional vector; positional encodings are learned and added to form the final embedding.  </li>
+<li><strong>Transformer Block</strong> (12 stacked in GPT‑2 small): includes multi‑head self‑attention (12 heads) and an MLP. Queries, Keys, Values are computed by linear projections of embeddings; attention scores are scaled, masked to prevent future‑token access, softmaxed, and combined with Values. Head outputs are concatenated and linearly projected. The MLP expands dimensions from 768 to 3072, applies GELU, then reduces back to 768.  </li>
+<li><strong>Output Layer</strong>: A final linear projection yields logits for each of the 50 257 vocabulary tokens; softmax converts logits to probabilities. Sampling uses temperature scaling and optional top‑k or top‑p filtering to balance determinism and diversity.  </li>
+</ul>
+<p>Auxiliary features—layer normalization (pre‑attention and pre‑MLP), dropout (training regularization), and residual connections (gradient flow)—stabilize training. The explainer runs a GPT‑2 small model in‑browser via ONNX Runtime, with a Svelte/D3.js UI for interactive inspection of embeddings, attention maps, and sampling parameters.</p>
+          </div>
+          <a href="https://poloclub.github.io/transformer-explainer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are largely positive, noting that the visualization’s clear graphics and interactive design aid understanding of attention mechanisms and LLMs, especially for newcomers. Several contributors appreciate the UI and find it helpful for learning core concepts, while others suggest enhancements such as foregrounding Q/K/V weight details, updating temperature and dropout explanations, and reflecting more current model features beyond GPT‑2. Technical curiosity about the purpose of separate key, query, and value matrices is expressed, and a few humorous remarks appear, but overall the feedback combines praise with targeted improvement ideas.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49792342" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bcantrill.dtrace.org/2026/09/20/what-sun-got-wrong/" target="_blank">What Sun got wrong</a>
+        </h2>
+        <span class="article-meta">
+          579 points • by chmaynard • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post reflects on Sun Microsystems’ shortcomings, using a 2005 incident where a startup running on OpenSolaris sought to purchase Sun hardware but received no sales response—or was offered the wrong product—while Dell quickly provided dedicated account support. The author argues Sun became disengaged from the practical mechanics of running a business, leading to operational failures despite strong strategic vision. This neglect contributed to Sun’s decline and eventual demise. The piece also notes Oxide’s homage shirts celebrating past computer companies, emphasizing that studying both their successes and failures offers inspiration and caution for current firms.</p>
+          </div>
+          <a href="https://bcantrill.dtrace.org/2026/09/20/what-sun-got-wrong/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a mixed view of Sun Microsystems, combining nostalgia for its pioneering engineering—Solaris, ZFS, SPARC hardware, and influential developers—with criticism of repeated strategic missteps. Recurrent themes include failed product decisions (cancelling Solaris on x86, under‑investing in Linux, the MySQL acquisition), internal political infighting, an unclear identity between hardware and software, and a sales approach that lagged behind rivals like Dell. Many attribute Sun’s decline to these business and market‑alignment failures despite its technical excellence, while some still admire its lasting technological contributions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49787436" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://artificialanalysis.ai/models/mimo-v2-6-pro" target="_blank">MiMo-v2.6-Pro: Intelligence, Performance and Price Analysis</a>
+        </h2>
+        <span class="article-meta">
+          48 points • by theanonymousone • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>MiMo‑V2.6‑Pro is an open‑weight multimodal model supporting text, image, speech, and video inputs and producing text output, with a 1 million‑token context window. It ranks 46 on the Artificial Analysis Intelligence Index, well above the median score of 18 for comparable models, and generated 140 million tokens during evaluation, a volume described as somewhat verbose relative to the median of 140 million. The model processes 125 tokens per second, giving it a speed rating of 75, which is considered notably fast. Pricing is $0.43 per 1 M input tokens (median $0.30) and $0.87 per 1 M output tokens (median $1.13), resulting in a total evaluation cost of $206.66. The analysis also references an image with alt text “Xiaomi logo,” which is not directly related to model performance.</p>
+          </div>
+          <a href="https://artificialanalysis.ai/models/mimo-v2-6-pro" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary expresses dissatisfaction with recent OpenAI usage reductions and a perceived decline in model intelligence, prompting a shift toward Chinese alternatives despite longer response times. It highlights inconsistencies in ranking metrics, noting that MiMo‑V2.6 Pro scores higher than DeepSeek‑V4.1 despite comparable capabilities, and points out benchmark results where MiMo trails leading models in speed but offers competitive pricing. The author also questions the exclusion of the SOL model from comparative evaluations. Overall, the tone is critical of current offerings and analytical about performance and cost factors.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49796660" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.colinbreck.com/i-dont-want-to-read-what-you-didnt-write/" target="_blank">I don&#39;t want to read what you didn&#39;t write</a>
+        </h2>
+        <span class="article-meta">
+          647 points • by mooreds • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The author criticizes the proliferation of AI‑generated design docs, pull‑request summaries, tickets, and meeting notes, describing them as overly detailed, context‑free, and exhausting to read.  </li>
+<li>Survey data cited (Cynthia Dunlop) shows 78 % of readers stop reading when they detect AI involvement and 71 % avoid the author, while 98 % prefer the original human voice.  </li>
+<li>Personal experience writing an academic paper demonstrates AI’s usefulness when the user supplies full context (journal style, LaTeX template, source code, logs, metrics). The AI assisted with verification, citation formatting, grammar, diagram generation, and abstract writing, but not with author‑driven prose.  </li>
+<li>The essay notes that current LLMs lack a mental model of specific readers, limiting empathy and creativity; improvement may come from standards such as ASD‑STE100 for clear technical documentation and detection tools like Pangram.  </li>
+<li>The author argues that authentic, intentional writing preserves narrative nuance, uncertainty, and personal perspective, which AI summarization cannot capture, and warns that overreliance on AI may diminish deep understanding and attention to detail.</li>
+</ul>
+          </div>
+          <a href="https://blog.colinbreck.com/i-dont-want-to-read-what-you-didnt-write/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view of AI‑generated writing. Many express frustration that LLM output often adds excessive, impersonal prose that obscures key information and feels like “slop,” making documents harder to read and prompting a preference for concise, human‑authored text. Others acknowledge that, when carefully prompted and iterated, AI can help structure ideas, improve readability, and assist users lacking confidence in writing. There is a recurring call for clear professional norms that limit AI use to polishing or outlining rather than replacing authentic voice. Overall sentiment leans toward cautious skepticism tempered by occasional appreciation of AI as a supporting tool.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49794330" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://linear.app/now/ci-bottleneck-reworked" target="_blank">AI coding has made CI a bottleneck, so we reworked ours to keep up</a>
+        </h2>
+        <span class="article-meta">
+          228 points • by julian_digital • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Linear reduced CI bottlenecks by redesigning infrastructure, tooling, and workflow logic. Key actions included: moving from GitHub Actions to third‑party runners with faster CPUs and better caching, cutting average job time 34% (up to 52% for ts‑c); replacing the TypeScript compiler with tsgo, slashing tsc‑check median by 73%; rewriting lint rules to operate on AST only, dropping TypeScript from ESLint and cutting lint time 55–68% while lowering memory use; tightening change‑detection jobs by shallow, sparse checkouts, lowering their median from 26 s to 8 s. They built a resilient checkout action with retries and low‑speed aborts, and moved non‑critical cache writes off the critical path, saving ~42 s per PR. Setup overhead was cut by pre‑installing shared deps in a custom CI image, limiting pnpm installs to needed packages, and abandoning slow node_modules caches—overall shard setup fell ~44% (110 s→67 s). Test execution improved via finer Vitest sharding (4→8 shards), file‑size balancing, and shared module state (isolate:false), yielding ~17% monthly runner‑minute savings and reducing the slowest shard from ~5.25 min to ~4.33 min. Combined, PR wait time dropped from &gt;6 min to ~5 min and runner time per test halved despite a quadrupling test suite.</p>
+          </div>
+          <a href="https://linear.app/now/ci-bottleneck-reworked" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a growing frustration with CI/CD latency and the expanding volume of tests that often add little value, especially when AI‑generated tests are seen as low‑quality. Many highlight self‑hosted or third‑party runners, stronger caching, and tools like Bazel as effective ways to cut costs and improve speed. There is a recurring call to redesign pipelines—integrating builds and tests, tightening contracts between services, and limiting CI to tasks impossible to run locally. Overall, sentiment is critical of current inefficiencies but hopeful that architectural and tooling changes can restore productivity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49792067" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lwn.net/SubscriberLink/1094575/2385e98583715c2b/" target="_blank">Looking forward to Git 2.56 – and 3.0</a>
+        </h2>
+        <span class="article-meta">
+          117 points • by chmaynard • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Git 2.56 introduces over 700 non‑merge commits, adding minor usability and performance tweaks without altering core workflows. Notable changes include an experimental <code>git history drop</code> subcommand for removing a commit (blocked by merges), enhanced <code>git status</code> suggestions, expanded low‑level <code>git refs</code> operations (create, delete, update, rename), a <code>--delete-merged</code> option for <code>git branch</code>, better error messaging when deleting branches used for bisection, retry logic for config‑file locks, and <code>git add --resolved</code> to stage only resolved conflict files. The release also contains numerous bug fixes and refactorings.</p>
+<p>Discussion about the next release centers on whether to move directly to Git 3.0. Key 3.0 changes under consideration are:</p>
+<ul>
+<li>Default use of SHA‑256 hashes instead of SHA‑1, improving security but requiring support from hosting services (GitLab and Forgejo already have it; GitHub’s status is pending).</li>
+<li>Enforcing lower‑case object IDs to avoid ambiguity.</li>
+<li>Switching the default ref storage to the binary “reftable” format for better scalability (already optional since Git 2.45).</li>
+<li>Making Rust a required build dependency.</li>
+</ul>
+<p>GitHub, libgit2, and other ecosystem tools are preparing for these transitions. The maintainer, Junio Hamano, has not yet announced the final decision, but community sentiment leans toward labeling the next release as 3.0.</p>
+          </div>
+          <a href="https://lwn.net/SubscriberLink/1094575/2385e98583715c2b/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed sentiment, combining frustration with current limitations and enthusiasm for proposed improvements. Users criticize the absence of native change‑ID support, GitHub’s slow adoption of SHA‑256 and related updates, and perceived forced adoption of Rust, while also questioning broader moves toward database‑style storage. Positive reactions appear for ideas such as a built‑in “git add --resolved” command and the potential benefits of reftable‑based repositories. Overall the discussion highlights demand for stronger tooling, faster feature integration, and caution toward forced technology changes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49794736" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
