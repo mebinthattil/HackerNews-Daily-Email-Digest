@@ -1,0 +1,550 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 23, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nobodywho.ai/posts/jev-in-25-lines/" target="_blank">Jev in 25 Lines of Python</a>
+        </h2>
+        <span class="article-meta">
+          56 points • by bashbjorn • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post demonstrates a minimal “Jev” implementation using the Llama‑CPP Python bindings. It loads the Qwen 3‑0.6B GGUF model (<code>Qwen/Qwen3-0.6B‑GGUF</code>, file <code>Qwen3-0.6B‑Q8_0.gguf</code>) with a 512‑token context, enabling <code>logits_all</code>. A prompt is constructed that presents an email snippet and three labeled choices (“A. Legitimate”, “B. Spam”, “C. Phishing”). The model is evaluated on the tokenized prompt, and the final token logits are extracted. Logits for the label tokens are gathered, transformed into log‑probabilities via <code>logaddexp</code>, and exponentiated to obtain class probabilities. The script prints logits, log‑probabilities, and probabilities rounded to three decimals. The author emphasizes that this approach performs local, fast classification without transmitting data, and references more complete open‑source Jev projects (OpenJev, openjev‑sglang, OpenJev on DiffusionGemma). The post is a parody, published Sep 22 2026.</p>
+          </div>
+          <a href="https://www.nobodywho.ai/posts/jev-in-25-lines/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion critiques relying on raw token log‑probabilities with chat models, noting that prose‑oriented training can dilute choice probabilities and cause unwanted drift. It recommends using clearly defined system prompts and structured multi‑token outputs to improve reliability, and suggests routing different prompt types to specialized models. Concerns are raised about missing latency, compute, and error‑rate comparisons, especially relative speed claims versus existing solutions, and a demand for concrete benchmarks, low‑latency performance, and robust parsing is expressed. Overall, the tone is skeptical yet constructive, emphasizing practical improvements and measurement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49812769" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank">GPT-6 Sol and Luna</a>
+        </h2>
+        <span class="article-meta">
+          1510 points • by OfficialTurkey • 125 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight strong approval of the 50 % price reduction for GPT‑6 Luna and Sol, with many users noting the cheaper cost as a primary benefit and seeing Luna as a practical upgrade over its 5.6 predecessor. Opinions are split on performance: several users report comparable or improved results for Sol, while others observe a modest decline for Luna and worry about possible model “nerfing.” Comparisons with Anthropic’s offerings emphasize OpenAI’s perceived transparency and cost‑effectiveness, yet some developers still favor Claude for specific tasks such as UI design. Overall, the community values affordability and reliability but remains cautious about trade‑offs in capability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49805509" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/claude-opus-5-5" target="_blank">Claude Opus 5.5</a>
+        </h2>
+        <span class="article-meta">
+          1517 points • by km144 • 175 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Claude Opus 5.5 is the first model in Anthropic’s Claude 5.5 family, matching Claude Fable 5.1 on most tasks while costing ~40 % less than Opus 5. External evaluators (Frontier Design, METR) and Anthropic’s automated behavioral audit rate it as the strongest‑performing and safest model to date, with reduced prompt‑injection susceptibility and broader alignment testing (longer, impossible, real‑incident scenarios).  </p>
+<p><strong>Performance</strong> – major gains in agentic coding, computer use, and knowledge work; e.g., a 680 k‑line code migration completed in &lt; 1 day, 39/40 web‑app load‑time reductions, and higher graphics polish in game generation. Benchmarks (Terminal‑Bench 4.0, AutomationBench, GDPval‑AA v2.1) show Opus 5.5 leading Claude models and outperforming GPT‑6 Astra at ~20‑40 % of the cost per task.  </p>
+<p><strong>Cost &amp; Speed</strong> – default token pricing $4 M input / $20 M output (20 % lower than Opus 5); cache reads $0.20 M (60 % lower). Output generation &gt; 30 % faster; fast mode up to 2.5× speed at $8 M input / $40 M output.  </p>
+<p><strong>Safety</strong> – production safeguards enabled, classifier screens actions, open‑source sandbox, robust code‑review checks; ties Fable 5.1 for lowest prompt‑injection success rate (Gray Swan benchmark).  </p>
+<p><strong>Applications</strong> – available to vetted life‑science and cybersecurity programs; upcoming Claude Sonnet 5.5 and Claude Haiku 5.5 will share similar improvements.</p>
+          </div>
+          <a href="https://www.anthropic.com/claude-opus-5-5" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to Claude Opus 5.5. Many users note the lower token pricing, faster generation and a clearer, less verbose communication style, citing improved coding and agentic tasks. Others criticize the frequent model releases, price‑driven feature cycles and new safety filters that hinder certain workflows. Some prefer alternative models such as Astra, DeepSeek or Chinese offerings, while a few express frustration with UI and subscription handling. Overall sentiment balances appreciation for performance and cost gains with skepticism about product strategy and restrictions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49803892" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://waymo.com/blog/2026/09/transit-rewards/" target="_blank">Transit rewards</a>
+        </h2>
+        <span class="article-meta">
+          127 points • by raybb • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Waymo is launching a transit rewards program in the San Francisco Bay Area, with plans to expand to additional cities. Riders who link a Visa card in the Waymo app and take a Waymo trip and a public‑transit trip within two hours will receive $2.85 in Waymo Cash—the approximate cost of a San Francisco bus fare. The incentive applies to all 27 Bay‑Area transit agencies that accept contactless Visa tap‑to‑pay. Waymo will also lease 40 dedicated parking spaces at Caltrain stations to facilitate vehicle staging for transit users. The rollout begins with employee access before opening to the public. Waymo cites surveys indicating that more than half of its riders in San Francisco, Los Angeles, and Phoenix combine rides with public transit, and positions the program as a complement to existing regional transfer discounts and tap‑to‑pay models. The company plans to replicate the model with other agencies to broaden all‑electric, multimodal mobility options.</p>
+          </div>
+          <a href="https://waymo.com/blog/2026/09/transit-rewards/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express frustration with fragmented transit options and the limited scope of Waymo’s incentive, noting that requiring a Visa card excludes many riders who rely on transit passes. Users question the program’s motives, viewing it as a marketing or competitive tactic rather than a genuine effort to improve mobility, and criticize the lack of broader integration with existing payment systems. There is a strong desire for a seamless, door‑to‑door solution and greater investment in reliable, publicly funded transit infrastructure, which many feel remains under‑prioritized.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49811065" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cryptocellar.org/bgac/the-mvueh-break.html" target="_blank">OpenAI GPT–6 Astra breaks Enigma message that has resisted solution since 2005</a>
+        </h2>
+        <span class="article-meta">
+          652 points • by sohkamyung • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>On 15 Sep 2026 Carter Leffer obtained validation that OpenAI’s GPT‑6 Astra independently broke the German Army Enigma message MVUEH (Nr. 172, 10 Jul 1941), a ciphertext unsolved since 2005. The AI identified the message as the most promising unbroken entry on the Crypto Cellar Research site, suspected a relation to the previously solved message SIPVX (Nr. 173), and used the repeated place name “ROSENOW ROSENOW” as a crib. After developing Python and C++ Enigma simulators and a Bombe, GPT‑6 derived a key with wheel order 253 (instead of the day’s 512), a left‑hand wheel turnover at the 72nd letter, and distinct plugboard and ring settings. The recovered plaintext matches SIPVX except for a twelve‑letter length difference caused by a transcription error (“Bitte” → “Btte”) and a duplicated signature. GPT‑6 also referenced Bundesarchiv radio‑message volumes (RS 3‑3/20a, RS 3‑3/63b) despite their absence from public archives. The break illustrates AI‑driven cryptanalysis achieving in days what previously required weeks or months of manual research.</p>
+          </div>
+          <a href="https://www.cryptocellar.org/bgac/the-mvueh-break.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reactions to the AI‑driven Enigma decryption. Several participants acknowledge the successful plaintext recovery and view it as a notable illustration of large‑language‑model assistance in cryptanalysis. Others question the novelty, suggesting the result likely stemmed from existing simulators, training data, or straightforward prompting rather than a breakthrough, and they debate the extent of human versus model contribution. The discussion also revisits historical Enigma‑breaking credit, expresses curiosity about applying similar methods to other unsolved codes, and raises broader concerns about hype, transparency, and the limits of current AI capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49801324" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.usenix.org/publications/loginonline/data-only-attacks-are-easier-you-think" target="_blank">Data-only attacks are easier than you think (2024)</a>
+        </h2>
+        <span class="article-meta">
+          48 points • by segfaultbuserr • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.usenix.org/publications/loginonline/data-only-attacks-are-easier-you-think" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments acknowledge that data‑only attacks are relatively easy to detect with existing static analysis and fuzzing, while emphasizing that abuse of legitimate business logic, such as e‑commerce refund manipulation, presents a more serious and harder‑to‑detect threat. Several remarks highlight the relevance of resources like GTFOBins and advocate better taint‑analysis tooling with improved user interfaces to reduce over‑tainting. There is surprise that a recent tool avoids LLM integration, coupled with a broader criticism that research quality has declined since LLMs became commonly used.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49811429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.404media.co/we-hacked-the-fbi-hackers-say-they-have-data-on-all-fbi-employees/" target="_blank">&#39;We hacked the FBI:&#39; Hackers say they have data on all FBI employees</a>
+        </h2>
+        <span class="article-meta">
+          591 points • by spenvo • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hackers claim to possess a comprehensive database of FBI personnel, asserting that they have personal information on every employee. A disclosed sample of 5,000 records, obtained by 404 Media, lists names, residential addresses, telephone numbers, and spousal details for alleged agents. The release is framed as evidence of a large‑scale breach of FBI staff data. Accompanying the claim are multiple image placeholders covering unrelated topics such as Roblox hijacking, a16z‑backed phone farms, smart‑toothbrush botnets, AI‑generated calls, and AI‑training controversies, but no additional substantive information about the purported FBI data leak. No technical specifics about the breach method, source, or verification are provided.</p>
+          </div>
+          <a href="https://www.404media.co/we-hacked-the-fbi-hackers-say-they-have-data-on-all-fbi-employees/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments coalesce around deep skepticism toward the security of large government databases, emphasizing that breaches like the recent PeopleSoft compromise expose systemic weaknesses and highlight reliance on vulnerable vendor software. The consensus criticizes governmental incompetence, hiring practices, and inadequate investment in cyber‑defense, while noting that paper or non‑collection remains the only truly safe option. Observers also question the motives and credibility of the hacker group, mock media hype, and speculate on AI’s role, but overall the tone is cynical and calls for stronger, more accountable security measures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49805278" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/hsfzxjy/npunlock" target="_blank">Show HN: Npunlock – Run custom C kernels for Intel NPUs</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by hsfzxjy • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>npunlock is a Windows‑only toolchain that enables custom C kernels to run on Intel Core Ultra NPUs (Meteor Lake / NPU3720). It bridges the gap between user‑written C code and Intel’s ACT‑SHAVE processors, allowing these kernels to be embedded in standard NPU graphs compiled with Intel’s driver. The project supplies header files (e.g., npunlock/npu3720_kernel.h) and uses the MoviTools MVC_DEPEND toolchain for compilation; the required binaries (npunlock.dll, npunlock_worker.exe) are packaged with the Python module. Example code demonstrates a full‑precision (FP32) GELU implementation, comparing NPU output against NumPy and reporting maximum absolute error. Supported features include static‑shape FP16 unary and binary kernels, mixed‑precision graphs with independent FP32‑unary and FP16‑binary branches, and reusable NumPy‑compatible buffers via Python, CLI, or native C APIs. Limitations: Windows x64, Meteor Lake/NPU3720, static shapes, known tensor layouts, and no OpenVINO runtime required. Linux ports and newer NPU generations are untested but encouraged for community contributions.</p>
+          </div>
+          <a href="https://github.com/hsfzxjy/npunlock" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses a neutral, inquisitive tone, asking for clarification on the purpose and practical applications of the content. It does not convey strong positive or negative sentiment, merely seeks information about usefulness, and reflects a straightforward request for explanation without any additional opinion or critique.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49800513" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://foxscript.org/" target="_blank">Microsoft killed FoxPro in 2007. Anyway, here&#39;s FoxPro revived</a>
+        </h2>
+        <span class="article-meta">
+          304 points • by boredjohnny • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>FoxDev Studio revives Visual FoxPro 10 as a 64‑bit environment that removes the 2 GB file‑size ceiling imposed by 32‑bit offsets. Tables larger than 2 GB remain readable, though they cannot be reopened in legacy VFP. The platform includes a Rust‑based compiler emitting WebAssembly bytecode and a matching interpreter; the editor validates code against this compiler, ensuring consistent syntax and runtime behavior. Execution runs in fibers that yield for external actions (e.g., MESSAGEBOX, READ EVENTS), preventing UI blocking. Forms are represented by a live object tree rendered directly by React, allowing granular updates (e.g., changing a label’s caption repaints only that control). Legacy 32‑bit .fll libraries are accessed via a small 32‑bit bridge process invoked by SET LIBRARY TO, while native 64‑bit DLLs can be called directly with DECLARE ... DLL. The system therefore supports both historic VFP libraries and modern 64‑bit extensions within a unified, high‑performance runtime.</p>
+          </div>
+          <a href="https://foxscript.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mix of nostalgia for Visual FoxPro’s simplicity and rapid development, recognition that sizable niche industries still rely on it, and criticism of its architectural limitations, especially security and multi‑user file‑based access. Many contributors describe successful migrations to client‑server or web stacks, while others argue that modern replacements often add unnecessary complexity and cost. There is consensus that legacy FoxPro applications persist because they work, but there is also a shared call for safer, scalable alternatives and open‑source tooling to facilitate transition.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49808023" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/xCuri0/ReBarUEFI" target="_blank">ReBarUEFI: Resizable BAR for almost any UEFI system</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by nateb2022 • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A UEFI DXE driver enables Resizable BAR (RBR) on systems lacking native support, improving GPU performance and required for optimal Intel Arc operation. The driver replaces the PreprocessController function of the PciHostBridgeResourceAllocationProtocol, reading a Resizable BAR size from the ReBarState NVRAM variable and applying it during PCI enumeration. Optional steps include enabling 4 GB decoding, disabling CSM, and applying BIOS patches for large BAR handling. The project provides scripts (buildffs.py, CMake‑based ReBarState) for building the driver on Windows or Linux, as well as UEFIPatch patches to lift 4 GB, 16 GB, and 64 GB BAR limits, prevent 64‑bit BAR downgrades, and expand MMIO space up to 512 GB on modern chipsets. Compatibility notes: it can work on PCIe Gen2 (e.g., i5‑2500K), Linux can resize BARs with 4 GB decoding or via DSDT patches and the kernel <code>pci=realloc</code> option; Windows requires BIOS modification. Unsupported BAR sizes may prevent boot, resolvable by clearing CMOS. Performance gains of up to ~12 % FPS were observed with a 2 GB BAR on an i5‑3470 + RX 580 system.</p>
+          </div>
+          <a href="https://github.com/xCuri0/ReBarUEFI" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights interest in enabling Resizable BAR to unlock full VRAM access and modest performance gains, particularly for gaming and GPU‑intensive tasks such as machine‑learning workloads. Users express frustration with restrictive BIOS options on older or vendor‑locked systems, noting that coreboot and custom firmware can add features like 4 GiB decoding, NVMe boot, and CPU microcode updates. There is curiosity about practical benefits, compatibility with specific hardware, and the feasibility of applying ReBAR modifications to both motherboards and graphics cards.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49781862" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
