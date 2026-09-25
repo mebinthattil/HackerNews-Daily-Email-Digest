@@ -1,0 +1,550 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.safateam.com/intelligence-hub/research/technical-articles/cve-2025-13032-entering-and-breaking-the-avast-antivirus-sandbox-part-2" target="_blank">CVE-2025-13032: Entering and Breaking the Avast Antivirus Sandbox Part 2</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by safateam • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CVE‑2025‑13032 is a double‑fetch flaw in Avast’s kernel driver that lets an attacker cause a paged‑pool overflow. The driver reads a user‑supplied _UNICODE_STRING twice: first to size a ExAllocatePoolWithTag allocation, then again for a memmove. By racing a second thread that flips the Length field between a safe value and a large one, the kernel allocates a small buffer but copies more data, overflowing into adjacent heap objects.</p>
+<p>The exploit sprays IORing objects, whose RegBuffers array resides in the same pool bucket. After freeing selected RegBuffers chunks, the overflowing allocation lands next to a live RegBuffers entry, overwriting one pointer to reference a user‑controlled fake _IOP_MC_BUFFER_ENTRY. This yields an arbitrary kernel read/write primitive: IoRingReadFile writes to the address in Address field (arbitrary write) and IoRingWriteFile reads from it (arbitrary read).</p>
+<p>Using the corrupted entry, the attacker reads the MDL created for the user buffer, extracts the <em>Process</em> field to leak their own <em>EPROCESS</em> address, and repairs the corrupted ProcessBilled field to avoid a BSOD. Finally, the token of the SYSTEM process is copied into the attacker’s <em>EPROCESS</em> token field, achieving full privilege escalation. The vulnerability has since been patched.</p>
+          </div>
+          <a href="https://www.safateam.com/intelligence-hub/research/technical-articles/cve-2025-13032-entering-and-breaking-the-avast-antivirus-sandbox-part-2" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall tone is critical of contemporary antivirus software, describing it as overly intrusive and counterproductive compared to its earlier, simpler signature‑scanning role. The comment argues that modern AV tools act like a sledgehammer, adding unnecessary complexity that creates more issues than it resolves. It promotes application whitelisting as a preferable strategy for runtime security, emphasizing minimal access and tighter control as a more effective protective measure.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49841115" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://f-droid.org/2026/09/24/f-droid-2.0-a-new-chapter-for-android-freedom.html" target="_blank">F-Droid 2.0</a>
+        </h2>
+        <span class="article-meta">
+          1219 points • by daveoc64 • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>F-Droid 2.0 is a complete redesign of the official F-Droid Android client, built with Kotlin and Jetpack Compose to align with modern Android standards and Material Design. The UI is reorganized into three primary sections—Discover, Search, and My Apps—while categories are expanded into finer‑grained, meta‑grouped listings (e.g., 17 game genres, specialized VPN, firewall, password‑manager categories). Search now indexes app names, descriptions, categories and translated text, with improved CJK support and query history. Powerful, combinable filters let users narrow results by category, device compatibility, or anti‑features. Update checks run automatically in the background; manual refresh is moved to an overflow menu. The installer leverages Android’s pre‑approval API for a smoother, near‑instant install flow on supported devices. Privacy tools retain Tor proxy support (now via TorVPN) and simplified “panic” masking (icon/name only). F-Droid Privileged Extension is unsupported; background updates rely on the session installer. The rewrite lowers contribution barriers by using current Android languages and tooling, and the project continues to seek testing, translation, code, and financial support.</p>
+          </div>
+          <a href="https://f-droid.org/2026/09/24/f-droid-2.0-a-new-chapter-for-android-freedom.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed reactions to F‑Droid’s recent redesign and 2.0 release: many appreciate the visual refresh, improved search, and background updating without the privileged extension, while others criticize the minimalist UI, missing visual cues, lack of ratings or reviews, and confusing update handling. Repeated concerns include repository sync speed, limited TV navigation, absence of category usefulness, and uncertainty about future Google restrictions. Users also discuss alternative stores, desire for a desktop client, and the balance between simplicity and advanced functionality. Overall sentiment is cautiously optimistic but highlights several usability and policy gaps.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49831968" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nyaa.sh/reviews/mac-mini-m6-emulation" target="_blank">Pentium II at 600Mhz with Voodoo 3 Emulated on 86Box with M6 Mac Mini</a>
+        </h2>
+        <span class="article-meta">
+          20 points • by hugh4life • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article evaluates retro PC emulation on Apple‑silicon Mac Minis using 86Box 6.0 (May 31 2026). 86Box emulates a Pentium II (Deschutes) system with 256 MiB RAM, Voodoo 3 VGA (16 MiB, 2 threads), and Windows 98 SE; performance is measured by maintaining 100 % emulation speed (no audio dropouts) while running Cinebench 2000 and 3DMark 2000 SE under Winamp audio playback.  </p>
+<p>Tests compare a 12‑core M6 (24 GiB) to a 10‑core M4 (16 GiB). The M6 sustains a stable 600 MHz emulated CPU clock (flat 100 % speed, no audio glitches), whereas the M4 caps at 500 MHz; the M4 begins to hitch at 550 MHz. Single‑thread performance is the limiting factor, as 86Box’s workload runs on two “super” cores, which on the M6 reach ~4.5–4.8 GHz with ~45 % utilization, leaving headroom.  </p>
+<p>Cinebench scores for the emulated Pentium II rise with clock (e.g., 9.28 CB at 600 MHz) and exceed period hardware results, reflecting emulator timing differences. The review concludes that the M6’s high‑speed cores make it a notably capable, low‑cost platform for accurate retro‑PC emulation.</p>
+          </div>
+          <a href="https://nyaa.sh/reviews/mac-mini-m6-emulation" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall enthusiasm for emulation, highlighting 86box’s accuracy and enjoyment in running legacy hardware and software, including custom operating‑system development for early‑era CPUs. Users note that the described specifications comfortably support classic games such as Need for Speed II, reinforcing the perception of sufficient performance. A light‑hearted remark underscores a nostalgic view of the emulation era, collectively portraying a positive and appreciative attitude toward retro computing experiences.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49841285" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bastardica.mitpit.com" target="_blank">Show HN: Make cursed fonts like Times New Bastard</a>
+        </h2>
+        <span class="article-meta">
+          681 points • by MitPitt • 61 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Bastardica is a standard OpenType font that employs a contextual substitution (“swap”) registered for every script, which browsers activate automatically. It functions wherever OpenType shaping occurs—browsers, design tools, and print—provided ligatures are not disabled. The font adds visual richness by applying Y‑offset and scaling adjustments to align glyphs precisely. When three or more fonts are combined, their glyphs intersect at regular intervals (e.g., a 5‑glyph and a 7‑glyph stride collide every 35th glyph); the first font in the sequence takes precedence, and the stride remains unchanged. Using prime‑number strides reduces such collisions. The text also lists common sources for free fonts, including Google Fonts, UNCUT, Velvetyne, Font Squirrel, FontSpace, and DaFont.</p>
+          </div>
+          <a href="https://bastardica.mitpit.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are largely playful and enthusiastic, celebrating the tool’s ability to remix and mash‑up font glyphs for jokes, artistic experiments, and custom designs, with many users expressing delight at creating odd or humorous hybrids such as “Papyrus + Comic Sans” or ransom‑note styles. A few note technical glitches on certain platforms and raise mild concerns about copyright or piracy perceptions, but overall the reaction is positive, highlighting creative potential, ease of use, and inspiration for further font‑related projects.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49823738" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/devdotfast/whiteboard" target="_blank">Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design</a>
+        </h2>
+        <span class="article-meta">
+          299 points • by sidharthkmenon • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Whiteboard is an MIT‑licensed, open‑source desktop application that lets developers and AI agents collaboratively design software on a shared canvas. It integrates with coding agents such as Claude Code, Codex, GPT‑6 Sol, and Claude Opus 5.5, providing an SDK for agents to draw and annotate directly in the app. Users download the app, connect an agent, and can ask the agent to review a branch against the main line, with results displayed on the canvas. Key features include clickable visualizations (sequence diagrams, ER diagrams, trace excerpts) that jump to underlying code, a Rust‑based, AST‑aware diff viewer that summarizes large additions and collapses tests/documentation, and a WASM‑based plugin system for customization. Agents can query and link their own execution traces for traceability. Limitations: files cannot be edited within Whiteboard, multi‑repo browsing is limited, and shared reviews do not auto‑update. Telemetry is anonymous and optional. The app is built on a vendored Code OSS (VS Code) base, with regular upstream security and feature updates. Contributions follow standard open‑source guidelines.</p>
+          </div>
+          <a href="https://github.com/devdotfast/whiteboard" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad enthusiasm for a visual, AI‑assisted architecture tool, praising its clean interface, semantic‑diff concept and potential to reduce cognitive load during design and review. Reviewers appreciate the integration with coding agents and see value for corporate adoption, but many raise practical concerns: lack of file editing, absence of Windows/Linux builds, ambiguity around calling it an IDE, risk of diagrams diverging from code, and uncertainty about pricing and feature roadmap. Comparisons to open‑source alternatives and suggestions for LSP support, dark mode and tighter toolchain integration also recur. Overall sentiment is optimistic yet cautious, seeking more functionality and platform coverage.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49833867" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dynomight.substack.com/p/liver" target="_blank">Why is the liver so weirdly regenerative?</a>
+        </h2>
+        <span class="article-meta">
+          400 points • by jbotz • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://dynomight.substack.com/p/liver" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express enthusiasm for biological complexity and regeneration, while offering corrections to oversimplified claims about cell turnover, neurogenesis, and organ cancer risk. Personal experiences with liver transplantation illustrate the organ’s regenerative ability and highlight clinical challenges. Several participants criticize teleological language and emphasize evolutionary trade‑offs, noting that many traits reflect limited selective pressure rather than optimal design. Overall the discussion balances admiration for physiological resilience with calls for more precise scientific framing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49832938" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://2dwillneverdie.com/" target="_blank">2DWillNeverDie</a>
+        </h2>
+        <span class="article-meta">
+          227 points • by surprisetalk • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://2dwillneverdie.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments largely emphasize a nostalgic appreciation for 2D pixel art, noting its timeless visual quality and emotional resonance compared to early 3D graphics. Many point out practical advantages of using 3D tools to generate 2D sprites, especially for animation efficiency in modern game production. There is disappointment over the decline of traditional 2D techniques in major studios, while recognizing indie efforts that sustain the style. Additional observations mention the interactive design of the referenced site, its retro aesthetic, and occasional humor or irrelevant dead entries.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49801436" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://linebender.org/blog/fearless-simd-1-0/" target="_blank">Fearless SIMD v1.0</a>
+        </h2>
+        <span class="article-meta">
+          257 points • by verdagon • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Fearless SIMD v1.0 releases after eight years of development, offering a Rust crate that combines autovectorization, multiversioning, portable SIMD abstractions, and direct intrinsic access without requiring unsafe code. Performance‑focused features include precise and fast variants for edge‑case‑sensitive operations, native‑vector‑size APIs, fixed‑size vectors, and upstream contributions to Rust and LLVM; developers can drop to platform intrinsics when needed with zero overhead. Safety is achieved by the <code>kernel!</code> macro (leveraging target‑feature v1.1) to invoke intrinsics safely and a minimal, audited transmute module for load/store operations, ensuring memory safety across the codebase. Ergonomic improvements come from the <code>#[simd]</code> procedural macro (part of <code>fearless_simd_macros</code> v0.1) that handles function multiversioning without manual <code>#[inline]</code> annotations, while preserving backward compatibility for non‑macro usage. The crate commits to three years of security updates and anticipates support for future Rust features (e.g., <code>f16</code>) and hardware extensions (SVE, RISC‑V vectors) without breaking the API. Although std::simd may eventually overlap, Fearless SIMD will remain relevant as an ecosystem complement. It is already a direct dependency of 30 crates and indirectly used by over a thousand, indicating growing adoption.</p>
+          </div>
+          <a href="https://linebender.org/blog/fearless-simd-1-0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses strong approval of Fearless SIMD, highlighting how it enabled stable‑Rust crates like PhastFT and memchr‑n to achieve competitive or superior performance without nightly features. Contributors note that the crate’s development has spurred ecosystem improvements, though they also point out gaps in functionality that motivate further work. Several participants inquire about extending compiler interprocedural analysis for custom numeric properties, compare the library to alternatives such as Highway, ISPC, and earlier Rust SIMD attempts, and suggest additional features like f16 support. Overall sentiment is supportive and forward‑looking.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49800085" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=vDjW_dRyKXY" target="_blank">Rails World 2026 Opening Keynote [video]</a>
+        </h2>
+        <span class="article-meta">
+          331 points • by an0malous • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The extracted page consists of a typical YouTube footer containing navigation links: “About”, “Press”, “Copyright”, “Contact us”, “Creators”, “Advertise”, “Developers”, “Terms”, “Privacy”, “Policy &amp; Safety”, “How YouTube works”, “Test new features”, and “NFL Sunday Ticket”. It concludes with a copyright notice stating © 2026 Google LLC. These links provide access to corporate information, media relations, intellectual‑property statements, user support, resources for video creators, advertising programs, API documentation for developers, legal agreements, privacy controls, community safety guidelines, operational explanations of the platform, beta testing opportunities, and subscription details for the NFL Sunday Ticket service. No additional content or descriptive text is present.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=vDjW_dRyKXY" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed but thoughtful reaction to the keynote. Many appreciate the optimistic view that newer tools let developers revisit legacy architectures and explore performance gains, especially the Rust rewrite and agent‑driven coding. Others express skepticism about AI’s role, fearing job displacement, loss of architectural discipline, and questioning the relevance of Rails going forward. Critics also note DHH’s shifting tone and political remarks, while some defenders argue Rails still suits conventional CRUD projects and that high‑quality custom code will remain valuable. Overall, the discussion balances curiosity about emerging technologies with concern for the Rails ecosystem’s future.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49817680" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://electrek.co/2026/09/23/toyota-best-selling-corolla-electric/" target="_blank">Toyota is taking the Corolla electric</a>
+        </h2>
+        <span class="article-meta">
+          325 points • by cisc • 55 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Toyota is preparing an all‑electric version of its best‑selling Corolla, slated to debut as a 2028 model year (launch expected in 2027). The next‑gen Corolla will be built on a heavily modified TNGA‑C platform capable of supporting internal‑combustion, hybrid, plug‑in hybrid (PHEV) and battery‑electric (EV) powertrains. Planned body styles include sedan, hatchback, crossover and a GR variant. The hybrid will pair a new 1.5 L four‑cylinder engine with an electric motor for roughly 134 hp and 10‑20 % improved efficiency; an AWD hybrid may be offered. The PHEV will use a larger battery for extended electric range (specifics not disclosed). The Corolla EV will offer single‑ and dual‑motor layouts with a minimum 250‑mile range. Anticipated US pricing: gas model ≈ $25,000, hybrid ≈ $27,000, EV and PHEV around $30,000. Toyota CEO Koji Sato emphasized a design overhaul and universal appeal across all power sources.</p>
+          </div>
+          <a href="https://electrek.co/2026/09/23/toyota-best-selling-corolla-electric/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments coalesce around skepticism toward Toyota’s strategy of adapting an existing Corolla platform for an electric model, with many viewing the resulting design as overly complex, costly, and insufficiently dedicated compared with ground‑up EVs such as the bZ series. Viewers express a strong preference for a simple, affordable, Corolla‑sized BEV that retains analog simplicity and reliable hybrid traits, while questioning charging practicality, price gaps, and limited range. Praise is directed toward competitors’ more focused EV offerings, and overall sentiment remains doubtful that Toyota’s upcoming electric Corolla will meet mass‑market expectations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49823568" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
