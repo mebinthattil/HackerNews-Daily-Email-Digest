@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/" target="_blank">OpenAI Feared &#34;Optics&#34; of what might appear on Hacker News</a>
+        </h2>
+        <span class="article-meta">
+          113 points • by papergirl • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Authors Guild and a group of prominent writers have filed a class‑action suit against OpenAI and Microsoft, alleging that the companies trained their AI models on copyrighted books obtained from the LibGen repository without permission. Recent unsealed briefs cite internal communications showing executives were aware that such “mass piracy” was illegal and would displace human authors. Key points include:</p>
+<ul>
+<li>OpenAI policy director Jack Clark warned in 2020 that GPT development would increasingly substitute for writers and cause unemployment.  </li>
+<li>Former OpenAI researcher Tarun Gogineni described his goal of having GPT write the final two books of <em>Game of Thrones</em> and dismissed author complaints as “acceptable economic disruption.”  </li>
+<li>Microsoft learned of OpenAI’s LibGen use as early as April 2019 during a presentation to Bill Gates and CTO Kevin Scott.  </li>
+<li>Internal messages reveal concerns focused on “optics” rather than legal risk, and a “Project Clear” effort in mid‑2022 to delete LibGen files from OpenAI’s storage.</li>
+</ul>
+<p>The case is proceeding as multidistrict litigation in Manhattan, with a hearing anticipated in early 2027. The Authors Guild, representing over 18,000 writers, is leading the lawsuit.</p>
+          </div>
+          <a href="https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express skepticism toward the portrayal of OpenAI’s data practices as merely “sketchy,” arguing that the underlying material is largely copyrighted textbooks rather than public‑domain works. They downplay concerns that AI will cause significant job loss, viewing such warnings as hype, and note that technological disruption historically displaces workers. The discussion also critiques the legal strategy of the Authors Guild, suggesting the lawsuit is driven by optics rather than substantive impact, and portrays corporate executives as indifferent to public opinion on forums like Hacker News.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49863864" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.astralcodexten.com/p/does-georgism-work-five-years-later" target="_blank">Does Georgism work? Five years later</a>
+        </h2>
+        <span class="article-meta">
+          331 points • by silveraxe93 • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post revisits a 2021 review of Henry George’s <em>Progress and Poverty</em> and updates five‑year‑old arguments about land‑value tax (LVT). It notes rapid legislative momentum: Virginia and Kentucky passed LVT‑enablement laws in 2026, with pending bills in Washington, New York, Ohio, and international interest from the UK, South Korea, and Germany. The author argues that land remains a dominant source of wealth, especially in dense urban cores and in South Korea where land‑to‑GDP ratios exceed 500 %. Empirical work using open‑source tools (CivicMapper, LVTShift) shows most LVT gains accrue to median homeowners, while vacant land and surface parking lose value. Research on tax incidence confirms LVT is rarely passed to tenants except under pervasive rent control with special exemptions, as observed in Denmark. Assessment challenges are deemed manageable: modern appraisal systems can separate land from improvements, though accuracy varies. The piece emphasizes practical “scut work”—local lobbying, data‑driven models, and case‑study playbooks—as the primary driver of policy adoption.</p>
+          </div>
+          <a href="https://www.astralcodexten.com/p/does-georgism-work-five-years-later" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show broad interest in Georgism and land‑value taxation, with many praising its theoretical fairness and potential to curb rent‑seeking, stimulate efficient land use, and address housing affordability. Simultaneously, participants raise practical concerns: political resistance from property owners, implementation complexity, uncertainty about revenue sufficiency, possible unintended effects on development cycles, and the need for complementary tax reforms. Examples from New Zealand, the US, and Singapore illustrate both successes and failures, leading to a consensus that the idea is appealing but politically and administratively challenging to enact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49844657" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mitxela.com/projects/flipflip" target="_blank">Flip Fluid on Flip Dots</a>
+        </h2>
+        <span class="article-meta">
+          67 points • by blutack • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A FLIP fluid simulation was implemented on a 13×28 electromechanical flip‑dot panel for the EMF2026 installation. The author acquired surplus Hanover panels (2007) from “Look Mum No Computer”, noting the board overhang prevents seamless tiling and the original driver updates the whole matrix in ~1 s. Each dot flips in ~60 ms with a ≤1 ms polarity pulse; columns can be driven in two passes (high then low) to potentially achieve ~56 ms refresh if pulses are ~1 ms. High current (~0.7 A at 12 V, up to &gt;1 A for faster pulses) and simultaneous coil activation present power and thermal challenges. Desoldering dots proved impractical, so the solution uses inexpensive motor‑driver H‑bridge ICs (MX6208/BE6208/LK6208, SOIC‑8, 0.5 A continuous) mounted on a custom board that replaces column traces. Each 8‑bit shift register (74 595) drives four dots directly; by tying one H‑bridge input high, a single‑ended operation yields push‑pull output without extra diodes. Capacitor‑coupled half‑bridge alternatives were explored but rejected due to size, cost, and quiescent current of BJTs. The final PCB design incorporates 15.24 mm pitch flip‑dot footprints, keep‑outs for test pads, and uses KiCad despite its limited repetitive‑component workflow.</p>
+          </div>
+          <a href="https://mitxela.com/projects/flipflip" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion focuses on reviving an old flip‑dot display, highlighting a design that replaces capacitors with a negative supply rail to drive coil polarity using only two transistors and referencing Mitxela’s board that supports a high‑frame‑rate fluid simulation. Comments express strong appreciation for the craftsmanship, execution, and presentation, while also noting the extreme fragility of the tiny magnet wires and soft plastic, stressing that standard desoldering methods can easily damage the dots and require very careful handling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49854219" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reddit.com/r/worldnews/comments/1wr3id3/meta_blocks_president_lulas_facebook_page_and/" target="_blank">Meta Blocks President Lula&#39;s Facebook Page, Campaign Ads 2 Weeks from Election</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by rbanffy • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.reddit.com/r/worldnews/comments/1wr3id3/meta_blocks_president_lulas_facebook_page_and/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses distrust of Facebook, alleging that the platform manipulates elections and suppresses political speech, particularly targeting Brazilian candidates. It claims a double standard that favors established parties, accuses the company of bias toward certain politicians, and calls for broader restrictions on political content ahead of elections. The tone is critical and calls for banning or heavily regulating social media to protect national sovereignty and prevent perceived interference.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49864642" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antonz.org/go-concurrency-distilled/" target="_blank">Go Concurrency Distilled</a>
+        </h2>
+        <span class="article-meta">
+          215 points • by chmaynard • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The mini‑book “Go concurrency distilled” is a concise refresher on Go’s concurrency primitives, illustrated with runnable examples. It covers:</p>
+<ul>
+<li><strong>Goroutines</strong> – lightweight functions started with <code>go</code>, managed by the runtime, and synchronized with <code>sync.WaitGroup</code> (including a helper <code>WaitGroup.Go</code>).</li>
+<li><strong>Channels</strong> – synchronous communication (<code>ch &lt;- v</code> / <code>v := &lt;-ch</code>), with patterns for output channels, closing, iteration (<code>range</code>), directional types, buffered channels (<code>make(chan T, n)</code>), and nil channels.</li>
+<li><strong>Select</strong> – channel‑focused multiplexing that chooses ready cases, supports cancellation, non‑blocking sends, and default handling.</li>
+<li><strong>Pipelines</strong> – composition of stages where each step reads from an input channel and writes to an output channel; includes output, done, and cancel channels for signaling completion or early termination.</li>
+<li><strong>Error handling</strong> – strategies for propagating errors in pipelines: early return on first error, or wrapping results in a struct containing both value and error.</li>
+</ul>
+<p>Additional topics listed (time, context, wait groups, data races, mutexes, semaphores, atomics, testing, scheduling, diagnostics) indicate further coverage, though the excerpt focuses on the core concurrency mechanisms.</p>
+          </div>
+          <a href="https://antonz.org/go-concurrency-distilled/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong appreciation for Go’s concurrency model, describing it as powerful and distinctive compared to other languages, while also acknowledging that mastering channels, select statements, and proper error handling can be challenging and often requires consulting documentation. Several contributors note difficulty transitioning from Java thread paradigms and finding patterns for dynamic operation graphs, especially before generics. Resources on anti‑patterns and data‑race prevention are highlighted as useful. Overall, the consensus is that Go’s concurrency is among the best available, but achieving fluency demands practice and careful study.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49856988" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/InfinityLoop1308/PipePipe" target="_blank">PipePipe: NewPipe hard fork implementing SponsorBlock</a>
+        </h2>
+        <span class="article-meta">
+          410 points • by Qision • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>PipePipe is an open‑source Android application forked from NewPipe in early 2022, operating as an independent project that does not track NewPipe updates. It offers a re‑imagined YouTube client with numerous enhancements: SponsorBlock integration for skipping ads, ReturnYouTubeDislike restoration, original (non‑localized) titles, optional login for restricted or premium content, live‑chat overlay in danmaku style, AV1 and VP9 codec support, background music playback, advanced search filters, keyword/channel filters, Shorts and paid‑video blocking, swipe‑to‑seek and fullscreen gestures, long‑press speed control, sleep timer, batch playlist downloading, and searchable local playlists/history. Cookie handling is limited to playback stream retrieval when a login cookie is set. Development focuses on rapid issue resolution and frequent feature updates; contributions via issues and pull requests are welcomed, though service requests are not accepted. Community contributors include @Priveete for SABR support and AioiLight for NicoNico code. Funding options are listed on Liberapay and Ko‑fi.</p>
+          </div>
+          <a href="https://github.com/InfinityLoop1308/PipePipe" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express broad interest in open‑source YouTube front‑ends that reduce reliance on Google’s servers, improve privacy, and incorporate features such as SponsorBlock, video history syncing, and ad skipping. Users favor browser‑based solutions for minimal installation, though many note occasional playback instability, IP blocks, and limited support on certain devices (e.g., Apple TV, iOS). Funding and maintenance sustainability are recurring concerns, while several developers and forks (PipePipe, NewPipe, Morphe, Tubular) receive praise for responsiveness and added functionality. Overall sentiment is cautiously optimistic about alternatives despite technical and infrastructural challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49842764" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2609.22978" target="_blank">DeepSeek Elastic Compute (DSec)</a>
+        </h2>
+        <span class="article-meta">
+          238 points • by shenli3514 • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>DeepSeek Elastic Compute (DSec) is presented as a sandbox infrastructure designed to support large‑scale agentic training. The system emphasizes elasticity and sandboxing to manage compute resources efficiently while maintaining isolation for training agents. The accompanying figures reference external resources and affiliations—archive, BibSonomy, Reddit, Simons Foundation, and Schmidt Sciences—suggesting data sources, citation repositories, or institutional collaborators involved in the work. No additional methodological or experimental details are provided in the extracted text.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2609.22978" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the paper’s unusually large author list, interpreting it as a possible strategy to protect human talent from poaching, and noting the scale of the reported infrastructure—hundreds of thousands of concurrent sandboxes across thousands of CPU cores and hundreds of terabytes of memory. Contributors compare the system to similar efforts such as Google’s Ax, discuss workload variability and the need for elastic resource allocation, and express both admiration for the impressive figures and curiosity about security implications and how it positions DeepSeek relative to other AI labs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49859112" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.blog/engineering/architecture-optimization/improving-site-performance-by-shipping-more-css/" target="_blank">Improving site performance by shipping more CSS</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by torutofu • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Primer design system’s CSS‑in‑JS approach began causing performance regressions as component counts grew in 2023, leading to longer client‑side style initialization, slower server‑side rendering (SSR), and unwieldy style updates. The team replaced it with CSS Modules, authoring component‑scoped CSS files that compile into static stylesheets, eliminating runtime CSS processing. Migration proceeded incrementally: each component received a translated CSS Module file, was gated behind a feature flag, and verified against visual regression snapshots before gradual rollout. By Dec 2024 all Primer components used CSS Modules, achieving ≈55 % faster SSR and ≈25 % quicker component initialization. Subsequent work removed the “sx” prop and styled‑components across GitHub. A VS Code plugin and internal codemods migrated ~7,760 sx props (April 2025–May 2026), reducing them to zero by June 2026; SSR time improvements of 1–22 % were observed on affected pages. The final step decoupled theming from styled‑components, completing a full transition to 100 % CSS Modules by June 2026.</p>
+          </div>
+          <a href="https://github.blog/engineering/architecture-optimization/improving-site-performance-by-shipping-more-css/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on performance and maintainability concerns with the current CSS implementation, noting excessive network requests, large stylesheet sizes, and overly long generated class names. Contributors suggest adopting functional CSS, optimizing build output, and allowing CSS‑in‑JS to coexist with CSS modules without added runtime overhead. Additional criticisms target the repeated use of !important, missing documentation links, and occasional UI bugs, while a few remarks express admiration for the project's progress despite tooling challenges. Overall, the feedback calls for more efficient, well‑documented styling practices.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49856193" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/reladraw/reladraw" target="_blank">Show HN: Reladraw – A diagram language where you decide where to place things</a>
+        </h2>
+        <span class="article-meta">
+          299 points • by jpwalsh234 • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>reladraw is a lightweight, TypeScript‑based diagram description language that lets users specify relative positions of nodes instead of absolute coordinates. It bridges the gap between declarative tools such as Mermaid, Graphviz, or D2—which auto‑place elements—and manual editors like draw.io or Excalidraw, which require explicit placement. The syntax defines nodes (e.g., <code>node app "Web app"</code>) and edges with directional hints (<code>edge app.api -&gt; store "queries" from: right to: left</code>). Positions are expressed relative to other nodes (<code>below app.ui</code>, <code>right of app level with app</code>). The repository provides a CLI (<code>reladraw file.reladraw -o file.svg</code>) and npm installation (<code>npm install -g reladraw</code>). A skill package can be added to various coding agents via <code>npx skills add reladraw/reladraw</code>. Version 0.8.0 is an early release with a parser, layout engine, and SVG renderer that have no runtime dependencies. The project is Apache‑2.0 licensed (code only) and invites issues—especially diagrams that cannot yet be expressed—as contributions.</p>
+          </div>
+          <a href="https://github.com/reladraw/reladraw" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly positive, describing the tool as a timely solution that improves diagram creation by allowing relative positioning and reducing the need for manual layout tweaking. Users appreciate its potential for better human‑agent collaboration, see it as a complement or alternative to Mermaid, Graphviz, and TikZ, and express interest in integrating it into markdown, IDE extensions, and theme support. Repeated concerns include minor bugs (e.g., theme switching, curved arrows), documentation clarity, and the desire for stable releases, plugin ecosystems, and broader rendering back‑ends. Overall sentiment is supportive with constructive suggestions for refinement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49858513" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pikuma.com/blog/c-integer-sizes-not-a-mistake" target="_blank">C&#39;s Flexible Integer Sizes Were Not a Design Mistake</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by ibobev • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>C’s native integer types (char, short, int, long, long long) were intentionally sized to match each machine’s “natural” word, providing minimum guaranteed ranges rather than fixed widths. In the 1970s hardware varied widely—bytes could be 6‑9 bits, word sizes spanned 12‑64 bits, and signed representations included two’s‑complement, ones‑complement, and sign‑magnitude. Fixed‑size types would have forced costly multi‑instruction arithmetic on 16‑bit CPUs, extra masking on 36‑bit machines, and software emulation on non‑two’s‑complement hardware. The C standard codified this philosophy with  minimum ranges and, from C99,  optional exact‑width types (e.g., int8_t) plus required least/fast types (int_least32_t, int_fast32_t). Projects such as Lua demonstrate portable code that queries ranges (e.g., using UINT_MAX) and selects types accordingly, avoiding assumptions about byte size (CHAR_BIT ≥ 8). Modern languages often fix widths because contemporary platforms have converged on 8‑bit bytes and two’s‑complement arithmetic, yet they retain a natural‑size integer (e.g., Rust’s isize, Go’s int). Thus, C’s flexible integer sizes were a deliberate design for portability, not a mistake.</p>
+          </div>
+          <a href="https://pikuma.com/blog/c-integer-sizes-not-a-mistake" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize that C’s architecture‑dependent integer sizes were essential on early machines but are now a source of portability problems, prompting widespread adoption of fixed‑width types such as those in . Contributors note that using exact‑size or fast‑width types avoids overflow and compatibility issues, while still valuing the language’s flexibility for niche platforms like DSPs where non‑standard sizes persist. Nostalgic remarks about legacy IDEs appear, but overall the discussion supports the article’s view that modern code should favor explicit size specifications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49845114" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
