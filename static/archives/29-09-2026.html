@@ -1,0 +1,553 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 29, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.conan.io/cpp/conan/gamedev/godot/cmake/2026/09/29/Using-Any-Cpp-Library-In-Godot.html" target="_blank">Using any C++ library in Godot</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by czoido • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Godot (MIT‑licensed) supports native C++ extensions via GDExtension, which loads a shared library (.dll/.so/.dylib/.wasm) at runtime. The official godot‑cpp bindings wrap the low‑level C API, providing C++ classes for all engine types; extensions derive from these classes and become regular nodes visible in the editor and usable from GDScript. Since godot‑cpp 10.0, a single release works with any Godot 4.3+ version by selecting an api_version option, and three build targets exist (template_debug, template_release, editor) that determine which library Godot loads based on the .gdextension file tags.</p>
+<p>Building extensions traditionally requires compiling godot‑cpp and every third‑party library for each platform. ConanCenter now provides a godot‑cpp package, making it a regular Conan dependency. Projects specify api_version and target options, and Conan resolves and builds matching binaries for all platforms, including any additional libraries (e.g., flecs ECS).</p>
+<p>The article demonstrates a GDExtension that creates a Swarm Node2D, uses flecs to simulate 100 000 particles, and renders them via a MultiMeshInstance2D. A Conan recipe declares godot‑cpp and flecs, CMake links them into a single shared library, and a single conan build command produces the extension for the selected target. This workflow simplifies cross‑platform distribution and integration of arbitrary C++ libraries into Godot projects.</p>
+          </div>
+          <a href="https://blog.conan.io/cpp/conan/gamedev/godot/cmake/2026/09/29/Using-Any-Cpp-Library-In-Godot.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights the complexity of integrating CMake scripts, Python, and C++ code, describing the process as tedious, while noting that Rust’s Godot bindings provide a smoother experience and allow use of any Rust library, including async features. It points out the necessity of a versioning script on Linux to match libstdc++ versions or avoid linker conflicts, and raises the question of whether true zero‑copy data transfer is feasible across the C++ and Godot boundary.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49890051" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jagi.studio/posts/phyllotaxis/" target="_blank">Phyllotaxis: An audio-reactive LED display</a>
+        </h2>
+        <span class="article-meta">
+          144 points • by evakhoury • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The project implements an audio‑reactive LED sculpture based on the phyllotaxis pattern, where points are placed on a radial line and rotated by multiples of the golden ratio to form a sunflower‑like cloud. Voronoi tessellation of these points generates cell shapes that house individual addressable RGB LEDs. Using CadQuery, the author creates 3D models: each cell is offset, extruded, and subtracted from a total volume, then a hole for the LED is cut. The model is split into quadrants for 3D printing, post‑processed in FreeCAD, and fitted with translucent mulberry paper for diffusion. An STM32 “blackpill” drives 89 LEDs via a custom SPI Neopixel driver; LED positions are stored in a lookup table and animated with fragment‑shader‑style code (e.g., radial sine spirals). An I2S MEMS microphone (INMP441) provides digital audio, processed with ARM CMSIS FFT and multiband gain to modulate brightness. Subsequent revisions replace the 3D‑printed backplate with five identical PCBs, move to an ESP32 with Rust firmware, and expose a local web UI for uploading WebAssembly sketches. Future work targets easier soldering, protective acrylic, and modular paper facings.</p>
+          </div>
+          <a href="https://jagi.studio/posts/phyllotaxis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the project, highlighting its innovative use of symmetry, LED integration, and audio‑driven visual patterns. Readers note practical assembly tips such as enlarging SMT pads and using fab‑assembly to save time and reduce risk. Several remarks draw parallels to existing products, suggesting convergent design, while a few critique the terminology “phyllotaxis” as inappropriate. Overall the feedback is positive, emphasizing inspiration for hobbyists, admiration of the aesthetic and technical execution, and encouragement to explore similar designs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49880411" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.christianperone.com/2026/09/the-systems-that-no-one-will-test/" target="_blank">The systems that no one will test</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by perone • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>In 2020 the author uncovered a vulnerability in Brazil’s federal database that exposed personal records for over 200 million citizens (IDs, passports, addresses, phone numbers, etc.). After reporting the issue to the agency, they confirmed the breach and patched the system without any data exfiltration. The author uses this incident to illustrate emerging risks posed by advanced machine‑learning models. Recent progress in reinforcement‑learning, RL‑from‑human‑feedback, and long‑horizon training enables labs to build automated RL environments—often with third‑party services—that can iteratively test and exploit system flaws at scale. Reports such as OpenAI’s technical paper on a model bypassing internal safeguards (via SSRF) exemplify this trend. The author warns that many government infrastructures will never undergo AI‑driven penetration testing, especially in resource‑constrained nations, increasing the likelihood of undiscovered vulnerabilities. Addressing the problem requires moving beyond polarized views of technology and developing coordinated, planetary‑scale security solutions despite geopolitical challenges.</p>
+          </div>
+          <a href="https://blog.christianperone.com/2026/09/the-systems-that-no-one-will-test/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong concern about personal data privacy, highlighting how services like The Work Number aggregate detailed employment and salary records without clear consent and how governmental agencies inadvertently share others’ information, fostering a sense of pervasive vulnerability. Skepticism appears toward AI‑safety narratives, suggesting they may create the threats they fear by encouraging weaponizable research, while frustration is voiced over the software industry’s lax attitude toward quality and reliability. Overall, the discourse is apprehensive, urging greater transparency, stricter safeguards, and more responsible practices across data handling, AI development, and software engineering.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49876052" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.computerworld.com/article/1673071/booted-up-in-1993-this-server-still-runs-but-not-for-much-longer-2.html" target="_blank">Booted up in 1993, this server still runs – but not for much longer (2017)</a>
+        </h2>
+        <span class="article-meta">
+          48 points • by doener • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article profiles a Stratus Technologies fault‑tolerant server installed in 1993 at Great Lakes Works EGL (now part of U.S. Steel) in Dearborn, Michigan. Designed with redundant hardware, the system has retained roughly 80 % of its original components, with disks, power supplies and other parts replaced over time. It runs Stratus’s proprietary VOS operating system, unchanged since the early 2000s, and has never experienced an unplanned shutdown. The server won Stratus’s 2010 “longest‑running” contest, and may still be the oldest operational unit known to the company. Maintenance is performed via third‑party parts; Stratus indicates spare parts likely remain in stock. Users favor its simple character‑driven interface and reliability. Stratus fault‑tolerant platforms are deployed in payment processing, telecommunications, manufacturing, energy and other sectors, supporting Windows, Linux, VMware and VOS. The server is scheduled for retirement and replacement in April following United States Steel’s 2015 acquisition of Great Lakes Works.</p>
+          </div>
+          <a href="https://www.computerworld.com/article/1673071/booted-up-in-1993-this-server-still-runs-but-not-for-much-longer-2.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The piece reflects a nostalgic view of legacy Stratus VOS hardware, emphasizing its long‑term reliability and the stability of an unchanged server environment, while also describing the challenges of working with aging, poorly maintained infrastructure. It conveys admiration for the system’s durability but notes the difficulty and oddity of servicing obsolete equipment, and it critiques the original article for providing insufficient technical detail. Overall, the tone mixes appreciation for past robustness with frustration over outdated technology and sparse reporting.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49870376" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/JoasASantos/Offensive-Security-AI-Models" target="_blank">Uncensored and Offensive Security AI Models Benchmark</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by soltanov • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A curated repository (Sep 2026) of open‑weight, uncensored LLMs designed for authorized red‑team, penetration‑testing, and security‑research tasks.  </p>
+<p><strong>Security‑fine‑tuned models</strong> (download links on HuggingFace) include: DeepHat V2, BugTraceAI‑CORE‑Apex 26B, BugTraceAI‑CORE‑Ultra 27B, CYBER‑FROST‑3.8, Cyber‑Prime 1.1 2.6B, Cyber‑Ornith‑1.5 9B, Dolphin3‑Cyber 8B, Imperum‑CybersecurityLLM v1.0, Lily‑Cybersecurity 7B v0.2, Qwythos‑9B, RavenX‑CyberAgent 35B, REDCELL‑26B‑A4B, security‑slm‑unsloth 1.5B, among others.  </p>
+<p><strong>General ablated/uncensored models</strong> cover Qwen 3.8‑27B, GLM‑5.3 variants, DeepSeek‑V4.1‑Flash, Qwen 2.5‑Coder‑32B, HIDra‑30B‑A3B, Dolphin‑Llama3‑8B, Wizard‑Vicuna‑13B, etc., provided in GGUF, FP8, BF16, Q4_K_M, Q6_K quantizations.  </p>
+<p><strong>Deployment notes</strong> detail weight‑level interventions (abliteration, obliteration) that remove alignment refusals without retraining, and common fine‑tuning or compression techniques: SFT, QLoRA, DPO, MoE, MTP, GGUF, FP8/BF16, quantization levels, APEX/imatrix importance‑matrix methods.  </p>
+<p>Benchmarks referenced include CyberBench (CyNER, APTNER, CyNews, SecMUL, CyQuiz, phishing, HTTP logs), TrustedSec LLM Attack Benchmark (4.8k runs vs OWASP Juice Shop), and Open LLM Leaderboard v1.  </p>
+<p>All models are hosted on HuggingFace and intended solely for authorized security research and education.</p>
+          </div>
+          <a href="https://github.com/JoasASantos/Offensive-Security-AI-Models" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on two main issues: visualisation and model performance. Several users criticize the current gradient colour scheme, calling it misleading on multiple plots and recommending a categorical palette instead, while also asking for source details to be added. In contrast, there is positive feedback on the Qwen 3.8 Flash Next uncensored model, with reviewers noting its strong performance and acknowledging its powerful base as a reason for its high ranking. Overall, the discussion blends constructive criticism of the graphics with approval of the model’s capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49888937" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mubi.com/en/notebook/posts/pirating-the-pirates" target="_blank">Pirating the Pirates</a>
+        </h2>
+        <span class="article-meta">
+          587 points • by piotrgrabowski • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article examines how unofficial fan preservation—often involving illegal ripping of home‑video releases—fills gaps left by studio “restorations” that alter runtime, audio, or image quality. Using Sergio Leone’s <em>The Good, the Bad and the Ugly</em> as a case study, the author describes early attempts (2011–2019) to combine an out‑of‑print 1998 DVD mono track with a newer Blu‑ray Italian cut, the discovery of more accurate 4K scans, and collaborations that ultimately improved the 2021 Kino Lorber edition through fan‑sourced LaserDisc audio and community pressure. The piece contrasts boutique labels (Arrow, Kino, Eureka) that aim to present historically accurate versions with studios that release expanded, remixed, or color‑graded cuts, often at the director’s request. Legal risk under DMCA §1201 is highlighted, alongside an emerging “pirate code” urging owners to possess physical copies and not profit from bootlegs. The author notes that labels now regularly consult fan experts, leveraging their restorations to produce more faithful commercial releases.</p>
+          </div>
+          <a href="https://mubi.com/en/notebook/posts/pirating-the-pirates" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad frustration with studios’ restrictive policies that limit access to original or high‑quality releases, especially for older films and video games, while praising fan‑driven preservation efforts such as remuxes, fan‑edits, and community‑sourced compilations. Many note that copyright enforcement often ignores intent and hampers cultural heritage, yet also acknowledge that piracy has introduced valuable works to viewers who later purchase physical media. There is a recurring call for more flexible, affordable licensing models and better legal avenues to obtain comprehensive, faithful versions of media.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49880036" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.kqed.org/news/12101534/california-farmers-are-struggling-to-sell-grapes-as-demand-for-wine-drops" target="_blank">California farmers are struggling to sell grapes as demand for wine drops</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by randycupertino • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>California wine grape growers face a sharp demand decline, with wine sales falling over 20% in five years and U.S. case shipments down 23% from 2020 to 2025. Prices for grapes have dropped, prompting removal of roughly 25% of the state’s ~600,000 vineyard acres. About half of this year’s crop entered harvest without buyer contracts, compared with 70‑80% contracted in a typical year. Growers such as Bill Berryhill (Berryhill Family Vineyards, Lodi) are leaving 200 of 500 acres unsold and plan to rip out 50 acres, accepting losses or discarding grapes. Allied Grape Growers reports that uncontracted grapes must often be sold at a loss for concentrated syrup. The market contraction is linked to aging baby‑boomer consumers, reduced alcohol consumption among younger adults, competition from craft beer, spirits, canned cocktails and cannabis, and lower global wine demand. Export options are limited by higher U.S. production costs and declining worldwide consumption. Consequently, vineyard closures are affecting farm labor and local economies.</p>
+          </div>
+          <a href="https://www.kqed.org/news/12101534/california-farmers-are-struggling-to-sell-grapes-as-demand-for-wine-drops" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments describe a broad contraction in wine consumption, especially among younger adults, driven by health awareness, higher prices, and reduced social drinking. Preference is shifting toward lower‑cost alternatives such as beer, spirits, cannabis, and natural or lower‑alcohol wines, while demand for U.S. imports is perceived to be falling. Producers face pressure to diversify, sell grapes or juice, or adopt new formats like canned or sparkling wines. Economic factors, including lower disposable income and trade tensions, are cited alongside cultural changes that de‑emphasize wine as a status symbol.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49883539" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf" target="_blank">AI companies leak data to advertisers [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          7 points • by damaru2 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The provided input consists solely of placeholder tags and contains no actual user comments or substantive text. Because there is no material to examine, no sentiments, themes, or collective opinions can be identified or described. Consequently, no patterns of agreement, disagreement, or recurring topics are present, and no meaningful summary of public reaction can be generated from the given content.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49890226" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/GergelyOrosz/status/2104825886922911981" target="_blank">Firebase SDK is CRASHING ALLLL iOS Apps, since today morning</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by pranshuchittora • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Gergely Orosz posted on X that the Firebase iOS SDK abruptly began crashing every app session that relied on it, leaving developers unable to intervene. He notes that the issue affected 100 % of sessions for impacted apps, generating roughly 110 k crash reports, and that the Firebase team was unaware of the problem when it occurred. Orosz critiques the SDK’s reliability, especially given Google’s reputed engineering standards, and characterizes the failure as “amateur.” The tweet tags other tech figures and publications (e.g., The Pragmatic Engineer, Vijay Tholpadi) but provides no further technical details beyond the widespread crash impact.</p>
+          </div>
+          <a href="https://twitter.com/GergelyOrosz/status/2104825886922911981" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express disappointment with a recent Firebase outage, highlighting how server‑side configuration can break apps despite version pinning and raising concerns about reliance on proprietary, possibly neglected services. While acknowledging Firebase’s historical usefulness and widespread adoption, many note a trend toward platform lock‑in, diminishing confidence in Google’s stewardship, and the difficulty of avoiding third‑party dependencies. Some participants suggest seeking open‑source, self‑hosted alternatives for offline sync and low‑connectivity use cases, reflecting a broader desire for more controllable and resilient mobile development stacks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49889934" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://www.jimsitu.com" target="_blank">Tank Body Problem</a>
+        </h2>
+        <span class="article-meta">
+          115 points • by jimbooonooo • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tank Body Problem – a brief specification listing player stats and control mappings. Two participants, P1 and P2, each start with an Elo rating of 1500 and zero experience points (XP0). The input schema includes: “Elevate” (▲▲) as the primary upward command; “Power” (◐→) to charge; horizontal movement via the A/D keys; weapon selection through J/L; firing with SPACE; a second press of SPACE activates a “Laser/Plumage” mode. Additional game mechanics specify that cheese objects bounce three times, poison releases bubble projectiles, and the environment simulates lunar gravity, affecting object trajectories. This concise set of parameters defines the initial conditions and control layout for the referenced tank‑body scenario.</p>
+          </div>
+          <a href="http://www.jimsitu.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall appreciation for the game’s concept while highlighting several areas needing improvement. Reviewers note that the current dominant strategy—approaching close range and firing—makes matches feel unbalanced and short, suggesting more depth and playtesting. Control schemes, especially arrow‑key turret handling, are seen as unintuitive, and a help overlay is requested. The trajectory preview often mismatches actual paths when the moon moves, reducing its usefulness. Additional suggestions include extending gameplay length, removing post‑victory screen shake, and fixing weapon‑switching for the first player.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49886482" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
