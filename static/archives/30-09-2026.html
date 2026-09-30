@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">September 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tomwojcik.com/posts/2026-09-21/september-2026-the-world-today/" target="_blank">September 2026: The world today, as seen by one Polish guy</a>
+        </h2>
+        <span class="article-meta">
+          201 points • by marjancek • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article outlines a sharp contraction in the global tech labor market in 2026, driven by AI-driven efficiency and corporate restructuring. Worldwide, 120 000 tech jobs were cut in the first half of the year, with May marking the worst month for US tech layoffs; Amazon eliminated 30 000 corporate roles, Meta cut 10 %, and Block shed nearly half its staff. In Poland, IT job postings fell by a third in 2023 and have since rebounded, but 90 % target mid‑senior levels while junior openings receive 47–146 applications each. Kraków’s unemployment rose to 2.8 % (up from ~2 % in 2024) and large firms such as HSBC and Shell cut hundreds of jobs, moving work abroad. Remote work demand has collapsed from &gt;10 % of US postings in 2022 to ~4 % now, intensifying competition for the few remaining roles. Rising fuel prices in Poland have increased commuting costs, further eroding the viability of local employment alternatives for displaced engineers.</p>
+          </div>
+          <a href="https://tomwojcik.com/posts/2026-09-21/september-2026-the-world-today/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely view the piece as overly dramatic, pointing out that Poland’s gas reserves, recent real‑estate trends and population growth are stronger than portrayed and that the country has progressed significantly since the post‑communist era. While acknowledging genuine concerns such as the Ukraine war, energy price shocks and broader geopolitical tensions, many argue that the narrative inflates risk, emphasizes media hype and neglects longer‑term structural strengths and renewable‑energy opportunities. Overall, sentiment skews toward skepticism of the pessimistic framing and calls for a more balanced assessment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49905487" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ninjahawk/livenerf" target="_blank">Livenerf: Has Opus 5.5 been nerfed yet?</a>
+        </h2>
+        <span class="article-meta">
+          616 points • by bryan0 • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>livenerf is an append‑only, deterministic benchmark designed to detect capability drift in a single model after release. Using Claude Opus 5.5 (launched 2026‑09‑22) as a case study, the suite runs daily for 30 days, with the first 10 days forming a baseline and two subsequent 10‑day windows for drift detection. A calibrated panel of 78 “sometimes‑right” items—drawn from GPQA Diamond, MMLU‑Pro, competition‑math and AIME 2025‑26—provides the primary metric; paired per‑item accuracy differences are computed with clustered standard errors, requiring a 99 % interval excluding zero in both windows, a minimum 3‑point change, and no concurrent shift in a control arm (Claude Opus 5). Secondary signals include output‑token counts, which reveal effort reductions before accuracy changes. The framework relies on Inspect (UK AI Security Institute), uses frozen prompts, a pinned Claude‑Code CLI, and pure‑function graders; all logs are immutable. Validation shows the system can detect ≈7.5‑point accuracy shifts over a 10‑day window, while same‑family model swaps of ~4 % token reduction remain undetectable. The repository contains full design, calibration, validation documents, and scripts for automated daily execution.</p>
+          </div>
+          <a href="https://github.com/ninjahawk/livenerf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view on post‑launch model performance. A sizable portion of users report noticing slower or lower‑quality outputs after a few days, attributing it to server load, incremental updates, or “honeymoon” effects, and they call for systematic benchmarking to verify changes. Others argue that perceived nerfs are largely psychological, noting that benchmarks have not consistently revealed degradations and that users simply adjust to higher capabilities. Trust concerns and calls for greater transparency or open‑source alternatives appear throughout, while concrete evidence remains anecdotal and the community remains divided about whether systematic nerfing occurs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49901736" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://exyr.org/2026/solving-factorio-quality/" target="_blank">Solving Factorio Quality</a>
+        </h2>
+        <span class="article-meta">
+          70 points • by laurenth • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Factorio’s 2024 Space Age expansion adds “Quality” tiers (normal, uncommon, rare, epic, legendary) that affect machine speed and module productivity. Quality increases occur probabilistically via quality modules: each tier‑up chance after the first is 10 % per module slot, yielding a maximum 24.8 % overall upgrade probability with four slots. The author models tier transitions with a 5×5 matrix T₍q₎, where rows represent output tiers and columns input tiers; successive crafting steps are computed by multiplying the ingredient vector by successive T₍q₎ matrices. Recycling (new machine) destroys items and returns 25 % of ingredients, enabling loops that repeatedly apply T₍q₎ until desired tiers are reached. Two loop strategies are described:</p>
+<ul>
+<li>“Gambling” – single‑pass crafting with quality modules, no recycling; output distribution is the first row of T₍q₎.  </li>
+<li>“Washing” – pure recycling loop using filter matrices to retain high‑tier items and repeatedly apply T₍q₎·¼; equilibrium is solved as A·x = b via Gaussian elimination, giving long‑term extraction rates (e.g., ~1 legendary per 2727 normal inputs at q = 24.8 %).  </li>
+</ul>
+<p>A combined “up‑cycling” loop mixes crafting and recycling, abstracted with the same vector‑matrix framework. The article links to an online calculator implementing these calculations.</p>
+          </div>
+          <a href="https://exyr.org/2026/solving-factorio-quality/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight strong interest in detailed, quantitative approaches to Factorio, praising the ability to engineer high‑quality production chains and noting the insights gained from analyzing module effects and quality differentials. At the same time, several remarks point out practical drawbacks of single‑assembler setups, the loss of productivity when recipes switch, and the space cost, leading to skepticism about their usefulness. Users also discuss how extensive automation and blueprint libraries can diminish early‑game enjoyment and raise the learning curve, while recognizing the game’s educational value and potential relevance to real‑world optimization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49887343" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-dots/" target="_blank">Dots: Always-on agents</a>
+        </h2>
+        <span class="article-meta">
+          622 points • by alvis • 159 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/introducing-dots/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall, comments show a split view of Dots. Some users appreciate the always‑on, domain‑specific agents for collaboration, memory separation and potential productivity gains, especially in development workflows. However, many express confusion about its purpose, view it as a simplified reskin of existing tools, and criticize its pricing, performance, and limited usefulness for non‑technical consumers. Concerns about security, data privacy, vendor lock‑in, and reliability of autonomous actions are prevalent, and several users compare it unfavorably to competing agents such as Grok Bot, Muse, and OpenClaw.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49896604" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/future/article/20260928-a-virtual-power-plant-hidden-in-vermont-homes-is-keeping-the-lights-on-during-storms" target="_blank">Vermont replacing power plants with home batteries</a>
+        </h2>
+        <span class="article-meta">
+          200 points • by devonnull • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The scraped page combines an unrelated headline about a U.S. state replacing power plants with home batteries with a series of image captions covering diverse subjects. The primary visible narrative describes red foxes confronting the Steller’s sea eagle, the world’s heaviest raptor, while foraging in Japan. Additional captions document personal experiences with residential energy storage: one user reports uninterrupted power after installing solar panels and two home batteries; another couple chose a home battery over a gas generator after cost comparison. The remainder of the alt‑text list catalogs wildlife (tigers, rhinos, long‑eared owls, Gobi bears, rare birds), natural phenomena (Catatumbo lightning), and assorted cultural images (statue of Liberty, telescope laser correction, portrait of King Harald). No coherent article text about the state‑level power‑plant replacement is present; the content is a disjointed collection of image descriptions spanning wildlife, energy‑storage anecdotes, and miscellaneous media.</p>
+          </div>
+          <a href="https://www.bbc.com/future/article/20260928-a-virtual-power-plant-hidden-in-vermont-homes-is-keeping-the-lights-on-during-storms" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed views on residential battery participation in virtual power plants. Many note financial gains from price‑spike arbitrage and grid‑stabilizing benefits, while others stress high upfront costs, limited ownership rights, and the burden of liability and data collection imposed by utilities. Skepticism appears regarding the scale of impact versus traditional generation, safety concerns, and regulatory hurdles such as installation clearances. Some see the model as a step toward decentralized resilience, whereas others view it as a profit‑driven scheme that could shift infrastructure costs onto consumers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49897993" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://postalemployeenetwork.com/news/2026/09/26/u-s-postal-inspectors-shut-down-website-selling-millions-of-counterfeit-postage-labels/" target="_blank">U.S. postal inspectors shut down website selling counterfeit postage labels</a>
+        </h2>
+        <span class="article-meta">
+          232 points • by ilamont • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The U.S. Postal Inspection Service, with federal partners, seized the domain LabelsBank.com and indicted Pakistani national Faheem Akram (33) for operating a website that sold over 5.1 million counterfeit U.S. Postal Service postage labels. The site offered labels at a flat $2 each, ignoring weight, size, or destination, enabling customers to ship packages at heavily reduced rates. Prosecutors allege the scheme caused more than $126 million in USPS revenue loss and involved at least 5,000 customers. Akram faces one count of conspiracy to defraud the United States, five counts of making and selling counterfeit postage stamp labels, and four counts of wire fraud. The indictment and domain seizure were authorized by a court order, and the operation was shut down by the Miami Division of Postal Inspectors. All charges remain allegations pending trial.</p>
+          </div>
+          <a href="https://postalemployeenetwork.com/news/2026/09/26/u-s-postal-inspectors-shut-down-website-selling-millions-of-counterfeit-postage-labels/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the prevalence of counterfeit USPS postage used by online sellers to inflate margins, describing a personal eBay experience where a seller repeatedly replaced shipments after “seized” tracking alerts. It references a recent criminal case involving a Pakistani operator of a label‑selling website, questioning how such labels bypass verification and how many remain in circulation. Participants express concern over postal security gaps, curiosity about the technical methods enabling the fraud, and criticism of both the scammers’ tactics and the postal system’s oversight.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49899090" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://america.gov/" target="_blank">America.gov</a>
+        </h2>
+        <span class="article-meta">
+          562 points • by plesiv • 143 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://america.gov/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize the concept of a government‑run AI assistant as valuable for streamlining access to services, but many note practical shortcomings. Users report interface glitches, slow loading, broken images, and limited language support, while expressing worries about privacy, data retention, and potential manipulation of feedback signals. Opinions diverge on the chatbot’s accuracy—some cite helpful, well‑sourced answers, others point out refusals to generate code or answer off‑topic queries. Overall sentiment is cautiously optimistic, hoping improvements will address usability, security, and reliability concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49893509" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aviationweek.com/defense/aircraft-propulsion/nasa-asked-several-former-sr-71a-staffers-help-secret-restart" target="_blank">NASA asked several former SR-71A staffers to help secret restart</a>
+        </h2>
+        <span class="article-meta">
+          171 points • by ilamont • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>NASA has reportedly recruited former SR‑71A test engineers, including retirees Mike Relja and Tim Conners, for a classified effort to return Lockheed’s SR‑71A Blackbird Tail No. 844 to flight after a 27‑year hiatus. Early 2024 satellite imagery shows the aircraft removed from its display pole at the Armstrong Flight Research Center and stored in the former shuttle hangar, where an inspection began. NASA Administrator Jared Isaacman hinted at a new “X‑plane” program that may draw on the Blackbird’s shape, but the agency declined to confirm the restart project. Engineers note major obstacles: the 59‑year‑old airframe, engines, and systems have been idle for decades; the 2007 destruction of the $600 M SR‑71 spare‑parts stockpile eliminated original components; unique JP‑7 fuel, tri‑ethylborane igniter, and specialized ground equipment are no longer available. Proposed mitigations include cannibalizing parts from museum‑displayed Blackbirds and leveraging existing flight‑test manuals and pilot expertise, though cost and logistics remain uncertain.</p>
+          </div>
+          <a href="https://aviationweek.com/defense/aircraft-propulsion/nasa-asked-several-former-sr-71a-staffers-help-secret-restart" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely question the practicality of reviving the SR‑71, emphasizing the high cost, loss of specialized tooling and unique fuel, and uncertainty about whether any missing parts could be salvaged or reproduced. Many express skepticism that a secret, superior platform already exists, while some note the aircraft’s iconic status and personal fascination, suggesting a nostalgic or “vanity” motive for restoration. Overall, the discussion balances doubts about technical and financial feasibility with admiration for the plane’s legacy, and a mixed view of whether renewed interest is justified.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49890733" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.mattkeeter.com/blog/2026-08-23-wgpu-facet/" target="_blank">Testing WebGPU data layouts with Facet</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by luu • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article describes a systematic approach to verify that Rust structs and WGSL shader structs share identical memory layouts for WebGPU compute shaders. A mismatch is demonstrated with a <code>mat3x3f</code> matrix: WGSL pads each row to 16 bytes (total 48 bytes) while Rust’s <code>[[f32;3];3]</code> occupies only 36 bytes, causing incorrect offsets (e.g., <code>image_size</code> shifted from 36 to 48). The author uses Naga to parse WGSL, extract struct members, and compare their offsets and sizes against Rust equivalents. To automate this, the Facet library provides runtime reflection via <code>#[derive(facet::Facet)]</code>, exposing a <code>SHAPE</code> type with field names, offsets, and sizes. A generic <code>compare_struct_layout&lt;T: facet::Facet&gt;</code> function parses the shader, validates overall struct size (handling trailing dynamic arrays), checks each field’s offset and size, and ensures all WGSL fields appear in the Rust struct. Unit tests instantiate this checker for each configuration struct (e.g., <code>ColorConfig</code>, <code>MergeConfig</code>), guaranteeing layout correctness without manual offsets. This method eliminates subtle bugs that can cause GPU hangs and can be extended to other CPU‑GPU data exchanges.</p>
+          </div>
+          <a href="https://www.mattkeeter.com/blog/2026-08-23-wgpu-facet/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49883913" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lfm.xiffy.nl/" target="_blank">RSS Feeds for Last.fm</a>
+        </h2>
+        <span class="article-meta">
+          72 points • by Baljhin • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A service at https://lfm.xiffy.nl generates RSS feeds for any Last.fm username. It provides four primary feeds: recent tracks ( /username ), loved tracks ( /username/loved ), top tracks ( /username/toptracks ), and top artists ( /username/topartists ). The top‑track and top‑artist feeds accept an optional period query parameter—7day, 1month, 3month, 6month, 12month, or overall—with a default of 1 month. When Last.fm supplies a non‑default image, the large version is added to the RSS item as an enclosure. In 2025 the service added a recommended‑tracks endpoint ( /username/recommended ) that returns data in Soundixx‑compatible JSON format ( /username/recommended/json ). Example URLs for user “thexiffy” illustrate each feed and period usage.</p>
+          </div>
+          <a href="https://lfm.xiffy.nl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey mixed reactions to Last.fm’s redesign. Many note that the overhaul removed social features such as local gig listings and community connections, rendering the service mainly a listening tracker and prompting users toward self‑hosted alternatives. Criticism also targets the lack of a reliable first‑party data export and inconsistent API endpoints, which require third‑party tools and cause validation problems. Conversely, some praise the site’s visual appeal, fast load times and clean codebase, acknowledging its continued utility for basic tracking.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49903862" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
