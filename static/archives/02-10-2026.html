@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 02, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://earendil.com/posts/pi-1-0/" target="_blank">Pi 1.0</a>
+        </h2>
+        <span class="article-meta">
+          1272 points • by sergiotapia • 71 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Pi 1.0 is released as a hardened, minimal, extensible agent harness. It integrates the latest models from major providers, supports coding tasks, and serves as a substrate for agentic applications. New features include native Codemode support for MCP and non‑LLM models (e.g., Jev, image models), virtual‑model extensions, deferred tool loading, cache warming for Anthropic models, mid‑conversation system messages, a new TUI theme, and default full‑screen mode. Pi Durable, an experimental package, extends Pi’s minimalism to longer‑running, multi‑surface conversations, offering a substrate for durable agentic applications with fine‑grained control over intelligence. Both Pi 1.0 and Pi Durable are MIT‑licensed; installation scripts are provided for Unix (<code>curl -fsSL https://pi.dev/install.sh | sh</code>) and Windows PowerShell (<code>irm https://pi.dev/install.ps1 | iex</code>). Pi Durable is available via npm (<code>npm install @earendil-works/pi-durable @earendil-works/pi-ai @earendil-works/chord</code>). Documentation is at pi.dev and source code at github.com/earendil-works/pi.</p>
+          </div>
+          <a href="https://earendil.com/posts/pi-1-0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong overall approval of Pi’s minimal‑core design, hackability, vendor‑agnostic tool calls, and its usefulness for coding, automation, and production deployments, especially with the new durable‑execution features. Users also appreciate its extensibility through plugins, SDK integration, and straightforward terminal interface. Repeated criticisms include concerns about feature creep, a cluttered plugin ecosystem, default full‑screen mode, performance and memory overhead, lack of standalone packages, and desire for more secure, compiled‑binary implementations. Opinions diverge on whether Pi’s minimalism remains sustainable compared with alternatives such as OpenCode, Claude Code, or Rust‑based harnesses.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49926069" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://inrng.com/2026/10/shimano-bicycle-museum/" target="_blank">Shimano Bicycle Museum Review</a>
+        </h2>
+        <span class="article-meta">
+          101 points • by pietroppeter • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Shimano Bicycle Museum in Sakai, near Osaka, occupies a modern glass‑and‑steel building of about 4,223 m². It presents a chronological display of bicycles, from early hobby‑horses to contemporary race machines, in a darkened hall with spotlights and an adjacent auditorium showing educational films on bicycle history, sport, and societal impact. A bright white gallery showcases notable models such as a steel Flandria, early Specialized Stumpjumper, Paralympic‑modified bikes, and a 2021 Olympic Merida, with many examples accessible for close inspection. Materials‑science stations let visitors compare steel, aluminium and titanium tubing and feel the weight of racing frames. The collection emphasizes Shimano components, especially Dura‑Ace and XTR groupsets from 1973 to 2021, while offering limited examples of SRAM, Campagnolo, and Mavic. Upper‑floor display cases house historic groupsets and a locked research archive of catalogs and brochures. Admission is ¥500 (≈ €3); the museum is reachable by a 30‑minute train ride from Osaka, with bike parking available.</p>
+          </div>
+          <a href="https://inrng.com/2026/10/shimano-bicycle-museum/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for the cycling coverage, describing it as high‑quality and essential for enthusiasts, and they convey gratitude toward the article. Readers show interest in visiting the site, asking which cyclist demographics it targets and whether a detour is worthwhile, while also hoping for displays that highlight historic components such as the first‑generation ten‑speed Dura‑Ace. Overall, the tone is positive and inquisitive, focusing on the value of the content and the desire for deeper technical and historical exhibits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49930047" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.singapore-samizdat.com/p/how-singapores-government-run-dating-service-firstdate-works" target="_blank">How Singapore&#39;s government-run dating service works</a>
+        </h2>
+        <span class="article-meta">
+          164 points • by danielfoster • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Singapore’s GovTech has launched “FirstDate,” a pilot matchmaking service for government employees that uses Singpass for identity verification and the Gale‑Shapley Stable Marriage Algorithm to generate one stable match per cycle. Participants complete a detailed questionnaire covering interests, cuisine preferences, travel habits, lifestyle, love languages, and personal values; the data are used to rank opposite‑gender users and produce stable pairings. The article explains the algorithm’s origins in medical‑resident placement and school‑choice systems, noting it guarantees no mutually preferable pairings but does not ensure satisfaction, especially when participants have external options or when preferences are ambiguous. Critics highlight three issues: (1) stability does not equal happiness; (2) questionnaire responses may not reflect true preferences; (3) reliance on checklist‑style matching mirrors commercial dating apps and may reinforce transactional views of relationships. The piece argues that Singapore’s broader dating challenges stem from declining “third spaces” and suggests investing in cultural, social, and recreational venues to foster organic connections rather than relying on algorithmic solutions.</p>
+          </div>
+          <a href="https://www.singapore-samizdat.com/p/how-singapores-government-run-dating-service-firstdate-works" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view of a government‑run dating service. Many express skepticism that algorithmic matching can address the complex, non‑committal nature of modern dating and worry about bias, privacy, and the power imbalance inherent in stable‑matching algorithms. Some argue that public involvement might reduce commercial incentives and provide structured social interaction, yet others note cultural pressures, high expectations, and the limited relevance of such schemes in societies focused on education and career. Overall, the discussion balances cautious optimism about organized matchmaking with doubts about its practicality and fairness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49929113" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lwn.net/Articles/1097401/" target="_blank">Several vulnerabilities have been discovered in the Linux kernel</a>
+        </h2>
+        <span class="article-meta">
+          303 points • by luispa • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Debian Security Advisory DSA‑6528‑1 (dated 29 Sept 2026) announces a comprehensive update to the <strong>linux</strong> package. The advisory lists over 300 CVE identifiers affecting kernel code, ranging from early‑2024 entries (e.g., CVE‑2024‑52560, CVE‑2024‑58094) through numerous 2025 and 2026 findings (e.g., CVE‑2026‑89438, CVE‑2026‑90199). All listed CVEs are addressed by the updated kernel version distributed in the current Debian release. Administrators are instructed to install the updated <strong>linux</strong> package from the official Debian repositories to apply the fixes and mitigate the associated security risks. No additional details on individual vulnerability severity or exploit vectors are provided in the excerpt.</p>
+          </div>
+          <a href="https://lwn.net/Articles/1097401/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note that the surge in reported kernel CVEs stems largely from a policy of assigning a CVE to any bug fix, inflating raw counts without implying a proportional rise in exploitable flaws. Opinions vary between concern over AI‑accelerated vulnerability discovery and reassurance that the increase is mostly a metric artifact, as emphasized by kernel maintainers. Some suggest shifting to microkernel architectures for stronger isolation, while others call for clearer severity scoring and better tracking tools. Overall, the discourse balances alarm about security volume with calls for refined processes and perspective.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49928121" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/clef-decision-models/" target="_blank">Clef: Open-weight decision models, and new RL fine-tuning platform</a>
+        </h2>
+        <span class="article-meta">
+          512 points • by jasondavies • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Cloudflare released two open‑source decision models, Clef and Clef‑flash, on Workers AI and Hugging Face (Apache 2.0). Decision models output bounded, typed classifications with probability scores, enabling programmatic routing without continual retraining. Clef incorporates a vision encoder and a 64 k token context window (vs 32 k for Jev), and is built on frozen Qwen 3.8‑27B (Clef) and Qwen 3.5‑9B (Clef‑flash) backbones with low‑rank adapters, a two‑stage attention‑routing head, label‑smoothed cross‑entropy, Brier loss, and RL‑based calibration (RLCD). Benchmarks on the Jev Decision Index show Clef achieving top scores (e.g., 98.47 % case‑exact on BFCL, 91.93 % API‑Bank accuracy) and median latency of 209 ms, while Clef‑flash reaches 38.8 ms median latency with comparable quality. Hosted at the edge, the models halve latency versus a 120 B LLM in a Threat‑Intelligence domain‑classification workflow (2.2 s vs 4.7 s). Cloudflare also offers a reinforcement‑learning fine‑tuning service—initially via a forward‑deployed‑engineer team, later self‑serve—leveraging AI Gateway, Workers AI, Containers, and a new Trainer to capture data, fine‑tune, and redeploy customized Clef models.</p>
+          </div>
+          <a href="https://blog.cloudflare.com/clef-decision-models/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed but largely cautious reception of the new decision models. Many note that Clef’s performance and pricing often lag behind Jev, citing higher latency and cost despite modest accuracy gains, while some praise its speed on smaller CPUs and its visual input capability. Enthusiasm appears for the rapid emergence of alternatives and potential applications such as security policies or game AI, yet criticism is common regarding opaque training data, limited fine‑tuning, calibration concerns, and the practical value versus existing solutions. Overall, the community balances optimism about competition with practical skepticism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49923692" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.deepseek.com/en/harness/" target="_blank">DeepSeek Harness Desktop for macOS and Windows</a>
+        </h2>
+        <span class="article-meta">
+          237 points • by Kuyawa • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page documents a scripted interaction with the DeepSeek Harness environment. An initial system prompt directs the assistant to run a bash command that prints “NAVIGATION_OK”, read two markdown files (nav‑a.md and nav‑b.md), and reply with the word “FIRST_DONE”. The assistant executes the command, confirms the output, reads both files, and returns “FIRST_DONE”. A subsequent user request asks for a markdown heading “Navigation Summary” and a concise summary of the two files; the assistant replies with a brief mention of “alpha nav, beta nav, and the NAVIGATION_OK output”. The assistant then lists workspace contents (nav‑a.md, nav‑b.md, README.md), performs a grep for “NAVIGATION” (finding two matches), reads README.md, and confirms task completion. Supporting images depict the Harness plugin manager, a trajectory view timeline of tool calls, and a QR code.</p>
+          </div>
+          <a href="https://www.deepseek.com/en/harness/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a mix of enthusiasm and caution toward the new harness platform. Positive remarks highlight its lightweight design, fast performance, extensible plugin architecture, and ease of installation, with users appreciating functional features and quick updates. Several criticisms focus on security and privacy concerns tied to its Chinese origin, the potential for malicious exploitation, and the instability of frequent breaking changes. Additional points of dissatisfaction include limited benchmark diversity, mobile UI sluggishness, unclear purpose of harnesses, and a desire for more robust documentation and feature completeness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49929489" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://svelte.dev/blog/sveltekit-3-is-here" target="_blank">SvelteKit 3</a>
+        </h2>
+        <span class="article-meta">
+          276 points • by sampsn • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Version 3.0 of SvelteKit, the official Svelte application framework, is now released. The migration tool (<code>sv migrate</code>) automates most code updates and produces a TODO list for remaining changes. New projects are generated with <code>sv create</code>. Key breaking changes include moving configuration to <code>vite.config.ts</code> (replacing <code>svelte.config.js</code>), renaming the <code>$lib</code> alias to <code>#lib</code>, enhancements to environment variable handling, streamlined service‑worker setup, and overall improved error handling. Remote functions—a type‑safe client‑server communication layer—are not yet production‑ready and currently require Async Svelte with an experimental flag. An upcoming Svelte Summit will be held in Ljubljana, Slovenia on 19–20 November, coinciding with Svelte’s 10th anniversary.</p>
+          </div>
+          <a href="https://svelte.dev/blog/sveltekit-3-is-here" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments overwhelmingly favor Svelte and SvelteKit, emphasizing their superior developer experience, simplicity, small bundle sizes, and closer alignment with raw HTML compared with React/Next.js. Users note smooth migrations, consistent improvements, and productivity gains across web, desktop, and mobile projects, while many express frustration with React’s complexity and frequent updates. A minority raise questions about the relevance of developer ergonomics in an era dominated by AI‑generated code and note pending features like remote functions, but overall the consensus highlights Svelte’s ease of use and stability as decisive advantages.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49926536" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://earendil.com/posts/pi-durable/" target="_blank">Pi Durable</a>
+        </h2>
+        <span class="article-meta">
+          380 points • by paulsmith • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Pi Durable is a framework for running Pi coding agents as long‑running, durable, and malleable applications. It provides a “harness” that stores conversations and tasks, and supplies execution environments for tools. Storage backends include in‑memory, SQLite, and JSONL; the interface is minimal and can be implemented on key‑value stores or Postgres, allowing deployment on any JavaScript runtime (Node, Bun, Cloudflare Durable Objects). Only active transcripts, live tasks, and pending submissions are kept in memory; older messages are compacted to stay within model context limits. Each step is a checkpointed task, so crashes are recovered by reopening the same storage and resuming unfinished tasks, with exact‑once request IDs preventing duplicate submissions. Multiple conversations run concurrently, can fork from any transcript point, and maintain independent agents (model, tools, settings). Extensions bundle system‑prompt sections, tools, hooks, and tasks; they are pluggable, can wrap or replace tools, and participate in durability. Tools are durable tasks with replay safety flags, and can spawn sub‑agents (sub‑conversations) that survive crashes. Hooks allow custom logic on model generation, tool invocation, or compaction, storing decisions memoized per task. The entire codebase is ~15 k lines (~150 k‑250 k tokens).</p>
+          </div>
+          <a href="https://earendil.com/posts/pi-durable/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express enthusiasm for durable agent frameworks, noting their potential for long‑running, recoverable, and multi‑user applications and acknowledging broader industry interest. At the same time, users highlight practical challenges such as limited conversation branching, insufficient sandboxing and policy controls, complexities around JSONL session management, and concerns about exact‑once guarantees. Opinions also mention token‑count discrepancies between models, preferences for in‑memory versus persisted state, and usability issues like poor code‑font rendering. Overall, the sentiment is cautiously optimistic, appreciating innovation while urging stronger safety features and simpler deployment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49925969" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Who is hiring? (October 2026)</a>
+        </h2>
+        <span class="article-meta">
+          204 points • by whoishiring • 167 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The text presents a collection of technical hiring announcements emphasizing remote or flexible locations, with many roles centered on AI, data science, product engineering, and privacy‑focused platforms. Frequently mentioned requirements include Python, SQL, and experience with modern machine‑learning or web frameworks, while compensation ranges vary widely and often include bonuses or equity. Several postings highlight autonomous product ownership, cross‑functional collaboration, and the use of AI‑assisted development tools. The overall pattern reflects a strong demand for engineers comfortable with production‑grade ML, cloud infrastructure, and full‑stack development across diverse industries.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49922569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://automatictransmission.khoury.northeastern.edu/index.html" target="_blank">Automatic Transmission – a data-privacy study of connected vehicles</a>
+        </h2>
+        <span class="article-meta">
+          190 points • by rafaelc • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper investigates data‑privacy risks associated with connected vehicles, focusing on the automatic transmission subsystem. It defines research objectives, explores how vehicle telemetry is exchanged within the broader connected‑vehicle ecosystem, and evaluates potential exposure of sensitive information. The experimental setup includes a controlled testing facility where vehicles are placed under a Faraday tent to block cellular signals, allowing measurement of data leakage and transmission behavior in isolation. Visuals illustrate the connected‑vehicle architecture, the test environment, and the specific hardware (e.g., Faraday tent) used to mitigate external communications. The study aims to identify privacy vulnerabilities in vehicle data flows, assess the effectiveness of signal‑blocking measures, and propose recommendations for safeguarding transmission‑related data in connected automotive systems.</p>
+          </div>
+          <a href="https://automatictransmission.khoury.northeastern.edu/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express widespread frustration with modern vehicles’ mandatory telemetry and lack of opt‑out options, viewing it as invasive and potentially affecting insurance or security. Many suggest disabling hardware, using older non‑connected cars, or pushing for clearer legal protections such as GDPR enforcement. Opinions vary on feasibility; some note that disabling features often sacrifices functionality, while others cite specific brands with better privacy settings. Overall, there is a call for stronger regulation and consumer‑driven alternatives to mitigate pervasive data collection.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49926628" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
