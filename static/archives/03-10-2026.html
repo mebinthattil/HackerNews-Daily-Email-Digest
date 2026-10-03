@@ -1,0 +1,557 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://casp.ac/reports/intelligence-explosion" target="_blank">Understanding Frontier Artificial Intelligence</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by roversx • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided to summarize.</p>
+          </div>
+          <a href="https://casp.ac/reports/intelligence-explosion" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward the prospect of reliably controlling AI that surpasses human intelligence, questioning whether human oversight can keep pace with self‑improving systems. They highlight the difficulty of assessing an AI’s progress when its reasoning becomes opaque, and doubt that current large language models generate genuinely novel creative output without extensive human guidance. References to external analyses reinforce the view that an intelligence explosion remains unproven and that human evaluation remains a critical, yet potentially insufficient, safeguard.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49942002" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.newgrounds.com/" target="_blank">Newgrounds.com – A community of games, music, and art</a>
+        </h2>
+        <span class="article-meta">
+          202 points • by azhenley • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.newgrounds.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong nostalgia for Newgrounds, highlighting the platform’s preservation of early flash games, animations, and personal creations that remain accessible through tools like Ruffle. Contributors recall specific titles, community interactions, and the site’s informal, creative atmosphere, contrasting it with newer, more commercial or censored gaming environments. While appreciation dominates, there are brief notes of lost content, occasional technical frustration, and mild criticism of modern AI‑generated games, yet overall sentiment remains fond and supportive of Newgrounds’ enduring presence.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49940394" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.eff.org/deeplinks/2026/10/court-agrees-eff-utahs-vpn-law-demands-technical-impossibility" target="_blank">Court agrees with EFF: Utah&#39;s VPN law demands a technical impossibility</a>
+        </h2>
+        <span class="article-meta">
+          622 points • by hn_acker • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Utah’s SB 73, enacted to regulate adult websites, requires platforms to block VPN users or accurately determine each visitor’s physical location to enforce age‑verification gates. The statute also bans sites from providing VPN usage instructions, making Utah the first state to target VPN circumvention of age checks. A federal judge issued a preliminary injunction blocking the law’s VPN provisions, finding that it likely violates the Constitution by imposing an unreasonable burden on businesses nationwide and demanding perfect geolocation—a capability that does not exist. The court noted that compliance would force entities such as Aylo (owner of Pornhub) to verify the age of all 28 million users worldwide, or block all VPN traffic, both impractical and overly intrusive. Proposed administrative rules calling for “commercially reasonable geolocation obfuscation detection systems” rely on unreliable heuristics (e.g., latency, time zones) and would expand surveillance. The injunction halts enforcement pending further litigation, setting a precedent against state mandates that require technically impossible or overly invasive tracking of internet users.</p>
+          </div>
+          <a href="https://www.eff.org/deeplinks/2026/10/court-agrees-eff-utahs-vpn-law-demands-technical-impossibility" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the tension between state attempts to block VPN use for gambling and broader concerns about internet freedom, technical feasibility, and constitutional limits. Many question whether VPN traffic can be reliably identified and argue that enforcement would be costly and ineffective, while others emphasize jurisdictional challenges and potential First‑Amendment violations. Some acknowledge a state’s interest in upholding gambling laws but warn that extensive blocking could lead to broader censorship, self‑censorship, and encroachment on individual liberties. Overall, the discussion reflects skepticism toward broad VPN bans and caution about their implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49927754" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developer.apple.com/pass-designer/" target="_blank">Apple Pass Designer</a>
+        </h2>
+        <span class="article-meta">
+          414 points • by soheilpro • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Pass Designer is an Apple Developer tool for creating and previewing digital passes. It targets a broad range of businesses—including local fitness centers, small music venues, global airlines, and national coffee chains—by providing an interface that simplifies the design process and ensures the resulting passes accurately reflect each brand’s visual identity. The platform emphasizes ease of use, allowing developers to craft pass layouts and immediately view how they will appear to end users. No additional technical specifications, workflow details, or integration instructions are included in the provided excerpt.</p>
+          </div>
+          <a href="https://developer.apple.com/pass-designer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe the pass‑designer as a straightforward, low‑complexity tool that could be built easily with existing UI components and LLM assistance, leading many to view it as unremarkable and overdue rather than innovative. Users note the utility of wallet passes for various scenarios, cite existing free web wizards, and suggest improvements such as dynamic barcodes, cross‑platform standards, and integrated design studios. Criticism centers on Apple’s focus on modest convenience features, perceived platform lock‑in, and inadequate documentation, while a minority express genuine interest in broader applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49937276" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nytimes.com/athletic/7648198/2026/10/01/mike-tomlin-minecraft-nfl-coach/" target="_blank">Mike Tomlin spent 12 years building a Minecraft city</a>
+        </h2>
+        <span class="article-meta">
+          453 points • by CoryOndrejka • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.nytimes.com/athletic/7648198/2026/10/01/mike-tomlin-minecraft-nfl-coach/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The reaction is largely appreciative, emphasizing the unexpected yet impressive dedication of a longtime NFL coach who has spent years building a Minecraft city, and highlighting the story’s heart‑warming, human‑interest appeal. Many note the personal effort and the joy it demonstrates for an adult hobby, while a few raise technical points, suggesting the build could be replicated with AI or mods and questioning its architectural sophistication. Some comments view the news as niche, relevant mainly to sports fans, yet overall the tone is supportive and admiring.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49925184" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://yuka.dev/blog-2026-10-02-linux-m4.html" target="_blank">The Forgetful CPU (Linux on M4)</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by signa11 • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post details the author’s effort to boot Linux on an M4‑based Mac mini. M4 introduces Secure Page Table Monitor (SPTM), which prevents the MMIO tracing used for earlier Apple‑Silicon bring‑up and forces changes to the m1n1 hypervisor. Initial attempts failed because GXF and the Reset Vector Base Address Register (RVBAR) writes caused crashes; skipping these writes allowed m1n1 to run in BRINGUP mode. Early‑boot output was obtained by inserting a minimal <code>debug_putc</code> routine, revealing that Linux’s MMU setup lacked a 1:1 mapping for the UART MMIO region, which was added to the initial page tables. A write to the CPU register <code>SYS_IMP_APL_VM_TMR_FIQ_ENA_EL2</code> also caused a crash until newer iBoot versions unlocked it. The secondary‑core startup required an <code>smp_start_offset</code>; after applying it, the system still crashed due to a broken WFI implementation. Replacing all WFI/WFIT instructions with NOPs enabled multi‑core boot, and a kernel boot‑argument now disables the faulty WFI path. The fix has been merged into mainline Linux and m1n1, allowing M4 (and later M4 Pro/Max, M5) devices to boot Linux with all cores active.</p>
+          </div>
+          <a href="https://yuka.dev/blog-2026-10-02-linux-m4.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express consistent criticism of Apple’s closed ecosystem, describing macOS as bloated and the company’s proprietary protocols as barriers to third‑party hardware such as trackpads. Many suggest that adopting open hardware standards like RISC‑V or improving existing x86‑64 platforms would be preferable, while noting Apple’s strong hardware quality. There is frustration with the difficulty of creating compatible accessories without emulating mouse devices, and some speculation about using AI to overcome these limitations. Overall, the sentiment is skeptical of Apple’s restrictive approach and supportive of more openness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49933869" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/announcing-cloudflare-ohttp-gateway/" target="_blank">Cloudflare OHTTP gateway</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by est • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Cloudflare announced the closed‑beta launch of its OHTTP Gateway, a managed service that decapsulates Oblivious HTTP (OHTTP) traffic and returns encrypted responses, enabling developers to receive HTTP requests without exposing client IPs or TLS fingerprints. The OHTTP architecture separates a relay (which forwards encrypted requests while stripping client identifiers) from a gateway (which performs the HPKE decryption/encryption), creating a “double‑blind” privacy model where no single party sees both identifiers and content.  </p>
+<p>Key points:<br>
+- Two product options: Cloudflare OHTTP Relay (self‑hosted gateway) for off‑Cloudflare servers, and Cloudflare OHTTP Gateway (managed) for apps already behind Cloudflare’s CDN/Workers or for third‑party relays.<br>
+- The Gateway runs on Cloudflare’s global anycast edge network, minimizing latency and handling automatic scaling, key management, and relay authentication via Cloudflare Access.<br>
+- It supports standard and chunked OHTTP, isolates non‑OHTTP traffic, and enforces separation of trust by refusing requests from Cloudflare Workers or proxied hosts.<br>
+- Ideal for privacy‑focused apps (e.g., Flo Health Anonymous Mode, Apple Private Cloud Compute) that need to hide user identifiers while keeping backend performance.  </p>
+<p>Developers must provide their own relay, implement an OHTTP client, and can test with Cloudflare’s pvcli tool. Registration for the waitlist is required.</p>
+          </div>
+          <a href="https://blog.cloudflare.com/announcing-cloudflare-ohttp-gateway/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed views on Cloudflare's role and the OHTTP protocol, combining technical curiosity with privacy concerns. While some dismiss the notion of covert government control, others note that its features—such as TLS fingerprinting and IP‑based blocking—behave as expected for surveillance‑oriented services. Participants question practical implementation, including abuse detection, integration with existing proxies or browsers, and the difficulty for typical users to configure such tools. There is also skepticism about the effectiveness of tracking defenses given pervasive JavaScript and cookie reliance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49941091" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://bsky.app/profile/theplanetaryguy.com/post/3mwucf5ert22f" target="_blank">A 12-year sequence of telescope images of a star and four planets orbiting</a>
+        </h2>
+        <span class="article-meta">
+          275 points • by mariuz • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A 12‑year observational series has captured direct images of a star located approximately 133 light‑years from Earth. Over this period, four exoplanets—each with a mass exceeding that of Jupiter—have been repeatedly imaged, revealing their slow orbital motion around the host star. The data consist of real telescope photographs, not artist renderings or simulations, demonstrating the planets’ positions at multiple epochs and confirming their long‑term dynamical behavior. This sequence provides empirical evidence of massive, widely separated exoplanets in a multi‑planet system and illustrates the capabilities of sustained high‑resolution imaging for tracking orbital evolution over decadal timescales.</p>
+          </div>
+          <a href="https://bsky.app/profile/theplanetaryguy.com/post/3mwucf5ert22f" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the visualizations, highlighting how the animations reveal planetary and galactic dynamics in an engaging, almost awe‑inspiring way. Viewers appreciate the technical progress that now allows direct imaging of faint exoplanets and anticipate future instruments such as the Roman Coronagraph and Habitable Worlds Observatory. Common questions focus on the limited number of frames, noise reduction, and the physical separation of the planets, while there is a shared desire for longer, more detailed observations and additional similar content. Overall sentiment is positive and curious.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49932147" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://thehustle.co/originals/why-barcodes-are-about-to-go-extinct" target="_blank">Barcodes are about to go extinct</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by rmason • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>QR codes, a 2‑D barcode invented by Masahiro Hara at Denso in the early 1990s, are poised to replace the 1‑D Universal Product Code (UPC) that has dominated retail for five decades. The UPC’s network effect, enforced by GS1’s company‑prefix licensing, created a de‑facto monopoly; however, GS1 announced a shift to QR codes (dubbed “Sunrise 2027”) to address limitations of traditional barcodes, especially for detailed traceability in food recalls and regulatory compliance. QR codes can store up to 200× more data, enabling links to origin, ingredients, allergens, expiry, sustainability, and disposal information, while remaining readable at checkout. Early adoption is already evident, with roughly half of surveyed retailers implementing QR capabilities and major brands (e.g., Unilever) re‑packaging tens of thousands of SKUs. Transition challenges include dual‑code packaging, data‑link infrastructure, and system integration; failure to adopt may risk shelf placement as major retailers upgrade scanners. Consumer preference for QR‑linked information is high (≈79 %).</p>
+          </div>
+          <a href="https://thehustle.co/originals/why-barcodes-are-about-to-go-extinct" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show overall optimism toward adopting richer 2‑D barcode standards such as GS1 Digital Link, citing advantages for product tracking, expiration management, recalls and fraud prevention, and appreciating the visual appeal of QR‑type codes. Many note practical benefits already seen in retail, especially for fresh food. At the same time, users point out gaps: current food‑tracking apps rarely read these codes, QR codes can interfere with self‑checkout, and adoption is hindered by legacy systems. Alternatives like color‑coded JAB or Digimarc, and RFID use, are mentioned, reflecting a mix of enthusiasm and pragmatic concern about implementation challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49938306" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.kagi.com/update-orion-linux-windows" target="_blank">An Update on Orion for Linux and Windows</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by pentagrama • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kagi announced that development of Orion for Linux and Windows will cease, and the source code for both platforms will be open‑sourced within the next 30 days. The company will shift all resources to Orion for macOS and iOS, aiming for faster, more stable, and more capable releases on Apple devices. Orion is built by a small, user‑funded team without using Chromium, emphasizing independence.  </p>
+<ul>
+<li>Linux: the current beta will remain functional but will receive no updates after October 2 2026; it is not recommended as a primary browser.  </li>
+<li>Windows: the planned late‑2026 launch is cancelled; the community will receive the code to continue development.  </li>
+</ul>
+<p>Kagi is seeking developers, maintainers, or organizations to steward the open‑source projects and has contacted open‑source foundations for long‑term governance. Interested parties should contact support@kagi.com. The announcement thanks beta testers and contributors for their support.</p>
+          </div>
+          <a href="https://blog.kagi.com/update-orion-linux-windows" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express uncertainty about Orion’s purpose, noting that privacy‑focused users already have open‑source options and view a proprietary browser as a barrier, especially on Linux. Critics question Kagi’s decision to develop its own browser rather than partner with established projects, citing limited market impact and resource constraints. While a few appreciate the early release and continued macOS support, reports of bugs and inconsistent stewardship across platforms erode trust, and many suggest Kagi should concentrate on its search service.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49941447" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
