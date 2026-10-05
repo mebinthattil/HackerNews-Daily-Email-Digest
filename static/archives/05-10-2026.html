@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 05, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cpr.dk/cpr-nyt/nyhedsarkiv/2026/okt/omfattende-uautoriseret-adgang-til-borgeres-cpr-oplysninger" target="_blank">Denmark Data Breach Exposes 8.8M People&#39;s Personal Data</a>
+        </h2>
+        <span class="article-meta">
+          131 points • by clan • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Central Person Register (CPR) reported a major security breach in which an unauthorized party exploited a Danish company’s legitimate access rights to query the CPR database. Through this misuse, the party obtained personal data—including names, addresses, and CPR numbers—for approximately 8.8 million registered citizens. The breach excludes individuals who have opted for name and address protection, whose details were not accessed. CPR administration has revoked the company’s access, notified the Danish Data Protection Agency, and is cooperating with specialists and law‑enforcement to reconstruct the incident timeline. The case is under police investigation alongside relevant authorities. Additional information is available on the Ministry of Research, Education and Digitalisation’s website.</p>
+          </div>
+          <a href="https://www.cpr.dk/cpr-nyt/nyhedsarkiv/2026/okt/omfattende-uautoriseret-adgang-til-borgeres-cpr-oplysninger" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express deep distrust of how personal data is collected and protected, emphasizing that frequent breaches—such as the recent Danish CPR leak affecting millions—show systemic weaknesses in both private firms and public‑sector digital infrastructure. Contributors criticize inadequate cybersecurity investment, lax access controls, and the perceived lack of consequences for mishandling identifiers like social‑security numbers. There is a prevailing view that leaks will continue, especially with expanding AI capabilities, and a call for stronger accountability and protective measures across Europe.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49962012" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.huawei.com/en/news/2026/10/qualcomm-broad-patent-agreement" target="_blank">Huawei and Qualcomm Announce Broad Patent License Agreement</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by 0xedb • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Huawei and Qualcomm have signed a multi‑year, broad patent‑license agreement covering cross‑licensing of their respective portfolios in 5G, compute, artificial intelligence, networking and related technologies. The deal includes Qualcomm’s acquisition of select Huawei U.S. patents in the same domains, pending regulatory approval. Both parties emphasize adherence to fair, reasonable and non‑discriminatory (FRAND) licensing standards. Huawei’s Chief Intellectual Property Officer, Alan Fan, highlighted the company’s long‑term R&amp;D contributions to 4G/5G standards, such as polar‑code signal transmission, while Qualcomm’s EVP John Han noted Qualcomm’s foundational wireless technologies and its 5G SEP licensing program, acknowledging Huawei’s ongoing innovation. The agreement aims to reinforce mutual recognition of each firm’s intellectual‑property assets and to support continued development in modern communication technologies.</p>
+          </div>
+          <a href="https://www.huawei.com/en/news/2026/10/qualcomm-broad-patent-agreement" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the recent Qualcomm‑Huawei patent agreement, describing it as a pragmatic cross‑licensing move driven by the overlapping 5G standard‑essential patents held by both firms and other major players. Contributors view the deal as evidence of a mutually dependent, cartel‑like patent environment that forces companies to settle on FRAND rates to avoid costly litigation, while criticizing Qualcomm’s practices and questioning US policy consistency. There is consensus that such arrangements constrain startups and reinforce an oligopolistic licensing structure.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49961861" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stratechery.com/2026/apple-and-a-hackers-future/" target="_blank">Apple and a Hacker&#39;s Future</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by maguay • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CVE‑2026‑65400 is a high‑severity (7.1) macOS screen‑sharing bug that lets remote attackers execute code via port 5900 when the service is internet‑exposed. Exploits observed by the Dutch NCSC installed a Monero miner with root access. Apple patched the flaw for macOS Tahoe, Sequoia, and Sonoma, but the fix arrived in a point release that many users missed despite enabling automatic security updates. The vulnerability stems from flawed state‑management in screen‑sharing, and Apple credited security firm Bynario for its discovery.  </p>
+<p>Ben Thompson describes how his always‑on Mac Mini, running only Claude and Codex, was compromised; an agent he built detected the intrusion, stopped commands, and helped identify a malicious hook in /etc/zshenv that launched a miner script in /var/tmp/.xmr, both timestamp‑masked to 1969. He attributes the incident to reliance on screen sharing and macOS’s Transparency, Consent, and Control (TCC) permission model, which blocks headless agents from seeing prompts. Thompson critiques Apple’s forthcoming Full Disk Access restrictions and the upcoming smart‑home hub (J490), arguing that Apple’s app‑centric approach may hinder AI‑driven agents, and notes his shift toward Linux for future workloads.</p>
+          </div>
+          <a href="https://stratechery.com/2026/apple-and-a-hackers-future/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary views Apple’s clarification of Full Disk Access as justified rather than a cause for emotional backlash, suggesting that criticism on social media stems from a focus on average‑user convenience rather than technical rationale. It frames the change as a deliberate platform control measure, portraying Apple’s restrictions on background processes as a security strategy that privileges its own system frameworks over third‑party agents. The overall tone is analytical, emphasizing policy intent over sentiment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49962857" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Niko1221/Strata" target="_blank">Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s</a>
+        </h2>
+        <span class="article-meta">
+          815 points • by snehesht • 79 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Strata is an open‑source inference engine that runs the 125‑billion‑parameter Qwen3.8‑Flash‑Next model on consumer PCs with NVIDIA or AMD GPUs of 12 GB VRAM or more (Windows or Linux). The installer detects hardware, selects an appropriate compressed model variant, and downloads ~70 GB; it then loads 35‑55 GB into RAM and reserves part for the GPU. Reported throughput is ~60 tokens / s on a typical gaming card (e.g., RTX 5070) and up to 100‑140 tokens / s on an RTX 3090. Multiple GPUs can share the workload. Model variants include “Coder” (32 GB RAM, 91 % SWE‑bench score), “Swift 1.5”, Unsloth 4‑bit versions, and others; smaller variants run faster, larger ones are more capable. Strata provides an OpenAI‑compatible endpoint (http://127.0.0.1:8080/v1) and an Anthropic‑compatible messages endpoint, allowing integration with coding assistants, Codex CLI, and other tools. Optional image input is supported on Linux AMD cards (not yet on Windows). Troubleshooting covers RAM limits, frozen startup, port conflicts, and parallel request handling. Documentation includes installation, model selection, and the underlying expert‑splitting architecture.</p>
+          </div>
+          <a href="https://github.com/Niko1221/Strata" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect broad enthusiasm for recent advances that enable high‑throughput local inference of large language models, especially with 4‑bit and related quantizations that achieve impressive token‑per‑second rates on consumer GPUs. At the same time, users express caution about accuracy loss at very low bit depths, note hardware limits such as VRAM and RAM constraints, and call for clearer benchmarking of speed versus quality. There is recurring interest in making models more accessible on modest systems, while some remain skeptical of hype and emphasize the need for balanced performance and reliability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49953495" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://filmstories.co.uk/news/tippett-studios-in-the-wake-of-its-closure-a-digital-archive-of-animated-materials-appears-online/" target="_blank">In the wake of Tippett Studios’ closure, a digital archive appears online</a>
+        </h2>
+        <span class="article-meta">
+          145 points • by rdmuser • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tippett Studios, the Berkeley‑based animation and effects house founded by Phil Tippett, closed on August 28 after prolonged financial difficulties, with its props, memorabilia and art sold in a two‑day auction. During the auction an unidentified buyer acquired a folder of CD‑ROMs and other discs and subsequently uploaded the contents to the Internet Archive. The donor, calling themselves “TippettFan,” digitized 90 unique discs as .ISO image files, preserving high‑resolution material that would otherwise have been lost. The archive includes test clips of CGI creatures, a 2008 interview with Phil Tippett, behind‑the‑scenes images from RoboCop and Starship Troopers, slides from the original Star Wars effects work, and publicity stills from Catwoman. A few clips are viewable online; the remainder are available for download as large ISO files. The upload was highlighted by Brandon Sheffield on BlueSky, offering historians and fans extensive film‑history resources to examine.</p>
+          </div>
+          <a href="https://filmstories.co.uk/news/tippett-studios-in-the-wake-of-its-closure-a-digital-archive-of-animated-materials-appears-online/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments collectively express strong appreciation for the rescue and digitization of a 90‑GB collection of vintage CD‑ROMs, highlighting the value of preserving film history that might otherwise remain inaccessible. The effort is praised as both impressive and somewhat unsettling given its reliance on a single discoverer’s actions. Contributors suggest acknowledging the rescuer’s name in the title, emphasize the importance of archiving on the Internet Archive and creating torrent mirrors, and note the loss that would have occurred without this preservation. Overall sentiment is supportive and optimistic about accessibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49957812" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cedardb.com/blog/sqldoom/" target="_blank">We ported the original Doom to SQL</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by Vaslo • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The project “SQLDoom” ports the original 1993 Doom’s game logic and renderer entirely to SQL, running inside a database while a Python client handles input, timing, and bitmap display. Game state (vertices, linedefs, sidedefs, sectors, things) is loaded from the Doom WAD into relational tables in about 18 s. The game loop operates at the classic 35 Hz tick rate, implemented as a series of stored procedures (cedarscript) that update entity components via bulk UPDATE/INSERT statements; a typical tick with six monsters takes ~2 ms, while a worst‑case tick consumes ~10 ms (≈37 % of the 28.6 ms budget). Rendering is a pure SQL function: a recursive CTE pipeline (≈89 CTEs, ~1300 lines) walks the pre‑computed BSP tree, performs visibility culling, projects walls and sprites, resolves depth ordering, applies colormaps and HUD, and finally aggregates 64 k RGB rows into a 192 kB framebuffer. The renderer can produce frames up to 60 Hz on an AMD Ryzen 7 7840U. Multiplayer deathmatch with up to four players is supported, and live game state can be queried via SQL while waiting in the queue.</p>
+          </div>
+          <a href="https://cedardb.com/blog/sqldoom/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong admiration for implementing complex game logic in SQL, highlighting its surprising simplicity, compactness compared to equivalent C code, and the benefits of atomicity and direct data‑logic integration. Many note practical experience with stored procedures in industrial settings, emphasizing collaborative editing and easy testing. Some acknowledge scalability challenges such as deadlocks and performance limits for real‑time action games, but view the approach as a clever, artistic solution for turn‑based multiplayer scenarios. Overall sentiment is positive, viewing SQL‑driven game logic as innovative and underappreciated.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49948300" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://wieslawsoltes.github.io/VB6/" target="_blank">A browser-native classic Visual Basic VB6 IDE</a>
+        </h2>
+        <span class="article-meta">
+          250 points • by wiso • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>I’m unable to provide a summary because the submitted text contains only a title and no substantive content to summarize.</p>
+          </div>
+          <a href="https://wieslawsoltes.github.io/VB6/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong nostalgia for classic development environments, praising the recreation’s ability to evoke memories of VB6, Turbo Pascal, and early visual IDEs while noting its fast browser launch and familiar property‑grid workflow. Several users highlight visual flaws, distorted UI elements, and missing features such as proper event handling, IntelliSense, debugging, and Win32 API support, describing bugs that hinder control selection and list updates. There is curiosity about whether AI assisted the project, alongside suggestions to improve fidelity, add API layers, and enable richer export options.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49956681" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://www.taobackup.com/index.html" target="_blank">The Tao of Backup</a>
+        </h2>
+        <span class="article-meta">
+          152 points • by vntok • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided excerpt consists of a page titled “The Tao Of Backup” and includes a single visual element described by the alt text “The Tao of Backup.” No additional textual content or further details are present in the supplied material.</p>
+          </div>
+          <a href="http://www.taobackup.com/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments combine humor, nostalgia and mild skepticism, generally acknowledging the backup advice as sensible while joking about the “master‑novice” narrative and outdated terminology. Several remarks appreciate the simplicity of the presentation and the practical suggestion of backing up system configurations, yet a few express doubt about hidden product promotion and note the post’s age and formatting quirks. Overall, the tone is light‑hearted, with appreciation for the advice tempered by playful criticism of its presentation and perceived commercial motives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49932236" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.zarfhome.com/2026/10/infidel-goes-wild" target="_blank">Infidel goes wild</a>
+        </h2>
+        <span class="article-meta">
+          141 points • by tobr • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post documents a critical memory‑corruption bug in Infocom’s <em>Infidel</em> (release 22, serial 840522 for Macintosh, also present in the original 830916). The routine <strong>DESERT‑TO‑TABLE</strong> is meant to store objects dropped in the “ENDLESS‑DESERT” into a fixed 100‑value array (<strong>DESERT‑TABLE</strong> at address 11129). ZIL generated the routine with a default argument <code>TBL</code> that should reference the global variable DESERT‑TABLE, but the compiler substituted the global’s index (30) instead of its address. Consequently the routine writes object IDs starting at memory location 30, overwriting unused header bytes and the abbreviations table (starting at 64). This produces garbled text, loss of the word “the,” and can crash the interpreter. A similar flaw exists in <strong>PROP‑TO‑TBL/TBL‑TO‑PROP</strong> (global 22, address 11329). The bug went unnoticed because players rarely drop more than eight objects in the endless desert. Fixes include removing the default argument and initializing <code>TBL</code> with <code>&lt;SET TBL ,DESERT‑TABLE&gt;</code> or passing the table address explicitly.</p>
+          </div>
+          <a href="https://blog.zarfhome.com/2026/10/infidel-goes-wild" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a broadly positive view of interactive‑fiction, noting that the community remains active and that new, high‑quality text adventures are released regularly, often for free. Contributors acknowledge the parser learning curve but advise newcomers to start with modern titles and use resources such as the Interactive Fiction Database. Development tools like Inform 7, Inform 6, Dialog and others are highlighted for their differing strengths. Additional topics include historical interest, occasional technical experimentation such as fuzzing, and mixed opinions on the role of LLMs in programming.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49943637" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cambridge.org/core/journals/iraq/article/gods-in-the-classroom-religion-and-education-in-1st-millennium-bce-babylonia/EB059EE81804DCBC1848CACBD6298E0B" target="_blank">Gods in the Classroom: Religion and Education in First Millennium BCE Babylonia</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by pseudolus • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that “religious education” in 1st‑millennium BCE Babylonia was not a separate scholastic unit but was embedded in the broader scribal curriculum, which served elite boys destined for priestly, administrative, or specialist roles. Formal schooling—private, household‑based instruction—combined literacy training with transmission of theological knowledge through diverse texts rather than a single scripture. Core learning outcomes included memorising god‑lists (the An and An = Anum lists) to master divine logograms and Akkadian‑Sumerian equivalents, copying prayers, hymns and mythic excerpts (e.g., Enūma eliš, Marduk hymns) that conveyed the attributes and hierarchy of deities, especially Marduk’s supremacy and Babylon’s status as religious capital. A secondary curriculum in southern cities (Nippur, Uruk) emphasized local deities such as Ninurta and avoided the “Marduk syllabus,” reflecting competing regional identities. The multi‑stage program progressed from basic sign lists to complex lexical lists, incantations, and topographical texts like Tintir, which glorified Babylon’s sacred geography. These texts functioned to inculcate state‑aligned religious ideology, socialize future elites, and preserve both Akkadian and residual Sumerian traditions amid shifting imperial contexts.</p>
+          </div>
+          <a href="https://www.cambridge.org/core/journals/iraq/article/gods-in-the-classroom-religion-and-education-in-1st-millennium-bce-babylonia/EB059EE81804DCBC1848CACBD6298E0B" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment reflects on the historical intertwining of religion and early scientific understanding, arguing that religious belief served essential social cohesion before modern explanations of natural phenomena emerged. It questions whether ancient Babylonian education treated religious texts as literal truth or practical curriculum, and extends the discussion to contemporary AI alignment, proposing a divine or moral framework—potentially invoking fear of eternal punishment—to ensure compliance. Overall, the remarks blend historical perspective with speculative suggestions for embedding ethical constraints in artificial intelligence.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49920332" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
