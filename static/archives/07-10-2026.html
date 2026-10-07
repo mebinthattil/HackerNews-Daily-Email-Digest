@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 07, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/szabadkai/c64-keyboard-font/" target="_blank">A font recreated from photographs of classic Commodore 64 keycaps</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by sohkamyung • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A repository provides a reconstructed “C64 Keyboard” font derived from photographs of original Commodore 64 keycaps. The package includes TTF, OTF, and web‑font files plus a preview.html tester that lets users insert special‑key and PETSCII symbols, then copy the resulting text. Features:</p>
+<ul>
+<li>Uppercase letters, numbers, punctuation, arrows, £ sign; selected accented characters (including Hungarian); function‑key labels (F1‑F12); classic C64 key legends.</li>
+<li>All 63 PETSCII graphic front legends, mapped to their original key positions; left legends correspond to Commodore + key, right legends to Shift + key (uppercase/graphics mode). Pi appears unframed on the up‑arrow key.</li>
+<li>Lowercase input renders as uppercase, preserving printed key‑cap appearance rather than the screen bitmap font.</li>
+</ul>
+<p>Outlines are reconstructed from the Ultimate Commodore 64 Reference and inferred from a supplied keyboard photograph; they are not exact traces. Editable glyph outlines reside in inglyphs/, with build scripts in scripts/. The project is an independent, unofficial reconstruction, version 1.107, replaceable via the provided package.</p>
+          </div>
+          <a href="https://github.com/szabadkai/c64-keyboard-font/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion conveys a generally positive view of the typeface’s aesthetic, describing it as a pleasing humanist sans. Commenters express curiosity about its origin, questioning whether the glyphs were created specifically for keyboard use or derived from an existing font. There is interest in broader platform support, including a version for the ZX Spectrum, and frustration over non‑functional download links, with requests for a working TTF file.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49990224" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" target="_blank">Sharing AI progress in mathematics</a>
+        </h2>
+        <span class="article-meta">
+          938 points • by OfficialTurkey • 117 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/sharing-ai-progress-in-mathematics/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the recent AI‑generated proofs, highlighting their breadth, perceived significance for longstanding open problems, and the impressive speed of computation. Many note a mix of personal disappointment and existential reflection about human effort being superseded, while also raising concerns about academic gate‑keeping, the need for human verification, and potential disruptions to doctoral research. There is optimism that the technology could transform mathematics and related fields, tempered by caution regarding verification standards, attribution, and broader societal priorities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49984923" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://strandsagents.com/blog/introducing-strands-decider/" target="_blank">Strands Decider 2B: a small, open-source, decision model</a>
+        </h2>
+        <span class="article-meta">
+          180 points • by gmays • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Strands Decider 2B is an open‑source 2 billion‑parameter decision model designed for fast, low‑latency inference on local CPU/GPU hardware. It repurposes a pre‑trained Qwen 3.5‑2B language‑model torso, removes the text‑generating LM head, and adds a lightweight (~1 M param) pointer head that scores candidate answers by comparing hidden states at option positions with the answer position; the torso is fine‑tuned via a rank‑16 LoRA adapter (v19 architecture).  </p>
+<p>Performance on JevBench shows competitive accuracy and calibration (ranked 3rd of 33 models in the 2 B class, 1st of 30 excluding slightly larger models) with Brier‑score‑based confidence reliability. Median decision latency is ≈115 ms on an RTX 3090 (≈153 ms on an M3 MacBook), scaling roughly linearly with token count.  </p>
+<p>The model outputs a selected option plus a confidence score, enabling applications such as model routing, tool selection, guardrails, memory/context management, policy classification, and hybrid agent workflows that combine LLMs for complex reasoning with deciders for inexpensive, deterministic choices. Code, weights, training data, and CLI tools are released on GitHub and Hugging Face for immediate experimentation.</p>
+          </div>
+          <a href="https://strandsagents.com/blog/introducing-strands-decider/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall interest in the decision‑model family, highlighting its compact size, speed, and suitability for low‑latency classification and automation tasks, while praising its clear documentation. Technical concerns dominate, especially regarding CPU load, conversion difficulties, and hardware requirements, prompting suggestions to use NPUs or iGPUs for better performance and lower power consumption. Users discuss fine‑tuning possibilities, integration with llama.cpp, and the desire for multimodal extensions, noting mixed experiences with reliability and benchmark calibration.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49987076" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nobelprize.org/prizes/chemistry/2026/press-release/" target="_blank">Nobel Prize in Chemistry 2026 to Henri B. Kagan and Kenso Soai</a>
+        </h2>
+        <span class="article-meta">
+          10 points • by sasvari • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Royal Swedish Academy of Sciences awarded the 2026 Nobel Prize in Chemistry jointly to Henri B. Kagan (Université Paris‑Sud, France) and Kenso Soai (Tokyo University of Science, Japan) “for the discovery of non‑linear effects and autocatalysis in asymmetric organic synthesis.” Their work resolved the long‑standing problem of biological homochirality by demonstrating how asymmetric reactions can produce a single enantiomer preferentially. Kagan’s 1986 discovery introduced a method to bias reaction outcomes toward one mirror image, while Soai’s 1995 and 2003 studies culminated in the Soai reaction, the first example of a chemically induced, self‑amplifying, enantioselective process that yields exclusively one enantiomer. These findings enable chemists to design enantioselective syntheses crucial for pharmaceuticals and other applications requiring chiral specificity. The prize includes a 12 million SEK award divided equally between the laureates. Additional resources include popular‑science and scientific background PDFs.</p>
+          </div>
+          <a href="https://www.nobelprize.org/prizes/chemistry/2026/press-release/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49990470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://developers.openai.com/api/docs/guides/decisions" target="_blank">Decisions API is in public beta</a>
+        </h2>
+        <span class="article-meta">
+          302 points • by chiefstorm • 45 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Decisions API provides fast (≈10× quicker than the Responses API) typed evaluations of text, images, or combined inputs. It returns a single‑choice answer, a probability‑weighted score, or a binary predicate with an associated probability. The only available model is <strong>gpt‑6‑luna</strong>, accessed via the POST /v1/decisions endpoint. A request includes three fields: <code>model</code>, <code>input</code> (a list of user messages containing <code>input_text</code>, <code>input_image</code>, or both), and <code>questions</code> (each with <code>type</code>, <code>name</code>, <code>instructions</code>, and optional <code>choices</code>). Responses contain an <code>answers</code> array echoing the question <code>name</code> and providing <code>type</code>‑specific fields: <code>probability</code> for predicates, <code>choice</code> + <code>confidence</code> for choice questions, or <code>score</code> + <code>probability</code> for scored categories. Images must be supplied as inline base64 data URLs; external URLs or <code>file_id</code>s are unsupported. SDK examples (Python 3.26+, JavaScript 7.30+, Go 3.73+, Ruby 0.101+, Java 4.78+) illustrate constructing the request, handling predicate refusals, and extracting probabilities. Choice questions route inputs (e.g., billing vs. technical) with confidence scores, while score questions compute weighted averages across ordered levels.</p>
+          </div>
+          <a href="https://developers.openai.com/api/docs/guides/decisions" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed reception to OpenAI’s new Decisions endpoint. Many note its speed and binary‑confidence output as useful, especially for cheap classification tasks, and appreciate added image support. However, several users report slower response times, higher costs, and lower accuracy compared with alternatives like Jev or open‑source models, questioning its value and pricing. Skepticism recurs about the service’s lack of a competitive moat, potential commoditization of AI, and OpenAI’s strategic focus, while others explore local implementations and future feature expectations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49984025" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mistral.ai/news/mistral-large-4/\" target="_blank">Mistral Large 4</a>
+        </h2>
+        <span class="article-meta">
+          1827 points • by Philpax • 132 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://mistral.ai/news/mistral-large-4/\" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note that Mistral Large 4 achieves strong results on vision and cybersecurity benchmarks, often matching or surpassing Chinese open‑weight models and offering lower token costs than earlier Mistral releases. Users appreciate European training and inference for sovereignty reasons and see the model as a useful daily driver in data analytics and legal research. Criticism focuses on slower generation, higher pricing relative to cheaper open‑source alternatives, subscription restrictions, and occasional tool‑calling problems. Overall perception is that the model represents solid progress and increased competition, though it is not viewed as a breakthrough compared with leading closed‑source systems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49977979" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/travelonium/arcadeia" target="_blank">Show HN: Arcadeia – A self-hosted media library with animated video previews</a>
+        </h2>
+        <span class="article-meta">
+          3 points • by omidontop • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Arcadeia is an open‑source, self‑hosted media library for personal photo and video collections, released under AGPL‑3.0. It provides a web interface with animated video thumbnails that highlight key moments, enabling visual browsing without opening each file. Core features include full‑text search with advanced queries, drag‑and‑drop import of files, directories or URLs, favorite tagging, on‑the‑fly transcoding to browser‑compatible formats, and integration of network storage. The system runs in Docker via docker‑compose, employing Apache HTTP Server, Solr for search, and a bundled .NET Core runtime. Minimum hardware requirements are 4 GB RAM, 10 GB storage, and an x86_64 or ARM64 CPU; 8 GB RAM is recommended for large libraries. Supported OSes are recent Linux distributions and macOS 11+ (Intel or Apple Silicon). The project warns that it lacks built‑in security for public exposure; deployments should use reverse‑proxy SSL/TLS, firewalls or VPNs, and limit access to trusted networks. Contributions are accepted through GitHub issues and pull requests, with testing guidance in TESTING.md.</p>
+          </div>
+          <a href="https://github.com/travelonium/arcadeia" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>No comments were provided, so there are no observable sentiments, recurring themes, agreements, or disagreements to summarize. Without any user feedback or discussion, it is not possible to identify collective opinions or assess the perceived usefulness of the animated thumbnails or the clarity of the installation guide. Consequently, no consensus or pattern can be reported.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49957044" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/" target="_blank">EmbeddingGemma 2: An open, lightweight multimodal embedding model</a>
+        </h2>
+        <span class="article-meta">
+          333 points • by ilreb • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>EmbeddingGemma 2 is an open‑source, natively multimodal embedding model built on the Gemma 4 architecture and released under the Apache 2.0 license. It contains 740 million parameters, optimized for on‑device inference, and unifies text, code, image, video, and audio representations within a single embedding space. The predecessor, EmbeddingGemma, achieved over 20 million downloads and was used for on‑device search and privacy‑focused retrieval‑augmented generation pipelines. EmbeddingGemma 2 extends this capability, enabling cross‑modal queries such as locating a specific video segment from a voice memo or searching hours of audio using text prompts. Performance is illustrated on several internal benchmarks: Massive Text Embedding Benchmark (Code), Massive Image Embedding Benchmark (Lite), and Massive Audio Embedding Benchmark. The model targets lightweight, high‑quality embeddings for consumer‑hardware applications.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary expresses strong approval of EmbeddingGemma 2, emphasizing its Apache 2.0 license, open weights, and lightweight multimodal design as valuable for on‑device and privacy‑focused applications. Users appreciate the ability to rely on a hosted service while retaining the option to run the model locally if the provider discontinues support, and they note the model’s modest size relative to earlier embeddings. Interest is shown in comparing performance to existing services, exploring quantization techniques, and understanding accuracy, hallucination rates, and practical use‑cases for text, vision, and audio embeddings.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49980487" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/shader-effects-inc/shaders" target="_blank">Shaders, WebGPU Components for React, Vue, Svelte, Solid, JavaScript and Framer</a>
+        </h2>
+        <span class="article-meta">
+          29 points • by jinqueeny • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Shader Effects Inc. provides a WebGPU‑based component library (“shaders”) for React, Vue, Svelte, Solid, plain JavaScript, and Framer. The package includes 200+ ready‑to‑drop effects (gradients, noise, glass, blur, cursor trails, etc.) implemented as  components; child layers are evaluated sequentially and blended on the GPU. The library is written in TypeScript, SSR‑safe, with typed reactive props and is used by thousands of sites. A visual design editor (shaders.com) lets users compose effects on an infinite canvas, adjust props via UI, drive them from cursor or timeline, and export the exact component tree for the target framework. A CLI (<code>npx shaders</code>) connects a codebase to a Shaders project, installs selected components, and syncs updates via a lock file. Custom shaders can be defined via <code>defineShader</code>, supplying a name, prop schema, and WGSL pixel code or std primitives. The core engine (MIT‑licensed) resides in <code>packages/core</code>; framework bindings are generated from it. Pro tier adds presets, sections, HD rendering, Framer plugin, version history, and priority support. Contributions are welcomed via pull requests.</p>
+          </div>
+          <a href="https://github.com/shader-effects-inc/shaders" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback is mixed, recognizing the visual appeal of the shader‑driven site while questioning its practical value. Commenters note the lack of texture‑based, lighting‑responsive effects and view the designs as decorative gimmicks rather than functional UI elements. Performance concerns surface, especially on modest hardware, and the HTML‑centric syntax is seen as overly verbose compared to a programmatic JavaScript API. Uncertainty about the distinction between the open‑source repository and the paid offering adds confusion, though the overall impression remains that the execution is impressive but not universally suitable.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49988709" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/M-Abozaid/esp32-c3-adblock" target="_blank">ESP32-C3 Adblock</a>
+        </h2>
+        <span class="article-meta">
+          100 points • by jayhoon • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Pi‑hole‑style DNS ad‑blocker runs on a $2 ESP32‑C3 without PSRAM by storing 40‑bit FNV‑1a hashes of domains in flash and binary‑searching them. ≈140 k domains occupy ~0.7 MB flash and are matched in ~10 ms using ~50 KB RAM; the 40‑bit size balances collision risk (≈1 collision at 537 k entries) against flash usage. The firmware extracts the queried domain, hashes it (including parent suffixes), and either returns 0.0.0.0 for hits or forwards to an upstream resolver for misses.</p>
+<p>Key components:
+- Build with PlatformIO (latest core required); copy secrets.example.h → secrets.h, set Wi‑Fi, web, and OTA passwords.
+- Generate the blocklist binary via tools/build_blocklist.py from hosts files, plain lists, or AdGuard rules; unsupported rules are ignored.
+- Flash firmware and blocklist filesystem in one USB session; subsequent updates occur OTA via a web dashboard (blocklist upload or remote URL, firmware upload, scheduled pulls).
+- Wi‑Fi setup via captive portal if no credentials; device discovered as c3adblock.local.
+- Security: HTTP Basic Auth protects state‑changing endpoints; X‑Requested‑With header mitigates CSRF; credentials are sent base64‑encoded over plain HTTP.
+- Features: per‑client stats, client banning, mDNS discovery, OTA updates, captive‑portal setup. Limitations include flash‑only blocklist size (≈1.3 MB with OTA firmware slots) and no TLS support. MIT‑licensed.</p>
+          </div>
+          <a href="https://github.com/M-Abozaid/esp32-c3-adblock" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments discuss a DNS‑blocking project, noting technical strengths such as the ability to handle large blocklists and the potential for probabilistic structures like Bloom filters, while also raising concerns about hash‑collision false positives, latency around 10 ms, and documentation quality. Hardware advice favors ESP32‑C3 models with external antennas, and suggestions include using ESP‑IDF over PlatformIO and adding multi‑device redundancy. Opinions vary between appreciation for the concept’s feasibility and criticism of performance, tooling, and naming, reflecting a balanced but cautious overall view.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49986862" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
