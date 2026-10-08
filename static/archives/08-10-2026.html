@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 08, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mathstodon.xyz/@tao/117395269325940185" target="_blank">“Math 2.0” will need to value mathematical progress more holistically</a>
+        </h2>
+        <span class="article-meta">
+          308 points • by ent101 • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page consists solely of a Mastodon interface notice and a title referencing Terence Tao’s comment about “Math 1.0” emphasizing priority in being first. No additional article text, images, or substantive content is present beyond the generic JavaScript requirement and an image placeholder.</p>
+          </div>
+          <a href="https://mathstodon.xyz/@tao/117395269325940185" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize AI’s capacity to solve problems quickly but criticize a prevailing focus on benchmark achievements that ignore insight, exposition, and community integration. Writers call for a shift toward “authorship 2.0,” emphasizing collaboration, contextual understanding, and holistic evaluation of contributions rather than raw proofs. Opinions are mixed: some see opportunities for new research models, improved teaching materials, and collaborative protocols, while others warn of mechanisation eroding meaning, widening resource gaps, and diminishing the intrinsic value of mathematical inquiry.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50002008" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank">Claude Haiku 5.5</a>
+        </h2>
+        <span class="article-meta">
+          896 points • by sfkgtbor • 69 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Claude Haiku 5.5 is a new small‑scale model optimized for high‑volume, cost‑sensitive workloads such as summarization, classification, database queries, and sub‑agent tasks. It runs ~75 % cheaper than Haiku 4.5 and offers the fastest inference speed in the Claude family, delivering up to 2.5× faster per‑turn latency in agentic use cases. Performance benchmarks (OSWorldKnowledge, GDPval‑AA, Humanity’s Last Exam) show improved scores across adjustable effort settings. Early customer tests report: 30 % latency reduction for AI‑teammate tasks (Asana), 92.8 % accuracy on CRM audits with the lowest false‑positive rate (HubSpot), and statistically significant gains in document‑question answering (AlphaSense). Safety evaluations indicate fewer misalignment incidents and more restrictive cybersecurity safeguards than Haiku 4.5, while maintaining biology safeguards comparable to Sonnet 5/5.5 and Opus 5. Pricing tables highlight strong value for prompts ≤100 k tokens (≈90 % of prior Haiku requests). Haiku 5.5 is available on AWS, Google Cloud, Azure, and the Claude Platform, with updated Python/TypeScript SDKs supporting computer‑use and browser beta features. Additional updates include a 50 % cut to Sonnet 5.5 cache‑read costs and new monthly API credits for Max and Team subscribers.</p>
+          </div>
+          <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe Claude Haiku 5.5 as a marked upgrade from 4.5, highlighting substantially lower per‑token costs, faster response times and benchmark results that often surpass GPT‑6 Luna and approach Sonnet/Opus quality. Users appreciate the new monthly API credits for Max and Team plans, seeing them as useful for building agents. However, several points of criticism recur: the model’s higher token consumption, price spikes beyond the 100 k token threshold, occasional slowdown, prompt‑leakage issues, and limited suitability for complex UI or deep statistical tasks. Overall sentiment is cautiously optimistic, recognizing both the improvements and the remaining trade‑offs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49996437" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://shahidhussain.com/writing/search-for-salvage/" target="_blank">The 15-year search for a band that charted once and vanished</a>
+        </h2>
+        <span class="article-meta">
+          125 points • by shahidhussain • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author spent 15 years tracking a 2006 indie‑rock CD by a band called Salvage, released on the tiny Despatches label and featuring the tracks “Electric” and “Searchlights”. Generic names, loss of the physical disc, and multiple bands named Salvage hindered discovery. Using AI‑assisted searches, the author confirmed a chart entry (No. 47 on the Independent Singles Chart, June 2006), identified the barcode’s shipper (Key Production, London), and exhausted databases (Discogs, GN​UDB, AcoustID, Spotify, Bandcamp, MusicBrainz, eBay, SoundExchange, Pandora). A misspelled credit led to producer Greg Haver, who connected the author with vocalist/guitarist Sam Tattersall. The band’s lineup was Sam Tattersall (vocals, guitars), Jon Tattersall (bass) and Matt Salvage (drums); production used a vintage Trident desk at Manic Street Preachers’ FASTER Studios, mixed manually and mastered by Shawn Joseph. After failing to secure a label deal, Salvage renamed themselves OK Tokyo, later maintaining a flash‑based website and MySpace. The investigation concludes with high‑resolution CD artwork provided by Haver, ending the search.</p>
+          </div>
+          <a href="https://shahidhussain.com/writing/search-for-salvage/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express a strong appreciation for the thrill of uncovering obscure or forgotten music, describing detailed personal searches that often involve linguistic barriers, limited online footprints, or outdated formats. Many highlight the nostalgic value of physical media and the satisfaction derived from diligent research, while also noting frustration with modern algorithmic recommendations that obscure discovery. There is a recurring view that the process of tracking down rare tracks enriches musical taste and offers a rewarding, though sometimes arduous, experience.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49959280" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://100r.ca/site/home.html" target="_blank">Living off-grid: Hundred Rabbits</a>
+        </h2>
+        <span class="article-meta">
+          228 points • by Muhammad523 • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The site’s monthly updates document a community of developers and sailors working on open‑source, low‑level software and analog communication tools. Recent highlights include a new “Rabbit Waves” page teaching One‑Time Pad encryption, the release of an animated browser version of the retro game <strong>Donsol</strong> (with Uxn Playdate support), and a point‑and‑click title <strong>Lepore Express Line</strong> written in Uxntal, a 16‑bit concatenative assembly language. Contributors are reviving the 1970s POP‑2 language for cross‑dialect exchange, expanding Giuseppe Peano’s “Latino Sine Flexione” into a BNF‑style auxiliary language, and developing a vector renderer for typesetting in Uxn (used in two recent zines). Ongoing boat work on the sailboat <em>Pino</em> includes rigging upgrades, water‑tank installation, and galley reconstruction. The group maintains a “No Bears None” logbook of a Victoria‑to‑Sitka voyage, produces custom comics (e.g., “Tangled”), and runs a book club with titles ranging from <em>To Kill a Mockingbird</em> to <em>1984</em>. Archives for 2018‑2025 are linked.</p>
+          </div>
+          <a href="https://100r.ca/site/home.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong appreciation for the duo’s off‑grid, self‑sufficient projects, noting the appeal of hands‑on building, open‑source analogies, sailing narratives, and custom software, and many say they feel inspired to pursue similar low‑tech or DIY endeavors. Several remarks highlight the philosophical value of repairing and understanding one’s tools and envision a shift toward real‑world connection over digital dependence. A minority critique the lifestyle as solipsistic or unrealistic, questioning its broader social impact and anti‑capitalist framing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49970767" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news.mit.edu/2026/margaret-hamilton-computing-pioneer-dies-1007" target="_blank">Margaret Hamilton has died</a>
+        </h2>
+        <span class="article-meta">
+          1589 points • by muglug • 45 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Margaret Hamilton, MIT Instrumentation Laboratory leader, pioneered defensive and priority‑driven software for NASA’s Apollo Guidance Computer. She introduced error‑prevention measures after a “Lauren error” where a child inadvertently launched a pre‑flight program, later validating the fix when astronaut Jim Lovell repeated the mistake on Apollo 8. Her team’s priority‑driven code enabled the Apollo 11 lunar landing by suppressing non‑essential tasks during a 1202 overload alarm, allowing mission‑critical operations to continue. After Apollo, Hamilton remained at the lab until its 1970s spin‑off into Draper Laboratory, then founded Higher Order Software (1976) and Hamilton Technologies (1990s). Hamilton Technologies’ flagship, the Universal Systems Language (USL), implements her fault‑tolerant, model‑based approach to complex software. She advocated for “software engineering” as a distinct discipline, earning honors including the NASA Exceptional Space Act Award (2003), Computer History Museum Fellow (2017), and induction into the National Aviation Hall of Fame (2022). Her work has become a touchstone for reliability‑focused software development and for women in computing.</p>
+          </div>
+          <a href="https://news.mit.edu/2026/margaret-hamilton-computing-pioneer-dies-1007" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments collectively convey deep admiration and sorrow over Margaret Hamilton’s passing, emphasizing her pioneering role in software engineering, error‑handling innovations, and the Apollo program’s success. Many highlight her influence in legitimizing software as an engineering discipline, noting her coining of the term “software engineer” and her lasting impact on subsequent generations. Personal recollections, references to oral histories, comics, and museum exhibits illustrate widespread respect and a desire to preserve her legacy, while some express yearning for similarly groundbreaking work today.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49998895" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank">GPT‑6 and Intelligent UI for everyone</a>
+        </h2>
+        <span class="article-meta">
+          647 points • by joshuawright11 • 106 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to OpenAI’s new “intelligent UI” features. Many users express enthusiasm for visual and interactive explanations, seeing potential for richer experiences, quicker comprehension, and accessibility benefits. At the same time, a sizable portion criticizes the current implementation as noisy, unintuitive, or poorly designed, noting regressions in safety benchmarks, unnecessary ad‑like elements, and added latency. Skepticism also appears regarding the need for a new model versus better UI engineering, the relevance of generated widgets for everyday tasks, and the overall value versus existing tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49996425" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/how-did-rosalind-franklin-miss-helix-her-iconic-dna-image-she-didn-t" target="_blank">How did Rosalind Franklin miss the helix in her iconic DNA image? She didn&#39;t</a>
+        </h2>
+        <span class="article-meta">
+          184 points • by pavel_lishin • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/how-did-rosalind-franklin-miss-helix-her-iconic-dna-image-she-didn-t" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on the view that the DNA double‑helix model emerged from a collaborative, multi‑year effort rather than a single eureka moment, with Rosalind Franklin providing crucial helical evidence that was later interpreted by Watson and Crick. Contributors note persistent misattribution in textbooks and public narratives, especially gender‑biased omissions, and argue that credit should reflect the collective nature of the work. While some dispute the extent of Franklin’s awareness of the double‑helix, most agree her data were essential to the final discovery.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49969073" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://treylorswift.github.io/demoscene-recomp/web/" target="_blank">Classic PC demoscene productions running natively in the browser</a>
+        </h2>
+        <span class="article-meta">
+          78 points • by adunk • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The project recompiles classic DOS demoscene productions so they execute directly in a web browser. An x86 emulator runs the original demo, recording every executed code block and its exact cycle timing. This trace is converted into C code that mirrors the original instructions one‑for‑one, then compiled to WebAssembly along with software models of the timer, VGA card, and Sound Blaster hardware. The WebAssembly output is validated against the emulator by comparing interrupts, port accesses, and video frames at each emulated moment, ensuring cycle‑accurate behavior. Demos run at their native 70 Hz VGA timing, appearing smoothest on displays of 70 Hz or higher. The site hosts four free releases: <em>Unreal</em> and <em>Second Reality</em> (Future Crew), <em>Crystal Dream II</em> (Triton), and <em>Stars: Wonders of the World</em> (NoooN), using unmodified original files. Visitor counts are anonymous, with no IP or cookie tracking. The displayed font is IBM VGA 8×16 by VileR (CC BY‑SA 4.0).</p>
+          </div>
+          <a href="https://treylorswift.github.io/demoscene-recomp/web/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments combine technical curiosity about translating emulator recordings into C with admiration for the resulting accessibility of classic demos. Many express nostalgia for the demoscene’s hardware‑limited creativity, praising 4 KB and 64 KB productions while lamenting a perceived loss of human ingenuity as AI tools automate code generation. Some view AI‑assisted ports as exciting progress, whereas others question the value of running demos in browsers without human effort. Overall, the discussion balances respect for past craftsmanship with mixed feelings about AI’s impact on creative coding.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50002426" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.404media.co/oldest-living-land-animal-jonathan-the-tortoise/" target="_blank">&#39;Jonathan&#39; is the oldest land animal on Earth</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by gumby • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Jonathan is a 194‑year‑old Aldabra giant tortoise, making him the oldest known land animal; he was born before the U.S. Civil War. Researchers have sequenced his genome to identify genetic factors that contribute to his extraordinary lifespan. The study aims to uncover molecular pathways and cellular mechanisms underlying extreme longevity, with the long‑term goal of applying these insights to human aging research. By comparing Jonathan’s genetic data to that of shorter‑lived species, scientists hope to pinpoint protective genes, DNA repair processes, and metabolic adaptations that enable such prolonged life, potentially informing strategies to extend healthy human lifespan.</p>
+          </div>
+          <a href="https://www.404media.co/oldest-living-land-animal-jonathan-the-tortoise/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments blend humor, curiosity, and caution regarding extreme longevity. Many reference the ancient tortoise as a curiosity and joke about becoming like it, while others discuss scientific interest in aging pathways, healthspan versus lifespan, and potential market value of anti‑aging interventions. Several remarks express skepticism about extending human life without improving health, raise ethical concerns about exploiting rare organisms, and question the involvement of military entities. Overall, the tone is mixed amusement and thoughtful debate about the implications of extreme lifespan extensions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49998066" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://scottaaronson.blog/?p=10169" target="_blank">The Mathocalypse</a>
+        </h2>
+        <span class="article-meta">
+          254 points • by 6bitquant • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>OpenAI released a batch of 372 AI‑generated proofs, including a claimed proof of Subhash Khot’s Unique Games Conjecture (UGC). The UGC proof introduces a novel recursive “noise‑gadget” code distinct from long/short codes, and also yields direct optimal NP‑hardness of approximation results for Max‑Cut and all CSPs. Other highlighted breakthroughs are:</p>
+<ul>
+<li>L = BPL (derandomization of log‑space)</li>
+<li>Fourier‑transform‑based integer multiplication in O(n log⁰·⁹⁹⁹⁹⁹⁹⁹⁹⁹⁹⁹ⁿ) time</li>
+<li>Positive solution to the Unitary Synthesis Problem (oracle‑aided quantum implementation of any n‑qubit unitary)</li>
+<li>Parity ∉ QAC⁰ and a near‑4‑th‑power separation between randomized and quantum query complexity</li>
+<li>Super‑quadratic separation of sensitivity vs. block sensitivity</li>
+<li>Area law for 2‑D gapped Hamiltonians</li>
+<li>Matrix multiplication in O(n⁹⁄⁴) time via a new method</li>
+<li>Ω(n³) lower bound on determinantal complexity of the permanent</li>
+<li>Randomized polynomial‑time approximation of perfect‑matching counts and near‑linear‑time maximum‑matching algorithm</li>
+<li>Uncomputability of solving polynomial equations over ℚ</li>
+</ul>
+<p>The community faces a “digest‑race” to verify these results; OpenAI’s “dump” model contrasts with Anthropic’s compensated‑author approach. An advisory group stresses that human mathematicians must still formulate questions and maintain equitable access to powerful tools.</p>
+          </div>
+          <a href="https://scottaaronson.blog/?p=10169" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed reaction to the AI‑generated mathematics claims. Critics highlight the paper’s opaque writing, question the reliability of auto‑formalised proofs, and worry that the results may be artifacts of translation errors or undisclosed exploits, expressing skepticism about their substantive value. Many voice anxiety about the impact on mathematicians’ careers and PhD relevance, while others adopt a more hopeful view, seeing the technology as a powerful research aid that can offload tedious search and enable deeper insight if properly verified. Overall, sentiment balances concern with cautious optimism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49997718" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
