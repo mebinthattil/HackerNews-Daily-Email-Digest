@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rea.tools/" target="_blank">REA Reverse – Engineer Anything</a>
+        </h2>
+        <span class="article-meta">
+          434 points • by modinfo • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The REA (Reverse Engineering for Your Coding Agent) report details a local‑debugging inspection of the HTTP browser edition of a dinosaur‑style game. By connecting to the browser’s debugging endpoint, the team retrieved the loaded index.js file, including its source code and hash. The script defines constants ACCELERATION = 0.001, MAX_SPEED = 13, and an initial SPEED = 6 (listed twice). The original game’s update function was executed in a controlled environment with obstacles and automatic scheduling disabled. After 4,000 update cycles the speed reached 10.0; after 10,000 cycles it capped at 13.0 (rounded to one decimal). The new mini‑game replicates this speed progression while providing a simplified teaching implementation of drawing, jumping, and collision handling. The report includes instructions for reproducing the inspection via the dinosaur page and notes that the inspected code is under the Chromium Authors BSD license.</p>
+          </div>
+          <a href="https://rea.tools/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge that AI‑generated decompilations can achieve high quality, rapid results and useful tooling, which many find impressive and helpful for tasks like bug hunting, firmware analysis, and legacy game reconstruction. At the same time, there is considerable unease about the broader impact on hobbyist and collaborative communities, potential erosion of expertise, and legal risks as copyrighted or protected binaries become easier to reverse‑engineer. Opinions are split between enthusiasm for the efficiency gains and concern over cultural, ethical and commercial consequences.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50028275" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://beaksec.github.io/posts/telegram-desktop-one-click-account-takeover/" target="_blank">Telegram Desktop vulnerability allowed any user&#39;s file to be stolen</a>
+        </h2>
+        <span class="article-meta">
+          180 points • by g-b-r • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Telegram Desktop processes clicked tg:// links by serialising commands (keyword;argument;) over a local socket when an instance is already running. The separator “;” is not escaped, allowing a crafted link to inject additional commands (e.g., CMD:quit). One injectable command is OPEN:, which accepts any URL scheme. Telegram also implements an internal interpret: scheme used by its release‑publish script; it reads a supplied instruction file and sends the referenced file to a specified channel without authorization checks.</p>
+<p>An attacker can place such instruction files on the victim’s disk by sending them as automatic‑download attachments in a group, causing them to be saved in a predictable location (e.g., %APPDATA%\Telegram Desktop\Downloads). By delivering a malicious tg:// link that injects multiple OPEN:interpret: commands, the attacker triggers reading of arbitrary files (e.g., tdata/key_datas, tdata/D877F…s) and uploads them to a channel they control. The extracted key data can reconstruct the DEK and decrypt the session authorization, enabling full account takeover, especially when no local passcode is set.</p>
+<p>Mitigations: upgrade to Telegram 7.2.9+ (removes interpret: and escapes the socket separator), enable “ask where to save each file”, restrict group invitations, and set a strong local passcode.</p>
+          </div>
+          <a href="https://beaksec.github.io/posts/telegram-desktop-one-click-account-takeover/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express disappointment over the three‑month delay in patching a Telegram Desktop vulnerability that allowed arbitrary file access and account takeover. Users highlight broader concerns about desktop OS file‑system permissions and the risks of tying accounts to phone numbers, urging stronger isolation and sandboxing. There is criticism of Telegram’s security reputation and the internal URL scheme that enabled the exploit, with calls for clearer disclosure and better security practices. Overall sentiment is skeptical of the platform’s safety.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50029123" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://deno.com/blog/cloudflare" target="_blank">Cloudflare acquires Deno</a>
+        </h2>
+        <span class="article-meta">
+          1234 points • by ilreb • 147 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Deno team is moving to Cloudflare to combine their runtime work with Cloudflare Workers and Durable Objects. Their roadmap includes:</p>
+<ul>
+<li>Continued support for the Deno runtime for one year, with monthly bug‑fix and security releases, after which development will cease; the runtime will remain open source.</li>
+<li>Deno Deploy will operate for six months before shutdown, with migration assistance for paying customers to Cloudflare Workers.</li>
+<li>The JSR package registry will stay active, transitioning its infrastructure to Cloudflare.</li>
+<li>Ongoing work on the Rust‑based V8 binding (rusty_v8) and its integration into Cloudflare’s worker engine (workerd).</li>
+<li>Introduction of “celld,” built on the Workers model, leveraging Durable Objects for distributed applications, providing built‑in scaling, persistent state, WebSockets, and a high‑level JavaScript API—particularly aimed at AI agent workloads.</li>
+</ul>
+<p>The move prioritizes a unified platform for building servers across Cloudflare’s network or other infrastructures, ending separate Deno runtime and hosting development.</p>
+          </div>
+          <a href="https://deno.com/blog/cloudflare" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey widespread disappointment that Deno’s official development will cease, with many expressing personal loss for a runtime they valued for its security, simplicity and TypeScript handling. Critics attribute the decline to shifts toward npm compatibility, venture‑capital pressures, and a lack of a viable business model, while acknowledging Deno’s influence on Node and other tools. There is cautious optimism that the open‑source codebase may be continued by the community or integrated into Cloudflare’s workers platform, though concerns persist about potential loss of independence and the future of related projects.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50019911" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://minesweeper.mikelacher.com/" target="_blank">Triple-A Minesweeper</a>
+        </h2>
+        <span class="article-meta">
+          978 points • by robin_reala • 114 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided to summarize.</p>
+          </div>
+          <a href="https://minesweeper.mikelacher.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively view the piece as an amusing parody that successfully lampoons modern AAA game conventions such as excessive hand‑holding, long intros, and forced monetisation, with many readers laughing and praising its clever satire. At the same time, several remarks note frustrations with the overly long opening, obstructive subtitles, and lack of traditional game elements like achievements, checkpoints, and challenge, expressing a desire for more gameplay depth or optional features. Overall sentiment is largely positive for the humor and concept, tempered by critiques of execution details.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50022292" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tonym.us/wsl2-vs-wsl3-benchmarks.html" target="_blank">WSL3 Performance is about 5-60% faster than WSL2 depending on the workload</a>
+        </h2>
+        <span class="article-meta">
+          19 points • by tonymet • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The benchmark compares WSL 2.6.3.0 (Linux 6.6.87.2) with WSL 3.0.2.0 (Linux 6.18.40.1) using an Alpine 3.23.0 rootfs, Go 1.27.1, and a host with an Intel i5‑8500T (2 vCPUs, 4 GB RAM allocated).  </p>
+<p><strong>Microbenchmark results (perf bench)</strong><br>
+- Sequential memory bandwidth ↑ 61 % (7.84 → 12.64 GB/s), driven by <code>page_reporting.page_reporting_order=5</code> reducing hypervisor page‑table walks.<br>
+- Scheduler/IPC latency ↓ ≈ 11 % for <code>sched/pipe</code> and <code>sched/messaging</code>, thanks to 6.18 scheduler refinements and tighter VMBus interrupt handling.<br>
+- Basic syscall (getppid) latency ↓ 3.8 %, limited by CPU architecture.  </p>
+<p><strong>Real‑world workload (GoReleaser build)</strong><br>
+- Wall‑clock time improves ≈ 4 % (≈ 7.5 s).<br>
+- Kernel time (<code>openat</code>, <code>newfstatat</code>, <code>mmap</code>, <code>futex</code>) drops ~16 % (≈ 9 s saved), reflecting lower trap overhead and better slab caching.<br>
+- &gt; 80 % of compile time remains user‑space CPU bound, constrained by the two pinned vCPUs.  </p>
+<p><strong>Takeaways</strong><br>
+- workloads with high IPC or memory churn (in‑memory databases, container‑dense pipelines) see sizable gains from the memory‑bandwidth and latency improvements.<br>
+- compute‑heavy builds are limited by allocated CPU resources; kernel improvements reduce sys time but overall duration stays near the hardware ceiling.</p>
+          </div>
+          <a href="https://tonym.us/wsl2-vs-wsl3-benchmarks.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a positive reaction to recent benchmarking results, highlighting surprise at the existence of the WSLc (WSL 3) release and providing links to the official release notes and a related discussion thread. Contributors note that, beyond container support, they observed a measurable performance increase when comparing WSL 2 to WSL 3, and they share a technique aimed at maximizing software efficiency on limited‑cost hardware. The overall tone is appreciative and focused on practical performance improvements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49998801" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.usenix.org/conference/usenixsecurity24/presentation/zhang-qibo" target="_blank">Eye of Sauron: Long-Range Hidden Spy Camera Detection</a>
+        </h2>
+        <span class="article-meta">
+          162 points • by ortusdux • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.usenix.org/conference/usenixsecurity24/presentation/zhang-qibo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion conveys strong interest in exploiting electromagnetic side‑channel emissions from video devices, noting that similar passive listening concepts have existed historically and that modern, low‑cost SDR hardware makes detection more accessible. Commenters recognize the technical cleverness and potential impact on privacy, corporate espionage, and national security, while also expressing skepticism about practical limitations such as interference from LTE/5G bands and inadequate shielding. There is consensus that mitigation through better shielding or memory buffering is possible, and some participants express a desire to build or study such systems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49997481" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://wiki.cateat.fish/art:computers_cannot_make_decisions" target="_blank">Computers Cannot Make Decisions</a>
+        </h2>
+        <span class="article-meta">
+          79 points • by heavensteeth • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that computer programs lack agency and therefore cannot be held responsible for outcomes; accountability must be assigned to human actors. It contends that attributing blame to large language models (LLMs) constitutes “decision laundering,” asserting that companies such as OpenAI and Anthropic deliberately enable problematic behavior rather than preventing it. The piece cites an internal IBM training document from 1979 stating, “A computer can never be held accountable, therefore a computer must never make a management decision,” to support the claim that computers should not be used for managerial judgment. The author claims that current incidents involving LLMs are the result of human choices and that regulatory or punitive actions are avoided due to economic concerns. Supporting images include the IBM memo excerpt and generic site footer graphics (donate button, PHP and HTML5/CSS validation badges).</p>
+          </div>
+          <a href="https://wiki.cateat.fish/art:computers_cannot_make_decisions" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on the view that ultimate responsibility for AI actions rests with the humans and organizations that design, deploy, and supervise the systems, not with the algorithms themselves. Many describe “decision laundering” as a way to deflect accountability, likening it to poor management practices. While acknowledging that AI can make effective choices, participants stress legal and ethical complexities, question corporate narratives, and express skepticism about the feasibility of fully containing autonomous agents. Overall, the discussion emphasizes human liability, the need for better safeguards, and distrust of industry rhetoric.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50029982" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://typeincube.com/" target="_blank">Cube Type – Isometric Typography Generator</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by eustoria • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No substantive content was provided beyond the title, so a summary cannot be generated.</p>
+          </div>
+          <a href="https://typeincube.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback is positive, describing the subject as cool and expressing enthusiasm. It also offers a straightforward monetization suggestion, recommending the addition of a simple “buy t‑shirt” button to generate revenue. The tone remains informal and optimistic, focusing on potential financial gain while keeping the overall design unchanged.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50010986" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news.vt.edu/articles/2026/10/research_fralinbiomed_upfhutelin.html" target="_blank">Food processing influences metabolism and brain activity</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by gmays • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The study compared two 300‑kcal meals that were nutritionally matched (carbs, fat, protein, calories, water, salt) but differed in processing level. The ultraprocessed meal (peanut‑butter‑jelly sandwich, deli turkey, veggie chips, cookie, cereal, instant mashed potatoes) produced significantly higher post‑meal insulin, slightly elevated blood glucose, and altered carbohydrate oxidation versus the minimally processed meal (banana, dried cranberries, cheese, egg). Participants then viewed matched food images during functional MRI; activity in the ventral striatum and nucleus accumbens varied in proportion to the metabolic response, although self‑reported willingness to pay for the foods did not differ. Researchers conclude that processing‑related metabolic changes are linked to distinct neural reward‑system activation, independent of macronutrient composition. Future work will examine diverse populations, larger meals, and isolate specific additives or processing steps. The work was funded by NIH (NIDDK) and an NSF graduate fellowship; original article DOI 10.1038/s42255-026-01619-4.</p>
+          </div>
+          <a href="https://news.vt.edu/articles/2026/10/research_fralinbiomed_upfhutelin.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on methodological concerns with the referenced study, noting that the meals were closely matched on nutritional factors yet the article omits glycaemic index details, and questioning the small sample size of 57 participants. Several remarks critique the NOVA classification system for its inconsistencies, especially regarding homemade versus packaged processed foods. There is interest in accessing the original research, and a suggestion to prepare comparable pasta portions at home using quality flour, reflecting a generally skeptical but inquisitive stance toward the study’s conclusions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50029830" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.janestreet.com/can-you-use-autoregressive-diffusion-to-generate-market-data/" target="_blank">Can you use autoregressive diffusion to generate market data?</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by jsomers • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post details a 2026 summer internship in which Kavish built an autoregressive diffusion model to generate market‑book events. Using four years of US equities data (timestamp, price, event type, etc.), the architecture combined a causally masked transformer encoder with two heads: a categorical head predicting event kind (expanded to 20 classes for trades, BBO updates, and specific discontinuities) and a diffusion head generating continuous attributes (price, elapsed time). Initial DDPM training on a 1,000‑step cosine schedule proved unstable, causing exploding trajectories; switching to flow‑matching (rectified flows) yielded stable sampling with fewer steps. To address the mixed continuous‑discrete nature of market data, Kavish introduced “atom smoothing,” smoothing spiky distributions (e.g., zero‑time gaps, penny‑size price moves) then re‑injecting point‑mass probability. Evaluation used total‑variation divergence on marginal distributions and a classifier distinguishing real versus synthetic events, showing improved realism after flow‑matching and atom smoothing. The model still degrades over long rollouts, highlighting open questions about the balance between categorical and diffusion predictions for accurate market‑data synthesis.</p>
+          </div>
+          <a href="https://blog.janestreet.com/can-you-use-autoregressive-diffusion-to-generate-market-data/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight enthusiasm for applying diffusion models to non‑standard time‑series data and commend the thorough, dense internship report. Reviewers note the work’s informativeness and the team’s achievement, while also questioning specific modeling choices such as assuming normal inter‑arrival times and suggesting Hawkes‑type dynamics. Several remarks emphasize that market behavior shifts, limiting long‑term predictive stability, and remind readers of standard performance caveats. Overall the feedback is largely positive with constructive technical criticism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50021410" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
