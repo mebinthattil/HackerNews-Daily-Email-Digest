@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 11, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lineageos.org/Changelog-32/" target="_blank">LineageOS 24.0</a>
+        </h2>
+        <span class="article-meta">
+          90 points • by timschumi • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LineageOS 24.0, built on Android 17, introduces extensive back‑porting of security patches (August 2025 – October 2026 for active branches, November 2025 for legacy 15.1, 16.0, 17.1) while preserving patch‑level strings only on Google‑supported releases (Android 14+). Core applications receive Material Design 3 updates, adding a new Canvas image editor, TV launcher Catapult enhancements, Etar, Jelly browser PWA shortcuts, Twelve music improvements, and a redesigned Updater with streamed A/B installs. WebUSB flash tools now support ADB, Fastboot, Amlogic Burn and Samsung Odin protocols directly from browsers. CI/CD pipelines automatically post CI votes, run tests, and deploy APKs via GitHub Actions. An external accessibility audit led to UI revisions and contributor training. Legacy devices using kernels 4.4/4.9 are limited to LineageOS 22.2, with continued monthly patches until Android 15 security bulletins cease. The release adds common SoC kernels, shared “shims,” expanded Wiki with MD3 styling, generic build targets for emulators, GSI, automotive, and experimental bare‑metal hardware, and encourages translation and developer contributions.</p>
+          </div>
+          <a href="https://lineageos.org/Changelog-32/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong approval of the new generic target and its broad hardware support, praising its ability to extend the life of older devices and thanking maintainers for preventing electronic waste. Users convey enthusiasm for LineageOS as a preferred Android experience and appreciate its role in keeping phones functional. At the same time, there is criticism of Android’s limited deep‑learning capabilities and perceived rigidity compared with alternatives, reflecting disappointment with the platform’s customization constraints. Overall, the tone is largely positive with noted concerns about Android’s ecosystem.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50040276" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nishtahir.com/build-your-own-decision-model/" target="_blank">Build your own decision model</a>
+        </h2>
+        <span class="article-meta">
+          304 points • by softwaredoug • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The note describes “system‑one” decision models that restrict a language model’s output to a predefined set of options (e.g., A‑E) and generate a single‑pass answer by masking the vocabulary. An implementation using Qwen‑3‑1.7B demonstrates constrained decoding: token IDs for the options are pre‑computed, logits for the final token are soft‑maxed over only those IDs, and the highest‑probability option is returned with its probability. On a simple sky‑color test the model selects “B” (Blue) with ≈ 0.999 confidence. Evaluated on a random CommonsenseQA hold‑out (1 221 items) the zero‑shot model achieves 59.4 % accuracy (macro F1 ≈ 0.584). A brief fine‑tune raises accuracy to 62.4 % (macro F1 ≈ 0.623). Calibration analysis shows severe over‑confidence; confidence bins do not match observed accuracy. Temperature scaling (optimal ≈ 3.797) flattens the distribution, aligning confidence with accuracy across bins. A GitHub repository provides scripts for dataset creation, evaluation, fine‑tuning, and calibration.</p>
+          </div>
+          <a href="https://nishtahir.com/build-your-own-decision-model/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show strong enthusiasm for experimenting with Jev‑style decision models, with multiple users sharing implementations, tutorials and successful applications such as game agents and lightweight classifiers. At the same time, several contributors express skepticism about the hype, questioning whether the approach offers genuine architectural advances beyond existing zero‑shot LLM classifiers and noting performance or cost limitations on local hardware. Requests for more real‑world examples, documentation improvements, and tools for calibration appear alongside concerns about evaluation practices and usability glitches. Overall the discussion balances excitement for rapid prototyping with critical appraisal of the technology’s novelty and practicality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50037949" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://patkerr.co.uk/2d-vehicles/" target="_blank">2D Vehicles</a>
+        </h2>
+        <span class="article-meta">
+          479 points • by Michelangelo11 • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The prototype implements a 2‑D rigid‑body physics core extended with three simple vehicle models—Brick, Ship and Car—using a single persistent body. The physics engine updates in fixed time steps, separating input handling, force integration and Canvas rendering. Rigid‑body state includes position, velocity, angle and angular velocity; forces applied at the centre produce translation, while off‑centre forces generate torque and spin. Collision with barriers is handled by a friction‑less edge solver that restores penetration and applies a contact impulse based on point velocity.</p>
+<p>Vehicle behaviours are layered on the core: Brick receives forces from pointer drags, Ship adds thrust at an attachment point, and Car applies engine force, steering and tyre‑resistance forces at four wheel positions. Each tyre resolves its local velocity into longitudinal and lateral components, applying proportional damping—weak for rolling, strong for sideways slip—plus steering adjustments and a hand‑brake effect that raises rear rolling resistance and reduces lateral grip. A vehicle coordinator invokes the selected dynamics object, integrates motion, transforms shape points for drawing and selects barrier contact points using mid‑edge contacts to avoid artificial spin.</p>
+          </div>
+          <a href="https://patkerr.co.uk/2d-vehicles/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad enthusiasm and nostalgia for the 2‑D vehicle simulation, praising its feel, simplicity and historical significance while many contributors share personal projects that built on or recreated the model. Positive feedback highlights the fun of handbrake turns, the value of prototyping, and the impact on games like GTA 1‑2. Several remarks note technical shortcomings, such as unclear diagrams, occasional unrealistic lateral motion, missing understeer, and odd behavior when switching configurations, and some request features like a parking‑training mode. Overall, appreciation outweighs criticism, with a shared interest in further refinement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=49991852" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://housing.over.pizza/" target="_blank">A city-building game in which the city would prefer you didn&#39;t</a>
+        </h2>
+        <span class="article-meta">
+          347 points • by JumpCrisscross • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>I’m unable to provide a summary because the submitted text contains only a title and no substantive content to summarize.</p>
+          </div>
+          <a href="https://housing.over.pizza/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments blend humor with criticism, using game analogies to highlight perceived bureaucratic obstacles in San Francisco’s housing development. Many express frustration over complex, time‑consuming processes and question the practicality of proposed solutions such as building high‑rise apartments over transit stations. While some appreciate the aesthetic and educational intent of the simulation, a prevailing view finds the UI overly convoluted and the gameplay discouraging, suggesting the design could be streamlined to better convey the housing‑policy message. Overall sentiment leans toward wanting simpler, more actionable tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50036864" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lightbulbcomputer.com/" target="_blank">The Lightbulb Computer</a>
+        </h2>
+        <span class="article-meta">
+          423 points • by oskarth • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article proposes the “Lightbulb Computer,” a speculative personal‑computing device that integrates a compact projector with on‑device computer‑vision sensors in a bulb‑shaped enclosure. Mounted in a portable base, a wall/ceiling socket, or a lamp, it can project high‑resolution images onto any surface and interact via voice, pointing gestures, and visual analysis. Use‑case scenarios include kitchen overlays (recipes, timers), contextual Q&amp;A while reading, collaborative large‑format maps, photo sharing, board‑game facilitation, smart‑home control by pointing, ambient displays (time, weather, calendar), and interactive 3‑D house maps with real‑time data layers. The author contrasts this approach with current screen‑centric and eyewear‑based AR/VR solutions, arguing that projectors avoid the social and ergonomic constraints of head‑mounted devices while preserving shared, spatial interaction. Recent advances in projector brightness, resolution, and computer‑vision speed make a prototype feasible, though consumer‑grade hardware is not yet available. Privacy is addressed through on‑device processing, hardware interlocks, indicator lights, and optional camera covers. Historical references include I/O Bulb, LuminAR, Humane Pin, Dynamicland, and Folk Computer.</p>
+          </div>
+          <a href="https://lightbulbcomputer.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are broadly enthusiastic about the prototype’s novelty and its promise for hands‑free, projected interaction, noting parallels to earlier concepts like Sixth Sense and recent voice‑assistant patents. Many highlight the low cost of required hardware and suggest refinements such as reduced latency, better speech cues, and more reliable projection under varied lighting. Simultaneously, a substantial share voices concerns over privacy, constant monitoring, data ownership, and the practicality of indoor‑only, non‑persistent displays, warning that commercial versions could become cloud‑dependent and intrusive. Overall sentiment mixes optimism about user‑experience potential with caution about security and usability constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50029487" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ratfactor.com/cards/git-commit-size" target="_blank">How big is a Git commit?</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by theanonymousone • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A newly‑initialized repository occupies ~64 KB in .git. Adding 250 tiny files (each “foo”) and committing creates about 47 KB of Git objects, raising the .git size to ~112 KB. Changing a single file and committing again adds roughly 17 KB, bringing the total to ~130 KB. The size increase comes from new Git objects: each commit generates a commit object, one or more tree objects (for the root and affected directories), and a blob object for the modified file. These objects are stored in .git/objects as 4 KB‑sized, zlib‑compressed files; even a 3‑byte change results in several new 4 KB objects. Log files also grow modestly (≈0.1 KB). Thus, Git’s storage model inflates small edits into multiple compressed objects, explaining why a minimal change can add several kilobytes to repository size.</p>
+          </div>
+          <a href="https://ratfactor.com/cards/git-commit-size" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments describe an effort to build a streamlined Git alternative that leverages AST paths for further compression, but the experiment concluded that Git’s existing mechanisms, including delta compression and packfiles, outperform the proposed approach. The discussion notes Git’s efficiency, queries support for newer compression algorithms such as Zstandard or Brotli, and suggests using long command‑line options for clearer code examples. Overall, the sentiment is that the custom solution was deemed unnecessary compared to Git’s proven performance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50017548" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theverge.com/games/1009140/ram-shortage-intel-amd-ddr4-comeback" target="_blank">Decade-old RAM is making a comeback</a>
+        </h2>
+        <span class="article-meta">
+          68 points • by 1potato • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CPU manufacturers are responding to sustained RAM price inflation by re‑enabling support for legacy DDR4 memory in upcoming processors. Gigabyte announced that new LGA 1700 motherboards will again accept both DDR4 and DDR5, with “dual‑format” chips slated for early 2027, reversing Intel’s 2024 DDR5‑only shift. AMD is following suit; Gigabyte revealed DDR4‑compatible AM4 boards to accompany the 10‑year anniversary launch of the Ryzen 7 5800X3D. DDR4, introduced in 2014, is now markedly cheaper than DDR5—e.g., a 32 GB DDR5 kit costs ≈ $620 versus $260 for an equivalent DDR4 kit—making it an attractive upgrade path despite DDR5’s higher speeds and efficiency. The market shortage is prolonging the viability of older sockets and chipsets, allowing users to retain existing DDR4 modules while awaiting broader price normalization.</p>
+          </div>
+          <a href="https://www.theverge.com/games/1009140/ram-shortage-intel-amd-ddr4-comeback" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight a pragmatic view that older DDR3/DDR4 hardware remains functional and cost‑effective, especially in emerging markets where repurposed server components are common. Many note that performance gains from newer DDR5 are modest for typical use, while prices for identical DDR4 modules have risen sharply, a trend attributed to AI‑related demand and broader component scarcity. Users also report buying and reselling used RAM at profitable margins, expressing both appreciation for the durability of legacy systems and concern over inflation driven by AI and GPU demand.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50028647" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/othermod/PSPi-Version-6" target="_blank">PSPi 6 – Raspberry Pi in a PSP</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by therepanic • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>PSPi 6 is an open‑source hardware project that replaces the mainboard of a PSP 1000 with a custom PCB housing a Raspberry Pi (Zero, Zero 2 W, or CM4 with carrier). The board provides an 800×480 LCD with adjustable brightness, integrated power‑management (charging, battery monitoring, power‑saving), and audio output (mono on Pi Zero/CM4, stereo planned). All original PSP buttons, joystick, and two extra buttons/joystick are retained, with LED and on‑screen status indicators. It supports a range of operating systems—RetroPie, Lakka, Ubuntu, Raspberry Pi OS, Batocera, Kali, etc.—enabling retro gaming, Linux computing, and general Pi software. Ready‑made boards are sold via othermod.com; design files are available for self‑manufacture (PCB files, component list, assembly instructions) but require advanced electronics skills. Documentation, troubleshooting, and compatibility guides are hosted on the project wiki. The hardware is released under a CC BY‑SA license, and the developer invites community contributions through bug reports, feature suggestions, Discord, and YouTube tutorials. Boards are shipping, with only minor, non‑functional revisions ongoing.</p>
+          </div>
+          <a href="https://github.com/othermod/PSPi-Version-6" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show interest in the PSP‑based project, noting that PSP batteries tend to overheat and that inexpensive units on eBay can supply parts without sacrificing a functional console. There is curiosity about extending the design to newer PSP models such as the 2000 and 3000 series. Additionally, users question whether existing home‑brew PSP emulators remain effective or if a Raspberry Pi implementation offers a more modern or superior emulation option. Overall, the discussion balances enthusiasm for the hardware approach with practical concerns about component sourcing and comparative utility versus software emulators.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50038623" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nature.com/articles/s41586-026-11111-4" target="_blank">Retrofitting language models to operate over bytes</a>
+        </h2>
+        <span class="article-meta">
+          65 points • by theanonymousone • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The byte‑ified model retains the overall LTLM structure (DTP, BLT, H‑Net) while operating on UTF‑8 bytes. Each byte receives an embedding from a large, sparsely‑activated table; the embedding is augmented with the longest matching subword suffix embedding to improve performance without added inference cost. A single mLSTM layer (the local encoder) contextualizes these byte embeddings, after which a non‑causal boundary predictor (using one‑byte look‑ahead) places patch boundaries during pre‑fill. Pooling selects the final byte representation of each patch as the patch embedding, which is fed unchanged into the deep global model inherited from the original subword LLM. Depooling adds the most recent patch representation to a linear projection of byte‑level encodings, and a stack of four mLSTM layers (local decoder) processes the result. The language‑model head projects the final byte vectors to next‑byte (and optional boundary) probabilities.</p>
+<p>Byte‑ification proceeds in two stages. Stage 1 distills a subword model into the byte model by (i) training the boundary predictor to replicate subword token boundaries (&gt;99 % accuracy), (ii) aligning pooled local‑encoder outputs with subword embeddings through L2 loss after a few frozen global layers (n≈4), and (iii) matching patch‑level likelihoods via a temperature‑scaled binary cross‑entropy loss, optionally combined with cross‑entropy. This stage requires only one forward pass through the full network and back‑propagation through the first n global layers, offering substantial efficiency before full end‑to‑end Stage 2 training. Parameter comparisons show modest differences (‑0.7 % to +4.5 %) relative to the original subword models.</p>
+          </div>
+          <a href="https://www.nature.com/articles/s41586-026-11111-4" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the continued reliance on token-based models despite research into token‑free approaches, highlighting recent papers such as Byte Latent Transformers and Charformer. Several remarks criticize subword tokenizers for lacking causality, noting that BPE effectively accesses future bytes. A separate observation expresses disappointment with Nature’s direction, suggesting it strayed from its core expertise. Overall, the discussion reflects awareness of emerging token‑free work, skepticism toward existing tokenization methods, and critique of institutional choices.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50001234" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fzakaria.com/2026/10/07/nix-wrote-half-of-my-debugger" target="_blank">Nix wrote half of my debugger</a>
+        </h2>
+        <span class="article-meta">
+          198 points • by ingve • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post explains how Rewind VM, a deterministic virtual machine built with Nix, turns a Nix derivation into a full‑featured debugger. Because a derivation captures exact inputs—source, compiler, libraries, kernel, and VM configuration—Rewind can reproduce builds reproducibly, pack them into a read‑only EROFS image, and boot the VM with all debug symbols and source files available via Nix’s separateDebugInfo and debuginfod. The tool records each instruction step, allowing inspection of thread lanes, CPU ownership, and stack frames. Features include “Compare” to show the last shared event and first divergence between runs, “Check from here” to fork a run at any step and replay it under many schedules, and integration with gdb or a shell for deeper inspection. The author demonstrates detection of a classic race condition in a bank‑deposit program, pinpointing the exact step where a reschedule causes a stale balance write. Rewind also supports bookmarks, exportable run files, and example derivations (philosophers, waiter, config‑reload) that illustrate bugs and fixes. Nix’s hermetic derivations supply the core debugging infrastructure automatically.</p>
+          </div>
+          <a href="https://fzakaria.com/2026/10/07/nix-wrote-half-of-my-debugger" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express optimism that AI could boost Nix adoption, noting its deterministic capabilities and engineering sophistication, especially in Rewind VM. Users admire the deterministic VM approach, comparing it favorably to older tools like rr, while also citing personal frustrations with Nix’s complexity and occasional reliability issues that erode trust. There is a recurring desire to adopt Nix despite challenges, and a belief that broader awareness of its benefits could increase uptake.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50017247" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
