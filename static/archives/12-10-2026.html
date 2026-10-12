@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.com/news/articles/c64g1l5389kvo" target="_blank">Deloitte falsified documents to evade tax on Abramovich&#39;s wealth</a>
+        </h2>
+        <span class="article-meta">
+          70 points • by Betelbuddy • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The BBC investigation reports that Deloitte’s Cyprus office assisted Russian oligarch Roman Abramovich in falsifying corporate records to conceal $10 billion in assets and evade UK taxes. Internal emails obtained by the BBC show advisers discussing back‑dating financial statements for 2003‑2004 and transferring beneficial ownership of BVI holding companies to a vehicle called Electus BVI, with the intention of misrepresenting the timing of asset transfers. The correspondence, dated 2005‑2006, explicitly states that the financial statements and accounting records must be altered to reflect the false dates. Deloitte’s involvement is presented as professional advice that enabled the creation of misleading documents, facilitating tax avoidance on Abramovich’s wealth. The article also includes unrelated visual content—images of yachts, estates, and a separate news story about a fatal accident in Cyprus—none of which pertain to the tax‑evasion investigation.</p>
+          </div>
+          <a href="https://www.bbc.com/news/articles/c64g1l5389kvo" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>I don’t have any comments to analyze, so I can’t provide a summary.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50054207" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lalinsky.com/2026/10/11/type-safe-html-templating-in-zig.html" target="_blank">Type-safe HTML templating in Zig</a>
+        </h2>
+        <span class="article-meta">
+          133 points • by lukaslalinsky • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Zig‑based HTML templating library named <strong>zt</strong> (inspired by Go’s Templ) compiles templates to Zig code at build time, allowing direct import and full type‑checking. It satisfies four core requirements: compile‑time type safety, zero‑allocation output written straight to <code>std.io.Writer</code>, automatic HTML‑escaping of dynamic values (with explicit <code>{!value}</code> for raw HTML), and a syntax that mirrors ordinary HTML. Templates are parsed, transpiled, and generate simple writer calls; layouts use <code>@children</code>, and control flow (<code>if</code>, <code>for</code>, <code>switch</code>) is expressed in native Zig code. Example usage shows rendering <code>HomePage</code> with a <code>User?</code> argument, writing to a buffered writer, and integration with the Dusty framework via <code>res.render(.html, pages.HomePage, .{user})</code>. Errors such as misspelled fields become Zig compile‑time errors, with comments linking back to the original template line. The library supports reusable components, layout inheritance, and safe URL attribute handling. It is early‑stage, open to feedback via GitHub issues or Zig Discord, and the author is considering syntax tweaks (e.g., <code>@if</code>, <code>@for</code>) to resolve parsing ambiguities.</p>
+          </div>
+          <a href="https://lalinsky.com/2026/10/11/type-safe-html-templating-in-zig.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Enthusiasm dominates the discussion, with strong interest in leveraging Zig’s build chain for rapid hot‑reloading and a call for benchmark data. Contributors recall early web development in low‑level languages, noting a resurgence of similar patterns and expressing admiration for type‑safe templating approaches in Kotlin, Rust, and other ecosystems. While several existing template solutions (e.g., Google Soy, M4) are cited as references, concerns arise about Zig’s standard library stability and IO cancellation handling, suggesting the concept is promising yet still hampered by tooling immaturity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50051573" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://royfish.dev/fingerprints-are-the-new-cookies" target="_blank">Fingerprints are the new cookies</a>
+        </h2>
+        <span class="article-meta">
+          413 points • by royfish • 45 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Fingerprinting is becoming the primary tracking method as third‑party cookies are phased out. Websites collect data from the initial network request (IP address, User‑Agent, Accept‑Language) and from JavaScript‑executed code that probes hardware and software characteristics: GPU/driver info via WebGL, CPU behavior, memory size, display resolution, audio rendering differences, installed fonts, timezone and locale settings, CPU core count, device memory, and language. These attributes form a high‑entropy fingerprint that can uniquely identify a user within a sample set, often without needing truly global uniqueness. The article explains entropy in terms of bits of information, showing how combined independent traits rapidly narrow the candidate pool. Mitigation options include browsers with built‑in anti‑fingerprinting (Tor, Mullvad, Brave) or adding noise (farbling) as done by Brave; extensions (e.g., JShelter) can interfere but may increase uniqueness. The page itself demonstrates fingerprinting by hashing values from OfflineAudioContext, WebGL, canvas rendering, Intl, navigator, and crypto.subtle APIs.</p>
+          </div>
+          <a href="https://royfish.dev/fingerprints-are-the-new-cookies" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that browser fingerprinting is a long‑standing, pervasive technique that enables tracking beyond simple cookies and raises significant privacy concerns. Many express skepticism toward current mitigations, noting limited effectiveness of plugins, extensions, and even incognito modes, while some highlight technical complexities such as latency‑based location inference. Opinions diverge on solutions: a portion advocates stronger legal regulation and opt‑in targeting APIs, others deem bans unrealistic or see the issue as inevitable with web complexity. Overall sentiment is critical of tracking practices and uncertain about viable countermeasures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50048642" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://clickhouse.com/blog/posette-talk-recap-postgres-isnt-slow-your-storage-is" target="_blank">Postgres isn&#39;t slow, your storage is</a>
+        </h2>
+        <span class="article-meta">
+          111 points • by saisrirampur • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The talk “Postgres Isn’t Slow. Your Storage Is.” presented a benchmark comparing PostgreSQL on AWS gp3 EBS (3 000 IOPS) versus local NVMe instance‑store. Eight identical clusters (m6id.4xlarge, 16 vCPU, 64 GiB RAM, 16 GiB shared_buffers) ran a 3.3‑billion‑row pgbench UPDATE workload (64 clients, 16 workers) for five minutes. NVMe achieved a median 16 030 TPS versus 1 734 TPS on EBS (9.24× higher) and reduced median latency from 36.9 ms to 4.0 ms. Page‑read latency dropped from ~19 ms (EBS) to 0.3 ms (NVMe); WAL fsync fell from 11 ms to 1.5 ms; lock/scheduler overhead fell from 5 ms to 0.2 ms. VACUUM on 10 GB bloat took 366 s (NVMe) vs 964 s (EBS); draining a 10 GB logical‑replication backlog took 139 s vs 238 s.  </p>
+<p>Key symptoms of storage bottlenecks include slow ingestion, high P95 read latency, autovacuum lag, lengthy checkpoints, and replication lag. The proposed production pattern uses local NVMe for speed, quorum‑based synchronous replication (ANY 1 of two standbys across AZs) for availability, and external WAL‑G backups/WAL archiving for durability and point‑in‑time recovery. Real‑world cases (Instacart, Datadog) validate this architecture.</p>
+          </div>
+          <a href="https://clickhouse.com/blog/posette-talk-recap-postgres-isnt-slow-your-storage-is" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that database performance is heavily constrained by storage latency and I/O, with many developers overlooking the impact of network‑attached or cloud‑based disks in favor of abundant memory and generic hardware abstractions. Respondents emphasize that well‑designed schemas, indexes, and query patterns are essential, noting that PostgreSQL itself is not inherently slow. Opinions also highlight that specialized hardware such as NVMe, local RAID, or purpose‑built racks can deliver order‑of‑magnitude gains, while cloud defaults and vague benchmarks often mask inefficiencies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50052163" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nanolathe.gg" target="_blank">Total Annihilation, rebuilt for modern computers</a>
+        </h2>
+        <span class="article-meta">
+          542 points • by jttnr • 58 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Nanolathe is an MIT‑licensed, open‑source engine that re‑creates the Total Annihilation RTS through clean‑room development, requiring the original game data to be supplied separately. The web demo includes the three‑mission original demo, allowing play without a game folder; full gameplay—single‑player skirmish, Survival, and campaign—requires the user’s own installation (e.g., GOG, Steam, or original CDs). The engine supports desktop browsers Chrome, Edge, and Safari; Firefox, mobile, and tablet support are unverified. Multiplayer is available via a “MULTI” menu where hosts generate a game code for 2‑10 player skirmish or 2‑3 player Survival matches, with selectable rule sets (Modern, Community 3.9, Strict 3.1) and optional AI opponents. Battles are recorded as replays. The beta version contains bugs, occasional missing features, and variable mission compatibility; save‑file compatibility is still being refined. Visuals include a modern GPU renderer with synthesized terrain, lighting, and glow, as well as a classic CPU renderer using original‑resolution terrain.</p>
+          </div>
+          <a href="https://nanolathe.gg" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad enthusiasm for Beyond All Reason as a polished, open‑source spiritual successor that delivers modern tooling, large‑scale battles and strong performance, often being praised as the best TA‑derived experience. Opinions diverge on comparisons: some favor BAR’s mechanics over Zero‑K or Forged Alliance, while others note differences in feel, rendering or documentation that can feel lacking. Technical questions about multicore support and engine choices appear alongside discussion of clean‑room development, legal concerns and nostalgia for the original Total Annihilation community and mod scene.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50045984" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/Geramy/LemonSeed-Studio" target="_blank">Running the unmodified Linux amdgpu driver on an iPad</a>
+        </h2>
+        <span class="article-meta">
+          33 points • by joshcsimmons • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LemonSeed Studio is a single‑app iPad IDE that performs on‑device large language model (LLM) inference using an external AMD GPU connected via Thunderbolt. The app embeds the unmodified upstream Linux amdgpu and amdkfd drivers as a PCIDriverKit extension, enabling direct GPU control from iPadOS. Inference runs through the LemonSeed Engine, which leverages the GPU’s HSA runtime and HRX/Loom for compute, while amdgpu_mtopg provides live telemetry of GPU metrics. The repository includes three third‑party submodules—mac_linuxgpu (GPU driver), LSE (inference engine), and amdgpu_mtopg (monitor)—and can be cloned with <code>--recurse-submodules</code> or initialized later via <code>git submodule update --init</code>. The driver submodule lazily fetches a pinned set of Linux sources on first build, avoiding full recursive cloning. All code is dual‑licensed under MIT or GPL‑2.0‑only, with each submodule retaining its original license as detailed in THIRD_PARTY.md.</p>
+          </div>
+          <a href="https://github.com/Geramy/LemonSeed-Studio" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express curiosity and confusion about the project's purpose, with many asking for clarification, images, and details about the enclosure used. There is interest in the technical novelty of an iPad driving an AMD GPU via a Thunderbolt eGPU and the ability to run Linux drivers, but also skepticism regarding practicality, noting the enclosure's lack of portability and questioning the advantage of using an iPad over a small PC. Overall tone mixes enthusiasm for the experiment with doubts about its usefulness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50041573" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jverzani.github.io/CalculusWithJuliaNotes.jl/" target="_blank">Calculus with Julia</a>
+        </h2>
+        <span class="article-meta">
+          144 points • by subset • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The notes “Calculus with Julia” introduce calculus concepts using the Julia programming language, emphasizing graphical, numerical, and occasional algebraic perspectives in line with the “rule of four” teaching approach. They contrast Julia’s numeric‑focused workflow with symbolic computer algebra systems (Mathematica, Maple, Sage), arguing that manual symbolic work aids learning while Julia’s natural syntax offers calculator‑like accessibility and extensibility. A minimal set of computational primitives, expressed as <code>action(function, arguments…)</code>, enables concise implementation of typical calculus problems. The material is organized into focused pages with self‑graded “try‑it‑yourself” questions, drawing on sources such as Strang, Knill, Schey, and several textbooks. Supporting code is provided via the CalculusWithJulia package and the content is distributed as a Quarto book, with an optional PDF compilation. Installation instructions reference <code>juliaup</code>, and contributors are invited to edit pages. References include works by Angenent, Hass et al., Rogawski et al., and Schey.</p>
+          </div>
+          <a href="https://jverzani.github.io/CalculusWithJuliaNotes.jl/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall favorability toward Julia for teaching applied mathematics and optimization, citing its syntax and JuMP as advantages over alternatives such as Lean, Mathematica, and MATLAB. Concerns are raised about coupling Julia with SymPy, which some find adds unnecessary complexity for introductory calculus material. Users also inquire about the current developer experience, requesting mature IDEs, static analysis, and debugging tools. Adoption outside academia is viewed as limited, with few references to broader industry use, while an unrelated remark about ant populations appears alongside the discussion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50034206" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/snuri00/ps2-web-recomp" target="_blank">Show HN: PS2 games statically recompiled to WebAssembly</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by deadxwarrior • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The project statically recompiles PlayStation 2 EE binaries to C++, then builds WebAssembly linked with a reimplemented PS2 OS and hardware runtime that renders via WebGPU. The EE recompiler preserves R5900 quirks (128‑bit registers, multimedia ops, branch delay slots, custom FP behavior) and emits 16 KiB code units; jumps become tail calls and thread switches unwind the host stack, avoiding per‑guest stacks. The I/O Processor (R3000) runs game‑provided IRX modules on an interpreter while its kernel and libraries are re‑implemented in C++. Vector‑unit‑1 microprograms are captured at runtime, compiled ahead‑of‑time to SIMD C++ and JIT‑translated to WebAssembly as needed. Graphics use the GS’s 4 MiB of video memory in native swizzled layout, rasterized by WebGPU compute shaders with tile‑binning, preserving PS2 texturing, palette, and blending rules; a software GS reference remains for validation. Sound is modeled by the SPU2 (48 ADPCM voices, DMA streaming) and movies by an IPU MPEG‑2 decoder. Demonstrations (Gran Turismo 4, God of War II) achieve 50‑60 fps at up to 3× native resolution on an integrated GPU. Build requires Git, CMake, Ninja, a C++20 compiler (clang preferred), Python 3, 7‑Zip, and Emscripten; the workflow (<code>port.sh</code>) converts a disc ISO into a self‑hosted web page, streaming the disc via HTTP Range requests and storing a virtual memory card in browser storage. WebGPU support (Chrome/Edge) and cross‑origin isolation are mandatory for full performance.</p>
+          </div>
+          <a href="https://github.com/snuri00/ps2-web-recomp" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed reactions toward the recomp project. Several users note practical frustrations, such as long CD loading times and limited accessibility without GitHub Pages, while others criticize it as a redundant core‑system emulator. At the same time, there is clear enthusiasm, describing the work as impressive and hoping it will expand to platforms like the Steam Deck and older graphics hardware, and that similar support could be added for additional titles such as Forza. Overall, appreciation is tempered by concerns over usability and broader compatibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50052251" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.sciencealert.com/secret-of-orange-cats-finally-revealed-after-60-year-search" target="_blank">Secret of Orange Cats Revealed After 60-Year Search</a>
+        </h2>
+        <span class="article-meta">
+          6 points • by bookofjoe • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Orange cat fur is caused by a 5 kb deletion in a non‑coding region upstream of the gene <strong>Arhgap36</strong> on the X chromosome. The deletion leads to ~13‑fold higher Arhgap36 RNA levels in melanocytes, suppressing eumelanin‑synthesizing genes and increasing pheomelanin production, which yields orange pigmentation. Two independent studies (Stanford and Kyushu University) found the deletion in every orange cat examined (145 of 188 cats) and confirmed its X‑linked inheritance. Males, with a single X, express the mutation uniformly and are usually solid orange; females, with two X chromosomes, undergo random X‑inactivation, producing the characteristic calico or tortoiseshell mosaic when one X carries the deletion and the other does not. Rare females homozygous for the deletion are fully orange. Overexpression of Arhgap36 appears confined to pigment cells and shows no adverse health or cognitive effects. Findings were reported in <em>Current Biology</em> (2025).</p>
+          </div>
+          <a href="https://www.sciencealert.com/secret-of-orange-cats-finally-revealed-after-60-year-search" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50037711" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cartographers-nk.wonyoung.so/" target="_blank">Cartographers of North Korea (2019)</a>
+        </h2>
+        <span class="article-meta">
+          270 points • by edent • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided to summarize.</p>
+          </div>
+          <a href="https://cartographers-nk.wonyoung.so/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects strong curiosity and appreciation for the increasing visibility of North Korea through tourist videos and open‑source mapping efforts. Contributors are praised for their hobbyist dedication, detailed documentation, and willingness to share data despite limited recognition, while the quality of OSM presentation and site design receives positive remarks. There is interest in the evolution of mapping within the country, concerns about data accuracy and restrictions, and a desire for more conventional article formats with static illustrations. Overall, the tone is enthusiastic and supportive of the collaborative work.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50047091" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
