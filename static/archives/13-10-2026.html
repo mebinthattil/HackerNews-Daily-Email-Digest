@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pdftomp3.com/connect-ai/" target="_blank">Show HN: Use your OpenAI subscription to create audiobooks</a>
+        </h2>
+        <span class="article-meta">
+          6 points • by janpmz • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The service enables users to convert PDFs into MP3 audiobooks using an existing AI subscription. Users attach a PDF in the chat interface and request “PDF TO MP3” conversion. Document processing is handled by the MCP (Managed Cloud Platform) and is covered by the user’s current subscription at no additional cost. Speech synthesis is performed via an API key—either the provider’s or the user’s—and is billed per usage by Google or OpenAI, depending on the chosen speech engine. The workflow emphasizes that only the speech generation incurs extra charges, while the document handling leverages the paid subscription. An illustrative image shows a PDF attached in the Codex environment with the conversion request.</p>
+          </div>
+          <a href="https://pdftomp3.com/connect-ai/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback expresses confusion and disappointment that the service requires a separate API key rather than allowing direct use of an existing OpenAI subscription, which many expected based on OpenAI’s authentication flow. The requirement is seen as misleading and unintuitive, prompting doubts about whether the implementation has been properly tested. Overall, the sentiment is negative, focusing on the perceived inconsistency between the advertised “use your OpenAI subscription” message and the actual authentication process.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50069337" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jsomers.net/e-coli-chemotaxis/" target="_blank">The baffling intelligence of a single cell (2024)</a>
+        </h2>
+        <span class="article-meta">
+          303 points • by jsomers • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>E. coli chemotaxis relies on a sensory‑motor circuit that translates extracellular ligand levels into directed swimming. Attractant molecules bind specific transmembrane chemoreceptors (e.g., the aspartate receptor), causing conformational changes that inhibit the associated CheA kinase. Reduced CheA activity lowers the phosphorylation rate of the response regulator CheY; less CheY‑P binds the flagellar motor’s C‑ring, decreasing motor reversals and thus tumbling. In uniform conditions, runs (≈1 s) alternate with brief tumbles, producing a biased random walk. Adaptation is achieved by reversible methylation of receptor “struts”: attractant binding opens methyl‑acceptor pockets, allowing CheR to add methyl groups, which stiffen the receptor and diminish its signaling output, while CheB removes methyl groups when signaling declines. This feedback grants sensitivity over five orders of magnitude and memory of concentration changes on the order of seconds. The network includes parallel phosphorylation/dephosphorylation cycles (CheA/CheY, CheZ), providing rapid, ATP‑driven amplification and tunable signal processing analogous to a biochemical computer.</p>
+          </div>
+          <a href="https://jsomers.net/e-coli-chemotaxis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong fascination with the complexity and vastness of biological systems, highlighting curiosity about how evolution avoids local optima and how cellular processes relate to computational primitives and neural networks. Several remarks note admiration for related literature and websites, while others question whether simple regulatory mechanisms constitute intelligence. A recurring theme critiques the pursuit of manipulating natural processes for commercial or perceived human benefit, emphasizing concerns about interfering with ecosystems without considering broader context. Overall, the discussion blends awe for natural design with philosophical skepticism about defining and exploiting intelligence.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50041866" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.thehistoryblog.com/archives/77107" target="_blank">Hittite royal archive found in Turkey</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by benbreen • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.thehistoryblog.com/archives/77107" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a consistently positive view of the History Blog, highlighting its serious, non‑sensational approach and the thorough, accessible detail it provides for casual readers. Appreciation is directed toward the reliance on original or closely related sources, as well as the inclusion of visual elements that enhance the content. Overall, the blog is regarded as a valuable, well‑curated resource that balances depth with readability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50067414" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://z.ai/blog/glm-legal" target="_blank">GLM-Legal</a>
+        </h2>
+        <span class="article-meta">
+          576 points • by ilreb • 45 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://z.ai/blog/glm-legal" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mixed view of legal‑focused language models. Many acknowledge that LLMs can streamline routine drafting and review tasks, offering cost and efficiency gains, yet they stress the necessity of qualified human oversight because current benchmark performance remains low and hallucinations remain common. Concerns dominate around data privacy, proprietary model control, and applicability across different legal jurisdictions. Skepticism also targets benchmark validity, model transparency, and the potential for misuse, while a minority express optimism about long‑term adoption and broader professional impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50058507" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html" target="_blank">Intel D270 GPU AI Accelerator–Up to 480 GB LPDDR5X</a>
+        </h2>
+        <span class="article-meta">
+          226 points • by hurricanepootis • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is mixed. Many express enthusiasm about the high memory bandwidth and potential for running large models locally, but also skepticism about practicality, pricing, and market positioning. Repeated concerns include unclear consumer pricing, ambiguous target between consumer and server use, possible high cost, and limited compute relative to memory. Some note technical interest in architecture and software support, while others criticize the marketing and view the product as vaporware. A desire for affordable access and broader GPU options is evident.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50063365" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident" target="_blank">Hackers activate automatic defrosting in supermarket fridges across Europe</a>
+        </h2>
+        <span class="article-meta">
+          717 points • by Zeekaas • 120 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A cyberattack has targeted Danfoss refrigeration control units used by several French supermarket chains, including Intermarché, Leclerc and Coopérative U. Hackers forced the automatic‑defrost function—normally a two‑hour daily cycle—to run continuously at 50 °C, causing fridges and freezers to overheat and leading to estimated losses of about €300 000, with potential nationwide impact in the millions of euros. In the Netherlands, a separate cybersecurity incident disabled the websites of Albert Heijn, Etos and Gall &amp; Gall, disrupted deliveries and compromised electronic shelf‑label pricing systems; Delhaize reported similar issues. Stores displayed warnings about price errors and suspended loyalty programs. Retailers have temporarily shut down affected systems and launched investigations, but it remains unclear whether the French and Dutch incidents are linked or how extensive the attacks are.</p>
+          </div>
+          <a href="https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on criticism of the insecure, internet‑exposed refrigeration controllers, describing the incidents as preventable negligence rather than sophisticated hacks. Observers note that manufacturers failed to issue timely updates for legacy units, leaving supermarkets and even military facilities vulnerable, and they blame both vendors and under‑invested IT practices. While the remote‑control functionality is acknowledged as useful for efficiency, the prevailing view is that the risks outweigh the benefits without stricter regulations, mandatory update support, and network segmentation. Speculation about the attackers varies, but consensus stresses systemic security lapses.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50055304" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://prophitt.me/writing/a-modern-web-app-in-c" target="_blank">A Modern Web App in C</a>
+        </h2>
+        <span class="article-meta">
+          577 points • by prophittcorey • 76 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article describes building a commercial web product (marketyour.games) in 2026 using a minimalist C‑CGI stack. The environment consists of OpenBSD, a statically linked C binary, httpd, and SQLite; no framework, templating engine, or separate database server is used. The CGI program reads HTTP environment variables, generates HTML directly, and accesses a SQLite database via its C API. Outbound services (Stripe, Postmark) are handled with libcurl; libsodium provides cryptographic functions, and libcjson parses JSON. Only libcurl and libsodium are external build dependencies; libcjson and SQLite are vendored as single‑file sources. Each request spawns a new process, enabling zero‑downtime deployments by swapping the binary. The author cites benefits: simplicity, low supply‑chain risk, ease of debugging, minimal tooling (Vim, Make, standard C utilities), and reduced operational overhead compared to traditional stacks with separate web and application servers. Drawbacks include the need to implement common utilities (cookie handling, query parsing, escaping) manually. The author concludes that CGI’s perceived obsolescence is unfounded today, with process forking inexpensive and FastCGI available if needed.</p>
+          </div>
+          <a href="https://prophitt.me/writing/a-modern-web-app-in-c" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed but generally appreciative view of minimalist C/CGI approaches, noting their simplicity, low‑dependency deployment and ease of reasoning for small, low‑traffic services. Many contrast this with the complexity of contemporary stacks involving containers, frameworks, and multiple languages, questioning their necessity. Concerns recur around security, SQLite contention, lack of observability, and the aging state of some CGI projects. Opinions also highlight alternatives such as FastCGI, Go, Rust, and modern web servers, while some criticize Apache and the overhead of per‑request process spawning. Overall, the community values minimalism but recognizes practical limits and trade‑offs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50058528" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.unsiloed.ai/blog/document-review-unsiloed-typesafe-jev" target="_blank">Document Review with Unsiloed and TypeSafe Jev</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by ritzaco • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post describes a workflow that combines Unsiloed’s OCR‑based extraction with TypeSafe’s Jev model to detect both reading errors and implausible medication dosing. Unsiloed returns each field’s value, an extraction_score, a grounding_score, and a citation (page, bounding box). Rows are assigned IDs (e.g., “row‑5”) so that Jev’s answers can be matched back to the original extraction. A single Jev request contains a shared state (context, careContext, medication list) and a “noul”‑type question per row asking whether the extracted dose and frequency are plausible. Jev returns a probability (0–1) indicating plausibility; values near 0.5 suggest uncertainty. Review logic flags a row if the lowest Unsiloed confidence &lt; 0.90 or the Jev plausibility &lt; 0.50. The example shows a stained cetirizine entry (low Unsiloed scores, high Jev plausibility) and an ibuprofen entry (high Unsiloed scores, low Jev plausibility), each requiring manual review for different reasons. The demo processes six rows (≈1,812 input tokens) costing about $0.000076 per document at Jev’s published rate, or ~$7.61 for 100 k documents. All extraction and Jev responses are stored with reviewer decisions for auditability.</p>
+          </div>
+          <a href="https://www.unsiloed.ai/blog/document-review-unsiloed-typesafe-jev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights the potential to generalize the OCR‑based structured data extraction approach beyond the presented example, applying it to any context where information is retrieved from sources such as tables, markdown files, or scanned documents. It suggests that once data is extracted, a decision model can be employed to conduct rapid, on‑the‑fly review or validation, enabling broader, adaptable workflows for automated data handling and quality assurance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50068443" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bloomberg.com/news/features/2026-10-13/cftc-staff-told-to-retract-analysis-of-suspicious-oil-trades-on-iran" target="_blank">CFTC Staff Were Told to Retract Analysis of Suspicious Oil Trades</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by helsinkiandrew • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.bloomberg.com/news/features/2026-10-13/cftc-staff-told-to-retract-analysis-of-suspicious-oil-trades-on-iran" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a generally positive view of the United States’ political system, emphasizing its ability to continue functioning despite criticism of recent presidential leadership. They acknowledge concerns about perceived corruption in elected officials while simultaneously highlighting institutional resilience as evidence of American strength. This combination of praise for systemic durability and criticism of specific leaders reflects a mixed but overall optimistic assessment of the nation’s governance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50069329" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/" target="_blank">Who is vfmaddrnd231pd?</a>
+        </h2>
+        <span class="article-meta">
+          214 points • by pngmangi • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>vfmaddrnd231pd is documented in older Intel Software Development Manuals (e.g., 2024 edition) as a fused‑multiply‑add of packed double‑precision values with per‑instruction rounding control, using an immediate byte to select rounding mode, denorm‑zero (DAZ), flush‑to‑zero (FTZ), and exception suppression. The entry lists a VEX‑encoded opcode (VEX.DDS.128.66.0F3A.W1 B8 /r /ib) and mentions intrinsics _mm_fmaddround_pd and _mm256_fmaddround_pd. In practice, no assembler (GNU as, clang, ICC) recognizes the mnemonic, and execution on a Haswell CPU triggers an undefined‑instruction exception (#UD). The “DDS” field appears only in this entry and was removed from later manuals, suggesting documentation inconsistency. The instruction is absent from the 2026 SDM edition, indicating it may have been planned but subsequently dropped before silicon implementation. The author concludes the entry is likely an editorial artifact rather than a functional ISA feature.</p>
+          </div>
+          <a href="https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment explains that the DDS modifier in VEX encoding appeared only in early revisions of Intel’s SDM and was later removed, likely due to hardware issues or a shift back to AVX‑512. It speculates on the reasons for its brief existence and notes that the instruction’s syntax is hard to grasp, suggesting that more assembler‑level programming could improve instruction set design. The author also reflects on how AI might help create more understandable assembler representations and compares legacy concepts to modern design challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50063138" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
