@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://deepmind.google/models/gemini/" target="_blank">Gemini 4 Argon</a>
+        </h2>
+        <span class="article-meta">
+          1262 points • by 737max • 149 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Argon is accelerating quantum research by optimizing both error‑correction decoders and algorithmic subroutines. It converted an internal version of AlphaQubit—Google DeepMind’s machine‑learning quantum error‑correction decoder—into a single, highly tuned hardware kernel, nearly doubling inference throughput. This improvement allows deployment of larger models on quantum hardware while maintaining strict real‑time latency requirements. Argon also lowered the spacetime cost of quantum subroutines: its formally verified Lean implementation of an arcsin block, used in recent quantum simulation algorithms, reduces cost by more than 100× compared with a published quantum CORDIC baseline. These advances contribute toward a standardized library of optimized quantum circuits, supporting scalable error correction and more efficient quantum algorithm design.</p>
+          </div>
+          <a href="https://deepmind.google/models/gemini/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments describe Gemini 4 Argon as a near‑frontier model with strong reasoning, clear multilingual writing and useful coding assistance, often praised for its handling of non‑Western topics and spatial reasoning. However, users note recurring chain‑of‑thought bugs, occasional infinite loops, higher token usage and slower runtimes that raise cost concerns. Availability frustrations are frequent, with confusing subscription tiers, limited rollout to Ultra plans, and UI problems on mobile and web. Overall sentiment is cautiously positive about capability but critical of reliability, pricing and rollout execution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50073879" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ciechanow.ski/sound/" target="_blank">Sound – Bartosz Ciechanowski (2022)</a>
+        </h2>
+        <span class="article-meta">
+          107 points • by dverlaeckt80 • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Sound propagates as pressure waves through a medium such as air, where rapidly moving molecules collide and generate pressure fluctuations. When a solid surface (e.g., a vibrating plate) moves, it compresses adjacent air, creating a wave that travels outward; the wave’s frequency determines perceived pitch and its amplitude determines loudness. Simple “jump” motions produce rectangular waveforms; continuous motions yield triangular or sinusoidal waveforms, each characterized by amplitude, frequency, and phase. Combining multiple waveforms adds their motions linearly, leading to constructive or destructive interference, beats, and changes in timbre. Phase shifts affect interference but have little impact on human hearing. Any periodic waveform can be expressed as a sum of sine waves via Fourier series or Fourier transform, revealing its frequency spectrum; higher‑frequency components give audible tones even when the fundamental frequency is inaudible. Decomposing complex shapes may exhibit Gibbs phenomenon near abrupt transitions. Real‑time spectrum analysis with a microphone shows environmental frequencies and amplitudes.</p>
+          </div>
+          <a href="https://ciechanow.ski/sound/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback emphasizes a strong appreciation for clear, visual explanations that make complex topics accessible, drawing parallels to nostalgic pop‑science articles. Readers value the perceived rigor and trustworthiness of the work, noting its ability to trace concepts from simple foundations to advanced ideas such as harmonics and interference. There is a recurring desire for similarly structured content, especially for assessing AI general intelligence, while newer visualizations elsewhere are seen as lower‑quality. Overall, the commentary highlights the educational impact and engaging presentation as noteworthy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50045147" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/android/ndk/issues/2260" target="_blank">AOSP Source Releases Are So Late Developers Disassemble Libraries to Report Bugs</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by tharen • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The issue reports a bug in Android 17’s Bionic C library where the wide‑character functions <code>wcscspn()</code> and <code>wcspbrk()</code> incorrectly treat any <code>wchar_t</code> value ≥ 0x100 as a match, causing them to return results that do not reflect the actual search set. The problem is documented in GitHub issue #2260 of the Android NDK repository and is associated with the CP3A.260905.009 build. The page displaying the issue is inaccessible (“You can’t perform that action at this time”), and the only additional content consists of five image placeholders labeled with usernames (@francisdb, @enh-google, @joaquinvacas, @pirama‑arumuga‑nainar, @zenczykowski). No further technical details, reproducibility steps, or patches are provided in the scraped text.</p>
+          </div>
+          <a href="https://github.com/android/ndk/issues/2260" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on concerns that recent EU regulation may be unintentionally delaying Android updates, with speculation that Google is postponing public AOSP releases to accommodate partners. Critics repeatedly describe Google’s handling of updates, the NDK, and overall project resources as inadequate, expressing frustration and calling for a forked Android alternative that better protects user freedom. While a few remarks acknowledge the benefits of open‑source access, the dominant view is distrust of Google’s motives and skepticism about the current development trajectory.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50083130" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/" target="_blank">Ledger confirms spy chip implant behind wallet crypto thefts</a>
+        </h2>
+        <span class="article-meta">
+          667 points • by thm • 71 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on a strongly critical view of hardware wallets, especially Ledger, highlighting repeated supply‑chain compromises, inadequate tamper protection, and the ease with which secret seeds can be exfiltrated. Many argue that trust in single‑vendor devices is misplaced and advocate multisignature setups using multiple brands, open‑source scrutiny, and stronger physical safeguards such as epoxy or tamper‑response mechanisms. While the technical ingenuity of the eSIM‑based attack is acknowledged, the prevailing sentiment is that the incident exposes deep security flaws and undermines confidence in self‑custody crypto solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50054092" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://anitab.org/press-release" target="_blank">Grace Hopper Celebration Cancelled</a>
+        </h2>
+        <span class="article-meta">
+          177 points • by mooreds • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AnitaB.org announced the cancellation of this year’s Grace Hopper Celebration in Anaheim, CA, citing insufficient funds due to lower-than‑expected individual registrations and sponsorship commitments, which failed to cover critical operating expenses. The organization acknowledged the impact on attendees who have arranged travel, visas, hotels, and work absences, and offered instructions: cancel or modify travel and hotel reservations directly with providers; financial matters—including registration fees—will be addressed individually, with registrants contacted by October 26. Inquiries should be sent to GHC@AnitaB.org for centralized handling. AnitaB.org expressed gratitude to the community and indicated that the cancellation has strained its finances; it is evaluating strategic alternatives and future programming, with further announcements expected in the coming weeks. Brenda Darden Wilkerson, President &amp; CEO, signed the release.</p>
+          </div>
+          <a href="https://anitab.org/press-release" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express disappointment that the Grace Hopper Celebration was cancelled, attributing it primarily to reduced corporate DEI investment and sponsor withdrawal, which many link to broader funding challenges for AnitaB.org. There is confusion over the organization’s shifting mission language and criticism of its perceived rebranding. Some participants lament personal inconvenience and lost networking value, while others voice skepticism about political or cultural motives behind the decision, describing the cancellation as symptomatic of larger shifts in tech‑industry priorities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50080007" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://guitoro.com/" target="_blank">Show HN: Guitoro, a virtual guitar you strum with your keyboard</a>
+        </h2>
+        <span class="article-meta">
+          420 points • by talccc • 68 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Guitoro is a free online virtual guitar platform offering four sampled instruments—steel‑string acoustic, classical, electric, and four‑string bass—with selectable timbres (e.g., Warm, Bright, Mellow for acoustic). It provides 15 chord types across all 24 major/minor keys, with editable chord entry and visual finger‑position diagrams in three shape modes (Standard, Easy, Up). The library includes 51 preset songs and classical pieces, adjustable tempo from 20 % to normal speed. Users can apply 56 strum and picking patterns, covering 14 common strums, 26 rhythm variations, and 12 picking styles. A built‑in backing band supplies 15 drum styles and 25 bass lines, tempo‑controlled between 10–220 BPM with metronome. Custom songs can be imported as chord text or ChordPro, repeated via “x2”, and played without lyrics. Solo mode enables single‑note melody input via keyboard with articulation effects. Amplifier and FX chain offers overdrive, distortion, fuzz, EQ, reverb, and delay for all instruments. Ten tunings (including Drop D, DADGAD, Open G/E) and a capo up to fret 10 support left‑handed guitars. Recordings up to ten minutes can be saved locally as WAV or compressed files, and an online microphone tuner covers guitar, bass, and ukulele.</p>
+          </div>
+          <a href="https://guitoro.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong overall enthusiasm for the browser‑based guitar interface, highlighting its intuitive UI, realistic sound, and usefulness as a learning tool, especially for players and beginners. Common suggestions include aligning the default view with standard tablature orientation, adding keyboard modifiers for chord variations, supporting custom tunings, multi‑touch on tablets, and improving features such as “let‑ring,” velocity detection, and independent string strumming. Users also note occasional technical glitches like choppy audio or arp bugs, and several mention accessibility applications and interest in expanded instrument support.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50077020" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://felixrieseberg.com/" target="_blank">Felix Rieseberg Homepage</a>
+        </h2>
+        <span class="article-meta">
+          178 points • by rglover • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided text consists solely of a title line reading “Felix Rieseberg” and contains no additional information, description, or data to summarize.</p>
+          </div>
+          <a href="https://felixrieseberg.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mixed response, combining appreciation for the nostalgic, Flash‑style interactive design with criticism of its accessibility and autoplay sound, which many deem poor UI choices. Several remarks note curiosity about the underlying technology and open‑source status, while others question the practicality and cost of AI‑generated content and its ability to address deeper knowledge gaps. Overall, the feedback balances admiration for the creative concept with concerns about usability, inclusivity, and the limitations of current AI tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50082470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.openculture.com/2026/10/a-900-page-pre-pantone-guide-to-color-from-1692.html" target="_blank">900-Page Pre-Pantone Guide to Color from 1692 (With Complete High-Res Scan)</a>
+        </h2>
+        <span class="article-meta">
+          157 points • by mdp2021 • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A. Boogert’s 1692 manuscript “Klaer Ligh­tende Spiegel der Ver­fkon­st” (French title <em>Traité des couleurs servant à la peinture à l’eau</em>) is a single‑copy, 900‑page handbook on water‑colour paint preparation. Written in Dutch, it contains over 700 pages of hand‑drawn colour swatches and detailed instructions for mixing pigments and adjusting tones with specific water ratios. The work reflects Aristotle’s colour theory rather than the later Newtonian spectrum, placing it at the cusp of modern colour science. Although it had little contemporary impact—most Dutch Golden‑Age painters were deceased by its completion—it offers a rare view of 17th‑century workshop practices. The manuscript is now housed at Bibliothèque Méjanes in Aix‑en‑Provence and is available as high‑resolution, zoomable scans online, providing a pre‑Pantonelike catalogue of pigment samples predating systematic colour standardisation that began with Goethe, Werner, and later the Pantone company (1963).</p>
+          </div>
+          <a href="https://www.openculture.com/2026/10/a-900-page-pre-pantone-guide-to-color-from-1692.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses strong enthusiasm for historical color reference works, highlighting Werner’s Nomenclature, the Thames and Hudson volume on natural palettes, and related titles such as the Haeckel compilation, while also recommending a YouTube channel focused on color theory. It raises questions about the feasibility of reproducing original swatch books with modern printing, the accuracy of color reproduction over time, and the process by which scanned editions gain recognition. Additional observations touch on typographic quirks and peripheral references to contemporary color systems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50053487" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/engineering/redesigning-source-control" target="_blank">Redesigning source control at Anthropic</a>
+        </h2>
+        <span class="article-meta">
+          756 points • by Philpax • 149 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Anthropic’s AI‑driven development pipeline increased from ~2,500 to &gt;30,000 daily merges, exposing limits of traditional Git for a monorepo &gt;100 GB history and 25 GB working copy. To handle tens of millions of daily checkouts, Anthropic built Scion, an in‑house server‑centric version‑control system, migrating the repo in five months and adding code‑review (Antique), search, and IAM tools.</p>
+<p>Scion’s design assumes always‑online clients, shifting most logic to a scalable server farm. Clients keep a bounded cache and request specific objects; the server stores changesets (file‑level deltas with content‑addressed blobs) and generates derived data (blame, history, indexes) on demand. No packfiles or global refs are required; commits are lock‑free and incremental. A three‑tier architecture (daemon, cache, authoritative servers) provides &gt;99 % cache hit rates, reduces CPU/memory footprint 200× versus Git mirrors, and cuts checkout latency by two orders of magnitude, yielding a 25 % CI CPU gain.</p>
+<p>Key lessons include rapid development with a small team, the evolving role of engineers alongside code‑generating agents, and the need for fine‑grained repo security. Anthropic views Scion as a case study for future large‑scale monorepos, suggesting that server‑side RPC extensions and sparse protocols could retrofit existing Git platforms for similar workloads.</p>
+          </div>
+          <a href="https://www.anthropic.com/engineering/redesigning-source-control" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on Anthropic’s massive code‑generation pipeline, noting impressive speed and memory gains but also raising concerns about quality, sustainability, and the shifting role of engineers who increasingly act as “stop‑gaps” for AI‑produced changes. Commenters debate the necessity of custom version‑control systems versus Git, question the practicality of tens of thousands of daily merges, and highlight potential risks of over‑reliance on AI while acknowledging the technical ingenuity involved. Overall sentiment is mixed, combining admiration for the engineering achievement with skepticism about its broader implications and long‑term viability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50073633" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ourworldindata.org/data-insights/electricity-generation-per-person-in-the-united-kingdom-has-fallen-by-a-third-from-its-early-2000s-peak" target="_blank">The United Kingdom generates less electricity per person than in the 1970s</a>
+        </h2>
+        <span class="article-meta">
+          301 points • by karakoram • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article corrects a common misconception that most plastic ends up in the ocean. Survey data from Sweden, Norway, Finland, Denmark and the UK show that ~90 % of respondents overestimate the share, selecting “&lt; 36 %” or “&lt; 66 %” when the correct answer is “&lt; 1 %”. OECD calculations confirm that only about 0.5 % of the 350 million tonnes of global plastic waste generated annually (≈1.7 million tonnes) reaches the ocean, after a cascade where roughly one‑quarter is mismanaged, 19 million tonnes leak to the environment, 6 million tonnes to rivers/coasts, and the remainder remains in landfills, recycling or incineration. The page also presents ancillary data visualisations: UK per‑capita electricity generation rose from near zero in 1920 to a peak of ~6,700 kWh in 2003, then fell to ~4,200 kWh in the latest year; extreme‑poverty rates in China and Indonesia have declined sharply; global wildlife abundance has dropped 73 % since 1970; under‑five mortality has fallen worldwide; median ages have risen across all regions; and U.S. oil production now exceeds 10,000 TWh yr⁻¹, surpassing other major producers.</p>
+          </div>
+          <a href="https://ourworldindata.org/data-insights/electricity-generation-per-person-in-the-united-kingdom-has-fallen-by-a-third-from-its-early-2000s-peak" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note that the drop in UK electricity demand stems from multiple factors: widespread efficiency gains such as LED lighting, better insulation, modern appliances, and the shift from electric to gas heating, alongside reduced industrial consumption and growing on‑site solar or wind generation. Respondents also highlight the high cost of imported power and its negative impact on businesses and the economy, while some criticize energy policy and attribute challenges to political decisions. Opinions vary between viewing the reduction as a positive efficiency outcome and seeing it as a symptom of deindustrialisation and economic strain.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50072994" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
