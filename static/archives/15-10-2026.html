@@ -1,0 +1,549 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jjmaxwell4.com/writing/things-to-know-when-you-get-cancer/" target="_blank">Things to know when you get cancer</a>
+        </h2>
+        <span class="article-meta">
+          1280 points • by jjmaxwell4 • 92 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author was diagnosed with oral squamous‑cell carcinoma in May 2026 and shares practical observations. Persistent scheduling—frequent call‑backs and checking for cancellations—proved essential for timely appointments. AI chat models often minimized seriousness, so reliance on them for medical judgment is unreliable. Prompt, comprehensive genetic testing may require direct advocacy; delays occurred when tumor samples differed (surgical vs. biopsy) and when physicians hesitated to order tests. Accessing NCCN “Standard of Care” flow charts (via a non‑professional account) helped the author understand treatment pathways and compare options. Consulting patients who have undergone the same surgery, and asking surgeons about volume and complication rates, clarified expectations. Securing a second opinion, ideally at a top cancer center, and requesting a pathology reread were emphasized despite logistical challenges. Organized digital records (dictated notes processed by AI) facilitated follow‑up. The Sijbrandij Foundation provides supplemental resources, and the author recommends using US News hospital rankings to select a major center, noting faster specialist communication and response times there.</p>
+          </div>
+          <a href="https://jjmaxwell4.com/writing/things-to-know-when-you-get-cancer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments overwhelmingly stress proactive advocacy in cancer care, urging patients and families to obtain second opinions, seek treatment at high‑volume specialty centers, and persistently navigate insurance and administrative hurdles. Consistent record‑keeping, genetic testing, and involvement in support or patient groups are repeatedly recommended. Experiences vary by region, with some noting more supportive public systems and others highlighting systemic inertia or profit‑driven incentives. While optimism about novel therapies and personal agency is common, many acknowledge the limits of medicine and the emotional strain of continual self‑advocacy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50093568" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.dfb.sh/blog/eap770-root-for-two-zeros/" target="_blank">Wanted to download an ISO, ended up writing a kernel exploit</a>
+        </h2>
+        <span class="article-meta">
+          36 points • by 0xdeafbeef • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author bought a TP‑Link EAP770 v1 (Qualcomm IPQ9574, Linux 5.4.164) that suffered silent data corruption on large TCP/HTTPS transfers over Wi‑Fi. Debugging showed 64‑byte blocks of zero‑filled data within otherwise checksum‑valid TCP segments, causing TLS/SSH “bad record mac” errors. The corruption appeared only on bridged LAN‑to‑Wi‑Fi traffic, implicating the AP’s Qualcomm SFE/PPE offload path.  </p>
+<p>Investigation revealed a DMA cache‑coherency bug in the out‑of‑tree qca‑nss‑dp driver: packet buffers are recycled without full cache invalidation, so stale cache lines can be written back after NIC DMA, overwriting received payloads. The offload then recomputes TCP checksums, delivering valid but corrupted data to clients.  </p>
+<p>Fixing required disabling two sysfs controls (<code>/sys/sfe/l2_feature</code> and <code>/sys/sfe/ppe_rfs_feature</code>), which are root‑only and inaccessible via TP‑Link’s restricted shell. The author crafted a kernel privilege‑escalation exploit using CVE‑2022‑0185 (integer underflow in <code>legacy_parse_param</code>) and pipe‑buffer manipulation to perform an arbitrary write, set those sysfs values to 0, and reboot‑persist the change with a watchdog script. Disabling the offload eliminates the corruption at a modest (~8 %) performance cost; uploads and wired traffic were unaffected. The bug is specific to Qualcomm’s SFE/PPE implementation and not present in x86 or OpenWrt builds.</p>
+          </div>
+          <a href="https://blog.dfb.sh/blog/eap770-root-for-two-zeros/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments primarily express frustration with defective hardware and inadequate customer support, emphasizing that poor product quality and lack of timely firmware updates discourage confidence in the brand. Users criticize the difficulty of returning faulty devices and question the effectiveness of verification programs that fail to resolve issues. A few remarks diverge into unrelated or humorous anecdotes, but the dominant viewpoint is disappointment with the hardware’s reliability and the perceived unresponsiveness of the company’s service.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50070625" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jackantico.io/garmin-mcp" target="_blank">Creating a Garmin &#34;MCP&#34;</a>
+        </h2>
+        <span class="article-meta">
+          19 points • by ricotico060 • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page provides only a title, “Jack Antico,” followed by a generic message stating that JavaScript must be enabled to run the application. No additional biographical information, career details, achievements, or contextual content about Jack Antico is present. Consequently, the source contains no substantive data, facts, or technical insights beyond the requirement for JavaScript activation to display any further material.</p>
+          </div>
+          <a href="https://jackantico.io/garmin-mcp" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses a desire for a personal system that locally ingests data from devices such as Garmin watches, bike computers, iPhones, and other sensors, allowing the user to back up and query information like exercise routes, messages, contacts, and media without relying on external services. It highlights concerns about third‑party data collection and proposes using a local “ingest” program, while briefly mentioning an existing service as an alternative.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50081045" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://anoma.ly/notes/opencode-2-0/" target="_blank">OpenCode 2.0</a>
+        </h2>
+        <span class="article-meta">
+          581 points • by gmays • 73 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>OpenCode 2.0 represents a substantial overhaul of the platform, targeting the experience of its millions of daily users. The release emphasizes a flexible architecture intended to accommodate a wide range of agent requirements. It introduces numerous new features, delivers performance enhancements, and includes extensive bug fixes. Among these updates, several user‑facing changes are highlighted as particularly impactful, though specific details are not enumerated in the source text. Overall, the update aims to improve system adaptability, reliability, and overall user interaction.</p>
+          </div>
+          <a href="https://anoma.ly/notes/opencode-2-0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a broadly favorable view of OpenCode v2, highlighting its client‑server architecture, plugin system, improved issue tracking, and the convenience of native apps and tunneling features. Users appreciate the added configurability, background tasks, and the ability to run sessions remotely, often describing it as a solid daily driver. However, recurring criticisms focus on heavy memory and CPU demands, slow installer progress, occasional bugs, limited UI customization, remote‑config security concerns, and perceived gaps in support and documentation, leading some to consider alternative harnesses.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50094994" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tinylittleoffice.com/" target="_blank">Tiny Little Office</a>
+        </h2>
+        <span class="article-meta">
+          396 points • by donohoe • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No substantive content was provided beyond the title “Tiny Little Office,” so there is no material to summarize.</p>
+          </div>
+          <a href="https://tinylittleoffice.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show overall interest and admiration for the lightweight, URL‑based office suite, with many noting its novelty, simplicity and potential for offline‑free sharing. However, users repeatedly point out practical issues: buggy word‑processing, limited file‑type support, difficulty sharing large data URLs, missing documentation, and lack of real‑time collaboration. There is skepticism about long‑term availability and a desire for desktop or collaborative alternatives, while a subset praises the concept and suggests feature expansions such as PDF annotation and better dark‑mode handling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50096142" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.liquid.ai/blog/lfm2-5-24b-a2b" target="_blank">LFM2.5-24B-A2B: Built for fast on-device agents</a>
+        </h2>
+        <span class="article-meta">
+          196 points • by gmays • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LFM2.5-24B‑A2B is a 24‑billion‑parameter mixture‑of‑experts (MoE) model with 2 B active parameters per token, optimized for on‑device agentic reasoning. It extends the LFM2.5 line, featuring a 40‑layer architecture, 64 experts per MoE block with top‑4 routing, gated short convolutions, and GQA. Key upgrades include a context window enlarged from 32 k to 131 k tokens and a vocabulary doubled to 128 k tokens for improved non‑Latin tokenization. Pre‑training scaled from 17 T to 33 T tokens, followed by a two‑phase mid‑training (2 T tokens at 32 k context, then 300 B tokens at 131 k) emphasizing reasoning, math, code, and long‑context data, plus tool‑call trajectories. A five‑stage fine‑tuning pipeline (SFT, teacher specialization, non‑agentic and agentic MOPD, agentic RL) produces the final reasoning‑only model that outputs explicit chains of thought.</p>
+<p>Benchmarking on 16 tasks shows competitive results versus larger MoEs (e.g., Qwen3.6‑35B‑A3B), leading on five of eight tool‑use/agentic benchmarks (AutomationBench, BFCLv4, ToolSandbox, LiveClaw, τ³‑Bench Banking) and all instruction‑following tests. Inference speeds reach 184 tokens /s on Apple M5 Max, 114 tokens /s on AMD Ryzen AI Max+, and &gt;21 k output tokens /s on a single NVIDIA B300 GPU, up to 1.7× faster than peers. The model, base and fine‑tuned weights, are open‑weight on Hugging Face with support for llama.cpp, MLX, vLLM, SGLang, and ONNX. Pricing is $0.10 per M input tokens and $1.00 per M output tokens.</p>
+          </div>
+          <a href="https://www.liquid.ai/blog/lfm2-5-24b-a2b" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight strong interest in the model’s reported speed, especially on‑device performance, while questioning what the AutomationBench metric actually measures and how it translates to real‑world tasks. Users compare its efficiency to larger models, noting faster token generation but mixed quality results in coding and general knowledge benchmarks. Repeated concerns address the opaque training cost, energy usage, and licensing terms, particularly the non‑commercial clause and pricing for high‑revenue businesses. Overall, there is enthusiasm for locally runnable models tempered by practical implementation challenges and uncertainty about benchmark relevance and cost structures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50097369" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mapwriting.substack.com/p/dentists" target="_blank">Do dentists know what they&#39;re doing?</a>
+        </h2>
+        <span class="article-meta">
+          663 points • by doitLP • 139 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://mapwriting.substack.com/p/dentists" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey widespread distrust of dental professionals, emphasizing perceived overdiagnosis, unnecessary procedures, and financial incentives tied to corporate practice models. Numerous anecdotes describe conflicting diagnoses, aggressive treatment recommendations, and the importance of seeking independent second opinions. While some users note occasional competent care and successful conservative treatments, the dominant view questions the consistency of skill, the influence of profit motives, and calls for greater transparency, patient empowerment, and systemic reform in dental practice.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50050553" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://catchabird.com" target="_blank">Catch a Bird – I made it for my own sanity</a>
+        </h2>
+        <span class="article-meta">
+          145 points • by eduardsik • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided excerpt consists solely of the title “Catch a Bird” and contains no additional text or information to summarize.</p>
+          </div>
+          <a href="https://catchabird.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly positive, describing the site as beautiful, lively, and uplifting, with many users noting how the simple, hopeful messages improve their mood and resonate personally. Praise focuses on the clean UI, clever bird‑metaphor mechanic, and multilingual translation details. Repeated suggestions call for stronger spam moderation, a more obvious feed button, options to manage or hide birds, and extensions such as sound, a TV app, or open‑source release. While a minority mention disruptive spam and bot concerns, the overall consensus is supportive and appreciative of the concept.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50053384" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/awslabs/aidlc-workflows" target="_blank">Aidlc: Adaptive workflow steering rules for AI coding agents</a>
+        </h2>
+        <span class="article-meta">
+          4 points • by pramodbiligiri • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AI‑DLC (AI‑Driven Development Life Cycle) provides a harness‑neutral core that adds structured, verifiable workflow steering to AI coding assistants (Claude Code, Kiro CLI/IDE, Codex CLI, Cursor, opencode, GitHub Copilot). Installation is a single script (curl on macOS/Linux/WSL, PowerShell on Windows) that creates the native <code>aidlc</code> command and all harness runtimes; no Bun or Node.js is required unless the “manual‑copy” runtime is used (download <code>aidlc‑copy‑runtime‑X.Y.Z.tar.gz</code> and place <code>runtime/&lt;harness&gt;/</code> in the project). Configuration selects a harness (<code>aidlc config --harness &lt;name&gt;</code>) and runs <code>aidlc doctor</code> for health checks. Provider setup is harness‑specific; the recommended model is Claude Opus 4.8. The methodology defines 5 phases, 33 stages, 14 agents (11 domain experts, 2 reviewers, 1 composer), 11 workflow profiles, human approval gates, and a 119‑event audit trail. Repository layout includes <code>core/</code> (engine), <code>harness/</code> (manifest integrations), <code>plugins/</code>, <code>scripts/</code> (packaging), <code>tests/</code>, and <code>docs/</code>. Build with <code>bun install --frozen-lockfile</code> and <code>bun scripts/package.ts</code>; useful commands are <code>aidlc config</code>, <code>aidlc doctor</code>, and <code>aidlc plugin sync</code>. Users are reminded to review AI‑generated output per AWS Responsible AI policy.</p>
+          </div>
+          <a href="https://github.com/awslabs/aidlc-workflows" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50100387" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.dataforprogress.org/blog/2026/9/29/americans-social-activity-has-steeply-declined-in-the-past-30-years" target="_blank">Americans&#39; social activity has steeply declined in the past 30 years</a>
+        </h2>
+        <span class="article-meta">
+          382 points • by hubraumhugo • 57 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Americans’ social engagement has fallen sharply over the past three decades. National surveys show a rise in solitary time and a drop in close‑friend networks—from 63 % with five or more close friends in 1990 to 38 % in 2021. A 2026 Data for Progress poll of 1,098 adults, modeled on the DDB Needham Life Style surveys (1995–1999), compared 2026 responses with 1995 data. Participation rates for several activities fell by double‑digit percentages: attending a class or seminar (‑22 %), entertaining at home (‑21 %), worship services (‑20 %), picnics (‑19 %), club meetings (‑19 %), card games (‑19 %), restaurant breakfasts (‑13 %), and volunteer work (‑12 %). In contrast, use of the internet rose 90 %, home video gaming 22 %, exercise classes 14 %, pop/rock concerts 13 %, and personal airline travel 5 %. The analysis notes methodological differences between the surveys, so results indicate trends rather than precise change estimates.</p>
+          </div>
+          <a href="https://www.dataforprogress.org/blog/2026/9/29/americans-social-activity-has-steeply-declined-in-the-past-30-years" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments repeatedly point to a marked decline in in‑person social interaction, linking it to pervasive smartphone and media consumption, rising costs of outings, car‑centric city designs, expensive housing, and pandemic‑induced habits. Several observers mention class‑related differences, with wealthier groups maintaining active social lives while lower‑income families face time and transportation constraints. Grassroots efforts such as low‑cost, phone‑free meetups are cited as effective counter‑measures, yet many express that a loss of shared public spaces and common culture further discourages participation. Online social activity is acknowledged as having risen in its place.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50089921" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
