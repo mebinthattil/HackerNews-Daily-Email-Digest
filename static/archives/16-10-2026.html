@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 16, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.niemanlab.org/2026/10/metas-new-commercial-terms-will-allow-the-scraping-of-news-sites-legal-experts-say/" target="_blank">Meta’s new commercial terms will allow the scraping of news sites: experts</a>
+        </h2>
+        <span class="article-meta">
+          247 points • by 0in • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.niemanlab.org/2026/10/metas-new-commercial-terms-will-allow-the-scraping-of-news-sites-legal-experts-say/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward Meta’s new terms that permit extensive web scraping, questioning the legal basis for assuming content owners can grant such licenses and highlighting conflicts with existing third‑party rights. Critics argue the provisions may undermine consent, raise antitrust concerns, and threaten business relationships, while some suggest blocking Meta’s crawlers or imposing strict click‑wrap restrictions. A minority view treats scraping as inherently permissible if content is publicly accessible, but overall sentiment is distrustful of Meta’s approach and its potential impact on publishers and users.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50111852" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://research.meta.ai/blog/muse-spark-open" target="_blank">Muse Spark Open</a>
+        </h2>
+        <span class="article-meta">
+          788 points • by bigwheels • 83 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Muse Spark Open is Meta’s latest open‑weight, US‑open‑weight language model, released for unrestricted developer use under the Muse Model License (limited commercial terms). It runs efficiently on Apple Silicon, leveraging MLX to exploit the Mac Studio M5 Ultra’s unified memory (up to 512 GB per machine) and 1.2 TB/s bandwidth; two such machines provide ~1 TB unified memory, enabling full‑model inference on‑device. Demonstrations include Muse Code driving iOS client updates and end‑to‑end video analysis in DaVinci Resolve. The model ships with custom, auto‑tunable Helion GPU kernels in SGLang, delivering 1.03–3.95× kernel‑level speedups on NVIDIA/AMD GPUs and a 3 % end‑to‑end gain on AMD MI350. Safety post‑training measures were applied, and evaluation against Meta’s Superintelligence Scaling Framework satisfied release thresholds across high‑risk categories. Developers can fine‑tune via PyTorch’s TorchTitan and run on Apple silicon through MLX, with weights hosted on Hugging Face and inference available through partners such as Together AI, Fireworks, Baseten, Modal, Groq, Nebius, and OpenRouter.</p>
+          </div>
+          <a href="https://research.meta.ai/blog/muse-spark-open" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a mixed view of Meta’s new open‑weight model. Users acknowledge the effort of releasing a sizable model and appreciate the potential for US‑based alternatives, yet many critique its performance as lagging behind Chinese offerings such as GLM, DeepSeek, and Qwen. Licensing constraints, high hardware costs (especially the Apple M5 Ultra setup), and questionable “open” status generate frustration. Skepticism about benchmark credibility and safety concerns also appear, while a minority express optimism that Meta’s move could broaden access if the issues are addressed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50107379" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=sjNpfz4UzqU" target="_blank">Woman who rescued injured crow keeps getting &#39;thank-you gifts&#39; from birds [video]</a>
+        </h2>
+        <span class="article-meta">
+          217 points • by johnnyApplePRNG • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page displays a typical YouTube footer containing navigation links to corporate and user resources. Sections listed include “About,” “Press,” “Copyright,” and “Contact us,” which provide general company information and media contacts. “Creators” and “Advertise” link to resources for content producers and advertising opportunities. “Developers” directs to API and integration documentation. Legal and policy items are covered by “Terms,” “Privacy,” and “Policy &amp; Safety.” Functional guides are offered through “How YouTube works” and “Test new features.” A partnership link, “NFL Sunday Ticket,” references the league’s streaming service. The footer ends with a copyright notice indicating “© 2026 Google LLC.”</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=sjNpfz4UzqU" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong interest in avian cognition, highlighting personal observations of crows, chickadees, hummingbirds and bees that suggest problem‑solving and social bonding. They request information on scientific research and literature documenting such behaviors, while noting both genuine studies and misleading claims like the fabricated TED talk. There is appreciation for visual documentation of ravens and curiosity about neural differences between birds and mammals. Overall, the tone is enthusiastic and inquisitive, emphasizing admiration for bird intelligence and a desire for credible sources.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50065859" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lwn.net/Articles/1097760/" target="_blank">Last rites for Gentoo&#39;s Chromium package</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by signa11 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Chromium, Google’s open‑source browser, has been declared “last rites” in Gentoo, meaning its ebuild is masked and the package is unmaintained. The difficulty stems from Chromium’s complex build system, bundled toolchain, frequent releases, and new Rust and Go dependencies, which require extensive compile‑time configuration via USE flags. Gentoo’s source‑based model allows users to select optional libraries and toolchains, but maintaining a fully functional ebuild across architectures (x86‑64, arm64, ppc64, RISC‑V) demands multiple skilled volunteers familiar with C, C++, Go, JavaScript, Rust, and Google’s proprietary tools. Attempts to adopt newer ebuilds from third‑party overlays (Bentoo, Fireburn) have failed or required substantial testing, and the upstream build process is unreliable, producing incomplete tarballs. Consequently, Gentoo users must obtain Chromium via alternatives such as Flatpak, pre‑built binaries (x86‑64 only), or other distributions (Arch, Debian, Fedora). Restoration would need a dedicated maintainer team and a reduction of optional features, but no viable plan exists currently.</p>
+          </div>
+          <a href="https://lwn.net/Articles/1097760/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey general frustration with the extensive effort required to compile complex software such as Chromium and the cascading dependency updates it triggers, making source‑based systems like Linux From Scratch or Gentoo impractical for many users. While some acknowledge the educational value and occasional performance appeal of custom builds, the prevailing view emphasizes the time consumption, frequent breakage, and limited tangible benefit compared with binary distributions. There is also curiosity about whether AI could streamline package maintenance, though no concrete solutions are presented.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50114359" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ipinfo.io/blog/rpki-protects-70-internet-routes" target="_blank">RPKI now protects 70% of internet routes</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by emot • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>RPKI now validates 70.3 % of routed IPv4 prefixes (up from 54 % in Sep 2025), a 16.4‑point gain driven largely by China, whose valid IPv4 coverage rose from 3.7 % to 83 % in one year. Invalid routes are seen by only two of the 1.6 M BGP collectors, indicating they rarely propagate. Country‑level invalid‑prefix counts can be misleading; weighting by address count and visibility reduces Spain’s invalid share from 28.2 % to 0.057 %. IPv6 RPKI coverage outpaces IPv4, reaching 79 % valid prefixes. About 16.2 % of RPKI‑covered IPv4 routes have “open windows” (maxLength set), allowing more‑specific hijacks such as the Hetzner incident; hosting providers vary widely in exposure. RPKI coverage can drop when ROAs disappear, as seen in Mauritius, Saudi Telecom, SEACOM, and Orange Maroc. ASPA (provider‑authorization) records grew from 131 to 3 272 networks, raising ASPA‑valid routing from 6.2 % to 9.7 % (≈3.5 % of traffic now covered). Recommendations: publish ROAs for all announcements, leave maxLength unset, monitor ROA continuity, and publish complete ASPA records.</p>
+          </div>
+          <a href="https://ipinfo.io/blog/rpki-protects-70-internet-routes" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed perspectives on RPKI. There is apprehension about legal and geopolitical risks from centralizing validation data, especially regarding potential governmental control. At the same time, participants note the recent rise in adoption, highlight new capabilities such as ASN path validation, and consider future implementation. Speculation appears about motivations behind rapid increases in certain countries, while some users request clearer presentation and improved tools for IP‑to‑country verification, noting that traditional whois services feel outdated. Interest in regional adoption data, particularly for the Caucasus, is also mentioned.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50112330" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.polygon.com/order-of-the-sinking-star-impressions/" target="_blank">&#39;500-hour&#39; Order of the Sinking Star is as complex and exhausting as it sounds</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by cvoss • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Order of the Sinking Star is an open‑world puzzle title from Thekla, led by Jonathan Blow, marketed as a 500‑hour experience. The game unifies mechanics from several indie Sokoban‑style titles—Mirror Isles, Promesst, Heroes of Sokoban, and Skipping Stones to Lonely Homes—into separate cardinal regions, then creates hybrid puzzles by combining these systems across the overworld grid. Puzzle design is praised for its complexity, inventive rule integration, and occasional “Super Mario Maker‑like” creativity, though the difficulty curve remains steep with minimal relief; solutions are often self‑contained and do not unlock broader insights. Players report high mental fatigue, frequent dead ends, and reliance on reset tools. Narrative elements are minimal and the placeholder voice work is slated for replacement. Development controversy stems from Blow’s political statements, leading some original creators to distance themselves and redirect profits to under‑privileged developers. The title releases on Switch 2, PS5, and PC on 8 Oct, with a Steam Deck prerelease review noted.</p>
+          </div>
+          <a href="https://www.polygon.com/order-of-the-sinking-star-impressions/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a divided reception. Many note the game’s extreme length and repetitive puzzle structure, describing it as tedious, exhausting, and less rewarding than comparable titles like The Witness, while also criticizing the focus on sheer size over engaging design. Others appreciate the deep, slow‑burn challenge, praising the puzzle mechanics, meta‑cognitive aspects, and overall craftsmanship despite the demanding time commitment and weak story elements. A subset mentions the creator’s controversy, viewing the coverage as a distraction from the game itself. Overall, the consensus balances admiration for difficulty with frustration over pacing and repetitiveness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50072119" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cnn.com/2026/10/13/us/nyc-horse-carriage-ban" target="_blank">New York City&#39;s iconic horse-drawn carriages expected to take their last trot</a>
+        </h2>
+        <span class="article-meta">
+          22 points • by 1659447091 • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>New York City Mayor Zohran Mamdani and City Council Speaker Julie Menin have agreed on legislation to phase out Central Park’s horse‑drawn carriage rides, with the ban taking effect on June 1 2028. The bill, slated for a council vote later this month, includes an “industry transition framework” that obligates the city to develop a worker‑retraining plan by April 2027, offering positions and training through agencies such as the Taxi and Limousine Commission, MTA, NYC Transit, the Port Authority and hospitality sectors. It also requires carriage owners to notify the Mayor’s Office of Animal Welfare before disposing of horses and prohibits selling or transferring them for slaughter or other carriage use. The move follows long‑standing animal‑rights criticism and a high‑profile incident last summer in which 18‑year‑old tourist Romanch Mahajan died after being thrown from a runaway carriage—the first such fatality in the attraction’s 150‑year history. Councilman Chris Marte, primary sponsor, reports 29 co‑sponsors and expects passage. The Transportation Workers Union Local 100 argues the bill provides insufficient economic relief for drivers.</p>
+          </div>
+          <a href="https://www.cnn.com/2026/10/13/us/nyc-horse-carriage-ban" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the controversy surrounding horse‑drawn carriage operations in cities such as Vienna and New York, emphasizing animal‑welfare concerns and the growing discussion of restricting or banning the practice, especially during extreme heat. They note longstanding opposition, past political stalls, and potential future policy shifts, while also linking the issue to broader labor and regulatory dynamics. Overall, the sentiment reflects criticism of maintaining carriage services in dense, polluted urban settings and support for stronger protections or eventual prohibition.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50082113" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://already-clean.goodfire.com/" target="_blank">Neural networks are clean</a>
+        </h2>
+        <span class="article-meta">
+          663 points • by themgt • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author argues that neural networks are far more interpretable than commonly believed. After extensive study of vision and language models, they conclude that apparent polysemanticity and superposition are largely misread phenomena; most neurons exhibit “recursive generalization,” where a unit expands to related sub‑concepts rather than arbitrarily mixing unrelated ones. Architectural improvements and better tools have revealed that even deep layers of models such as InceptionV1 and modern large language models contain 90‑100 % neurons with a single dominant function, with only a small minority remaining ambiguous. The earlier belief in superposition stemmed from limited capacity, weak interpretability methods, and reward‑hacked feature visualizations, not from a distinct learning principle. Scaling up models tends to produce narrower, more monosemantic neurons, making mechanistic interpretability feasible through rapid, normal‑science investigation of neurons and circuits. The essay outlines four steps supporting this view: a single learning principle (generalization), improved tools, compounding understanding as maps fill in, and the prospect that interpretability may be tractable in the near term.</p>
+          </div>
+          <a href="https://already-clean.goodfire.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge the article’s ambitious claim that many neurons in large models are legible, noting its thoroughness and the appealing visual tools, while also praising the author’s engaging writing. At the same time, a substantial portion expresses skepticism about the strength of the evidence, warning that polysemanticity, emergent behaviours, and unresolved methodological details limit confidence that mechanistic interpretability is near‑solved. Observers highlight the piece’s dense presentation, the importance of open‑weight models, and the ongoing debate over whether this work marks a breakthrough or a modest incremental step.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50105647" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danieltemkin.com/esolangs/folders" target="_blank">The Folders Programming Language</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by gurst • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://danieltemkin.com/esolangs/folders" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a blend of fascination and disdain for the language’s extreme unconventionality. Many highlight its chaotic, “unhinged” nature and applaud its originality as something beyond typical AI generation, while simultaneously labeling it as pointless, overly complex, and even repulsive when considering the effort required to write even a single statement. The overall tone balances enthusiasm for its novelty with criticism of its impracticality and bewildering syntax.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50114342" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://viceconsole.fyi/blog/2026/10/10/what-i-self-host/" target="_blank">What I self-host</a>
+        </h2>
+        <span class="article-meta">
+          452 points • by BrunoBernardino • 60 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://viceconsole.fyi/blog/2026/10/10/what-i-self-host/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect a mixed but generally pragmatic view of self‑hosting. Many participants report that modest hardware can run typical media and automation stacks with low resource use, and they appreciate the control and cost savings it offers. At the same time, several note that configuring and maintaining multiple containers or Kubernetes clusters is time‑consuming, fragile, and often requires detailed documentation or AI assistance. Preferences diverge between Docker‑compose, systemd, and Kubernetes approaches, while concerns about security, backups, and exposing services persist. Overall, users value flexibility but seek simpler, more reliable deployment methods.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50109715" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
