@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://api-docs.deepseek.com/guides/search/" target="_blank">DeepSeek search and fetch – $0.75 per 1000 successful requests</a>
+        </h2>
+        <span class="article-meta">
+          85 points • by fagnerbrack • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The DeepSeek Search &amp; Fetch APIs provide read‑only access to live web content for agents and RAG applications. Both use the base URL <code>https://api.deepseek.com</code> with bearer authentication (<code>Authorization: Bearer &lt;API Key&gt;</code>) and <code>Content-Type: application/json</code>.  </p>
+<p><strong>Search API (<code>/v1/tools/search</code>)</strong> accepts JSON with <code>query</code> (supports operators like <code>site:</code>, <code>-site:</code>, <code>lang:</code>, <code>after:</code>, <code>before:</code>), <code>count</code> (1‑50), and <code>need_content</code> (boolean). It returns HTTP 200 with a <code>results</code> array; each entry includes <code>rerank_score</code>, <code>title</code>, <code>url</code>, <code>snippet</code>, <code>summary</code>, optional <code>content</code>, <code>site_name</code>, <code>site_icon</code>, <code>date</code>, and <code>authority</code>. Empty results are not billed.</p>
+<p><strong>Fetch API (<code>/v1/tools/fetch</code>)</strong> takes a single <code>url</code> field and returns the page’s <code>title</code> and Markdown <code>content</code>. Availability depends on the target site’s policies.</p>
+<p>Billing is per successful request (HTTP 200 with data), not per token or result count. Errors follow OpenAI‑compatible format; retry on 408, 429, or 5xx, and resolve 402 by topping up. Rate limits are enforced per‑account (QPS) for each API, with an additional per‑domain QPS limit for Fetch. Server‑side tool calls via DeepSeek Harness, Claude Code, or Codex are currently free; per‑request billing begins 00:00 Beijing time on 1 Nov 2026.</p>
+          </div>
+          <a href="https://api-docs.deepseek.com/guides/search/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight that DeepSeek Flash is viewed as a strong, near‑state‑of‑the‑art model with a distinctive search capability, yet users question why fetch operations incur charges and compare its cost unfavorably to cheaper third‑party APIs such as Brave Search and Kagi. There is interest in how the service handles anti‑bot protections like Cloudflare challenges, and concern that pricing for integrated search and fetch tools may rise, potentially making them less cost‑effective than self‑built alternatives. Overall sentiment is cautiously appreciative but wary of expense and limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50138531" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sphinx-six-theta.vercel.app/" target="_blank">Show HN: Sphinx – A hook that quizzes you on your AI&#39;s code before shipping</a>
+        </h2>
+        <span class="article-meta">
+          97 points • by critiquebrowser • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Sphinx is a Git hook that adds an “understanding check” to the push workflow for agent‑assisted development. When a developer or AI coding agent pushes changes, Sphinx pauses the push and presents a scenario‑based question derived from the diff (e.g., handling Stripe webhook retries). The user must answer; an incorrect response triggers a learning loop, while a correct answer allows the push to continue. The tool operates with minimal token usage and can interface with any OpenAI‑compatible endpoint, including Codex, Claude, Cursor, OpenCode, and Pi. Answers never reach the coding agent, and environment files or secrets remain hidden. A “yolo” mode permits pushes to proceed automatically, logging any skips. Installation is via npm (<code>npm install -g sphinx-understand</code>) on Node 22.19+ across macOS, Linux, or WSL, after which normal <code>git push</code> commands invoke the Sphinx checks. The system aims to ensure developers understand the functional impact of code before it ships.</p>
+          </div>
+          <a href="https://sphinx-six-theta.vercel.app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express frustration with AI‑generated code that bypasses learning and produces low‑quality “slop,” prompting calls for tools that enforce understanding or gate merges. Some see such safeguards as valuable for inexperienced developers and open‑source maintainers, while others view them as unnecessary friction for proficient users. Opinions diverge on whether existing code‑review processes suffice, with concerns about workflow impact, cultural change, and AI hallucinations. Overall sentiment is mixed, balancing support for quality‑enhancing mechanisms against skepticism about practicality and added overhead.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50137950" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.readtheprofile.com/p/elizabeth-holmes-documentary-you-can-see-everything" target="_blank">How the Elizabeth Holmes documentary “You Can See Everything” is deceiving</a>
+        </h2>
+        <span class="article-meta">
+          104 points • by MaysonL • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The documentary “You Can See Everything” (directed by Lance Oppenheim and Nathan Fielder) examines Elizabeth Holmes and the Theranos scandal while simultaneously illustrating how documentary form can shape audience perception. The film interleaves close‑ups, wide shots, and narrative reordering to shift Holmes’s portrayal from villain to victim, prompting viewers to experience real‑time emotional reassessment. The author notes that Holmes was acquitted of patient‑fraud charges but convicted of defrauding investors who contributed over $700 million, emphasizing the nuance often lost in popular retellings. An referenced 2015 Canon experiment—photographers receiving divergent descriptions of the same subject produced markedly different portraits—serves as an analogy for how framing influences interpretation. The piece argues that viewers first form an emotional impression, then construct beliefs, and finally seek supporting facts, a process the documentary exploits to demonstrate the ease of psychological manipulation. The author suggests the film warrants study for its demonstration of narrative control and its impact on audience cognition.</p>
+          </div>
+          <a href="https://www.readtheprofile.com/p/elizabeth-holmes-documentary-you-can-see-everything" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary views the documentary as competently crafted but ultimately unsatisfying, describing it as long, ambiguous and more a study of deception than a definitive portrait of its subject. Viewers note that it raises questions about honesty, manipulation and perspective without providing clear answers, and many find the accompanying article overly vague and pretentious. Opinions converge on the film’s capacity to provoke skepticism toward media narratives, while also expressing fatigue with its repetitive structure and a desire for deeper factual analysis.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50137620" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nature.com/articles/d41586-026-03266-x" target="_blank">Bleached corals thrive within days when touching healthy neighbour</a>
+        </h2>
+        <span class="article-meta">
+          424 points • by alkyon • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Scientists demonstrated rapid reversal of coral bleaching by physically joining bleached fragments with healthy ones from the same genet. In laboratory trials using Pocillopora damicornis, ten paired fragments (one bleached, one healthy) were set up; five pairs were allowed to touch, forming a tissue bridge, while five were separated by millimetres. In touching pairs, the bleached fragments regained color within eight weeks, with symbiont populations doubling every four days and full recovery occurring after a week of contact even when later isolated. Separated pairs showed no recovery and died after ~20 weeks. Microscopy confirmed that fusion and symbiont transfer required genetic identity; fragments from different individuals or species did not fuse or transmit algae. The findings suggest a potential, scalable method for restoring bleached corals by leveraging intra‑genet tissue connectivity to re‑establish Symbiodiniaceae symbiosis.</p>
+          </div>
+          <a href="https://www.nature.com/articles/d41586-026-03266-x" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments combine factual explanations of coral bleaching and its dependence on zooxanthellae with personal observations of widespread bleaching on the Great Barrier Reef, noting limited practical use of cloning for restoration. Several remarks express curiosity about experimental methods and scalability, while others raise speculative ideas—such as refrigeration islands, horizontal gene transfer, or unconventional theories—often with a skeptical or sarcastic tone. Overall, the discussion balances recognition of a scientific finding’s potential benefits with doubts about its real‑world applicability and concerns about broader environmental challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50126253" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://leodemoura.github.io/blog/2026-10-15-lean-now-ships-with-verified-kernels/" target="_blank">Lean now ships with verified kernels</a>
+        </h2>
+        <span class="article-meta">
+          118 points • by matt_d • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Lean 4.35.0 introduces the <code>lake check</code> command, which exports a development and rechecks it with the official <code>leanchecker</code> kernel inside a sandbox (optional with <code>--inadvisably-no-sandbox</code>). The <code>--paranoid</code> flag runs the same check against four additional kernels: nanoda, lean4lean, con‑leche, and con‑ron, plus a hardened‑allocator variant of the official kernel.</p>
+<ul>
+<li><strong>con‑leche</strong> – first Lean kernel written in Lean and proven consistent (modelled in set theory per Mario Carneiro). Its consistency proof is verified by the official kernel; performance is 0.69× the official kernel, checking Mathlib in ~100 s on eight threads.  </li>
+<li><strong>con‑ron</strong> – Rust translation of con‑leche, refined and verified using the Aeneas tool, providing protection against bugs in the Lean compiler/runtime.  </li>
+<li><strong>lean4lean</strong> – verification in progress; implementation mirrors the C++ kernel, aiming for a third verified kernel.  </li>
+</ul>
+<p>The renovation plan, led by Arthur Adjedjis and reviewed by Joachim Breitner, aligns kernel changes with proof updates. Future work includes a more user‑friendly <code>lake check</code>, plug‑in support for external kernels, binary export formats, and incremental checking to scale to projects of tens of millions of lines of code. Discrepancies between kernels should be reported to contact@lean-fro.org.</p>
+          </div>
+          <a href="https://leodemoura.github.io/blog/2026-10-15-lean-now-ships-with-verified-kernels/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on whether earlier widespread adoption of Lean and collaborative formal‑proof repositories could have produced many of the recent mathematical advances, questioning how much progress is due to LLM assistance versus Lean’s intrinsic productivity. Commenters express doubt that mathematicians’ discomfort stems solely from AI use, suggesting it reflects broader unease with large‑scale, non‑heroic collaboration. Optimism appears about Lean becoming a core language for programming and domain‑specific tools, while there is modest skepticism regarding claims about AI‑found vulnerabilities and the precise meaning of “verified” in this context.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50114758" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.smithsonianmag.com/science-nature/dam-removals-are-bringing-fish-back-across-the-northeastern-united-states-striking-down-one-tiny-barrier-at-a-time-180989679/" target="_blank">Dam removals are bringing fish back across the northeastern United States</a>
+        </h2>
+        <span class="article-meta">
+          264 points • by sohkamyung • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Since 1912 more than 2,300 U.S. dams have been removed, with a surge in the past 25 years; 2024 saw a record ≈ 2,500 river miles reopened, highlighted by the Klamath River’s four‑dam removal (≈ $500 M) that restored &gt; 400 mi of chinook salmon habitat. While western salmon runs dominate headlines, most removals occur in the Northeast, where ≈ 35,000 barriers still impede fish. Recent projects include Vermont’s Blake Higgins Dam, Maine’s Edes Falls Dam, and New Hampshire’s Bellamy and Oyster River dams. Removal of the Talbot Mills Dam (Billerica, MA) is pending. Studies by UNH biologist Nathan Furey use PIT‑tag monitoring to assess alewife passage in restored streams such as the Bellamy River. Community‑driven efforts in Plymouth, MA have eliminated multiple Town Brook dams, increasing herring returns from ≈ 25 k to &gt; 200 k annually. Ongoing challenges involve funding, permitting, and opposition from “NOOMBY” groups, while aging hydro‑dams face safety and economic liability pressures.</p>
+          </div>
+          <a href="https://www.smithsonianmag.com/science-nature/dam-removals-are-bringing-fish-back-across-the-northeastern-united-states-striking-down-one-tiny-barrier-at-a-time-180989679/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey overall approval of using targeted dam removal and managed flooding to restore fish habitats, highlighting successful projects in the Klamath and Kennebec basins and noting the broader precedent they set. At the same time, contributors acknowledge trade‑offs: small, aging dams may be expendable, but larger hydro facilities pose challenges for fish passage, energy supply, and local heritage. Concerns are raised about possible drought, reduced renewable power, and aesthetic impacts of infrastructure modifications, reflecting a nuanced view that balances ecological gains with practical and cultural considerations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50126312" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" target="_blank">DeepSeek-v4.1-Flash-1017</a>
+        </h2>
+        <span class="article-meta">
+          839 points • by theykk • 86 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>DeepSeek‑V4.1‑Flash‑1017 is a minor revision of DeepSeek‑V4.1‑Flash that delivers measurable gains in reasoning, coding, agentic tasks, and visual benchmarks while reducing execution time and output length, improving the performance‑cost trade‑off for various agent harnesses. The release does not include a Jinja chat template; instead, it provides a self‑contained Python encoder (encoding.py) with test cases covering multi‑turn dialogue, tool calling, thinking mode, numeric reasoning, system messages, and interleaved images. For production, the deepseek‑recipe Rust libraries (with Python bindings) offer a protocol‑aware toolkit that converts API messages into the DeepSeek V4/V4.1 prompt format, encodes token IDs, and parses model outputs, handling thinking, tool calls, images, and generation settings while leaving inference and transport to the caller. An inference folder supplies weight‑conversion steps and local execution guidance, with recommended sampling parameters (temperature, top‑p, context window, max‑tokens). The code and model weights are released under the MIT License. Citation information and contact (service@deepseek.com) are provided for academic referencing and support.</p>
+          </div>
+          <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments overall view DeepSeek v4.1 Flash as a fast, cost‑effective model that excels in coding and agentic tasks, with many users adopting it as a daily driver and appreciating its openness and lower token usage. Positive notes emphasize speed, cheaper inference, and practical workflow integration, often pairing it with higher‑tier models for review. Criticisms include occasional over‑thinking, higher token consumption at larger reasoning settings, occasional API flakiness, and a perceived intelligence gap versus top‑tier models such as Opus 5.5 or Claude. The discussion also highlights broader concerns about competitive pressure on major AI providers and the growing relevance of open‑source alternatives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50129045" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pele.run/" target="_blank">Pele – Mermaid diagrams as themeable SVG</a>
+        </h2>
+        <span class="article-meta">
+          407 points • by dchest • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Pele is a JavaScript library that converts Mermaid diagram syntax into SVG graphics. It supports theme customization through CSS variables—e.g., --pele-bg, --pele-fg, --pele-muted, --pele-line, --pele-surface, --pele-surface‑alt, and --pele-border—allowing color and font changes without re‑rendering the diagram. Users import the render function from the pele module, pass a Mermaid string (such as a flowchart definition), and receive an object containing the generated svg markup. The SVG can then be inserted into the DOM, for example via document.querySelector('#diagram').innerHTML = svg;. Example usage demonstrates rendering a simple flowchart where “Mermaid text” connects to an SVG node. The library’s API is minimal: call render(mermaidCode) and embed the returned SVG.</p>
+          </div>
+          <a href="https://pele.run/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong frustration with Mermaid’s layout and styling limitations, especially for complex diagrams and dark‑mode support, and note difficulties using it server‑side. Many view Pele as a promising alternative, appreciating its open‑source status, lighter dependencies, and potential for easier embedding. Users request clearer GitHub links, mention GraphViz as a reference point, and share brief self‑promotions. Minor issues such as broken playground previews and FOUC are also noted, while overall sentiment leans toward seeking better tooling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50132193" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://webmasters.stackexchange.com/questions/88659/how-can-cloudflare-offer-a-free-cdn-with-unlimited-bandwidth/88685#88685" target="_blank">Matthew Prince on why Cloudflare offers a free version and always will (2016)</a>
+        </h2>
+        <span class="article-meta">
+          77 points • by thatslast • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://webmasters.stackexchange.com/questions/88659/how-can-cloudflare-offer-a-free-cdn-with-unlimited-bandwidth/88685#88685" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments present a mixed view of Cloudflare. Critics highlight its high enterprise pricing, persistent latency issues, limited feature set compared with rivals, and concerns about monopoly, data aggregation, and potential choke‑point risks. Supporters emphasize its generous free tier, ease of deployment, transparency, open‑source contributions, and useful services such as workers, domain management, and 1.1.1.1, noting the low barrier to entry and anonymity. Overall, opinions balance appreciation for its accessibility and innovation against worries about performance, cost, and centralized control.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50138087" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.davidpriver.com/Fun-Extending-the-C-Preprocessor.html" target="_blank">Fun Extending the C Preprocessor</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by david2ndaccount • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The snippet demonstrates a C‑preprocessor technique for applying a macro to each argument in a variadic list. It defines:</p>
+<ul>
+<li><code>CAT</code>/<code>CAT_</code> for token concatenation.</li>
+<li><code>NARG</code> and <code>NARG_</code> to count the number of arguments, using <code>__VA_OPT__</code> to handle empty variadic lists and a trailing sequence <code>8,7,…,0</code>.</li>
+<li>A series of <code>MAP_n</code> macros (<code>MAP_0</code> … <code>MAP_8</code>) that recursively invoke a user‑supplied macro <code>m</code> on each argument, chaining calls until the list is exhausted.</li>
+<li><code>__map</code> selects the appropriate <code>MAP_n</code> by concatenating <code>MAP_</code> with the count from <code>NARG</code>.</li>
+</ul>
+<p>An example defines <code>PRINTINT(x)</code> as <code>printf(#x " = %d\n", x);</code> and calls <code>__map(PRINTINT, 1, 2, 3, 4, x, y, z)</code>. After preprocessing, the code expands to separate <code>printf</code> statements for each argument, printing their names and values. The approach works for up to eight arguments and illustrates how variadic macros and token‑pasting can emulate a map operation in the C preprocessor.</p>
+          </div>
+          <a href="https://www.davidpriver.com/Fun-Extending-the-C-Preprocessor.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion focuses on recurring preprocessor constructs needed for complex macro preprocessing, highlighting the two‑stage concatenation (CAT) and the NARG pattern referenced in the article. It notes that the forthcoming C29 standard will introduce <strong>COUNTER</strong>, and there is optimism that additional built‑in macros such as <strong>VA_COUNT</strong> and <strong>CAT</strong> may follow. The comment also points out that a separate MAP implementation is available via a public repository, eliminating the need to extend the preprocessor for mapping functionality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50106792" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
