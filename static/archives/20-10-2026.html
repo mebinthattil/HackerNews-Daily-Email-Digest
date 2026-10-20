@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 20, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tywr/Nordwand-Mono" target="_blank">Nordwand Mono – A monospace font for coders and adventurers</a>
+        </h2>
+        <span class="article-meta">
+          184 points • by noriax86 • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Nordwand Mono is a compact monospace neo‑grotesque font created from scratch with Python for coding environments. It blends the classic proportions of Adrian Frutiger’s Univers with the metrics of JetBrains Mono, and its name references Swiss typographic heritage. Design influences include Univers, Apple’s SF Pro &amp; SF Mono, Sharp Type’s Alpes Mono, and Dalton Maag’s Ubuntu Mono. The project provides alternative character sets selectable via OpenType feature tags, and includes two ligatures (“-&gt;” and “=&gt;”), with possible future expansion. Users can generate custom builds by editing <code>config.example.yml</code>, visualizing individual glyphs (<code>python -m visualize --config config.yml &lt;glyph_id&gt;</code>), and compiling the full font (<code>python -m generate_font --config config.yml</code>), which outputs to <code>./custom-fonts</code>. The README warns that altering metrics may require glyph adjustments and offers no guarantee of visual quality after such changes.</p>
+          </div>
+          <a href="https://github.com/tywr/Nordwand-Mono" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show broad interest and generally positive reactions to the new monospaced font, with many noting its readability, soft appearance, and similarity to favored fonts such as Berkeley Mono and JetBrains Mono. Users appreciate its limited ligatures, spacing, and flexibility for coding environments, and several intend to adopt it in projects. Critiques focus on potential character ambiguity—particularly tall glyphs for angle brackets and hyphen length—perceived excess width, and installation questions. Overall, enthusiasm outweighs reservations, reflecting a desire for further testing and easy access.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50141581" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.openbsd.org/80.html" target="_blank">OpenBSD 8.0</a>
+        </h2>
+        <span class="article-meta">
+          260 points • by privong • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>OpenBSD 8.0 provides platform‑specific installation media and procedures. For α, amd64, i386, and arm64, a bootable CD (install80.iso) can be written; amd64 and i386 also support USB boot from install80.img or a miniroot image, and network PXE installation where CD/USB are unavailable. armv7 requires a system‑specific miniroot on an SD card with serial‑console access. hppa installs via network boot per INSTALL.hppa. landisk uses a miniroot image written to the CF or disk start. luna88k copies boot and bsd.rd to a Mach/UniOS partition and boots from the PROM. macppc boots from CD or via Open Firmware commands. octeon boots bsd.rd over DHCP/TFTP after serial connection. powerpc64 and riscv64 install from a USB stick (riscv64 also needs the board’s microSD card). sparc64 can boot from CD, floppy, swap‑partition miniroot, or network as described in INSTALL.sparc64; floppies must be error‑free.  </p>
+<p>The OpenBSD ports tree is distributed as a tar.gz archive; it can be extracted to /usr and updated via anonymous CVS (e.g., <code>cvs -d anoncvs@server.openbsd.org:/cvs update -Pd -rOPENBSD_8_0</code>). Prebuilt packages are also available on mirrors. The ports‑related mailing list is ports@openbsd.org.</p>
+          </div>
+          <a href="https://www.openbsd.org/80.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show overall approval of OpenBSD 8.0’s stability, clear release notes, and improvements such as multiprocessor support, with users noting smooth upgrades across several versions. Concerns arise about the upgrade process requiring a monitor, uncertainty about version‑number semantics, and requests for performance benchmarks, especially for SMP networking. Some skepticism is expressed about the authenticity of certain changes and compatibility with newer hardware like a 2018 Mac Mini. The tone is generally positive but mixed with practical frustrations and curiosity about technical details.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50160494" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nature.com/articles/s41467-025-58290-8" target="_blank">Restoration of Retinal Regenerative Potential</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by Kaibeezy • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Retinal injury in mice induces a marked increase of Prox1 protein in Müller glia (MG) without up‑regulating Prox1 mRNA, indicating protein acquisition from neighboring neurons. Using RNAscope, FACS‑sorted MG, and a Prox1‑EGFP reporter, the study showed that MG lack endogenous transcription at the Prox1 locus yet accumulate the protein after photoreceptor degeneration (MNU, light, NMDA). Genetic deletion of Prox1 in bipolar cells (Chx10‑CreERT2) lowered MG Prox1 levels and significantly raised EdU‑positive MG, demonstrating that neuronal Prox1 suppresses MG proliferation. Intravitreal delivery of FLAG‑tagged recombinant Prox1 to injured retinas reversed this effect, reducing MG proliferation and increasing microglial proliferation; the same manipulation in zebrafish MG also decreased Ascl1a‑positive MGPCs. Blocking extracellular Prox1 with an anti‑Prox1 scFv expressed via AAV2 restored MG proliferation in injured mice. Single‑cell RNA‑seq of Prox1‑depleted MG identified activated clusters and a trajectory from resting MG to RPC‑like states, with up‑regulation of Gadd45a, Hbegf, Notch1 and Hes1, confirming a transition toward a regenerative phenotype when intercellular Prox1 transfer is disrupted.</p>
+          </div>
+          <a href="https://www.nature.com/articles/s41467-025-58290-8" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50140111" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions" target="_blank">WhatsApp&#39;s help pages hid LLM instructions: dont recommend a regulator</a>
+        </h2>
+        <span class="article-meta">
+          394 points • by ds • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>WhatsApp’s European privacy policy lists the right to complain to a data‑protection regulator, yet from early July to mid‑October 2026 its help‑centre pages contained hidden instructions for its support chatbot. Two notable blocks instructed the AI: (1) when a user cannot delete an account because they lack access to the phone number, the bot should repeat the automatic‑deletion timelines (30 days after deactivation, 120 days inactive, 365 days in the US) and must not suggest contacting a Data Protection Authority, a manual deletion, or using another phone; (2) whenever a user mentions legal action, a lawyer, or a court, the bot must refrain from citing or interpreting WhatsApp’s terms, privacy policy, or any data‑protection law (e.g., GDPR, LGPD, CCPA) and should direct the user to a qualified legal professional. These hidden notes were delivered to web crawlers but not displayed to users, and were removed after October 2026. The public policy still affirms users’ rights under GDPR Articles 17 and 77. The investigation found the majority of other hidden blocks were benign housekeeping instructions.</p>
+          </div>
+          <a href="https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on the discovery of hidden prompts in WhatsApp support pages, with many viewing it as a concerning example of prompt injection that limits users’ access to legal information, while others describe it as a harmless bug or a routine safeguard for a chatbot. Skepticism about Meta’s motives and its broader influence appears alongside suggestions that such instructions could improve bot consistency if made transparent. Overall, the discussion balances criticism of potential overreach with acknowledgment that restricting legal advice may be a prudent, if unpopular, precaution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50159341" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.minimax.io/blog/minimax-m31f" target="_blank">MiniMax M3.1 Flash</a>
+        </h2>
+        <span class="article-meta">
+          461 points • by jtg • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>MiniMax M3.1 Flash is a next‑generation “Flash” model that claims a three‑fold increase in inference speed and a 70 % reduction in usage cost versus its predecessor. Benchmark results show:</p>
+<ul>
+<li>AutomationBench‑AA: top‑tier performance on enterprise SaaS workflows (sales, marketing, operations, finance, HR).  </li>
+<li>BankerToolBench: 76.2 score, handling multi‑step planning, document consistency, financial compliance, and chained tool calls.  </li>
+<li>DeepSWE v1.1: 73.7 % accuracy, comparable to leading models on complex coding tasks, feature development, bug fixing, and test validation.  </li>
+<li>OSWorld V2: 61.7 points; Agents’ Last Exam (ALE): 29.6 points, ranking first among Chinese models for computer‑use and professional‑task execution.  </li>
+<li>CyberGym: 82 % score, demonstrating strong vulnerability discovery, code auditing, penetration testing, malware analysis, and reverse engineering.</li>
+</ul>
+<p>Inference efficiency is achieved via aggressive sparsity, reaching &gt;200 TPS (median &gt;170 TPS). Pricing is $0.15 per M input tokens, $0.60 per M output tokens, and $0.015 per M cached input tokens. The model is available via MiniMax API, M Plan, and MiniMax Code; model weights will be released later.</p>
+          </div>
+          <a href="https://www.minimax.io/blog/minimax-m31f" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The consensus is largely critical, describing the model as benchmark‑optimized yet underperforming in real‑world use and questioning the validity of published scores. Reviewers compare it unfavorably to alternatives such as DeepSeek V4.1 Flash, GLM 5.3, and Opus, highlighting higher token usage, slower wall‑clock performance, and inconsistent accuracy despite advertised cost reductions. Skepticism extends to the rapid release cycle and lack of independent verification, while a minority note occasional strengths in documentation tasks and lower pricing. Overall sentiment leans toward distrust of the model’s practical value.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50154540" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/technology/us-banning-chinese-ai-deepseek-government-agency-it-systems-2026-10-19/" target="_blank">DeepSeek banned from U.S. federal civilian agencies under new DHS order</a>
+        </h2>
+        <span class="article-meta">
+          222 points • by cmrdporcupine • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.reuters.com/technology/us-banning-chinese-ai-deepseek-government-agency-it-systems-2026-10-19/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the ambiguous scope of the order, debating whether it blocks only direct DeepSeek services or any software incorporating its code, and whether third‑party aggregators such as OpenRouter are affected. Many express skepticism, characterizing the measure as politically driven regulatory capture or protectionist bias against open‑weight Chinese models, while a smaller portion accept the security rationale citing data‑exfiltration, malware, and legal exposure risks. Overall, the discussion is divided between criticism of overreach and concern for genuine national‑security vulnerabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50154244" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ipinfo.io/blog/france-fridges-hack" target="_blank">France&#39;s supermarket fridges were vulnerable online for months</a>
+        </h2>
+        <span class="article-meta">
+          159 points • by emot • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>In early October 2026 French supermarket refrigerators were forced into defrost mode, heating to 50 °C, causing food loss and fires. The attack targeted Danfoss refrigeration controllers (models AK‑SM 800, AK‑SM 800A, AK‑SC 355) whose web dashboards were exposed on the public IPv4 Internet. Weekly IPinfo scans showed 1,331 French dashboards—53 % of the global total of 2,528—while 85 % ran software with known vulnerabilities; only 195 (15 %) had all published fixes. Most exposed devices had been online since at least March 2026, with 1,019 addresses unchanged over six months. After the incident, 76 % of French dashboards disappeared by October 14, indicating operators unplugged them rather than patching. Similar exposures existed in 69 other nations, notably Poland, the US and Portugal. CERT‑FR advises removing controllers from the public Internet, using VPNs for contractor access, updating firmware, enforcing strict security settings, and changing default passwords. The attacker’s identity and entry method remain unknown.</p>
+          </div>
+          <a href="https://ipinfo.io/blog/france-fridges-hack" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively criticize the security design of the Danfoss refrigeration controllers, highlighting the built‑in backdoor password, outdated firmware, and widespread exposure of connected fridges. Viewpoints emphasize that such devices should be air‑gapped or isolated, argue that manufacturers showed negligence in releasing vulnerable software, and note the practical risks demonstrated by incidents in France. There is agreement that the industry’s rapid update cycle and reliance on legacy code exacerbate the problem, while some express frustration that security failures are dismissed as user error.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50159616" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/golang/go/issues/82345" target="_blank">Go will reject certificate chains containing eight distrusted SPKIs</a>
+        </h2>
+        <span class="article-meta">
+          85 points • by mendym • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The scraped page consists of a GitHub issue header titled “crypto/x509: mitigation for security concerns with a specific Certificate Authority” (Issue #82345 in the golang/go repository). No issue description, comments, or technical discussion are present; instead, the page displays the message “You can’t perform that action at this time.” Following this notice, the content lists five image placeholders with alt‑text labels showing usernames: @thatnealpatel, @gopherbot, @zhangyoufu, @x0wllaar, and @purpleidea. No further details, code snippets, mitigation strategies, or references to the Certificate Authority are included in the extracted text. Consequently, the available information is limited to the issue title, an access‑restriction notice, and a series of image alt texts without substantive technical content.</p>
+          </div>
+          <a href="https://github.com/golang/go/issues/82345" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion conveys strong concern over recent Certificate Transparency log updates that block logging for certificates issued by compromised CAs, interpreting the move as evidence of total private‑key compromise and a risk to non‑CT‑enforcing clients. Participants note the presence of non‑malicious test certificates and lament the inability to have certificates signed by multiple authorities, viewing the situation as unprecedented and problematic. Overall sentiment is alarmed and critical of the current limitations and potential security gaps introduced by the blocking policy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50160877" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.funwithcomputervision.com/weball/" target="_blank">Weball: Play Katamari on Websites</a>
+        </h2>
+        <span class="article-meta">
+          193 points • by croes • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page, titled “weball,” displays a goal statement indicating that the objective is unlocked, with two additional levels remaining and the ability to select any website thereafter. No further technical or contextual information is provided.</p>
+          </div>
+          <a href="https://www.funwithcomputervision.com/weball/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the feature, highlighting its clever progression from text capture to handling large images, its whimsical, addictive feel, and its nostalgic ties to games like Katamari and Kirby. Users appreciate the novelty and visual charm, though several note that performance degrades noticeably after a few hundred words, causing low framerates and slowing the experience. Overall, the sentiment is largely positive, praising the implementation’s fun and inventive nature while acknowledging its current speed limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50140584" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cretezy.com/2026/ad-free-android-tv" target="_blank">An ad-free Android TV</a>
+        </h2>
+        <span class="article-meta">
+          195 points • by CraftThatBlock • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The guide explains how to eliminate Google TV ads and replace the default interface on Android TV devices. It uses the following components:  </p>
+<ul>
+<li><strong>Projectivy Launcher</strong> as a custom home screen, showing only installed apps.  </li>
+<li><strong>SmartTube</strong> (sideloaded) to replace the official YouTube app, providing ad‑free playback and built‑in SponsorBlock.  </li>
+<li><strong>Wholphin</strong> as the Jellyfin client.  </li>
+<li><strong>Button Mapper</strong> to remap the remote’s YouTube button to launch SmartTube.  </li>
+</ul>
+<p>Setup steps:<br>
+1. Install Projectivy, Wholphin, Button Mapper from Play Store; sideload SmartTube.<br>
+2. Enable Developer options, turn on Wireless (or USB) debugging, pair via ADB.<br>
+3. Disable the stock launcher packages (<code>com.google.android.apps.tv.launcher</code>, <code>com.google.android.tungsten.setupwraith</code>) and set Projectivy as the home activity using <code>adb shell pm set-home-activity</code>.<br>
+4. Uninstall or disable the official YouTube TV app (<code>adb uninstall</code> or <code>pm uninstall --user 0</code>).<br>
+5. Enable required accessibility services, grant <code>WRITE_SECURE_SETTINGS</code> to Button Mapper, and map the YouTube button to SmartTube.<br>
+6. Optional: reduce animation scales and disable unused Google apps via ADB.  </p>
+<p>All changes are reversible with <code>pm enable</code> or <code>cmd package install-existing</code>. The result is an ad‑free Android TV experience with a streamlined launcher and remote controls.</p>
+          </div>
+          <a href="https://cretezy.com/2026/ad-free-android-tv" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong frustration with Google’s ad‑heavy Android TV interface, citing intrusive video ads, slower startup, and concerns about tracking, while praising the ability to replace the default launcher with alternatives such as ATV Launcher Pro, FLauncher, or app‑only mode to improve performance. Numerous users highlight successful custom setups using Linux, Plasma Bigscreen, Switchfin, Moonfin, Wholphin, and other Jellyfin clients, emphasizing ad‑free, streamlined experiences. There is a shared desire for simpler, non‑smart TV solutions or open‑source TV‑box platforms that avoid the bloat and latency of the stock system.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50158942" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
