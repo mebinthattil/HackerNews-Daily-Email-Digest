@@ -1,0 +1,577 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 21, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.joshwcomeau.com/css/interop-2027/" target="_blank">The Future of CSS</a>
+        </h2>
+        <span class="article-meta">
+          328 points • by soheilpro • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Interop effort, coordinated by major browser vendors, routinely drives new CSS features to near‑universal support within a year—CSS Subgrid reached that level by late 2023. For Interop 2027, Mozilla’s ranking system highlighted ten proposals the author voted for:</p>
+<ul>
+<li><strong>@function</strong> syntax for custom CSS functions (e.g., gradient‑to‑transparent, translate‑polar). Implemented in Chromium; likely to spread quickly.  </li>
+<li><strong>corner‑shape</strong> property offering squircle, bevel, notch, and scoop corner forms that modify the border‑box, currently unsupported in Firefox/Safari.  </li>
+<li><strong>border‑shape</strong> for drawing arbitrary borders with lines, arcs, and Bézier curves; also animatable.  </li>
+<li><strong>Anchor Positioning Level 2</strong> adding container queries to detect fallback positioning of anchored elements.  </li>
+<li><strong>inherit()</strong> function enabling calculations on inherited values (e.g., <code>calc(inherit() - 4px)</code>).  </li>
+<li><strong>Scroll‑triggered animations</strong> complementing existing scroll‑driven animations, removing the need for JavaScript observers.  </li>
+<li><strong>reading‑flow</strong> (and <strong>reading‑order</strong>) to align tab order with visual grid/flex layouts.  </li>
+<li><strong>interpolate‑size</strong> and <strong>calc‑size()</strong> for animating keyword values like <code>height:auto</code>; supported in Chrome since 2024 behind <code>@supports</code>.  </li>
+<li><strong>gap‑decorations</strong> (<code>rule</code>, <code>row‑rule</code>, <code>column‑rule</code>) to render grid borders directly.  </li>
+<li><strong>scroll‑state</strong> container queries for detecting when <code>position:sticky</code> elements are stuck or when a scroll container reaches top/bottom.</li>
+</ul>
+<p>Most proposals are usable today as progressive enhancements in browsers that already support them, and many are expected to enter Interop 2027 for broader adoption.</p>
+          </div>
+          <a href="https://www.joshwcomeau.com/css/interop-2027/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a split between enthusiasm for recent CSS advances—such as variables, functions, responsive iframes, and modular styling—and frustration over growing complexity, browser‑specific implementations, and the blending of CSS with JavaScript‑level logic. Some participants celebrate the innovation and practical benefits in projects, while others argue that feature creep hampers simplicity, portability, and maintainability, suggesting a return to more straightforward approaches or entirely new styling paradigms. Overall, the discussion balances excitement for new capabilities with concerns about usability, consistency, and the future direction of CSS.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50175070" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://permit.petercai.com/" target="_blank">Show HN: SimCity, but with Permits</a>
+        </h2>
+        <span class="article-meta">
+          776 points • by pcai • 62 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page describes a city‑building simulation where development is contingent on permit approval. The model tracks residents’ ages, incomes, and housing, while businesses can hire, expand, and relocate. Economic variables such as land values, rents, taxes, and municipal services are dynamically linked, reflecting how changes in one sector affect the others. Gameplay involves navigating a planning committee, where proposals—e.g., upzoning suburban lots—are subject to opposition rates (e.g., 88 % dissent) and may be altered by mayoral concessions. Visuals illustrate diverse urban patterns: river‑front towers with distant factories, mixed‑use streets combining workshops, tank farms, warehouses, and small homes, fenced lots awaiting rezoning, lakeside hamlets, suburban deep‑lot homes, and dense high‑rise districts. The overarching theme emphasizes the iterative, score‑keeping nature of urban growth constrained by regulatory processes.</p>
+          </div>
+          <a href="https://permit.petercai.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a mixed reaction to the “Permit Pending” simulation. Many find the premise amusing and a sharp commentary on real‑world permitting, zoning and democratic bureaucracy, while others praise its visual style and the idea of a realistic economic experiment. At the same time, a substantial portion criticize the user interface, excessive pop‑ups, unclear metrics, mobile and WebGL bugs, and a steep learning curve that makes the experience feel more like actual work than a game. Overall, the sentiment balances appreciation for the concept with disappointment over execution and usability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50170593" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/" target="_blank">Muse exposes users&#39; personal and business secrets when they share conversations</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by gumby • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Meta’s Muse AI agent allowed users to share searches, conversations, and images via unique URLs. Researchers at security firm Claroc discovered that the URL generation scheme was weak, enabling enumeration of 6,800 share links with a single query. Opening a sample of these links exposed a range of confidential data, including executive‑search notes, a marketing firm’s internal revenue review, a small‑business loan request, a bank‑fraud alert with partial account details, a real‑estate investor’s performance report, and a full‑year staff vacation calendar. The researchers obtained the URLs through passive DNS data, which records historical domain‑to‑IP resolutions. Claroc reported the findings to Meta’s bug‑bounty program on October 8; Meta responded by suspending the sharing functionality while reviewing the issue and considering redesigns to prevent link discovery. The incident highlights the risk of predictable sharing URLs despite Meta’s claim that Muse was built “from the ground up for privacy and security.”</p>
+          </div>
+          <a href="https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong criticism of Meta’s Muse service, focusing on perceived privacy and security shortcomings such as easily discoverable share links, inadequate URL design, and insufficient legal accountability for data handling. There is broader frustration with large tech companies’ reliance on advertising and data monetization, contrasted with the challenges of building a European personal‑AI platform that must manage user customizations, sandboxing, and compliance. Overall sentiment is skeptical toward Meta’s claims of privacy and security, and wary of entrusting sensitive information to such services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50174687" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news-web.php.net/php.announce/509" target="_blank">Upcoming critical PHP security release (CVE-2026-109618 / -109619)</a>
+        </h2>
+        <span class="article-meta">
+          692 points • by xd • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://news-web.php.net/php.announce/509" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey widespread alarm about a critical PHP vulnerability affecting many recent versions, with most contributors urging immediate protective steps such as disabling session‑upload progress, blocking multipart/form‑data or POST requests, and relying on Cloudflare or host‑level mitigations while awaiting an official patch. Frustration is evident over the delay in releasing fixes and concern that unpatched sites are already being exploited. Several remarks criticize PHP’s long‑standing security issues and suggest migrating to other platforms, while others emphasize defensive layering and temporary shutdowns for high‑risk services. Overall, urgency and uncertainty dominate the discussion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50172041" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mistral.ai/news/voxtral-3/" target="_blank">Voxtral 3</a>
+        </h2>
+        <span class="article-meta">
+          649 points • by ilreb • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Voxtral 3 is a suite of speech‑to‑text, text‑to‑speech, and voice‑agent components designed for real‑time multilingual voice applications.  </p>
+<ul>
+<li>
+<p><strong>Transcription</strong>: Voxtral Small Transcribe 3 (state‑of‑the‑art multilingual model) supports 50+ languages, provides speaker diarisation, end‑of‑turn detection, and context‑biasing with keyphrase prompting. The Mini Transcribe 3 variant (4 B parameters) runs at $0.0035 /min with sub‑500 ms latency for 35+ languages and includes realtime diarisation benchmarks (cpWER) superior to Whisper, Scribe v2 and Gemini 3.5.  </p>
+</li>
+<li>
+<p><strong>Synthesis</strong>: Voxtral Mini TTS 3 delivers expressive speech in 35+ languages and 50+ dialects, handling emotion, pacing and emphasis from textual context. It offers voice cloning from 30 min of audio (Pro Voice) and costs $13 per 1 M characters, outperforming comparable commercial TTS on quality‑per‑dollar metrics.  </p>
+</li>
+<li>
+<p><strong>Voice‑Agent SDK</strong>: Integrated pipeline (LiveKit‑based) combines streaming transcription, Mistral‑Small reasoning, tool‑calling and speech output with &lt;1 s turn latency; supports SIP/WebRTC, function calling, web search and private data retrieval.  </p>
+</li>
+<li>
+<p><strong>Deployment</strong>: Available via Mistral’s EU‑hosted API or self‑hosted on‑premise, preserving data sovereignty. Pricing: transcription $0.0035‑$0.008 /min, speech synthesis $13 / 1 M chars, agent reasoning $0.04‑$0.08 /min.  </p>
+</li>
+</ul>
+<p>The platform targets contact‑center agents, virtual assistants and hands‑free copilots, enabling multi‑step actions across connected systems while maintaining language coverage and expressive vocal output.</p>
+          </div>
+          <a href="https://mistral.ai/news/voxtral-3/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a blend of enthusiasm and caution toward the new Voxtral models. Users appreciate the ability to run a 4 GB‑VRAM version in real‑time on modest hardware and note improvements in transcription and diarization, yet many criticize the shift to a closed model, citing privacy concerns and limited open‑source access. Performance opinions are mixed: some find the voice sounding artificial and the French accent amusing, while others report acceptable word‑error rates but stress remaining issues with latency, multilingual mixing, and full‑duplex capability. Comparisons to Whisper, Nvidia, and commercial STT services highlight a demand for better accuracy, speed, and open tooling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50168396" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/" target="_blank">Feds suspect ransom negotiator ran ShinyHunters extortion site</a>
+        </h2>
+        <span class="article-meta">
+          192 points • by Bender • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>U.S. federal investigators have linked executives at two ransomware‑negotiation firms to the ShinyHunters extortion operation. ShinyHunters, active since 2019, has extorted &gt;$70 million this year and recently hacked the FBI recruitment site, threatening to release personnel data. Leadership shifted from French hackers to “Rey,” a teenage hacker from Amman; Rey was detained in Jordan after Dutch authorities arrested senior member Pepijn van der Stap on September 15 2026, seizing his Signal messages. Those messages revealed frequent contact with Canadian cybersecurity executive Edward Dubrovsky and a U.S. consulting‑firm executive, both aware of breaches before victims. Dubrovsky, author of a cyber‑extortion guide, was arrested on extortion charges; investigators believe he knew of the FBI data breach but did not inform the agency.  </p>
+<p>A defunct extortion site, shinywire.com (May 3 – Oct 16 2026), listed ~100 victim firms and was reportedly run by an executive at the U.S. consulting firm. The site posted stolen samples and threatened publication on Tor if victims did not negotiate.  </p>
+<p>The case highlights conflicts of interest where negotiators profit from ransom payments, prompting DOJ prosecutions of negotiators (e.g., MonsterCloud CEO Zohar Pinhasi, Angelo Martino) for fraud and conspiracy. Industry experts call for greater transparency in ransomware‑response fees.</p>
+          </div>
+          <a href="https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments display a mixture of curiosity and criticism. The use of flash‑bang grenades by Dutch police and the FBI website hack are noted as surprising or concerning, with several remarks questioning law‑enforcement tactics and past leaks. Ransomware negotiation practices generate debate over incentive structures, while professional negotiators are described as valuable and reputable. Humor and sarcasm appear in references to “teenage hacker” and “Breaking Bad” analogies, and there is overall skepticism toward institutional competence and reliability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50173487" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://emudhra.we-have-a-problem.com/" target="_blank">eMudhra intermediate CA compromise</a>
+        </h2>
+        <span class="article-meta">
+          909 points • by galadran • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The private keys of eight eMudhra intermediate CAs, issued in April 2025, were compromised due to faulty key generation that allowed key recovery from the certificates. The compromise was demonstrated on 17 Oct 2026 by signing a test message with each intermediate’s private key; verification files (certificates, public keys, signatures) are provided in proof.zip. The intermediates chain to roots trusted by Mozilla, Microsoft, Apple, and Chrome, enabling an attacker to impersonate any site signed by them. Mozilla, Microsoft, Apple, and Chrome blocked the intermediates via OneCRL, CRLite, and CRLSets (Firefox/Chrome on 17 Oct, Apple on 19 Oct, Microsoft on 20 Oct). The CA revoked the intermediates, but many non‑browser clients do not process revocation data. Instructions are given to test trust (curl commands) and to manually remove the affected roots from system trust stores across Linux distributions, macOS, and BSD. Users are advised to update browsers and OSes promptly; further technical details are in Mozilla’s bug tracker and the incident report repository.</p>
+          </div>
+          <a href="https://emudhra.we-have-a-problem.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the discovery that eight eMudhra intermediate certificates were issued with effectively one‑byte private keys, exposing a severe weakness that could allow impersonation of any site signed by those CAs. Commenters note that browsers with built‑in revocation mechanisms (OneCRL, CRLite) mitigate the risk, while many command‑line tools and embedded systems remain vulnerable due to outdated or bundled trust stores. The community emphasizes the need for stronger revocation infrastructure, coordinated patching across languages and platforms, and critiques of the PKI’s reliance on centralized CAs and inadequate key‑generation safeguards.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50166579" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.quantamagazine.org/in-hilbert-space-all-things-are-quantumly-possible-20260826/" target="_blank">In Hilbert space, all things are quantumly possible</a>
+        </h2>
+        <span class="article-meta">
+          87 points • by unprovable • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hilbert space is defined by two mathematical criteria: completeness (no missing points) and the existence of an inner product that quantifies alignment between states and axes. Its dimension reflects the number of possible outcomes for a system—e.g., a qubit has a two‑dimensional space, a particle with unrestricted position has an infinite‑dimensional space. The same Hilbert space underlies different measurement bases, allowing Heisenberg’s picture (rotating axes) and Schrödinger’s picture (rotating state vectors) to describe identical physics. Von Neumann named these abstract spaces after Hilbert, who first studied infinite‑dimensional examples.  </p>
+<p>Philosophically, some, like Sean Carroll, treat Hilbert space as the fundamental arena of reality, while others, such as Jonathan Sorce, view it as a useful but not universal mathematical tool, preferring alternative structures when needed. One such structure is the von Neumann algebra, which describes transformations of Hilbert spaces and has been explored to resolve logical issues and to model quantum aspects of spacetime and black holes. Researchers thus employ a “zoo” of spaces—Hilbert spaces, von Neumann algebras, and others—depending on the quantum system under study.</p>
+          </div>
+          <a href="https://www.quantamagazine.org/in-hilbert-space-all-things-are-quantumly-possible-20260826/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the distinction between what is mathematically conceivable and what is physically permissible, emphasizing that only phenomena consistent with physical laws—such as energy conservation—are truly possible. Several contributions treat Hilbert space as a useful abstraction rather than a literal reality, while others reference related philosophical ideas like superdeterminism and quantum correlations. A recommendation highlights Sean Carroll’s “Mindscape” podcast, particularly the episode featuring David Wallace, as a source for further discussion of these topics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50175185" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unsung.aresluna.org/good-type-against-all-odds/" target="_blank">Good type against all odds</a>
+        </h2>
+        <span class="article-meta">
+          111 points • by firloop • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The text explains how certain display technologies update screens line‑by‑line from top to bottom, causing a slanted visual effect similar to rolling‑shutter distortion; this influences the direction of italic slant, which in English and German defaults to a right‑leaning angle due to reading direction and typographic convention. It notes that the opposite direction could be chosen without technical necessity, highlighting the importance of understanding such details in design decisions. The author then lists several typographic curiosities observed in low‑resolution (5×7 pixel) fonts and other media: unexpected small‑caps, a train‑carriage icon, a stadium icon formed from four characters, decorative fills, a vertical ligature created by removing line height, a slanted “NOT” glyph, extended underlines, a three‑dimensional underline, an easter‑egg on an old typesetting machine, hyphenation on a computer keyboard, and an old‑fashioned contraction. Each example is accompanied by images that illustrate these intentional but unconventional typographic treatments.</p>
+          </div>
+          <a href="https://unsung.aresluna.org/good-type-against-all-odds/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on the typographic slant of handwritten letters, offering historical and ergonomic explanations while noting that right‑leaning slant persists across left‑to‑right and right‑to‑left scripts, suggesting it is largely conventional. Appreciation for Marcin’s detailed presentations of mundane design elements is prevalent, with readers expressing admiration for his storytelling, photography, and editorial choices. A few remarks add peripheral observations about related topics such as Yiddish handwriting, film references, and hardware displays, but overall the tone remains supportive and enthusiastic toward the content and its creator.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50175059" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mariusbancila.ro/blog/2026/10/18/composite-objects-and-cpp26-the-stdpolymorphic-type/" target="_blank">Composite objects and C++26 the std:polymorphic type</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by jandeboevrie • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article introduces C++‑26 <code>std::polymorphic</code> as a value‑type alternative to <code>std::unique_ptr</code> + virtual <code>clone()</code> for owning heterogeneous components. Using a smart‑home event hierarchy, it shows the traditional design (abstract base <code>Event</code>, derived sensor events, <code>EventLog</code> holding <code>std::vector&lt;std::unique_ptr&lt;Event&gt;&gt;</code>) which requires hand‑written copy/assign, a public <code>clone()</code> method, mutable pointees through <code>const</code> pointers, and the possibility of null entries. Replacing <code>unique_ptr</code> with <code>std::polymorphic&lt;Event&gt;</code> eliminates these issues: the container becomes copyable via deep copy automatically, the interface stays clean (no <code>clone()</code>), const‑propagation works because a <code>const std::polymorphic</code> yields a const reference, and the type never holds a null value (only a moved‑from, detectable state). <code>std::polymorphic</code> achieves this through type‑erased copy and destroy operations captured at construction (e.g., via <code>std::in_place_type</code>). It supports small‑buffer optimisation, allocator awareness, and provides <code>operator*</code>, <code>operator-&gt;</code>, and <code>valueless_after_move()</code>. The article advises using <code>std::polymorphic</code> for value‑semantic owners with runtime‑varying types, <code>std::indirect</code> for fixed types, <code>std::variant</code> for closed sets, and smart pointers for shared identity.</p>
+          </div>
+          <a href="https://mariusbancila.ro/blog/2026/10/18/composite-objects-and-cpp26-the-stdpolymorphic-type/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express dissatisfaction with recent C++ additions, particularly the complexity and move‑semantic quirks of std::indirect for the pImpl idiom, and a preference for more straightforward designs such as enum‑based unions instead of class hierarchies. Several remarks convey a sense of fatigue toward continual language evolution, noting personal reluctance to adopt newer features. Additional queries raise technical concerns about copyability requirements for std::polymorphic and request clarification on default security configurations, indicating unresolved uncertainties.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50148845" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
