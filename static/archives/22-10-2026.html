@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simedw.com/2026/10/21/world-model-terminal/" target="_blank">WorldTUI: I trained a 360M model to pretend to be a terminal</a>
+        </h2>
+        <span class="article-meta">
+          154 points • by alphax314 • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>WorldTUI is a 360 M‑parameter language model fine‑tuned to simulate a terminal by predicting screen‑grid updates from raw keypresses. Built on Qwen2.5‑Coder‑0.5B, the model was trained on 336 k synthetic sessions (≈2 B tokens) generated in Docker, with randomized prompts, sizes, and activities (bash, vim, tmux, Python, snake). Input tokens encode keystrokes and time‑waits; output tokens describe row edits, cursor moves, and copy operations, reducing full‑screen redraws from ~3 000 to a few tokens. Training incorporated DAgger‑style self‑correction: the model predicts 1‑4 steps, compares to ground truth, and learns to repair its own errors, improving PresetBench from 24/47 to 38/47. Parallel row decoding with speculative verification cut large‑frame latency from 6.7 s to 0.87 s on RTX 4090 and to ≈0.9 s in a WebGPU browser demo (int4, 208 MB). Evaluation (ShellBench, PresetBench, memory read‑back tests) shows modest command correctness and limited persistent filesystem state. The demo runs locally in Chrome/Edge; performance is slower in Firefox. Future work may explore broader application training and alternative generation methods.</p>
+          </div>
+          <a href="https://simedw.com/2026/10/21/world-model-terminal/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for the fine‑tuned terminal interface, highlighting its novelty, low‑resource execution, and potential for broader applications such as version control, web services, and embedded tools. Many note comparable experiments, including “lossy git” and other model‑driven simulations, and discuss technical aspects like model size, memory gains, and API integration. Several users report practical issues—state inconsistencies, browser‑specific glitches, and unexpected behavior—while also speculating on future UI paradigms and the feasibility of exposing the system online. Overall sentiment is positive yet tempered by observed bugs and implementation limits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50190363" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://web.maths.unsw.edu.au/~davidharvey/research/subnlogn.pdf" target="_blank">The recently proposed o(n log n) integer multiplication algorithm [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          187 points • by craigcitro • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://web.maths.unsw.edu.au/~davidharvey/research/subnlogn.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively note the recent integer‑multiplication breakthrough, acknowledging its theoretical significance while questioning practical impact and the difficulty of understanding the underlying papers. Several contributors highlight a formal Lean proof and ongoing improvements, expressing openness to further collaboration. Others discuss how large language models appear to grasp complex proofs faster than humans, generating mixed feelings of unease and curiosity. Overall, the tone blends cautious optimism about the result’s relevance, appreciation for the exposition, and concern about AI’s growing role in mathematical research.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50190455" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.railway.com/p/security-disclosure-wednesday-october-21st" target="_blank">Security Disclosure</a>
+        </h2>
+        <span class="article-meta">
+          439 points • by passenger • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Railway detected anomalous activity on systems that store customer environment variables. Investigation indicates an unauthorized third party accessed encrypted environment variables and, for some, obtained the decrypted contents, potentially exposing API keys, database credentials, and private registry tokens. The incident appears linked to recent attacks on platform providers targeting AI inference services, prompting Railway to notify upstream providers to revoke all related keys. While impact may be limited to a subset of users, Railway advises all customers to immediately roll every stored environment variable and private registry credential, and to audit service logs for suspicious activity. All deployments are currently paused; new builds cannot be released until the investigation concludes. Affected accounts will receive direct email notifications, and further updates will be posted on Railway’s status page.</p>
+          </div>
+          <a href="https://blog.railway.com/p/security-disclosure-wednesday-october-21st" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread frustration with Railway’s handling of a recent security incident that forced users to rotate secrets while deployments were halted, leaving many services offline and incurring unexpected costs. Users criticize the delayed communication, the inability to redeploy after key changes, and perceived shortcomings in secret storage and incident response. The breach is linked to broader AI‑related attacks, prompting concerns about platform security and prompting some users to consider migrating to alternative providers or self‑hosted solutions. Overall sentiment is negative, highlighting disappointment and a loss of confidence in the service.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50188228" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/openai-cli" target="_blank">OpenAI CLI</a>
+        </h2>
+        <span class="article-meta">
+          96 points • by armcat • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The OpenAI CLI provides a command‑line interface to the OpenAI REST API. It can be installed via Homebrew (<code>brew install openai/tools/openai</code>) or with Go (<code>go install github.com/openai/openai-cli/cmd/openai@latest</code>), requiring Go 1.26+. After installation the binary resides in <code>$HOME/go/bin</code> or <code>$GOPATH/bin</code>; add this directory to <code>PATH</code> for command access. The CLI uses a resource‑based syntax (<code>openai &lt;resource&gt; [subresource…] &lt;command&gt; [flags]</code>) and supports both standard API keys (<code>OPENAI_API_KEY</code>) and admin keys (<code>OPENAI_ADMIN_KEY</code>). Global options include <code>--api-key</code>, <code>--admin-api-key</code>, <code>--organization</code>, <code>--project</code>, <code>--base-url</code>, <code>--header/-H</code>, <code>--format</code>, <code>--format-error</code>, <code>--transform</code>, and <code>--debug</code>. Tab‑completion, help (<code>--help</code>), and output formatting (<code>json</code>, <code>jsonl</code>, <code>yaml</code>, etc.) are built‑in. Image generation saves files to <code>~/Downloads/gpt-images/</code> by default; variations are created via <code>images edit</code>. File uploads accept plain paths; JSON/YAML arguments can reference local files with <code>@filename</code>, <code>@file://</code>, or <code>@data://</code>. An optional mutual‑TLS mode requires <code>OPENAI_MTLS_CLIENT_CERT_FILE</code> and <code>OPENAI_MTLS_CLIENT_KEY_FILE</code> and a custom base URL. Update checks query GitHub releases daily (disable via <code>OPENAI_CLI_NO_UPDATE_CHECK=1</code>). The project is Apache‑2.0 licensed and contributions follow the repository’s <code>CONTRIBUTING.md</code>.</p>
+          </div>
+          <a href="https://github.com/openai/openai-cli" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment describes a new, stateless CLI tool for LLM interaction that the author finds practical, composable, and useful for scripting, and invites feedback. It then shifts to criticism of OpenAI’s product naming, documentation, and communication, questioning the necessity of the new tool compared to existing APIs, expressing concerns about quota usage, reliability, deprecation, and support practices, and asking when the tool should be preferred over alternatives. Overall, the sentiment mixes enthusiasm for the author’s solution with skepticism toward official OpenAI tooling and its ecosystem.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50191507" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://claude.com/product/claude-duet" target="_blank">Claude Duet</a>
+        </h2>
+        <span class="article-meta">
+          353 points • by kuberwastaken • 55 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Revenue this week reached $528 K, a 9 % increase year‑over‑year, with cash on hand of $2.1 M providing 14 months of runway. Café sales grew 11 % overall; Valencia weekend sales fell 8 %, and delivery errors were noted in Valencia. Subscriptions total 4,200, up 38 this week, with a churn rate of 3.1 %; the primary churn drivers are subscription churn in East Bay. Wholesale generated $1.3 M, with contracts set to renew before March; one wholesale account (Northfield) is at risk due to term negotiations. Customer satisfaction averages 4.7 stars; top complaints include wrong milk (19 reports), late delivery (11), and skipped requests (9). The team comprises 85 employees, with two open roles and a Head of Wholesale position closing today. The Chicago location is 33 % complete (out of 41 % planned) and on track to open on November 14. Current action items focus on Valencia delivery errors, Northfield terms, and East Bay subscription churn.</p>
+          </div>
+          <a href="https://claude.com/product/claude-duet" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express both enthusiasm for AI‑powered personal assistants and disappointment with their current implementation. Users appreciate how agents such as Dot, Duet, and similar tools can automate complex personal and business tasks, yet many criticize clunky sign‑up flows, limited integration, and unreliable performance on coding or web actions. Privacy and control concerns recur, especially regarding cloud‑based data, password‑manager access, and lack of transparency. Opinions also diverge on the market’s rapid commoditization and the long‑term value of locked‑in model ecosystems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50186037" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://google.github.io/styleguide/rustguide.html" target="_blank">Rust Style Guide</a>
+        </h2>
+        <span class="article-meta">
+          293 points • by kaycebasques • 24 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Google Rust Style Guide defines consistent, tooling‑friendly conventions for Rust code used across Google projects (Android, Chromium, Fuchsia, etc.). It aligns with the official Rust style where not conflicting, emphasizing readability, long‑term maintainability, and support for large‑scale refactorings. Library code must follow binding API‑design rules; application code treats them as strong recommendations. Crates should be small, preferably one file, with a flat directory layout; leaf modules are named after their primary item, and non‑leaf modules contain only declarations and re‑exports. Glob imports are prohibited except for specific C++ interop cases; use statements must import whole modules, traits are imported locally, and top‑level functions are called with explicit module prefixes. Formatting follows rustfmt with max‑width 100, lowercase hex literals, and macro matcher formatting. Ownership guidance discourages Rc/Arc except when necessary and prefers borrowing over cloning. Function signatures favor flexible references, iterator‑based inputs/outputs, impl Into, enums over bools, and appropriate error types (Option, Result, panic!). Type design prefers newtypes, named fields, and standard‑library trait implementations; generics are favored over dyn Trait, and extension traits carry an “Ext” suffix. Important traits (Copy, Clone, Default, PartialEq/Ord, etc.) should be implemented when semantically appropriate.</p>
+          </div>
+          <a href="https://google.github.io/styleguide/rustguide.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to the Google‑sponsored Rust style guide. Many appreciate its thoroughness, coherence and the consolidation of common Rust conventions, noting it aids consistency and tooling. However, several points generate disagreement: the use of #[non_exhaustive] on public enums, strict module size limits, mandatory unqualified type imports, avoidance of async/.await in Chromium, and the recommended getter/setter patterns. Critics argue these rules can reduce readability, increase runtime risk, or be unnecessary, while others defend them as practical safeguards drawn from broader industry experience.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50186010" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/" target="_blank">GitLab critical patch release</a>
+        </h2>
+        <span class="article-meta">
+          341 points • by artooro • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>GitLab released critical patch versions 19.5.1, 19.4.3, 19.3.6, 19.2.9, 19.1.9, 19.0.10, and 18.11.13 on 21 Oct 2026 for both Community and Enterprise Editions. All self‑managed installations should upgrade immediately; GitLab.com and Dedicated tenants on 19.3.5‑internal0/19.4.2‑internal0 already include the fixes.</p>
+<p><strong>Security fixes (CVE 2026‑xxxx):</strong><br>
+- <strong>CVE‑2026‑110264:</strong> Integer overflow in the regex compiler → unauthenticated remote code execution (CVSS 10.0).<br>
+- <strong>CVE‑2026‑15723:</strong> OmniAuth‑LDAP auto‑linking email lookup → authenticated account takeover (CVSS 8.2).<br>
+- <strong>CVE‑2026‑112212:</strong> OAuth/OIDC discovery cache poisoning → redirect to attacker‑controlled server (CVSS 7.5).<br>
+- <strong>CVE‑2026‑12664:</strong> GraphQL work‑item email field bypasses read_api token scope (CVSS 6.8).<br>
+- Additional CVEs address SAML/LDAP membership lock bypass, internal header leakage, group‑milestones API authorization bypass, AI feature access without subscription, merge‑request title cache leakage, approval‑policy bypass, vulnerability‑record deletion, and Duo admin‑lock enforcement.</p>
+<p><strong>Bug fixes</strong> are listed for each patch version.<br>
+<strong>Upgrade impact:</strong> database migrations cause downtime on single‑node installs; multi‑node clusters can use zero‑downtime procedures. Post‑deploy migrations may run after upgrade. References to update documentation and notification feeds are provided.</p>
+          </div>
+          <a href="https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express concern over a severe Ruby regex engine vulnerability affecting GitLab, noting its recent fix and backporting but highlighting the challenge of keeping installations up‑to‑date given frequent patches. Users discuss whether the flaw originates in GitLab’s own compiler or the underlying language, reference similar integer‑overflow issues in other libraries, and lament the rapid pace of security incidents. There is a shared view that automated patching, including AI‑assisted tools, may become necessary to manage the evolving threat landscape.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50185869" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/" target="_blank">Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor</a>
+        </h2>
+        <span class="article-meta">
+          505 points • by abhisek • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LiteLLM 1.107.0 published on PyPI was compromised with a credential‑stealing module (cook.py) and a remote‑code‑execution backdoor (sitecustomize.py). Both files are installed in site‑packages; cook.pth imports cook.py, causing the stealer to run in every Python process, while sitecustomize.py launches a daemon that hourly fetches a domain from a GitHub domain.txt, executes an embedded copy of the stealer, and runs code retrieved from http://</p>
+          </div>
+          <a href="https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express widespread concern over the repeated supply‑chain compromise of LiteLLM, highlighting systemic issues such as credential theft, developer permission fatigue, and inadequate package‑manager safeguards. Many advise pinning to earlier versions, using isolated environments or alternative implementations, and call for stronger defaults like cooldown periods. Criticism focuses on maintainers’ trustworthiness and the perceived lack of transparent communication, while some note the incident was quickly contained and suggest the episode may drive improvements in tooling and security practices.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50181114" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html" target="_blank">Using LLM for confidence scoring is a bad idea</a>
+        </h2>
+        <span class="article-meta">
+          80 points • by jimauthors • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LLMs generate confidence scores as plain text continuations, not as calibrated probability estimates derived from evidence. A true confidence measure must (1) reflect the amount of relevant information used for a prediction and (2) be validated against actual outcomes across many instances (calibration). Weather forecasters illustrate this: their percentages are computed from data and updated with new observations, and they are judged accurate only by comparing predicted confidence levels with observed frequencies over time. LLMs lack both properties; their token‑by‑token generation learns the form of confidence statements but not their correspondence to correctness. Consequently, LLM scores vary with phrasing, repeated queries, or preceding text, and cannot be trusted without extensive empirical validation. A reliable alternative is to build an external rule‑based confidence system: identify observable cues (e.g., source relevance, answer consistency), initialize confidence from historical success rates, record each prediction’s outcome, and iteratively adjust the rule to match observed accuracies. This approach yields consistent, calibrated confidence scores independent of the LLM’s text generation.</p>
+          </div>
+          <a href="https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that LLM‑generated confidence scores are unreliable without explicit calibration on labeled data, and that naïve 0‑100 or rating scales are poorly suited. Several contributors suggest using binary or small enumerated axes, fine‑tuning with domain‑specific calibration sets, or employing decision‑style models such as Jev to improve calibration. While some acknowledge recent reinforcement‑learning advances can yield stronger intuition for confidence, many remain skeptical of LLMs for subjective scoring, noting they reflect average human taste and lack robust reasoning. Overall, the consensus stresses careful metric design and calibration rather than trusting raw self‑reported confidence.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50176082" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.jim-nielsen.com/2026/icons-in-every-menu/" target="_blank">No more icons in every menu by default</a>
+        </h2>
+        <span class="article-meta">
+          294 points • by riffraff • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>macOS removed the default practice of placing an icon beside every menu item, a change introduced in the Golden Gate release after being present in the previous Tahoe version. The author notes that Apple’s Human Interface Guidelines now cite the Tahoe approach as an example of what not to do, and references John Gruber’s June commentary on the reversal. The shift restores the earlier design principle that Apple historically did not use icons in menus, strengthening the author’s argument that “Apple tried it, lived with it for a year, then abandoned it.” The post emphasizes that abandoning a previously implemented feature demonstrates experiential learning rather than mere adherence to tradition. An accompanying image contrasts two menu lists—one with icons (marked incorrect) and one without (marked correct)—to illustrate consistent visual design.</p>
+          </div>
+          <a href="https://blog.jim-nielsen.com/2026/icons-in-every-menu/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on recent UI trends, particularly the widespread inclusion of icons in menus, which many view as a result of younger designers replacing experienced veterans without sufficient knowledge transfer. Critics argue that visual flair often outweighs functional clarity, leading to cluttered interfaces, while a minority appreciate icons that convey meaning or aid navigation, especially for non‑native speakers. Consensus favors a balanced approach: use icons sparingly where they add value, adhere to established guidelines, and prioritize usability over decorative uniformity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50161346" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
