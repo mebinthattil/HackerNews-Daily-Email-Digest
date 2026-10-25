@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://danluu.com/ambitious/" target="_blank">We should be more ambitious with the software we build</a>
+        </h2>
+        <span class="article-meta">
+          376 points • by ltratt • 73 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post argues that advances in AI‑driven coding agents now make it feasible to tackle ambitious software projects that were previously impractical. Using Michael Malis’s pgrust as a case study, the author notes that thorough testing of the Rust‑based PostgreSQL rewrite has uncovered real PostgreSQL bugs (numerical SP‑GiST failures, JSONPath cache errors, pgcrypto crashes, dictionary loader memory safety issues, money overflow, etc.), showing that even incomplete rewrites can improve the underlying ecosystem. Performance gains are highlighted as the primary motivation, with the expectation that optimizations demonstrated in pgrust could propagate to PostgreSQL, ClickHouse, and similar systems.</p>
+<p>The author cites personal experiments—custom regex engines, a ripgrep fork, a Rust interpreter, and direct‑I/O filesystem hacks—that were built in hours rather than months thanks to modern models. Similar rapid development is reported for board‑game AIs, ZSTD implementations, and bespoke Neovim formatting tools. An appended comment warns that most developers should moderate ambition, as AI‑generated code can be fragile, over‑fitted, or hard to maintain without deep domain knowledge. Overall, the piece emphasizes that while low‑quality AI projects are abundant, targeted, well‑tested efforts can yield durable improvements and open new productivity frontiers.</p>
+          </div>
+          <a href="https://danluu.com/ambitious/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey cautious optimism about using AI and modern languages like Rust to build higher‑performance, non‑Electron software, emphasizing quality, open‑source availability, and ambitious new projects. Contributors note that AI can accelerate prototyping and reduce boilerplate, yet it does not resolve team coordination, code‑review bottlenecks, or deeper design and security challenges, requiring human oversight and robust testing. There is a split between calls for greater ambition—creating novel tools and services—and concerns that current software is already overly complex or that AI‑generated code can become messy and token‑inefficient. Overall, the sentiment balances excitement for AI‑augmented development with pragmatic doubts about process, maintainability, and broader industry impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50225695" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras" target="_blank">Cerebras Deploys Trillion-Parameter AI Models</a>
+        </h2>
+        <span class="article-meta">
+          139 points • by gmays • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The text explains Cerebras’ inference pipeline for trillion‑parameter AI models, emphasizing that concurrent requests stream continuously rather than waiting as in GPU batches. It states that true performance is best measured by total token throughput per unit of power (tokens / second / megawatt) at a fixed generation speed, rather than by raw concurrency or batch size. Scaling beyond 3 trillion parameters involves calculating memory requirements for model weights and request state, partitioning the model across multiple wafers, and linking these wafers into a pipeline. Each added wafer provides additional compute and on‑chip memory, enabling models larger than any single chip’s capacity. The page concludes with an invitation to deploy models on Cerebras or use its inference cloud, and credits the design team and reviewers.</p>
+          </div>
+          <a href="https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view of Cerebras’s AI hardware. Users acknowledge its high raw throughput and low energy per token, noting that inference can be very fast when models fit the pipeline. At the same time, many express disappointment with limited model quality, modest on‑chip memory, high power draw, and a lack of consumer‑ready or easily purchasable solutions. Technical questions focus on the square‑grid core layout, KV‑cache handling, and reliability concerns about wafer‑level failures versus more fault‑tolerant GPU clusters. Overall sentiment combines cautious optimism about speed with significant skepticism about practicality, scalability, and ecosystem support.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50227356" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kottke.org/26/10/how-japanese-dried-bonito-is-made" target="_blank">How Japanese Dried Bonito Is Made</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by bookofjoe • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kanesa Katsuobushi Shoten, a Nishi‑Izu workshop founded in 1882 and now run by fifth‑generation craftsman Yasuhisa Serizawa, preserves the 200‑year‑old “tebiyama” hand‑fired smoke‑drying technique for katsuobushi (dried bonito). The process begins with fresh bonito filleted and boiled for 90 minutes, then smoked more than ten times over a hand‑tended wood fire. The fish is repaired with bonito paste, inoculated with koji mold for fermentation, and finally sun‑dried for several months—over half a year—until it becomes as hard as wood and acquires a jewel‑like sheen. The tebiyama method involves digging a vertical 2‑meter‑deep pit, igniting raw Izu wood (oak, sawtooth oak, cherry) at the bottom, and exposing the fish to high‑temperature open‑flame smoke. Originating in the Edo period (≈300 years ago) in West Izu’s Tago district, this method is credited with locking in intense umami and producing exceptionally rich‑flavored bonito flakes, a technique now retained by only a few Japanese manufacturers.</p>
+          </div>
+          <a href="https://kottke.org/26/10/how-japanese-dried-bonito-is-made" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment conveys curiosity about the production of bonito‑based dashi, noting personal experience of tolerating it despite a fish allergy and describing various Japanese dishes that use it. It reflects nostalgia for the traditional atmosphere of Tsukiji market, emphasizing the visual and sensory details of wooden flakes, industrial equipment, and the aroma they impart. The author expresses appreciation for a video that explains the process, viewing it as informative and valuable for understanding the craft.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50193936" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aardappel.github.io/goose/" target="_blank">The Goose Programming Language</a>
+        </h2>
+        <span class="article-meta">
+          370 points • by bobbydigitales • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Goose is a memory‑safe systems language that eliminates heap allocation, garbage collection, reference counting, and explicit lifetime annotations. All dynamic values reside on compiler‑managed data stacks; growth advances a bump pointer and memory is freed automatically at scope exit. References remain valid during stack growth, enabling stable links without reallocation. The compiler infers a static root for every reference, rejecting out‑of‑scope uses without requiring lifetime syntax. Nested structures are stored inline as contiguous metadata‑plus‑elements blocks, eliminating pointers and reducing allocation overhead. Enums can be compiled in fixed‑size (tag + largest payload) or variable‑size mode, yielding up to 4× memory savings and 2× speed improvements. Links are stored as 1‑, 2‑ or 4‑byte relative offsets, making data position‑independent and directly usable as a file format; loading validates framing, tags, lengths, and offsets. Values are constructed in place, so returning arrays or building structures incurs no copying. Errors propagate across calls via static checks instead of unwinding. Generics and higher‑order functions are monomorphized at compile time, incurring no runtime overhead. Goose compiles to a single C file, runs anywhere a C compiler is available, and includes a TinyCC backend for in‑process execution.</p>
+          </div>
+          <a href="https://aardappel.github.io/goose/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed enthusiasm and skepticism. Many express interest in Goose’s stack‑based memory model, noting potential benefits for data‑oriented and embedded workloads and drawing parallels to Rust, C, Dart isolates, and region‑based memory. Several ask how dynamic data such as variable‑size strings or hash tables are handled without a heap and whether fragmentation or contiguous allocation limits arise. Praise is given for clear documentation and examples, while criticism targets AI‑generated text, lack of a TL;DR, and uncertainty about safety versus performance trade‑offs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50224100" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.speedcrunch.org/" target="_blank">SpeedCrunch 1.1</a>
+        </h2>
+        <span class="article-meta">
+          137 points • by LordNibbler • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>SpeedCrunch is a free, open‑source scientific calculator designed for high‑precision calculations. It targets STEM professionals, students, and educators, offering features such as multiple concurrent sessions, a formula book, and dedicated panels for functions, constants, variables, and units. The application runs natively on Windows, macOS, and Linux, and can be downloaded without cost. Its interface supports rapid entry of complex expressions and provides real‑time results with extensive mathematical libraries. Documentation is available via a user manual, and contributions are encouraged through a donation option. The project emphasizes cross‑platform compatibility and precision suitable for advanced scientific and engineering work.</p>
+          </div>
+          <a href="https://www.speedcrunch.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Long‑time users note that SpeedCrunch remains a valuable, frequently used scientific calculator, praising its core functionality and recent order‑of‑operations fix. However, the latest release draws criticism for UI enlargements, added borders, excess padding, and perceived input lag, with several commenters preferring the stability of the older version or migrating to alternatives. Responses from developers, including AI‑generated replies, are viewed positively for their promptness. Overall sentiment is mixed: appreciation for the tool’s usefulness and improvements tempered by disappointment over regressions and a desire for consistent, bug‑free performance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50224210" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ratfactor.com/cards/pl-small" target="_blank">Small Programs and Languages</a>
+        </h2>
+        <span class="article-meta">
+          100 points • by andsoitis • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Small programming languages are valued for minimal syntax and core concepts while retaining expressive power. Assembly is noted as extremely simple syntactically—essentially a list of opcode mnemonics—yet its ISA-specific nature limits portability. SNOBOL, though a string‑processing language, shares assembly’s jump‑only control flow. Extremely compact high‑level languages include:</p>
+<ul>
+<li><strong>Forth</strong> – only spaces separate tokens; highly flexible.</li>
+<li><strong>Lisp/Scheme</strong> – tiny core syntax with powerful macros.</li>
+<li><strong>Tcl</strong> – everything is a string, enabling language construction.</li>
+</ul>
+<p>Lua’s 27‑page core, C’s compact yet expressive design, Zig’s C‑like size, and JavaScript’s small core (functions, arrays, objects) illustrate various trade‑offs between size and usability. David Ungar’s “simplicity trumps expressiveness” principle argues that a slightly simpler system is preferable to a complex, opaque one. “Microworlds” are self‑contained environments that benefit from concise languages, quality documentation, beginner‑friendly error messages, and well‑designed standard libraries. The Ramda functional library for JavaScript exemplifies how a small, composable library can feel like a separate language while adding expressive power.</p>
+          </div>
+          <a href="https://ratfactor.com/cards/pl-small" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for compact programming and constraint‑driven development, highlighting several ultra‑small utilities and a game created in uxn, as well as a bootloader‑sized operating system. Authors express personal satisfaction from working within tight resource limits and cite inspirational readings on little languages and language processors. The tone is appreciative, noting the enjoyment of revisiting these challenges, and multiple external resources such as repositories and articles are shared to support further exploration. Overall, the feedback is positive and focused on the value of minimalistic coding exercises.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50225674" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gopher.muffinlabs.com/sdf.org/users/nervtoji/phlog/001.txt" target="_blank">Why Gopher in 2026?</a>
+        </h2>
+        <span class="article-meta">
+          72 points • by andsoitis • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>The entry “Why gopher in 2026?” (May 22 2026) reflects on a cultural shift among younger users, especially those with ADHD, who seek “simpler” technology to reduce modern digital noise.  </li>
+<li>The author contrasts contemporary conveniences (e.g., Vim syntax highlighting, searchable online documentation) with earlier reliance on manual pages and personal expertise.  </li>
+<li>Flip phones are cited as an example of low‑tech devices that now appear nostalgic to a new generation, while they were once cutting‑edge.  </li>
+<li>Concerns are expressed about the current tech ecosystem: pervasive subscription models, constantly changing services, and profit‑driven product direction.  </li>
+<li>The author praises the SDF (Super Dimension Fortress) community as a platform that preserves older, more stable computing practices.  </li>
+<li>A brief comment (May 24 2026) agrees with the tension between moving forward and longing for the past, noting a personal need to “slow down.”</li>
+</ul>
+          </div>
+          <a href="https://gopher.muffinlabs.com/sdf.org/users/nervtoji/phlog/001.txt" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses strong appreciation for the simplicity and independence of protocols like Gopher and Gemini, emphasizing their resistance to corporate control and AI‑generated spam. Many participants recall early internet culture and netiquette, valuing offline or low‑tech lifestyles as antidotes to social‑media‑driven anxiety. Technical contributions and retro‑compatible tools receive praise, while concerns are raised about limited content variety and lack of media support. Overall sentiment favors a return to minimalist, community‑driven networking, coupled with criticism of modern platform‑centric social media.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50226577" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.apricitas.io/p/ai-and-the-fall-of-the-creative-class" target="_blank">America has lost 200k of jobs in media, film and the arts. How much is AI?</a>
+        </h2>
+        <span class="article-meta">
+          338 points • by gnabgib • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>America has lost over 200 000 jobs in digital creative sectors in the past four years, with about 50 000 gone in the last year—an intensity comparable only to the 2001 and 2008 recessions. The decline spans almost every media subsector, most sharply in movie &amp; sound recording (‑100 k jobs, ≈ ⅓ of the sector) and written publishing (‑70 k jobs). While some losses continue long‑standing trends (e.g., newspaper consolidation), sectors such as live broadcasting, streaming, and graphic design have experienced unprecedented downturns since the rise of generative AI capable of producing novels, photorealistic images, and music at low cost.</p>
+<p>Historical analogues show technology‑driven disruption: the early‑2000s internet and file‑sharing collapsed music‑sale revenues, shifting income to live concerts; video moved from theatres to home platforms, yet recent AI‑generated content now competes for attention without a live‑revenue offset. AI adoption is already modest (≈ 32 % of arts workers) but pervasive enough that most major projects incorporate it. Potential worst‑case scenarios echo the newspaper collapse—massive unbundling of content and revenue loss—though unpredictable spillovers (e.g., TikTok‑driven book sales) may mitigate impacts. Outside media, AI‑driven job loss remains limited, but sustained disruption could spread if AI’s economic value matches investor expectations.</p>
+          </div>
+          <a href="https://www.apricitas.io/p/ai-and-the-fall-of-the-creative-class" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a generally critical view of recent changes in the entertainment sector, attributing job losses and reduced wages to a mix of factors including streaming‑driven revenue cuts, production migration to lower‑cost locations, consolidation, high housing costs, and an oversupply of content. While AI is noted as accelerating efficiency and displacing certain creative tasks, most commenters see it as one element among broader economic pressures rather than the primary cause. Opinions also highlight the rise of influencer‑driven media, antitrust concerns, and declining consumer willingness to pay for multiple subscription services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50226419" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rootkitlabs.com/2026/10/06/i-built-a-stereo-vision-board-for-hardware-hackers/" target="_blank">I Built a Stereo Vision Board for Hardware Hackers</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by machinehum • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A stereo‑vision board was built around the Rockchip RV1103 (single‑core 1.1 GHz Cortex‑A7, 64 MB DDR2, MIPI‑CSI‑2) in a four‑layer PCB with controlled‑impedance USB, MIPI and Ethernet traces, solid ground plane, and signal/power layers. The design required minor revisions (incorrect SoC, lens‑mount hole size, LED resistor value, thin 0.9 V trace). Firmware uses a typical ARM boot chain: BootROM → TPL (DRAM init) → SPL (loads U‑Boot) → U‑Boot → Linux kernel, all assembled with Buildroot, which incorporates the vendor BSP for Rockchip MIPI, hardware accelerators, and out‑of‑tree kernel support. In Linux, camera drivers expose V4L2 nodes (/dev/video0‑10) and sub‑device controls (/dev/v4l‑subdevX). The Rockchip Video Engine (/dev/rve) is accessed via the proprietary librve.a library, providing a hardware SAD (sum‑of‑absolute‑differences) engine used for block‑matching stereo depth estimation. User‑space software configures cameras, streams frames, and schedules SAD tasks to compute disparity maps. Future work includes production runs, software clean‑up, image optimisations, SLAM integration, and YOLO inference.</p>
+          </div>
+          <a href="https://rootkitlabs.com/2026/10/06/i-built-a-stereo-vision-board-for-hardware-hackers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express overall enthusiasm for the presented approach, describing it as well executed and appealing. Several participants request additional technical details, such as processing time, offset variability, mitigation by minimum‑distance constraints, and potential misinterpretation of regular patterns. Practical concerns include baseline distance, clock‑signal distribution, and bill‑of‑materials cost. Some suggest leveraging existing PS5 camera hardware as an alternative solution. Overall tone is positive but seeks deeper implementation insight.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50172432" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.southampton.ac.uk/~doug/quantum_physics/index.html" target="_blank">I don&#39;t understand quantum physics (2018)</a>
+        </h2>
+        <span class="article-meta">
+          313 points • by rramadass • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The excerpt contains only the title “QUANTUM_PHYSICS” and a separator line, with no additional text, data, or technical discussion to summarize.</p>
+          </div>
+          <a href="https://www.southampton.ac.uk/~doug/quantum_physics/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects widespread frustration with traditional quantum‑mechanics introductions that rely heavily on classical wave‑particle analogies, while many participants favor a linear‑algebra or quantum‑information perspective as a clearer entry point. Numerous resources are cited to support self‑study, and there is general agreement that the mathematical formalism works despite conceptual unintuitiveness. Opinions diverge on interpretation: many‑worlds and Copenhagen are criticized, with some preferring instrumentalist or realist alternatives, yet most acknowledge that quantum mechanics remains the most effective model available even if incomplete.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50219666" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
