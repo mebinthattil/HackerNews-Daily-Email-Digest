@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 26, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://titleart.dvy.io/" target="_blank">Show HN: TitleArt – Make text like it&#39;s 1997</a>
+        </h2>
+        <span class="article-meta">
+          215 points • by davidbarker • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided excerpt consists solely of a title, “TitleArt – Make text like it’s 1997,” and contains no additional description, specifications, usage instructions, or contextual information to summarize.</p>
+          </div>
+          <a href="https://titleart.dvy.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly nostalgic and appreciative, recalling school‑era WordArt use and describing the recreation as fun and reminiscent of 1990s graphics tools. Users express enthusiasm for the project and share personal memories, while also suggesting improvements such as broader font and language support, more authentic scrollbars, and additional clip‑art elements. A few note existing alternatives with wider character sets and mention modest demand, but overall the tone remains positive with constructive feedback.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50238708" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://train-it.eu/blog/cpp26-contracts-the-ballot-result/" target="_blank">The result of the C++26 DIS ballot</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by uasi • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>C++26’s DIS ballot failed on 23 Oct 2026, marking the first ISO/IEC SC22 draft to miss both required thresholds (14/20 favorable votes and ≤5 negative out of 22). The draft received 12 “yes” votes and nine “no” votes from nine countries (Denmark, Finland, Iran, Italy, Japan, Luxembourg, Romania, Spain, Sweden); France and Ireland abstained with comments, Poland and the US abstained without comment. The primary source of opposition appears to be the contracts feature, which critics argue lacks sufficient implementation guarantees and raises semantic choices (ignore, observe, enforce, quick‑enforce). The ISO directives allow three remedial paths: issue a revised enquiry draft (8‑week vote), circulate a revised committee draft, or publish as a technical specification; cancellation requires SC22 approval. WG21 will discuss options at the Búzios meeting (16‑21 Nov 2026). Meanwhile, compilers continue to ship draft features (GCC 16 with ‑std=c++26, Clang with ‑std=c++2c), but these implementations are not guaranteed to match any future standard.</p>
+          </div>
+          <a href="https://train-it.eu/blog/cpp26-contracts-the-ballot-result/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a broadly critical view of C++, emphasizing its growing complexity and difficulty for typical developers to keep pace with ongoing changes. Many regard the contracts feature as unfinished and likely to be avoided, while modules are seen as poorly supported and rarely used in practice. Concerns are raised about the language’s legacy build model, inconsistent compiler support, and the standards committee’s perceived inefficiency, with several comparisons favoring Rust’s cleaner design and evolution. Overall sentiment leans toward frustration with C++’s direction and usability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50239748" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/KrushnaVardhanReddy/PaperPilot" target="_blank">PaperPilot – Zero-Cloud, Pure-Rust PDF Engine with WASM and MCP</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by vardhan1237 • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>PaperPilot is a pure‑Rust PDF and document toolkit that runs entirely locally (CLI, REST, Tauri desktop, WASM, and MCP interfaces share a common core). It provides operations such as merge, split, rotate, delete, reorder, booklet imposition, N‑up grid, compression, plain‑text extraction, OCR (via Rust‑based PaddleOCR), watermarking, signature validation/removal, PII scanning, deep sanitization, and Office data conversion (Excel → JSON/CSV). Current version 0.6 includes these features; the roadmap targets PDF ↔ Markdown/HTML/JSON (v0.7), PDF → Word/Excel/PowerPoint (v0.8), encryption, signing, redaction, forms, annotations (v0.9), and full PDF/A, Bates numbering, rendering, flattening, repair, comparison (v1.0). Integration with Claude/Cursor MCP is supported via a JSON config pointing to the <code>paperpilot-mcp</code> binary. Build requires Rust ≥ 1.75, Node.js, and pnpm; components compile with <code>cargo build</code>. The REST API runs on <code>localhost:7823</code> with Swagger docs. The project is Apache 2.0 (Community Edition); an Enterprise Edition adds SSO, RBAC, audit logs, and DLP.</p>
+          </div>
+          <a href="https://github.com/KrushnaVardhanReddy/PaperPilot" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show overall appreciation for the tool’s privacy‑first, zero‑cloud design and its Rust implementation, with many noting its usefulness for secure PDF handling. Repeated requests focus on adding features such as password removal, digital signing, an official GUI, and clearer licensing, while some question the reliance on AI and ask whether the engine is derived from MuPDF. Users also compare it to existing PDF viewers, seek better web‑interface performance, and suggest broader integration options, indicating both support and constructive criticism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50238739" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://exhibits.stanford.edu/menuez/browse/next-computer-inc?per_page=96&amp;sort=pub_year_isi+asc%2C+title_sort+asc&amp;view=masonry" target="_blank">Behind the scenes at the NeXT Computer office</a>
+        </h2>
+        <span class="article-meta">
+          104 points • by Austin_Conlon • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://exhibits.stanford.edu/menuez/browse/next-computer-inc?per_page=96&amp;sort=pub_year_isi+asc%2C+title_sort+asc&amp;view=masonry" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express nostalgic appreciation for the NeXT era, highlighting its distinctive design, influential technology, and vibrant office culture while noting a sense of missed opportunity and melancholy about not having experienced it firsthand. Contributors admire the hardware’s aesthetics, the early web’s origins, and specific software tools, yet many also acknowledge Steve Jobs’s difficult early management and the eventual impact of his work. There is a recurring wish for modern revival of NeXT’s interface and a broader longing for the collaborative, inventive atmosphere of that period.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50238763" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://brashandplucky.com/2026/10/15/growing-trees.html" target="_blank">Growing Trees</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by ibobev • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The implementation follows Palubicki et al.’s self‑organizing tree model. Growth proceeds in discrete seasons on a metameric structure (internode + leaf + bud). Each season: (1) light is sampled per bud using a voxel‑grid shadow model where each bud casts a decaying pyramid; buds also read a direction vector V toward the least‑shaded voxel. (2) Light values are summed from tips to root, giving a base resource v = α Q_base. (3) Resource ascends the hierarchy, split at each branch according to the extended Borchert‑Honda equation v_m = v · λ Q_m / (λ Q_m + (1‑λ)Q_l); λ controls bias toward the main axis. Buds receiving ≥1 unit generate ⌊v⌋ new metamers (subject to a cap). (4) New segment direction is a weighted sum of previous direction, V, tropism, and noise; phyllotactic bud placement (spiral, opposite, whorl) is parallel‑transported along the shoot. (5) Branches are pruned when average light per metamer falls below a threshold; shed branches still contribute to trunk girth. Girth is computed with an apipe model (r_parentⁿ = ∑ r_iⁿ, n = 2 for area preservation). The resulting skeleton is rendered as a swept bark mesh; foliage uses twig‑spray cards drawn from a procedural atlas, with normal blending toward a crown ellipsoid and distance‑based LOD (cards → impostors). The system can bake depth‑field views for efficient forest instancing.</p>
+          </div>
+          <a href="https://brashandplucky.com/2026/10/15/growing-trees.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong approval of the procedural tree generation concept, highlighting its innovative feedback loop where buds compete for light and resources to shape crown structures. Readers appreciate the novelty of simulating natural growth processes, noting the visual results as impressive. Several participants reference related experiments and tools, such as a personal AI‑driven tree simulator, and acknowledge the author’s reputation for quality content, reinforcing a consensus of enthusiasm and recognition for the approach.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50209278" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://imaginationlibrary.com/" target="_blank">Dolly Parton&#39;s Imagination Library</a>
+        </h2>
+        <span class="article-meta">
+          534 points • by jumploops • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Imagination Library is a proven early‑childhood literacy program founded by Dolly Parton, operating in the USA, UK, Ireland, Canada, and Australia. Expansion to additional communities requires local participation; the organization supplies resources—including a step‑by‑step onboarding checklist and support from “Regional and State Directors,” who act as program trainers—to facilitate new implementations. Prospective partners are encouraged to initiate a program in underserved areas, leveraging the provided materials to establish distribution of free books to children. Visual assets referenced include a primary program logo, a banner commemorating the initiative’s 31‑year anniversary, and a third image labeled “fb.” The content emphasizes community‑driven growth and the logistical support available for launching new Imagination Library sites.</p>
+          </div>
+          <a href="https://imaginationlibrary.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong approval of the Imagination Library, highlighting its effective decentralized funding model, consistent delivery of high‑quality, age‑appropriate books, and the added reading‑guidance notes for parents. Participants note emotional benefits for children, gratitude toward Dolly Parton’s initiative, and appreciation for the program’s sustainability through local charities and grants. Several remarks call for broader adoption or similar efforts, mention comparable services such as PJ Library, and reflect on Dolly’s lasting legacy, while a few inquire about the relevance of picture‑only books for early readers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50234474" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/notaroomba/keybytes" target="_blank">Show HN: A Truly Modular Keyboard</a>
+        </h2>
+        <span class="article-meta">
+          144 points • by NotARoomba • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A modular keyboard system called <strong>Keybytes</strong> comprises individual 1 U key modules (“Keybits”) and a central main board (“Keyword”).<br>
+- Each Keybit integrates a CH32V003 RISC‑V MCU, a Cherry MX switch, 2 MB QSPI flash (W25Q16JV), and pogo pins on all four sides delivering 3.3 V, GND and I²C for power, communication, and programming.<br>
+- The Keyword is split into two stacked PCBs: the top hosts an STM32WB55RGV6 MCU, a ceramic Bluetooth antenna, and flash; the bottom provides USB‑C with ESD protection, a BQ25895 Li‑Po charger, and a TPS631000 buck‑boost converter.<br>
+- Connections between modules use the pogo pins; three pins on the top PCB also support firmware updates of Keybits.<br>
+- The system includes magnetic casings for assembly, an RGB status LED, and optional 1 S Li‑Po battery pads.<br>
+- Designs are in KiCad; case models are supplied as STEP files via Onshape.<br>
+- Project is released under the MIT license and lists dependencies such as Ember, Cyberboard, Trace, and Linea.</p>
+          </div>
+          <a href="https://github.com/notaroomba/keybytes" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is positive curiosity mixed with practical skepticism. Commenters appreciate the modular keyboard concept and its novelty, but raise repeated concerns about connector orientation, communication reliability, I²C address limits, and structural rigidity when scaling to full layouts. Cost, weight, and manufacturability are questioned, as is the ability to support staggered or ergonomic arrangements and larger keys. Suggestions include adding blank modules for spacing, alternative bus protocols, and improving robustness through redundancy or better mechanical design.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50228115" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blocks.manifold3d.ch/" target="_blank">Switzerland. Block by block. At 1:1 scale</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by theanonymousone • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The site “Blocks – Die Schweiz 1:1 in Minecraft” is hosted in Switzerland (Hostpoint) and uses Cloudflare for content delivery. Server logs record IP address, timestamp, browser and requested page for operation, security and visitor statistics (Logaholic). Map tiles and aerial imagery are fetched from Cloudflare and swisstopo, respectively, each receiving the visitor’s IP. Payment is processed through Stripe (Ireland), which collects email, address, payment details and device data for fraud prevention; Stripe’s own privacy policy applies. Order records (order number, amount, payment method, email, address, optional name for the “Gipfelbuch”) are stored, with address retained only by Stripe to verify Swiss residency. License keys and download tracking are managed on a Cloudflare‑hosted page, storing order number, amount, email and name to control downloads, updates and key revocation. Email delivery of keys and updates uses Resend (USA); a single reply stops further update mails. Automatic key suspension follows refunds or disputes, with manual overrides possible. Data may be transferred to Ireland, the UK, the USA and other jurisdictions, relying on the Swiss‑U.S. Data Privacy Framework or EU standard contractual clauses for protection. Images illustrate Swiss landmarks reproduced in the Minecraft map.</p>
+          </div>
+          <a href="https://blocks.manifold3d.ch/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50240922" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://charliegerard.dev/blog/overgrown-extension/" target="_blank">Overgrown, when plants invade your abandoned tabs</a>
+        </h2>
+        <span class="article-meta">
+          264 points • by speckx • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Chrome extension named “Overgrown” visualizes neglected browser tabs as being overtaken by plant growth. Each tab runs a neglect timer that increments when the tab is out of view and pauses when active. As the timer progresses, SVG plant graphics expand from the edges toward the center; once over 5 % coverage, the page becomes non‑interactive (scrolling only). Users clear the vines by dragging the cursor across them, reducing coverage back to 5 % before interaction is restored. The extension includes configurable settings for growth speed and selectable “weapons” (rusty machete, chainsaw, flamethrower) that affect the clearing animation. Architecturally, the code is divided into three components: a background script (background.js) that initializes and removes per‑tab state, a popup UI for time, weapon, and tab status controls, and a content script folder containing SVG assets, growth logic, the neglect clock, and sound effects. The project is open‑source and intended as a lightweight, playful reminder to revisit idle tabs.</p>
+          </div>
+          <a href="https://charliegerard.dev/blog/overgrown-extension/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions: many users appreciate the visual cue for tab age and find it helpful for tracking open versus saved tabs, while others consider it impractical because most tabs remain unloaded or they already rely on tab‑suspending tools. Frequent suggestions include making the coverage indicator adjustable, adding translucency effects, integrating with tab unloading, and extending support to non‑Chromium browsers such as Firefox. Comparisons to Chrome’s tab groups and Trello’s aging features appear, and a recurring tone blends curiosity about the concept with criticism of its limited utility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50197108" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2512.19428" target="_blank">Attention Is Not What You Need (2025)</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by westurner • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The scraped material consists of metadata for the arXiv preprint “Attention Is Not What You Need” (arXiv:2512.19428). The only textual elements are the paper’s title and a series of image placeholders with descriptive alt text: “archive”, “license icon”, “BibSonomy”, “Reddit”, “Simons Foundation”, “Simons Foundation International”, and “Schmidt Sciences”. These alt texts indicate the presence of standard repository and licensing graphics, as well as links or references to academic networking (BibSonomy), social discussion (Reddit), and funding or institutional affiliations (Simons Foundation, Simons Foundation International, Schmidt Sciences). No abstract, introduction, methodology, results, or conclusions are present in the provided excerpt.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2512.19428" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively question the paper’s methodological soundness, noting that the described pairing operation appears flawed and that the experimental validation relies on a small, outdated model that offers limited evidence. Reviewers criticize the lack of rigorous analysis, insufficient metrics, and absence of supporting visuals, suggesting the work feels under‑developed and potentially generated by an LLM. While acknowledging that scaling can compensate for architectural choices, most remarks emphasize the need for clearer justification, stronger empirical results, and greater scholarly rigor before the ideas can be taken seriously.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50237224" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
