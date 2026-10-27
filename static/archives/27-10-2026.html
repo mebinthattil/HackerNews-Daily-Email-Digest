@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank">Three new discoveries in mathematics, computer science, and physics</a>
+        </h2>
+        <span class="article-meta">
+          871 points • by jonluca • 82 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a blend of admiration for the claimed mathematical and physical results and unease about OpenAI’s handling of the work. Many applaud the apparent breakthroughs in the Kakeya conjecture, the Exponential‑Time Hypothesis and quantum‑field‑theory formalizations, while others question the practical significance, reproducibility and the role of massive compute. Repeated concerns involve credit allocation, transparency, the impact on academic incentives, funding levels, and whether similar outcomes could arise without AI. Overall sentiment is cautiously optimistic but critical of the disclosure process and broader implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50251344" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://j11g.com/the-mythical-man-month-in-the-age-of-ai" target="_blank">The Mythical Man-Month in the Age of AI</a>
+        </h2>
+        <span class="article-meta">
+          97 points • by ilreb • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post revisits Brooks’s Law—“adding manpower to a late software project makes it later”—and evaluates its relevance in 2026 when AI agents and large language models (LLMs) assist development. It argues that while AI eliminates some traditional bottlenecks (onboarding, meetings, breaks), the fundamental constraint remains: sequential tasks cannot be parallelised arbitrarily, illustrated by the classic “baby problem.” Overhead is transformed rather than removed; teams must still define completion criteria, review generated code, detect hallucinations, and integrate outputs, effectively managing the agents themselves. Deploying multiple autonomous agents without precise orchestration leads to redundant or conflicting changes. The author proposes an updated formulation: “Adding agents to a project with unclear requirements gets you the wrong answer faster,” emphasizing the need for clear specifications and coordinated control when leveraging AI in software projects.</p>
+          </div>
+          <a href="https://j11g.com/the-mythical-man-month-in-the-age-of-ai" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express cautious skepticism toward applying the Mythical Man‑Month to AI coding agents, noting that the principle still holds for coordination, design coherence, and verification even when code generation is cheap. Opinions are mixed: agents are seen as helpful for narrow, trial‑and‑error tasks such as reverse‑engineering or performance tweaks, but ineffective for large, open‑ended projects and can produce over‑specified, buggy output. Several remarks highlight the risk of skill erosion and the continued need for human oversight, while a few acknowledge occasional productivity gains in well‑bounded tasks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50255298" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf" target="_blank">The Exponential Time Hypothesis Is False [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          611 points • by vok • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://github.com/openai/math/blob/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the recent sub‑exponential‑time algorithm for 3‑SAT, noting surprise at its theoretical breakthrough while emphasizing that it does not collapse NP to subexponential time under standard reductions. Participants express mixed reactions: many view it as an intriguing challenge to the Exponential‑Time Hypothesis and a reminder that unexpected algorithmic advances can occur, yet most consider the practical impact negligible due to astronomical constants and limited relevance to cryptographic security. Skepticism about proof verification and the role of AI‑generated formalizations also appears.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50251661" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.sciencealert.com/researchers-identify-new-circadian-subtype-of-depression-affecting-1-in-4-patients" target="_blank">New &#39;Circadian&#39; Subtype of Depression Affecting 1 in 4 Patients</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by gmays • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A study of 11,380 participants from the Australian Genetics of Depression Study identified a “circadian” depression subtype affecting roughly 25 % of patients. Researchers defined this subtype by six criteria: seasonal symptom variation, delayed sleep midpoint, pronounced social jet‑lag (different sleep timing on work vs. non‑work days), evening chronotype, longer total sleep when possible, and morning fatigue. Individuals with this profile tended to develop depression earlier, exhibited more severe features (mania, psychosis, suicidality), gained weight during episodes, and showed higher genetic risk for neurodevelopmental, inflammatory, and cardiovascular disorders. They responded poorly to standard antidepressants and experienced more side effects. Overlap with atypical depression existed but many cases were distinct. The authors suggest that interventions targeting circadian regulation—such as light therapy and melatonin—may be more effective for this subgroup and should be considered early in treatment planning. The findings were published in the <em>British Journal of Psychiatry</em>.</p>
+          </div>
+          <a href="https://www.sciencealert.com/researchers-identify-new-circadian-subtype-of-depression-affecting-1-in-4-patients" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively describe personal struggles with irregular sleep patterns, circadian rhythm disorders, and seasonal mood changes, often linking fatigue to school or work demands and daylight variations. Several users mention self‑diagnosing conditions such as circadian depression or non‑24‑hour sleep‑wake disorder and express mixed experiences with melatonin and interest in light‑therapy guidance. A common thread is frustration over disrupted schedules, while a few note temporary improvement after daylight‑saving adjustments. Overall, the discussion reflects a desire for effective management strategies and validation of these sleep‑related difficulties.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50196212" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank">Sebastian Raschka&#39;s from-scratch video course on building reasoning models</a>
+        </h2>
+        <span class="article-meta">
+          699 points • by sgiannopoulos • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article announces an eight‑part video course, “Build Your Own Reasoning Model (From Scratch),” delivering 11 hours of Python/PyTorch code that extends a pre‑trained Qwen‑3 0.6B model into a full reasoning system. It covers: environment setup (Python, uv, CUDA/Apple Silicon, remote GPU); baseline model loading, tokenization, greedy decoding, KV‑caching, and torch.compile optimizations; construction of a math‑answer verifier for MATH‑500 evaluation and its reuse as a reward signal; inference‑scaling techniques (temperature, multinomial sampling, top‑p, self‑consistency) and trade‑offs between accuracy and compute; scoring functions, log‑probability calculations, and a self‑refinement loop; Reinforcement Learning with Verifiable Rewards (RLVR) via a simplified Group Relative Policy Optimization (GRPO) loss, including reward conversion, training‑loop logging, and checkpoint analysis; advanced training diagnostics (entropy, advantage, KL loss, clipping) and discussion of reward hacking; and finally, knowledge‑distillation from a larger teacher (DeepSeek R1) using soft/hard, on/off‑policy methods, dataset preparation, cross‑entropy training, and evaluation on MATH‑500. Prerequisites are Python and PyTorch; early stages run on CPU, later stages benefit from GPU. The course is complemented by a Manning book, a Substack article, and a short LinkedIn Learning overview.</p>
+          </div>
+          <a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express a mixed view of learning LLMs by building them from scratch. Many acknowledge the steep compute and data requirements that limit practical experimentation, yet they appreciate such tutorials for deepening conceptual understanding and recommend specific books and videos as effective pedagogical tools. Some participants praise the clarity of explanations and find the hands‑on approach motivating, while others question the real‑world utility and suspect the material may serve more as a personal‑brand monetization effort. Overall, the consensus balances appreciation for educational value against concerns about feasibility and relevance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50245138" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.unix.dog/~yosh/blog/2026-10-25_pratt-parsing.html" target="_blank">Writing about pratt parsing so I remember it</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by dverlaeckt80 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post documents a personal experiment converting a C‑expression calculator from a shunting‑yard implementation to a Pratt parser. It notes that Pratt parsing is rarely covered in standard textbooks (e.g., <em>The Dragon Book</em>) and is more common in compiler‑development circles.  </p>
+<p>Key points:<br>
+- Shunting‑yard uses an explicit operator stack and binding‑power comparisons; the author provides a minimal C version that emits postfix tokens.<br>
+- Pratt parsing replaces the stack with the call stack: <code>expr(parser, left_bp)</code> parses a prefix token (nud) then repeatedly processes infix/postfix tokens (led) while the current token’s binding power exceeds <code>left_bp</code>. This mirrors stack unwinding in shunting‑yard but yields cleaner, more extensible code.<br>
+- Adding parentheses is shown by assigning a binding power of 0 to ‘(’, calling <code>paren()</code> to parse the enclosed sub‑expression, and checking for the matching ‘)’.<br>
+- The author highlights that each operator can have its own prefix and postfix handler, enabling straightforward extensions such as unary <code>+/-</code> and postfix operators.  </p>
+<p>The article concludes with references to the “Crafting Interpreters” chapter and a repository containing a more feature‑rich example.</p>
+          </div>
+          <a href="https://www.unix.dog/~yosh/blog/2026-10-25_pratt-parsing.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall sentiment expressed is dissatisfaction with the shunting yard algorithm, describing it as unintuitive, while the recursive descent parser is regarded as clearer and more sensible. The comment favors the latter as a more understandable parsing technique, indicating a preference for approaches that align with personal intuition over more abstract algorithmic methods.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50255177" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.enlyth.com/posts/oldest-windows-gui-app-win-11/" target="_blank">Oldest GUI application that still runs on Windows 11</a>
+        </h2>
+        <span class="article-meta">
+          410 points • by enlyth • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author investigates the oldest Windows‑GUI program that runs natively on Windows 11 (64‑bit) without emulation.  </p>
+<ul>
+<li><strong>FreeCell.exe (22 Feb 1993)</strong> – a Win32s executable that launches and plays correctly on Windows 11, making it a 33‑year‑old, fully functional GUI app.  </li>
+<li><strong>CDPLAYER.EXE (16 Nov 1992, Build 347)</strong> – an early NT 3.1 binary that avoids the problematic C runtime by linking to the system crtdll.dll, which remains in SysWOW64; it starts (showing “no CD‑ROM drive”) and can play audio when a small emulation DLL (cdemu.dll) supplies fake CD data.  </li>
+<li>The author notes earlier NT 3.1 builds (1991‑early 1992) used a draft PE format and cdecl calling convention, causing crashes on modern Windows.  </li>
+</ul>
+<p>A secondary note mentions that 16‑bit programs are unsupported on 64‑bit Windows, but can be run via the otvdm emulator (e.g., Reversi.exe from Windows 1.01, 1985), which the author treats as “cheating.”</p>
+          </div>
+          <a href="https://blog.enlyth.com/posts/oldest-windows-gui-app-win-11/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments emphasize strong appreciation for the longevity and stability of the Win32 API, noting that many decades‑old Windows programs—such as FreeCell, early games, and utility tools—still run on modern systems with minimal effort. Contributors lament the shift toward mobile‑first, non‑native UI frameworks and reduced backward compatibility, while highlighting successful patches and emulation approaches that preserve legacy functionality. Overall, there is a consensus that Microsoft’s commitment to long‑term API support contrasts with other platforms, and that preserving classic interfaces remains valued despite contemporary design trends.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50248055" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eliasfarhan.ch/graphics/cpp/2026/01/27/why-i-teach-opengles.html" target="_blank">I still teach OpenGL ES 3.0</a>
+        </h2>
+        <span class="article-meta">
+          53 points • by majorchord • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://eliasfarhan.ch/graphics/cpp/2026/01/27/why-i-teach-opengles.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments emphasize that OpenGL’s global state and poor error reporting make it difficult for beginners, leading many to favor WebGPU or WebGL 2 for their clearer diagnostics, portability across languages, and alignment with modern GPU APIs such as Vulkan, Metal, and DirectX 12. Several contributors acknowledge that a short introductory exposure to OpenGL can convey fundamental graphics concepts, but most argue it should be limited before transitioning to newer, less opaque APIs. Overall, the consensus leans toward teaching newer APIs while recognizing OpenGL’s historical instructional value.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50253939" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/microsoft/pylance-release/blob/main/docs/tsp/type-server-protocol.md" target="_blank">Type Server Protocol</a>
+        </h2>
+        <span class="article-meta">
+          241 points • by adamnemecek • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Type Server Protocol (TSP) is a JSON‑RPC interface for Python type‑analysis servers. It builds on Language Server Protocol (LSP) data shapes (Position, Range, URI strings) and uses a “typeServer/” method prefix. Compatibility is expressed with semantic version strings; minor version changes may break, while patch changes are backward compatible within a minor line (e.g., 0.4.1). A client connects to the server via a main channel (stdio or Node IPC) and optionally opens additional read‑only IPC channels for concurrent queries. Session flow: start server, LSP initialize, call typeServer/getSupportedProtocolVersion, obtain a snapshot with typeServer/getSnapshot, issue type‑query or import‑resolution requests tied to that snapshot, and handle typeServer/snapshotChanged notifications when analysis results become stale. Snapshots are non‑negative integers that never decrease; stale‑snapshot requests must return a ServerCancelled error (‑32802). Type queries (computed, declared, expected) accept a node or declaration argument and return JSON‑serializable type objects with kind, id, and flags. Multi‑connection support is negotiated via initialize capabilities and requires a common transport (currently “ipc”). All payloads must conform to the defined shapes, and extra connections are read‑only and must reject LSP or state‑changing messages.</p>
+          </div>
+          <a href="https://github.com/microsoft/pylance-release/blob/main/docs/tsp/type-server-protocol.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the Python Type Server Protocol (TSP) as a specialized extension of the Language Server Protocol, with mixed reactions. Critics highlight concerns that Microsoft’s implementation creates proprietary features that hinder editor interoperability and view the protocol as unnecessarily Python‑specific, while supporters note its potential to unify type‑checking across tools and address existing fragmentation among Python analyzers. Opinions also touch on broader skepticism about Python’s ecosystem and language design, balanced by acknowledgment that open‑source efforts aim to improve type‑query capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50248371" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/otya128/winevdm" target="_blank">16-bit Windows (Windows 1.x, 2.x, 3.0, 3.1, etc.) on 64-bit Windows</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by doener • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The repository provides an altered version of <strong>winevdm</strong>, a 16‑bit Windows (1.x–3.1) emulator ported to 64‑bit Windows. It enables direct execution of Win16 binaries and includes an installer (install.inf) and uninstaller (uninstall.reg). Key components:</p>
+<ul>
+<li><strong>CPU emulator</strong> for 64‑bit Windows (LDT modification unavailable; NtSetInformationProcess returns error).</li>
+<li><strong>Win16‑to‑Win32 conversion</strong> routines auto‑generated from convspec (e.g., <code>DestroyWindow16</code> maps to <code>DestroyWindow</code> via handle translation).</li>
+<li><strong>DOS emulation</strong> for Win16 programs; can set DOS version via <code>VDMDOSVER</code>, though functionality is limited and DOSBox/MS‑DOS Player are recommended.</li>
+<li><strong>HANDLE conversion</strong> between 16‑bit and native Windows handles.</li>
+<li><strong>Compatibility fixes</strong> for installer detection and Windows directory redirection; attempts to write <code>%WINDIR%\*.ini</code> are redirected to user‑writable locations.</li>
+</ul>
+<p><strong>Build instructions</strong> (Visual Studio 2017):
+1. Clone repo, edit <code>PropertySheet.props</code>.
+2. Create build directory, run <code>cmake ..</code> and <code>make</code>.</p>
+<p>Usage examples: <code>winevdm.exe CALC.EXE</code> or <code>winevdm.exe --app-name app.exe</code>. The project includes <code>otvdm.ini</code> for configuration.</p>
+          </div>
+          <a href="https://github.com/otya128/winevdm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback expresses overall satisfaction with the functionality of MS Office 2.0 for basic word processing and its compatibility with modern formats, while noting a specific issue with unrecognized dictionary files. It combines nostalgia for legacy Windows environments with criticism of Microsoft’s decision to drop native 16‑bit support, arguing that a simple compatibility layer could have preserved older applications. The comments also highlight successful use of alternative solutions like WINE to run classic games, reinforcing a desire for broader legacy software support.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50253529" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
