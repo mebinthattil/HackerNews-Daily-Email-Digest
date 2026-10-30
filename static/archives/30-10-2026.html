@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 30, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8" target="_blank">Binance-hacker-1029 – $5.6B stolen from Binance</a>
+        </h2>
+        <span class="article-meta">
+          1370 points • by Tiberium • 146 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on criticism of Binance’s security, emphasizing that a single compromised DevOps laptop enabled the multi‑billion‑dollar theft and exposing the fragility of hot‑wallet practices. Many note that frozen stablecoins limit immediate damage but question the feasibility of full restitution and highlight the broader risk of centralized exchanges, referencing similar incidents at Polymarket and Coinbase. Opinions split between viewing the event as evidence of crypto’s systemic vulnerabilities and a call for stricter controls, while some remain skeptical of recovery prospects and warn users to shift assets to self‑custody or more regulated institutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50296470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mistral.ai/news/mistral-large-4-oss/" target="_blank">We&#39;re releasing the weights of Mistral Large 4</a>
+        </h2>
+        <span class="article-meta">
+          1485 points • by kuberwastaken • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Mistral AI released the open‑weight weights for Mistral Large 4 (Le Chonk), a 1‑trillion‑parameter multimodal model trained from scratch on European infrastructure. After three weeks of additional reinforcement learning, the model shows notable gains in coding and cybersecurity tasks while reducing token usage and inference cost. Benchmark results include a 19.7 % score on Cognition’s FrontierCode 2.0, 48 % on the Artificial Analysis Coding Agent Index with 47 % fewer tokens, and a 41 % score on Terminal‑Bench 4.0 (up 13 pp) with 30 % fewer output tokens. On the Artificial Analysis Cyber Index it achieves 51 % vulnerability‑discovery performance and a 96.6 % refusal rate for malicious cyber requests, the highest among open models. Three reasoning modes (Low, Medium, High) let users balance performance and cost. The model is positioned for sovereign AI deployments, offering open‑weight licensing, customisation via MistralForge, and integration through Mistral Studio, API, OpenRouter, Hugging Face, NVIDIA NIM, vLLM, and SGLang. Pricing is $0.70 per M input token, $0.07 per M cached input, and $2.10 per M output tokens; commercial Model‑as‑a‑Service use requires a separate license. Future work will build specialised variants atop this foundation.</p>
+          </div>
+          <a href="https://mistral.ai/news/mistral-large-4-oss/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments note a significant price reduction that makes Mistral Large 4 more cost‑competitive, prompting many to reevaluate its value. Users appreciate the EU provenance, the availability of weights, and the added model options, but express doubts about the “open‑weight” label due to a non‑OSI license and commercial‑use restrictions. Performance feedback is mixed: some report satisfactory results, while others cite hallucinations, limited coding ability, and lower quality compared with leading open or proprietary models. Concerns also appear around benchmark transparency, hardware demands, and the difficulty of navigating licensing or payment processes. Overall sentiment balances cautious optimism with notable skepticism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50289418" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theguardian.com/books/2026/oct/20/gilgamesh-by-simon-armitage-review-an-ancient-epic-is-brilliantly-translated-for-our-times" target="_blank">Gilgamesh by Simon Armitage review – an ancient epic is brilliantly translated</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by benbreen • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Simon Armitage’s new translation of the ancient Mesopotamian epic Gilgamesh re‑frames the 4,000‑year‑old narrative for contemporary readers. The poem follows king Gilgamesh of Uruk, his creation of the wild man Enkidu, their joint battles against Humbaba and the Bull of Heaven, and Gilgamesh’s solitary quest for immortality after Enkidu’s death. Armitage highlights modern parallels: explicit treatment of sex workers, ecological damage symbolised by the forest‑cutting that kills Enkidu, and a same‑sex bond between the heroes; he also links Humbaba’s fight to present‑day resource conflicts such as Gulf‑war oil disputes. The translation respects the fragmentary tablet history—originally Sumerian, later Akkadian, rediscovered in the 19th century—by preserving repetitive, incantatory structures while employing a regular four‑beat line without rhyme. Armitage blends archaic diction with contemporary idiom, varies registers to reflect the poem’s violent and sexual content, and provides scholarly footnotes for gaps. Critics view the work as a vivid, scholarly yet poetic rendition likely to become a standard English version, while noting that further fragment discoveries may prompt future revisions.</p>
+          </div>
+          <a href="https://www.theguardian.com/books/2026/oct/20/gilgamesh-by-simon-armitage-review-an-ancient-epic-is-brilliantly-translated-for-our-times" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment questions whether the cited edition constitutes an authentic translation of the original Sumerian text, noting the absence of clear attribution and criticizing the use of “verse translation” as a marketing label that suggests a screenplay‑ready format. It highlights concern that the work may prioritize commercial appeal over scholarly fidelity, and points to older translations of the Gilgamesh epic as more reliable sources for accessing the ancient material.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50263127" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cuis.st/" target="_blank">Cuis: The Modern Smalltalk-80</a>
+        </h2>
+        <span class="article-meta">
+          122 points • by theanonymousone • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Smalltalks 2026 will be held 14‑16 October at the Facultad Regional Rosario of the UTN in Rosario, Argentina. The Cuis community will contribute eight talks covering projects and work done in Cuis.  </li>
+<li>On 2 June 2026 a “Demo Meeting” will feature Milan Lajtos demonstrating the use of a code‑agent to develop <strong>Blueprint</strong>, a redesign of the Cuis Smalltalk desktop environment, followed by discussion.  </li>
+<li>On 1 June 2026 the <strong>Cuis 7.8</strong> stable release was announced.  </li>
+<li>Visual assets include screenshots of the Cuis Smalltalk development environment, examples of vector‑graphics rendering within Cuis, and images of related tools such as the Cuis website, Dybo, and a Stream Deck interface.</li>
+</ul>
+          </div>
+          <a href="https://cuis.st/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a generally positive view of Smalltalk, noting its performance comparable to Squeak and Pharo while acknowledging a smaller library ecosystem and the chance for open‑source contributions. Users highlight its historical role as an educational language and express nostalgic surprise at encountering it again. The language’s visual appeal and perceived approachability are praised, contrasting earlier intimidation with a welcoming impression. Overall sentiment emphasizes usefulness for static web projects, appreciation of its design, and interest in further development despite modest library support.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50255343" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.quantamagazine.org/how-do-you-take-a-picture-of-a-black-hole-20261029/" target="_blank">How Do You Take a Picture of a Black Hole?</a>
+        </h2>
+        <span class="article-meta">
+          5 points • by dverlaeckt80 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The episode explains how the Event Horizon Telescope (EHT) turned Earth into a ~10 km‑scale radio interferometer to image black‑hole shadows. By linking existing millimeter‑wave dishes (South Pole, Chile, Mexico, Hawai‘i, Arizona, Spain, France) with hydrogen‑maser clocks and very‑long‑baseline interferometry, the consortium achieved ≈ 20 µas resolution—enough to resolve the ~50 µas event‑horizon ring of Sagittarius A<em> (4 × 10⁶ M☉, 27 kly away) and the similarly sized ring of M87</em> (6 × 10⁹ M☉, 55 Mly away). The team spent two decades developing instrumentation, securing telescope time, and overcoming weather, timing, and data‑transfer challenges. Imaging M87<em> succeeded first because its larger mass yields a slower, more stable emission pattern, whereas Sagittarius A</em> varies on ~30 min timescales, complicating integration. The resulting images provide direct tests of General Relativity, confirm the presence of supermassive black holes, and open prospects for time‑resolved movies of horizon dynamics by the early 2030s.</p>
+          </div>
+          <a href="https://www.quantamagazine.org/how-do-you-take-a-picture-of-a-black-hole-20261029/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50301717" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/herdrdev/herdr-app" target="_blank">Herdr has released native app</a>
+        </h2>
+        <span class="article-meta">
+          211 points • by cherioo • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Herdr is a cross‑platform desktop application for managing terminal sessions and coding agents. It runs on Linux (desktop session with Vulkan driver), macOS (Apple Silicon binaries; Intel builds from source), and Windows (PowerShell installer). Installers add the executable to ~/.local/bin (Linux/macOS) or %LOCALAPPDATA%\Programs\herdr‑app (Windows) and place the app in the system menu. The core process maintains terminal lifecycles; closing the UI window leaves terminals running, while closing panes or tabs terminates their shells. Workspaces (“spaces”) contain tabs that can be split into panes; each space may be named and is tied to the first terminal’s folder. An agents sidebar aggregates agents from all spaces, showing statuses (Working, Blocked, Done, Idle). Remote machines can be added via SSH, allowing spaces to run on those hosts with state synchronized across connected screens. Layouts and “mods” (JavaScript UI extensions) are configurable; key bindings are stored in keys.json. Updates are background‑downloaded and applied on restart; telemetry is enabled by default but can be disabled. Development uses Rust 1.95.0, Zig 0.16.0, and the repository includes Just recipes for building, testing, and benchmarking.</p>
+          </div>
+          <a href="https://github.com/herdrdev/herdr-app" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments describe Herdr as a well‑engineered, stable alternative to traditional terminal multiplexers, praised for its native integration with coding agents, seamless remote session handling, customizable layouts, and effective replacement for tmux. Users note useful desktop and GUI extensions, SSH support, and the convenience of persistent agents, while also highlighting missing mobile apps, automatic‑update concerns, telemetry defaults, and occasional incompatibilities with existing sessions. Comparisons to Orca, Rex, Zed, and other harnesses surface, with some criticism of promotional language and worries about future monetisation or VC‑driven changes. Overall sentiment balances strong appreciation for functionality with cautious reservations about privacy, platform coverage, and long‑term direction.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50298436" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=kL9BTbIGxLg" target="_blank">I&#39;m so bad at billiards that I ended up in the hyperbolic plane [video]</a>
+        </h2>
+        <span class="article-meta">
+          134 points • by surprisetalk • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page presents a footer navigation for YouTube, listing key informational and functional sections. Items include corporate and media links such as “About” and “Press,” legal references like “Copyright,” “Terms,” and “Privacy,” and contact information under “Contact us.” Creator‑focused resources are provided via “Creators,” advertising opportunities through “Advertise,” and technical support for integration via “Developers.” Policy and safety guidance appears under “Policy &amp; Safety,” while operational insight is offered by “How YouTube works.” The interface also offers a “Test new features” option for experimental functionality and a link to “NFL Sunday Ticket,” indicating sports‑related services. The footer concludes with a copyright statement © 2026 Google LLC.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=kL9BTbIGxLg" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express strong appreciation for the video’s visual and conceptual content, highlighting the striking emergent patterns, the educational value of the presented mathematics, and the aesthetic appeal of the generative artwork. Viewers repeatedly note the channel’s quality and the novelty of the ideas shown, while also acknowledging the video’s entertaining and inspiring nature. A minority of remarks criticize the audio mix and perceived YouTube quality limitations, but these concerns do not outweigh the overall positive reception.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50273104" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/da-luce/astroterm" target="_blank">Astroterm: A Planetarium for Your Terminal</a>
+        </h2>
+        <span class="article-meta">
+          143 points • by nvmdbljstm • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>astroterm is a C‑based terminal application that renders real‑time positions of stars, planets, moons, and constellations as ASCII (or Unicode/Braille) graphics. Users can specify observer latitude, longitude, or a city name, and set an arbitrary UTC date‑time to view past, present, or future skies. Key options include magnitude thresholds for star rendering and labeling, frame rate, animation speed, color output, constellation drawing, azimuthal grid, and aspect‑ratio adjustment. The program supports bash completions and can display metadata such as coordinates and date‑time.</p>
+<p>Installation is available via multiple package managers (pacman, dnf, Homebrew, Nix, Guix) and direct binary download using wget (Linux/macOS) or PowerShell (Windows). After downloading, the binary is made executable and run with <code>./astroterm</code>. Documentation lists example commands for visual effects (e.g., <code>--color --constellations --speed 10000 --fps 64</code>) and troubleshooting tips for Unicode locale settings. The project is MIT‑licensed and welcomes contributions through GitHub issues and pull requests.</p>
+          </div>
+          <a href="https://github.com/da-luce/astroterm" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong approval of the project’s creativity and execution, highlighting the appealing README, clean code, and effective ASCII visualizations. Several contributors suggest expanding the scope to include additional celestial objects such as the ISS or Starlink, and note data availability issues with certain TLE sources. Ideas for practical integrations, like using the output as a dynamic terminal MOTD, are offered alongside comparisons to similar concepts in other domains. Overall, the feedback is enthusiastic, supportive, and focused on potential enhancements and broader applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50270651" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://labs.ycombinator.com/projects/games/index.html" target="_blank">We ran AI agent swarms in Minecraft and Mindustry</a>
+        </h2>
+        <span class="article-meta">
+          293 points • by sandslash • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Ongoing survivor log tracks HP and food units for ~30 characters, prioritizing those with low hunger (target 18) and severe injuries.  </li>
+<li>Food values: cooked beef/pork = 8, chicken/mutton = 6, bread = 5, apple = 4; ration deficits are calculated and allocated via Ada/Ines before consumption.  </li>
+<li>Logistics: hunters return raw meat; furnaces (refuge and surface) process it; scarce fuel is reserved for food production, not stone/copper. Seed donations and wheat planting are recorded, with mature crops protected.  </li>
+<li>Allocation protocol: reservations are made via direct‑message withdrawals from specific chests; confirmed deliveries include beef to Basil, bread to Kiri, mutton to Tove, salmon to Noor, cod to Lorcan and Kasimir. Mis‑deliveries (e.g., chicken intended for Noor) are tracked and corrected.  </li>
+<li>Critical updates: Orla rescued, Tove reduced to HP 1 (food 5) with reserved supplies; Noor remains at HP 9, food 4 awaiting ration; most others have stabilized or defer rations.  </li>
+<li>Current snapshot: Ines at HP 16.357, food 8 in a secured refuge; gate closed, no unread messages; no edible food left in refuge chest.</li>
+</ul>
+          </div>
+          <a href="https://labs.ycombinator.com/projects/games/index.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mix of fascination and skepticism toward using LLM‑driven agents for sandbox games. Many acknowledge the novelty of having multiple bots coordinate tasks and generate code, noting impressive demonstrations but stressing that latency, token overhead, and the need for tight feedback loops limit real‑time play. Critics compare the approach unfavorably to specialized neural agents, cite emergent bureaucratic behavior, and question scalability and hierarchy design, while suggesting more efficient toolchains or dedicated models as needed for practical gaming or robotic applications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50296486" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/SheepSeb/tinyworldformer" target="_blank">A tiny world model running games on a Raspberry Pi Pico 2 W</a>
+        </h2>
+        <span class="article-meta">
+          214 points • by airinei • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>TinyWorldFormer runs two tiny neural networks on a Raspberry Pi Pico 2 W: a looped‑transformer world model that predicts the next frame and reward from the current frame and action, and an actor that selects actions from the generated frame. The world model uses a single transformer block applied 1–4 times with shared weights; patches of 2×2–6×6 cells are embedded with position‑specific vectors, and decoding relies on three rules (background argmax, global singleton placement, sprite stamping). Models are quantized to int8 (per‑row weight scales, per‑tensor activation scales) with QAT; matrix multiplies use RP2350 SMLAD instructions and float‑32 for embeddings and norms. Training uses 1–3 M recorded transitions per game, followed by fine‑tuning on dream‑generated data. The on‑device agent employs Stream‑AC(λ) learning without replay buffers, using two 64‑unit hidden layers (32 on the Pico). Core 1 runs the dream loop (2 transformer loops per frame), while core 0 handles USB/display. Firmware fits within the Pico’s 4 MB flash and 520 KB SRAM (e.g., Pac‑Man uses 600 KB flash, 460 KB SRAM). The same engine compiles to WebAssembly for browser execution.</p>
+          </div>
+          <a href="https://github.com/SheepSeb/tinyworldformer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong enthusiasm for the project’s ability to run a world‑model based agent on minimal hardware, with many expressing admiration for its performance on a Raspberry Pi Pico 2 and curiosity about the training hardware used. There is interest in the deterministic behavior of the neural network, its applicability to procedural content generation, and the possibility of extending it to other platforms such as WebGPU. Questions also arise about whether the actor learns from the model’s errors and how a single model handles multiple games. Overall, the tone is supportive and inquisitive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50295450" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
