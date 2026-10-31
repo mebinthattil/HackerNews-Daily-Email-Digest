@@ -1,0 +1,557 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">October 31, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://xoranth.net/gcc-switch/" target="_blank">Switch Lowering in GCC</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by signa11 • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post examines how GCC lowers <code>switch</code> statements under <code>-O3</code>. Simple dense cases (e.g., sequential values 0‑4) are compiled into a jump table, with GCC recognizing constant offsets (e.g., 97‑101) and generating indexed jumps. Empirically, GCC chooses a jump table when the table size is roughly ≤ 8 × the number of case labels; a sparse set like {0,8,16,24,40} is instead emitted as a balanced comparison tree. Outlier cases (e.g., 1‑5 plus 100) are partially jump‑table‑ized, handling the dense subset via a table and a separate branch for the outlier. When multiple labels share the same target, GCC may still prefer comparisons if the total comparison count multiplied by 8 exceeds the potential table size. Non‑contiguous character cases are optimized using a bit‑test (<code>bt</code>) instruction; the constant 2753205 encodes the allowed ASCII values as a bitset. The implementation resides in the <code>pass_lower_switch</code> and <code>analyze_switch_statement</code> passes, which build clusters for case ranges, apply bit‑set detection, then attempt jump‑table formation, falling back to decision‑tree generation for remaining cases.</p>
+          </div>
+          <a href="https://xoranth.net/gcc-switch/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion conveys a light‑hearted curiosity, with participants noting that the subject is interesting and drawing attention to its name. The tone remains upbeat, with a sense of amusement rather than criticism. Overall, the remarks suggest a modestly positive reaction centered on novelty rather than detailed analysis and minimal elaboration.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50314085" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zebra.rodeo/en/blog/marelleo/" target="_blank">Show HN: Marelleo, an open-source story box I built for my kids using ESP32</a>
+        </h2>
+        <span class="article-meta">
+          38 points • by foOg • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Marelleo is a DIY NFC‑enabled audio box built for children, inspired by commercial story toys but using an open, user‑controlled system. The creator chose an ESP32 development board for its Wi‑Fi and MP3 decoding capability, prototyped on a breadboard, then migrated to a perfboard before designing a fully populated PCB in KiCad (491 hand‑routed tracks, brass inserts for screw threads). Power is supplied by a 3000 mAh Li‑ion cell with a proper charge‑controller; a potentiometer provides volume control. A 3D‑printed enclosure (designed in Fusion 360) houses the board, speaker, NFC reader, and USB‑C port, with reinforced walls and brass inserts to withstand child abuse. Firmware serves a captive‑portal web page for Wi‑Fi setup, MP3 upload, and NFC‑to‑track mapping, supports streaming URLs, and performs secure OTA updates with rollback safety. All hardware files, PCB schematics, and source code are MIT‑licensed on GitHub, enabling replication or customization. The project evolved through iterative hardware revisions, debugging of wiring errors, and lessons on safety and durability.</p>
+          </div>
+          <a href="https://zebra.rodeo/en/blog/marelleo/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong admiration for the project’s concept and execution, highlighting its appealing design, thorough documentation, and open‑source approach as both inspiring and educational for hardware newcomers. Reviewers note parallels to earlier screen‑less story‑box initiatives and appreciate the avoidance of closed, subscription‑based ecosystems. While most feedback is positive, a minority critique the writing style, describing it as overly repetitive and reminiscent of AI‑generated text. Overall, the response is encouraging, with interest in the technical details and content creation process.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50260753" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://vitalik.eth.limo/general/2026/10/31/digital_minimalism.html" target="_blank">Digital Minimalism</a>
+        </h2>
+        <span class="article-meta">
+          28 points • by wilbertliu • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Digital minimalism advocates intentional use of technology rather than default consumption. The author reports three self‑experiments:  </p>
+<ul>
+<li><strong>Social‑media interface:</strong> Switching from X’s native app to the Firefly multi‑client (integrating X, Bluesky, Farcaster, Lens) removed the platform’s recommendation algorithm, reducing exposure to toxic content and improving well‑being.  </li>
+<li><strong>Cell‑data minimalism:</strong> For 100 days the phone ran in airplane mode, using Wi‑Fi only. Goals were privacy (avoiding carrier tracking via IMSI/IMEI) and mental health. Navigation relied on the offline CoMaps app; public‑Wi‑Fi availability varied by region (high in Taipei, moderate in Ukraine/US/Canada, low in Austria/Hungary and Switzerland).  </li>
+<li><strong>Web minimalism:</strong> Routine tasks (e.g., ENS IPFS updates, crypto payments) shifted to command‑line tools (AI‑generated scripts, kohaku‑cli). The author argues that web apps repeatedly download code, increase attack surface, and leak extensive telemetry, whereas modular Unix‑style tools, possibly driven by local LLMs, restore user control without programming expertise.</li>
+</ul>
+<p>The conclusion links past physical minimalism—enabled by computers and the internet—to a new wave of digital minimalism, made feasible by modern software quality and AI, urging individuals to reduce digital clutter in ways that fit their needs.</p>
+          </div>
+          <a href="https://vitalik.eth.limo/general/2026/10/31/digital_minimalism.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a largely negative view of current social‑media practices, arguing that substituting human interaction with AI does not align with digital minimalism and merely swaps one addictive habit for another. Concerns are raised about pervasive tracking, platform incentives that prioritize prolonged eyeball time, and the shallow nature of conversation on alternatives like Mastodon or Bluesky due to character limits. Skepticism about the overall value of these networks leads to suggestions that information could be sourced through events, RSS feeds, or other non‑algorithmic channels.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50313661" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://virtuallyfun.com/2026/10/29/my-favourite-powermac-is-a-nintendo-wii/" target="_blank">My favourite PowerMac is a Nintendo Wii</a>
+        </h2>
+        <span class="article-meta">
+          308 points • by DHowett • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://virtuallyfun.com/2026/10/29/my-favourite-powermac-is-a-nintendo-wii/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses enthusiasm for revived Wii capabilities after recent mobile game shutdowns, highlighting improved stability, additional software, and restored online play through community hacks and services. It urges inclusion of a Mac OS port in the Open Shop Channel and references related development projects, while also speculating about converting PowerMac hardware into a Wii platform and noting historic cross‑platform hardware ties. Overall, the tone is optimistic about retro‑gaming preservation, supportive of ongoing modding efforts, and curious about further hardware‑software integrations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50307190" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/chris124567/cfsolve" target="_blank">Cloudflare Turnstile solver library (no headless browser required)</a>
+        </h2>
+        <span class="article-meta">
+          204 points • by costco • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>cfsolve is a Rust library and CLI tool that solves Cloudflare Turnstile widgets and challenge pages without a headless browser, returning either a Turnstile token or a <code>cf_clearance</code> cookie. It operates using a browser profile (e.g., <code>profiles/safari-26-ios.json</code>) that records challenge responses; profiles must be kept with their associated JSON payloads. The tool requires the Rust version specified in <code>rust-toolchain.toml</code>, plus CMake, a C/C++ compiler, libclang, and Git to build BoringSSL. Primary commands:</p>
+<ul>
+<li><code>cargo build --release --bin challenge</code> then run <code>./target/release/challenge</code> with options such as <code>--page &lt;url&gt;</code>, <code>--fingerprint &lt;profile&gt;</code>, <code>--solve</code>, and optional <code>--sitekey</code>, <code>--action</code>, <code>--cdata</code>, or <code>--blank-page</code> to target specific widgets.</li>
+<li>Proxy support via <code>--proxy</code> (HTTP, HTTPS, SOCKS5).</li>
+</ul>
+<p>The library API allows loading a <code>Browser</code> from a profile and invoking <code>solve_turnstile</code>, <code>clear</code>, or generic <code>solve</code> to handle both widgets and challenges. <code>PageSource</code> variants (<code>Navigate</code>, <code>Blank</code>, <code>Html</code>) define how the page is fetched. Options include proxy configuration and a custom <code>Sink</code> for progress/debug output. Errors are categorized (e.g., <code>Network</code>, <code>Rejected</code>, <code>Blocked</code>, <code>Challenged</code>). Licensing is MIT except for patched vendored dependencies.</p>
+          </div>
+          <a href="https://github.com/chris124567/cfsolve" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects mixed frustration and pragmatic acceptance of Cloudflare Turnstile’s evolving defenses. Contributors note regional inconsistencies, intermittent reliability, and the difficulty of scaling bypasses despite individual successes. There is awareness of an ongoing arms race, concern about legal and ethical implications of publicizing methods, and recognition that larger actors can automate detection more effectively. While some view the tools as useful, many emphasize the need for continual updates, caution against exposing techniques, and acknowledge the broader impact of AI‑driven challenges on internet accessibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50277379" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wired.com/story/the-dollar63-billion-binance-hack-was-pulled-off-in-just-20-minutes/" target="_blank">The $6.3B Binance hack was pulled off in just 20 minutes</a>
+        </h2>
+        <span class="article-meta">
+          449 points • by domhudson • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The $6.3 billion Binance hack was executed in roughly 20 minutes and is linked by security firms TRM, Chainalysis, and Elliptic to the North Korean hacking group TraderTraitor, known for previous attacks on Bybit and other DeFi platforms. Binance’s investigation identified an initial breach via a compromised engineer’s laptop, followed by additional points of entry. TraderTraitor reportedly uses fabricated applications, Tornado Cash for wallet funding, and pre‑attack rehearsals. Chainalysis observed real‑time commingling of stolen Binance funds with those from the Bitget exploit, also attributed to North Korean actors. Approximately $2.8 billion (44 % of the total) – mainly stablecoins – has been frozen by exchanges; the remaining $3.3 billion, primarily Bitcoin, Ether, and XRP, remains unfrozen and can only be halted when transferred to a service. Analysts note unprecedented laundering patterns and extensive automation to obscure transaction trails, suggesting ongoing risk of further fund movement.</p>
+          </div>
+          <a href="https://www.wired.com/story/the-dollar63-billion-binance-hack-was-pulled-off-in-just-20-minutes/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong criticism of Binance’s security practices, questioning how a compromised laptop could enable a $6 billion loss and noting the absence of safeguards such as withdrawal limits or cold‑storage. Many draw parallels to traditional bank heists and suggest the attack may involve insider access or nation‑state actors, while also highlighting the difficulty of prosecuting such actors. Skepticism about crypto’s broader value surfaces, with debates over regulation, accountability, and the role of decentralized systems versus centralized control dominating the discussion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50303172" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Tell HN: Scribd Breached</a>
+        </h2>
+        <span class="article-meta">
+          199 points • by x______________ • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong concern about the growing accessibility of AI‑driven hacking tools and the lack of proactive red‑team testing on critical infrastructure, noting that both malicious actors and nation‑states will likely exploit such technology. Users criticize corporate handling of breaches—particularly Scribd’s delayed disclosure and vague system descriptions—and convey frustration over inadequate transparency and perceived predatory practices. Overall sentiment is uneasy and skeptical, emphasizing heightened personal risk, the inevitability of AI in cyber‑offense, and a demand for stronger security measures and clearer communication.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50312756" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://status.northflank.com" target="_blank">Northflank Breached</a>
+        </h2>
+        <span class="article-meta">
+          433 points • by js4ever • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Northflank’s status page reports a security incident response timeline. At 11:43 UTC a threat alert was issued by Wiz, prompting immediate rotation of environment variables. By 11:44 UTC engineers began reviewing the alert. At 12:02 UTC an initial network‑policy patch was applied, followed by additional patch deployments at 12:50 UTC. At 13:00 UTC Northflank requested support from the Wiz Computer Incident Response Team (CIRT). Further patch deployments occurred at 13:05 UTC, with two entries indicating repeated application of the same patches. The page includes a single image with alt text “Northflank,” but no further visual data.</p>
+          </div>
+          <a href="https://status.northflank.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express growing alarm over a series of rapid breaches affecting multi‑tenant SaaS/PaaS providers, attributing the trend to AI‑assisted attackers and insufficient security investments. Contributors stress the need for stronger credential management, zero‑trust architectures, secret isolation, and dedicated incident response, while some suggest a shift back toward large hyperscalers or BYOC models. Frustration is evident regarding broken trust and operational fallout, yet there is an expectation that firms will harden defenses and prioritize professional security expertise.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50305025" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.techpolicy.press/breaking-the-open-web-wont-stop-the-bad-bots/" target="_blank">Breaking the open web won&#39;t stop the bad bots</a>
+        </h2>
+        <span class="article-meta">
+          259 points • by raybb • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article critiques the federal Stealth Bot Prohibition Act and New York’s Stealth Crawler Prohibition Act, which would require any automated web access to disclose the bot’s identity and purpose. While aggressive AI‑driven scraping can overload sites and affect ad revenue, the bills’ blanket “stealth” definition and vague “reasonably likely to damage” standard risk criminalizing legitimate public‑interest crawling. The author cites the Wall Street Journal’s 2022 investigation of 31,000 financial disclosures, the Internet Archive’s Wayback Machine (over one trillion pages archived), disability‑accessibility audits of a million sites, public‑health opioid tracking, and government threat‑detection crawlers as essential tools that often rely on anonymity. Existing privacy, copyright, and consumer‑protection statutes already address abusive data use. The piece urges policymakers to support technical standards—such as IETF protocols for anonymous attestation of well‑behaved bots—rather than imposing identification mandates, and to base liability on concrete harms (e.g., server overload, fraud, prohibited data use).</p>
+          </div>
+          <a href="https://www.techpolicy.press/breaking-the-open-web-wont-stop-the-bad-bots/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong skepticism toward the New York bill requiring bot identification, noting that disclosure does little to curb harmful scraping and would burden legitimate users while leaving foreign bots untouched. Many cite privacy, convenience, and enforceability concerns, and propose alternatives such as proof‑of‑work, micropayments, or decentralized identity, though these are also seen as inconvenient. There is doubt about the bill’s legislative prospects and criticism of current bot‑mitigation tools that degrade user experience, while acknowledging that effective technical reforms are needed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50263837" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.jacc.org/doi/epdf/10.1016/j.jaccas.2026.110397" target="_blank">Longitudinal Changes InWearable-Captured PhysiologyBefore Sudden Cardiac Death</a>
+        </h2>
+        <span class="article-meta">
+          31 points • by brandonb • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.jacc.org/doi/epdf/10.1016/j.jaccas.2026.110397" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments commend the paper’s clear formatting, visual appeal, and the subject’s perseverance, while highlighting concerns that the article emphasizes risks of overtraining more than wearable benefits. They argue that standard population‑based metrics can miss individual health changes, advocating for personalized, high‑resolution monitoring rather than static averages. Wearable devices are noted as useful for trend tracking but unreliable for precise energy expenditure, prompting suggestions to adopt adaptive caloric models and explore longitudinal baseline tracking in clinical practice.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50274885" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
