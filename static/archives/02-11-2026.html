@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 02, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hackerbooks.org" target="_blank">Show HN: HackerBooks – HackerTube, but for books mentioned on HN</a>
+        </h2>
+        <span class="article-meta">
+          1441 points • by roansh • 123 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Hacker Books site compiles titles of books that appear in Hacker News comment threads, providing a searchable catalog for readers. Navigation is performed entirely via keyboard shortcuts, eliminating the need for mouse interaction:</p>
+<ul>
+<li><strong>/</strong> – places focus on the search input to type queries.  </li>
+<li><strong>j / k</strong> – move the cursor down to the next book or up to the previous one.  </li>
+<li><strong>Enter</strong> – opens the currently highlighted book’s detail page.  </li>
+<li><strong>Esc</strong> – closes the open view and returns to the prior list.  </li>
+<li><strong>g h</strong> – jumps to the Home page.  </li>
+<li><strong>g t</strong> – displays the “Top all‑time” book list.  </li>
+<li><strong>g m</strong> – shows the “Most recommended” titles.  </li>
+<li><strong>g r</strong> – presents the “Rising” books.  </li>
+<li><strong>g f</strong> – opens the personalized “For You” feed.  </li>
+<li><strong>?</strong> – toggles the help overlay that lists these commands.</li>
+</ul>
+<p>These shortcuts enable efficient browsing of the book collection directly from the keyboard.</p>
+          </div>
+          <a href="https://hackerbooks.org" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong appreciation for the HackerBooks project’s speed, utility, and comprehensive aggregation of Hacker News book mentions, while also noting a recent decline in overall mentions and questioning whether LLMs influence this trend. Users repeatedly request richer filtering options—by genre, fiction versus nonfiction, language, format, and library availability—and improvements such as better cover images, direct comment links, and expanded metadata sources. Critiques include gender imbalance in top recommendations, occasional misclassifications, missing titles, and concerns about how recommendations are counted. Many suggest extending the model to other media and open‑sourcing the code.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50326821" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="http://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html" target="_blank">Postgres 19 is late because so many more bugs are being found now</a>
+        </h2>
+        <span class="article-meta">
+          514 points • by soheilpro • 50 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="http://rhaas.blogspot.com/2026/10/postgres-19-is-late-and-its-ais-fault.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is cautiously optimistic: AI‑driven analysis is praised for uncovering numerous long‑standing bugs and security issues in PostgreSQL, improving code quality and accelerating bug‑fix cycles. Several comments note that the increased detection workload strains maintainers and may delay releases, highlighting verification and triage as new bottlenecks. Opinions diverge on long‑term effects: many see AI as a valuable tool that raises the reliability bar, while others worry about over‑reliance, lower‑quality contributions, and potential slowdown of feature development. The consensus acknowledges both benefits and challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50312408" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://wikihack.netlify.app" target="_blank">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a>
+        </h2>
+        <span class="article-meta">
+          222 points • by aizk • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://wikihack.netlify.app" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments combine enthusiasm for the project’s concept and its utility with a range of practical suggestions and light‑hearted critiques. Users appreciate the aggregation of Hacker News media and links to original discussions, while requesting features such as non‑English Wikipedia support, a light theme for visual accessibility, and broader media collections (apps, games, niche sites). Several remarks note similarity to existing tools, express concerns about scroll‑wheel behavior and long‑term maintenance, and use humor to comment on the proliferation of “Hacker‑X” spin‑offs. Overall sentiment is supportive but calls for refinements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50333339" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://karpathy.bearblog.dev/hacker-tube/" target="_blank">HackerTube: YouTube built from videos recommended by HN</a>
+        </h2>
+        <span class="article-meta">
+          2612 points • by karpathy • 263 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>HackerTube is a YouTube‑style site built from videos recommended in Hacker News comments. Using Opus 5.5 and Claude Code, the author scraped all HN comments, filtered spam, applied a Sonnet model, and extracted 40 K comments that referenced 6 454 YouTube videos spanning 150 topics (2007‑2026). The resulting service presents these videos with a custom UI, employing a “50 % thumbnail” instead of the original thumbnail, and provides recommendation lists stored locally in the browser (no user accounts). Additional features include keyboard shortcuts and an export of the curated dataset for independent replication. Deployment required only three manual steps: creating a Google Cloud API key for video metadata, provisioning a VPS, and registering the domain. After supplying the VPS IP, Claude handled code updates, deployment, security hardening, and optimization, completing the project in roughly two hours.</p>
+          </div>
+          <a href="https://karpathy.bearblog.dev/hacker-tube/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are largely enthusiastic about the open‑source, self‑hosted feed and its potential to replace YouTube’s algorithmic recommendations, highlighting appreciation for the nerd‑focused, non‑clickbait content and the ability to customize ranking, filtering, and social sharing. Frequent suggestions include adding recency sorting, playlist export, keyword‑based blocking, and broader API access, while concerns focus on moderation scalability, spam, and compliance with YouTube’s terms. Overall sentiment is supportive, viewing the project as a valuable alternative that empowers users to curate and control their video consumption.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50319510" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fosscomics.com/posts/13.%20BSD%20Unix%20Part%203%20-%20The%20Beginning%20of%20BSD%20Unix/" target="_blank">F/OSS Comics #13: BSD Unix, Part 3 – The Beginning of BSD Unix</a>
+        </h2>
+        <span class="article-meta">
+          134 points • by joonehur • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Berkeley’s BSD began in 1977 when Bill Joy packaged a Pascal compiler and the ex editor as a supplemental tape for existing AT&amp;T Unix systems; distribution required only a tape and postage for holders of a Unix source license. The first release (1BSD) was a collection of tools, not a standalone OS, and about 30 copies were shipped. Joy expanded the bundle with vi, the C shell, and other utilities for the second release (2BSD), shipping roughly 75 tapes and handling requests personally. With the arrival of a VAX at Berkeley in 1978, graduate student Ozalp Babaoglu added virtual‑memory support to Bell Labs’ 32/V Unix; Joy and collaborators integrated and debugged this kernel, enabling larger address spaces for applications like the Macsyma algebra system. Porting of ex, vi, the C shell, and the Pascal system to the VAX produced 3BSD, released in December 1979. Its successful deployment on the VAX attracted DARPA/ARPANET attention, highlighting Unix’s portability across heterogeneous research machines.</p>
+          </div>
+          <a href="https://fosscomics.com/posts/13.%20BSD%20Unix%20Part%203%20-%20The%20Beginning%20of%20BSD%20Unix/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are broadly positive, praising the illustrations, historical focus and specific panels while noting enthusiasm for the series. Several remarks request practical improvements such as an RSS/Atom feed and more panels, and one points out a factual inaccuracy regarding WWII‑era computers. A few users seek clarification on technical references, and there is casual interest in notable figures like Marshall Kirk McKusick and Bill Joy. Overall sentiment is favorable with modest suggestions for accuracy, accessibility and expanded content.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50332163" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://syscall.sh/" target="_blank">Show HN: I&#39;ve updated my Linux System Call website and API</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by guitmz • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Linux syscall.sh aggregates complete syscall tables for 27 architectures, covering kernel versions 3.3 through 7.3. Each architecture has a JSON file (e.g., /x64/syscalls.json) that lists every syscall number, argument registers (ARG0–ARG5), return register, and the exact entry instruction (int 0x80, syscall, ecall, svc, etc.). The JSON records the kernel release when a syscall first appeared (<code>since</code>) and, if applicable, when it was removed (<code>removed_in</code>); a “all, with removed” view marks dropped syscalls with their removal release. Data are generated directly from kernel source by parsing SYSCALL_DEFINE macros across all mainline releases, ensuring the numbers match the kernel dispatcher. Short descriptions are taken from the Linux man‑pages project, with additional io_uring details from liburing. An API (e.g., <code>https://api.syscall.sh/v2/syscalls/x64/read</code>) provides programmatic access to the tables, diffs between releases, and full history. The site rebuilds automatically whenever the underlying syscall data changes.</p>
+          </div>
+          <a href="https://syscall.sh/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Please provide the set of comments you would like summarized so a neutral overview can be generated.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50334704" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/bones-may-release-proteins-slow-aging-and-extend-life-span" target="_blank">Bones may release proteins that slow aging and extend life span</a>
+        </h2>
+        <span class="article-meta">
+          124 points • by EA-3167 • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/bones-may-release-proteins-slow-aging-and-extend-life-span" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion blends humor with serious speculation about the bone‑compression finding. Participants wonder what natural pressures could cause mild bone squashing, how the effect might relate to exercise or weight‑lifting, and whether it could translate to humans. Several comments explore aging’s link to cancer, suggesting that extending life might alter cancer dynamics, while others question the underlying mechanisms and evolutionary reasons. Overall, the tone is inquisitive yet skeptical, highlighting curiosity about biological plausibility and potential implications without endorsing definitive conclusions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50331957" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Ask HN: Which TV do you recommend for privacy?</a>
+        </h2>
+        <span class="article-meta">
+          428 points • by LecroJS • 176 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that smart‑TV privacy risks are best avoided by keeping the television offline and using it solely as a display for a trusted external device such as a Kodi‑enabled NUC, Apple TV, or similar media box. Users report disconnecting Wi‑Fi/Ethernet, removing internal radios, or employing network‑level blocks (VLANs, Pi‑hole, DNS filters) to limit traffic. When truly “dumb” TVs are unavailable, they recommend commercial monitors, projectors, or stripped‑down models, while noting that rooting or custom firmware can add functionality but may void warranties. Overall sentiment favors offline setups over built‑in smart features.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50328896" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.fz-juelich.de/en/news/archive/press-release/2026/mystery-of-60-second-fluctuations-in-power-grids-solved" target="_blank">Mystery of 60-Second Fluctuations in Power Grids Solved</a>
+        </h2>
+        <span class="article-meta">
+          142 points • by _Microft • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Large‑scale battery storage systems periodically verify their state of charge, typically initiating a power‑check at the start of each minute. Measurements on the Jülich “Living Lab Energy Campus” at 80 points showed synchronized spikes in electricity consumption precisely at these one‑minute intervals, matching the 60‑second frequency dips observed by Tennet Germany and other operators. The researchers conclude that the collective, clock‑driven checks of many batteries produce a global one‑minute disturbance in grid demand, which can cause brief turbine slow‑downs and increased wear, as seen in hydro‑electric plants and in Ireland where battery‑driven data centres amplified the signal four‑fold between 2016 and 2021. While batteries are the primary source, other digitally controlled loads (e.g., HVAC, heat pumps, appliances) may contribute similar patterns. Randomising the timing of these checks would mitigate synchronization effects. Findings are detailed in <em>Nature Energy</em> (2026), DOI 10.1038/s41560‑026‑02144‑0.</p>
+          </div>
+          <a href="https://www.fz-juelich.de/en/news/archive/press-release/2026/mystery-of-60-second-fluctuations-in-power-grids-solved" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a neutral, inquisitive tone focused on the observation of unusually regular, minute‑based spikes in power‑grid data and their similarity to common API traffic patterns. Participants note that the periodicity suggests a clock‑driven process, discuss the difficulty of identifying the responsible devices, and question why such loads appear significant enough to affect grid measurements. Suggestions include using streaming APIs or cursors to reduce request cost, and there is interest in technical explanations of the underlying mechanisms and their impact on turbine wear.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50315217" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://trigger.dev/blog/security-incident-nov-2026" target="_blank">Trigger.dev customer environment variables exposed</a>
+        </h2>
+        <span class="article-meta">
+          98 points • by anurag • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Trigger.dev reported a security incident on Sunday, November 1. The organization identified and blocked the exploit used in the attack, but discovered that a subset of customer organizations had their environment variables accessed without authorization. Affected account owners have been emailed with mitigation steps. Trigger.dev will post further updates on its status page and provides a contact channel for additional questions. The disclosure includes several illustrative images (Bun runtime, webhook integrations, AI agent development, and related content) but no additional technical details about the vulnerability or remediation beyond the notification to impacted users.</p>
+          </div>
+          <a href="https://trigger.dev/blog/security-incident-nov-2026" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong frustration and distrust toward recent security incidents, condemning the premature “resolved” status and the exposure of environment variables. Contributors criticize reliance on third‑party services for core functions like background jobs and authentication, arguing it increases attack surface and cost, and they advocate using self‑hosted or open‑source alternatives. There is widespread concern about inadequate security priorities, a call for greater transparency about exploited vulnerabilities, and apprehension that similar risks could extend to AI‑related tooling. Overall sentiment is markedly negative and cautionary.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50331784" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
