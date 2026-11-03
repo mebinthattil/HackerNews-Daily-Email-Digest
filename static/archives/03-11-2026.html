@@ -1,0 +1,582 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 03, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rikiyat.github.io/blog/weight-space-programming/" target="_blank">Astra can read and write weights to improve Qwen</a>
+        </h2>
+        <span class="article-meta">
+          2693 points • by dbreunig • 286 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Weight‑Space Programming is demonstrated by a frontier LLM (referred to as Astra/GPT‑6 Astracan) that directly reads and writes neural‑network weights using natural‑language prompts, without gradient‑based training. Across eight experiments:  </p>
+<p>1‑3. Astra infers network behavior from raw weight tensors alone—identifying the game a PPO policy was trained on, the shape generated by a DDPM diffusion model, and the training language of a 7.2 M‑parameter character transformer, even when only middle layers are provided.<br>
+4. Given a PPO car‑control policy that stalls on a ramp, Astra edits 3.5 % of its 171 k weights, enabling 100 % success across 1 024 episodes.<br>
+5. Astra synthesizes weights from scratch for three MinAtar games; the resulting agents surpass PPO trained for 100 M steps and approach PPO trained for 500 M steps.<br>
+6. Scaling to a 1.5 M‑parameter Go network, Astra writes functional weights with zero forward passes and improves performance with up to 50 passes.<br>
+7. Using attention‑pattern analysis, Astra distinguishes a sycophantic from an honest Gemma‑3 270 M model.<br>
+8. Editing 0.016 % of Qwen‑3.5‑0.8 B’s weights removes looping behavior, raising MATH‑500 accuracy from 7.9 % to 48.1 % and tripling IFEval scores.  </p>
+<p>These results show that LLMs can natively interpret, repair, and generate neural‑network weights, suggesting a new paradigm for model auditing, rapid optimization, and capability steering.</p>
+          </div>
+          <a href="https://rikiyat.github.io/blog/weight-space-programming/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments acknowledge that the reported ability to read and edit neural‑network weights with a language model is technically interesting and builds on an existing line of research in weight‑space programming and mechanistic interpretability, but many consider the claims overstated and the improvements modest, especially given the reliance on small models and standard steering‑vector techniques. Skepticism centers on the generality of the results, the amount of specialized training required, and the practical scalability to larger systems. Overall sentiment is a blend of cautious curiosity, recognition of incremental progress, and a call for clearer benchmarks and reproducibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50341174" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/NVIDIA/auto-ontology" target="_blank">Nvidia – open-source auto-ontology</a>
+        </h2>
+        <span class="article-meta">
+          81 points • by campervans • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>NVIDIA Auto Ontology is an open‑source Python framework that constructs deterministic, graph‑based semantic layers from enterprise metadata to support reliable LLM and agent workflows. It generates enterprise ontologies, reconciles definitions across systems, and provides certified query validation with provenance. Key features include:</p>
+<ul>
+<li><strong>Discovery &amp; grounding</strong>: builds AI‑ready knowledge graphs, connects to existing ontologies, and assigns trusted business meanings to metrics, entities, and relationships.  </li>
+<li><strong>Validation &amp; exposure</strong>: checks generated SQL queries against certified definitions and serves context via MCP, CLI, and REST API.  </li>
+<li><strong>Deployment</strong>: available as Docker‑Compose (local) or Helm chart for Kubernetes; stores catalog metadata in PostgreSQL and uses NVIDIA NIM endpoints for LLM, embedding, and reranking models (default models configurable via environment variables).  </li>
+<li><strong>Security</strong>: supports Better Auth RBAC, optional Vault integration for encrypted DB credentials, SSO, and API tokens (SHA‑256 hashed, role‑based, revocable).  </li>
+<li><strong>Licensing</strong>: Apache 2.0; third‑party components listed in THIRD_PARTY_NOTICES.md; external contributions are not accepted.  </li>
+</ul>
+<p>The repository includes docs for text‑to‑SQL benchmarking, MCP server usage, and agent skill packages.</p>
+          </div>
+          <a href="https://github.com/NVIDIA/auto-ontology" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions, combining interest in the tool’s potential with considerable criticism and confusion. Reviewers note a lack of clear documentation and a confusing opening that hampers engagement, and they question the reliability of the approach, citing issues with LLM weighting and the need for explicit summaries. Concerns about proprietary dependencies, such as the required NVIDIA API key and closed‑source libraries, are frequent, while some users compare it unfavorably to simpler alternatives they already use. Nonetheless, a few see possible value for reducing enterprise technical debt.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50348962" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://toit.io/blog/toit-v2-0-0/" target="_blank">Toit v2.0.0</a>
+        </h2>
+        <span class="article-meta">
+          91 points • by floitsch • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Toit v2.0.0 marks the first stable release after four years of alpha development, encompassing over 2,000 commits, 500,000+ line changes, and 200+ alpha versions. The project transitioned from closed‑source at Toitware to an open‑source community effort after Toitware’s closure in 2024. The final breaking change introduced in v2.0.0 refactors peripheral APIs to accept raw pin numbers instead of gpio.Pin objects. Ongoing development continues with pending pull requests for a code formatter, compiler resolution enhancements, and broader architecture support.</p>
+<p>Key improvements since open‑sourcing include:
+- Expanded hardware compatibility, notably the Arm‑based EC618 and most ESP32 variants.<br>
+- Unified toit command line interface, enhancing Toit as a desktop scripting language.<br>
+- Rewritten package manager and a growing ecosystem of packages.<br>
+- Mixins enabling shared implementations across classes.<br>
+- Firmware envelopes that allow firmware customization without rebuilding the SDK.<br>
+- Various compiler and runtime optimizations, improved hardware testing, and GitHub syntax highlighting.</p>
+          </div>
+          <a href="https://toit.io/blog/toit-v2-0-0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The language generates interest for its concise, Python‑like syntax and novel argument style, with many noting its readability and appealing design. However, users express uncertainty about its practical applications, questioning whether it targets scripting, embedded applications, or both. There is curiosity about the origin of its name and concern over adoption given the original company's shutdown. Comparisons to Python highlight mixed opinions on readability, and some skepticism appears regarding the need for another programming language. Overall sentiment blends curiosity and cautious doubt.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50321605" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio" target="_blank">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a>
+        </h2>
+        <span class="article-meta">
+          232 points • by bpierre • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Disc Image Studio converts an image into data that meets the physical layer constraints of CD, DVD and single‑layer BD‑R discs, producing visible patterns after burning. It offers a Windows GUI (requires Windows 10 2004 or later) and experimental CLI packages for Linux/macOS (x64, arm64) bundled with .NET 10 runtime.</p>
+<ul>
+<li><strong>Media support</strong>: CD (export WAV + CUE or RAW tracks, 0D/AA 2‑level grayscale); DVD (ISO export, A5/92 grayscale); BD‑R (ISO/UDF 2.01, pure graphics or file system, MMC sequential write).  </li>
+<li><strong>Design workflow</strong>: layer‑based canvas, tone module (dither, gamma, brightness), file‑area preview, built‑in disc presets, and auxiliary calibration that improves positional accuracy from 10⁻⁶ to 10⁻¹⁴.  </li>
+<li><strong>Burning</strong>: experimental real‑time burning (blank media only) via Windows IMAPI2; supports export of full ISO/RAW images for use with external burners.  </li>
+<li><strong>CLI</strong>: commands for image import, CD‑DA generation, BD encoding, calibration, simulation, self‑test, etc.  </li>
+<li><strong>Architecture</strong>: modular via IOpticalDiscModule; source split into Core, Imaging, Burning, format‑specific modules, tests, and packaging scripts.  </li>
+<li><strong>Licensing</strong>: GPL‑3.0‑or‑later; no drivers or telemetry, third‑party components under their own licenses.</li>
+</ul>
+          </div>
+          <a href="https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a CTF challenge that used raw audio data to simulate a CD‑RW image, highlighting the technical difficulty of calibrating disk geometry and the author’s inability to create a reliable, repeatable process. Participants express admiration for the inventive concept and recall related technologies such as LightScribe, printable CD labels, and earlier optical‑drive tricks, noting a nostalgic appreciation for tactile, artsy media. Several comments show curiosity about current optical‑drive availability and potential applications, while a few unrelated or flagged remarks add little substantive content.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50346849" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hackertimes.ca/" target="_blank">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a>
+        </h2>
+        <span class="article-meta">
+          295 points • by polpenn • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page promotes “hjkl,” a free, browser‑based platform offering short exercises focused on Vim motions, text objects, search, and other editing commands. Lessons progress from guided edits to self‑directed challenges, requiring only a desktop browser and a physical keyboard; no user account is needed. The page also includes a series of images whose alt text references unrelated subjects: neural‑network weight experiments, a video‑browsing interface described in a blog post, a Swedish supermarket worker discarding overheated goods, portraits of Anthropic’s chief executive in two media reports, a chart estimating Anthropic’s monthly revenue for early 2026, and a voxel rendering of Warsaw’s Palace of Culture and surrounding buildings. These visual entries appear unrelated to the primary description of the hjkl Vim training tool.</p>
+          </div>
+          <a href="https://hackertimes.ca/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express enthusiasm for the newspaper‑style presentation of Hacker News, noting improved readability and a fresh way to browse articles. Several users reference earlier similar projects and appreciate the design choices, fonts, and mobile layout reminiscent of Slashdot. Criticisms include redundancy with existing tools, concerns about copyright, pay‑wall behavior, lack of dark mode, and technical issues such as certificate errors. Suggestions include adding AI filtering, dark mode, and a more realistic pay‑wall implementation, while some prefer the original high‑density HN view.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50346981" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://twitter.com/guilleflorvs/status/2117379073785696395" target="_blank">Revolut moves to self-hosted GLM</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by pretext • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Revolut transitioned roughly 2,000 engineers to a self‑hosted General Language Model (GLM) for coding tasks, simultaneously moving Claude Code and Codex to an exception list. According to AI‑operations lead David Abitbol, the deployment runs on 56 Nvidia B200 GPUs, achieving a blended processing cost of about $0.30 per million tokens—approximately one‑tenth the rate previously paid to Anthropic. The tweet notes that operational staffing to maintain the GPU fleet (“how many people it takes to keep 56 B200s healthy”) is a hidden component of the cost savings. No further technical details or performance metrics are provided.</p>
+          </div>
+          <a href="https://twitter.com/guilleflorvs/status/2117379073785696395" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes a shift toward self‑hosted open‑source models as a cost‑effective alternative to commercial inference services, highlighting substantial savings on token pricing and hardware investments. Concerns focus on data privacy, regulatory constraints, and the lack of proven business impact from higher‑quality proprietary models. While open models are viewed as generally adequate for many engineering tasks, limitations with ambiguous prompts are noted, and there is speculation about whether this approach will become a broader industry trend.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50350004" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://erici.eu" target="_blank">European RISC-V Industrial Computing Initiative</a>
+        </h2>
+        <span class="article-meta">
+          124 points • by ymz5 • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The European RISC‑V Industrial Computing Initiative (ERICI) provides a coordinated, open‑source reference stack for industrial computers built on the RVA23 RISC‑V SoC. ERICI defines and validates the interfaces from firmware through bootloader, BIOS, hypervisor, real‑time control, and general‑purpose operating systems, ensuring all layers boot together on actual RVA23 hardware. The initiative is non‑commercial, Europe‑based, and globally accessible. Key software components include the HFI BIOS firmware with setup and boot control, the mr‑bml boot loader for OS selection, the gRouvr partitioning hypervisor, QSOE real‑time control, and a Linux‑based operator GUI/HMI. The hardware platform features RVA23 cores, integrated memory, I/O devices, and an IOMMU. Representative hardware shown includes a control cabinet with a RISC‑V industrial computer and I/O modules, the Firefly AIBOX‑K3 mini PC, the Milk‑V Jupiter2 board, and a QSOE login session running as a gRouvr guest on the SpacemiT K3.</p>
+          </div>
+          <a href="https://erici.eu" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments display mixed reactions toward the European RISC‑V Industrial Computing Initiative. Many express doubt about its legitimacy, noting the lack of a formal organization and reliance on Chinese manufacturers, and question whether it truly advances European sovereignty in silicon production. Skepticism is coupled with criticism of the initiative’s vague goals and perceived promotional nature. At the same time, a portion of the discussion conveys enthusiasm for RISC‑V’s open‑ISA benefits and hopes for broader adoption, though overall confidence in the project’s impact remains low.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50334523" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Show HN: Subvocal – Talk to your computer without making noise</a>
+        </h2>
+        <span class="article-meta">
+          708 points • by aarushyadav • 145 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for a wearable that captures subvocal speech, highlighting its potential for hands‑free interaction, accessibility for users with disabilities, and use in noisy environments. Frequent requests concern ergonomic fit, especially for prescription glasses, and whether the hardware could be a smaller attachment or ear‑piece. Many ask about technical details such as on‑device versus cloud inference, latency, offline operation, language support, battery life, health and RF safety, and pricing or subscription models. Skepticism appears around current accuracy, privacy implications, and the need for clearer documentation and certification pathways.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50340088" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.argmin.net/p/galactus-the-devourer" target="_blank">Efficient algorithms, the Exponential Time Hypothesis, and losing the plot</a>
+        </h2>
+        <span class="article-meta">
+          61 points • by sebg • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post traces the historical difficulty of rigorously defining algorithmic efficiency. It cites Jack Edmonds’s 1965 work on maximum‑matching, where “good” algorithms were described only informally and later quantified by a running‑time bound expressed as a function of input size (vertices + edges). Edmonds warned against rigid criteria that might stifle practical advances, yet his own blossom algorithm was labeled “quartic,” prompting later researchers to adopt polynomial time as the standard notion of efficiency while treating exponential time as inefficient. The author argues that polynomial bounds can still be impractically large (e.g., (n^{1000})) and that asymptotic reasoning encourages “galactic algorithms” with unrealizable runtimes. This critique is applied to a recent claim by OpenAI of a sub‑exponential SAT algorithm, whose stated bound holds only beyond astronomically large instance sizes (far exceeding the number of atoms in the universe), effectively reducing to exhaustive search for any feasible problem. The post concludes that such results illustrate the persistent inadequacy of current efficiency definitions.</p>
+          </div>
+          <a href="https://www.argmin.net/p/galactus-the-devourer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects mixed views on the usefulness of traditional time‑complexity analysis. While many acknowledge its simplicity, mathematical structure, and heuristic value, they also point out its limited practicality, especially when constant factors, hardware models, and real‑world performance diverge from theoretical assumptions. Suggestions for alternatives such as cache‑oblivious analysis appear, though they are seen as more complex. Skepticism about proving meaningful bounds for NP‑complete problems and frustration with perceived disconnects between theory, AI‑generated proofs, and engineering concerns also emerge.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50320904" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/" target="_blank">If you love a website, back it up</a>
+        </h2>
+        <span class="article-meta">
+          563 points • by ingve • 67 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author recounts losing a long‑standing personal site (teapuppies.com) and urges individuals to preserve web content themselves. Personal web archiving can be done with readily available tools that output standard WARC/WACZ files:</p>
+<ul>
+<li><strong>ArchiveWeb.page browser extension</strong> (Chrome): install, start/stop archiving while browsing; captures single pages, whole sites, or social‑media profiles and provides a dashboard for preview.</li>
+<li><strong>ArchiveWeb.page standalone app</strong>: same functionality with its own browser, convenient for local archive review.</li>
+<li><strong>Browsertrix</strong>: an automated web‑crawler web app (free trial, then paid per use) that crawls entire domains or scoped sections; open‑source version can be self‑hosted.</li>
+</ul>
+<p>Archived content can be replayed locally or shared via the open‑source ReplayWeb.page viewer, which can be embedded on any site with a simple JavaScript snippet. Since archives are single WACZ files, multiple copies can be distributed to ensure preservation. The tools mentioned are mostly free, with Browsertrix being the only paid option after the trial.</p>
+          </div>
+          <a href="https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong consensus that web content is rapidly disappearing and proactive archiving is essential, with many sharing personal experiences of lost bookmarks, photos, and niche sites. A wide range of tools—browser extensions, command‑line utilities, self‑hosted services, and AI‑assisted scripts—are recommended for capturing static pages, media, and entire sites, while users note gaps in existing solutions such as diffing archives or handling dynamic content. Concerns arise about legal limits, privacy, and future reliance on centralized AI or corporate platforms, prompting suggestions for offline storage, physical copies, and community‑run archives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50336518" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
