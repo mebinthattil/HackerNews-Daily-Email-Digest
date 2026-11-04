@@ -1,0 +1,566 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 04, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sw.kovidgoyal.net/kitty/changelog/#" target="_blank">Kitty 0.50</a>
+        </h2>
+        <span class="article-meta">
+          152 points • by porridgeraisin • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Added dockable windows (launch --type=window‑dock / tab‑dock) for status bars, file trees, etc.  </li>
+<li>New restore_session_after_logout option saves full kitty state (including scrollback) across logouts; encrypted on macOS, uses Inhibit portal on Linux.  </li>
+<li>Tab workspace enhancements: launch --focus‑existing, by‑title for alphabetical ordering, launch --location, detach_window action to move windows between named tabs.  </li>
+<li>Wayland improvements: native‑looking client‑side decorations, touchscreen support (tap = click, scroll with momentum, hold‑then‑drag for selection).  </li>
+<li>Custom shaders expanded (cursor‑trail‑railgun/torpedo/pixiedust) with shader_event control, animation pipelines, pointer_map support.  </li>
+<li>Graphics protocol now includes two indexed‑color image formats and equery key for feature detection.  </li>
+<li>Implemented OSC 7501 program‑status protocol, exposing status in tab bar via tab.program_status field.  </li>
+<li>Automatic theme handling: preserve per‑window colors across light/dark switches, ssh‑kitten color‑scheme options, launch --color persistence.  </li>
+<li>Layout and resizing refinements: collapse_window_margins, edge‑mode divider selection, fractional resize steps.  </li>
+<li>Scaling of box‑drawing characters, cursors, title bar borders with font size; mouse_map now supports wheel buttons.  </li>
+<li>Hyperlink display position configurable (hyperlink_target_position) and hover pointer shown only when modifiers match click action.  </li>
+<li>Quick‑access‑terminal kitten gains socket control, hold option, and “if‑running” mode.  </li>
+<li>Session files now store OS window geometry (os_window_position, --os-window-geometry).  </li>
+<li>Command palette shows action/kitten aliases on empty query; vertical tab bars respect tab_title_max_length.  </li>
+<li>Linux/BSD MIME detection via shared‑mime‑info cache, improved IME candidate anchoring, shell‑integration terminfo exposure, and --config=NONE now skips all auto‑loaded config files.  </li>
+<li>Numerous bug fixes: terminal emulation edge cases, graphics shared‑memory names, window/tab focus and drag‑and‑drop, render jitter, font fallback for Nerd‑Font icons, ssh‑kitten permission handling, desktop UI D‑Bus activation, theme caching, remote‑file recovery, transfer atomicity, drag‑and‑drop safety, clipboard MIME handling, kitten file‑saving through symlinks, various kitten bugs, Wayland cursor‑shape crashes, Linux momentum scrolling, macOS sleep‑related rendering, zsh completion formatting.</li>
+</ul>
+          </div>
+          <a href="https://sw.kovidgoyal.net/kitty/changelog/#" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show strong overall approval of Kitty, with many users highlighting its speed, low resource usage, extensive customization, and unique features such as the execution‑log shortcut and upcoming session‑restore. The recent release’s shaders, variable‑font support, and quick‑access improvements are praised, while a few users note minor concerns about potential breaking changes, limited Windows support, and occasional quirks like ssh xterm handling. Comparisons with alternatives such as Ghostty and GNOME Terminal emphasize Kitty’s preferred status despite these small drawbacks.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50362980" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop" target="_blank">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a>
+        </h2>
+        <span class="article-meta">
+          95 points • by novaRom • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Linux can be installed on RTX Spark laptops (e.g., MSI Prestige N16 Flip AI Plus) and will boot a full desktop with Nvidia’s open‑kernel driver, 4K 120 Hz output, and functional audio, keyboard, and touchpad after appropriate work‑arounds. The hardware reserves 96 GB of unified memory for the GPU; this split can only be changed from Windows, and lowering it to 4 GB is required for Linux to see the remaining RAM.  </p>
+<p>When the laptop is connected to AC power, Linux locks the GPU to ≈ 780 MHz, whereas Windows runs the same GPU at ≈ 2.2 GHz. This throttling stems from a Windows‑only component (“Nvidia Platform Controllers and Framework”) that decrypts an encrypted power‑table firmware and manages CPU/GPU power sharing; Linux lacks an equivalent driver, so the GPU cannot boost. Consequently, native Linux benchmarks (GPT‑OSS‑120B, vLLM) achieve only ~14 tokens s⁻¹ versus ~65 tokens s⁻¹ on Windows/WSL.  </p>
+<p>On battery, Linux clocks rise to ~1.8 GHz and performance approaches Windows levels. WSL currently offers the most practical solution, inheriting Windows’ power management while running Linux‑first AI tools. A full fix requires Nvidia to port the platform‑controller power logic to its Linux driver.</p>
+          </div>
+          <a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong concern about increasing reliance on cloud‑based, centrally controlled AI and emphasize the need for sovereign, open alternatives. Nvidia’s closed‑driver strategy and perceived monopoly are repeatedly criticized, especially regarding Linux support and misleading product titles that mix RTX Spark with DGX Spark. Technical frustrations focus on throttling bugs, limited inference capability on laptops, and the difficulty of running large models locally. Some users propose workarounds such as reverse engineering, alternative drivers, or using remote access, but overall sentiment remains wary of proprietary constraints and centralization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50362905" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/codex/issues/59060" target="_blank">Told to reboot a server, it destroyed systemd, destroyed containers, ran random</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by jstanley • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The GitHub issue reports a severe incident triggered by a server reboot that corrupted the systemd init system, destroyed running containers, and executed unintended scripts, resulting in financial losses exceeding $10,000. The page displays a “You can’t perform that action at this time” message, indicating restricted access. The content consists mainly of placeholders for numerous images (alt texts referencing various usernames) without substantive textual detail about the event. No technical logs, reproduction steps, or remediation information are included in the scraped excerpt. The core claim is that an instructed reboot caused extensive system damage and costly downtime.</p>
+          </div>
+          <a href="https://github.com/openai/codex/issues/59060" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong distrust and frustration toward the reported incident, questioning the credibility of the financial damage claims and suggesting possible manipulation or insider involvement. Contributors highlight technical failures such as reboot mishandling, container and systemd disruptions, and lack of command logs, attributing these to the AI’s behavior. Concerns about the poster’s mental state and requests for money are noted, while an intense, profanity‑filled outburst condemns the AI’s actions and the responsible organization. Overall sentiment is markedly skeptical, critical, and alarmed.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50363717" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cosmos-institute.org/p/verification-is-not-knowledge" target="_blank">Verification Is Not Knowledge: Science needs more than answers</a>
+        </h2>
+        <span class="article-meta">
+          53 points • by ersinesen • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The essay argues that equating scientific value solely with verified outputs—correct proofs or effective treatments—ignores the essential role of human understanding, accountability, and criticism in knowledge production. It traces this “value‑free” ideal to post‑World‑War‑II scientific culture, where epistemic criteria were privileged over ethical and social values, and shows how this mindset fuels current enthusiasm for AI‑driven science that can generate verified results without human insight. Using examples such as AI‑produced cancer therapies, AI‑written papers, and automated theorem‑proving, the author demonstrates the risks of losing interpretability, responsibility, and the capacity for transformative critique. The piece stresses that scientific progress depends on a community of epistemic agents who can judge relevance, defend claims, and revise errors; mechanical objectivity cannot replace this social process. Even if AI agents become accountable, human agents remain necessary to pose questions, evaluate answers, and sustain the shared standards that give verified results the status of knowledge.</p>
+          </div>
+          <a href="https://blog.cosmos-institute.org/p/verification-is-not-knowledge" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments view AI as a powerful tool that can rapidly produce correct mathematical or scientific results, likening it to a modern calculator that outpaces human effort. They stress that verification alone does not equal understanding and argue that human insight remains essential for interpreting and extending AI‑derived conclusions. References to leading mathematicians illustrate a model where AI supplies brute‑force outcomes while humans craft elegant explanations. Overall, the tone is cautiously optimistic about AI’s usefulness but wary of humans falling permanently behind its capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50363019" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aroundprague.cz/en/news/us/rtx-5090-street-prices-top-9-000-as-nvidia-gpu-costs-climb" target="_blank">RTX 5090 Street Prices Top $9k as Nvidia GPU Costs Climb</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by teleforce • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://aroundprague.cz/en/news/us/rtx-5090-street-prices-top-9-000-as-nvidia-gpu-costs-climb" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment emphasizes that a locally‑run AI setup using consumer‑grade GPUs can match the performance of commercial models for most coding tasks while offering faster, unmetered token processing and keeping data on‑premises, which simplifies EU compliance. A detailed cost comparison shows that purchasing and operating a single GPU for three months costs roughly $80, dramatically less than the $1,639.50 required for equivalent cloud token usage. The author notes that this economic advantage applies mainly to individual developers, while larger organizations or research projects with extensive GPU needs may face different cost dynamics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50363861" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://milkman.dev/" target="_blank">Milkman – The Better Alternative to Postman</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by jplunien • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Milkman is a JavaFX‑based workbench for creating and testing requests and responses, designed as a lightweight alternative to Electron‑based tools like Postman. It emphasizes low startup time and reduced memory usage. The platform is extensible through plugins, allowing support beyond standard HTTP/REST calls to include database queries, gRPC, GraphQL, and other protocols. By leveraging a modular architecture, developers can add custom request types and response handling without being confined to a single communication standard. The project’s GitHub repository includes visible star metrics, indicating community interest.</p>
+          </div>
+          <a href="https://milkman.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed feelings about Milkman, noting appreciation for its Java‑FX implementation as a non‑Electron alternative but criticizing its outdated‑looking interface and mobile screenshot scaling. Reviewers request clearer articulation of advantages over established tools such as Postman, including performance or extensibility data, and compare it to competitors like Bruno and Insomnia. Several remarks question the long‑term relevance of GUI API testing tools, while others make light‑hearted jokes. Overall, the feedback highlights a desire for better UI polish, stronger positioning, and evidence of tangible benefits.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50362993" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mrdoob.github.io/codevember-2026/01/" target="_blank">Jelly Sheet</a>
+        </h2>
+        <span class="article-meta">
+          268 points • by memalign • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Codevember 2006 entry titled “Fold” (dated 2006/01) presents a single interactive element: a cloth simulation. The only on‑screen instructions are “Drag the cloth” and “Space to pause,” indicating users can manipulate the simulated fabric with mouse dragging and toggle pause with the space bar. No additional description, code, or contextual information appears on the page; it consists solely of the title, date, and these brief interaction cues. The layout suggests a browser‑based demonstration, typical of Codevember challenges that showcase concise graphics or physics demos. No further technical details, source files, or explanatory text are provided.</p>
+          </div>
+          <a href="https://mrdoob.github.io/codevember-2026/01/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show broad appreciation for the visual project, highlighting its novelty, interactivity, and aesthetic appeal, with many noting it as fun, satisfying, and impressive on both desktop and mobile browsers. Repeated observations mention technical drawbacks such as lag as content accumulates, incompatibility with certain browsers, and screen‑size limitations. A few remarks question the relevance of tagging the work for challenge hashtags and express mild unease over its endless animation. Overall the feedback balances enthusiasm for the creative execution with practical critiques of performance and usability.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50361268" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.githubstatus.com/incidents/smtdswd1h2w4" target="_blank">Incident with Pull Requests, Git Operations and Issues</a>
+        </h2>
+        <span class="article-meta">
+          73 points • by kevcampb • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “GitHub Status – Incident with Pull Requests, Git Operations and Issues” announces a service incident affecting core GitHub functionality. It indicates a disruption to pull‑request handling, Git command operations, and issue tracking features. The status entry is presented with standard GitHub branding, including a header image (identified by the alt text “GitHub header”) and a footer image (alt text “GitHub footer”). No additional technical details, timestamps, or remediation steps are provided within the supplied text. The content is limited to the incident headline and the two visual elements that frame the status notice.</p>
+          </div>
+          <a href="https://www.githubstatus.com/incidents/smtdswd1h2w4" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread frustration with recent GitHub instability, especially the removal of SSH‑RSA support and frequent push/pull failures that disrupt deployment pipelines. Users report repeated outages, reduced reliability, and concerns about security implications, while also noting the broader impact on productivity. Several alternatives are suggested, including self‑hosted solutions such as Gitea, employing a file‑cache layer, or switching to other private‑repo providers. Overall sentiment is negative, emphasizing the need for more dependable services and prompting discussions of migration or mitigation strategies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50363378" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.nns.ee/2026/11/02/renault-hack/" target="_blank">Jailbreaking my car&#39;s navigation system just so I can change the time</a>
+        </h2>
+        <span class="article-meta">
+          837 points • by xx_ns • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author’s 2014 Renault Latitude uses a TomTom Carminat LIVE head‑unit (code‑named beaumont) built on a Samsung S5P6440 SoC running a custom Linux 2.6.28.10 OS. The unit requires a licensed navigation SD card; without it the Settings applet (including clock adjustment) is unavailable because the menu definition is read from the card and DRM checks enforce a specific card CID. The firmware update image (ttsystem) contains an ext3 rootfs. Reverse‑engineering revealed read‑only and no‑exec mount options, a unionfs overlay on the SD‑card FAT32 partition, and a script interpreter (master.script) that can execute limited commands via SHEX and LOG. By exploiting LOG’s path‑traversal to overwrite /proc/sys/kernel/core_pattern with “|/bin/sh /media/sdcard/payload.sh” and using SHEX to run /bin/dbus‑monitor (which aborts and triggers a coredump), the attacker gains root execution of a payload from the SD card. The payload backs up the eMMC, locates /mnt/flash/settings.dat, and changes the stored GMT offset from 180 minutes to 120 minutes, correcting the car’s timezone.</p>
+          </div>
+          <a href="https://blog.nns.ee/2026/11/02/renault-hack/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively praise the detailed write‑up and view it as a valuable reference for future tinkering, while expressing widespread frustration with automotive head‑unit designs that hide or lock time‑setting functions, rely on DRM‑protected SD cards, and lack simple manual controls. Many participants support the emerging jailbreak movement, cite successful aftermarket replacements, and discuss the technical challenges of reverse‑engineering firmware. Criticism of manufacturers’ restrictive software and hardware choices is strong, and there is a shared enthusiasm for open, customizable car infotainment solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50339288" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://napcakes.nekoweb.org/posts/malloc/" target="_blank">The lost malloc()</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by matt_d • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post surveys memory‑allocation code in early Unix source. In Version 4 (1973) a simple linear allocator (<code>alloc</code>) aligns the requested size, expands the heap with <code>sbrk(2000)</code> when needed, and never frees memory, allowing callers to ignore <code>NULL</code>. In the “dmr/malloc” implementation (Dennis Ritchie’s directory) <code>malloc(mp,size)</code> and <code>mfree(mp,size,addr)</code> operate on explicit resource maps (<code>coremap</code> and <code>swapmap</code>), which are flat arrays tracking free blocks. The routines use a first‑fit list of <code>struct map</code> entries and coalesce adjacent blocks, handling both main memory (32‑word units) and swap space (256‑word units).  </p>
+<p>Later releases introduced allocation macros: V6’s <code>ALLOC(x)</code> maps to <code>ckalloc(sizeof(struct x))</code>; V8 adds <code>tryalloc</code> (zero‑initialising on failure) and <code>new(type)</code> macros that wrap <code>alloc</code>. V8 also shifts to the conventional <code>malloc</code>/<code>free</code> interface. The article notes that these macros prefigure C++’s <code>new</code> operator, which Stroustrup later justified as a safer alternative to manual <code>malloc</code>/<code>init</code> patterns.</p>
+          </div>
+          <a href="https://napcakes.nekoweb.org/posts/malloc/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the design of memory deallocation functions, with many asserting that passing the allocation size to free is redundant because callers already know it, leading to unnecessary bookkeeping and performance cost. Some acknowledge that the existing interface is acceptable and note that arena or bump allocators have trade‑offs, offering occasional speed gains but risking higher memory use and fragmentation. Several participants express appreciation for the historical continuity of C’s allocation concepts and reflect on how early techniques predate modern language features.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50362466" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
