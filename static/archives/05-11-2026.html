@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 05, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://layer3intel.com/blog/residential-proxies-white-house-network" target="_blank">Residential proxies detected on White House network</a>
+        </h2>
+        <span class="article-meta">
+          1087 points • by Rasbora • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://layer3intel.com/blog/residential-proxies-white-house-network" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed reaction, combining concern over possible command‑and‑control capabilities in compromised devices and criticism of the lack of concrete evidence linking the traffic to the White House. Several contributors question the methodology and request clearer data, while others defend residential proxy services as legitimate tools with lawful uses. Technical suggestions appear about detecting such traffic on home networks, and speculation about IoT vulnerabilities and insider misuse is common. Overall, the discussion reflects skepticism toward the article’s implications, balanced by acknowledgement that residential proxies can serve non‑malicious purposes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50371246" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ernie.baidu.com/release/ernie-5-5-flash-base/" target="_blank">Baidu released ERNIE 5.5 Flash Base</a>
+        </h2>
+        <span class="article-meta">
+          37 points • by pretext • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>ERNIE‑5.5‑Flash‑Base is a 280 B‑parameter sparse Mixture‑of‑Experts (MoE) language model with 14 B active parameters per token. It uses 43 Transformer layers (hidden size 4096, 64 heads) and supports up to 128 K training context and 1 M token context for fine‑tuning. Core architectural innovations include: Latent‑Gated Sparse Attention (MLA for full‑token access in 1/7 layers, Heavily Compressed Attention in the rest, low‑rank gated attention, and virtual head attention); Multi‑Router Latent MoE (512 routed experts, top‑10 selection, latent‑space experts, bias‑corrected load balancing); Manifold‑Constrained Hyper‑Connections replacing standard residuals; MultiMax output head with piecewise temperature; and ECHO, which reuses the final backbone layer for multi‑token prediction. The tokenizer is a 200 K BPE with right‑to‑left digit grouping for numbers. Pre‑training consumed 33.5 T tokens using the Muon optimizer (FP8 mixed precision) and a context gradually expanded to 128 K. The corpus emphasized multilingual web data, repository‑scale code, and long‑context documents. Training infrastructure featured a distributed Muon optimizer with communication‑efficient updates and memory‑balanced sharding, plus the FlashMask‑4 attention kernel supporting head dimensions up to 576. Benchmarking shows strong performance, especially on reasoning, code, and long‑context tasks. The model is released on Hugging Face in FP8 and BF16 formats for further fine‑tuning or research.</p>
+          </div>
+          <a href="https://ernie.baidu.com/release/ernie-5-5-flash-base/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight enthusiasm for ERNIE 5.5 Flash Base, noting its strong performance relative to comparable large models and its appeal for local deployment and customization. At the same time, users express reservations about its branding and the implications of the term “dropped,” and they point out that it is a base model lacking instruction fine‑tuning. Some participants inquire about practical experience with the model, while others compare its release timing to upcoming competitors, indicating both interest in testing and caution about its current state.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50377078" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://markblah.github.io/lemmings/" target="_blank">Lemmings CSS Animation</a>
+        </h2>
+        <span class="article-meta">
+          209 points • by MarkBlah • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Walker Playground demonstrates a dynamic text‑based navigation environment where each line of reflowing text functions as a separate “floor.” As the browser window is resized, columns adjust, allowing walkers to move vertically from one line to the next, drop off short line ends, and land on the underlying element. Because line spacing is set tighter than a walker’s height, textual content never obstructs movement; only UI elements such as borders, boxes, buttons, images, and input fields act as barriers. This design prevents walkers from becoming trapped between adjacent lines. Additionally, a continuous long floor positioned near the page bottom serves as a catch‑all surface for any walkers that descend past all other elements. The system thus provides a clear, obstruction‑aware model for testing resize behavior and element interaction.</p>
+          </div>
+          <a href="https://markblah.github.io/lemmings/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express strong nostalgia and admiration for the animation, describing it as fun, impressive, and a pleasant start to the day. Many note technical curiosity, sharing related projects, ports, and implementation details, while some point out minor issues such as mobile zoom bugs, padding problems, and lack of classic Lemmings behaviors like walking, digging or parachutes. Overall the tone is positive, with a focus on creativity, appreciation for the homage, and constructive suggestions for refinement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50375354" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank">A thousand fewer paths to root</a>
+        </h2>
+        <span class="article-meta">
+          367 points • by dangelosaurus • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a demand for detailed breakdowns of the reported kernel vulnerabilities—subsystems affected, code age, and flaw types—while questioning the completeness and transparency of the presented data. Skepticism is common, with many labeling the figures as potentially inflated marketing hype and calling for full technical disclosures. Concerns arise over the high financial cost of AI‑driven scanning, the feasibility for most organizations, and the broader security impact of commoditizing exploit discovery. Opinions vary on mitigation, citing existing patching practices, architectural redesigns, safer languages, or verified microkernels as possible long‑term solutions, yet overall sentiment reflects unease about the current state and future trajectory of software security.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50372929" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openai.com/index/introducing-images-2-6/" target="_blank">Images 2.6</a>
+        </h2>
+        <span class="article-meta">
+          312 points • by davidbarker • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://openai.com/index/introducing-images-2-6/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed reactions to the latest image model release. Many users note visual regressions such as unwanted artifacts, yellow tint, and poor lighting, claiming the new version often underperforms compared to the previous 2.5 model and lacks consistent control for fine edits. Technical concerns include higher token usage, unclear SVG handling, and limited GIF support. Some appreciate new capabilities like native GIF generation and vector output, while others criticize pricing, perceived stagnation in image‑generation progress, and broader ethical reservations about AI‑generated media. Overall sentiment leans toward disappointment tempered by isolated positives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50372945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ziglang.org/devlog/2026/#2026-10-24" target="_blank">Partial Operator Precedence</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by tosh • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Zig now enforces explicit parentheses for ambiguous operator combinations (e.g., <code>x orelse y == z</code>). The compiler reports “ambiguous operator precedence” errors and requires disambiguation, while common arithmetic expressions retain their previous precedence.  </li>
+<li>A precedence table for unambiguous operators (*/%, +‑, comparison, logical) remains unchanged; any other mixes will be parenthesized automatically by <code>zig fmt --upgrade</code> (flag to be removed after one release). Manual fixes are recommended to catch potential bugs.  </li>
+<li>Naked packages (without <code>build.zig.zon</code>) can now include optional <code>version</code> and <code>paths</code> fields; the dependency name participates in the hash only when a version is provided, reducing hash brittleness and allowing controlled updates.  </li>
+<li>New CLI options: <code>--print-tree</code> displays dependency trees with hashes; <code>--configure</code> exits after configuration (replacing old <code>--fetch</code> behavior); <code>--fetch</code> now fetches all dependencies without configuration.  </li>
+<li>std.ArrayList gains pointer‑stability locks (<code>lockPointers</code>/<code>unlockPointers</code>) to prevent dangling pointers when the underlying buffer reallocates. A demonstrated bug shows how storing slices from a growing <code>ArrayList</code> can corrupt data; applying the locks triggers an assertion when stability is violated.</li>
+</ul>
+          </div>
+          <a href="https://ziglang.org/devlog/2026/#2026-10-24" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses strong approval of saturating and wrapping operators, noting their efficiency and clarity, and welcomes Zig’s strict precedence rules as a practical improvement over the many levels found in languages like C/C++. Commenters appreciate the error‑preventing design, compare it favorably to approaches in Fortress, Go, WGSL, and JavaScript, and suggest broader adoption or linting support in other languages. Some reservations are voiced, describing operator precedence as conceptually problematic and proposing alternatives such as function‑only syntax, but overall the sentiment is supportive of the proposed changes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50340195" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro" target="_blank">Kimi K3.1 Pro model weights are out</a>
+        </h2>
+        <span class="article-meta">
+          545 points • by abrarthought • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kimi K3.1 Pro is an open‑weight, multimodal, agentic model with 3 billion parameters and a 1 million‑token context window. It builds on Kimi K3, replacing full‑attention Gated MLA layers with Gated DeepSeek Sparse Attention for more efficient long‑context processing. Post‑training employed large‑scale joint reinforcement learning across hundreds of downstream domains, yielding notable gains in coding, 3D creation, financial research, factual accuracy and other agentic tasks.</p>
+<p>Evaluation (temperature 1.0, top‑p 0.95, max reasoning effort) covers extensive benchmarks: coding suites (Terminal‑Bench, SWE‑Marathon, ProgramBench, DeepSWE, PostTrainBench, Kimi Code Bench, BenchCAD); agentic tasks (BioMysteryBench, Agents’ Last Exam, OfficeQA, Frontier Finance, HANDBOOK.md, Harvey Legal, OSWorld, DECK‑Arena, Design Bench, BrowseComp, GDPval‑AA, AutomationBench, tool‑augmented multimodal); reasoning and multimodal metrics (GDP.pdf, HLE‑Full/Diamond, MMMU‑Pro, PerceptionBench, Kimi Hallucination); and cybersecurity challenges (ExploitBench, ExploitGym, xdev‑bench‑hard). Scores are reported relative to peers such as DeepSeek‑V4.1‑Flash, GLM‑5.3, GPT‑6 Astra and Claude models.</p>
+<p>The model is accessible via an OpenAI/Anthropic‑compatible API (platform.kimi.ai) with inference engines listed as “kimi‑k3.1‑pro”. Usage supports configurable reasoning effort (“low”, “high”, “max”) and requires returning full assistant messages, including reasoning content and tool calls. Kimi K3.1 Pro is released under the Kimi K3.1 Pro License; inquiries go to support@moonshot.ai.</p>
+          </div>
+          <a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note that the Kimi K3.1 Pro model offers strong performance for many use cases but falls short of the latest frontier models, requiring substantial GPU resources that limit home deployment. Observers compare its benchmarks to alternatives like DeepSeekV4.1‑Flash and Opus5.5, with mixed views on claimed “benchmaxed” status. The discussion highlights growing third‑party inference services, potential cost reductions, and broader implications for AI commoditization, while expressing frustration over accessibility and licensing concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50366999" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ricursive.com/ripple" target="_blank">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a>
+        </h2>
+        <span class="article-meta">
+          301 points • by Philpax • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ricursive Intelligence, a full‑stack AI lab, develops self‑improving systems by jointly optimizing hardware, software, and models. They trained a proprietary language model for their chip‑design platform, achieving the U.S. open‑weight state‑of‑the‑art (SOTA) on agentic coding benchmarks. The released Ripple‑65B Preview is a 65‑billion‑parameter dense model pretrained on 12 trillion tokens, supporting up to 1 million context length. It scores 80.52 on TerminalBench 2.1, surpassing larger open‑weight models such as Reflection Beam 501B (80.1), Meta Muse Spark 816B (76.4), Thinking Machines Inkling 975B (63.8), and NVIDIA Nemotron 3 Ultra 550B (56.4). Optimized architecture yields strong reasoning, low‑latency token generation, and efficient execution on local devices like NVIDIA DGX Spark, which have high FLOPs but limited memory bandwidth. Ripple‑65B Preview is available via Hugging Face, Together AI, GMI Cloud, OpenRouter, with Fireworks integration forthcoming.</p>
+          </div>
+          <a href="https://www.ricursive.com/ripple" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed reactions, combining appreciation for a new open‑weight 65‑billion‑parameter model with substantial criticism of its “state‑of‑the‑art” labeling and benchmark presentation. Reviewers note the model’s limited appeal to hobbyists due to high compute demands, the absence of comparisons to leading open models, reliance on outdated or disputed benchmarks, and concerns about US‑centric positioning and jurisdictional restrictions. Some acknowledge its practicality on higher‑end hardware and view it as a step toward more affordable large models, while many call for clearer, broader performance data.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50369925" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://leancrew.com/all-this/2026/10/textedit-vs-pages/" target="_blank">TextEdit vs. Pages</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by surprisetalk • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author evaluates macOS TextEdit against Pages for occasional word‑processing tasks. TextEdit’s fixed, non‑hideable toolbar duplicates functions that could reside in menus, while Pages places a customizable toolbar in the title bar, preserving document space. Pages’ format sidebar can be hidden and, despite vague naming, provides more accessible style controls; TextEdit lacks comparable sidebar options. Zoom in TextEdit is limited to doubling/halving, though trackpad pinch gestures add finer control; Pages allows setting a default zoom per document. Pages supports templates and user‑defined styles (e.g., a “Big Note” template with specific Helvetica Neue fonts and list indentation), whereas TextEdit cannot save templates. Memory usage favors TextEdit, which consumes noticeably less RAM than Pages. Both apps are free; the author prefers Pages for its UI flexibility, template system, and better zoom handling, despite its higher memory footprint.</p>
+          </div>
+          <a href="https://leancrew.com/all-this/2026/10/textedit-vs-pages/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note that TextEdit originated as a demo application in OPENSTEP and differs fundamentally from Pages, making direct comparison inappropriate. Pages is described as an underrated word processor that incorporates decades of WYSIWYG development, offering a competent print‑design mode useful for posters, booklets, and flyers, while remaining free and intuitive. Additionally, there is strong enthusiasm for KDE Kate, expressed as a preferred alternative. Overall, the discussion emphasizes historical context, praises Pages’ functionality, and shows clear preference for Kate.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50352846" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stepshots.com/css-feature-clips" target="_blank">Replacing homepage demo media with looping HTML and CSS</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by hauju • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CSS Feature Clips enables looping product demos without video by capturing UI steps. The provided log shows a Stepshots session recording a “Sign up” flow using a configuration file, resulting in a four‑step .stepshot file (output/signup‑flow.stepshot) ready for upload via the “stepshots upload” command. Visual assets listed include the Stepshots logo and three featured mentions: infra.page, Nick Launches, and DanielLaunches, each identified by their alt text. The summary highlights the tool’s workflow for creating lightweight, repeatable UI demonstrations.</p>
+          </div>
+          <a href="https://stepshots.com/css-feature-clips" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express admiration for LLM capabilities while questioning their economic sustainability. Praise focuses on the tools’ potential and usefulness, yet concerns dominate regarding the cost‑benefit balance and the likelihood that low pricing or high operational costs will undermine the financial models of providers. There is a prevailing view that without clear, high‑value breakthroughs, the current hype may not translate into lasting profitability, suggesting a skeptical outlook on the long‑term viability of LLM‑driven services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50364284" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
