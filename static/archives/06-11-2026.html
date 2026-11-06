@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 06, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ppmpreetham/BUI" target="_blank">Blender&#39;s UI and Runtime: Much Faster Than GPUI</a>
+        </h2>
+        <span class="article-meta">
+          219 points • by ppmpreetham • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>BUI (Blender UI) is a standalone UI library that reproduces Blender’s widget drawing, interaction rules, and look using a small C core (“kit”). The kit maintains a widget tree, performs layout, handles mouse/keyboard input, and renders on CPU or optional GPU (Direct3D 11 on Windows, OpenGL 3.3 on Linux). Thin language bindings expose the kit to Python, Rust, JavaScript/React, C/C++, and Dear ImGui, allowing the same widgets and behavior across languages.</p>
+<p>Key features:
+- 45 Blender‑style widgets (sliders, pie menus, color wheel, node editor, file browser) plus full Tkinter and Qt‑style APIs.
+- Damage‑based rendering: only changed regions redraw, idle UI uses 0 % CPU.
+- GPU‑accelerated path draws identical pixels to the CPU raster and supports large textures, video playback, and animated image formats.
+- Rust bindings provide full HTML 5 element set, modern CSS (flexbox, grid, Tailwind v4), rsx!/view! markup, and gpui‑compatible syntax.
+- JavaScript/React and Svelte bindings render to the native BUI surface without a browser engine.
+- Cross‑platform native windows on Windows (Win32), Linux (X11/Wayland via XWayland), and experimental macOS Cocoa; HiDPI support included.
+- Install via pip (Python), cargo (Rust), npm/bun (JS), or CMake (C/C++); pre‑built wheels and binaries are available. Performance benchmarks show 2–4× lower CPU per frame than gpui‑fast, sub‑5 ms first‑frame latency, and minimal memory overhead.</p>
+          </div>
+          <a href="https://github.com/ppmpreetham/BUI" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong admiration for Blender’s UI design, with many participants praising its aesthetics and wishing it were adopted in other applications such as GIMP, Inkscape, kitty, calibre, or even new Linux distributions. At the same time, concerns are raised about performance claims of GPUI, licensing constraints of the GPL‑licensed Blender UI, limited accessibility support, and the complexity of using a non‑native toolkit. Opinions also note that the project’s documentation could be expanded and that developers may prefer native widget sets for broader user acceptance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50389333" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105" target="_blank">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a>
+        </h2>
+        <span class="article-meta">
+          71 points • by microtonal • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is a GitHub issue titled “ASN Bank · Issue #105 · PrivSec‑dev/banking‑apps‑compat‑report”. Access to the issue is blocked, as indicated by the message “You can’t perform that action at this time.” The content consists solely of a visual‑content section listing 18 images, each identified only by its alt‑text label. The alt texts are primarily user handles (e.g., @ghost, @aerique, @ph00lt0, @lucasvbeek, @ekes, @readefries, @wouterdedroog, @Tasqa, @remyderuysscher, @joepie91, @danieldk, @ranjowd) and two screenshot filenames (Screenshot_20220829‑155749, Screenshot_20220829‑155843). No additional narrative, technical data, or code excerpts accompany the images. Consequently, the scraped material provides only the issue title, an access restriction notice, and a catalog of image identifiers without substantive contextual information.</p>
+          </div>
+          <a href="https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread frustration that Dutch and other European banks block GrapheneOS and other non‑standard Android devices, citing intrusive measures such as Play Integrity checks, custom‑ROM detection, and forced reliance on Google services. Users criticize the lack of transparent technical justification, the difficulty of obtaining support, and the perception that regulatory or platform pressure drives these policies rather than genuine security needs. While some acknowledge that strong security is essential for banking and insurance, the dominant view calls for open APIs, standardized verification methods, and less restrictive, more privacy‑respectful approaches.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50390124" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/anthropics/claude-code/issues/107757" target="_blank">Claude Code sends your email address to websites</a>
+        </h2>
+        <span class="article-meta">
+          1192 points • by motoroco • 103 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Bug Report #107757 on the anthropics/claude-code GitHub repository concerns a privacy violation involving the User‑Agent header. The issue page is currently inaccessible, displaying only a “You can’t perform that action at this time.” message. The content consists primarily of a series of image placeholders with alt texts showing various GitHub usernames (e.g., @taylor-edwards, @Netkas, @eepymeowers, etc.) and one image file name (b586y1.jpg). No additional description, discussion, or technical details about the privacy problem are present in the scraped text.</p>
+          </div>
+          <a href="https://github.com/anthropics/claude-code/issues/107757" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on concerns that Claude Code automatically injects users’ email addresses into request headers, often without explicit consent, leading to privacy worries and spam complaints. Many point to the SEC API’s requirement for contact information as a trigger, while others note that the behavior appears in broader contexts and can expose additional data. Users cite insufficient safeguards, request stronger sandboxing and transparent logging, and acknowledge Anthropic’s recent patches but remain skeptical about the default level of access and the adequacy of current controls.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50385272" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jhr.pensoft.net/articles.php?id=9096" target="_blank">Living beyond the limits of survival: wood ants trapped in a gigantic pitfall (2016)</a>
+        </h2>
+        <span class="article-meta">
+          27 points • by hitekker • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page consists of a title—“Living beyond the limits of survival: wood ants trapped in a gigantic pitfall”—followed by a subscription prompt for email alerts related to the article’s categories. The visual section lists four images identified only by alt‑text labels: “logo,” “Tag Logo,” “ORG,” and “DOI Logo.” No article body, abstract, figures, data, or narrative content is present in the scraped text; the only available information is the title and placeholder image descriptors.</p>
+          </div>
+          <a href="https://jhr.pensoft.net/articles.php?id=9096" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments criticize the use of sensational terminology, pointing out that the source material does not describe the ant colony as “cannibalistic.” They focus on the factual details of a large Formica polyctena colony trapped in a former nuclear bunker, the resulting death of millions of workers, and the limited presence of other insects. The discussion also rejects ideological analogies such as a “dictatorship of the proletariat” applied to ants and dismisses attempts to link the observation to broader philosophical arguments.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50390525" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://sshhole.com" target="_blank">sshole</a>
+        </h2>
+        <span class="article-meta">
+          2735 points • by josemrb • 130 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page traces Unix password handling from the 1980 <em>daemon</em> entry with a literal “<em>” (no password) in /etc/passwd to modern /etc/shadow hashes (e.g., $6$abc$… for SHA‑512). It notes that <code>crypt()</code> returns NULL on failure, and many programs crashed when they compared this NULL to the stored field. Musl libc changed the behavior (≈2012) to return an unmatchable character (“</em>”) instead of NULL, preventing crashes. Musl’s SHA‑512 implementation caps passwords at 256 bytes; longer inputs cause <code>crypt()</code> to fail and return “*”.  </p>
+<p>In 2016 CVE‑2016‑6210 revealed a timing side‑channel: sshd returned instantly for non‑existent users. The fix hashes the supplied password with a dummy salt to equalize timing, still rejecting the login.  </p>
+<p>Alpine Docker images omitted a root password (CVE‑2019‑5021); later releases locked root with “*”, preserving key‑based logins.  </p>
+<p>A latent bug persisted: with musl (no PAM) sshd accepted any password for accounts whose shadow entry was “*” when the password exceeded 256 bytes, a condition unnoticed until a 2026 security review.</p>
+          </div>
+          <a href="https://sshhole.com" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on a musl crypt() behavior that returns “*” or “+” on password‑length errors, which OpenSSH can misinterpret, enabling authentication bypass for disabled accounts. Contributors detail the code paths, reproduce the issue on Alpine images, and advise updating OpenSSH or disabling PasswordAuthentication. Many criticize the use of magic strings for error signalling and lament legacy design choices that allow such flaws to persist, while some express distrust of the library’s changes and call for clearer failure handling and proper CVE tracking. Overall sentiment is cautious concern with technical clarification and remediation recommendations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50378228" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://apps.metaebene.me/en/kugelblitz" target="_blank">Kugelblitz – Mac-Native Google Earth Alternative</a>
+        </h2>
+        <span class="article-meta">
+          87 points • by luoc • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page consists primarily of image descriptions:</p>
+<ul>
+<li>A global view in Kugelblitz showing Europe and Africa in daylight while Asia is in night.  </li>
+<li>A topographic rendering of Austria’s Grossglockner region with hillshading, elevation tints, contour lines, glacier highlights, and colored slopes.  </li>
+<li>An Equal‑Earth atlas segment depicting North Africa, Europe, and Arabia, including inset hemispheric outlines.  </li>
+<li>A composite of Central Europe where OpenRailwayMap railway lines overlay a satellite background.  </li>
+<li>An angled road‑map of Tokyo displaying streets, railways, buildings, and place names.  </li>
+<li>Low‑altitude aerial perspectives of the Dolomites’ Puez group and of Lucerne extending toward Pilatus, combining terrain, infrastructure, and labels.  </li>
+<li>A side‑by‑side view from a Mac window showing the Lauterbrunnen valley’s glacier‑head and navigation interface, noted as non‑headset recording.  </li>
+<li>An illustration of the 12 August 2026 total solar eclipse, marking the Moon’s shadow over Greenland’s east coast with totality limits and equal‑coverage lines.</li>
+</ul>
+          </div>
+          <a href="https://apps.metaebene.me/en/kugelblitz" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey overall approval of Kugelblitz’s performance, noting smooth operation on modern hardware such as Apple M1 Pro and praising its speed compared with older versions of Google Earth. Users suggest enhancements like cloud rendering, adjustable initial grid settings, and the ability to keep the globe rotating after mouse interaction, while also requesting editable descriptions. A few reports mention compatibility problems on macOS Sequoia 15.8.x and missing features relative to Google Earth, leading some to mention alternative tools such as Geolibre. The tone is generally positive with constructive feedback.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50389370" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://worldstrike.fun/" target="_blank">Multiplayer tanks that demolish real buildings from OpenStreetMap</a>
+        </h2>
+        <span class="article-meta">
+          59 points • by n4ze3m • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>World Strike is a multiplayer tank combat game set in realistic city environments. Players navigate tanks using WASD controls, aim with the mouse, and fire via clicks, while tapping the screen to set destinations. The core mechanics involve destroying buildings, which remain demolished for all players, and engaging other tanks in combat to defend or claim streets. Users can personalize their presence by selecting an emoji and marking rubble with it. The game features a persistent timer: when a tank is destroyed, it respawns after five minutes, and the countdown continues even if the player leaves the session. Controls also support tap‑to‑aim and hold‑to‑shoot actions, emphasizing quick, strategic movement and territorial control.</p>
+          </div>
+          <a href="https://worldstrike.fun/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed response, with frequent reports of connectivity problems such as callsign conflicts, dropped connections, high latency, and respawn bugs that interrupt gameplay, alongside occasional hardware crashes. Users also express ethical unease about the demolition theme, while some find the concept entertaining and appreciate its open‑map potential. Suggested improvements include more stable Wi‑Fi/4G performance, better attribution placement, optional elevation data, adjustable viewing angles, and refined respawn timing. Overall sentiment balances frustration over technical issues with modest enthusiasm and calls for feature enhancements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50389420" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://obelisk.club/research/app-store-2026" target="_blank">App Store 2026 in numbers: AI, pricing, abandoned apps</a>
+        </h2>
+        <span class="article-meta">
+          43 points • by Peter216 • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The “App Store 2026 in numbers” report from Obelisk Club presents five data visualizations covering recent trends on the iOS marketplace. The first chart quantifies the proportion of apps that reference artificial‑intelligence technologies. The second illustrates revenue streams for free‑download apps, detailing the relative contributions of advertising, in‑app purchases, and subscriptions. The third shows the market share held by independent developers across various chart categories. The fourth measures the count of applications that have not received updates or maintenance for an extended period, indicating abandonment rates. The fifth aggregates the most frequent criticisms found in low‑rating user reviews, highlighting common sources of dissatisfaction. All figures are available for free reuse under a CC BY 4.0 license, with required attribution to Obelisk Club.</p>
+          </div>
+          <a href="https://obelisk.club/research/app-store-2026" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments note a rapid influx of low‑effort camera and photo apps, driven by AI tools, which has diluted attention for traditionally polished offerings; name recognition, as with a high‑profile release, now outweighs feature quality. Observations also highlight many “abandoned” apps still running ad campaigns before disappearing, and a sizable share of listed apps lacking updates for over a year. Readers express interest in broader market data for Google and Mac stores, revenue figures, and express concern that AI‑centric products could threaten the long‑term viability of many existing apps and platforms.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50389448" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.cve.org/CVERecord?id=CVE-2026-83844" target="_blank">MS Paint Remote Code Execution Vulnerability</a>
+        </h2>
+        <span class="article-meta">
+          562 points • by kuberwastaken • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided text consists solely of a title, “Common vulnerabilities and Exposures (CVE),” without any additional content, description, or details to summarize.</p>
+          </div>
+          <a href="https://www.cve.org/CVERecord?id=CVE-2026-83844" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread surprise and disbelief that a basic drawing application can contain a network‑exposed remote code execution flaw, with many users questioning how Paint could listen on a port and why Microsoft classified it as unauthenticated, no‑interaction vulnerable. There is strong demand for clearer technical details and confirmation of the issue’s scope, alongside frustration at the perceived boiler‑plate wording of the CVE. Most participants note that the vulnerability has been patched in newer builds and urge updating, while a minority respond with sarcasm and jokes about future exploits in other simple utilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50384233" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pwn.college/" target="_blank">Pwn.college</a>
+        </h2>
+        <span class="article-meta">
+          165 points • by tripdout • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>pwn.college is an online dojo that teaches core cybersecurity skills through hands‑on challenges organized into a belt system (white to black). The platform’s material is used for university grading, so users are asked not to publish solution write‑ups, videos, or livestreams. Learners follow a prescribed sequence of dojos, with optional “Side Quests” for self‑directed study. Educators may freely use the lectures’ videos and slides for non‑commercial courses, provided they give attribution and notify the team; institutions can import or add private challenges. Conference organizers can request a weekend‑long training presence. After completing pwn.college, participants are encouraged to join CTFs (e.g., via ctftime.org), wargames (e.g., GitHub’s wargame‑nexus), or other platforms such as CryptoHack and OST2, and can pursue internships at ASU. The underlying infrastructure is open‑source, accepting pull requests and issues, while some modules remain closed‑source; trusted collaborators can contact the team for module or slide contributions. A resource index lists the various tools and platforms used.</p>
+          </div>
+          <a href="https://pwn.college/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey largely positive sentiment toward the platform, noting its nostalgic connection to classic hacking wargames and coursework, appreciation for its hands‑on approach, belt rewards, and the engaging “white belt” introduction. Several remarks compare it favorably to other training sites such as HackThisSite, OverTheWire, and OWASP WebGoat. Minor criticisms appear regarding text justification that hampers readability and uncertainty about policies on posting write‑ups, with a few observations that the scoreboard’s top scores reflect only tutorial completion. Overall, the consensus is that the project is enjoyable and valuable for learning cybersecurity skills.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50387796" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
