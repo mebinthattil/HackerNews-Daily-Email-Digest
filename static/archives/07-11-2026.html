@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 07, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mitchellh.com/writing/libghostty-1-0" target="_blank">Libghostty 1.0</a>
+        </h2>
+        <span class="article-meta">
+          658 points • by mfiguiere • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Libghostty‑vt 1.0 is a portable, high‑performance C library for terminal emulation extracted from Ghostty. The 1.0 release stabilizes both the library and its C ABI, guaranteeing semantic‑versioning compatibility and allowing dynamic linking without crashes; unsupported calls return GHOSTTY_UNSUPPORTED. It is MIT‑licensed, depends only on libc at runtime, and incorporates permissively‑licensed SIMD (simdutf, Google Highway) and image‑decoding (Wuffs) components, with no copyleft code. The library is already embedded in major products: JetBrains IDE terminals (≈12.5 M users), Neovim (replacing libvterm), KDE Konsole experiments, Vercel Turborepo, dev‑env shells, and numerous commercial tools; community bindings exist for over a dozen languages. Packaging provides signed source and dependency tarballs, shared/static libraries, headers, pkg‑config and CMake files, and supports standard prefix/DESTDIR conventions across Linux, macOS/iOS (XCFramework), Windows (DLL + import lib), Android NDK, and WebAssembly (size‑optimized and speed‑optimized builds). CI tests cover x86_64, aarch64, arm, wasm32 and others; the library is thread‑free, allocator‑agnostic, and demonstrates low memory use (10 k terminals on 4‑core/8 GB server). Documentation and downloads are at lib.ghostty.org.</p>
+          </div>
+          <a href="https://mitchellh.com/writing/libghostty-1-0" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly positive, highlighting Ghostty’s performance, stable ABI, and the ease libghostty provides for embedding terminals in diverse applications. Users appreciate the documentation, feature set such as graphics protocol support, and the ability to build custom tools without extensive effort. Comparisons mention Kitty and iTerm2 as alternatives, noting preferences for specific rendering or configuration features, while requests for Windows support and clarification of C versus Zig implementation appear. A few remarks question ABI guarantees and note limited speed gains in niche cases, but overall sentiment remains supportive.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50399933" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals" target="_blank">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a>
+        </h2>
+        <span class="article-meta">
+          103 points • by benbreen • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on the plausibility of a Scandinavian origin for the Goths, referencing historical place names, early Gothic language evidence such as Wulfila’s Bible, and Roman encounters in Romania. Commenters question why the Goths would have migrated, suggesting a broader family movement rather than a purely warrior group, and inquire about climatic or other motivations. There is curiosity about linguistic links between Gothic and later Romance terms for “helmet” and “bandit,” and a desire for additional scholarly research on the migration’s causes.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50401740" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/research/components-of-agent-memory" target="_blank">The Components of Agent Memory</a>
+        </h2>
+        <span class="article-meta">
+          47 points • by geoffbp • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Agent memory is modeled on human hippocampal replay: logs are captured during interaction and later reorganized during idle “dreaming” compute. Memory notes (tagged salient events) sit above raw transcripts, while higher layers include structured representations such as wikis and an injected context layer. Experiments show that letting Claude generate its own salience judgments outperforms fixed rules; models that close the learning loop (e.g., Opus 5, Opus 5.5, Sonnet 5.5) achieve higher CL‑Bench scores when they write, test, and confirm rules. In Pokémon, a compact, strategy‑focused memory (Fable 5) yields more badges than an exhaustive log (Sonnet 3.7). Dreaming corrects erroneous notes, promotes useful entries, and builds wikis that improve retrieval‑augmented question answering (48 % to 61 % graded criteria on a 350 k‑file corpus). Over 128 dreaming sessions, wiki size grew from 2 M to 128 M tokens, increasing performance while saving ~20 k tokens per query. Proper hierarchy management keeps injected context small, avoiding token bloat and hallucinations.</p>
+          </div>
+          <a href="https://www.anthropic.com/research/components-of-agent-memory" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a mixed view of Claude’s memory system and the recent article. Several users report that automatically created memories are often task‑specific, leading them to prune most entries and call for smarter selection criteria. Practical suggestions include analyzing agent transcripts, tracking tool‑call failures, and using databases to extract efficiency metrics. Conversely, a notable portion dismisses the article as marketing spin, questioning the authenticity of “memory” and “dreaming” claims and labeling the presented experiments as ineffective. Overall, opinions range from constructive interest in improving memory management to strong skepticism about its purported capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50402212" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://hightouch.com/blog/llm-judges-identity-resolution" target="_blank">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a>
+        </h2>
+        <span class="article-meta">
+          484 points • by theanomaly • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The study evaluated LLM decision models (Jev and GPT‑6 Luna) for grading identity‑resolution (IDR) outputs, comparing them to frontier models (Opus). On a benchmark of 1,000 synthetic identities (half correct, half over‑merged) Jev and Luna achieved 88.8‑97.3 % accuracy out‑of‑the‑box, while decision models were up to 90× cheaper ($0.05‑$0.10 per 1 k identities) and 10× faster (~0.15 s). Luna initially outperformed Jev, but its confidence was poorly calibrated, leading to high‑confidence errors on difficult cases. Jev’s confidence remained near 50 % for mistakes, enabling a hybrid pipeline: Jev first, then Opus for low‑confidence cases. This hybrid reached frontier accuracy at &gt; 4× lower cost than Opus alone and maintained scalability. Thresholds of 60 % (Jev) and 70 % (Luna) optimized accuracy. Results suggest calibration is critical; a well‑calibrated cheap model can defer expensive inference selectively, delivering near‑state‑of‑the‑art performance with substantially reduced expense.</p>
+          </div>
+          <a href="https://hightouch.com/blog/llm-judges-identity-resolution" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments discuss using lightweight decision models to orchestrate larger language models, noting cost savings and comparable quality for many tasks while acknowledging that gains depend on specific use‑cases and model versions. Several participants report successful experiments with Qwen, Jev, and Luna, but also highlight calibration uncertainties, occasional performance gaps, and the need for better documentation and code examples. Concerns are raised about privacy implications of automated data mapping and skepticism about marketing hype, with overall sentiment balanced between optimism for efficiency and caution about limitations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50397429" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817" target="_blank">Tesla to wind down Cybertruck production</a>
+        </h2>
+        <span class="article-meta">
+          1013 points • by PLenz • 169 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tesla will cease Cybertruck production at its Texas gigafactory around mid‑2027, citing persistently weak sales. Deliveries began in late 2023; U.S. sales fell to 20,237 units last year—a 48 % decline from the prior year and far below Musk’s 250 k annual target. The model’s angular stainless‑steel design limited market acceptance, especially in Europe where pedestrian‑impact regulations block approval. Production capacity will be reallocated to the newly launched Cybercab, a steering‑wheel‑less robotaxi vehicle with butterfly doors that began limited paid service in Austin. It remains unclear whether Cybertruck production will shift to another plant or be terminated entirely. Analysts note that broader electric‑pickup demand is low, and regulatory hurdles further constrained the Cybertruck’s prospects. Tesla has not commented beyond Musk’s X post calling the Cybertruck “the best vehicle Tesla has ever made” and framing the wind‑down as “the end of an era.”</p>
+          </div>
+          <a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are sharply divided, with many highlighting the Cybertruck’s striking, unconventional design and its technical innovations—such as a large battery pack and novel body construction—while also noting its novelty value and appeal to enthusiasts. A larger portion critiques its high price, limited practicality as a pickup, uncomfortable interior, safety concerns, and poor market fit, arguing that the vehicle failed to meet functional expectations and sales targets. Critics also connect its shortcomings to broader Tesla strategy issues, competition from Chinese EVs, and the influence of Elon Musk’s branding.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50391456" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://edu.postgrespro.com/postgresql_internals-14_en.pdf" target="_blank">PostgreSQL Internals [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          24 points • by Foe • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://edu.postgrespro.com/postgresql_internals-14_en.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback indicates that the referenced material is considered outdated, being based on a 2023 release of PostgreSQL 14. Commenters express a need for more current resources, specifically seeking versions released after 2025, suggesting that the existing content does not meet present requirements for up‑to‑date information. The overall tone is a request for updated material rather than an evaluation of the content’s quality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50361765" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.multifamilydive.com/news/realpage-rent-pricing-case-360m-renters/873553/" target="_blank">RealPage rent-pricing case wraps with nearly $360M to renters</a>
+        </h2>
+        <span class="article-meta">
+          128 points • by raybb • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A federal antitrust case alleging that RealPage’s revenue‑management software enabled large apartment owners to coordinate rent increases was settled in the U.S. District Court for the Middle District of Tennessee. The court approved settlements totaling nearly $360 million, with 11 landlords reaching 14 agreements for $218 million in May and 27 landlords entering 26 agreements for $141.8 million in October. The settlement class comprises U.S. multifamily renters who paid rent on properties using RealPage’s Revenue Management Solutions, Lease Rent Options, YieldStar, or AI Revenue Management between Oct. 18 2018 and Nov. 21 2025. Defendants did not admit liability but agreed to cease providing non‑public data to RealPage and to stop using competitor data in pricing recommendations. State attorneys general from D.C., Kentucky, Maryland, New Jersey and Washington challenged the settlements, but Judge Waverly Crenshaw denied their request to reject them. All claims against settling defendants are dismissed with prejudice, while other potential defendants remain subject to separate actions.</p>
+          </div>
+          <a href="https://www.multifamilydive.com/news/realpage-rent-pricing-case-360m-renters/873553/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong dissatisfaction with the settlement, viewing it as inadequate to curb collusion and price manipulation in the rental market. Contributors call for greater transparency, such as a public registry of rental prices, and argue that competition—or public ownership—should replace current proprietary data practices. They extend the criticism to similar anti‑competitive behavior in other sectors and advocate for stricter enforcement or abolition of firms like RealPage, framing the issue as a broader problem of privatized, rent‑seeking markets.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50399991" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/" target="_blank">US FAA says it will phase out floppy disks from air traffic control by 2028</a>
+        </h2>
+        <span class="article-meta">
+          341 points • by ChrisArchitect • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on criticism of the FAA’s reliance on antiquated floppy‑disk technology, expressing frustration that safety‑centered processes are hindering timely upgrades. Contributors note the risk of using fragile, air‑gapped media and question backup redundancy, while also referencing political framing of the modernization as a “historic” achievement. A mix of humor, nostalgia for legacy hardware, and technical suggestions—such as flash‑based replacements—appears alongside broader concern that bureaucratic inertia, rather than safety, may be the primary barrier to improvement. Overall sentiment is skeptical and calls for more efficient, secure modernization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50388001" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.smithsonianmag.com/history/greece-has-its-own-pompeii-and-the-ruins-tell-a-captivating-story-of-a-sophisticated-seafaring-bronze-age-society-180989747/" target="_blank">Greece has its own Pompeii: Thera buried Akrotiri in ash 17th-16th century BCE</a>
+        </h2>
+        <span class="article-meta">
+          108 points • by derbOac • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Thera eruption (c. 1620–1530 BCE) blanketed the Bronze‑Age settlement of Akrotiri on present‑day Santorini in ~200 ft of ash and pumice, preserving its structures like a “Pompeii of the Aegean.” The eruption altered the island’s climate, generated tsunamis, and caused the caldera’s collapse, with ash reaching Egypt and Israel. Archaeological work began after a 1866 quarry find; major excavations started in 1967 under Spyridon Marinatos and continue under Christos Doumas, having uncovered roughly 10 % of the site. Findings include multistory stone buildings, sophisticated drainage, and over 30 frescoed rooms—most depicting female‑centered ritual scenes and crocus symbolism—plus pottery, beads, and charred barley and fava beans that illuminate Middle Bronze‑Age diet and trade. No human victims have been found, implying successful evacuation. A bioclimatic shelter protects the ruins, which are open to visitors, while a nearby museum displays artifacts. Akrotiri provides a uniquely detailed view of a cosmopolitan Cycladic society and its connections across the Eastern Mediterranean.</p>
+          </div>
+          <a href="https://www.smithsonianmag.com/history/greece-has-its-own-pompeii-and-the-ruins-tell-a-captivating-story-of-a-sophisticated-seafaring-bronze-age-society-180989747/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary highlights Santorini’s lesser‑known archaeological richness, praising the Museum of Prehistoric Thera for its well‑preserved frescoes and noting the island’s unique placement atop a caldera rim. It recommends boat trips to the volcanic caldera and visits to the Akrotiri ruins as authentic historic experiences, contrasting them with the heavily crowded main town of Fira and the ubiquitous blue‑dome scenery. The overall tone is appreciative of the island’s deep history and distinctive landscape while acknowledging tourist congestion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50360810" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://acid.vegas/blog/the-port-that-does-not-exist/" target="_blank">Port 0: The Port That Does Not Exist</a>
+        </h2>
+        <span class="article-meta">
+          3 points • by NewCzech • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://acid.vegas/blog/the-port-that-does-not-exist/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50403063" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
