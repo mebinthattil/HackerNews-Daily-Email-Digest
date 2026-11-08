@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 08, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.lorekit.io/blog/open-agent-memory-format" target="_blank">Agent memory needs its OpenTelemetry moment</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by mthines • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post highlights the fragmentation of agent memory storage across many proprietary formats—AGENTS.md, CLAUDE.md, .cursor rules, custom “/memories” directories, Copilot’s GitHub‑side facts, and JSONL knowledge graphs—preventing tools from sharing learned data. It argues that, like observability before 2019, the field lacks a common data model, semantic conventions, and protocol. The author cites OpenTelemetry’s successful merger of OpenTracing and OpenCensus as a template: a shared model (spans, metrics, logs), standard names (service.name, http.*), a single transport (OTLP), and reference SDKs, while vendors compete on storage and analysis. Existing memory proposals (Portable Memory, Open Memory Protocol, COGX, LangGraph, etc.) each solve export but not live addressing, and differ on address levels, identity handling, lifecycle, and author attribution. A spec should define address hierarchy, record schema (id, address, key, lifecycle, written_by, content_type, attributes), conventions, MCP‑based operations, and conformance tests, leaving storage, ranking, and UI to competition. The post calls for a neutral working group to develop this shared standard.</p>
+          </div>
+          <a href="https://www.lorekit.io/blog/open-agent-memory-format" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed views on portable agent memory. Many acknowledge a need for more efficient, transferable references and a unified format, yet doubt that competing AI providers will collaborate on a standardized system. Skepticism appears about the maturity of context‑handling techniques and the usefulness of imposing a single abstraction, with some preferring simple filesystem or markdown solutions. Others argue that agents can already navigate varied formats, while a few consider built‑in memory detrimental and advocate disabling it in favor of explicit file‑based recording. Overall, opinions range from cautious support to criticism of current approaches.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50411467" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://caleb.software/posts/claude-to-pi.html" target="_blank">Goodbye Claude, Hello Pi</a>
+        </h2>
+        <span class="article-meta">
+          329 points • by karagenit • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author, a longtime user of Claude Code (available via Claude Pro), reports switching to the Pi development harness due to multiple technical frustrations. Key issues with Claude Code include: the need to manage separate AGENTS.md and CLAUDE.md files, a limitation of only one IDE‑connected session at a time (preventing simultaneous tab usage), and a VSCode GUI extension with broken slash commands, lack of custom status line support, and disorganized sub‑agent output. Frequent product updates (244 releases in the current year) repeatedly altered system prompts and tool descriptions—over three‑quarters of changes affected prompt content—leading to instability and increased token overhead (e.g., a default Bash tool description near 3,000 tokens). The author criticizes the feature‑heavy, low‑vision roadmap and insufficient product‑level gatekeeping. In contrast, Pi is described as stable, minimalist, and highly customizable, with the author already developing extensions and recommending open‑source harnesses to users facing similar pain points.</p>
+          </div>
+          <a href="https://caleb.software/posts/claude-to-pi.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reveal a split between users who have migrated to graphical desktop interfaces for LLM coding—valuing richer text, integrated images, session organization, and smoother scrolling—and those who remain with terminal‑based tools for keyboard‑only workflows and lightweight setups. Pi’s harness is praised for deep customizability but flagged for potential policy risks, token overhead, and occasional instability, while Claude Code and other GUIs receive mixed feedback regarding feature gaps and cost. Overall, the community leans toward GUIs for convenience, yet a dedicated minority persists with TUIs for simplicity and control.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50410107" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/torvalds/linux" target="_blank">GitHub Down Again?</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by ridowk • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Linux kernel is the core component of any Linux operating system, handling hardware management, system resources, and essential services for software. The repository provides quick‑start links for bug reporting, obtaining the latest source (kernel.org), building the kernel, and joining the community. Comprehensive documentation covers building requirements, code of conduct, licensing (COPYING), and can be built with make htmldocs or viewed online.</p>
+<p>The site categorizes audiences and supplies targeted guides:</p>
+<ul>
+<li><strong>New developers</strong> – development process, patch submission, coding style, kbuild, tools, core APIs.  </li>
+<li><strong>Researchers</strong> – memory management, scheduler, networking, filesystems, RCU, locking, power management.  </li>
+<li><strong>Security experts</strong> – LSM development, self‑protection, vulnerability reporting, CVE procedures, security features.  </li>
+<li><strong>Backport/maintenance engineers</strong> – stable‑kernel rules, backporting, patch application, maintainer profiles, Git configuration.  </li>
+<li><strong>System administrators</strong> – admin guide, kernel parameters, sysctl, tracing, performance/security, hardware monitoring.  </li>
+<li><strong>Maintainers</strong> – handbook, pull‑request workflow, patch management, rebasing/merging, development process.  </li>
+<li><strong>Hardware vendors</strong> – driver API, driver model, device tree, power management, DMA API.  </li>
+<li><strong>Distribution maintainers</strong> – ABI docs, Kconfig, module signing, taint handling.  </li>
+<li><strong>AI coding assistants</strong> – mandatory compliance with licensing and DCO guidelines.</li>
+</ul>
+<p>Contact channels include mailing lists, IRC (#kernelnewbies), Bugzilla, and the MAINTAINERS file.</p>
+          </div>
+          <a href="https://github.com/torvalds/linux" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express widespread frustration with recent GitHub availability problems, noting repeated 504 time‑outs, failed downloads, and broken CI pipelines that hinder development workflows. Users criticize the status page for not reflecting outages, blame the platform’s heavy load and Azure hosting, and question reliance on GitHub for essential tooling. Several suggestions advocate self‑hosting or migrating to alternatives such as Codeberg, while a few remarks note that the service was functional for them, indicating mixed personal impact but overall dissatisfaction.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50411818" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://clj.rs/" target="_blank">Clj.rs – a Clojure dialect implemented in Rust</a>
+        </h2>
+        <span class="article-meta">
+          60 points • by simonpure • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>cljrs is an experimental Clojure dialect designed for the Rust ecosystem. It provides a Lisp runtime that includes persistent data structures and a hosted macro system, enabling native interoperation with Rust code. The language can be used in both compiled and interpreted modes, positioning it as a runtime suitable for agentic coding tasks. cljrs is distributed via crates.io and is currently in an early development stage, so users should expect incomplete features and rough edges.</p>
+          </div>
+          <a href="https://clj.rs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall interest and a generally favorable view of the project, noting its similarity to ClojureScript and its utility for dynamic scripting and hot‑reloading. Users appreciate its flexibility and see potential advantages such as faster start‑up times and smaller container images, though they do not currently encounter Clojure interop gaps. Suggestions include clarifying non‑goals, comparing it to related tools, and considering alternative naming, while a few inquire about native binary compilation. The tone remains positive and exploratory.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50366902" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.bosscher.ch/posts/openstick/" target="_blank">What I run on my $10 USD OpenStick homelab</a>
+        </h2>
+        <span class="article-meta">
+          589 points • by LaurensBER • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The OpenStick homelab, purchased for $10, includes a 1 GHz quad‑core ARM Cortex‑A53 CPU, 512 MB RAM (≈450 MB usable), 4 GB eMMC, 150 Mbit/s Wi‑Fi, a 4G modem with GPS, passive cooling and a programmable LED. The device runs Debian with systemd and Podman, enabling lightweight container hosting. The author deploys several services within this environment:</p>
+<ul>
+<li><strong>CastSponsorSkip</strong> – intercepts Google Cast streams to skip sponsorships/ads.  </li>
+<li><strong>AdGuard Home (fork, 40 MB)</strong> – DNS‑level blocker using extensive blocklists, handling ≈60 % of queries.  </li>
+<li><strong>Zeroclaw (≈3 MB RSS idle)</strong> – AI‑agent hub supporting 30 messaging channels, monitored via Telegram.  </li>
+<li><strong>Cloudflare Tunnel (8‑20 MB)</strong> – exposes services securely without opening ports.  </li>
+<li><strong>Beszel (≈20 MB)</strong> – visual monitoring of CPU, memory, and alerts via Telegram.  </li>
+<li><strong>Dozzle</strong> – Podman log viewer with a richer UI than Beszel.  </li>
+<li><strong>Gatus (10 MB)</strong> – service‑level health monitoring and web UI.  </li>
+<li><strong>Fusion (22 MB RAM)</strong> – self‑hosted RSS reader.  </li>
+<li><strong>Shiori (10‑20 MB)</strong> – bookmark manager with automatic archiving.  </li>
+<li><strong>Diun (9 MB)</strong> – notifies Telegram of container updates.</li>
+</ul>
+<p>These tools collectively provide DNS filtering, AI‑assisted alerts, secure remote access, system metrics, container management, service uptime checks, RSS consumption, bookmark archiving, and update notifications on a low‑power, silent platform.</p>
+          </div>
+          <a href="https://blog.bosscher.ch/posts/openstick/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion is largely enthusiastic about using a low‑cost ARM board for self‑hosting, noting that its modest RAM can handle many services when software is chosen efficiently and highlighting successes with ad‑blocking, container auto‑updates, VPN, and lightweight RSS feeds. Participants also explore extensions such as PoE clustering, HDMI integration, LTE connectivity, and alternative cheap hardware. At the same time, several comments express caution about granting root‑level LLM agents broad network access, citing potential prompt‑injection risks, and request clearer guidance on firmware, distro options, and reliable supply sources.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50406670" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again" target="_blank">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a>
+        </h2>
+        <span class="article-meta">
+          402 points • by shmulc • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong concern about secret leakage from Claude Code, emphasizing that local settings files should never be committed and that git‑ignoring, secret‑scanning tools, and pre‑commit hooks are essential. Users recommend using auto mode, isolated VMs, API proxies, password‑manager CLI calls, and dedicated credential‑management solutions to limit agent access. The discussion includes criticism of Claude Code’s lack of built‑in scrubbing, frustration over exposed passwords, and advice to enforce operational‑security hygiene, while a few remarks convey anger toward the tool’s handling of secrets.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50407882" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://imagesco.com/articles/kirlian/kirlian-photography.html" target="_blank">Kirlian Photography: Building Your Own Equipment</a>
+        </h2>
+        <span class="article-meta">
+          50 points • by joebig • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kirlian photography is a high‑voltage, contact‑print technique that records corona discharge on photographic film. Originating with S. Kirlian and Valentina in 1939, it follows earlier electro‑photography work by Lictenberg, Tesla, Narkevich‑Todka, and F.F. Strong. The basic setup places sheet film on a metal (discharge) plate, positions the object on the film, and applies a brief high‑voltage pulse; the discharge pattern is captured on the film without a lens. Inanimate subjects are grounded to enhance the corona, while living subjects must not be grounded for safety. Black‑and‑white ortho film is recommended for beginners because it can be developed under a red safelight; color film requires total darkness.</p>
+<p>A simple manual device can be built from two 67.5 V batteries (or series‑wired 9 V cells), a high‑voltage autotransformer, capacitors, and a momentary toggle switch. A transparent discharge plate—glass coated with tin‑oxide, surrounded by a copper ring electrode, and sealed between thin plastic sheets with silicone—allows use of a standard camera (bulb mode) or video camera. Proper insulation, grounding methods, and exposure timing (10–20 s or multiple switch pulses) are essential. Reported “paranormal” claims, such as disease prediction or the “phantom leaf” effect, are explained by variable physical factors (skin resistance, humidity, pressure, voltage, frequency) rather than bio‑plasma phenomena.</p>
+          </div>
+          <a href="https://imagesco.com/articles/kirlian/kirlian-photography.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses skepticism toward the claimed paranormal effects, noting that the image likely resulted from insufficient cleaning of the plate or glass, leaving residue that produced the appearance. It references an earlier source that popularized the phenomenon in the 1970s and dismisses that era’s broader interest in psychic and UFO topics as outdated. Overall, the tone is critical, emphasizing a rational explanation over supernatural interpretation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50410359" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://readonlymemo.com/legend-of-xanadu-pc-engine-fan-translation-interview-making-of/" target="_blank">Finding Xanadu: Inside a JRPG classic translation 15 years in the making</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by speckx • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article chronicles the 15‑year fan translation of Nihon Falcom’s PC Engine RPGs <em>The Legend of Xanadu</em> and <em>Xanadu II</em>. After initial attempts by translator SamIAm and hacker EsperKnight stalled, retired programmer Elmer joined in 2015, leveraging his 1980s‑era console experience to reverse‑engineer Falcom’s interleaved script/assembly format. He built a decompiler/recompiler, created a custom compression scheme (SWD5) to free memory, and added boot‑code for loading expanded English text, which can be up to 50 % larger than the original Japanese. Sam later translated ~240 k characters for the first game and ~95 k for the sequel, iteratively testing and refining line breaks, fonts, and drop‑shadow rendering. Subtitles were added to voiced cutscenes by frame‑accurate timing, avoiding a full dub. The completed <em>Legend of Xanadu</em> patch launched on 27 Oct 2025; <em>Xanadu II</em> is in final testing, expected to release within weeks. The project highlights community collaboration, low‑level hacking, and preservation of a historically significant JRPG.</p>
+          </div>
+          <a href="https://readonlymemo.com/legend-of-xanadu-pc-engine-fan-translation-interview-making-of/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50378974" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nfsu2.xyz/" target="_blank">Need for Speed Underground 2 online in the browser</a>
+        </h2>
+        <span class="article-meta">
+          998 points • by fluxusars • 87 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://nfsu2.xyz/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong nostalgia and enthusiasm for reliving the classic racing game through a browser‑based WebAssembly port, praising its surprisingly smooth performance on both old PCs and modern phones and admiring the technical feat of recompiling legacy code. Many callers hope similar revivals will bring other dated titles online, while repeatedly noting legal ambiguity surrounding the distribution of copyrighted assets and fearing potential takedowns. Opinions also mention occasional performance hiccups, missing multiplayer features such as chat, and a desire for native builds or broader game support. Overall sentiment is appreciative yet cautious.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50403052" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/" target="_blank">Making any integer with four 2s (2025)</a>
+        </h2>
+        <span class="article-meta">
+          148 points • by germanrabbit • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The puzzle asks for representations of any natural number using exactly four copies of the digit 2 and any allowable mathematical operations. Simple cases can be solved with elementary arithmetic, while adding exponents, factorials, gamma functions, integrals, or complex numbers expands the achievable range. A notable solution, attributed to Paul Dirac, uses nested square‑roots and base‑2 logarithms to construct a general formula that expresses any integer with only three 2s. To meet the four‑digit requirement, a single 2 is replaced by (\sqrt{2+2}), preserving the count while retaining the formula’s validity. This approach demonstrates that, in principle, every natural number can be generated from four 2s, though the practical difficulty lies in arranging the required nested radicals. The discussion references Graham Farmelo’s biography of Dirac for historical context.</p>
+          </div>
+          <a href="https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on a numeric‑expression puzzle, debating rule interpretations such as treating square roots as implicit operands and labeling “22” as base‑dependent cheating. Contributors list specific integers that cannot be formed with four copies of digits 2‑9 using basic arithmetic, extend the operation set with exponentiation and concatenation, and share external resources for related challenges. A minority notes the perceived difficulty of representing 7 and proposes a trivial construction via Peano’s successor function, emphasizing that many solutions rely solely on natural‑number operations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50408713" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
