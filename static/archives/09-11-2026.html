@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 09, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rbanffy.github.io/fun-with-big-computers/fun-with-vm370/" target="_blank">Fun things to do with your VM/370 CE machine – Fun with big computers</a>
+        </h2>
+        <span class="article-meta">
+          35 points • by rbanffy • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page describes practical ways to obtain and use the VM/370 Community Edition (CE) mainframe environment. It recommends Docker (or Podman) to run a ready‑made container <code>rbanffy/vm370ce</code>, exposing a 3270 console on port 3270, and notes that the image contains only open‑source or public‑domain software. It also mentions alternatives such as nested VM/370 on an IBM mainframe or acquiring a legacy system, but warns of logistical and licensing complexities. Users connect via a 3270 emulator (e.g., x3270), log on as CMSUSER (password cmsuser), and interact with the CMS operating system. The guide shows how to edit the default PROFILE EXEC, run a BASIC “HELLO WORLD” program, compile and execute a FORTRAN IV hello‑world, and redirect its output using FILEDEF and the WRITE (6,…) convention. It further lists additional language tools available in VM/370 CE, including PL/I (compiled with PLI) and REXX (interpreted scripts marked with a comment header). The tutorial emphasizes command syntax, file types, and the screen‑oriented nature of 3270 terminals.</p>
+          </div>
+          <a href="https://rbanffy.github.io/fun-with-big-computers/fun-with-vm370/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a favorable view of VM as the most accessible mainframe operating system, emphasizing that understanding minidisks and s390 device addressing simplifies its use to a level comparable with DOS. They also recommend the 2.4 VM ADCD distribution, noting it includes a comprehensive set of useful software and is readily obtainable for those who search for it. Overall, the sentiment is positive toward VM’s approachability and the availability of a complete software package.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50423569" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2610.14162" target="_blank">Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation</a>
+        </h2>
+        <span class="article-meta">
+          108 points • by theanonymousone • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The provided excerpt consists of the paper’s title, “Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation,” followed only by a list of six image placeholders with alt‑text labels: “archive,” “BibSonomy,” “Reddit,” “Simons Foundation,” “Simons Foundation International,” and “Schmidt Sciences.” No abstract, introduction, methodology, results, or discussion sections are included, so the document contains no substantive technical description, experimental data, or conceptual details to summarize. Consequently, the only concrete information available is the paper’s focus on a next‑concept modeling approach aimed at accelerating parallel coarse‑to‑fine text generation, and the presence of visual references that appear to cite various repositories or institutional sources. No further factual content can be extracted from the supplied material.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2610.14162" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express cautious skepticism about the new tokenizer and training method, emphasizing the substantial effort and hardware resources required for retraining and questioning its practical adoption without clear performance gains. Users report difficulties running the system and suggest exploring ideas from image and video compression for dimensional masking. There is criticism of clickbait hype and of the naming conventions, particularly the term “NCM,” which some find misleading or confusing, while acknowledging the hierarchical diffusion transformer concept underlying the approach. Overall sentiment leans toward wary interest pending demonstrable results.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50422168" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ketchup3d.github.io/app/" target="_blank">KetchUp – Open-source SketchUp alternative built with Rust and WebGPU</a>
+        </h2>
+        <span class="article-meta">
+          543 points • by dcoulmbe • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>BenchUp is a free, open‑source 3D modeling application aimed at woodworking and furniture design. It runs on Windows, macOS, Linux, and in desktop browsers that support WebGPU or WebGL2, requiring a mouse and keyboard. Users create models by drawing basic shapes (lines, rectangles, circles) and applying Push/Pull to add thickness, then manipulate geometry with move, scale, offset, and orbit tools. Exact dimensions are entered via snapping, typed lengths, and measurement utilities; organization is supported through groups, reusable components, and tags. Projects autosave locally and can be downloaded as portable “.ketchup” files; there is no cloud storage or account system. BenchUp imports SketchUp (.skp) files (limited to geometry) and exports Wavefront OBJ (.obj) without materials. The codebase is written in Rust and released under the MIT license, with source and contribution guidelines available on GitHub.</p>
+          </div>
+          <a href="https://ketchup3d.github.io/app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express disappointment with SketchUp’s shift toward a subscription‑only, web‑based modeler and the loss of a free or perpetual‑license desktop version, citing concerns about cloud storage, reduced performance on large projects, and incompatibility with existing .skp files. Users appreciate SketchUp’s intuitive interface and integrated 3D Warehouse, but many seek open‑source or AI‑assisted alternatives that run locally, support Linux, and retain familiar workflow habits. Requests focus on file‑import/export compatibility, trackpad support, and clearer feature demos, while overall sentiment favors simpler, affordable tools that preserve user control.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50418176" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/" target="_blank">Unlocking any car from X brand in most of the world</a>
+        </h2>
+        <span class="article-meta">
+          410 points • by infosecau • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The researchers reverse‑engineered the automaker’s connected‑car Android app, exposing a chain that allows remote control of any vehicle in Australia (and, with additional work, the US and Canada). Decompiling the APK revealed all API calls to *.redacted‑telematics.com.au, including an unauthenticated admin tool (admintool.redacted‑telematics.com.au) whose JavaScript bundle contained hard‑coded OpenIDM admin credentials. By exploiting a path‑traversal bypass (/static%2f..%2fopenidm/), they accessed OpenIDM management APIs despite a WAF. Using these credentials they could reset user passwords and, due to a misconfiguration, skip MFA via a Resource Owner Password Credentials (ROPC) flow, obtaining valid access tokens for any account. With the minted token they called the remote‑command endpoint (/v1/remote/route/command) to issue door‑unlock (and engine‑start) commands, using only the vehicle’s licence‑plate to retrieve VIN, subscriber GUID, and account details. The full exploit chain is: plate → VIN → subscriber GUID → OpenIDM admin credentials → WAF traversal → MFA bypass → token mint → remote command API.</p>
+          </div>
+          <a href="https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments focus on a security flaw in a major automaker’s connected‑car system, identified as likely Toyota/Lexus, with users noting similar vulnerabilities in other models. Opinions converge on criticism of the complexity and privacy risks of remote‑unlock features, describing the implementation as poorly designed and prone to exploitation. Some suggest stronger local key‑based authentication or regulatory part registries, while others downplay the threat compared to physical theft. Overall, there is consensus that current automotive IoT security is insufficient and warrants improvement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50419215" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://matteoraso.github.io/im-not-convinced-the-ai-bubble-exists.html#im-not-convinced-the-ai-bubble-exists" target="_blank">I&#39;m not convinced the AI bubble exists</a>
+        </h2>
+        <span class="article-meta">
+          344 points • by matteoraso • 103 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article argues that the notion of an AI bubble is unsubstantiated. It notes that AI firms have committed roughly $5 trillion to data‑center construction—a largely one‑off expense—while operating costs are modest; Anthropic’s S‑1 filing shows a $2.08 return per $1 of compute, indicating profitability once infrastructure is in place. Debt service is estimated at $250 billion per year over 20 years, comparable to the annual revenue of major tech firms (e.g., Alphabet’s $162 billion in 2019). Revenue growth cited for Anthropic (from $41 M in 2023 to $16.3 B in early 2026) and similar trends at OpenAI, Google, Meta, and NVIDIA suggest expanding market demand. The piece asserts that competitive advantage (“moat”) is limited, yet brand loyalty, institutional lock‑in, and switching costs sustain user bases. Capital remains accessible via public debt and equity, and existing AI companies exhibit stable P/E ratios in the 20s, unlike classic bubble valuations. While acknowledging regulatory, public‑opinion, and security risks, the author concludes that AI’s growth appears sustainable rather than speculative.</p>
+          </div>
+          <a href="https://matteoraso.github.io/im-not-convinced-the-ai-bubble-exists.html#im-not-convinced-the-ai-bubble-exists" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments display broad skepticism toward the current AI investment boom, questioning whether demand and pricing can sustain the massive infrastructure and debt incurred. Critics highlight slowing revenue, profit losses, competitive pressure from cheaper models, and the high ongoing costs of hardware and data‑center operations. While some acknowledge AI’s transformative potential, most argue that timing, market adoption, and efficient alternatives will limit returns, suggesting the sector may resemble a speculative bubble rather than a stable growth engine.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50418975" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://datahyena.com/research/a-chipmaker-was-in-one-of-every-eleven-100m-rounds/" target="_blank">Nvidia was in 1 in 11 startup rounds over $100M last year</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by ghostfoxgod • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A chipmaker appeared in one out of every eleven $100 million financing rounds, indicating frequent participation in large‑scale funding. Conventional lists that rank the most active investors in such rounds typically focus on institutional funds and exclude corporate strategics, thereby omitting a key player among the top three strategic investors. To accurately monitor strategic involvement, analysts should track not only leading venture funds but also corporate backers such as NVIDIA, Salesforce, and GV (Google Ventures). Including these corporations alongside traditional fund investors provides a more complete view of the entities driving substantial round activity.</p>
+          </div>
+          <a href="https://datahyena.com/research/a-chipmaker-was-in-one-of-every-eleven-100m-rounds/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment defends the financing arrangement, asserting it is not circular and emphasizing its purpose of encouraging startups to adopt Nvidia’s technology stack. It frames the practice as typical for a major public company, suggesting that such financing is reasonable and aligned with industry norms rather than problematic. The tone is explanatory and dismissive of criticism, positioning the approach as standard and beneficial for technology integration.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50392256" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://psalm.dev/articles/psalm-7" target="_blank">Psalm 7 release: PHP security&amp;static analysis software</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by danogentili • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Psalm 7 introduces a unified, always‑on security analysis (now 10× faster) that runs together with type checking and dead‑code detection. Taint tracking has been expanded to cover NoSQL, LLM‑prompt, URL injection, new sources such as php://input, STDIN, $_SERVER, $_FILES, and flows through closures, generators, traits, by‑reference parameters, and more, with library stubs for Guzzle, PSR‑7, Monolog, MongoDB, etc. A new purity model based on Hack‑style capabilities lets functions declare exact side effects (io, time, write‑props, etc.) and supports purity templates for higher‑order functions, classes, iterators, and generators. Graph‑based dead‑code detection now finds unused code, including unreachable cycles and unused exception constructions. Template defaults enable generic types with fallback arguments, reducing missing‑template errors. Psalm now fully supports PHP 8.5 (pipe operator) and 8.6 (partial function application) with precise typing. Daily releases, bundled framework plugins (PHPUnit, Symfony, Laravel, Mockery, sabre/event), a versioned plugin API, CI helpers, a compact output format, and faster startup complete the release. Upgrade via Composer to vimeo/psalm ^7.0.</p>
+          </div>
+          <a href="https://psalm.dev/articles/psalm-7" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion emphasizes that PHP’s limited native type system makes static analysis essential, relying on phpdoc annotations to convey detailed types and aid IDE completion. It outlines the two established analysis tools, Psalm and PHPStan, noting comparable performance, and introduces a newer Rust‑based option, Mago, which offers similar functionality but lacks level granularity. The commentary also conveys frustration with PHP’s reliance on external documentation for basic type information, highlighting perceived shortcomings in the language’s built‑in capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50406107" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://declarative-dragging.github.io/" target="_blank">Declarative Dragging</a>
+        </h2>
+        <span class="article-meta">
+          586 points • by smusamashah • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Declarative Dragging (D2) is a model‑driven approach that lets interface authors make elements draggable by specifying which future model states should be reachable through a drag, rather than coding geometry, feedback, and animation directly. The system speculatively renders each target state, extracts the element’s position, and synthesizes a smooth drag‑and‑drop interaction. D2 is composable: basic drag behaviors can be combined and extended with modifiers for floating, snapping, and transitions. The authors implemented D2 in the Dragology library for SVG web interfaces and provide a demo gallery illustrating interactive examples such as twisted‑tree manipulation and permutation labs where multiple parallel representations stay synchronized during a drag. The concept originated from prototypes for a math‑tangibility game (2022) and collaborative sketching of tree‑rewriting interactions (2023), later refined into a research contribution presented at UIST ‘26 (Horowitz, Blinn, Heer). The paper and library aim to simplify creation of high‑quality drag interactions across educational, gaming, and creative tooling domains.</p>
+          </div>
+          <a href="https://declarative-dragging.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion is largely enthusiastic, praising the paper’s novel declarative approach to drag‑and‑drop, its elegant API, speculative rendering, and potential to simplify UI development, with many commenters expressing excitement about its impact and educational demos. Several participants raise practical concerns, questioning scalability to many drop targets, the complexity introduced by composables and a DSL, performance costs of speculative rendering, and the difficulty of integrating it into vanilla JavaScript or existing frameworks. A few note the lack of explicit prior‑art citations and view the work as a promising but still experimental contribution to HCI.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50368481" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://chimera-vocal-synth.vercel.app/" target="_blank">Chimera Vocal Synth</a>
+        </h2>
+        <span class="article-meta">
+          243 points • by nmstoker • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://chimera-vocal-synth.vercel.app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The responses are largely enthusiastic, highlighting the tool’s creative potential for vocal training, singing, language learning, and experimental sound design. Users note its visual appeal and compare it to existing vocal simulators, while also exploring advanced techniques such as throat singing and overtone manipulation. Several comments report a bug that causes distortion in extreme articulator positions and note performance issues on mobile devices. Overall sentiment is positive, with interest in further development, integration as a vocoder, and deeper physiological modeling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50418182" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://mailroute.net/blog/outlook-rejecting-email-without-dmarc" target="_blank">Outlook.com is rejecting email from domains without DMARC</a>
+        </h2>
+        <span class="article-meta">
+          426 points • by xmddmx • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Since Nov 5 2026 Microsoft’s consumer mail services (Outlook.com, Hotmail, Live, MSN) have begun rejecting messages from domains lacking a DMARC TXT record. The rejection appears as “550 5.7.1 Message rejected: Message lacks SPF/DKIM/DMARC Auth Records (AS9031519)”. Unlike the prior bulk‑sender rule (≥5 000 messages/day, enforced since May 2025), this change affects low‑volume senders and is not publicly announced. Only some messages are blocked, so intermittent bounces can go unnoticed. The fix is a single DNS entry: a TXT record named _dmarc with the value <code>v=DMARC1; p=none</code>. This record declares DMARC usage without changing enforcement for other receivers; it only satisfies Outlook.com’s requirement. Successful DMARC still requires SPF or DKIM alignment with the From domain, so the record alone won’t help if those mechanisms are missing. The change reflects a broader industry trend toward universal DMARC adoption as a baseline for email authentication.</p>
+          </div>
+          <a href="https://mailroute.net/blog/outlook-rejecting-email-without-dmarc" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on frustration with Microsoft’s recent enforcement of DMARC‑based rejection for domains lacking a DMARC record, noting that the change often appears silent and was not publicly announced. Many acknowledge that the policy aligns with long‑standing industry trends and improves spam protection, while others criticize the burden placed on small self‑hosted mail operators and the lack of clear communication. Comparisons to similar measures by Gmail and references to existing SPF/DKIM requirements highlight a broader expectation that proper email authentication should have been standard practice. Overall sentiment mixes irritation over implementation with acceptance of its security rationale.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50416158" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
