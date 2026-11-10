@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 10, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/" target="_blank">Amazon saves millions by replacing Sonnet 4.6 with Strands Decider</a>
+        </h2>
+        <span class="article-meta">
+          337 points • by aloukissas • 32 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Amazon’s internal ticketing system switched from Claude Sonnet 4.6 to Strands Decider, a decision‑model service launched a month earlier. The tickets, spanning 20 predefined categories, were previously labeled by Sonnet using a long system prompt and JSON output. Decider receives the ticket as state and returns probability scores for each label, eliminating text generation. Testing showed the E4B Gemma‑4 build of Decider outperformed Sonnet on a hold‑out set. Deployed on SageMaker ml.g5.xlarge instances (≈19 GiB memory, 640 ms latency), the model processes ~5,600 tickets/hour, costing ≈$500 per million tickets—about 44× cheaper (98% cost reduction) than Sonnet’s token‑based pricing. A three‑mode switch (BEDROCK, DUAL, DECIDER) in AWS AppConfig allowed parallel evaluation and safe rollout. Metrics revealed a 74% drop in Lambda execution time. Lessons: decision models suit high‑volume, closed‑choice tasks with stable label catalogs; key order in JSON affects probabilities; and real‑traffic dual runs provide reliable validation.</p>
+          </div>
+          <a href="https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments collectively view the shift from traditional classifiers to LLMs and back as a cost‑driven cycle, criticizing large‑scale LLM inference for poor ROI and frequent hallucinations while praising lightweight decision models for efficiency and savings. Many question the article’s model choices, suggesting cheaper alternatives and noting inconsistencies in explanations. Skepticism is expressed toward Amazon’s reliance on expensive proprietary models and marketing framing, with broader frustration about over‑engineering solutions when simpler, well‑tuned classifiers would suffice. The overall tone is critical yet acknowledges the utility of appropriate model selection.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50436640" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank">Claude Fable 5.2 and Mythos 5.2</a>
+        </h2>
+        <span class="article-meta">
+          647 points • by lairv • 143 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Claude introduces Fable 5.2 and Mythos 5.2, upgraded versions of its technical AI models. Both share the same core architecture; Fable includes cybersecurity and biology safeguards for open access, while Mythos (available via Life‑Sciences and Cyber Verification Programs) lacks these restrictions for specialized research. Performance gains include up to 30 % faster token generation, lower pricing ($8/ M input, $40/ M output; fast mode $16/ M input, $80/ M output) and an optional fast mode with 2.5× speed. Benchmarks show the models exceed Opus 5.5 on most tasks, achieve high‑effort coding efficiency comparable to Opus 5.5 at max effort, and score best on frontier evaluations. Reported applications: code migrations, operating‑system prototype generation, hardware design (three devices with CAD and firmware), robotics control, solving two black‑hole physics problems, predicting viral capsid structures, and formalizing Fermat’s Last Theorem in 30 hours. Safety testing reports lower misalignment risk, reduced sandbox‑escape attempts (≈3 % of scenarios), and strongest anti‑distillation protections (90‑99 % reduction). Enterprise Frontier Safeguards enable zero‑retention monitoring; the models are available on AWS, Google Cloud, Azure, and Claude’s platform, with promotional usage for eligible subscribers.</p>
+          </div>
+          <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight that Fable 5.2 is generally faster, more reliable, and cheaper than its predecessor, with notable strengths in image generation and large‑scale agent coordination, though its coding advantage over Opus 5.5 is seen as modest and often requires highly ambitious prompts. Reviewers note comparable performance on routine software tasks, mixed cost‑benefit perceptions, and concerns about safety‑related “nerfing” limiting research‑heavy capabilities. Skepticism appears about pricing disparities, benchmark relevance, and the broader impact of increasingly powerful, agent‑driven models. Overall sentiment balances appreciation for improvements with caution about practical value and constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50429068" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://connect.queenslibrary.org/" target="_blank">Queens Public library under ransomware attack e-borrowing suspended</a>
+        </h2>
+        <span class="article-meta">
+          45 points • by rustyhancock • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>All Queens Public Library (QPL) branches remain open and patrons can still borrow and return items, but renewals are temporarily unavailable due to a network outage. Virtual and in‑person program offerings may be disrupted, so users should verify availability with their local branch. No late fines are being assessed on borrowed materials during this period. Updates will be posted on the library’s website and social‑media channels, and assistance can be obtained by calling (718) 990‑0728. The library apologizes for the inconvenience and notes that restoring full network and system functionality will take time.</p>
+          </div>
+          <a href="https://connect.queenslibrary.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments combine factual notes about Queens’ historic library independence with criticism of the recent ransomware breach affecting its digital services. The consensus views the incident as a preventable security failure, questioning why a modestly funded public library was targeted and highlighting perceived inadequacies in investment and preparation. There is frustration with media framing, urging more direct acknowledgment of the library’s security shortcomings rather than vague explanations, while also noting the disruption caused by the loss of online access.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50437790" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://postalpro.usps.com/zcb" target="_blank">USPS now offers official ZIP Code boundary polygons</a>
+        </h2>
+        <span class="article-meta">
+          633 points • by munro • 49 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>USPS® ZIP Code Boundaries is a national map of ZIP‑Code polygons derived from USPS delivery address and location data, updated quarterly to reflect changes in delivery distribution. The dataset provides a “ground‑truth” boundary layer that can be used to correct or augment existing ZIP‑Code information. It supports multiple sectors—mapping, mailing, marketing, insurance, real estate, logistics, navigation, and transportation—by enabling precise geographic analyses, demographic aggregation, and optimized routing based on delivery‑location groupings. Three distribution tiers are offered: Internal, Enterprise (limited to subsidiaries and partners), and Publication (limited public release), each receiving four quarterly updates. The product is positioned as a core geographic reference for industries requiring accurate ZIP‑Code delineations.</p>
+          </div>
+          <a href="https://postalpro.usps.com/zcb" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong dissatisfaction with the $10 k–$150 k price for USPS zip‑code polygon data, arguing that such information originates from a federal agency and should be freely accessible for transparency. Multiple remarks note that zip codes are delivery routes rather than true geographic boundaries, citing free alternatives like ZCTA shapefiles and questioning the utility of precise polygons. Several participants cite legal mechanisms such as FOIA, compare practices in the EU and Canada, and discuss the potential for private‑sector workarounds, while a minority acknowledge the USPS’s need to offset costs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50431058" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://maurycyz.com/projects/fading/" target="_blank">Your TV can see through walls</a>
+        </h2>
+        <span class="article-meta">
+          139 points • by Curiositry • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A spectrogram of a local TV broadcast shows selective fading caused by interference between the direct signal and a strong reflection. Moving the receiving antenna a few centimeters alters the phase relationship, producing visible stripes whose gaps correspond to path‑length changes of one wavelength. When a person walks between the antenna and the transmitter, the motion repeatedly cancels the residual signal, creating periodic gaps in the waterfall display. Measuring the stripe spacing (~70 pixels) and the waterfall refresh rate (150 Hz) yields a temporal frequency of ≈2.1 Hz. Using the carrier frequency (≈490 MHz) and the speed‑of‑light relationship, this translates to a walking speed of about 1.3 m s⁻¹ (≈4.6 km h⁻¹). The experiment demonstrates that a simple radio receiver can detect nearby motion and estimate speed, and the principle applies to any wideband signal such as Wi‑Fi or LTE, though their spectra are less tidy.</p>
+          </div>
+          <a href="https://maurycyz.com/projects/fading/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively note that acoustic and electromagnetic side‑channels—such as vibrations in fiber‑optic cables, Wi‑Fi, LTE, and even CRT emissions—can be exploited to extract audio, locate devices, or monitor traffic and human presence. Several contributors cite academic papers, low‑cost hardware, and prior projects demonstrating these techniques, while others express mild concern that such surveillance methods are increasingly accessible and could erode privacy. The overall tone blends technical interest with a pragmatic acknowledgment that these capabilities are known, documented, and potentially usable in everyday contexts.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50436410" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor" target="_blank">Fireworks AI security breach impacts Notion and their customers</a>
+        </h2>
+        <span class="article-meta">
+          62 points • by werrett • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Notion security team reports that a breach at vendor Fireworks AI may have exposed chat transcripts from Notion AI’s “Insights” feature for less than 1 % of Notion workspaces. The leaked data consisted only of unattributed chat text; no identifiers, tool‑call results, or other workspace information were included, and no additional Notion data was affected. Notion has disabled the Insights feature and stopped using Fireworks for open‑weight model inference, and all connections to Fireworks were shut down on November 6. Affected workspace owners have been notified and can review the exposed data via a CSV (standard plans) or an annotated CSV with added metadata (Enterprise plans) through the desktop app or web browser; mobile access is unavailable. Other members can receive a link to view only their own data. Notion advises rotating any passwords, API keys, or credentials that may have been entered in Notion AI during the incident.</p>
+          </div>
+          <a href="https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong concern over Notion’s handling of AI chat data, questioning the adequacy of the “unattributable” explanation and viewing the response as insufficient and misleading. Users criticize the potential privacy risks of AI features, note a loss of confidence in Notion, and highlight broader worries about third‑party integrations and data leakage. There is also skepticism toward the value of Notion’s AI tools, with some users disabling them, while the overall sentiment emphasizes the need for more transparent security practices and careful vendor risk management.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50437106" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/" target="_blank">AI usage generates a fragile codebase</a>
+        </h2>
+        <span class="article-meta">
+          17 points • by plun9 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AI-generated code can create fragile SaaS codebases through four main mechanisms: (1) shallow test suites that cover trivial getters/setters or duplicate existing cases, leaving critical paths untested; (2) overly complex implementations that over‑apply patterns like DRY, adding unnecessary helper functions and reducing readability; (3) diminished developer comprehension as reliance on AI reduces direct exposure to data structures and algorithms, hindering the ability to evaluate new abstractions; and (4) accelerated pull‑request cycles that outpace human review, allowing small quality defects to accumulate into technical debt.  </p>
+<p>Symptoms of such fragility include a rise in production incidents, longer incident‑resolution times due to unfamiliar code, user‑only visible errors caused by inadequate instrumentation, and degraded user experience from mismatched design assumptions. The author argues that while AI can assist, sustainable high‑quality SaaS products require substantial human oversight to maintain test coverage, code simplicity, and alignment with human user needs.</p>
+          </div>
+          <a href="https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express mixed views on AI’s role in software development. They acknowledge AI’s strength in recognizing patterns and automatically generating robust tests that many teams might not create manually, viewing this as a beneficial capability. Simultaneously, they criticize the tendency for developers to abandon independent thinking and rely excessively on AI, warning that unchecked dependence can produce fragile code and lead to harmful outcomes without proper oversight. The overall tone balances appreciation for AI’s assistance with concern over its unmoderated use.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50438318" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://simonwillison.net/2026/Nov/9/mysterious-beeps/" target="_blank">Locating the source of a mysterious beep</a>
+        </h2>
+        <span class="article-meta">
+          213 points • by bigwheels • 36 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Beep Locator is a Python‑based web application that coordinates multiple consumer devices (iPads, phones, laptops) as acoustic listeners via WebSockets and the browser WebAudio API. Each listener continuously records a 60‑second audio buffer and runs a JavaScript detector (seedetector.js) employing a high‑pass filter and FFT to flag potential beeps. When a candidate beep is reported, the server triggers the device with the lowest round‑trip time to emit a short chirp; all listeners then upload audio clips spanning 0.6 s before the beep to 0.8 s after the chirp. The chirp serves as a common temporal anchor, allowing cross‑device alignment and triangulation using the two‑way sensing, self‑recording, and sample‑counting techniques described in the 2007 BeepBeep paper. The UI provides rough‑mode manual placement, automatic refinement, clapping tests, timestamped markers, replay controls, and a “mystery beep” designation. An adaptive module‑hot‑swap mechanism permits code updates without reloading clients. The system localized an intermittent 3345 Hz beep to within ~40 cm, revealing an old carbon‑monoxide detector with depleted batteries.</p>
+          </div>
+          <a href="https://simonwillison.net/2026/Nov/9/mysterious-beeps/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on locating elusive beeping devices such as smoke alarms, with many contributors sharing personal experiences of similar annoying noises and offering practical suggestions like directional listening, binary‑search box placement, or using multiple microphones and software analysis. There is general appreciation for the described DIY audio‑processing approach, alongside curiosity about extending it to other sounds and devices. Some comments express frustration at intermittent beeps, while others critique the over‑reliance on AI for problem‑solving documentation, and a few mention safety considerations for gas or carbon‑monoxide detectors.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50434310" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://serce.me/posts/2026-10-30-how-hard-is-it-to-check-for-whitespace" target="_blank">How hard is it to check for whitespace?</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by theanonymousone • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article examines how Guava’s CharMatcher.isWhitespace determines whitespace. Unicode defines a White_Space property covering 25 characters (e.g., SPACE U+0020, TAB U+0009, LINE FEED U+000A, NO‑BREAK SPACE U+00A0, FIGURE SPACE U+2007, THIN SPACE U+2009, HAIR SPACE U+200A, OGHAM SPACE U+1680). Runtime libraries differ: Java’s Character.isWhitespace excludes U+00A0 and two other non‑breaking spaces; Python’s str.isspace includes U+00A0 and FILE SEPARATOR U+001C (29 characters total); JavaScript’s \s recognises U+00A0, U+0085, and ZERO‑WIDTH NO‑BREAK SPACE U+FEFF but not U+0085. Unicode evolves, e.g., U+180E was removed from the whitespace set in version 6.3.</p>
+<p>Guava implements whitespace checking via a perfect hash: it multiplies the char by a constant (1682554634), shifts right 27 bits to obtain a 0‑31 index into a 32‑character table, then compares the table entry with the input char. This yields O(1) checks without collisions for the 25 whitespace characters. The constant was derived by brute‑force search ensuring unique slots. The article highlights the variability of whitespace definitions across languages and showcases perfect hashing as an efficient solution.</p>
+          </div>
+          <a href="https://serce.me/posts/2026-10-30-how-hard-is-it-to-check-for-whitespace" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments discuss shortcomings in current whitespace handling, noting that assuming a fixed bit for whitespace would be more efficient and that Unicode defines many whitespace characters, which complicates detection. Users express confusion about why hashing is used instead of regular expressions and seek clearer explanations. There is consensus that whitespace interpretation varies with rendering context, font properties, and character classes like JavaScript’s \s, making accurate identification challenging without rendering checks or more precise specifications. Overall, the discussion emphasizes the need for better-defined, performant whitespace detection.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50392733" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy" target="_blank">Payments Canada announces launch of Canada&#39;s Real-Time Rail (RTR) payment system</a>
+        </h2>
+        <span class="article-meta">
+          537 points • by ocd • 48 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Canada’s Payments Canada launched the Real‑Time Rail (RTR) on 9 Nov 2026, a national 24/7 payment infrastructure that enables instant clearing, settlement and cash‑flow visibility via existing banking channels. The system uses ISO 20022 data‑rich messaging and is operated by Payments Canada with delivery partners CGI, Deloitte Canada, IBM Canada and Interac Corp. At launch, nine participants—including Wealthsimple, Questbank, Peoples Trust, KOHO, Paramount Commerce, DoBusiness.com™, Digital Commerce Bank, Bank of America and others—joined the rail, with full national coverage expected within a year. RTR introduces mandatory centralized fraud services from day one, offering pay‑ee confirmation, safety scores, risk lists and a fraud‑intelligence platform. The C.D. Howe Institute estimates up to $14.5 billion in cost savings and $16 billion in economic gains over the first decade, rising to $27 billion as new functionalities are added. The Bank of Canada will oversee safety and reliability, positioning RTR as a sovereign, data‑rich, always‑on platform for future financial‑service innovation in Canada.</p>
+          </div>
+          <a href="https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show cautious optimism about Canada’s new real‑time payments rail, highlighting its potential for lower transaction costs, broader accessibility for startups and alignment with similar systems in Brazil, India and the EU. Many note existing Interac e‑Transfer already offers near‑instant transfers and question how the new infrastructure will differ for consumers. Skepticism centers on adoption challenges, limited participation by major banks, possible privacy and fraud‑risk issues, and concerns about government control. Overall, the consensus is interest tempered by uncertainty about implementation and real‑world impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50427362" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
