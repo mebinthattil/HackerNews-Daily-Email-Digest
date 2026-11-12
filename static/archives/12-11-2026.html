@@ -1,0 +1,566 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 12, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pron.github.io/posts/correctness-and-complexity" target="_blank">Why Writing Correct Software Is Hard</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by AriFordsham • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article explains why software correctness is inherently hard. It traces the theoretical background from Hilbert’s program—seeking consistency, completeness, and decidability—to Gödel’s incompleteness theorems and the 1936 halting theorem (proved independently by Church and Turing). The halting theorem shows no algorithm can decide for every program whether it halts; reductions give two key corollaries:</p>
+<ul>
+<li><strong>Reachability undecidability</strong>: no program can determine whether another program ever reaches a given state.  </li>
+<li><strong>Rice’s theorem</strong>: any non‑trivial semantic property of partial functions is undecidable.</li>
+</ul>
+<p>The “Busy Beaver” function f(n) (maximum steps of a halting n‑state Turing machine) and the analogous proof‑size function g(n) are proved non‑computable, demonstrating that the difficulty of proving termination grows faster than any computable function. Concrete small machines (e.g., a 1919‑state TM) have termination statements independent of ZFC, showing that even modest programs can be mathematically unresolvable. The piece argues that computation, tied to physical processes, lies outside pure mathematics, and that algorithmic complexity—formalized later by Hartmanis and Stearns—captures the practical limits of verification.</p>
+          </div>
+          <a href="https://pron.github.io/posts/correctness-and-complexity" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses interest in formal verification while acknowledging limited experience beyond toy proofs. It welcomes a discussion that moves beyond AI‑centric narratives and unrealistic expectations of easy verification. The author emphasizes that creating programs amenable to formal verification is a challenging design task that demands substantial thought and deep insight into the problem domain.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50465352" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/janestreet/agent_skills/blob/master/socratic-tutor/SKILL.md" target="_blank">Jane Street: Socratic Tutor</a>
+        </h2>
+        <span class="article-meta">
+          281 points • by tosh • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Socratic‑Tutor skill guides an agent to teach a user through guided questioning rather than lecturing. Before starting, the agent confirms the user wants an interactive tutoring session; single‑question requests are answered directly. The topic is broken into 4–10 concrete subskills (or a two‑level hierarchy for broad topics), each tracked on a 0–5 proficiency scale and displayed as an ASCII progress bar. A short diagnostic of 3–5 questions assesses the user’s initial level for each subskill before any instruction begins.</p>
+<p>During the teaching loop the agent asks one question at a time, prompting the user to predict, explain, find flaws, apply concepts, or connect ideas. Incorrect answers receive narrower probing questions; correct answers may be challenged to test robustness. Brief explanations are given only for genuinely new material, after which questioning resumes. Levels advance only after consistent, independent demonstrations, with periodic unannounced reviews that can lower levels if needed. The session concludes when all subskills reach the target level (typically 4/5, or 5/5 for full mastery), followed by a comprehensive mixed assessment. Users can issue commands such as “show progress,” “harder,” “just tell me,” “save state,” and “resume from:” to control the tutoring flow.</p>
+          </div>
+          <a href="https://github.com/janestreet/agent_skills/blob/master/socratic-tutor/SKILL.md" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely view the Socratic‑tutor skill as a useful way to make language‑model interactions more instructional, noting that it encourages deeper reasoning, reduces hand‑holding, and can improve writing and programming practice. Users share practical setup tips, report positive experiences across domains such as email drafting and learning new languages, and compare it to earlier study modes. Critiques focus on the skill’s limited novelty, the effort required to maintain consistency, potential degradation of context over time, and concerns about repetitive implementations across teams. Overall sentiment is cautiously optimistic with recognition of both benefits and practical constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50438261" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://codeberg.org/wvhulle/bootvine" target="_blank">A live tree of systemd jobs on the boot console</a>
+        </h2>
+        <span class="article-meta">
+          123 points • by orhunp_ • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://codeberg.org/wvhulle/bootvine" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong overall approval of the new visual boot interface, praising its aesthetics, usefulness for monitoring systemd units, and potential as a default across distributions. Reviewers note that while the displayed 12‑second boot time may seem long on fast laptops, the visual representation remains valuable, and some suggest adding richer graphics or parallel hardware initialization. Interest extends to adapting the concept for other init systems, and even users typically opposed to systemd acknowledge it as a noteworthy improvement. The consensus is that the tool is a welcomed enhancement despite minor performance concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50425017" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028" target="_blank">Tim Peters has died</a>
+        </h2>
+        <span class="article-meta">
+          1247 points • by ayhanfuat • 53 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express deep respect and gratitude for Tim Peters, highlighting his technical impact through the Zen of Python, Timsort, and numerous Python enhancements, as well as his mentorship, humor, and generosity toward newcomers. Readers mourn his passing, recalling personal interactions and the loss felt across the community, while a minority note dissatisfaction with how the Python Software Foundation communicated his death and referenced past conflicts. Overall, the tone is reverent and sorrowful, emphasizing his lasting influence on both the language and its developers.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50450488" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.mcmillen.dev/sigbovik/" target="_blank">93% of paint splatters are valid Perl programs (2019)</a>
+        </h2>
+        <span class="article-meta">
+          459 points • by zenincognito • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper “93 % of Paint Splatters are Valid Perl Programs” (SIGBOVIK 2019) investigates whether random paint splatters can accidentally form syntactically valid Perl code. Using optical character recognition (OCR) on a dataset of 100 splatter images, the authors find that 93 % of the OCR outputs parse as Perl programs. The study presents seven splatters that do not parse, analyzes common syntactic properties of the valid cases, and includes a gallery linking each image to its corresponding Perl source. Supplementary material provides a single‑page overview of all splatters, a tarball of the image dataset, and a link to the full proceedings (page 174). An errata section lists additional “interesting” programs identified after submission, such as OCR strings that evaluate to 0 or specific strings in Perl. The work is framed as a tongue‑in‑cheek empirical contribution to programming‑language folklore.</p>
+          </div>
+          <a href="https://www.mcmillen.dev/sigbovik/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong appreciation for SIGBOVIK’s whimsical style and the playful creativity of Perl, noting its ability to tolerate unconventional syntax and even resemble visual art. Contributors share nostalgic admiration for Perl’s history while also highlighting practical challenges such as OCR reliability and maintenance complexity in large Perl codebases. Some observe AI’s occasional use of Perl, treating it as a humorous novelty, and a few question the validity of OCR‑based analyses. Overall the discussion balances fondness for Perl’s eccentricity with measured technical critique.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50459745" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wiz.io/blog/cve-2026-119618-rce-apache-http-server-vulnerability" target="_blank">Critical RCE Vulnerability in Apache HTTP Server</a>
+        </h2>
+        <span class="article-meta">
+          233 points • by soheilpro • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>CVE‑2026‑119618 is a critical race‑condition flaw in Apache HTTP Server’s HTTP/2 module (mod_http2). The vulnerability resides in the assign_headers() function, where improper synchronization of concurrent threads can corrupt heap memory, enabling remote, unauthenticated arbitrary code execution. The issue was independently discovered by Anthropic and Google Cloud’s Vulnerability Research Team; no public exploit or confirmed abuse has been reported. It affects any deployment that enables HTTP/2 in Apache versions prior to 2.4.71, as well as standalone mod_h2 builds older than 2.0.42. Wiz data indicate that 64 % of cloud workloads run vulnerable Apache instances, and 51 % are publicly exposed, creating a potential vector for lateral movement and access to cloud metadata. Mitigation steps are: upgrade Apache to 2.4.71 or later (or mod_h2 &gt; 2.0.42); if immediate patching is infeasible, temporarily disable HTTP/2 and enforce HTTP/1.1. Wiz Threat Center provides queries to locate vulnerable assets.</p>
+          </div>
+          <a href="https://www.wiz.io/blog/cve-2026-119618-rce-apache-http-server-vulnerability" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a newly disclosed critical Apache HTTP Server vulnerability, particularly affecting the HTTP/2 module, with many participants emphasizing the need to disable or patch it promptly. Comments express confusion over CVE identifiers, concern about the prevalence of vulnerable Apache instances in cloud environments, and frustration over delayed container updates. Several users compare Apache to alternatives such as Nginx or Rust‑based servers, critique the complexity of HTTP/2, and note skepticism toward AI‑generated fixes while highlighting broader LAMP‑stack security challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50462177" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/aws/aws-emulator" target="_blank">AWS emulator</a>
+        </h2>
+        <span class="article-meta">
+          870 points • by super_linear • 82 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>AWS Emulator is a local, head‑less program that mimics AWS APIs for development and CI testing without requiring an AWS account or incurring service fees. It operates in two modes: <strong>Server mode</strong>, where the SDK or CLI is pointed to the emulator’s HTTPS endpoint (127.0.0.1:9297) via environment variables; and <strong>Embedded mode</strong>, where the emulator is added as a Rust dev‑dependency and its HTTP client is wired directly into tests, eliminating the need for an external endpoint. The repository provides a workspace with one crate per AWS service, built with a Rust toolchain, C compiler, and ≥100 GB disk space; initial builds are resource‑intensive but incremental builds are fast. Telemetry is enabled by default but can be disabled via the <code>--telemetry off</code> flag, <code>EMULATOR_TELEMETRY</code> environment variable, a <code>config.toml</code> setting, or Embedded API options. Issues and fidelity gaps are tracked in the <code>issues/</code> directory; contributions are limited to issue reporting, as PRs are not accepted. The code is licensed under CC0‑1.0, except vendor components under Apache 2.0.</p>
+          </div>
+          <a href="https://github.com/aws/aws-emulator" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments reflect mixed sentiment toward the new AWS emulator. Users acknowledge the long‑standing need for a locally runnable AWS‑compatible environment and express cautious optimism about its potential, especially when integrated with tools like Testcontainers. However, many raise doubts about its maturity, maintenance, and completeness, noting security limitations, difficulty resetting state, large build requirements, missing services, and reliance on AI‑generated code. Comparisons to existing alternatives such as LocalStack, Floci, and Fakecloud are common, while concerns about telemetry, licensing and long‑term support persist.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50456631" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://michael.bacarella.com/2026/11/10/false-smoke-alarm-jane-street-datacenter/" target="_blank">A false smoke alarm almost drowned Jane Street&#39;s only NYC datacenter</a>
+        </h2>
+        <span class="article-meta">
+          501 points • by mbac32768 • 42 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>Jane Street’s sole New‑York datacenter was located on the same floor as its trading floor to protect proprietary algorithms and allow manual shutdown by pulling power cords—a practice inherited from a partner’s nuclear‑submarine background.  </li>
+<li>Contractors’ dust triggered the building’s smoke detector; the alarm automatically pressurized the sprinkler system and shut down the CRAC (Computer Room Air Conditioner) units to prevent feeding a fire.  </li>
+<li>With cooling disabled, rack temperatures quickly rose above 140 °F. The systems team raced to the machine room and manually unplugged every server to avoid equipment damage and potential water‑damage from sprinklers that could release under heat.  </li>
+<li>The incident caused minimal downtime because markets were closed; afterward, procedures were tightened but the datacenter remained in‑building until later events (e.g., Hurricane Sandy).  </li>
+<li>To prevent similar oversights, the team built a reliable OCaml‑based monitor that queries each Linux server’s internal temperature sensor each minute, averages the values, and alerts the team when the mean exceeds a safe threshold, providing a more trustworthy early‑warning than CRAC or room‑sensor telemetry.</li>
+</ul>
+          </div>
+          <a href="https://michael.bacarella.com/2026/11/10/false-smoke-alarm-jane-street-datacenter/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on data‑center resilience during emergencies, highlighting both admiration for staff who manually supplied diesel and concerns about insufficient safety mechanisms such as emergency power‑off switches, integrated smoke‑alarm shutdowns, and fire‑suppression systems. Commenters note the trade‑offs between water‑based sprinklers and gas‑based fire suppression, question why cooling was not restored before powering down servers, and emphasize the importance of geographic and provider redundancy. The tone is generally appreciative of the effort involved but critical of design oversights and calls for clearer, more robust emergency procedures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50455394" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad" target="_blank">Nvidia is preparing to oust Jensen Huang</a>
+        </h2>
+        <span class="article-meta">
+          1072 points • by jbredeche • 203 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a mixed assessment of Jensen Huang’s situation: many view his personal misconduct—infidelity and alleged ties to a Chinese spy—as serious breaches that could justify removal, especially given potential export‑control violations and national‑security concerns. Others stress his pivotal technical leadership, noting Nvidia’s strategic importance and the difficulty of replacing him without harming the company and the broader AI ecosystem. A recurring theme questions whether the board will protect him despite the scandal, while some argue the affair alone should not dictate his corporate fate.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50459703" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/" target="_blank">Gemini Decisions API</a>
+        </h2>
+        <span class="article-meta">
+          448 points • by iamdelirium • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Gemini Decision 1, accessed via the Decisions API, scores options without token‑by‑token decoding, achieving median compute latency of 50–100 ms (150–250 ms end‑to‑end) for up to 16 K‑token contexts and remaining stable from 1 to 100 questions per request. Zero output tokens are billed, making it roughly five times cheaper than Gemini 3.5 Flash‑Lite on the shared benchmark suite.  </p>
+<p>Key capabilities:<br>
+- Native multimodal processing of text, images, audio, video, and PDFs in a single forward pass; resolution can be tuned per visual input to balance detail and token cost.<br>
+- Supports three decision types in one request:<br>
+  • <strong>noul</strong> – yes/no probability with optional true/false criteria.<br>
+  • <strong>choice</strong> – multiple‑choice selection (2–255 options) with winner and normalized probabilities.<br>
+  • <strong>score</strong> – ordered rubric grading, returning a continuous weighted score and per‑level probabilities.<br>
+- Each answer includes a confidence score (0–1) for routing ambiguous cases.  </p>
+<p>The API uses the same ContentBlock format as the Interactions API, allowing combined multimodal inputs such as a call recording plus account metadata or a scanned claim PDF with damage photos.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express surprise that the multimodal decision model was not highlighted earlier, noting its ability to ingest audio, video, and PDFs as a notable advantage. Opinions are divided: several users praise its lower error rates and speed despite higher cost, while others criticize pricing, unclear use cases, and marketing gaps. Comparisons with existing models such as Jev, Liquid, and open‑source options highlight trade‑offs in performance and expense. Concerns also appear about ethical implications and product availability timelines.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50456791" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
