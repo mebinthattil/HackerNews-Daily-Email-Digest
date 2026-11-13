@@ -1,0 +1,570 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 13, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://status.claude.com/incidents/nn11wk485zfn" target="_blank">Elevated errors on claude.ai, Claude Code, and platform.claude.com</a>
+        </h2>
+        <span class="article-meta">
+          175 points • by __vivek • 55 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>No content was provided beyond the title, so a summary cannot be generated.</p>
+          </div>
+          <a href="https://status.claude.com/incidents/nn11wk485zfn" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on a widespread outage affecting Claude and related Microsoft services, with many users reporting authentication failures, forced logouts, and intermittent reconnections across regions. The discussion repeatedly links the issue to a concurrent Microsoft 365 outage and speculates about underlying causes such as Azure, Cloudflare, or system dependencies. Frustration is evident, alongside jokes about forced downtime, reliance on AI tools, and requests for reset options. Overall sentiment leans negative, emphasizing disrupted workflows, uncertainty about the outage’s origin, and a resigned acceptance of a temporary work pause.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50481187" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f" target="_blank">Jensen Huang resigns</a>
+        </h2>
+        <span class="article-meta">
+          3611 points • by lldb • 385 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that Jensen Huang’s departure reflects more than personal misconduct, with many attributing the scandal to alleged export‑ban violations and possible governmental or geopolitical maneuvering. Opinions split between criticism of Huang’s judgment and sympathy for his leadership legacy, while others argue the board acted to protect Nvidia’s reputation and shareholder value. A recurring theme is uncertainty about the true motives—whether the affair, regulatory breaches, or a broader power struggle—combined with concern over the potential impact on Nvidia’s market position and the wider AI industry. The tone ranges from skeptical and wary to lamenting the drama.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50467087" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ice-wm.org/" target="_blank">IceWM</a>
+        </h2>
+        <span class="article-meta">
+          203 points • by inatreecrown2 • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>IceWM is a lightweight X Window System manager focused on speed, simplicity, and minimal interference. Developed in C++ by Marko Maček since 1997, it offers a taskbar with pager, global and per‑window keybindings, dynamic menus, and full keyboard control (including Alt‑Tab switching). The manager supports multiple monitors via RandR and Xinerama, several focus models, manual window placement, autoraising, tooltips, DockApps, tabbed windows, and configurable keybindings. It is highly configurable and themeable, with over 450 downloadable themes; themes consist of settings and small images. IceWM is packaged for major Linux distributions (Debian, Ubuntu, Arch, OpenSUSE, Gentoo, Slackware, CentOS, antiX, NixOS) and most *BSDs, and is translated into roughly 36 languages. The latest stable release is 4.1.0 (2026‑08‑06), released under the GNU Library GPL. Installation can be performed from source tarballs or GitHub development clones, requiring standard X11 libraries and optional dependencies (e.g., imlib2, libpng). Bug reports and contributions are handled via GitHub.</p>
+          </div>
+          <a href="https://ice-wm.org/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey overall appreciation for IceWM’s lightweight, low‑resource nature and its suitability for remote or modest hardware, often recalling nostalgic positive experiences and noting its out‑of‑the‑box functionality. Users also highlight its simplicity compared with heavier desktops and suggest it as a viable option for educational or legacy deployments. At the same time, several remarks criticize its dated visual design, limited window‑management features such as snapping, and perceived neglect by developers, while others note a shift toward Wayland and newer window managers as alternatives. The consensus balances nostalgic favorability with calls for modernization.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50478515" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://motherduck.com/blog/the-data-intelligence-engineer/" target="_blank">The Dawn of the Data Intelligence Engineer</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by jonbaer • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article proposes a new role, the <strong>Data Intelligence Engineer (DIE)</strong>, to address AI‑driven data work that does not fit traditional data‑team titles. A DIE automates data‑engineer ingestion and analytics‑engineer transformation/modeling by building software agents that encode organizational knowledge (e.g., joinable fields, business terms like “ARR”) into a shared context. Core duties include:</p>
+<ul>
+<li>Designing frameworks and data models that support agent‑based querying.</li>
+<li>Curating and maintaining contextual metadata for reliable answers.</li>
+<li>Developing and running evaluation suites (evals) that test agents against known Q&amp;A pairs, providing confidence and detecting breakage.</li>
+<li>Monitoring, fixing, and preventing system failures to ensure continuous availability of data‑driven surfaces.</li>
+<li>Enabling self‑service access so any employee can query LLMs (Claude, ChatGPT, etc.), generate apps/visualizations, and make data‑informed decisions.</li>
+</ul>
+<p>The role blends responsibilities of data engineers, analytics engineers, and analysts, reflecting the convergence of these functions in modern AI‑augmented data stacks. Successful DIEs deliver an experience equivalent to consulting the company’s most knowledgeable analyst for every query.</p>
+          </div>
+          <a href="https://motherduck.com/blog/the-data-intelligence-engineer/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express frustration with the proliferation of narrowly defined data roles, urging broader, T‑shaped skill sets and tighter collaboration. There is caution about unchecked data democratization, emphasizing the need for trustworthy, shareable insights and suggesting that exposing a metrics layer could improve governance. Opinions highlight the enduring value of domain expertise and the risk of overly specialized titles, proposing that analytics engineering and BI functions be merged. Skepticism appears toward new job labels, while some optimism exists about AI models gaining contextual understanding through integrated communications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50480480" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/" target="_blank">Rust 1.100</a>
+        </h2>
+        <span class="article-meta">
+          706 points • by mbStavola • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Rust 1.100.0 stabilizes several major features and introduces key Cargo improvements.  </p>
+<ul>
+<li><strong>Never type (<code>!</code>)</strong> is now fully stable, usable in any position, with <code>Infallible</code> aliased to <code>!</code>. The fallback type changes from <code>()</code> to <code>!</code> in pre‑2024 editions, a breaking change that may affect generic result handling.  </li>
+<li><strong>Allocator API</strong>: the core <code>Allocator</code> trait and related types (<code>Box</code>, <code>Vec</code>, <code>Arc</code>, <code>Rc</code>) are stabilized, enabling custom allocators for <code>Vec</code> and <code>Box</code>.  </li>
+<li><strong>DropGuard</strong> (<code>core::mem::DropGuard</code>) provides a convenient closure‑on‑drop helper, supporting <code>dismiss</code> to prevent execution.  </li>
+<li><strong>Zero‑sized type creation</strong>: <code>std::mem::conjure_zst</code> offers a dedicated, unsafe way to instantiate ZSTs safely.  </li>
+<li><strong>Cargo linting</strong>: <code>unused_crate_dependencies</code> warns about dead dependencies; cache layout now consistently hashes build configurations, reducing collisions.  </li>
+<li><strong>Dependency cooldowns</strong>: <code>min-publish-age</code> lets registries enforce a waiting period before new crate versions are considered, configurable via <code>.cargo/config.toml</code>.  </li>
+</ul>
+<p>Additional stabilized APIs include numerous <code>Allocator</code> implementations, <code>bool::toggle</code>, <code>Box::take/map</code>, <code>UnsafeCell</code> helpers, string/array trim prefixes/suffixes, <code>Vec::from_fn</code>, and Windows process extensions.</p>
+          </div>
+          <a href="https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for the major release, highlighting appreciated new features such as the never type, stabilized APIs, dependency‑cooldown handling, unused‑dependency warnings, and allocator improvements. Many users express gratitude to the maintainers and note practical benefits for their projects. Alongside the praise, recurring concerns include slower compilation times, large temporary build artifacts, the absence of a stable ABI, questions about semver versioning for breaking changes, limited documentation on new APIs, and skepticism about the effectiveness of minimum publish‑age safeguards. Several remarks also explore Rust’s role in AI‑assisted development and its safety advantages.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50472038" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://status.claude.com/history" target="_blank">Claude Is Down</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by cornfieldlabs • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “Claude Status – Incident History” consists of two main sections. The first presents an exhaustive alphabetical list of countries and territories paired with their international dialing codes (e.g., Afghanistan +93, United States +1, China +86). No incident details, timestamps, or status updates are included. The second section, “Images and Visual Content,” references a single image whose alt text is “Claude logo.” No further textual or visual information is provided.</p>
+          </div>
+          <a href="https://status.claude.com/history" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a widespread service disruption affecting Claude, with many participants expressing frustration over lost productivity, ruined projects, and concerns about reliability, especially when deadlines are tight. Several comments note the inconvenience of having to seek alternatives or wait for resets, while others advise diversifying providers and mention that the outage does not affect all regions. Humor and sarcasm appear alongside speculation about the cause, but the dominant view reflects disappointment and a desire for more dependable service.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50481220" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://brave.com/blog/search-api-agentic-payments/" target="_blank">Brave Search API now accepts agentic payments via the x402 protocol</a>
+        </h2>
+        <span class="article-meta">
+          117 points • by sjdh76 • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Brave’s Search API now supports instant, pay‑as‑you‑go “agentic” payments through the open x402 protocol. Instead of API‑key authentication, each request requires a USDC payment on the Base blockchain; an unpaid request returns HTTP 402 with the price and payment details, after which the agent signs and resubmits the payment to receive results and a transaction receipt. Brave acts as a facilitator, accepting USDC now and planning support for additional networks and stablecoins. Pricing aligns with existing rates: $0.005 per 1,000 queries for LLM‑context searches and for standard web, news, image, video, and local endpoints, with Base gas fees covered temporarily. No account or plan is needed—developers install the Stripe‑developed CLI wallet (PurlWallet), fund it with Base‑native USDC, and query via the x402 proxy. Documentation and integration guides are available at Brave’s API dashboard.</p>
+          </div>
+          <a href="https://brave.com/blog/search-api-agentic-payments/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The overall sentiment is cautious skepticism about HTTP 402 micropayment models for search, questioning functionality, cost, and scalability, especially when agents repeat queries. Curiosity about positive experiences exists, but many doubt widespread adoption. Concerns focus on expense, lack of deduplication, privacy implications, and reliance on crypto. Some acknowledge Brave Search as a viable alternative, while others consider the approach naive yet potentially beneficial if implemented responsibly.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50477649" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/simpsoka/zigzag" target="_blank">Show HN: My $300 embroidery machine needed a subscription, so I built my own app</a>
+        </h2>
+        <span class="article-meta">
+          545 points • by simpsoka • 56 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>ZigZag is an open‑source, Rust‑based embroidery editor for macOS and Windows that converts SVG artwork into machine‑readable stitches. It includes a visual studio (egui + OpenGL) and a command‑line tool, both sharing the same engine, and supports AI agents via Model Context Protocol (MCP) for automated design creation and editing. Export formats cover PES/PEC, DST, EXP, JEF, VP3, and direct Bluetooth transfer to Brother Skitch (PP1). Installation provides signed, notarized macOS DMG and a self‑contained Windows zip; no Rust toolchain is required. Core modules handle SVG import, stitch parameters, tatami fill, satin columns, running/ triple‑run stitches, polygon booleans, overlap removal, routing, trims, and digitizing checks. The planner removes hidden overlaps, orders caps, routes travel stitches out of view, and respects fabric presets. UI mimics Illustrator with Pen, Shape, Brush, smart guides, path tools, image trace, thread palettes, and contextual task bars. Panels are dockable, tabs retain per‑document state, and an Agent panel streams Claude Code or Codex actions through MCP.</p>
+          </div>
+          <a href="https://github.com/simpsoka/zigzag" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for using large language models to create affordable, open‑source tools that replace costly, proprietary embroidery and other hobby‑software, highlighting the potential to free users from subscription‑based ecosystems and revitalize legacy hardware. Contributors note the high prices and outdated interfaces of existing solutions, share related open‑source projects, and discuss challenges such as ensuring file validity and long‑term maintenance. While optimism about DIY automation is prevalent, there are concerns about future vendor lock‑in, support durability, and proper attribution in reused code.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50470488" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/" target="_blank">Gemini 4 Hydrogen and Orchestrator</a>
+        </h2>
+        <span class="article-meta">
+          423 points • by jonbaer • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Gemini 4 Hydrogen is now available in Google Antigravity, accompanied by an “Orchestrator” dropdown that dynamically pairs Hydrogen with higher‑capacity models such as Gemini 4 Carbon (and Argon for Ultra plans). Orchestrator routes tasks bidirectionally: Carbon handles initial read‑only analysis, planning, and re‑planning triggers, then hands off to Hydrogen for code edits, package updates, and testing; if Hydrogen encounters difficulty it returns control to Carbon for state inspection and plan repair. This dynamic pipeline achieves near‑Carbon success rates while using 24 % less quota and completing tasks 19 % faster on Terminal‑Bench 4.1. Developers can also construct explicit multi‑model pipelines via the Antigravity SDK, e.g., using Hydrogen agents for issue triage and coding while Carbon tackles large refactors and security checks. Hydrogen alone scores 51 on the Artificial Analysis Intelligence Index and 57 % on Terminal‑Bench 4.1 (over three‑fold Flash 3.8’s 18.2 %). rollout: Hydrogen to paid Google AI Pro/Ultra users; Orchestrator (Carbon) and (Argon) to Ultra subscribers, with Argon also for Pro; enterprise access via Gemini for Business.</p>
+          </div>
+          <a href="https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on Google’s new Gemini 4 Hydrogen and the accompanying Orchestrator feature. Commenters repeatedly note confusion over the chemistry‑based naming and compare it unfavorably to previous numeric schemes. Performance and cost are common concerns: Hydrogen and Flash are praised for speed and lower quota use, while Carbon and Argon are described as slow and expensive. Opinions about the Orchestrator’s utility are split, with some seeing potential efficiency gains and others questioning its necessity. Overall sentiment is cautious optimism tempered by frustration over naming and pricing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50472260" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer" target="_blank">Edge0-145B: Frontier AI Capabilities on Your Own Computer</a>
+        </h2>
+        <span class="article-meta">
+          268 points • by sroussey • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Edge0‑145B (and Edge0‑120B) are released as fully open‑source models with 145 billion parameters, accompanied by a unified inference framework and deployment tools for on‑device use. Key engineering advances enable a 145 B model to run on a laptop with ~28‑29 GB peak memory, &gt;80 tokens / s decode speed, and modest power draw, by:</p>
+<ul>
+<li><strong>Architecture:</strong> 64‑expert groups share large weight matrices, so only ~10 B parameters are active per inference step.  </li>
+<li><strong>Training:</strong> The model is trained from the start for the on‑device architecture, avoiding post‑hoc pruning.  </li>
+<li><strong>Loading:</strong> A three‑tier pipeline (GPU, system RAM, SSD) overlapped reads, keeping “hot” experts in GPU memory and a 40 GB expert library in RAM.  </li>
+<li><strong>Scheduling:</strong> CPU and GPU cooperate; speculative decoding evaluates multiple token candidates in parallel.</li>
+</ul>
+<p>Benchmark results show competitive performance versus frontier cloud models (e.g., 64.6 % on DeepSWE 1.1, 90.4 % on GPQA‑Diamond, 80.6 % on IFBench) with a mean score of 72.8 % across six tests while using roughly 40 % of the memory required by comparable 4‑bit deployments. Demonstrations include autonomous coding agents, video generation, 3D scene creation in Blender, game‑level design, drone flight‑control code, and PCB layout automation, all executed locally without cloud token fees. The stack supports macOS, Windows, Linux, Apple M‑series and NVIDIA GPUs, and aims to shift increasingly complex AI workloads from cloud‑first to on‑device‑first execution.</p>
+          </div>
+          <a href="https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express enthusiasm for the model’s efficiency and the progress in tool‑use capabilities, noting impressive benchmark claims and the potential of smaller, specialized models. At the same time, many raise practical concerns: high VRAM and CUDA‑only requirements, unclear macOS support, limited information about the company, and skepticism toward benchmark gains that may not translate to real‑world performance. Overall sentiment is cautiously optimistic, balancing excitement about technical advances with doubts about accessibility, transparency, and actual usability for typical users.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50475713" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
