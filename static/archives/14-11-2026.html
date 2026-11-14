@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 14, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/" target="_blank">Why get an expensive Pi when I have an old phone?</a>
+        </h2>
+        <span class="article-meta">
+          69 points • by casi • 17 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author evaluates using refurbished smartphones (Redmi 13C 5G and Huawei Mate 30 5G, ¥300‑500) as alternatives to a Raspberry Pi‑based system that requires a high‑resolution camera, GPS, storage, and a microcontroller for lighting control. Phones already include 40‑50 MP cameras, integrated GPS, flash storage, battery, mobile data, touchscreen, and USB‑C interfaces, reducing component count and cost. A cost comparison (November 2026 rates) shows the phone‑based solution is cheaper than a fully equipped Pi with cellular HAT and separate GPS module, though neither includes the custom light‑controller PCB, SIM, data plan, or enclosure. The Redmi has been rooted, its camera tested, and its sleep‑wake schedule verified; the Huawei can run a kiosk app despite harder rooting. The author notes scalability concerns for mass deployment (battery health, consistent camera behavior) but sees potential for art installations and remote‑managed displays, leveraging the phones’ mass‑produced hardware to replace bespoke Pi or Mac mini setups.</p>
+          </div>
+          <a href="https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments compare used smartphones to Raspberry Pi hardware for edge‑computing projects, noting that phones offer integrated screens, sensors, GPS and strong CPUs at low cost, but raise concerns about supply variability, battery replacement, inconsistent hardware, and limited Linux support that makes large‑scale deployment complex. Raspberry Pi is praised for standardized, well‑documented software, GPIO access, stable kernels and ease of use, though price and lack of built‑in peripherals are mentioned. Several participants suggest mini‑PCs or laptops as alternatives, emphasizing trade‑offs between flexibility, reliability and upfront effort.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50440709" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ggml-org/ggml/releases/tag/v1.0.0" target="_blank">Ggml v1.0.0</a>
+        </h2>
+        <span class="article-meta">
+          272 points • by cobychapple • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>ggml 1.0.0 removes the deprecated public API and legacy DIAG_MASK operations, updates the RPC protocol to v9, and introduces configurable YaRN truncation via ggml_rope_set_truncate/get_truncate. The release adds FP8 support (OCP FP8 and FP8 KV‑cache) and implements a backward pass for the TRI operator. Precision testing for MUL_MAT src1 and gating for ggml_prec_set_acc are included. Scheduler improvements skip uploading unused inputs and prefetch only inputs generated by earlier splits. MoE cache can now compute a portion of cache misses on the CPU and copy results back asynchronously. Backend enhancements cover:</p>
+<ul>
+<li>CUDA: few‑row MMQ (batch 2‑24), BF16 few‑row matmuls, fused NVFP4/GLU gates, extended FlashAttention (sm70, head‑size 256, MMA heads 40/72), graph handling refinements, MoE layout linearization, debug buffer pool, and deterministic Top‑K.</li>
+<li>Vulkan: Intel FlashAttention prefill, batched tensor copies, dequantized KV with CM2, YaRN truncation, large‑tile split‑K for RDNA3/4, tiled‑transpose concat, FWHT kernels, and various bug fixes.</li>
+<li>Metal, SYCL, OpenCL, WebGPU, Hexagon, CANN, ZDNN, and OpenVINO also receive new kernels, optimizations, and robustness fixes, including decomposed Adreno FlashAttention and multi‑column GEMV support.</li>
+</ul>
+          </div>
+          <a href="https://github.com/ggml-org/ggml/releases/tag/v1.0.0" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments are overwhelmingly positive, emphasizing continual performance gains, effective use on modest or legacy hardware, and strong engineering quality of the project. Users note frequent speed improvements, successful operation on low‑end GPUs, and support for emerging architectures such as RISC‑V. Appreciation is expressed for the open‑source nature and its role in enabling local inference. A minority of remarks criticize the website’s visual design and presentation, suggesting it appears unrefined despite the project’s technical strengths. Overall, sentiment favors the project’s functionality and ongoing development.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50493062" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://monkeyisland.pages.dev/" target="_blank">Monkey Island: all 13 versions side by side</a>
+        </h2>
+        <span class="article-meta">
+          130 points • by maximilianburke • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is titled “The Secret of Monkey Island: all 13 versions side by side” and appears to be a comparative overview of every released edition of the game. Its primary purpose is to place each version next to the others for direct visual and technical reference. The layout likely lists each iteration—original, remastered, port, and platform‑specific releases—showing key attributes such as release date, platform (e.g., PC, console, handheld), graphical updates, control schemes, and any added or removed content. The side‑by‑side format enables readers to quickly assess differences in artwork, interface, performance, and supplemental features across the full series of thirteen releases. No narrative or opinionated commentary is evident beyond the factual comparison.</p>
+          </div>
+          <a href="https://monkeyisland.pages.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary expresses strong nostalgia and admiration for early adventure games and their graphics, highlighting the evolution from CGA’s limited palette to richer EGA/VGA and Amiga versions while praising the skill of artists who created multiple variations with minimal tools. It references specific titles such as Monkey Island, Indiana Jones, Phantasmagoria 2, Baphomet’s Curse, King’s Quest 7, and Simon the Sorcerer, noting their storytelling, humor, and puzzles. The overall tone is appreciative and wistful, emphasizing the lasting impact of those games and their visual presentation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50493904" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus" target="_blank">Nvidia allegedly engineered scarcity by funding AI startups to buy its GPUs</a>
+        </h2>
+        <span class="article-meta">
+          594 points • by speckx • 72 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a split view of Nvidia’s recent financing and partnership tactics. A sizable portion characterizes the moves as engineered scarcity or questionable circular financing intended to boost demand and stock value, often linking them to past anti‑competitive behavior and criticizing media coverage as biased or sensational. Another group argues the approach is standard capital allocation, beneficial for startups, and a logical response to capacity constraints, noting that demand for AI hardware remains strong. Overall, discussion balances skepticism about motives with acknowledgment that such strategies are common for large tech firms.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50493251" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.nbcnews.com/news/us-news/faa-orders-nationwide-ground-stop-departing-flights-reasons-safety-rcna609247" target="_blank">FAA issues national ground stop – lifted 4.5 hours later</a>
+        </h2>
+        <span class="article-meta">
+          1550 points • by zulln • 245 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The FAA issued a nationwide ground stop for departing flights at 3:54 p.m. ET on Friday, citing “extraordinary circumstances” after routers in the legacy air‑traffic‑control system became overloaded, causing radar and communications instability in TRACONs and en‑route centers. The stop lasted more than four hours and was lifted at 8:15 p.m. ET. Over 7,000 flights were canceled, leaving an estimated 300,000–400,000 passengers stranded and causing capacity issues at major airports such as Reagan National and Chicago O’Hare. At the alert time, more than 3,500 aircraft were airborne and 4,042 flights were en route to U.S. destinations. Officials ruled out a cyberattack; the SMART system supplied by Air Space Intelligence was not involved. The outage highlighted the vulnerability of the FAA’s decades‑old analog equipment, prompting calls for a $50 billion modernization, building on a $12.5 billion upgrade already approved. Nationwide ground stops are rare, previously occurring after 9/11 and a January 2023 NOTAM system failure.</p>
+          </div>
+          <a href="https://www.nbcnews.com/news/us-news/faa-orders-nationwide-ground-stop-departing-flights-reasons-safety-rcna609247" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a nationwide FAA communications outage traced to an update of the L3Harris‑managed telecom network, with many participants linking it to the rollout of new AI tools and legacy system overload. Commenters cite historical outages, note sparse official details, and highlight the massive cost of modernizing the aging infrastructure. There is widespread concern about flight delays, unclear guidance on international traffic handling, and frustration over limited transparency, while acknowledging that the immediate impact appears limited to ground stops and delayed departures.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50489641" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unsloth.ai/docs/models/qwen3.8" target="_blank">Unsloth Qwen3.8-27B Quantizations – Dynamic v3.1 Update</a>
+        </h2>
+        <span class="article-meta">
+          149 points • by Retro_Dev • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The guide outlines the commands needed to set up Qwen 3.8 locally using the llama.cpp framework. It instructs users to update the package index and install required system packages (<code>pciutils</code>, <code>build-essential</code>, <code>cmake</code>, <code>curl</code>, <code>libcurl4-openssl-dev</code>). After installing dependencies, the repository is cloned from https://github.com/ggml-org/llama.cpp. The build configuration disables shared libraries (<code>-DBUILD_SHARED_LIBS=OFF</code>) and enables CUDA support (<code>-DGGML_CUDA=ON</code>). CMake then compiles the project in the <code>llama.cpp/build</code> directory, targeting release mode and cleaning any previous builds. The resulting executables—including <code>llama-cli</code>, <code>llama-mtmd-cli</code>, <code>llama-server</code>, and <code>llama-gguf-split</code>—are placed in <code>llama.cpp/build/bin/</code>. The page includes a single logo image as visual content.</p>
+          </div>
+          <a href="https://unsloth.ai/docs/models/qwen3.8" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express overall enthusiasm for the recent model updates and benchmarking transparency, noting noticeable performance gains especially for users with limited GPU resources. Users appreciate the detailed metrics and compare token efficiency across models, while also highlighting hardware constraints that still limit practical deployment of larger 27‑billion‑parameter variants. There is recurring interest in further quantization levels, such as Q8 or Q5+, and curiosity about how these versions stack up against alternative implementations. The tone remains supportive yet seeks continued improvements in efficiency and broader hardware compatibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50491980" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.joshka.net/cell-borders/" target="_blank">Terminal borders that don&#39;t cost a cell</a>
+        </h2>
+        <span class="article-meta">
+          264 points • by vinhnx • 34 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post introduces a terminal protocol for drawing “cell borders” – line segments attached to individual cell edges rather than using full‑cell Unicode box‑drawing glyphs. Each cell can store up to twelve line segments (half‑edges and four center arms), each with independent color, width, style (solid, double, dashed, dotted) and optional rounded corners with anti‑aliased arcs. Borders are treated as cell attributes, scrolling, erasing, inserting and reflowing with text like background colors. When neighboring cells both define a shared edge, the terminal merges them using a priority rule (higher priority, then wider, then right/bottom). The protocol is encoded as a DCS sequence (ESC P 1 +b cell‑border ; OP ; FIELDS… ESC ) with a pen‑setting command and rectangle commands for bulk updates; a capability query determines support, falling back to traditional box‑drawing characters. Implementation in Ghostty adds a 16‑bit border ID per cell and a shared table of border sets (~100 B each), costing negligible memory unless all 65 535 IDs are used (≈10–15 MiB). Demo applications (Ratatui panes, form widgets, braille graphs, btop‑style monitor) show how cell borders eliminate layout space loss, enable precise widget outlines, and avoid copy‑paste artefacts. The author seeks feedback on performance and adoption across terminals and TUI libraries.</p>
+          </div>
+          <a href="https://www.joshka.net/cell-borders/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to the new terminal border capability. Many appreciate the visual improvement and potential for richer TUIs, while others worry it adds unnecessary GUI‑like complexity, may impact performance, compatibility, and resource usage, especially over multiplexers or with CJK characters. Several users suggest broader support for overstrike mode or alternative approaches, and some express preference for simple, predictable text interfaces. Concerns about padding, spacing, and consistent rendering across terminals and window managers are also common.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50491423" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://grounds.top/" target="_blank">Show HN: Live map of U.S. flights during tonight&#39;s FAA nationwide ground stop</a>
+        </h2>
+        <span class="article-meta">
+          150 points • by gvsi • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page provides a live, map‑based overview of the FAA’s nationwide ground stop that began at 3:30 pm ET on 13 Nov 2026. Flight data are sourced from the ADS‑B network (adsb.ficommunity) and a FAA NAS status delay feed; the site is independent and not affiliated with the FAA. The interface displays airborne commercial aircraft by altitude bands, flights missing from the sky compared with the same time the previous Friday, and aircraft currently climbing out. It tracks departures at the 16 largest U.S. airports, showing the proportion of flights in the last 30 minutes relative to the same period a week earlier, and defines “recovery” when an airport reaches 75 % of its usual departures for two consecutive readings. A backlog estimate lists commercial departures missed since the stop began, calculated as the difference from the prior week’s volume. Additional sections summarize carrier‑specific airborne shares, the FAA delay feed (which lists all airports during a nationwide stop), and manually updated news reports on the event.</p>
+          </div>
+          <a href="https://grounds.top/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong enthusiasm for the quickly built flight‑ground‑stop visualisation, praising its usefulness, speed of creation, and the accessibility of the underlying data. Readers show curiosity about the prompts and data sources, ask whether the view includes only commercial traffic or could also capture general‑aviation flights, and note the role of ADS‑B in preserving coverage when radar was down. Overall the discussion highlights appreciation for the project’s technical execution and interest in expanding its scope.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50491545" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://dfarq.homeip.net/what-happened-to-3com/" target="_blank">What happened to 3Com?</a>
+        </h2>
+        <span class="article-meta">
+          149 points • by gvieri • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>3Com, founded in 1979 by Ethernet co‑inventor Bob Metcalfe, grew to a $5.8 billion networking firm during the dot‑com boom, known for reliable, U.S.-manufactured network cards and a strong brand alongside Cisco and Intel. After the bust, the company abandoned its enterprise networking segment, losing revenue and dealer support, while competitors like Intel undercut its pricing. Diversification moves—most notably the costly acquisition of US Robotics and entry into the dial‑up modem market just before broadband emergence—further strained profitability; 3Com posted no profit from 2000 to 2005. Attempts at overseas production and a partnership with Huawei failed to reverse the decline. In late 2009, Hewlett‑Packard acquired 3Com’s assets for $2.7 billion, integrating the technology into HP’s Aruba‑branded networking line; HP now sells Intel‑based NICs under its own label. Vintage 3Com cards remain popular among retro‑computing enthusiasts for their driver support and reliability.</p>
+          </div>
+          <a href="https://dfarq.homeip.net/what-happened-to-3com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments reflect a blend of nostalgia for 3Com’s early hardware reliability, lifetime‑warranty policy, and personal relationships with its engineers, alongside criticism of strategic missteps that led to its decline. Contributors acknowledge the durability of NICs such as the 3c509 and effective technical support, while also noting failed software partnerships, limited router offerings, and the impact of the HP acquisition on product continuity. The shift toward integrated Ethernet and cheap clones is seen as rendering dedicated cards obsolete for most home users.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50491830" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.youtube.com/watch?v=IRK8h67ol7Q" target="_blank">Jonathan Blow – If AI solved coding, why is my software still the same? [video]</a>
+        </h2>
+        <span class="article-meta">
+          302 points • by helloplanets • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The excerpt lists the primary navigation sections found in YouTube’s footer area, including links to “About,” “Press,” “Copyright,” “Contact us,” “Creators,” “Advertise,” “Developers,” “Terms,” “Privacy,” “Policy &amp; Safety,” “How YouTube works,” “Test new features,” and “NFL Sunday Ticket.” It also contains a copyright notice stating “© 2026 Google LLC.” These items serve as entry points to corporate information, user‑focused resources, legal documentation, and promotional services associated with the platform. The layout reflects YouTube’s standard site architecture for accessing official content, policy details, developer tools, and partnership programs.</p>
+          </div>
+          <a href="https://www.youtube.com/watch?v=IRK8h67ol7Q" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that AI has noticeably accelerated coding speed and enabled small teams to prototype and ship niche tools, yet it has not resolved core challenges of problem definition, architecture, or large‑scale software quality. Opinions diverge on overall software progress: some cite a surge in high‑quality indie games and newer engines, while others maintain that mainstream development has changed little since the early 2000s. Jonathan Blow’s remarks are regarded as insightful within his domain but often dismissed as overstated or irrelevant beyond games. Organizational culture, legal constraints, and existing processes are repeatedly cited as primary limits on AI’s broader impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50484658" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
