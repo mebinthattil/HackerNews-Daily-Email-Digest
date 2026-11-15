@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 15, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.spacex.com/launches/starship-flight-15" target="_blank">SpaceX catches the Starship to end Flight 15</a>
+        </h2>
+        <span class="article-meta">
+          1267 points • by ls612 • 96 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.spacex.com/launches/starship-flight-15" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments overwhelmingly celebrate the successful catch as a historic engineering milestone that validates Starship’s fully reusable design and promises dramatically lower launch costs, inspiring enthusiasm for future space missions and encouraging interest in engineering. Many highlight the precision of the operation, the potential for rapid turnaround, and its significance compared to past systems. Parallel concerns appear regarding environmental impact, the practicality of scaling such hardware, and skepticism toward corporate leadership, while a minority express muted excitement or question the advantages of catching versus landing. Overall, the sentiment is strongly positive with notable but limited reservations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50500963" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://space.stackexchange.com/questions/37775" target="_blank">Why did some Apollo missions carry a grenade launcher?</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by Skyfall106 • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://space.stackexchange.com/questions/37775" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments blend humor with factual clarification. A meme about a “haunted moon” is followed by references to Soviet cosmonauts carrying firearms for survival and the TP‑82’s use, as well as mention of a seismic imaging experiment, indicating interest in historical lunar equipment. A speculative question about grenade‑launcher range on the Moon shows curiosity about weapon performance in low gravity. Several remarks criticize the moderation policy that removes joke posts, expressing frustration toward perceived over‑policing. Overall tone is light‑hearted yet mildly critical of joke deletion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50505271" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.crissyfield.de/research/lovable-en/" target="_blank">Lovable apps expose passport details and more than 200K private messages</a>
+        </h2>
+        <span class="article-meta">
+          843 points • by armcat • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Many Lovable applications expose highly sensitive data because of recurring access‑control misconfigurations. These patterns enable attackers to apply a single exploit across multiple apps with minimal effort. The analysis emphasizes that:</p>
+<ul>
+<li>Expert review of permissions, interfaces, and account separation is required before any confidential data is processed.</li>
+<li>Security checks must be repeated after any significant changes to the application.</li>
+<li>Automated scans cannot replace a professional security assessment; organizations lacking in‑house expertise should obtain qualified external support.</li>
+<li>The report updates figures from the Handelsblatt article dated 2 Nov 2026.</li>
+</ul>
+          </div>
+          <a href="https://www.crissyfield.de/research/lovable-en/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on strong criticism of insecure defaults and inadequate row‑level security in Supabase‑based AI‑generated applications, blaming platform design choices and the ease with which inexperienced users can deploy exposed databases. Repeated calls appear for stricter default policies, automated security testing, and enforceable liability to deter negligent data exposure. While the author and a security representative from Lovable defend their scanning tools and remediation processes, most remarks emphasize that the underlying platform decisions, not the AI itself, are responsible for the widespread leaks and potential regulatory breaches.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50499017" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal" target="_blank">Court denies motion to dismiss DRAM price fixing case</a>
+        </h2>
+        <span class="article-meta">
+          189 points • by ybathaee • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Judge Noël Wise denied Samsung, SK Hynix and Micron’s joint motion to dismiss a class‑action alleging a Sherman Act conspiracy to restrict conventional DRAM supply and shift capacity to high‑bandwidth memory (HBM). The complaint, filed June 25 2026 by 17 consumers and small businesses, asserts the three firms—controlling &gt;91 % of global DRAM revenue in Q3 2025—cut production in late 2022, diverted output to HBM, and failed to expand commodity DRAM despite record prices (DRAM prices up 172 % YoY, 697 % over 18 months). The judge found multiple “plus factors” supporting an inference of agreement: long‑term HBM lock‑ups, refusals of long‑term conventional DRAM contracts, Micron’s closure of the Crucial brand, delayed or halted fab projects, simultaneous DDR4 wind‑downs, and near‑identical customer‑vetting practices. She rejected arguments that the case mirrors the Ninth Circuit’s 2022 DRAM II dismissal, that investor statements or conference meetings prove non‑conspiracy, and that market concentration is neutral. Plaintiffs must answer by Dec 7 2026; a case‑management conference is set for Jan 12 2027.</p>
+          </div>
+          <a href="https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong concern that recent RAM price spikes may result from collusion among major manufacturers, with many urging legal action and harsher penalties if price‑fixing is proven. Several remarks note the impact on research budgets and PC building, while others suggest alternative explanations such as increased demand for high‑bandwidth memory tied to AI workloads. Skepticism appears about both the existence of a cartel and the broader AI market, reflecting a mix of frustration over costs, calls for accountability, and uncertainty about underlying market forces.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50502988" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bbc.co.uk/news/articles/c6jdmdzv25r9o" target="_blank">Handwritten 200-year-old dismissal notice found on roof tile</a>
+        </h2>
+        <span class="article-meta">
+          21 points • by nephihaha • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A 19th‑century roof slate bearing a handwritten dismissal notice was uncovered at Cawarden Reclaim, a salvage yard in Rugeley, Staffordshire. The tile, a blue‑clayed Staffordshire roof tile, was inscribed before firing with the text: “I do hereby discharge you, John Lewis, from my employment, Thomas Austin.” Researchers linked the name to Thomas Austin Brick &amp; Tile Makers, a Stoke‑on‑Trent firm operating from Clay Hills in the 1820s, suggesting the tile was a personal communication to a pottery worker. General manager Adam Giles, who found the tile, cleaned it and recognized its historical value. The discovery illustrates a rare example of informal, written labour termination recorded directly on a building material during the early industrial era.</p>
+          </div>
+          <a href="https://www.bbc.co.uk/news/articles/c6jdmdzv25r9o" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments mainly explore speculative ideas about the tile’s purpose, suggesting it might serve as a company signature through its clay composition, firing process, and final form, while also noting the practical differences between tile and paper. A recurring humorous tone references the culture of roofers, both historically and presently, with jokes about passing leftover tiles and the origin of “getting fired.” Nostalgic remarks about workers bringing animals to the job appear alongside lighthearted observations, creating a generally playful and inquisitive discussion.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50474529" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://netbsd.org/~nia/disk-encrypt/" target="_blank">Disk encryption on NetBSD – achieving secrecy</a>
+        </h2>
+        <span class="article-meta">
+          40 points • by jaypatelani • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>On a sparc64 NetBSD system, the primary disk <strong>wd0</strong> is partitioned with a dedicated cgd partition <strong>d</strong> (type <em>cgd</em>) spanning cylinders 10404‑33287.  </li>
+<li>Generate a cgd parameter file with <code>cgdconfig -g -k argon2id -o /etc/cgd/wd0d adiantum 256</code>, then attach the encrypted device via <code>cgdconfig -V re-enter cgd0 /dev/wd0d</code>; the kernel presents it as <strong>cgd0</strong>.  </li>
+<li>To verify passwords, embed a secondary disklabel inside the encrypted partition. Use the disklabel editor to create sub‑partition <strong>a</strong>, set the filesystem type (e.g., <code>4.4LFS</code> or <code>4.2BSD</code>), start offset 0, size <code>$</code> (full space), then write the label.  </li>
+<li>Set <code>verify_method</code> to <code>disklabel</code> in <code>/etc/cgd/wd0d</code> and add <code>cgd0 /dev/wd0d /etc/cgd/wd0d</code> to <code>/etc/cgd/cgd.conf</code> for automatic creation at boot.  </li>
+<li>Create a filesystem on <strong>/dev/cgd0a</strong> (e.g., <code>newfs -O2ea /dev/rcgd0a</code> for FFSv2ea or <code>newfs</code> for LFS).  </li>
+<li>Mount the encrypted filesystem (<code>mkdir -p /encfs; mount /dev/cgd0a /encfs</code>) and add an entry to <code>/etc/fstab</code> such as <code>/dev/cgd0a /encfs lfs rw,noatime 1 2</code> (or <code>ffs</code> with <code>rw,log,noatime</code> for FFS).</li>
+</ul>
+          </div>
+          <a href="https://netbsd.org/~nia/disk-encrypt/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback indicates that the current approach to keeping device contents secret is viewed as inadequate because it encrypts only user data and certain configuration files while leaving system packages unprotected. This limitation raises concerns about the ability to conceal the presence of applications such as Tor, which could be problematic in jurisdictions where such software is prohibited. Overall, the sentiment is that the protection mechanism does not sufficiently safeguard all potentially sensitive system components.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50504277" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://retrocomputing.stackexchange.com/questions/17957" target="_blank">How did Woz write the Apple 1 BASIC before building the computer?</a>
+        </h2>
+        <span class="article-meta">
+          226 points • by Skyfall106 • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://retrocomputing.stackexchange.com/questions/17957" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively recall that early hobbyist computing relied on hand‑written assembly and paper listings because affordable assemblers and storage were scarce, fostering a deliberate, “slow programming” mindset that many view nostalgically. They note that creating a monitor/assembler was a crucial first step, while the exact method Woz used to transfer BASIC into ROM remains unclear. Modern developers acknowledge occasional hand‑assembly or low‑level patching when tools fall short, and they respect Woz’s skill, though opinions differ on whether learning raw opcodes versus assembly was optimal.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50501594" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://tsoracle.rs/" target="_blank">Strictly monotonic timestamps and gapless sequences in Rust</a>
+        </h2>
+        <span class="article-meta">
+          8 points • by znano • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>tsoracle is a Rust‑implemented timestamp oracle that provides two services: strictly monotonic timestamps (get_ts) and gapless, dense sequences (get_seq) per named key. Both are durable and fault‑tolerant: the leader fsyncs a high‑water mark or per‑key counter, replicates it via pluggable consensus (built‑in OpenRaft and OmniPaxos drivers, with a trait for custom back‑ends), then hands out IDs locally for high throughput. Gapless sequences are non‑idempotent; failures return a SeqUncertain error to avoid silent retries. The system is crash‑safe—state is persisted before any ID is issued, and restarts never rewind. It includes a gRPC client with leader discovery, request coalescing, and reconnection, and emits Prometheus‑compatible metrics for allocator, leader, and request activity. tsoracle can run as a standalone CLI service, be embedded as a library, or deployed via Docker/Helm. The project is open‑source under Apache‑2.0, with fuzzing, fail‑point testing, and stress harnesses for hardening, and follows conventional contribution and release processes.</p>
+          </div>
+          <a href="https://tsoracle.rs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback expresses doubt about whether the claimed benefits stem from domain‑specific optimization comparable to a native implementation, noting the absence of real‑world comparative benchmarks. It stresses that such performance improvements typically require concrete evidence rather than assumptions, and while the tone remains measured, the commenter remains skeptical and seeks verification of the purported advantages. Overall, the response calls for empirical data to substantiate the assertions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50481056" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://rorz.io/writing/semicircle-packing" target="_blank">Semicircle Packing</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by sarreph • 2 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post describes the author’s participation in the GPU World short‑story contest, noting its $40,000 first prize and the involvement of venture‑capital firm Paradigm and Guardian Angel Intelligence as sponsors. While exploring Paradigm’s “Puzzles” page, the author focused on the “Pack Semicircles” challenge: arrange 15 identical semicircles to minimize the radius of the enclosing circle. Initial attempts used manual sketching and Affinity graphics tools, but the process proved cumbersome. The author then built a custom web visualizer (puzzles.rorz.io/semicircle-packing) with Codex assistance, implementing “fan” layers, a “Tighten” mode that optimally spaces layers, and a “Relax” mode that applies a search algorithm for asymmetric adjustments. Using this tool and iterative hill‑climbing with Codex, the author achieved a radius of 2.94853, placing in the top three of the leaderboard. The narrative concludes with reflections on the balance between brute‑force coding results and creative sketching, and an intention to continue enhancing the tool.</p>
+          </div>
+          <a href="https://rorz.io/writing/semicircle-packing" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a uniformly positive reaction, highlighting an appreciation for the piece’s balanced blend of thoughtful exploration and clear, visual outcomes. Readers note that the content’s intellectual wandering remains engaging without becoming excessive, and that the presented information is both entertaining and practically useful, even extending to everyday tasks such as baking. Overall, the feedback emphasizes satisfaction with the style, clarity, and applicability of the material.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50484234" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jordi.inversethought.com/blog/25-of-my-favourite-modern-nes-games/" target="_blank">My favourite modern NES games</a>
+        </h2>
+        <span class="article-meta">
+          98 points • by jordigh • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article surveys 25 contemporary home‑brew titles for the Nintendo Entertainment System, illustrating the ongoing “Second ReNESance.” All games are obtainable digitally (often via itch.io, Steam, or official stores) and many have limited physical cartridge releases. Genres span horror‑themed platformers (All Hell Unleashed), Metroidvania‑style adventure (Alwa’s Awakening), Zelda‑like exploration (Anguna), co‑op firefighting (Blazing Rangers), horizontal shmups (Changeable Guardian Estique, GunTneR), arena shooters (Data Man), licensed‑property platformers (Garbage Pail Kids, Jane Austen’s 8‑bit Adventure), and seasonal horror series (Haunted: Halloween Trilogy). Several entries emphasize technical fidelity to NES hardware constraints, such as faithful Atari‑2600 ports, use of Famitracker for authentic soundtracks, and support for original peripherals like the Zapper. The piece notes community‑driven distribution, charitable origins (Cowlitz Gamers’ 2nd Adventure), and supplemental materials (source code, manuals) that accompany certain releases, underscoring both creative diversity and preservation of the NES development culture.</p>
+          </div>
+          <a href="https://jordi.inversethought.com/blog/25-of-my-favourite-modern-nes-games/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion conveys strong enthusiasm for contemporary NES homebrew titles, highlighting how modern development tools have revitalized creation for legacy platforms and lowered barriers for hobbyists. Participants express nostalgia for the original console, share personal collections and favorite classic games, and recommend several recent indie releases. There is curiosity about playing these games on non‑hardware systems such as Mac or Linux, and recollections of 1990s NES clones and the challenges of sourcing cartridges, underscoring the community’s appreciation for both historical and newly‑made content.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50503465" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
