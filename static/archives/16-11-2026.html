@@ -1,0 +1,572 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 16, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.monirbounadi.com/Bounadi_JMP.pdf" target="_blank">Coffeehouses and the Rise of Science [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          25 points • by Michelangelo11 • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.monirbounadi.com/Bounadi_JMP.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment reflects nostalgia for inclusive idea exchange across classes, concerns about growing class divides and unhealthy digital habits reducing creativity, mentions coffee shops as informal workspaces, cites specific venues like Wild &amp; Wood and former Skillsmatter CodeNode, notes difficulty finding neutral meet‑up spaces, and observes that laptop use in cafés is seen as contributing to scientific progress despite barista restrictions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50516245" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://pub.cba.mit.edu/863.26/site/" target="_blank">How to make almost anything</a>
+        </h2>
+        <span class="article-meta">
+          371 points • by o4c • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>HTMAA 2026 – “How To Make (almost) Anything” (MAS.863/4.140/6.9020) meets Wednesdays 1:00‑4:00 in E14‑633, with weekly recitations Thursdays 5:00‑6:00. The semester runs from 9 Sept to 15 Dec, covering:</p>
+<ul>
+<li>Intro, CAD, version control &amp; web development (9/9‑9/10)  </li>
+<li>Project management, computer‑controlled cutting, parametric design (9/16‑9/17)  </li>
+<li>Embedded programming, electronics basics (9/23‑9/24)  </li>
+<li>3D scanning/printing, AI agents (9/30‑10/1)  </li>
+<li>Electronics design, first review, EDA (10/7‑10/8)  </li>
+<li>Electronics production, debugging (10/14‑10/15)  </li>
+<li>Computer‑controlled machining, CAM (10/21‑10/22)  </li>
+<li>Input devices, Edge AI (10/28‑10/29)  </li>
+<li>Output devices, motor &amp; motion control (11/4‑11/5)  </li>
+<li>Mechanical &amp; machine design, machine building (11/11‑11/12)  </li>
+<li>Wildcard week, second review, molding &amp; casting (11/18‑11/19)  </li>
+<li>Networking, communications, interface/AP programming, mesh networks (11/25‑11/30)  </li>
+<li>System integration, help sessions (12/2‑12/3)  </li>
+<li>Final assignments, project development, help sessions (12/4‑12/10)  </li>
+<li>Project presentation prep (9:00‑1:30), final exam (1:30‑4:30), open house (5:00‑6:30) on 12/15.</li>
+</ul>
+          </div>
+          <a href="https://pub.cba.mit.edu/863.26/site/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view of the course: many appreciate its breadth, seeing value in exposing students to a wide range of techniques and fostering awareness of what can be achieved, which they deem useful for later specialization or managerial roles. Others criticize the superficial treatment of topics, the overwhelming pace, and limited hands‑on depth, arguing that true mastery requires extensive practice and focused instruction. Additional remarks mention resource constraints, the importance of supplemental learning materials, and occasional off‑topic or contentious references that do not shape the core consensus.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50514470" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://iter.ca/post/ubo-uxss/" target="_blank">Universal XSS in uBlock Origin from website-driven element picker</a>
+        </h2>
+        <span class="article-meta">
+          410 points • by zaik • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post details a universal XSS vulnerability in the Firefox MV2 version of uBlock Origin (and a lesser‑impact variant in MV3/uBO Lite). The extension’s element picker, invoked via right‑click, is implemented by loading an iframe from a URL of the form <code>moz-extension://&lt;UUID&gt;/web_accessible_resources/epicker‑ui.html</code>. An attacker can discover the extension’s random UUID through a built‑in “no‑fetch‑if” filter that redirects ad‑script requests to a local script, intercepting the resulting XHR. With the UUID, the attacker embeds the picker iframe invisibly (opacity 0) and communicates via <code>postMessage</code> and a <code>MessageChannel</code>. By supplying a crafted <code>opt</code> field containing a newline, the attacker injects an arbitrary trusted filter such as <code>google.com##+js(trusted‑rpnt, script, …)</code>, which the picker accepts and adds as a trusted filter. When the user clicks the hidden “Create” button, the filter is stored, allowing the attacker to execute JavaScript on any site. The flaw was patched by requiring a secret token from the content script in the picker’s initial message.</p>
+          </div>
+          <a href="https://iter.ca/post/ubo-uxss/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express widespread concern about browser extensions that manipulate the page DOM, citing privacy and security risks such as inadvertent data leakage and exploitation of extension identifiers. Users highlight a specific uBlock Origin vulnerability, urging updates and recommending tighter sandboxing or moving rule creation to browser chrome. Opinions vary on mitigation, with some favoring alternative blockers, profile isolation, or DNS‑based filtering, while others criticize the overall extension model and the reliance on AI‑assisted discovery of flaws. Overall sentiment stresses caution, calls for stronger safeguards, and acknowledges recent corrective updates.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50513160" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://petervandijck.com/post/pbrgs-ev0bc" target="_blank">Doing Show HN generates a ton of automated email pitches</a>
+        </h2>
+        <span class="article-meta">
+          11 points • by petervandijck • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author posted a Show HN announcement for Airdash and, over four days, received 17 unsolicited emails generated by automated tools that only read the title. The pitches fall into two groups:</p>
+<ul>
+<li>
+<p><strong>Launch boards, directories, and listing services (7 emails).</strong> They propose do‑follow backlinks, featured spots, or placement in product‑of‑the‑week battles, with fees ranging from free to $49 for a 60‑day featured listing, $19–$200 for weekly slots, or $19.99 for a 3D‑city map entry. One service even listed the product without permission.</p>
+</li>
+<li>
+<p><strong>Service offers (10 emails).</strong> These include a security‑header scan ($29 full report), security‑testing (£499), competitor or market analysis (free score, paid deeper reports), newsletter sponsorship ($29 / mo), Reddit promotion, affiliate partnership, discount‑code request, AI‑co‑founder collaboration, demo‑video generation, and a skill‑pack for other coding agents ($10 trial).</p>
+</li>
+</ul>
+<p>All messages repeatedly reference the product’s description (“SQLite databases for agents with an Airtable view”), often re‑worded, and most promise “no follow‑ups” or single‑shot contact. The collection illustrates how Show HN launches trigger mass, template‑driven outreach from various SaaS‑focused marketing platforms.</p>
+          </div>
+          <a href="https://petervandijck.com/post/pbrgs-ev0bc" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad frustration with a high volume of unsolicited, automated pitch emails triggered by activity on the platform, especially after Show HN posts and ordinary comments. Users note that the influx is frequent enough to be noteworthy, with many messages being caught by spam filters yet still reaching inboxes. The consensus is that this spam problem is pervasive across the site, not limited to specific threads, and it leads to regret over posting or commenting due to the resulting email bombardment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50516232" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news.cornell.edu/stories/2026/11/researchers-track-whole-body-movement-just-smartwatch" target="_blank">Researchers track whole body movement with just a smartwatch</a>
+        </h2>
+        <span class="article-meta">
+          70 points • by PaulHoule • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Researchers at Cornell’s SciFi Lab introduced EchoMotion, a system that uses ultrasonic sound emitted and captured by a single commercial smartwatch (speaker and microphone) to infer full‑body pose. A deep‑learning model translates echo patterns into the positions of 12 joints, achieving average errors under four inches (≈10 cm) for new users, reduced to ~2.4 inches after a 12‑minute calibration. The prototype consumed ~12 mW, using about 5‑6 % of a Galaxy Watch 6 battery for a 30‑minute session. Tests on unmodified Galaxy Watch 6, Watch 7, and Google Pixel Watch 3 confirmed consistent performance across devices. Experiments with 10 volunteers performing 18 exercises showed robustness to typical indoor environments and ambient noise, with slight degradation in hallways due to external echoes. The researchers aim to apply EchoMotion to fitness tracking, rehabilitation, and integration with smart‑glasses vision, leveraging its privacy‑preserving, low‑data, low‑power characteristics. The work was presented at ACM UbiComp/IWSC and funded by the NSF.</p>
+          </div>
+          <a href="https://news.cornell.edu/stories/2026/11/researchers-track-whole-body-movement-just-smartwatch" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is optimistic about using ultrasonic sensing and wearable data for health monitoring, particularly for older adults and remote exercise support. Comments reference existing iPhone mobility metrics and anticipate improved accuracy in future devices. Technical details about chirp frequencies, resolution, and range are discussed, alongside possibilities such as respiratory‑rate measurement via smartwatches. Concerns are raised about noise pollution and suitability for pets. Comparisons to gaming controllers illustrate familiar motion‑tracking concepts, while some remarks note limited relevance.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50486745" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://qwen.ai/blog?id=qwen4-max" target="_blank">Qwen4-Max</a>
+        </h2>
+        <span class="article-meta">
+          589 points • by ilreb • 31 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://qwen.ai/blog?id=qwen4-max" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show mixed reactions to Qwen 4‑Max, noting its improved coding and agentic abilities but criticizing its slower token rate, higher cost, and modest Artificial Analysis score that lags behind frontier models. Users appreciate the focus on efficiency and anticipate upcoming smaller variants such as Flash and 27 B, while expressing disappointment that open‑weight progress appears slower than competitors. Concerns are raised about potential safety restrictions, possible embedded “poison pills,” and limited support for cybersecurity tasks, alongside frustration with pricing and availability of Chinese‑origin models.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50513215" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://muni.works/research/vcad" target="_blank">Exact Gradients Through a BRep Kernel</a>
+        </h2>
+        <span class="article-meta">
+          13 points • by ecto • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper presents a method for computing exact gradients of design‑parameter‑dependent objectives in a boundary‑representation (BRep) kernel by freezing the tessellation topology and differentiating node positions. Surface nodes are differentiated using dual numbers on analytic surfaces, while vertex and trim nodes are obtained via implicit differentiation of surface equations, with added tangency constraints for fillet blends. The approach yields exact first‑order derivatives for the frozen mesh, supports directional second‑order derivatives, and enables a transposed (reverse‑mode) pass that computes per‑parameter cotangents in a single forward evaluation. It integrates mass‑property and rigid‑body dynamics sensitivities, including a differentiable penalty‑contact model, and reports topology changes as errors. Validation against central finite differences shows errors dominated by polygonization (e.g., 6.7 % at 16 segments per circle, 0.11 % at 128). Limitations include dependence on fixed topology, small valid parameter steps (≈ mm), and the need to recompute a fresh plan each iteration.</p>
+          </div>
+          <a href="https://muni.works/research/vcad" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50487628" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ransomnews.com/burger-king-tweet-bitly-link-hijack-2026/" target="_blank">Old Bitly links are being hijacked</a>
+        </h2>
+        <span class="article-meta">
+          305 points • by hspeiser • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Bitly disclosed a vulnerability that let attackers re‑register the back‑half of old, inactive bit.ly links and redirect them to arbitrary content. On 15 Nov 2026 the short links in a 2011 Burger King tweet (now pointing to Wikipedia’s list of Nazi camps) and a 2011 McDonald’s tweet (now pointing to Wikipedia’s September 11 article) were claimed and later deactivated by Bitly. An analysis of 97 bit.ly links from Donald Trump’s 2009‑2013 tweets found 40 still original, 49 re‑created later but still directing to the intended pages (mostly YouTube or news sites), and 7 re‑created to unrelated destinations (now disabled). CNN reported similar hijacks affecting posts from Bill Gates, Justin Trudeau, Mike Pence, the FBI and the U.S. Department of Defense. Bitly’s help pages claim back‑halves cannot be reused; a bug that allowed this was reportedly fixed in Feb 2025, yet the issue re‑emerged. Recommendations include auditing historic short links, verifying creation dates via a “+” suffix, removing compromised links, and using owned short domains for future URLs.</p>
+          </div>
+          <a href="https://ransomnews.com/burger-king-tweet-bitly-link-hijack-2026/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments broadly view outsourced URL shorteners as unreliable and prone to link rot, data loss, and abuse, emphasizing the risk of permanently broken links when services shut down or are compromised. Many advocate self‑hosted solutions or custom domains for greater control and stability. While acknowledging shorteners’ convenience and occasional legitimate use, the consensus highlights concerns about spam, malicious redirects, and the difficulty of preserving link intent over time, suggesting that the drawbacks outweigh the benefits without robust oversight.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50511395" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://steveblank.com/2026/11/15/whats-next-for-nvidia/" target="_blank">What&#39;s Next for Nvidia?</a>
+        </h2>
+        <span class="article-meta">
+          289 points • by zdw • 47 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Nvidia’s board announced Jensen Huang’s resignation after 33 years, ending a tenure marked by three major pivots: launching CUDA in 2006 to repurpose GPUs for general computing, steering the company into deep‑learning hardware after the 2012 ImageNet breakthrough, and expanding into AI‑datacenter systems with the 2020 Mellanox acquisition. These shifts altered Nvidia’s business model from graphics boards to a software platform and then to integrated systems. The analysis warns that replacing a visionary founder with an execution‑focused CEO often curtails innovation, citing Microsoft’s post‑Ballmer revival under Satya Nadella and Apple’s incremental growth under Tim Cook. For Nvidia, the board must decide whether to prioritize continued execution of its current revenue stream—bolstered by a strong order book and CUDA ecosystem—or to seek a new visionary capable of anticipating and shaping future AI‑chip markets. Key challenges include avoiding talent loss, managing brand‑linked external relations, and preventing the company from becoming a stagnant, profit‑only operation vulnerable to agile competitors.</p>
+          </div>
+          <a href="https://steveblank.com/2026/11/15/whats-next-for-nvidia/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on skepticism toward Nvidia’s current leadership and future stability, focusing on Jensen Huang’s personal controversy, possible investigations, and the risk of diminished innovation without his presence. Many anticipate his return as essential, while others predict a decline that could benefit competitors such as AMD and other AI chip makers. Parallel discussion references Steve Jobs’ strategy of self‑cannibalization and debates the broader value of founder CEOs, with mixed views on whether founder departure necessarily harms innovation. Overall sentiment is cautious, highlighting uncertainty and potential disruption in the AI hardware market.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50512235" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://forum.torproject.org/t/security-release-0-4-9-17/22454" target="_blank">Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack</a>
+        </h2>
+        <span class="article-meta">
+          169 points • by aillia • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Tor Project released version 0.4.9.17, a security update focused on relay DoS defenses, notably fixing IPv6 handling vulnerabilities. The patch addresses a large‑scale DDoS attack that has flooded relays with client circuits, overwhelming many operators. The team is evaluating additional mitigation measures and anticipates further releases soon. Relay operators are urged to upgrade immediately; no post‑upgrade actions are required. The announcement thanks relay operators for their support via the tor‑relays mailing list.</p>
+          </div>
+          <a href="https://forum.torproject.org/t/security-release-0-4-9-17/22454" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express concern that running a guard relay can lead to network overload and severe bandwidth reduction, prompting operators to downgrade or disable guard status. Users note recurring DoS‑like slowdowns affecting many relays, suspecting targeted attacks or malicious relay manipulation. Frustration with Tor’s persistent slowness and occasional access blocks is common, while there is cautious skepticism about the current security posture amid evolving threats, alongside a desire for faster, more integrated anonymity solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50512441" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
