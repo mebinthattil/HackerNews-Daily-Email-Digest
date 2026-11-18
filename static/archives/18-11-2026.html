@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 18, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://energy-based-reasoners.github.io/" target="_blank">Energy-Based Reasoners: 385x more efficient inference</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by frenchmajesty • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Energy-Based Reasoners (EBRs) extend looped recurrent models by learning an explicit energy function over latent reasoning states. The energy scores compatibility between a state and the problem input; its gradient directs iterative refinement via gradient descent, and a small gradient norm serves as an adaptive stopping criterion. Training incorporates exploration to expose additional modes and shape the energy landscape across diverse states. Empirically, EBRs match or exceed prior recurrent reasoners on four algorithmic reasoning benchmarks, achieving 99.9 % accuracy on Sudoku‑Extreme while using 345× fewer inference FLOPs than the next best model and comparable training compute. Adaptive stopping allows easy puzzles to finish in few steps, and scaling the number of descent steps or trajectories improves solution quality. On multi‑solution tasks, EBRs attain state‑of‑the‑art coverage of distinct valid solutions, maintaining near‑100 % single‑sample accuracy. These results demonstrate that energy‑based formulations provide explicit progress signals, efficient inference, and strong performance for complex reasoning problems.</p>
+          </div>
+          <a href="https://energy-based-reasoners.github.io/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize that the approach performs effectively on a narrow set of logic‑puzzle tasks and express interest in seeing further research. At the same time, they question broader claims of dramatically faster reasoning, noting that the definition of “reasoning” used appears unusually generous and does not align with common understandings of the term. Overall, there is cautious appreciation for the specific results combined with skepticism toward the extrapolation of those results to general reasoning abilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50543989" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://calif.io/java4shell/" target="_blank">Java4Shell: RCE in OpenJDK when processing Base64</a>
+        </h2>
+        <span class="article-meta">
+          983 points • by werrett • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The write‑up details <strong>Java4Shell</strong>, a memory‑corruption bug in OpenJDK HotSpot’s x86‑64 Base64 intrinsic. The intrinsic miscalculates the mask for the final padded block, causing <code>evmovdqub</code> to write 64 bytes with a mask of ‑1 u64. When decoding a malformed input such as 64 ‘A’s followed by ‘=’, the decoder allocates a 50‑byte buffer but writes past its end (offset 48 to 111), yielding a controlled out‑of‑bounds write.  </p>
+<p><strong>Exploitation flow</strong><br>
+- Warm‑up the Base64 decoder until C2 JIT compiles the intrinsic.<br>
+- Trigger the overflow to overwrite a Java array length (the “writer”), gaining a bounded arbitrary write.<br>
+- Use the corrupted length to corrupt a neighboring array (the “reader”), creating a heap‑leak primitive (JavaBleed).<br>
+- Perform heap‑Feng‑Shui (spray, TLAB manipulation) to align objects, then extend writes to the Code Cache and JVM hooks for full remote code execution.  </p>
+<p><strong>Affected releases</strong>: OpenJDK 17.0.6+ on x86‑64 CPUs with AVX‑512 VBMI; all downstream builds (Amazon Corretto, Eclipse Temurin, Microsoft, Azul, BellSoft, SAP, Red Hat, Oracle, GraalVM).  </p>
+<p><strong>Mitigations</strong>: update to patched builds (released Nov 17 2026) or disable the intrinsic (<code>-XX:-UseBASE64Intrinsics</code>) or AVX‑512 (<code>-XX:UseAVX=2</code>).</p>
+          </div>
+          <a href="https://calif.io/java4shell/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a newly disclosed Java heap‑out‑of‑bounds write in the AVX‑512 Base64 decoder, which affects HotSpot JVMs on x86‑64 CPUs with AVX‑512 support. Commenters note that exploitation requires precise network conditions, proximity to the target, and custom payload chains, limiting immediate mass‑scale attacks, while still posing risk to unpatched legacy deployments. Multiple mitigations are cited, including disabling the hardware‑accelerated decoder or AVX‑512 via JVM flags and employing proxy‑based filtering. Broad criticism targets the complexity of native‑code optimizations, the slow patch cycle of Java distributions, and the growing reliance on AI‑augmented tooling in security.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50538240" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://revscope.co/blog/search-seo-geo-2026/" target="_blank">Google&#39;s AI answers reducing search traffic by 40%</a>
+        </h2>
+        <span class="article-meta">
+          459 points • by slashdev • 74 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Google’s AI “Overviews” now appear on &gt;60 % of U.S. English queries (up from ~6 % in 2022) and sit above organic results, linking to cited sources. A randomized Chrome‑extension experiment (Jan–Feb 2026) showed that when Overviews are visible, users click external sites 0.37 times per query versus 0.62 without them—a 39.8 % drop; the proportion of searches ending with no outbound click rose from 54 % to 73 %. Overall organic clicks to publishers are estimated to fall ~18.5 % and the CTR of the top organic result dropped 58 % on desktop (17.8 %→7.4 %) between Sep 2025 and Aug 2026.  </p>
+<p>Citation analysis indicates that domains with more referring domains are moderately more likely to be cited (Spearman ≈ 0.4), but size, not specific tactics, drives visibility. “Generative Engine Optimization” (GEO) essentially mirrors SEO: being linked from high‑authority sites, adding quotable data, statistics, and source citations improves citation odds; shortcuts such as llms.txt or AI‑specific markup show no measurable benefit.  </p>
+<p>AI assistants direct only ~0.3 % of total traffic (≈3.5 M visits in Mar 2026) but exhibit higher conversion rates on the few sites that receive them. Recommended actions: maintain indexable, link‑rich pages; monitor which sources are cited per topic; craft content that can be quoted; avoid unproven shortcuts; and evaluate performance by revenue rather than click volume.</p>
+          </div>
+          <a href="https://revscope.co/blog/search-seo-geo-2026/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments convey a mixed view of AI‑driven search. Users widely note that AI delivers faster, single‑answer results and has sharply reduced their reliance on traditional search, with many reporting 40‑80 % drops in traffic. While this convenience is praised, there is strong concern that AI centralizes information, harms content creators, erodes SEO‑based revenue, and diminishes open‑web discovery. Anticipation of ads within AI outputs and worries about misinformation, gatekeeping, and the long‑term sustainability of the web ecosystem also appear frequently, reflecting both enthusiasm for efficiency and anxiety over broader impacts.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50540178" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://social.anoxinon.de/@codebergstatus/117636437840688845" target="_blank">Codeberg.org Not Reachable</a>
+        </h2>
+        <span class="article-meta">
+          213 points • by hans_castorp • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The excerpt consists of a page title referencing a Codeberg status update (“Codeberg Status: ‘As you probably noticed, our domain codeberg.org …’”) followed by a standard Mastodon notice instructing users to enable JavaScript to use the web application, with a brief suggestion to try native Mastodon clients. No additional content, data, or technical details are present in the provided text.</p>
+          </div>
+          <a href="https://social.anoxinon.de/@codebergstatus/117636437840688845" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Overall sentiment is mixed, with frustration over the unexpected domain suspension and disruption of services, concern about reliance on a US registrar and the DNS as a single point of failure, and calls for more local or decentralized alternatives. Users report the site gradually becoming reachable again and express relief at the restoration, while also questioning the registrar’s actions and seeking clearer explanations. Some comments add humor or note related Reddit bans, but the dominant view emphasizes the need for more robust domain management.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50544261" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.cloudflare.com/quad9-withdrawal-from-france/" target="_blank">Quad9&#39;s withdrawal from France: A canary in the coal mine</a>
+        </h2>
+        <span class="article-meta">
+          661 points • by subset • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Quad9 announced it will cease operating its free public DNS resolver (9.9.9.9) in France after a French court imposed daily fines for not blocking domains linked to alleged copyright infringement. The ruling forced Quad9 to choose between costly litigation and altering its service in ways that would compromise user privacy and security, leading to its withdrawal. This exit removes a privacy‑focused resolver used by government agencies, hospitals, universities and utilities, risking unannounced service loss for those users. Similar withdrawals have occurred previously (e.g., Cisco’s OpenDNS in France, Portugal and Belgium). Cloudflare argues that DNS‑level blocking is technically ineffective—users can switch resolvers or use known IP addresses—and that it causes collateral damage by indiscriminately blocking entire domains without user notice. Mandating such blocking also risks cross‑border enforcement, fragmenting the open Internet and undermining resolver performance and privacy. Cloudflare, Google and Cisco continue to oppose orders requiring DNS blocking and are appealing a Belgian directive that could penalize them for non‑compliance after January 2027.</p>
+          </div>
+          <a href="https://blog.cloudflare.com/quad9-withdrawal-from-france/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong criticism of France’s move to enforce DNS‑level blocking for piracy, viewing it as heavy‑handed, likely to fragment the global internet, undermine privacy and set a precedent for broader regulatory balkanization. Contributors attribute the pressure to right‑sholder interests and argue that such technical measures are ineffective and threaten a free, open network, while acknowledging that the internet already faces concentration of power. Overall the sentiment is that the ruling harms openness and may drive reputable services away without solving piracy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50538994" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://consumerrights.wiki/w/ID.me_terms_required_for_IRS_sign-in" target="_blank">ID.me terms required for IRS sign-in</a>
+        </h2>
+        <span class="article-meta">
+          381 points • by DeepLogin • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Taxpayers accessing IRS online services must use either ID.me or Login.gov. ID.me’s Terms of Service (Version 10.1.0, 13 Nov 2026) include a mandatory arbitration clause, jury‑trial and class‑action waivers, with an opt‑out option available within 30 days of acceptance or after material changes. Disputes not settled within 45 days go to a neutral arbitrator; liability is capped at $1,000. The Credential Policy requires reaffirmation of terms at least every five years, or credentials may be suspended. ID.me’s Privacy Policy permits marketing use of personal data, sharing with affiliates (e.g., ID.me Shop), and transfer in corporate transactions; data related to government verification may be retained up to three years after wallet closure, with exceptions for fraud‑prevention. ID.me does not charge registration fees and claims no sale of data, though consent is implied for certain disclosures. TreasuryDirect adopted ID.me on 28 Oct 2026, excluding Login.gov, prompting Senate Finance and Banking Committee members (Wyden, Warren) to request a delay pending review. Login.gov, run by GSA, offers a government‑run alternative with similar privacy safeguards and no commercial data use.</p>
+          </div>
+          <a href="https://consumerrights.wiki/w/ID.me_terms_required_for_IRS_sign-in" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments overall express strong dissatisfaction with the mandatory use of ID.me for accessing TreasuryDirect, IRS, and other government services, citing barriers for users without smartphones, verification difficulties, privacy concerns, and the perception of unnecessary reliance on a private contractor despite an existing login.gov option. Several remarks highlight financial and procedural obstacles, such as account‑closure rules and high contract costs, while a minority note that the service functions reliably for them. The dominant view calls for a government‑run authentication alternative and criticizes the perceived waste of taxpayer money.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50540437" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://science.caseyhandmer.com/physics/" target="_blank">I had AI read my entire field, Theoretical Astrophysics</a>
+        </h2>
+        <span class="article-meta">
+          3 points • by Anon84 • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The dataset catalogs physics papers by citation count and tracks the extent of automated review stages. For each citation range, it lists total papers and the proportion processed through four actions: full‑text screening, “haiku” skim, “sonnet” read, and full “opus” recompute/verification. Coverage increases with citation frequency:  </p>
+<ul>
+<li>0 citations: 2,541 papers; 58 % screened, 1 % haiku, 0 % sonnet, 0 % opus.  </li>
+<li>1–2 citations: 2,448 papers; 66 % screened, 2 % haiku.  </li>
+<li>3–9 citations: 4,968 papers; 70 % screened, 11 % haiku.  </li>
+<li>10–29 citations: 8,147 papers; 77 % screened, 40 % haiku, 0 % sonnet, 0 % opus.  </li>
+<li>30–99 citations: 13,265 papers; 81 % screened, 68 % haiku, 6 % sonnet, 0 % opus.  </li>
+<li>100–299 citations: 11,077 papers; 81 % screened, 80 % haiku, 9 % sonnet, 3 % opus.  </li>
+<li>300–999 citations: 5,051 papers; 71 % screened, 70 % haiku, 10 % sonnet, 5 % opus.  </li>
+<li>1,000–2,999 citations: 1,324 papers; 54 % screened, 53 % haiku, 5 % sonnet, 5 % opus.  </li>
+<li>3,000+ citations: 403 papers; 30 % screened, 29 % haiku, 2 % sonnet, 2 % opus.  </li>
+</ul>
+<p>Overall, 659 papers have undergone the most expensive recompute verification, beginning with the most cited. The visualization shows citation distribution versus review depth across the physics literature.</p>
+          </div>
+          <a href="https://science.caseyhandmer.com/physics/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50545118" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.siderolabs.com/talos-linux" target="_blank">Talos Linux</a>
+        </h2>
+        <span class="article-meta">
+          66 points • by SweetSoftPillow • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Talos Omni extends talosctl to provide centralized fleet management for large‑scale Kubernetes deployments. When manual lifecycle processes become untenable, Omni automates provisioning, version upgrades, configuration changes, and backup operations across all clusters from a single control plane. It also supports direct container scheduling on Talos‑based single‑node edge sites, eliminating the need for a full Kubernetes cluster while using the same fleet plane for orchestration. Talos Omni is offered both as a SaaS solution and as a self‑hosted deployment, with source code available under the Business Source License 1.1. The accompanying visual assets list corporate logos (e.g., Nokia, Roche, Ubisoft) that illustrate adoption or partnership contexts.</p>
+          </div>
+          <a href="https://www.siderolabs.com/talos-linux" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong overall approval of Talos, highlighting its reliability in both personal labs and production environments and praising Siderolabs’ support responsiveness. Users appreciate its streamlined Kubernetes deployment, noting fewer configuration issues compared to traditional Linux distributions, and express interest in upcoming products like Director, hoping pricing will suit smaller teams. Recurrent questions address deployment flexibility—whether VM or bare‑metal matters—and a desire for a non‑Kubernetes, minimal API‑driven OS. Critiques focus on limited website copy quality and challenges debugging kubelet failures without shell access.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50543343" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf" target="_blank">Nvidia stopped disclosing Singapore sales as revenues hit $104B</a>
+        </h2>
+        <span class="article-meta">
+          570 points • by louiereederson • 30 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on clarifying that Nvidia’s reported Singapore revenue reflects accounting conventions rather than actual sales to Singapore, noting the use of the subsidiary for global OEM orders and standard tax structuring. Many view media coverage as sensationalist, questioning the alleged link to chip smuggling and the CEO’s departure while emphasizing the lack of evidence for wrongdoing. Skepticism appears toward the notion of a coordinated conspiracy, and a minority expresses concern about export‑control compliance and potential shareholder impact, but overall sentiment treats the issue as a routine financial reporting matter rather than a corporate scandal.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50534631" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kernel.dev/blog/why-is-gemini-4-carbon-taking-so-long/" target="_blank">Why is Gemini 4 Carbon taking so long?</a>
+        </h2>
+        <span class="article-meta">
+          126 points • by deenadz • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post examines why Gemini 4 Carbon (referred to as “Carbon”) spends more time fixing bugs than GPT‑6 Astra. In a baseline trial both models identified a bug’s cause quickly—Astra within a minute, Carbon after about six minutes. Astra wrote a fix three minutes later, whereas Carbon waited roughly 25 minutes before producing code. Two hypotheses are considered: Carbon may have been uncertain of the cause (knowledge gap) or may have continued despite knowing it, reflecting a training bias that rewards correct answers over minimizing steps. To test behavior, a modified harness injected a “do you already have enough to make the fix?” check‑in every five turns. With these prompts, Carbon’s total runtime fell from 37 minutes to 28 minutes, and the lag between cause identification and editing shrank from 25 minutes to ~10 minutes, indicating that the slowdown stems from Carbon’s procedural behavior rather than lack of knowledge.</p>
+          </div>
+          <a href="https://kernel.dev/blog/why-is-gemini-4-carbon-taking-so-long/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary describes Gemini 4 Carbon as notably inefficient, with low token‑per‑second rates, high inference costs, and frequent timeouts or step‑limit errors, especially on simple tasks. It is portrayed as slower and more expensive than alternatives such as Hydrogen, Argon, and other non‑Google models, though it sometimes excels in deeper architectural analysis. The author attributes these traits to Google’s focus on frontier performance and benchmark leadership rather than cost‑effective serving, and notes that comparable models from OpenAI or Anthropic provide better value for most coding and non‑coding use cases.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50541790" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
