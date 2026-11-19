@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 19, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.php.net/releases/8.6/en.php" target="_blank">What&#39;s New in PHP 8.6</a>
+        </h2>
+        <span class="article-meta">
+          87 points • by netol • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>PHP 8.6 is announced as a major update to the PHP language, scheduled for release on 19 November 2026. The version introduces several new language features: support for partial function application, a new Duration class, a Polling API, and a built‑in clamp() function. Although the release date is set, the version has not been released at the time of the announcement. The announcement includes two images labeled “PHP 8.6” and “To Top,” but provides no additional technical details.</p>
+          </div>
+          <a href="https://www.php.net/releases/8.6/en.php" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to the latest PHP release. Several users express enthusiasm for technical improvements such as reduced ZTS overhead, enhanced stream error handling, and the new clamp function, while also urging immediate patching of existing installations. Others criticize the language’s trajectory, noting declining relevance compared to newer languages, inadequate default Unicode support, and recurring security concerns, including potential vulnerabilities discovered by AI. A few remarks mention usability annoyances like unnecessary animations. Overall, the feedback balances appreciation for specific enhancements with broader doubts about PHP’s future direction and safety.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50557870" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://verialabs.com/ruby2shell/" target="_blank">Ruby2ßhell: Pre-authentication RCE on stock Rails</a>
+        </h2>
+        <span class="article-meta">
+          176 points • by jdns • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ruby2Shell (GHSA‑34m4‑m9fh‑gqp5) stems from a one‑byte heap overflow in Ruby’s handling of single‑byte encodings (ISO‑8859, Windows‑125x) that lack a capital “ß”. When upcasing “ß”, the code writes two bytes (“SS”) but only checks space for one byte (<code>while(*pp&lt;end &amp;&amp; to&lt;to_end)</code>). The output buffer is allocated as input length + 20 bytes; each “ß” adds one extra byte, so an input containing 21 such characters overruns the buffer by one byte. The flawed loop, present since Ruby 2.4.0, is invoked by <code>upcase</code>, <code>swapcase</code>, <code>downcase(:fold)</code>, and <code>casecmp?</code>; UTF‑8 strings follow a different path and are unaffected. The overflow writes a single byte—‘S’ (0x53) for upcasing or ‘s’ (0x73) for case‑folding—just beyond the buffer, allowing an attacker to control the overflow size via input length and read out‑of‑bounds data. The issue was fixed upstream in commit ruby/ruby@d582f8f.</p>
+          </div>
+          <a href="https://verialabs.com/ruby2shell/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on a surge of reported remote‑code‑execution flaws that stem from tiny, often single‑byte overflows, noting that AI tools now streamline the discovery of full exploit chains. Contributors acknowledge the specific Ruby advisory covering the issue, discuss how character‑conversion bugs (e.g., ß → SS) can enable such overflows, and question the practicality of turning a single‑byte fault into an RCE. There is a recurring call for stronger memory‑safety guarantees, suggestions to adopt safer languages like Rust, occasional humor, and brief dismissals, while overall sentiment remains analytical with modest skepticism about exploit feasibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50556287" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://zerodha.tech/blog/high-performance-distributed-blob-storage/" target="_blank">Distributed, high-performance blob storage on SQLite</a>
+        </h2>
+        <span class="article-meta">
+          81 points • by ghostfoxgod • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Blobasaur is a sharded, distributed blob‑storage server built in Rust that uses SQLite as its storage engine and implements the Redis protocol (including Cluster support). It replaces Zerodha’s legacy SSDB store for JSON‑encoded UI preferences ranging from a few KB to several MB, delivering single‑digit‑millisecond latency on commodity hardware. Data is partitioned across multiple SQLite files (shards) via multi‑probe consistent hashing; each shard has a dedicated writer that batches writes in a single BEGIN IMMEDIATE…COMMIT transaction, while reads use a pool of read‑only connections. Compression (zstd in production) reduces payload size ~9×, cutting page usage and improving cache efficiency. The system runs SQLite in WAL mode with PRAGMA synchronous = NORMAL, accepting relaxed durability, and optionally an async‑write mode that acknowledges writes before commit. Cluster routing splits the keyspace into 16 384 CRC16 slots, with static slot assignment and gossip‑based node discovery. Benchmarks show 16 shards increase write throughput 3.3× (median latency ≈ 2 ms) and sustain &gt; 25 k ops s⁻¹ for 64 KB blobs. Operational learnings include enabling incremental auto‑vacuum and integrating TTL cleanup into the main writer to avoid latency spikes. Blobasaur is open‑source (AGPL‑v3) and deployed as a three‑node cluster (4 vCPU, 8 GB RAM) with p99 latencies around 2 ms.</p>
+          </div>
+          <a href="https://zerodha.tech/blog/high-performance-distributed-blob-storage/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on evaluating SQLite‑based storage for JSON blobs, questioning whether representing blob schemas in SQL and using per‑type SQLite files can reduce I/O and improve efficiency. Participants repeatedly raise concerns about network accessibility, replication, fault tolerance, and consistency, asking how a single portable file would handle node failures and whether the approach effectively amounts to sharding or a database‑per‑user design. The overall tone is skeptical and inquisitive, seeking clarification on replication mechanisms, durability guarantees, and the practicality of replacing traditional blob storage with this SQLite strategy.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50557537" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/" target="_blank">How the European Commission rolled out Matrix to more than 40k staff</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by liotier • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The European Commission implemented an internally‑hosted Matrix communication service built on Element’s Enterprise Server Suite (ESS Pro), scaling from a December 2025 proof‑of‑concept to deployment on all 40,000 staff laptops by September 2026. Sovereignty was defined across five dimensions—resilience, vendor diversity, data ownership, platform ownership, and procurement leverage—with internal communication priorities of resilience, data ownership, and interoperability driving the choice of Matrix. The architecture uses sovereign cloud providers (selected via a tender), integrates with EU Login for familiar authentication, and currently operates without external federation pending technical and governance decisions. Key rollout phases included a proof‑of‑concept, infrastructure build‑out (Jan‑Jun 2026), desktop/web and mobile pilots, and a staged laptop rollout (Jul‑Sep 2026). Scaling challenges addressed were cross‑server user discovery, delayed visibility of newly created accounts, performance impact of live presence (temporarily disabled), and dynamic infrastructure scaling. Security hardening was performed before launch and continues via regular reviews. The tool complements, rather than replaces, existing platforms such as Microsoft Teams, and federation discussions now focus on technical capability, governance, and partner security/privacy.</p>
+          </div>
+          <a href="https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express criticism toward the allocation of resources, emphasizing concerns that development support is insufficient and that bureaucratic overhead creates a costly burden for users. Frustration is evident regarding the time and effort required to verify devices and resolve basic functionality issues, especially when multiplied across large numbers of users. Additionally, there is skepticism about European policy decisions that favor high expenditures to reduce reliance on the United States, coupled with a perception that many readers fail to grasp the underlying motivations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50558533" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/" target="_blank">Gemini 4 Neon</a>
+        </h2>
+        <span class="article-meta">
+          866 points • by yigitdemirag • 134 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Gemini 4 Neon is a new large language model designed for rapid end‑to‑end task completion in software engineering, knowledge work, and scientific workflows. It ranks #3 overall on the Artificial Analysis Intelligence Index with a score of 61, placing it just behind larger, slower models, and holds the #2 position on the Vals Index, positioned on the Pareto frontier. The model also achieves #2 in steerability on the Agent Arena Index, indicating strong adaptability to mid‑task user corrections, and records the lowest fabrication rate observed in internal Google Antigravity testing. Gemini 4 Neon supports a 1 million‑token context window and is priced at $3 per million input tokens (or $0.15 per million cached input tokens, a 95 % discount) and $15 per million output tokens. Availability begins today via the Gemini API in Google AI Studio, Gemini for Business (API and model dropdown), paid Google AI Pro and Ultra subscriptions in Google Antigravity, and Pro/Ultra tiers in the Gemini app.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects a mixed but generally analytical view of recent AI model releases. Commenters note that Anthropic’s Opus 5.5 is widely regarded as the most conversationally human‑like, while Google’s Gemini series shows strong speed and reasonable quality, especially Neon, though Carbon is criticized for latency and output verbosity. There is broad frustration with the proliferating, opaque naming conventions and pricing tiers, alongside appreciation for benchmark improvements and occasional performance gains. Overall, users seek models that combine Opus‑level intelligence with faster, cheaper operation, while calling for clearer model taxonomy and more consistent access.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50552424" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.harrison.page/garage-door-spam/" target="_blank">Garage Door Spam</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by harrisonpage • 5 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author recounts how their Chamberlain garage‑door opener, previously managed via the “myQ” app with notifications, lost third‑party API access after Chamberlain disabled it in late 2023. To regain local control, they installed two ratgdo32 boards (~$62 each) from ratcloud LLC, which interface with LiftMaster’s Security+ 2.0 protocol using open‑source firmware. The boards were wired to the opener’s terminals, assigned static IPs (192.168.0.192 and 192.168.0.245), and integrated with Apple HomeKit for voice commands. A built‑in JSON status endpoint allowed the author to recreate a legacy mercury‑switch alarm via a Slack notification script that checks door status nightly. They exposed the devices on a Tailscale network with custom routes, enabling health‑check monitoring. All functionality now operates locally without cloud dependence, and notifications include the identity of the door operator, which the original myQ service never provided.</p>
+          </div>
+          <a href="https://blog.harrison.page/garage-door-spam/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong dissatisfaction with advertisements embedded in IoT devices, describing them as a major annoyance that drives users to replace or discard such products. Home Assistant is noted as a partial workaround, while open‑source alternatives, such as building a garage‑door controller with an ESP32 and Meross hardware, receive praise for being inexpensive, customizable, and ad‑free. Integration with Apple HomeKit and voice control is highlighted as a desirable convenience, indicating a preference for DIY, ad‑free ecosystems over manufacturer‑provided, ad‑supported solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50519231" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.drivevault.io/blog/when-will-hard-drive-prices-come-down.html" target="_blank">SSD prices will start going down the second half of next year</a>
+        </h2>
+        <span class="article-meta">
+          105 points • by illidan1000 • 22 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>SSDs are expected to start easing in price in the second half of 2027 as NAND flash supply catches up with demand; TrendForce forecasts a 4‑5 % supply deficit through 2026 and balance thereafter. Hard‑drive prices, however, will likely remain high until 2028 because Seagate and Western Digital have booked most of their high‑capacity output into long‑term data‑center contracts through 2028 and are not adding new factories. Current retail levels (ComputerBase, Sep 2026) show HDDs at +134 % and SSDs at +129 % versus pre‑crisis 2025 prices, though monthly increases have slowed. HDD price relief will come gradually from higher‑density HAMR drives reducing cost per terabyte, not from abrupt cuts. Buyers should purchase now for essential work or incomplete backups, wait for SSD upgrades until late 2027, and avoid speculative stockpiling. Key watch‑points include TrendForce NAND surveys, ComputerBase price trends, and any pricing‑pressure signals from Seagate or Western Digital.</p>
+          </div>
+          <a href="https://www.drivevault.io/blog/when-will-hard-drive-prices-come-down.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that memory prices may eventually decline, but opinions diverge on timing and likelihood. Several users cite current low price‑to‑earnings ratios and rapid revenue growth as indicators of an imminent price drop driven by oversupply or waning demand, while others express skepticism, pointing to persistent high retail costs, market monopolies, and geopolitical disruptions that could sustain prices. Optimism is linked to potential AI‑related demand shifts and advances in compression, whereas caution emphasizes uncertainty in demand, supply expansions, and broader economic factors.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50557716" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kapteko.com/15-million-webservers/" target="_blank">15M web servers on one VM – smoltcp, DPDK, AF_XDP</a>
+        </h2>
+        <span class="article-meta">
+          190 points • by fessguid • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article outlines a proof‑of‑concept for hosting ≈15 million independent HTTP servers inside a single 10 GB VM using one CPU core.<br>
+- A naïve C server uses the five basic syscalls (socket, listen, accept, recv, send, close) and hits the 65 k port limit; extending the port range and employing multiple IPs (e.g., an IPv6 /64 subnet) can raise the address space but still falls short.<br>
+- Each kernel socket consumes ~3.3 kB, so 15 M sockets would need ~20 TB RAM, far exceeding the budget.<br>
+- The proposal replaces the kernel stack with a custom userspace runtime: guests are loaded into one process, a minimal scheduler saves only three fields (program counter, server FD, client FD) ≈ 16 B per guest, yielding ~220 MB for 15 M guests.<br>
+- Active connections (≈1 M) at ~5 kB each add ~5 GB, keeping total usage under 10 GB.<br>
+- To avoid kernel overhead, the runtime uses a user‑mode TCP/IP stack (smoltcp) with TUN/TAP, DPDK, or AF_XDP for zero‑copy I/O. Benchmarks show smoltcp uses ~620 B per idle server, DPDK the best performance, and AF_XDP close behind.<br>
+- The final architecture loads all guests, intercepts their syscalls, forwards network I/O through smoltcp adapters, and schedules execution in a tight loop, demonstrating that moving the network stack to userspace can achieve the desired scale within the memory constraints.</p>
+          </div>
+          <a href="https://kapteko.com/15-million-webservers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively praise the article’s blend of technical depth and humor, describing it as clear, engaging, and refreshingly human‑written. Readers repeatedly note its readability, entertaining anecdotes, and effective illustration of resource‑optimization concepts, while also appreciating nostalgic references to earlier blog styles. Minor criticisms include a suggestion to adjust the title for clarity and confusion over a specific graph, but overall the piece is regarded as an excellent, enjoyable read that successfully balances insight with wit.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50556533" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities" target="_blank">Unauthenticated remote code execution in Nginx</a>
+        </h2>
+        <span class="article-meta">
+          1412 points • by speedping • 90 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Two critical unauthenticated remote‑code‑execution (RCE) flaws were found in NGINX, tracked as CVE‑2026‑123633 and CVE‑2026‑123007, both receiving a CVSS 9.2 rating. The vulnerabilities require HTTP/2 to be enabled; CVE‑2026‑123633 is a use‑after‑free in connection‑reuse handling, while CVE‑2026‑123007 is an integer‑underflow in HTTP/2 flow‑control accounting that leads to an out‑of‑bounds memory copy after signed/unsigned conversion. CVE‑2026‑123007 affects NGINX versions back to 1.9.5 (2015); the use‑after‑free has existed for nearly six years. Exploitation allows an unauthenticated attacker to execute arbitrary code on the server, potentially stealing data, tampering with sites, or disrupting services across all applications behind a single NGINX instance. The flaws were independently reported by Wiz Research, Ikotas Labs, Metnir, Rapid7, and Xint, and coordinated with F5. A security release was issued on Nov 18 2026. Mitigation: upgrade to the patched version immediately or temporarily disable HTTP/2 if upgrading is not feasible.</p>
+          </div>
+          <a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on a recently disclosed Nginx HTTP/2 memory‑safety vulnerability, with consensus that disabling HTTP/2 or applying the promptly released patches is the immediate mitigation. Commenters criticize the timing of public disclosure, argue for broader advisories, and note the limited real‑world exploitability due to high traffic and specific CPU requirements. Numerous remarks link the rapid discovery to AI‑assisted research, while others lament the recurring security issues in widely used open‑source software and debate the merits of moving to alternative protocols or more constrained codebases.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50547374" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://curiousbits.nl/blog/do-not-buy-ram-compress/" target="_blank">Do not buy RAM, compress</a>
+        </h2>
+        <span class="article-meta">
+          52 points • by Ecno92 • 18 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li>AI‑driven parallel workloads raise workstation memory needs, yet RAM is costly and often non‑expandable.  </li>
+<li>Linux memory compression (zram) can alleviate pressure by storing data in compressed RAM, similar to techniques already present in Windows, macOS, and Android.  </li>
+<li>Distribution support varies: Fedora and Pop!_OS enable zram by default; Ubuntu does not; Amazon Linux enables it only on small VMs; most others require manual setup.  </li>
+<li>Compression incurs modest CPU overhead and latency but can achieve ratios up to 1:4; an example showed 5.7 GB of data occupying 1.7 GB of RAM (≈1:3.35).  </li>
+<li>In a test with dozens of Firefox tabs on a 32 GB system, significant memory was off‑loaded to the zram swap device.  </li>
+<li>Enabling zram can reduce the need for larger cloud instances, potentially halving infrastructure costs for SaaS applications.  </li>
+<li>The Arch Linux wiki provides a step‑by‑step guide for configuring zram on Linux systems.</li>
+</ul>
+          </div>
+          <a href="https://curiousbits.nl/blog/do-not-buy-ram-compress/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments recognize memory compression as an established feature in macOS and newer Windows builds, while noting many Linux distributions still require manual activation of zram or zswap. Users report noticeable performance gains and reduced need for additional RAM, especially on low‑memory or embedded systems, and many advocate enabling compression by default. However, several remarks point out CPU overhead, added latency, and potential issues when swap is disabled, leading to a split view that favors zswap over zram for most desktop setups but accepts zram for specific constrained environments.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50557661" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
