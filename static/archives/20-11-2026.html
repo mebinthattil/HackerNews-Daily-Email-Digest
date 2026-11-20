@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 20, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ecohustler.com/article/one-corporation-to-pollute-them-all/" target="_blank">Carnival Cruises emits ten times more sulphur oxide than all of Europe&#39;s cars</a>
+        </h2>
+        <span class="article-meta">
+          104 points • by sammatilda • 9 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Carnival Corporation, the world’s largest cruise operator, emitted roughly ten times more sulfur oxides (SOx) around European coasts in 2017 than all 260 million European cars combined, according to Transport &amp; Environment. Royal Caribbean, the second‑largest operator, emitted about four times the European car fleet’s SOx. SOx forms sulfate aerosols that harm human health and cause acidification. Spain, Italy, Greece, France and Norway experience the highest exposure, with Barcelona, Palma de Mallorca, Venice, Civitavecchia and Southampton identified as the most affected ports. The report notes that lax marine sulfur fuel standards permit cruise ships to burn high‑sulfur bunker fuel along these coastlines. Nitrogen oxides (NOx) from cruise vessels account for ~15 % of Europe’s passenger‑car NOx emissions; in Marseille, 57 ships in 2017 produced nearly a quarter of the NOx emitted by 340 000 cars. Recommendations include adopting a zero‑emission port standard, expanding emission control areas beyond the North and Baltic Seas, and regulating NOx on existing ships. Available technologies—shore‑side electricity, batteries, and hydrogen—are cited as viable solutions, but industry adoption is deemed unlikely without governmental mandates.</p>
+          </div>
+          <a href="https://ecohustler.com/article/one-corporation-to-pollute-them-all/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments focus on the environmental impact of removing sulfur from marine fuels, noting a perceived link to reduced oceanic cloud cover and increased warming. Several contributors suggest geoengineering approaches—such as cloud seeding or fuel additives—to restore lost clouds, while others advocate stricter regulation or bans on bunker fuel use, especially for recreational vessels. Skepticism appears regarding the magnitude of cruise‑ship emissions versus other sources and the relevance of older data, with occasional references to side effects like acid rain. Overall, the discussion blends concern over climate effects, regulatory proposals, and doubts about cited evidence.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50572116" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://architectlabs.com/blog/frostbite" target="_blank">Frostbite: A new CPU architecture discovered, designed and verified by AI</a>
+        </h2>
+        <span class="article-meta">
+          134 points • by shioyama • 33 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Frostbite is a general‑purpose CPU built from an interaction‑net programming model, where each computation step is local, dependencies are explicit, and values have single ownership. AI agents autonomously designed the ISA, microarchitecture, RTL, verification flow, and GDS, iterating over compiler, architecture, and runtime specifications encoded in a formal language (ASL) that maps to Lean for theorem proving. The chip, fabricated in 7 nm, runs at 500 MHz; a 2 × 2 tile quad occupies 0.792 mm² and includes on‑chip work‑stealing and a lightweight scheduler, eliminating large caches and coherence logic. Across 25 benchmarks (including FFT, GEMM, LZ4, and recursive algorithms), Frostbite achieved a geometric‑mean 4.59× higher performance‑per‑watt than a modern dual‑issue, in‑order superscalar core of comparable area, with 8.77× higher performance‑per‑area. Energy use shifted from memory fetch/decode (57 % → 38 %) to on‑chip network and scheduler (6 % → 26 %). The AI‑driven workflow proved capable of discovering novel architectural primitives and cross‑stack optimizations unattainable in traditional ASIC flows.</p>
+          </div>
+          <a href="https://architectlabs.com/blog/frostbite" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express a mixture of cautious optimism and skepticism toward AI‑generated hardware designs. Reviewers note that while the concept of data‑flow or graph‑based architectures is not new, the presented work is praised for its visual appeal but questioned for its actual novelty, benchmark relevance, and practical performance compared to existing CPUs such as Apple silicon. Several points criticize the industry’s focus on quantity over quality, the persistence of single‑global‑memory assumptions in programming languages, and call for more rigorous evaluation. Overall, there is interest in AI‑accelerated chip design but doubt about its immediate impact and maturity.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50572503" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://kottke.org/17/06/if-you-cant-explain-something-in-simple-terms-you-dont-understand-it" target="_blank">If you can&#39;t explain something in simple terms, you don&#39;t understand it (2017)</a>
+        </h2>
+        <span class="article-meta">
+          44 points • by sammatilda • 14 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The excerpt recounts Richard Feynman’s emphasis on explaining complex concepts in simple terms as a test of true understanding. It cites a missing lecture on planetary motion later reconstructed by David Goodstein. A anecdote describes Feynman’s attempt to teach why spin‑½ particles follow Fermi‑Dirac statistics; failing to reduce it to a freshman level, he concluded the topic was not yet fully understood. The piece parallels this with Apple engineer John Gruber’s claim that simple explanations demonstrate mastery. It also notes Feynman’s admission that magnetic force lacks an intuitive analogy for him and his broader statement that “nobody understands quantum mechanics.” A final note from his blackboard—“What I cannot create, I do not understand”—summarizes his philosophy that creation is the benchmark of comprehension.</p>
+          </div>
+          <a href="https://kottke.org/17/06/if-you-cant-explain-something-in-simple-terms-you-dont-understand-it" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on the difficulty of reducing complex subjects to simple explanations, emphasizing that audience knowledge and context heavily influence effectiveness. While some view clear, distilled explanations as a mark of rigorous thinking, others caution that oversimplification can omit essential nuances and lead to misunderstandings. Recurrent points include the limits of reductionism, the need for careful balance between clarity and detail, frustration with inadequate explanations in fields like quantum computing, and the recognition that what is simple for one person may not be for another.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50572355" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openssl/openssl/pull/33652" target="_blank">OpenSSL: Buffer overflow in EVP_EncodeBlock() (CVE-2026-121481, CVSS 9.8)</a>
+        </h2>
+        <span class="article-meta">
+          280 points • by JacobHenner • 23 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The pull request backports safeguards for a buffer‑overflow vulnerability (CVE‑2026‑121481) to OpenSSL 3.6.5. Modifications include:  </p>
+<ul>
+<li><strong>EVP_EncodeBlock()</strong> now aborts when the input length is negative or when the resulting Base64 output would exceed <code>INT_MAX</code> (<code>dlen &gt; (INT_MAX/4)*3</code>). For empty input the function writes only a NUL terminator.  </li>
+<li><strong>EVP_DecodeBlock()</strong> returns 0 for empty input and ‑1 for a negative length, preventing underflow.  </li>
+<li><strong>http_client.c base64encode()</strong> validates that the encoded size fits in an <code>int</code>, rejecting inputs that would otherwise overflow (previously only <code>len &gt; INT_MAX</code> was checked). This issue could be triggered via a long <code>s_client -proxy_pass</code> command.  </li>
+</ul>
+<p>The changes mirror pending upstream guards (openssl/openssl#33652) and are co‑authored by Claude Opus 5.5. No functional code changes beyond the added length checks.</p>
+          </div>
+          <a href="https://github.com/openssl/openssl/pull/33652" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion acknowledges a flaw in OpenSSL’s EVP_EncodeBlock that only triggers with extremely large inputs, making practical exploitation unlikely for typical use cases and prompting criticism of the CVSS 9.8 rating as overstated. Commenters highlight the API’s poor design, lacking buffer‑size validation, and note that the issue chiefly affects newer OpenSSL releases, with uncertain impact on forks. Widespread frustration over continual vulnerability disclosures and patching demands is evident, alongside calls for safer size handling and more proactive monitoring of infrastructure.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50569226" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://jeanmicheljarre.com/aaa/the-making-of-oxygene" target="_blank">The Making of Oxygene</a>
+        </h2>
+        <span class="article-meta">
+          15 points • by hggh • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Jean‑Michel&nbsp;Jarre’s 1976 debut album <em>Oxygène</em> reshaped electronic music. Recorded in Jarre’s Paris kitchen with a single eight‑track Scully recorder, the instrument‑only work uses a VCS3, EMS Synthi AKS, ARP 2600, Eminent String Ensemble, RMI Harmonic Synthesizer, RMI Keyboard Computer, Farfisa organ, and a Korg Mini‑Pops drum machine. Collaborator Michel Geiss handled sound‑engineering, programming ARP 2600 patches and managing tape edits; the master comprises two spliced eight‑track tapes. The six instrumental pieces (Parts 1‑6) were released by Dreyfus/Motors in December 1976, initially selling 50 000 copies in France. After Polydor’s Fred Haayen secured UK distribution and BBC Radio 1 full‑album play, <em>Oxygène</em> entered the UK chart at #19, spent 24 weeks there and reached the top 10 in seven countries, eventually selling ~18‑20 million copies worldwide. Album art—Michel Granger’s “Oxygène” painting—depicts a skull within Earth and was adapted for the cover. The record’s minimalist, hand‑sequenced structures and novel stereo presentation contributed to its lasting influence on synth‑driven pop.</p>
+          </div>
+          <a href="https://jeanmicheljarre.com/aaa/the-making-of-oxygene" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express positive reactions, with contributors sharing personal memories of attending a large open‑air concert and recalling music’s influence during their upbringing, while also acknowledging the article’s quality. Overall sentiment is appreciative and nostalgic, highlighting memorable experiences and gratitude toward family influences, and indicating general satisfaction with the content presented.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50572822" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://healeycodes.com/introducing-the-worlds-strongest-sokoban-solver" target="_blank">The Strongest Sokoban Solver</a>
+        </h2>
+        <span class="article-meta">
+          77 points • by ibobev • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <ul>
+<li><strong>Solver performance</strong>: “Soksolv” solves more levels than any published Sokoban solver on the Large Test Suite (3,272 levels) and Open Test Suite (10,043 levels), including 24 world‑first automated solves, and runs about 3.2× faster in total time.  </li>
+<li><strong>Development resources</strong>: Built via a 14‑day Claude Code session using ~430 sub‑agents (Opus 5.5, Sonnet 5.5, Fable 2.2) at an API cost of ≈ $3,500 and ≈ 15,000 vCPU‑hours (AMD EPYC). The code is written in Go, limited to 15 GB RAM, and executes on an 8‑core/16 GB machine.  </li>
+<li><strong>Core algorithmic techniques</strong>:<br>
+  • Best‑first search with push‑only expansion and flood‑fill worker reachability.<br>
+  • Aggressive dead‑lock pruning (corner, frozen pair, PI‑corral) and macro‑move compression in tunnels.<br>
+  • Bidirectional search using simulated pulls to meet forward search in the middle, cutting the branching factor roughly in half.<br>
+  • Feature‑Space Search (FESS) that projects positions into a low‑dimensional feature grid and cycles through least‑explored cells.<br>
+  • Novelty‑based width search rewarding previously unseen box‑square placements.<br>
+  • Lane architecture: multiple concurrent search lanes share tables, dead‑lock data, and memory, enabling collaborative solving across all cores.  </li>
+<li><strong>Benchmark characteristics</strong>: The combined benchmark set contains 9,756 unique levels (average 16 boxes, ~830 moves, ~160 pushes). Soksolv’s design avoids ML, code‑copying, and hard‑coded solutions, focusing on verifiable, reproducible heuristics.</li>
+</ul>
+          </div>
+          <a href="https://healeycodes.com/introducing-the-worlds-strongest-sokoban-solver" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong appreciation for the write‑up, highlighting its clear explanation of Sokoban heuristics and the author’s solver progress. Readers note the puzzle’s computational complexity and express interest in applying the discussed techniques to their own challenges. Several remarks extend the discussion to broader themes, such as building verifiable experiment factories and using agent‑driven search to advance algorithmic research, especially in areas like compression and reinforcement learning. Overall the tone is supportive, enthusiastic, and focused on the practical and theoretical implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50523241" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://trynotched.com/find" target="_blank">Show HN: Tinnitus frequency finder and audio notch tool</a>
+        </h2>
+        <span class="article-meta">
+          18 points • by brianrhea • 7 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A browser‑based tool guides users through a four‑minute pitch‑matching procedure to estimate the frequency of their tinnitus. After a safety checklist, users describe the sound (tone, hiss, etc.) and set a quiet reference level. A level check presents nine tones from 1 kHz to 14 kHz, recording the lowest audible point for each; subsequent test sounds are adjusted to equal perceived loudness, compensating for high‑frequency hearing loss. Users then rate up to ten randomly ordered tones (750 Hz–12 kHz) as “far,” “warm,” or “very close,” after which six forced‑choice pairs narrow the estimate from half an octave to about a twelfth. An octave‑verification step compares the provisional match with tones an octave above and below to avoid common octave errors. A second independent match is made by dragging a pure tone to the perceived pitch. The final result shows the median frequency in hertz, a confidence range, and the nearest musical note; results are stored locally and averaged across sessions. The service is free, requires headphones, and does not replace medical evaluation.</p>
+          </div>
+          <a href="https://trynotched.com/find" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments emphasize that while no definitive cure exists, psychological therapies and sound‑based interventions such as notch‑filter audio are widely regarded as valuable for reducing distress. Users share personal experiences of tinnitus stemming from infections, earwax, or high‑frequency tones, noting that perception can improve with attention‑shifting techniques. Several contributors have created or promoted web tools for pitch‑matching and customized sound playback, expressing frustration with limited audiology options and calling for coordinated therapeutic efforts rather than proliferating isolated apps. Overall sentiment is cautiously optimistic about non‑medical strategies.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50541568" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theatlantic.com/technology/2026/11/silicon-valley-model-collapse/689505/" target="_blank">Why do tech leaders sound so illogical and off-putting?</a>
+        </h2>
+        <span class="article-meta">
+          32 points • by pseudolus • 13 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.theatlantic.com/technology/2026/11/silicon-valley-model-collapse/689505/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary conveys a broadly skeptical and critical tone toward technology executives, portraying them as ego‑driven, financially motivated, and prone to shaping narratives that serve regulatory or corporate interests rather than genuine concern. It contrasts experiences at large, pragmatic firms with startup cultures perceived as self‑important, and suggests that misinformation and group identity reinforce these dynamics. The author emphasizes that love, kindness, and practical work ethic are undervalued, while strategic “doomerism” and image management are viewed as deliberate tactics to preserve power and profit.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50573087" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ffmpeg.org/download.html#release_9.1" target="_blank">FFmpeg 9.1 &#39;Gauss&#39;</a>
+        </h2>
+        <span class="article-meta">
+          166 points • by gyan • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>FFmpeg distributes only source code; pre‑compiled packages and static builds are provided by third‑party sites. The source can be cloned via <code>git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg</code>. All official releases are signed with the project’s RSA‑2048 PGP key (FCF986EA15E6E293A5644F10B4322F04D67658D8); users should import the public key (<code>ffmpeg-devel.asc</code>) and verify tarball signatures with GPG. Post‑quantum signatures (<code>.pq.asc</code>) are also available for recent releases but require GnuPG ≥ 2.4 or a compatible backend (OpenSSL 3.5, RustCrypto).  </p>
+<p>FFmpeg follows a roughly six‑month major‑release cycle, with point releases for bug fixes. Development branch snapshots receive most new features and security patches. Recent stable releases (as of 2026‑11‑20) include:  </p>
+<ul>
+<li><strong>9.1 “Gauss”</strong> (released 2026‑11‑20) – libavutil 61.19.100, libavcodec 63.24.100, libavformat 63.16.100, libavdevice 63.5.100, libavfilter 12.8.100, libswscale 10.5.100, libswresample 7.6.100.  </li>
+<li><strong>9.0.2 “Lei”</strong> (2026‑09‑18) – corresponding library versions 61.1.102, 63.1.102, etc.  </li>
+<li>Earlier branches 8.x, 7.x, 6.x, 5.x and 4.x are listed with their library version sets. Older releases are archived on the “Old Releases” page.</li>
+</ul>
+          </div>
+          <a href="https://ffmpeg.org/download.html#release_9.1" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for the extensive updates, praising FFmpeg as a versatile, essential tool and thanking the maintainer for reliable Windows builds. Users note practical benefits such as expanded codec support and hardware acceleration, and some suggest future enhancements like handling HLS X‑DISCONT stitching. A recurring complaint concerns the default distribution being stripped, specifically the removal of the vidstabtransform filter, which forces users to seek full versions elsewhere. Overall sentiment is largely positive with constructive feedback on distribution completeness.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50569998" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://cpldcpu.com/2014/03/19/%c2%b5-wire-usb-on-an-attiny-10/" target="_blank">µ-Wire – USB on an ATtiny 10</a>
+        </h2>
+        <span class="article-meta">
+          50 points • by mofosyne • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The ATtiny10, a 6‑pin SOT23 AVR with 1 KB flash, 32 B SRAM and a reduced 16‑register core, was used to implement a USB‑compatible “µ‑Wire” device that drives a single WS2812 RGB LED. By stripping V‑USB to its essentials—removing interrupt handling, reset processing, double buffering, and non‑essential endpoints—the firmware fits within the ATtiny10’s limits (988 / 1024 B flash, 28 B variables + 2 B stack SRAM). An interrupt‑free V‑USB variant from micronucleus reduced SRAM use, while manual register remapping avoided register collisions. The author calibrated the internal 12 MHz RC oscillator for USB timing, accepting the lack of a PLL. AVR‑GCC’s failure to emit the one‑word LDS/STS instructions for the reduced core forced inline assembly macros to achieve optimal code size. The final implementation processes USB SETUP packets in‑order, stealing time to update the WS2812 while ignoring the following data packet, enabling full protocol compatibility with existing little‑wire host software. Source code is available on GitHub.</p>
+          </div>
+          <a href="https://cpldcpu.com/2014/03/19/%c2%b5-wire-usb-on-an-attiny-10/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for the technical accomplishment of fitting complex firmware onto an ATtiny10, highlighting its significance as a notable engineering milestone. Contributors emphasize the value of the detailed documentation and source availability, noting that the work serves as an inspiring example for other developers. The overall tone is affirming, recognizing the effort as worthy of recognition and preservation within the community’s technical history.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50545818" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
