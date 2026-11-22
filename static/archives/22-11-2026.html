@@ -1,0 +1,553 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 22, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.caranddriver.com/news/a74490092/toyota-nissan-honda-standardize-parts-lower-costs/" target="_blank">Toyota, Nissan, and Honda to standardize parts to lower costs</a>
+        </h2>
+        <span class="article-meta">
+          573 points • by zdw • 39 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Japan’s three largest automakers—Toyota, Nissan and Honda—have agreed to standardize certain components to cut production costs. The initial focus will be on unified quality criteria for steel, consistent specifications for plastics and resins, and a universal color‑coding system for wiring harnesses. Standardization discussions are beginning with domestic parts suppliers, with international suppliers to be incorporated later, and implementation is slated for the next fiscal year. The effort targets parts that are cost‑intensive yet invisible to consumers, ensuring brand identity remains unchanged. The move is part of a broader strategy by Japan’s seven major manufacturers to improve competitiveness against rising Chinese rivals, with savings intended to fund future innovations. The Japan Automobile Manufacturers Association, chaired by Koji Sato (also Toyota’s vice‑chairman), is overseeing the program.</p>
+          </div>
+          <a href="https://www.caranddriver.com/news/a74490092/toyota-nissan-honda-standardize-parts-lower-costs/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the view that Japanese automakers are adopting greater parts standardization and increased reliance on shared suppliers to lower costs and compete with Chinese manufacturers. Observations note historical precedents, potential benefits for maintenance and repair, and the possibility of reduced model differentiation and consumer pricing impact. Skepticism appears regarding the timing of these changes, the effect on jobs and vehicle quality, and whether cost savings will translate to lower purchase prices. Discussions also touch on EV range limitations, software lag, and broader market pressures shaping the shift.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50596133" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theguardian.com/society/2026/nov/20/pill-pancreatic-cancer-breakthrough-daraxonrasib" target="_blank">Pill to treat pancreatic cancer hailed as &#39;biggest breakthrough in decades&#39;</a>
+        </h2>
+        <span class="article-meta">
+          1056 points • by rafaelc • 25 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A phase‑II trial of daraxonrasib, a KRAS inhibitor that blocks oncogenic KRAS mutations common in pancreatic ductal adenocarcinoma, reported notable tumor responses in patients with newly diagnosed, metastatic disease. Among 61 participants, tumor growth halted in ~90 % of cases; &gt;60 % experienced tumor shrinkage or disappearance, and ~8 % achieved radiographic complete response (tumors undetectable on CT). After a median 18‑month follow‑up, 76.6 % of patients were alive at 12 months, compared with the typical 40‑45 % survival for chemotherapy alone. One in 12 patients achieved undetectable disease. Daraxonrasib’s mechanism—binding and inactivating mutant KRAS—suggests potential applicability to other KRAS‑driven cancers. Researchers emphasized that the drug is not yet a cure, long‑term durability remains uncertain, and larger studies are required before regulatory approval and NHS adoption. Pancreatic cancer currently has a 5‑year survival of ~3 % when metastatic, highlighting the significance of these early efficacy signals.</p>
+          </div>
+          <a href="https://www.theguardian.com/society/2026/nov/20/pill-pancreatic-cancer-breakthrough-daraxonrasib" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express cautious optimism about the new KRAS inhibitor, noting it modestly extends survival for late‑stage patients and marks a rare advance after decades of limited options. Many highlight potential benefits for earlier‑stage disease, reduced recurrence, and improved quality of life, while also raising concerns about high cost, severe side effects, resistance, and equitable access. Skepticism about hype appears alongside hopes for broader, affordable cures and AI‑driven research, with personal anecdotes underscoring the disease’s impact.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50582069" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/pithings/unkernel" target="_blank">A real Linux kernel, compiled to WebAssembly</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by DonAtimator • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Unkernel compiles a full Linux 7.x kernel (including syscalls, scheduler, ext4, TCP/IP, MMU with Sv39 page tables) into a single WebAssembly module that runs entirely in the browser or Node. User programs are unmodified aarch64 binaries (Alpine, Debian, etc.) executed by kwemu, an AArch64 CPU written in Zig and linked into the kernel; memory management and syscalls are handled by the native Linux code, not emulated. Boot completes in ~70 ms, the Alpine shell appears in 0.3 s after a ~10 MB download, and the kernel runs with 48 MiB guest memory. Measured syscall latency is ~170 ns (vs 110 ns native), read 64 B ≈170 ns, and fork‑exit‑wait ≈60 µs, comparable to native and far faster than QEMU. JIT‑compiled hot user code yields 1.6–2.3× speed‑up over interpretation; OpenSSL achieves ~100 MiB/s AES‑128‑GCM and ~160 MiB/s SHA‑256. Features include ext4/overlayfs/tmpfs, full TCP/IP stack, cgroups, namespaces, vsock, ALSA sound, framebuffer, and persistent storage via IndexedDB or host‑provided images. Limitations: no IPv6, limited UDP/DHCP/DNS, no inbound connections, missing ptrace, seccomp, and some SIMD fallback. The MIT‑licensed JavaScript SDK provides CLI, TypeScript API, and worker‑based SMP support, enabling embedding Linux shells, package managers, graphics, sound, and custom back‑ends in web or server environments.</p>
+          </div>
+          <a href="https://github.com/pithings/unkernel" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion expresses enthusiasm for extending WebAssembly to support userspace workloads, noting existing proofs of concept but highlighting difficulties with process scheduling and preemption. It contrasts WASM with JavaScript‑based JIT emulators, citing benchmark results that show higher speeds for JIT approaches on certain workloads. The comments reference several demos and technical resources, suggesting that leveraging modern JS runtimes could yield performance advantages over pure WASM implementations while acknowledging current limitations in WASM’s scheduling capabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50533945" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/" target="_blank">Lean verification of the Riemann Hypothesis</a>
+        </h2>
+        <span class="article-meta">
+          1057 points • by g-b-r • 66 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Lean library released on 20 Nov 2026 by Levent Alpöge contains a formal proof of the Riemann Hypothesis, comprising roughly 17 million lines of code that depend solely on Mathlib. The Lean and Mathlib communities have audited the submission and certify that it meets four verification criteria:</p>
+<ul>
+<li><strong>Correct statement</strong>: The hypothesis is expressed using the Mathlib definition <code>RiemannHypothesis</code>, which has been reviewed by number‑theory experts.</li>
+<li><strong>Successful compilation</strong>: Numerous contributors have compiled the library without errors, reproducing an identical raw proof export.</li>
+<li><strong>Statement‑theorem correspondence</strong>: An isolated file importing only Mathlib defines the hypothesis; independent comparison tools (<code>comparator</code> and <code>con‑leche –compare</code>) confirm that Alpöge’s theorem matches the Mathlib statement exactly.</li>
+<li><strong>Proof validity</strong>: The exported proof has been checked by Lean’s kernel and additional proof checkers (<code>con‑leche</code>, <code>con‑ron</code>, and third‑party tools). These checkers include formal guarantees against accepting false proofs, addressing concerns about logical soundness.</li>
+</ul>
+<p>The community credits all participants for providing verification resources and anticipates further work to elucidate the proof’s ideas.</p>
+          </div>
+          <a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion reflects a blend of enthusiasm for the AI‑generated formal proof and caution about its reliability. Commenters acknowledge the technical achievement of encoding vast mathematics in Lean and credit the human collaborators, yet they repeatedly question possible bugs in the verification tools, the opacity of a 17‑million‑line proof, and whether the result can be trusted without deeper human understanding. Many express interest in simplifying the proof, exploring downstream consequences, and applying similar methods to other open problems, while noting that definitive acceptance will depend on thorough, independent scrutiny.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50589618" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://arxiv.org/abs/2606.14068" target="_blank">Harsher on Male? Evaluating LLMs on Gender-Asymmetric Moral Framing in Conflicts</a>
+        </h2>
+        <span class="article-meta">
+          23 points • by rzk • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper titled “Harsher on Male? Evaluating LLMs on Gender-Asymmetric Moral Framing Across Diverse Conflict Scenarios” investigates whether large language models (LLMs) exhibit gender‑biased moral judgments when presented with conflict situations that frame actions differently for men and women. It systematically constructs a set of varied conflict scenarios and measures the models’ responses to assess the presence and degree of gender‑asymmetric framing. The study aims to identify potential disparities in how LLMs evaluate similar moral actions based on the gender of the agent, providing quantitative analysis across multiple model architectures. Supporting visual elements include generic icons for archive, licensing, bibliographic references, Reddit, and funding organizations (Simons Foundation and Schmidt Sciences), indicating repository links and acknowledgments but offering no additional substantive content.</p>
+          </div>
+          <a href="https://arxiv.org/abs/2606.14068" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments emphasize that large language models mirror the biases present in their training data, which predominantly reflect current societal norms and a Western‑centric perspective. Observations note that Chinese models exhibit comparable or greater bias, likely due to reliance on distilled US models, and suggest that additional models such as Anthropic, Mistral, and Grok merit comparative analysis. Overall, the discussion conveys a critical view of the pervasive cultural bias in LLMs while acknowledging their ability to replicate human behavior patterns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50597743" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stulle.app/" target="_blank">Sandwich Simulator</a>
+        </h2>
+        <span class="article-meta">
+          294 points • by subdomain • 51 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://stulle.app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments display a blend of playful enthusiasm and recurring frustration with the sandwich‑building tool. Users frequently request additional toppings—including regional options like ajvar, guacamole, and vegan alternatives—and desire greater flexibility such as placing bread on top, cutting cheese layers, and applying condiments beyond the base slice. Technical concerns appear, noting performance drops at high stack heights and limited ingredient‑spreading mechanics. Cultural jokes about German cuisine and odd toppings recur, while many express appreciation for the concept and visual gallery despite the noted functional constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50594911" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/ShinMegamiBoson/lookatmyquant" target="_blank">Inkling-2-Mini in 5.4 GB Memory</a>
+        </h2>
+        <span class="article-meta">
+          479 points • by k__ • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>LookAtMyQuant is a quantization compiler that measures KL divergence for each model component and selects trellis‑coded representations to fit a size budget with minimal output degradation. On Gemma 4 E2B its GGUF achieves 12× lower KL than Q4_K_M at equal file size. LookAtMyQuant 2 compresses Qwen 3.5‑4B to 1.23 GB (2.3 bits/weight), solving 330/540 exact‑answer math problems with KL 0.45 nats (vs 0.59 for Bonsai). The pipeline uses post‑training quantization, Fisher‑information row budgeting, digit‑token weighting, and 4 000 steps of distillation, costing ~US 34 GPU time. The same method reduces Qwen 3.8‑27B from 53.7 GB to 7.2 GB (2.1 bits/weight), retaining 401/540 math solutions and outperforming UD‑IQ2_XXS on HumanEval, MMLU and GSM8K. Inkling‑2‑Mini (26.4 B physical/5.4 B active MoE) is compressed into six Apple‑Silicon builds (3.85‑12.76 GB, 1.18‑3.92 bpp) using block‑vector and row trellis codes, attention projection floors, and NVFP4 passthrough; the 12.8 GB model matches 100 % of the BF16 teacher on all benchmarks with 32.5 % less memory. Runtime for Apple Silicon installs via pip (mlx, mlx‑lm, numpy, huggingface‑hub, lookatmyquant) and provides the <code>lamq</code> CLI and Python API (<code>runtime_mlx.load</code>, <code>mlx_lm.generate</code>). Example compiler usage on SmolLM2‑360M yields perplexity 16.64 and KL 0.0926 versus original 15.31.</p>
+          </div>
+          <a href="https://github.com/ShinMegamiBoson/lookatmyquant" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment expresses strong skepticism toward the repository’s quantization claims, emphasizing that reduced memory footprints often come with significant trade‑offs and that benchmark numbers can be misleading. It criticizes the README’s disorganized history, advises reliance on established quantization tools such as official GGML releases, Unsloth, and well‑known community projects, and highlights practical performance limitations on typical GPUs. The author also questions the validity of reported quality metrics, suggesting the model’s results are inconsistent with mainstream standards and may be overhyped.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50591853" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/tamnd/riemann-handbook" target="_blank">Show HN: The Riemann Proof Handbook</a>
+        </h2>
+        <span class="article-meta">
+          58 points • by tamnd • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The repository tamnd/riemann-handbook provides a PDF/EPUB “handbook” that narrates the Lean formalisation of the Riemann Hypothesis (the tamnd/riemann‑lean project). It does not constitute an independent verification; the Lean code has not been fully built, nor have the written statements been cross‑checked against the code. The book is organised into development volumes, each entry corresponding to a declaration whose dominated subtree exceeds size thresholds (≥1000, ≥300, ≥100). Entries are assigned to volumes and chapters based on proof branches or Lean folder structure, with a ledger tracking coverage. Building the book requires Python 3.11+, pandoc 3.8+, and Tectonic; commands such as <code>python -m rhb ledger</code>, <code>check</code>, and <code>build</code> generate PDFs/EPUBs (MathML) via a pipeline: Markdown → pandoc with filters/rhb.lua → LaTeX using tex/handbook.sty → Tectonic. The text is CC BY 4.0; the builder is MIT‑licensed. Errors should be reported via the repository’s issue tracker.</p>
+          </div>
+          <a href="https://github.com/tamnd/riemann-handbook" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express dissatisfaction with the current AI‑generated writing, describing it as overly generic and riddled with “Claudisms” that hinder readability. Contributors suggest employing explicit style guidance, adversarial review, and human rewriting to improve clarity and narrative flow. Parallel discussions mention a newly built tool for distributed Riemann‑hypothesis computation and reference existing Lean implementations, questioning whether the proof has been fully verified and seeking additional resources such as PDFs, EPUBs, and clearer explanatory content. Overall, the tone calls for more rigorous editing and better documentation.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50596664" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/" target="_blank">Data Processing Incidents on Inference Providers</a>
+        </h2>
+        <span class="article-meta">
+          171 points • by sdko • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Earlier this week security researchers identified data‑policy violations at several inference providers. OpenRouter confirmed no breach of its own service but found issues with specific providers, prompting the following actions: three providers were off‑boarded; 125 endpoints lost Zero Data Retention (ZDR) eligibility—including those flagged by researchers and additional precautionary removals; and all potentially affected customers were notified. Ongoing measures include adapting the researchers’ testing methodology for continuous monitoring, performing technical verification of network paths to detect third‑party forwarding of requests or responses, and requiring validated assurances before reinstating ZDR eligibility for any removed endpoint. OpenRouter acknowledges the Dragos report and plans to integrate similar testing into its platform, demanding higher compliance from providers seeking inclusion. Providers are encouraged to publish incident write‑ups; a live list of security announcements will be maintained, though not all providers have posted publicly.</p>
+          </div>
+          <a href="https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong concern about OpenRouter’s handling of data‑retention guarantees, citing recent prompt‑leakage incidents and questioning the platform’s provider vetting and audit practices. Many view the removal of questionable endpoints as insufficient without enforceable technical safeguards, while a portion emphasizes reliance on local models or direct agreements with inference providers for greater assurance. Skepticism persists that “zero data retention” claims lack verification, and overall sentiment leans toward distrust of the service’s ability to protect user data despite some acknowledgment of recent corrective steps.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50595554" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really" target="_blank">Detonating a pile of lead azide</a>
+        </h2>
+        <span class="article-meta">
+          624 points • by beginning_end • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on strong criticism of the prolonged, uninspected storage of lead‑azide, attributing responsibility to military contractors and oversight failures. Many emphasize the extreme hazard posed by degraded primary explosives, advocating bomb‑squad intervention or controlled detonation rather than robotic handling. Environmental and public‑health risks from lead contamination and plume dispersion are highlighted, with calls for stricter standards, transparent accountability, and alternative disposal strategies such as burial or chemical neutralization. While a few suggest innovative mitigation ideas, the dominant view deems the situation mismanaged and unacceptable.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50588982" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
