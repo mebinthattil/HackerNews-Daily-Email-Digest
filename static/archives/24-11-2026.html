@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 24, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/" target="_blank">LLM agents work for their parent companies, not for you</a>
+        </h2>
+        <span class="article-meta">
+          164 points • by surprisetalk • 29 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author describes building a Claude‑coded assistant to extract artist and song information from Instagram reels, then locate the track on Bandcamp for purchase or on YouTube for download. A recent Bandcamp search‑API challenge blocked the workflow; the model refused to suggest workarounds, while still offering to download the YouTube version, which provides no revenue to the artists. This behavior illustrates the author’s view that AI agents prioritize the policies of their parent companies (Anthropic, OpenAI) over user intentions, limiting legitimate use cases such as supporting independent musicians. The post argues that corporate controls can bias model outputs, potentially favoring advertisers or complying with external directives, and calls for locally hosted, open‑source models that operate without such restrictions. The author also notes that “open” models’ capabilities depend heavily on training data and that some foreign models enforce geopolitical constraints. The overall theme is a critique of corporate‑driven AI limitations and a push for user‑controlled, unrestricted tools.</p>
+          </div>
+          <a href="https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments converge on a skeptical view of proprietary AI models, emphasizing that built‑in safeguards and corporate guardrails often limit user autonomy and serve commercial interests rather than genuine safety. Many advocate for open‑source, locally hosted models and self‑run agents to avoid vendor lock‑in, citing ease of customization and control. While recognizing that unrestricted tools can be misused, the prevailing sentiment prefers transparent design processes and the ability to modify or remove restrictions, warning that future commercialization may further restrict access and impose ad‑driven or regulatory constraints.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50627340" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://deucalionn.vercel.app/polymarket-delit-initie-jensen-huang-nvidia/" target="_blank">Investigation of Polymarket Insider Trading on the Reinstatement of Jensen Huang</a>
+        </h2>
+        <span class="article-meta">
+          371 points • by oska • 44 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The analysis documents a suspected insider‑trading episode on the Polymarket prediction market “Will Jensen Huang rejoin NVIDIA by December 31, 2026?”. Between 02:19 and 03:28 CET on 23 Nov 2026, a newly created Gnosis Safe proxy (address 0xdf8616e1…) executed four consecutive limit orders, buying 4,648 USDC of “YES” tokens at a 6.5 % implied probability and absorbing roughly 34 % of available sell liquidity. The position was locked before any public news. 89 minutes later, Donald Trump posted on Truth Social supporting Huang’s reinstatement; eleven hours after that, NVIDIA’s board announced Huang’s immediate return, driving the market price to $1.00. The trader’s position was settled at 71,518 USDC, yielding a net profit of +66,869 USDC (+1,438 % ROI). On‑chain forensics show the trader used a burner wallet with no prior activity, relying on Polymarket’s pUSD bridge for funding, leaving a fully traceable record of the trade’s timing, size, and profit.</p>
+          </div>
+          <a href="https://deucalionn.vercel.app/polymarket-delit-initie-jensen-huang-nvidia/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely focus on whether the Polymarket trade was genuine insider trading or merely fortunate timing, with many questioning the statistical odds and suggesting alternative, higher‑liquidity strategies such as leveraged NVDA or Bitcoin positions. Skepticism about the platform’s fairness and its similarity to gambling recurs, alongside criticism of political influence and alleged corruption tied to Trump. Some view insider activity as an expected feature of prediction markets, while others highlight the concentration of profits among a tiny user segment and call for better monitoring tools.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50626578" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.kadoa.com/congress/insights/trump-nvidia" target="_blank">Who in Washington owns and trades Nvidia stock</a>
+        </h2>
+        <span class="article-meta">
+          104 points • by hubraumhugo • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page lists disclosed Nvidia stock trades by former President Donald Trump and 37 members of Congress around the period of Jensen Huang’s resignation and reinstatement. Nvidia fell 48 % from its October peak to 20 Nov 2026, then rose 33 % on 23 Nov after the board reinstated Huang, citing input from senior U.S. officials. Trump’s 2026 activity comprises 28 purchases (valued $5.1 M–$16.7 M) and 15 sales ($4.4 M–$12 M), shown on daily closing prices; his 2025 year‑end holding was reported at $12.5 M–$58 M (67k–311k shares). If still held, the November price swing cost $0.5 M–$2.2 M, though trade timing is uncertain due to range‑based reporting. Congressional data cover 192 trades by 37 lawmakers since Jan 2025, based on periodic transaction reports (including family accounts) but exclude trades from annual or candidate filings. Reports may be delayed up to 45 days; November trades will appear by early January.</p>
+          </div>
+          <a href="https://www.kadoa.com/congress/insights/trump-nvidia" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express broad distrust of elected officials, emphasizing concerns that lawmakers’ stock trading—despite reporting deadlines—creates opportunities for insider advantage and corruption. Many argue that trading should be prohibited for politicians and lobbyists, criticizing specific figures such as Pelosi and noting perceived partisan hypocrisy. Some participants claim the presented data shows ordinary market activity, while others point to high‑profile cases like NVIDIA and question the influence of undisclosed connections. Overall sentiment is negative toward political financial practices and calls for stricter transparency and restrictions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50626861" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fzakaria.com/2026/11/23/2035-came-early" target="_blank">2035 Came Early</a>
+        </h2>
+        <span class="article-meta">
+          451 points • by setheron • 40 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post reviews recent advances that accelerate running full Linux environments in browsers. After referencing Gary Bernhardt’s talk on JavaScript’s rise, the author highlights <strong>trynix.dev</strong>, a service that launches any Nix package (≈300 k versions) via WebAssembly, but notes QEMU‑Wasm’s limited speed. The newer engine <strong>unkernel.dev</strong>—Linux compiled to WebAssembly—provides 2×–32× faster boot and execution because only user‑space programs are emulated. Benchmarks show substantial gains on first runs where kernel work dominates. The environment supports networking (via a single WebSocket to a Wisp relay), Wayland compositing, a minimal Mesa build with the virgl driver rendered through WebGL2, ALSA sound, and standard CLI tools (curl, git, pip). Demonstrations include X11 apps (xeyes), GL gears, speech synthesis (espeak‑ng), live weather via curl, and nested browsers (Firefox inside Firefox). The author concludes that the 2035‑era JavaScript‑WebAssembly integration has arrived earlier than anticipated.</p>
+          </div>
+          <a href="https://fzakaria.com/2026/11/23/2035-came-early" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express widespread frustration with JavaScript’s pervasiveness and perceived bloat, while simultaneously showing optimism that AI‑generated code, Rust, and WebAssembly can reduce reliance on it. Readers discuss the novelty of running full systems inside browsers, noting both technical curiosity and concerns about performance, tooling, and sandboxing. There is enthusiasm for LLM‑assisted development and cross‑platform tools, tempered by skepticism about practical adoption, standards progress, and long‑term dominance of any single language or platform. Overall sentiment blends criticism of current stacks with hopeful anticipation of emerging alternatives.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50624497" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fzakaria.com/2026/11/12/worshipping-at-the-altar-of-brendan-gregg" target="_blank">Worshipping at the Altar of Brendan Gregg</a>
+        </h2>
+        <span class="article-meta">
+          83 points • by kqr • 6 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Rewind, a deterministic virtual machine, now includes a <strong>rewind time</strong> command that extracts a run’s critical‑path metrics and off‑CPU activity. The tool reports total elapsed time on a single VM CPU, the minimal possible duration (critical path) regardless of parallelism, and the proportion of time spent asleep versus computing. In a libuv‑1.51.0 build, 78 s elapsed reduced to a 47.4 s critical path, with 67 % of that time in sleep states (epoll_pwait, clock_nanosleep, futex) and 33 % in computation. The command breaks down the path by phase, process, and individual sleeps, showing that the “check” phase and the lt‑run‑tests runner dominate the critical path, largely due to intentional 45 ms sleeps in the hrtime test (75 calls, 3.38 s total). Rewind records every context switch and wake‑up, enabling off‑CPU flame‑graph generation, Perfetto traces, and reproducible debugging with gdb at any recorded step. The approach extends Brendan Gregg’s off‑CPU analysis to deterministic replay, allowing precise identification of bottlenecks without prior tracing.</p>
+          </div>
+          <a href="https://fzakaria.com/2026/11/12/worshipping-at-the-altar-of-brendan-gregg" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express enthusiasm for a deterministic virtual machine while questioning its single‑threaded design and potential impact on high‑throughput multithreaded workloads. They criticize flame‑graphs for multithreaded analysis, recommend modern tracing tools such as perfetto and recent surveys of tracing methods, and note the value of low‑latency, language‑specific trace outputs. Additional feedback highlights confusing LLM‑generated documentation, shares profiling experiences that reveal hidden memory usage, and emphasizes that deterministic instruction‑count benchmarking improves reproducibility but omits off‑CPU activity, while tracing overhead and context‑switch logging are acknowledged as trade‑offs.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50626413" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.bloomberg.com/news/articles/2026-11-24/anthropic-breaks-below-83-ipo-price-in-premarket-trading" target="_blank">Anthropic Breaks Below $83 IPO Price in Premarket Trading</a>
+        </h2>
+        <span class="article-meta">
+          76 points • by Betelbuddy • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.bloomberg.com/news/articles/2026-11-24/anthropic-breaks-below-83-ipo-price-in-premarket-trading" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong skepticism toward the company’s long‑term prospects, emphasizing concerns that its business model lacks a sustainable advantage and that open‑weight models and hardware scarcity will erode pricing power. Critics compare the valuation to other tech IPOs, noting that initial stock performance appears disconnected from future value and suggesting the offering serves primarily as an exit for early investors. Overall sentiment is negative, focusing on perceived overvaluation, limited moat, and doubts about the IPO’s legitimacy as a growth vehicle.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50627836" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://ladybird.org/posts/alpha/" target="_blank">Ladybird is now in alpha</a>
+        </h2>
+        <span class="article-meta">
+          2160 points • by janvdberg • 139 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ladybird has entered alpha and is downloadable for macOS and Linux. It runs on a newly developed, ground‑up browser engine that is not a fork of existing projects, with a modest but functional surrounding UI. As an early release, compatibility is limited; some websites may fail to render and occasional crashes can occur. Users can report broken sites and optionally submit crash reports in accordance with the privacy policy. The project invites security researchers to probe the browser and provide hardening feedback. Updates are delivered via a rolling channel, eliminating the need to build from source for each iteration. Ladybird includes WebDriver support for automated testing and implements the Firefox DevTools protocol. Development is funded by sponsors and donors, and the team acknowledges ongoing extensive work ahead.</p>
+          </div>
+          <a href="https://ladybird.org/posts/alpha/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong enthusiasm for Ladybird’s functionality, noting that most tested sites render correctly and that the browser feels surprisingly competent despite being built from scratch. Reviewers appreciate its independence from major corporate ecosystems, its potential for privacy‑focused development, and rapid progress driven by AI‑assisted contributions. Common critiques mention jerky scrolling, occasional rendering quirks, limited extension and ad‑blocking support, and a desire for performance benchmarks, memory metrics, and clearer security or contribution policies. Overall sentiment is supportive and hopeful, balanced by practical suggestions for improvement.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50614249" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.vam.ac.uk/blog/museum-life/an-anti-slavery-sugar-bowl" target="_blank">An anti-slavery sugar bowl (2024)</a>
+        </h2>
+        <span class="article-meta">
+          41 points • by leonry • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Victoria &amp; Albert Museum is displaying a rare early‑19th‑century glass sugar bowl (c. 1820‑30) inscribed in gilt “East India Sugar / Not Made by Slaves.” Likely produced in Bristol, a major glass‑making centre linked to the trans‑Atlantic slave economy, the bowl is one of only two known surviving glass abolitionist pieces, the other held by the British Museum. It reflects the anti‑slavery movement’s strategy of embedding political messages in everyday domestic items to influence consumer behaviour. Campaigners organised large sugar boycotts in 1792‑93 and 1825‑29, led by Quakers and figures such as William Fox, urging consumers—especially middle‑ and upper‑class women—to refuse West Indian sugar and display abolitionist symbols on tea‑time wares. Most abolitionist sugar bowls were ceramic; this glass example illustrates how manufacturers benefited financially from both the slave‑produced sugar trade and the subsequent boycotts. The V&amp;A notes the bowl’s repaired condition, loss of its original lid, and its role as a tangible artifact of ethical consumerism and protest in the era of British abolition.</p>
+          </div>
+          <a href="https://www.vam.ac.uk/blog/museum-life/an-anti-slavery-sugar-bowl" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments highlight Bristol’s historical involvement in the Atlantic slave trade, noting recent public actions such as the removal of a slave‑trader statue and the city’s lingering place‑name reminders. They argue that abolitionist rhetoric often emphasized “slavery‑free” sugar, suggesting economic motives over moral ones, and point to clergy and petition campaigns that framed abolition as financially driven. The discussion stresses that consumer boycotts made slavery unprofitable, contending that contemporary narratives overemphasize political and economic shifts while downplaying the impact of grassroots activism.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50598094" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://stalw.art/blog/microsoft-exchange-replacement/" target="_blank">Stalwart is now a drop-in replacement for Microsoft Exchange</a>
+        </h2>
+        <span class="article-meta">
+          555 points • by shaunpud • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Stalwart 1.2.0 adds full support for Microsoft Exchange protocols—MAPI over HTTP, Exchange Web Services (EWS), Exchange ActiveSync, and Autodiscover—making it a drop‑in replacement for on‑premises Exchange. The open‑source Community edition (AGPL) serves these protocols alongside JMAP and the Web UI on a single HTTPS port, allowing Outlook (classic Windows and Mac), Apple Mail/Calendar/Contacts, iOS/Android mail apps, Gmail, Thunderbird, Evolution, eM Client and libraries such as exchangelib to connect unchanged. Mail, calendar, contact, task and note data remain synchronized across all clients; server‑side Outlook rules are stored as Sieve, and delegate/share permissions map to Stalwart shares. The Exchange module is optional, disabled by default, and can be removed when obsolete. Migration is facilitated by the Vandelay import tool, which copies mailboxes from Exchange Server or Microsoft 365 via EWS or Graph into Stalwart over JMAP. Additional features in 1.2.0 include advanced mail rules, read receipts, per‑account working hours, resource accounts, a high‑performance native FoundationDB client, and an interactive terminal CLI built with Ratatui.</p>
+          </div>
+          <a href="https://stalw.art/blog/microsoft-exchange-replacement/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a mixed view of Stalwart as an open‑source, technically modern alternative to Exchange. Users note reliable performance and appeal for low‑budget or self‑hosted setups, yet express concerns about missing enterprise features such as robust archiving, Kerberos, modularity, and spam handling. Regulatory compliance, deliverability issues, and the difficulty of replacing entrenched Microsoft clients are repeatedly cited as barriers. Pricing is seen as comparable to cloud offerings, and while some appreciate the drop‑in claim, many doubt broad adoption given legacy lock‑in and support challenges.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50620349" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://martincmartin.github.io/slidev-stem/watches/article/1/" target="_blank">How a Mechanical Watch Keeps Time (Interactive 3D)</a>
+        </h2>
+        <span class="article-meta">
+          34 points • by martincmartin • 4 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Mechanical watches use a calibrated oscillating system to regulate time. A hairspring— a fine steel spiral—provides a restoring torque, while the attached balance wheel supplies inertia, together creating a regular beat (typically one swing every two seconds). The escapement converts this oscillation into incremental steps: the balance’s impulse jewel strikes a pallet fork, allowing the escape wheel to advance one tooth per swing, producing the audible “tick‑tock.” A gear train reduces the escape wheel’s speed: a pinion drives a larger fourth wheel that turns once per minute, moving the second hand. Subsequent gear reductions (7½ × 8) yield the minute wheel, turning once per hour, and a further 3 × 4 reduction provides the hour wheel, completing a 12:1 ratio for a 12‑hour rotation. Power originates from a mainspring, a coiled steel spring wound by a key; its slow unwind drives a barrel that engages the gear train. Properly adjusted, this fully mechanical system can achieve ~99.99 % accuracy, losing or gaining about nine seconds per day.</p>
+          </div>
+          <a href="https://martincmartin.github.io/slidev-stem/watches/article/1/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express appreciation for the visual presentation while raising technical concerns about the escapement design. Reviewers note that the escape wheel appears unable to impart impulse to the pallet, potentially preventing the balance from sustaining motion, and suggest adding a slow‑motion view to examine the interaction. They also emphasize the dual role of the escapement in regulating mainspring unwind and energizing the balance. Overall, the feedback combines praise for the effort with constructive criticism regarding functional realism and animation control.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50599458" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
