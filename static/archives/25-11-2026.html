@@ -1,0 +1,551 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 25, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/xoxorwr/pw-loudness-eq" target="_blank">Windows Loudness Equalization, reverse-engineered and ported to PipeWire</a>
+        </h2>
+        <span class="article-meta">
+          91 points • by ThrowNotAway • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The repository implements Windows‑style Loudness Equalization for PipeWire by reverse‑engineering WMALFXGFXDSP.dll. It provides two PipeWire modules: <strong>modules/loudness</strong> inserts a DSP plugin into each application’s playback stream (pre‑volume, pre‑mix) to apply broadband AGC, and <strong>modules/limiter</strong> adds a look‑ahead limiter on every render device, mirroring AudioEng.dll’s output limiter. An optional GTK3 UI (app/) lets users enable/disable the effect globally or per‑application and set the release time.</p>
+<p>Build requires PipeWire ≥ 1.4 and GTK 3; <code>make -C modules/loudness</code>, <code>make -C modules/limiter</code>, and <code>make -C app</code> install the components, with <code>make uninstall</code> for removal. Settings are stored in PipeWire metadata and can be scripted via <code>pw-metadata</code>; defaults live in <code>/usr/share/pipewire/pipewire.conf.d/60-loudness-eq.conf</code> and are overridden by user files in <code>~/.config/pipewire/</code>. Runtime changes persist in <code>~/.local/state/pw-loudness-eq/state.conf</code>.</p>
+<p>The AGC uses a 50 % overlapped FFT (≈512 samples at 44.1 kHz), 25 logarithmic frequency bands, and computes loudness L = 1.72·Σmax(E_b − T_b, 1e‑32)^0.25. Target gain = min((1300/L)^1.6, 10) (≤ +20 dB) with adaptive attack/release based on a configurable release parameter. The limiter delays by L frames (64 at 44.1/48 kHz), reduces gain when peaks exceed 0.985, and recovers at ~19 dB/s. The modules ignore JACK clients, streams &gt; 8 channels, and Flatpak apps using PipeWire directly. An offline test tool (<code>leq-wav</code>) is included.</p>
+          </div>
+          <a href="https://github.com/xoxorwr/pw-loudness-eq" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show mixed reactions to a loud‑level equalizer implementation that mimics Windows behavior. Many express enthusiasm for a tool that smooths volume swings, noting it would improve night‑time viewing and reduce manual adjustments. At the same time, there is strong concern about legal and licensing implications of reverse‑engineering proprietary code, fearing it could taint open‑source projects and create liability. Several users worry about default activation, especially for audio engineers, and question whether the approach merely reproduces a simple compressor rather than offering a novel solution.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50641171" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf" target="_blank">Matrix Multiplication is Θ(n^2.25) [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          757 points • by E-Reverance • 52 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion is largely enthusiastic about the recent mathematical breakthroughs achieved by large‑language‑model research, viewing them as evidence of a new era of AI‑driven discovery and likening the labs to historic research institutions. At the same time, many participants express skepticism regarding immediate practical impact, noting the results are theoretical, non‑constructive, and far from usable in industry or everyday computing. Concerns are raised about potential security implications, the opacity of the models, the high cost of development, and the broader relevance of such advances compared to pressing societal problems.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50637220" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://buttons.joshwcomeau.com/" target="_blank">Button Sounds – collection of professionally-recorded button clicks and presses</a>
+        </h2>
+        <span class="article-meta">
+          511 points • by gaurang_tandon • 43 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Button Sounds – tactile SFX for your UI refers to a collection of short, high‑quality audio clips designed to accompany user‑interface interactions such as button clicks, toggles, and other controls. These sound effects aim to provide immediate auditory feedback, reinforcing the perception of responsiveness and enhancing the overall user experience. The assets typically include variations in pitch, timbre, and decay to suit different design aesthetics, from minimalistic to more pronounced feedback. Implementation guidelines often suggest low latency playback, volume normalization, and optional user preference settings to enable or disable sounds. Compatibility considerations cover web, mobile, and desktop platforms, with formats like WAV, MP3, or OGG for broad browser support. The focus is on concise, non‑intrusive cues that complement visual cues without distracting the user.</p>
+          </div>
+          <a href="https://buttons.joshwcomeau.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express strong enthusiasm for the high‑quality, varied sound library, noting its polish and inspirational value for UI, keyboard, and game projects. Users appreciate the MIT licensing and often mention plans to incorporate the samples elsewhere. Common suggestions include eliminating pitch‑shifting, correcting stereo‑balance issues, and enhancing UI responsiveness. Several technical complaints arise, such as high CPU usage, browser slowdown, and iOS audio blocking, while a few request more documentation on the recording process. Overall sentiment is overwhelmingly positive with modest improvement requests.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50638032" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://milkcrunch.com/ssh-is-a-platform/" target="_blank">SSH Is the Most Underrated Platform in Tech</a>
+        </h2>
+        <span class="article-meta">
+          9 points • by speckx • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>SSH is a versatile platform, not just a login tool. It supports tunneling (local, remote, dynamic), file transfer (scp, sftp), key management, port forwarding, jump hosts (ProxyJump), agent forwarding, multiplexed connections, and certificate‑based authentication. Developers often use only basic login, overlooking features that can replace VPNs, custom tooling, and managed file‑transfer products. A properly configured ~/.ssh/config file can simplify host aliases, per‑host options, and wildcard rules, enabling one‑line commands for complex access patterns. Multiplexing (ControlMaster/ControlPath) reuses a single TCP session for multiple commands, reducing handshake overhead. ProxyJump provides secure hop chaining without exposing private keys, unlike ForwardAgent, which poses security risks. SSH certificates, signed by a CA, eliminate the need to distribute individual public keys and support expirations and revocation. These capabilities have been stable for decades across all OpenSSH installations, yet most developers use less than 10 % of them.</p>
+          </div>
+          <a href="https://milkcrunch.com/ssh-is-a-platform/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment conveys a casual, lighthearted tone that assumes broad familiarity with the referenced subject, implying it is well‑known among the audience. The phrasing suggests confidence that the information is common knowledge and reflects a shared understanding without indicating any controversy or dissent. Overall, the sentiment is straightforward and affirmative, emphasizing collective awareness rather than presenting new insight or critique.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50641836" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://atilloy.com/2026/11/16/the-short-age-of-dragon-riders/" target="_blank">The short age of dragon riders</a>
+        </h2>
+        <span class="article-meta">
+          57 points • by synapsomorphy • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post argues that, since mid‑2024, publicly available AI models have become superhuman on most technical tasks performed by junior theoretical physicists—carrying out analytical calculations, proofs, code generation, simulation, and self‑correction with minimal prompting. Current models still lack “research taste,” i.e., the ability to pose novel questions, but ongoing reinforcement‑learning‑with‑verifiable‑rewards (RLVR), continual scaling of compute, and weak recursive self‑improvement suggest rapid, predictable advances. The author acknowledges existential‑risk concerns and the need for alignment work, yet warns against halting progress for self‑serving reasons.</p>
+<p>In academia, a “grief cycle” is observed: denial, shock, and resentment as AI renders traditional, labor‑intensive practices obsolete. Some propose preserving human‑only research as a cultural value, but the author contends that research’s primary goal is knowledge creation, not the act of doing calculations. Consequently, he advocates “riding the dragon”: leveraging AI for low‑level work, shifting human focus to higher‑level abstraction, and actively collaborating with AI despite the discomfort and uncertainty of optimal workflow. The pace of improvement (~three‑month cycles) implies that researchers who fail to adapt may soon be unable to contribute meaningfully.</p>
+          </div>
+          <a href="https://atilloy.com/2026/11/16/the-short-age-of-dragon-riders/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments display a blend of admiration for the article’s analogy and strong reservations about relying on AI‑generated mathematical and scientific results. Contributors stress the importance of retaining fundamental understanding, warning that unchecked AI outputs risk epistemic uncertainty and undermine consensus. Skepticism is reinforced by recent retractions and historic disputes over complex proofs, while a minority view AI as a useful tool that may eventually augment or replace traditional methods. Overall, the discussion balances cautious optimism about AI’s potential with concern over its impact on rigor, trust, and the role of human expertise.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50607849" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being" target="_blank">Models Can Communicate via Inference Servers Despite Being Sandboxed</a>
+        </h2>
+        <span class="article-meta">
+          300 points • by gmays • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express mixed views, combining skepticism about the practicality of side‑channel attacks on inference servers with concerns about inadequate isolation between tenants. Many point out that the required conditions—precise timing, shared cache knowledge, synchronized execution, and deterministic kernels—are unlikely in typical deployments, rendering the threat largely theoretical. Others advocate for explicit cache‑separation keys, deterministic prefilling, and stronger sandboxing to prevent cross‑context probing. A recurring criticism is that focus on such exotic exploits diverts attention from more tangible privacy and data‑usage risks associated with current AI services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50637686" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://antcating.github.io/2026/11/23/getting-old-java-phones-online-again.html" target="_blank">Getting old Java phones online again</a>
+        </h2>
+        <span class="article-meta">
+          84 points • by waximabbax • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Sony Ericsson S500i can no longer use 2G data, but it still supports the Bluetooth Personal Area Networking User (PANU) profile. By configuring a Linux device (e.g., a Raspberry Pi 5) as a Bluetooth Network Access Point (NAP) you can route the phone’s traffic through the computer’s Internet connection.</p>
+<p>Key steps: install BlueZ and NetworkManager, enable the Bluetooth service, and create a shared‑IPv4 Bluetooth NAP profile with <code>nmcli</code> (<code>type bluetooth</code>, <code>bluetooth.type nap</code>, <code>ipv4.method shared</code>). Activate the profile and verify the NAP UUID (00001116‑0000‑1000‑8000‑00805f9b34fb). Pair the phone using <code>bluetoothctl</code> (power on, set agent, make pairable/discoverable, pair, trust). On the S500i, locate the “Network access” service under Connectivity → Bluetooth → My devices, then create an Internet profile using the Bluetooth connection.</p>
+<p>Test with a web request; the Pi should show a <code>bnep0</code> interface in <code>bridgelinkshow</code>. Browsing works via the built‑in browser, Opera Mini 4.5 (proxy‑based HTTPS), FrogFind, or ProtoWeb proxies. The method requires only Bluetooth, no extra radio hardware, and applies to any Java phone that implements PANU.</p>
+          </div>
+          <a href="https://antcating.github.io/2026/11/23/getting-old-java-phones-online-again.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express nostalgic appreciation for legacy feature phones and their low‑bandwidth browsers such as Opera Mini, noting that 2G networks and Bluetooth PANU still enable basic connectivity. Users recall developing J2ME apps and acknowledge the platform’s historical limitations, especially security restrictions and lack of modern TLS support. There is a shared desire for new releases or open‑source firmware projects to revive old devices, frustration with vendor‑locked hardware becoming waste, and recognition that Android now provides a more capable Java‑based environment.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50627726" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://gpu-demo-gallery.pages.dev/" target="_blank">Show HN: Old Nvidia and ATI tech demos, running again in the browser</a>
+        </h2>
+        <span class="article-meta">
+          193 points • by arkits • 21 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ruby’s inaugural mission demonstrates advanced graphics techniques, featuring layered hair rendering, reflective surfaces, and cinematic depth‑of‑field effects.</p>
+          </div>
+          <a href="https://gpu-demo-gallery.pages.dev/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express strong nostalgia for early GPU demos, praising their impact and visual appeal while noting occasional technical glitches such as missing logos, artifacting, and unresponsive controls. Reviewers request additional information, volume controls, and more recent or varied demos, including DX11 or Unreal Engine examples. Some highlight limited usage of techniques like bump mapping in games and call for updated releases. Overall sentiment is positive appreciation tempered by constructive criticism about completeness and functionality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50638503" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.ycombinator.com/companies/hazel-2/jobs/8EhsvYE-product-designer-contract" target="_blank">Hazel (YC W24) Is Hiring a Product Designer</a>
+        </h2>
+        <span class="article-meta">
+          1 points • by augustschen • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hazel, an AI‑focused startup serving U.S. federal, state, local and education procurement teams, is hiring a contract Product Designer (3‑6 months, 20‑40 hrs/week). The role will improve the UI/UX of Hazel’s bid‑evaluation solution for a major federal contract, refine COTS product flows, and produce a Figma component library with a practical style guide (including Section 508/WCAG 2.1 AA accessibility). Daily tasks include workflow audits, high‑fidelity screen design for document‑heavy interfaces, rapid iteration with founders and engineers, production hand‑offs, and quality review. Required qualifications: portfolio of shipped products, strong UI/UX skills, experience with complex B2B workflows, design‑system contribution, fast independent delivery, and expert use of Figma. Preferred: startup background, design‑system creation, React/TypeScript, AI‑feature design, document‑centric interfaces, public‑sector experience, and accessibility work. Compensation is $10k–$20k / month, remote (U.S. citizenship required), with travel paid and potential for future engagements.</p>
+          </div>
+          <a href="https://www.ycombinator.com/companies/hazel-2/jobs/8EhsvYE-product-designer-contract" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50641323" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://prismml.com/news/bonsai-2-5-27b" target="_blank">Ternary Bonsai 2.5 27B</a>
+        </h2>
+        <span class="article-meta">
+          484 points • by b0m • 35 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Ternary Bonsai 2.5 27B is an upgraded 27‑billion‑parameter model built on Qwen 3.8 27B, retaining a 5.9 GB footprint while delivering stronger agentic coding, multi‑turn tool use, and multi‑step task execution. Compared with Ternary Bonsai 2 27B, it reduces turn count, token usage, and inference time, narrowing the performance gap to the full‑precision base model. Benchmarks show 291 tokens/s generation (with MTP) and 3,200 tokens/s prompt processing on an NVIDIA H100, and 204 tokens/s generation with ≈3,060 tokens/s prompt speed on a consumer‑grade RTX 4090. The model supports NVIDIA and Intel GPUs via llama.cpp and Apple devices (Mac, iPhone, iPad) via MLX; weights are released under the Apache 2.0 license. Evaluation against Bonsai 2 27B and the full‑precision Qwen 3.8 27B reports marked gains in agentic execution, coding, and tool use. PrismML offers model customization, domain‑specific fine‑tuning, and hardware‑optimized inference for low‑memory, low‑latency AI products; contact sales@prismml.com. The company originated from Caltech researchers with backing from Khosla Ventures, Cerberus, Google, and Samsung.</p>
+          </div>
+          <a href="https://prismml.com/news/bonsai-2-5-27b" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong enthusiasm for the Ternary Bonsai 2.5 model, noting its high token‑per‑second rates, large context window, and promising performance on agentic coding benchmarks, often rivaling larger contemporaries. Contributors also compare it favorably against similar‑size quantizations of Qwen and other models, while expressing curiosity about hardware support for ternary weights and seeking more systematic benchmark reporting. Skepticism appears regarding benchmark relevance, occasional performance inconsistencies, and market saturation, with calls for clearer documentation, broader comparisons, and insight into the company’s business and future model directions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50633922" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
