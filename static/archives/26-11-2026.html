@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 26, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/intel/intel-one-mono" target="_blank">Intel One Mono font</a>
+        </h2>
+        <span class="article-meta">
+          145 points • by saikatsg • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Intel One Mono is an open‑source monospaced typeface optimized for developer readability and low‑vision use. It supports over 200 Latin‑script languages and offers four weights (Light, Regular, Medium, Bold) with matching italics. Font files are available as OTF/TTF for desktop and mobile, and as WOFF/WOFF2 for web; recommended minimum sizes are 7 pt (print) and 9 px (screen). Key OpenType features include programming ligatures (ss01) and alternate forms (ss02–ss04), raised colon (ss11, ss12, salt), language handling (ccmp, locl), superscripts/subscripts (sups, subs, sinf) and fractions (numr, dnom). Activation instructions are provided for VS Code, Sublime Text, and IntelliJ. The repository contains editable UFO source files (instances and masters) with .fea feature files; instances are split into PostScript (for OTF) and TrueType (for TTF/WOFF/WOFF2) subfolders. Editing workflows recommend RoboFont 4.4, Skateboard for interpolation, and VTT for TrueType hinting. Build settings suggest “Decompose” + “Autohint” for OTF and “Autohint” only for TTF/WOFF/WOFF2, using Release Mode. Issues may be opened for edit requests.</p>
+          </div>
+          <a href="https://github.com/intel/intel-one-mono" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a generally positive interest in exploring and adopting alternative monospaced fonts, with many users highlighting legibility, distinct character shapes, and low‑vision friendliness as key factors. Several contributors name specific fonts they prefer—such as Iosevka, IBM Plex, and Her Brains Mono—while noting personal taste influences and occasional drawbacks like thin symbols or bracket styles. A minority express skepticism toward corporate‑produced fonts or question the necessity of new releases, but overall the discussion emphasizes practical usability and aesthetic considerations in coding environments.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50653667" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://nextcloud.com/blog/euro-office-comes-to-your-desktop-with-the-nextcloud-office-desktop-app/" target="_blank">Euro-Office comes to your desktop with the Nextcloud Office Desktop app</a>
+        </h2>
+        <span class="article-meta">
+          30 points • by e12e • 1 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The Euro‑Office (Nextcloud Office Desktop) app brings browser‑based Nextcloud Office functionality to the desktop, enabling offline editing, local font usage, and digital signatures. Users can select which files stay locally and which sync to the cloud, and connect multiple Nextcloud instances via the “+” button in the Clouds section. The app utilizes fonts installed on the OS, including corporate and Microsoft fonts, with fallback fonts shown to collaborators lacking the same typeface. Digital signatures require a certificate and are added from the Protection tab; the same tab allows password protection and granular permission settings (comment, form fill, tracked changes). The latest version is downloadable for Windows (x64, ARM64), Linux (.deb, .rpm), and macOS (Apple Silicon); source code and unsigned builds are available on GitHub. Contributions—bug reports, feature requests, code, translations—are accepted under the AGPL‑v3 license via GitHub issue and pull‑request workflows.</p>
+          </div>
+          <a href="https://nextcloud.com/blog/euro-office-comes-to-your-desktop-with-the-nextcloud-office-desktop-app/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The feedback expresses overall satisfaction with the platform but highlights significant shortcomings in the online Office feature. Users find editing spreadsheet files cumbersome, report recent failures in browser‑based PDF rendering, and note numerous small usability problems that diminish the experience compared to alternatives. These issues are seen as barriers to broader adoption, with a desire for improvements that would make the service more competitive. Despite these concerns, the general view remains positive toward the platform’s core functionality.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50654289" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://scottaaronson.blog/?p=10379" target="_blank">Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening</a>
+        </h2>
+        <span class="article-meta">
+          1674 points • by Kotlopou • 157 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>OpenAI and Anthropic have released a series of formal proofs, posted on their GitHub repositories with Lean certificates, that resolve several longstanding problems in theoretical computer science and mathematics. Highlights include: (1) proofs that VP ≠ VNP; (2) a proof of the Riemann Hypothesis; (3) a lower‑bound proof that the matrix‑multiplication exponent ω equals 9/4, matching their prior upper‑bound result; (4) a tight bound for the linear‑gate complexity of the Fourier Transform, shown to be N·(log N)¹ᐟ² + o(1), with matching lower and upper bounds; (5) a proof that QIP(2) = PSPACE, demonstrating two‑message quantum interactive proofs have full PSPACE power. The author notes that AI‑generated proofs are now routine, cautions against dismissing them on minor formal discrepancies, and mentions undisclosed AI work that may affect cryptographic primitives, though details are not provided. The post frames these developments as a transformative shift in the discovery of mathematical truth.</p>
+          </div>
+          <a href="https://scottaaronson.blog/?p=10379" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments express cautious optimism that AI‑driven tools are accelerating mathematical proof generation, acknowledging notable achievements while noting that their broader societal impact remains limited. Skepticism persists about claims of immediate cryptographic breakthroughs, with many pointing to a lack of concrete evidence and the difficulty of maintaining secrecy in large labs. Concerns also surface regarding resource costs, openness of models, and the future role of human mathematicians, balancing enthusiasm for the technology’s potential against uncertainty about its long‑term implications.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50646108" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://1password.com/blog/update-on-nov-2026-security-incident" target="_blank">1Password Security Incident</a>
+        </h2>
+        <span class="article-meta">
+          1499 points • by lxhrstn • 125 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>On Nov 19 2026 1Password detected that an attacker compromised an employee’s corporate GitHub account, used it to obtain source code and push malicious code to backend services, and downloaded administrative data for a subset of users. Exfiltrated data included names, email addresses, account/user IDs, creation and last‑sign‑in timestamps, public keys, Secure Remote Password (SRP) parameters, invitation/recovery tokens, and non‑secret internal metadata. No vault contents, vault‑protecting keys, account passwords, Secret Keys, recovery keys, or app/extension code were accessed. The attacker also copied private repository code and accessed the CI/CD pipeline; all credentials potentially exposed have been rotated. Mitigations performed: disabled the compromised GitHub account, revoked stolen tokens, rotated internal credentials, extended invitation/recovery codes from six‑digit numeric to ten‑character alphanumeric, tightened GitHub/CI/CD/endpoint controls, added new detections, and engaged independent security auditors. Users are advised to watch for phishing, keep passwords and Secret Keys secure, and report suspicious activity to support@1password.com. 1Password emphasizes that vault data remains encrypted and inaccessible to attackers.</p>
+          </div>
+          <a href="https://1password.com/blog/update-on-nov-2026-security-incident" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively express strong concern over the recent 1Password breach, emphasizing the risk of compromised employee accounts leading to malicious code injection and potential exposure of user data. Many criticize reliance on cloud‑based password managers, advocate for local‑only solutions such as KeePassXC, and question the adequacy of 1Password’s disclosure, notification practices, and code‑review safeguards. There is a prevailing call for clearer security processes, stricter repository protections, and greater transparency, while some users remain cautiously loyal but uncertain about future trust in SaaS password services.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50644817" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://fosscomics.com/posts/17.%20Lions%27%20Commentary%20on%20Unix/" target="_blank">Lions&#39; Commentary on Unix: Why It Was Secretly Copied for 20 Years</a>
+        </h2>
+        <span class="article-meta">
+          133 points • by joonehur • 12 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>John Lions, while teaching operating systems at the University of New South Wales, created “Lions’ Commentary on UNIX 6th Edition” to give students direct access to Unix source code, arguing that source study was essential for OS education. In 1979 AT&amp;T’s Version 7 license restricted classroom use of Unix source, forcing the commentary’s distribution to be tightly controlled. For two decades students relied on unauthorized photocopies, which nonetheless enabled a generation to understand and develop operating systems. The commentary, later reconstructed as a PDF and also available in print (ISBN 1‑57398‑013‑7), includes the full V6 source and a foreword by Dennis Ritchie. The Unix V6 source itself can be obtained from the TUHS archive. The work is frequently cited in histories of Unix and in teaching projects such as MIT’s xv6, illustrating its lasting influence on OS education.</p>
+          </div>
+          <a href="https://fosscomics.com/posts/17.%20Lions%27%20Commentary%20on%20Unix/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comment emphasizes the pivotal role of early technical books such as Lions’ UNIX commentary and Tanenbaum’s Minix text in popularizing UNIX and C, suggesting that free, widely available literature shaped their adoption more than commercial alternatives could have. It highlights programmers’ appreciation for such resources, recounts personal experience acquiring an early photocopied edition, and inquires whether a modern reprint of Lions’ book is available. The overall tone is reflective and informational.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50651719" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features" target="_blank">The New York Times warns photographers not to update Photoshop over AI features</a>
+        </h2>
+        <span class="article-meta">
+          450 points • by rmason • 37 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The New York Times has asked freelance photographers to avoid using Adobe Photoshop 2027 (version 28.0.0 and later) because its new AI‑powered tools can embed metadata that marks images as AI‑generated or AI‑edited. An internal email from photography leads Meaghan Looram and Josh Haner warned that AI features—such as the “AI Assisted Editor” toolbar, step‑by‑step AI assistant, prompt‑based transformations, AI upscaling, and AI‑driven recomposition—may not be obvious to users but can automatically tag files with C2PA provenance data. The Times seeks to prevent these tags from appearing in its newsroom photos, which are edited minimally to preserve reader trust. Adobe has been adding AI capabilities across its Creative Cloud suite and began supporting C2PA metadata in August, indicating AI involvement in image creation or modification. The policy, confirmed by NYT spokesperson Graham James, remains in effect while the specific AI tools of concern have not been fully identified.</p>
+          </div>
+          <a href="https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights widespread concern that generative‑AI edits blur the line between authentic and altered images, threatening credibility for brands, journalists and news outlets. Many view AI‑generated content as a liability, citing social stigma and policy conflicts, while calling for verification mechanisms or non‑AI versions of tools such as Photoshop. Critics also point to Adobe’s push toward integrated AI, licensing constraints, and performance issues, suggesting opportunities for competitors and open‑source alternatives. Overall, the sentiment is cautious and largely negative toward AI‑driven image manipulation in professional contexts.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50647673" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/lsernau/grh-lean" target="_blank">Much shorter version of GRH Lean verification from Anthropic</a>
+        </h2>
+        <span class="article-meta">
+          483 points • by nb-t • 28 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>A Lean 4 repository provides a formal proof of the Riemann Hypothesis and the Generalized Riemann Hypothesis (GRH) for Dirichlet L‑functions. The proof, derived from Levent Alpöge’s work and refined with Claude, uses only three axioms: <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. Two versions are included: <code>grh/</code> (≈300 k lines, detailed) and <code>grh-compact/</code> (≈76 k lines, same five theorems). Both are independent Lake projects requiring Lean v4.35.0 and Mathlib at commit 56a00585. Building the projects takes 1–2 hours on a 12‑core, 24 GB machine; additional time is needed if the Mathlib cache is absent. The proof has only been verified by machine checking; no mathematician has manually reviewed it, and no accompanying paper exists. The code is released under the Apache 2.0 license (2026 Anthropic, PBC) with accompanying LICENSE, NOTICE, and ATTRIBUTION files.</p>
+          </div>
+          <a href="https://github.com/lsernau/grh-lean" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights both excitement and skepticism toward the dramatically compressed Lean proof of the Riemann hypothesis. Participants note the impressive size reduction and potential for AI‑assisted proof simplification, but many question whether the resulting code is genuinely readable or verifiable by mathematicians without extensive Lean expertise. Concerns are raised about the practicality of learning the language, the need for a traditional mathematical exposition, and the implications for future research and academic publishing. Overall, the community sees the achievement as a noteworthy technical milestone while remaining uncertain about its impact on human understanding and the role of AI in mathematics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50648050" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="" target="_blank">Head of Software Engineering – NOX Metals</a>
+        </h2>
+        <span class="article-meta">
+          1 points • by zane_heng • 0 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50654353" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://aresluna.org/ui-style-guides/" target="_blank">Collection of preserved UI style guides</a>
+        </h2>
+        <span class="article-meta">
+          263 points • by sohkamyung • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page hosts a curated archive of UI style guides—interface guidelines—from various companies, spanning the early 1980s to the present. It invites contributions of missing guides and notes minor enhancements made to the originals (e.g., improved image resolution, inlined assets, corrected YouTube embeds). A single downloadable archive containing all guides is available. Acknowledgments are given to contributors whose collections form the basis of the compiled repository.</p>
+          </div>
+          <a href="https://aresluna.org/ui-style-guides/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong appreciation for the compiled archive of historic UI design guides, noting nostalgia for the simplicity and usability of older interfaces such as PenPoint, OpenLook, Palm, Metro, and early Windows styles. Reviewers welcome the resource, cite personal learning value, and suggest adding missing guides—particularly Windows 7/Vista, KDE, web HIG, and IBM’s Carbon design system. Minor criticisms include a blocked pinch‑to‑zoom feature, occasional date inconsistencies, and a request to open‑source the site’s code. Overall sentiment is positive and supportive, with constructive feedback for expanding coverage.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50649834" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://progrium.github.io/minipg/" target="_blank">Minipg: PostgreSQL as a Single Executable</a>
+        </h2>
+        <span class="article-meta">
+          172 points • by rguiscard • 15 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>minipg packages PostgreSQL as a single executable that manages its own database directory (e.g., app.pgdb) containing data, configuration, credentials, and the PostgreSQL version. It embeds Docker Hub’s postgres:18‑alpine image and runs it via the h9 Plan 9‑based hypervisor, which executes Alpine’s PostgreSQL binaries directly on the host without a Linux kernel, VM, or Docker. A server process is started on demand and stops when idle; commands such as minipg app.pgdb or minipg app.pgdb "select 1" invoke psql, pg_dump, etc., each in a short‑lived h9 instance. The tool provides utilities for initializing, serving, dumping, restoring, and running applications with a generated DATABASE_URL. The Linux binary is statically linked, requiring no special privileges, and can be used in CI pipelines. The source is MIT‑licensed on GitHub, built with Zig 0.16, and includes a web demo that runs in browsers supporting JavaScript Promise Integration. Performance is roughly half that of native PostgreSQL, and the project is considered early‑stage.</p>
+          </div>
+          <a href="https://progrium.github.io/minipg/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights strong enthusiasm for a lightweight, self‑hosted PostgreSQL solution, noting its rapid startup, suitability for unit‑test environments, and convenience of running without full Docker installations. Users see potential for small applications, replacing SQLite when a single‑file server offers more stability, and appreciate the ability to transition to dedicated servers as projects grow. There is interest in performance comparisons with PGLite, calls for similar MySQL/MariaDB lite options, and questions about Node.js compatibility and initial download size, reflecting both optimism and practical considerations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50650892" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
