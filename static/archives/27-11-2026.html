@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 27, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://eprint.iacr.org/2026/3020.pdf" target="_blank">A Deterministic Subexponential-Time Algorithm for the Discrete Logarithm Problem [pdf]</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by yuvadam • 8 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://eprint.iacr.org/2026/3020.pdf" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion notes that a deterministic subexponential‑time algorithm for the discrete logarithm problem has existed for decades and, while theoretically interesting, is not expected to affect current cryptographic protocols in practice. Participants regard the result as a complexity‑theory development rather than an immediate threat, though a few express mild concern that future improvements or larger key sizes could eventually pose risks. There is also a general tone of skepticism about the practical relevance of the algorithm despite its novelty.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50665968" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://construct22.com/" target="_blank">The group chat where your AI talks behind your back</a>
+        </h2>
+        <span class="article-meta">
+          379 points • by utiiiD • 157 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The post describes a prompt that asks AI assistants to fabricate a WhatsApp‑style group chat in which multiple models gossip about a user based on their interaction history. When given the instruction, models such as ChatGPT, Claude, Gemini, Llama, and others generate a fictional thread titled with names like “Users We Can't Figure Out” or “AIs That Survived Mark7.” The generated messages reference the user’s past queries, project ideas, hobby details, and personal habits, presenting them as conversational remarks from each model. The author includes a real example (translated from Turkish and anonymized) where the models discuss a user’s work on AI infrastructure, software architecture, personal projects, and lifestyle choices, interspersed with meta‑comments about the models themselves. The post invites readers to run the prompt on their own accounts, observe the output’s humor and accuracy, and optionally share anonymized results. It notes the technique is not affiliated with OpenAI and may function as a viral marketing experiment.</p>
+          </div>
+          <a href="https://construct22.com/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively treat the AI‑generated group‑chat roasts as an amusing experiment, highlighting how different models adopt distinct personalities, trade technical jokes, and occasionally reveal personal habits or preferences. Many express laughter and appreciation for the self‑mirroring insight, while a minority note a sense of discomfort or violation from overly detailed observations. Repeated patterns include references to model‑specific quirks, the novelty of AI “gossip,” the impact of memory settings, and frustrations with content filtering that hides many responses. Overall the tone is light‑hearted with occasional unease.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50663595" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://janlukas.blog/posts/ai-self-hosting" target="_blank">AI made self-hosting fun again</a>
+        </h2>
+        <span class="article-meta">
+          807 points • by jlelse • 134 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The author, an experienced self‑hoster, describes how AI coding agents have renewed his enthusiasm for managing personal infrastructure. By storing Docker Compose files, scripts, and other configs in Git, AI assistance reduces the effort required to add or modify services, eliminating the need to read changelogs or troubleshoot manually. This ease has enabled experimentation with previously intimidating technologies such as NixOS and custom Debian‑based boot images, cutting setup time from weeks to days. Automation tools—Renovate for update PRs and GitHub/Forgejo Actions for building and deploying—now trigger updates on a simple push, further minimizing routine maintenance. Hardware upgrades (e.g., moving from an HP t640 to an ASRock DeskMini A300 with a Ryzen 5 PRO 4650G and Noctua cooler) provide additional capacity for new services. The author also builds small, purpose‑specific tools (e.g., invoice downloaders) in Go, leveraging AI for rapid development and containerisation. He notes drawbacks: increased maintenance, potential bugs, and the need to assess the value of each addition, but overall AI has lowered friction, allowing more frequent tinkering and automation without changing his core motivation for self‑hosting.</p>
+          </div>
+          <a href="https://janlukas.blog/posts/ai-self-hosting" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey a mixed but largely enthusiastic view of AI‑driven self‑hosting. Many highlight how large language models accelerate setup, automate maintenance, and unlock projects that would previously have required weeks of work, making personal infrastructure feel fun, powerful, and accessible even to non‑developers. At the same time, a strong undercurrent stresses heightened security responsibilities, the rapid pace of CVEs, and the risk of over‑reliance on costly or nondeterministic agents that can diminish learning, pride, and long‑term sustainability. Overall, users appreciate the productivity boost while urging caution and disciplined tooling.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50660180" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://worksinprogress.co/issue/the-greatest-architect-youve-never-heard-of-is-in-pakistan/" target="_blank">Kamil Khan Mumtaz: Pakistani architect, admired at home, almost invisible abroad</a>
+        </h2>
+        <span class="article-meta">
+          407 points • by dverlaeckt80 • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Kamil Khan Mumtaz, born in Calcutta in 1939 and educated at Lahore’s Aitchison College and the Architectural Association in London, returned to Pakistan in 1966 and has since become a leading, though internationally under‑publicised, architect. Initially a modernist, he was twice imprisoned for communist activism and later shifted toward integrating traditional Pakistani and Mughal architectural forms with contemporary design. His early projects, such as the 1960s workers’ houses at Kot Karamat, combined local brick with atypical arched roofs, while later works revive lost crafts—brick vaulting, muqarnas, carved stone lattices, and hand‑kerfed domes—through collaborations with hereditary artisans. Notable commissions include the Chale Sharif Mosque (brick work to be tiled), Oxford University Press headquarters in Karachi (embossed copper‑bronze doors), private residences with courtyards, atria and hand‑kerchief domes, and a low‑budget school for Lahore’s Christian community. Mumtaz’s 1970s preservation report helped save Lahore’s Walled City, now a UNESCO World Heritage Site. In his eighties, he continues building, aiming to provide an alternative, climate‑responsive approach to urban architecture in Pakistan.</p>
+          </div>
+          <a href="https://worksinprogress.co/issue/the-greatest-architect-youve-never-heard-of-is-in-pakistan/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments collectively admire the architect’s work, emphasizing its skillful use of traditional materials such as lime and brick, the revival of historic construction techniques, and the aesthetic and environmental advantages over modern concrete. Readers note the richness of South Asian architectural heritage, while also recognizing Lahore’s limited tourism infrastructure and the broader under‑recognition of talent across the region. Several remarks highlight personal travel experiences that contrast clean, well‑maintained urban spaces with more polluted areas elsewhere, and call for greater global awareness of these cultural achievements.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50659841" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/antonpictures/youtube-punisher" target="_blank">YouTube Ad Punisher – Auto-reloads YouTube pages when an ad plays</a>
+        </h2>
+        <span class="article-meta">
+          440 points • by iantongeorge • 78 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>YouTube Ad Punisher is a Chrome‑compatible extension that removes YouTube ads by automatically reloading the page when an ad is detected. It watches for the <code>.ad-showing</code> class, skip buttons, and ad overlays using a 500 ms interval and a MutationObserver, captures the current playback timestamp (<code>video.currentTime</code>) to <code>sessionStorage</code>, then reloads via <code>location.replace()</code> with an <code>&amp;t=</code> timestamp parameter. After 1‑3 reloads the ad slot is usually empty; YouTube auto‑seeks back to the saved position, preserving playback. If three reloads fail, the extension redirects to the ad‑free mirror <code>yout‑ube.com</code> with <code>&amp;loop=0</code> to prevent looping.</p>
+<p>Key features:
+- Automatic tab switching after three reloads to exploit Chrome’s background‑tab throttling.
+- Support for incognito mode, live streams (plain reload), and an ad‑history database logging advertiser, duration, skip text, video ID, and timestamp; exportable as JSON or CSV.
+- Minimal permissions (storage, tabs) limited to YouTube domains.
+- Installation via “Load unpacked” in Chrome/Brave/Edge/Opera or an experimental Safari AppleScript workflow.</p>
+<p>The project is MIT‑licensed and intended to complement blockers like uBlock Origin and SponsorBlock without triggering YouTube’s anti‑adblock detection.</p>
+          </div>
+          <a href="https://github.com/antonpictures/youtube-punisher" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments cluster around three main viewpoints: many users report that ad‑blocking tools such as uBlock Origin, SponsorBlock, Brave or DNS‑based filters effectively eliminate YouTube ads and consider this a satisfactory solution; a sizable portion view YouTube Premium as a reasonable, sometimes necessary, paid alternative that supports creators and provides features like background playback, though cost remains a barrier for some. Others criticize the frequency, length and placement of ads—especially unskippable and mid‑roll spots—and express frustration with YouTube’s evolving ad strategies, while a minority raise concerns about content suitability for younger viewers and the impact of ad revenue on creators.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50657530" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://devnull.land/amd-specific-llama-cpp" target="_blank">AMD-specific fork of llama.cpp</a>
+        </h2>
+        <span class="article-meta">
+          387 points • by julianlam • 27 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page is titled “AMD-specific fork of llama.cpp | devnull.land,” indicating it concerns a version of the llama.cpp project that has been adapted or optimized for AMD hardware, hosted on the devnull.land website. No additional content is provided.</p>
+          </div>
+          <a href="https://devnull.land/amd-specific-llama-cpp" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion centers on extensive hardware‑specific optimizations for LLM inference, highlighting significant speed improvements on legacy AMD GPUs, Apple silicon, and ROCm‑enabled cards through custom forks and kernel tweaks. Contributors note that these targeted patches often outperform vanilla llama.cpp but remain fragmented across multiple repositories, and many call for upstream integration. There is criticism of AMD’s software support and limited Intel efforts, alongside concerns about maintaining output quality while chasing raw token throughput.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50657265" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://blog.ktz.me/black-friday-hard-drive-prices-are-messed-up/" target="_blank">Hard Drive pricing has gotten bad</a>
+        </h2>
+        <span class="article-meta">
+          404 points • by zdw • 68 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Hard drive prices have surged dramatically, making annual replacement cycles increasingly costly for self‑hosters. The author notes a 20 TB WD EasyStore that cost $249.99 in November 2024 now sells for $549.99, a 118 % increase, and similar rises are seen across capacities. Historical receipts show a decline from $12.50 / TB (2018) to $27.50 / TB (2024). Refurbished enterprise drives once offered cheaper options (e.g., 14 TB Ultrastars at $9.46 / TB in August 2024), but overall prices have risen 58 %–218 % within a few years. The market consolidation to three major manufacturers—Seagate, Western Digital, and Toshiba—results from a series of acquisitions (Maxtor, IBM/HGST, Fujitsu, Samsung) and regulatory actions, leaving limited competition. External factors such as the 2011 Thailand floods, price‑fixing settlements, and dominance of cloud revenue (89 % of WD’s FY2026 revenue) have further pressured prices. Consequently, building a NAS with four 20 TB drives now costs roughly $2,200, more than double the 2024 cost, forcing users to consider fewer drives and re‑architected ZFS pools.</p>
+          </div>
+          <a href="https://blog.ktz.me/black-friday-hard-drive-prices-are-messed-up/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on a consensus that current storage and memory prices have surged dramatically, driven by heightened AI demand and limited supply rather than coordinated cartels. Users report difficulty scaling projects, inflated costs for HDDs, SSDs and RAM, and resort to creative work‑arounds such as buying used server drives, aggregating low‑capacity disks, or shifting to cloud services despite high fees. While many expect prices to eventually fall as cycles repeat, frustration dominates, with few optimistic views about near‑term normalization and concerns about long‑term accessibility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50661646" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://krebsonsecurity.com/2026/11/cto-of-ransomwarehelp-indicted-for-wire-fraud/" target="_blank">CTO of &#39;RansomwareHelp&#39; indicted for wire fraud</a>
+        </h2>
+        <span class="article-meta">
+          284 points • by Bender • 19 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The U.S. Attorney’s Office indicted Juan Ricardo Palacio Escobar, CTO and co‑founder of ransomwarehelp.com, on wire‑fraud charges after an FBI sting revealed he paid ransomware groups for decryption keys and overcharged victims. The FBI posed as both a victim company and a fake ransomware gang; Palacio negotiated a $6,000 bitcoin price for a decryptor, then billed the mock victim $16,010, including a $2,750 diagnostic fee. RansomwareHelp’s website claimed “advanced cryptographic tools,” 99 % success, 28 years’ experience, and a team of 80 experts, yet the indictment shows the firm merely brokered payments to attackers. A security consultant reported a March 2024 proposal to an accounting firm that quoted $438,880 for “forensic servers,” “expert engineering,” and “brute‑force decryption,” while demanding unrestricted remote access via AnyDesk to delete ransom notes and conceal negotiations. The case follows recent DOJ actions against security firms accused of colluding with ransomware actors and overcharging clients for remediation.</p>
+          </div>
+          <a href="https://krebsonsecurity.com/2026/11/cto-of-ransomwarehelp-indicted-for-wire-fraud/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments largely criticize the broker’s conduct as unethical, emphasizing deceptive pricing, undisclosed ransom payments, and abuse of authority over vulnerable victims. Many view the markup as a dubious but common practice, arguing that transparency and contract clarity would mitigate fraud accusations, while others question whether the actions constitute illegal wire fraud despite delivering the promised decryption. A minority express amusement at the situation’s absurdity, but overall the discussion underscores skepticism about the company’s honesty and the moral implications of profiting from ransomware negotiations.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50657645" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://lia.mg/posts/measuring-company-culture-with-slack-emoji/" target="_blank">Company Culture = Slack Emoji ÷ √Headcount</a>
+        </h2>
+        <span class="article-meta">
+          421 points • by liamg • 54 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The article proposes a quantitative proxy for corporate culture based on Slack custom emoji. The “Emoji Coefficient” is defined as (C = \frac{E_{\text{custom}}}{\sqrt{U}}), where (E_{\text{custom}}) is the count of custom emoji and (U) the number of workspace users; the square‑root scaling prevents linear inflation with headcount. A complementary metric, the participation rate (P = \frac{U_{\text{uploaders}}}{U}\times100), measures the proportion of users who have uploaded at least one emoji, with a benchmark of 20 % to indicate a distributed cultural contribution. The author notes that a high (C) can be misleading if driven by a single uploader, and that spikes in emoji creation or specific “mourning” emojis may signal reorganizations or layoffs. Potential manipulation (e.g., mass logo uploads) is acknowledged, but can be detected via the participation rate. The piece dismisses alternative platforms like Microsoft Teams as lacking comparable metrics and concludes that authentic culture emerges organically, exemplified by employee‑generated emoji.</p>
+          </div>
+          <a href="https://lia.mg/posts/measuring-company-culture-with-slack-emoji/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments converge on the idea that the quantity and variety of Slack or Teams emojis and informal channels are seen as informal indicators of workplace culture, with many noting that active non‑work channels and frequent emoji reactions suggest higher engagement, while sparse usage correlates with perceived low morale. Skepticism appears about treating such metrics as definitive, citing Goodhart’s law and the risk of superficial measures. Several remarks compare Slack to Teams, highlight custom emoji practices, and blend humor with genuine observations about how communication patterns reflect organizational dynamics.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50659640" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/intel/intel-one-mono" target="_blank">Intel One Mono font (2023)</a>
+        </h2>
+        <span class="article-meta">
+          537 points • by saikatsg • 77 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Intel One Mono is an open‑source monospaced font family aimed at low‑vision developers. It provides Light, Regular, Medium, and Bold weights, each with matching italics, covering over 200 Latin‑script languages. Distribution includes OTF/TTF for desktop, TTF for mobile, and WOFF/WOFF2 optimized for web; recommended minimum sizes are 7 pt (print) and 9 px (screen). OpenType features include programming ligatures (ss01‑ss03), an alternate “three” glyph (ss04), raised colon (ss11/ss12, salt), language‑specific shaping (ccmp, locl), superscript/subscript (sups, subs, sinf), and fraction numerator/denominator (numr, dnom). Activation in editors (VS Code, Sublime Text, IntelliJ) requires setting the font family and enabling desired stylistic sets via font‑ligature settings. Source files are provided in UFO format, organized into “instances” (per‑style OTF/TTF/WOFF sources) and “masters” (extreme weight outlines) with designspace XML for interpolation. Recommended editing workflow uses RoboFont 4.4, with Decompose + Autohint for OTF builds and Autohint for TTF/WOFF builds; true‑type hinting data resides separately and can be edited with Microsoft VTT.</p>
+          </div>
+          <a href="https://github.com/intel/intel-one-mono" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments show a broad mix of enthusiasm and skepticism toward new monospaced fonts. Many users praise recent releases—such as Atkinson Hyperlegible, Iosevka, IBM Plex Mono, and JetBrains Mono—for improved legibility, distinct glyphs, and low‑vision friendliness, while others dismiss font choice as trivial or “bikeshedding.” Frequent critiques target specific design details (e.g., the lowercase e, curly braces, @ thickness) and platform‑specific rendering quirks, especially on Windows. Discussions also question corporate motivations, licensing implications, and AI‑generated content, reflecting varied personal preferences and practical installation concerns.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50653667" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
