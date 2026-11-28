@@ -1,0 +1,546 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HackerNews Digest</title>
+  <style>
+    /* HackerNews-inspired minimal digest email styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6ef; /* Classic HN background */
+  font-family: Verdana, Geneva, sans-serif; /* HN uses Verdana */
+  -webkit-font-smoothing: antialiased;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f6f6ef;
+  padding: 10px;
+}
+
+.header {
+  background-color: #ff6600; /* Classic HN orange */
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+
+.header .date {
+  margin: 0;
+  padding: 4px 8px;
+  color: #000000;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.content-body {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+
+.article {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.article-title {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+.article-title a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.article-title a:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
+  font-size: 11px;
+  color: #828282; /* HN gray for metadata */
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #828282;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 3px;
+}
+
+.summary-content {
+  font-size: 13px;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Summaries are rendered from markdown into sanitized HTML. Give the generated
+   block elements sensible spacing (no `white-space: pre-line` anymore). */
+.summary-content p {
+  margin: 0 0 10px 0;
+}
+
+.summary-content p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-content ul,
+.summary-content ol {
+  margin: 0 0 10px 0;
+  padding-left: 22px;
+}
+
+.summary-content li {
+  margin-bottom: 4px;
+}
+
+.summary-content code {
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+}
+
+.summary-content pre {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 3px;
+}
+
+.summary-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.comments-box {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff6600;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+.comments-content {
+  font-size: 12px;
+  color: #333333;
+  line-height: 1.6;
+}
+
+.comments-content p {
+  margin: 0 0 8px 0;
+}
+
+.comments-content p:last-child {
+  margin-bottom: 0;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.read-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #f6f6ef;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 11px;
+  color: #828282;
+  margin-top: 20px;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: #ff6600;
+}
+
+/* Mobile responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    padding: 5px;
+  }
+  
+  .content-body {
+    padding: 12px;
+  }
+  
+  .header {
+    padding: 4px;
+  }
+  
+  .header h1 {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .article-title {
+    font-size: 14px;
+  }
+  
+  .summary-content {
+    font-size: 12px;
+  }
+  
+  .comments-content {
+    font-size: 11px;
+  }
+}
+
+/* Better rendering across email clients */
+table {
+  border-collapse: collapse;
+}
+
+a img {
+  border: none;
+}
+
+/* Ensure consistent box model */
+* {
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HackerNews Digest</h1>
+      <p class="date">November 28, 2026</p>
+    </div>
+
+    <div class="content-body">
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://github.com/p-e-w/heretic/issues/601" target="_blank">Farewell</a>
+        </h2>
+        <span class="article-meta">
+          39 points • by nolist_policy • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The GitHub repository p-e-w/heretic has been archived by its owner on 28 November 2026, after which the repository became read‑only. Issue #601 in this repository carries the title “Farewell”. The archive status indicates that no further commits, issues, or pull‑requests can be added, and existing content is preserved for reference only. The page includes a single visual element labeled “Image 1” with the alternative text “@p‑e‑w”. All navigation and interaction are limited to view‑only access, reflecting the repository’s final state. No additional technical data, code, or discussion content is present in the provided excerpt.</p>
+          </div>
+          <a href="https://github.com/p-e-w/heretic/issues/601" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express concern that expanding AI integration will shift control from a free‑speech issue to one of shaping personal cognition, emphasizing the need to retain the ability to influence the AI “lens” through which individuals view the world. They frame participation in the referenced project as essential to preserving that autonomy, and convey disappointment over the departure of a key figure, urging community involvement to sustain the original vision.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50676672" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://unkernel.dev" target="_blank">Unkernel: Real Linux kernel, compiled to WebAssembly</a>
+        </h2>
+        <span class="article-meta">
+          385 points • by nreece • 38 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The page titled “unkernel” indicates that it attempts to boot a Linux kernel compiled to WebAssembly. This process requires JavaScript; users must enable JavaScript in their browser and reload the page for the kernel to load.</p>
+          </div>
+          <a href="https://unkernel.dev" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments convey strong enthusiasm for running Linux‑like environments and applications directly in browsers, highlighting impressive startup speed, low‑overhead performance, and novel possibilities for education, lightweight scripting, and AI integration. Many note the technical intrigue of WebAssembly kernels, POSIX runtimes, and unkernel architecture, while others express curiosity about the division of work between client and server and request clearer documentation. Some users point out practical limitations such as UI clunkiness, slower emulation on certain devices, and the need for broader language support, but overall the sentiment remains positive and forward‑looking.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50674218" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://news.cornell.edu/stories/2026/11/loom-seamlessly-combines-weaving-knitting-and-braiding" target="_blank">Loom seamlessly combines weaving, knitting and braiding</a>
+        </h2>
+        <span class="article-meta">
+          153 points • by PaulHoule • 10 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Cornell researchers have created “Kneadix,” a prototype loom that merges weaving, braiding and knit‑like processes by treating them as yarn‑twisting operations. The machine replaces a traditional heddle with a bed of rotating hexagonal horn gears from braiding equipment, allowing any yarn to alternate between warp and weft mid‑fabric and enabling curved edges. A retractable comb with adjustable teeth replaces the standard beater, and each yarn carrier includes a sensor‑driven tensioner that winds or unwinds yarn to maintain optimal tension and friction. Programming the loom currently requires manual yarn tracking; the team provides a Python module library and plans to automate tracking and develop a more intuitive interface. Potential applications include high‑performance garments (e.g., gloves combining knit, woven and braided sections) and smart clothing with integrated electrical pathways. Future work aims to improve stability, expand yarn compatibility, and release a 3D‑printable kit for broader use. The project was led by François Guimbretière with support from NSF, Cornell Bowers Undergraduate Research Experience and a design‑tech seed grant.</p>
+          </div>
+          <a href="https://news.cornell.edu/stories/2026/11/loom-seamlessly-combines-weaving-knitting-and-braiding" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The discussion highlights interest in automating bobbin‑lace techniques, noting the demonstration’s appeal while emphasizing that it remains a small‑scale student project requiring larger spindles for practical production. Opinions express skepticism about the novelty of the approach, suggesting similar commercial looms already exist, and question whether the system truly replicates knitting. Nonetheless, there is appreciation for the precision a machine could achieve in such detailed textile work, and a broader view that this development fits into the ongoing expansion of automated manufacturing.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50632052" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://research.google/blog/supercharging-transformer-residual-connections/" target="_blank">Google&#39;s DeepCrossAttention achieves comparable model quality up to 3x faster</a>
+        </h2>
+        <span class="article-meta">
+          448 points • by ComputedCamp995 • 16 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The paper “DeepCrossAttention: Supercharging Transformer Residual Connections” critiques standard transformer residual (skip) connections, which simply add a layer’s output to its input with equal weighting, causing dilution of early‑layer details in deep networks. To address this, the authors propose DeepCrossAttention (DCA), a generalized residual mechanism that learns dynamic routing weights for features from multiple preceding layers, allowing each layer to select the most relevant historical representations. Experimental results on language‑modeling benchmarks (LM1B, C4) show DCA reduces validation perplexity compared with baseline Transformers and recent alternatives (LAUREL‑PA, 1×1‑DenseFormer, Hyper‑Connections). Performance improves as the number of active routing connections (k) increases (e.g., perplexity drops from 15.14 to 14.35 when k rises from 1 to 24). The approach also achieves comparable or better accuracy while decreasing parameter count by 30‑40 %. Visual figures illustrate the routing architecture, benchmark comparisons, and the effect of varying k on perplexity.</p>
+          </div>
+          <a href="https://research.google/blog/supercharging-transformer-residual-connections/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>Comments highlight a generally favorable view of Gemini Neon, emphasizing its low cost, speed, and adequacy for sharing work, while contrasting it with Claude’s verbosity and Codex’s limited creative ability. Users express frustration with slow response times and value‑driven concerns about Google’s consumer AI offerings. There is enthusiasm for research on depth‑wise cross‑attention and model architecture tweaks, seeing potential for performance gains. Subscription choices reflect a shift toward cheaper, faster services, with mixed opinions on model quality versus practical utility.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50672565" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www-cs-faculty.stanford.edu/~knuth/moratorium.html" target="_blank">Knuth: Moratorium on Error Reports</a>
+        </h2>
+        <span class="article-meta">
+          161 points • by ultraficial • 20 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Donald Knuth announces a temporary halt on reviewing new error reports for his books. Over the past fifty years he has manually corrected reported mistakes, but the recent surge in reports—driven by large language models—now exceeds his capacity to read them. Random sampling shows most recent submissions duplicate previously reported issues. Consequently, he will not examine any reports submitted after 25 November 2026 until he publishes an updated errata list for each affected book. He asks readers to consult that list to determine whether new reports are being accepted. Knuth apologizes for past errors and his limited ability to handle multiple tasks simultaneously, and pledges to process the backlog as quickly as possible. The “Books for which errata are now welcome” section is currently empty, pending future updates.</p>
+          </div>
+          <a href="https://www-cs-faculty.stanford.edu/~knuth/moratorium.html" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express a collective melancholy about cultural shift as AI tools flood Donald Knuth’s errata system, prompting concerns that human‑focused scholarship and “human care” are being eclipsed by mass‑produced machine errors. Contributors criticize the low‑effort, repetitive submissions that overwhelm Knuth, suggesting the need for a public tracker or automated screening to manage the backlog. While some lament the loss of personal engagement and the devaluation of reward checks, others acknowledge the practical inevitability of AI‑driven reporting and call for structured solutions.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50674452" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://localthunk.com/blog/balatro-timeline-3aarh" target="_blank">The Balatro Timeline</a>
+        </h2>
+        <span class="article-meta">
+          411 points • by sheepscreek • 26 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Balatro’s development spanned roughly three years. Early prototypes lacked jokers, blinds, and used a rudimentary card‑enhancement system. The “chip × mult” scoring mechanic was added after the creator watched Northernlion’s “Luck Be a Landlord” videos. Intentional avoidance of existing roguelike designs led to extensive experimentation, including discarded systems such as a separate reroll currency and a “golden seal” card effect. The project shifted from hobby to potential commercial product when a friend praised the beta after dozens of hours, prompting scope expansion (more jokers, controller/touch support, tutorial character, soundtrack, special card editions). Community exposure grew via small indie YouTubers and Discord feedback. By June, wishlists rose from 183 to 2,440, aided by streams from Dan Gheesling and later Northernlion, who received a full‑beta key after demo play. Publisher interest culminated in a contract with Playstack after legal and business setup, providing a salaried role and support for multi‑language releases and console ports. The timeline ends with the game’s launch in February 2024.</p>
+          </div>
+          <a href="https://localthunk.com/blog/balatro-timeline-3aarh" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong admiration for Baladro and its developer’s openness, praising the game’s originality, community engagement, and the positive impact of a high‑profile streamer on its popularity. Many note the creator’s careful stance against gambling integration and appreciate the focus on mental‑health awareness. Repeated concerns include the reliance on chance for exposure, the desire for broader PC distribution, and the game’s addictive potential. Overall sentiment is supportive and hopeful, while calling for continued transparency and mindful growth.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50657346" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical" target="_blank">GPT 6.2 Astra Solves a Historical Mystery</a>
+        </h2>
+        <span class="article-meta">
+          460 points • by dr_red_dog • 64 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            
+          </div>
+          <a href="https://generativehistory.substack.com/p/gpt-62-astra-solves-a-historical" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show a generally cautious optimism about using large language models for historical research. Many acknowledge the model’s ability to locate obscure sources and make useful connections that humans might miss, while emphasizing that expertise, validation, and access to undigitized archives remain essential. Skepticism centers on the model’s reliance on pre‑existing data, potential hallucinations, and the risk of over‑reliance diminishing human skill. Concerns also arise about the broader impact on scholarly practice, job roles, and the need for historians to stay involved in interpreting results. Overall, AI is seen as a powerful supplement rather than a replacement for traditional scholarship.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50643158" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.worldofinteriors.com/story/paolo-soleri-arconsati-arizona" target="_blank">Paolo Soleri built a utopian eco-city in the Arizona desert</a>
+        </h2>
+        <span class="article-meta">
+          88 points • by robtherobber • 11 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Arcosanti, Paolo Soleri’s experimental eco‑city in the Arizona desert, was conceived as a compact, self‑sustaining community that emphasizes minimal living, reuse, and cooperative work. Only about 10 % of Soleri’s masterplan has been built, and resident archivist Ray Paskus notes that applications for new members have stalled because the lifestyle is demanding, monastic‑like, and isolated. Despite broader interest in communal living, few are prepared to adopt the ascetic, labor‑intensive model required for earth‑conscious co‑operative living. Soleri, who died in 2013 at 93, maintained that cities must be reinvented to sustain civilization; Arcosanti remains an unfinished, operational prototype of that vision. The article also references allegations of abuse made by Soleri’s daughter Daniela against him. For further details, visit arcosanti.org.</p>
+          </div>
+          <a href="https://www.worldofinteriors.com/story/paolo-soleri-arconsati-arizona" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The commentary contrasts upscale, service‑heavy co‑living models in central London with more community‑oriented experiments, noting that the former function more like hotels with high rents despite included amenities. It expresses admiration for Arcosanti’s distinctive architecture and personal connection to the site, while questioning the practicality of scaling such “village” concepts and arguing that they may hinder genuine community isolation. The overall view is skeptical about the sustainability and broader applicability of co‑living and arcology projects, emphasizing that urban development depends on policy and ecosystem design rather than architecture alone.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50666724" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://www.infohawk.com/news/2026-11-27-black-friday-webrtc-skimmer" target="_blank">Credit card skimming scripts using WebRTC found on popular shopping sites</a>
+        </h2>
+        <span class="article-meta">
+          543 points • by scanr • 41 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>The report describes a credit‑card skimming campaign that leveraged WebRTC to exfiltrate payment data from mobile checkout pages on several retail sites. The malicious loader was inserted via consent‑banner settings, CDN files, shared marketing pixels, or site HTML and retrieved two scripts (Insds.js, gtage.js) from Amazon S3 buckets. After bootstrapping, the code targeted only small‑screen or touch‑device checkouts, establishing a WebRTC data channel through Cloudflare TURN relays (GET /_cf/ice and POST /_cf/rel to *.northbridgeads.com). Card details were sent back in encrypted chunks, validated by SHA‑256, and executed with eval. Affected parties included Lascana (pixel removed), Revolve/FWRD (issue resolved), and the ad‑attribution platform Quorum. Mitigations recommended: restrict connect‑src CSP to known hosts, remove third‑party tracking pixels from payment pages, audit consent‑banner and tag‑manager scripts for S3 references, and monitor for the specific request patterns and strings (KghRtc, rtc‑signal‑v1, quickfetch). The incident highlights the risk of third‑party code on checkout pages and the need for stricter supply‑chain controls.</p>
+          </div>
+          <a href="https://www.infohawk.com/news/2026-11-27-black-friday-webrtc-skimmer" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments express strong criticism of current browser defaults that enable technologies like WebRTC without explicit user consent, viewing them as unnecessary attack surfaces that facilitate skimming and malware, especially on e‑commerce sites. Contributors call for tighter content‑security policies, default disabling of such features, and better sandboxing of third‑party scripts and ads. There is consensus that payment forms should redirect to trusted providers, that stronger cryptographic practices and regulatory enforcement would improve security, and that existing ad‑blocking and privacy tools are essential given these systemic vulnerabilities.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50668145" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+      <div class="article">
+        <h2 class="article-title">
+          <a href="https://starfire.tech/shock/" target="_blank">Coherent Energy Transformations: What elements can you make?</a>
+        </h2>
+        <span class="article-meta">
+          12 points • by jerlendds • 3 comments
+        </span>
+
+        <div class="section">
+          <div class="section-label">Summary</div>
+          <div class="summary-content">
+            <p>Run S‑71 used a 1 mm × 180 mm lead cathode immersed in 1.5 mol L⁻¹ KOH, opposite a 25 × 25 × 30 mm copper box (open back, top hole). A single 120 V AC pulse (phase 0) lasting 800 ms was applied; the initial surge produced a marked effect, visualised as a ball forming on the wire tip after discharge. A classroom‑scale replica replicates this cell with a clip‑on glass vessel, a transformer‑SCR pulse unit, and selectable 55 V/110 V outputs behind a keyed lock‑out (24 s). Substitutes for the lead cathode include aluminium, iron or tin wire. Measured total current rises from 7 A (wire tip touching electrolyte) to 76 A at 8 mm depth; current density falls from 9.4 A mm⁻² to 2.9 A mm⁻² over the same range. Comparative graphs show density variation for stiff, 3 Ω, and kit supplies. Post‑experiment copper strips exhibit green/grey deposits; SEM images document hollow and solid spherical particles and thin film fragments formed during the pulse. Schematics detail the mains‑isolated transformer, SCR switching, lock‑out timer, and two‑layer PCB implementation.</p>
+          </div>
+          <a href="https://starfire.tech/shock/" target="_blank" class="read-link">Read full article →</a>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Community Discussion</div>
+          <div class="comments-box">
+            <div class="comments-content">
+              <p>The comments show support for prioritizing independent laboratory replication before commercializing kits, reflecting confidence in a cautious approach. At the same time, there is notable frustration with the presentation of the experimental details, which are described as opaque, overly technical, and difficult to follow. Critics call for clearer, more direct explanations of the procedures, results, and significance rather than cryptic references and jargon. Overall, the sentiment combines approval of a replication‑first strategy with disappointment in the lack of transparent communication.</p>
+            </div>
+          </div>
+          <a href="https://news.ycombinator.com/item?id=50648760" target="_blank" class="read-link">Read all comments →</a>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="footer">
+      <p>This digest was generated automatically.</p>
+      
+    </div>
+  </div>
+</body>
+
+</html>
